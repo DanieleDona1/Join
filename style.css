@@ -4,3 +4,21 @@
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
   }
+
+  .maxWidth {
+    max-width: 1920px;
+  }
+
+  .dFlexSaCe {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+  }
+
+  .dFlexColumnCeCe {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
