@@ -29,6 +29,7 @@
 //     });
 // });
 
+
 document.addEventListener("DOMContentLoaded", () => {
     let files = ['templates/header.html', 'templates/navbar.html'];
     let elementIds = ['header-div', 'navbar-div'];

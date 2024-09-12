@@ -1,7 +1,13 @@
+body{
+    font-family: "Inter";
+}
+
 .lnH1{
     margin: 0;
     font-size: 61px;
     font-weight: 700;
+    font-family: "Inter";
+
 }
 .lnImg{
     position: absolute;
