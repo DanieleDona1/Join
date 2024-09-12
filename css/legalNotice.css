@@ -1,12 +1,22 @@
 .lnH1{
+    margin: 0;
+    font-size: 61px;
+    font-weight: 700;
+}
+.lnImg{
     position: absolute;
     top: 206px;
     left: 328px;
-    margin: 0;
-    width: 371px;
-    height: 73px;
-    font-size: 61px;
-    font-weight: 700;
+    width: 1014px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;   
+}
+
+.lnImg button{
+    border: none;
+    background-color: white;
+    padding: 0;
 }
 
 .lnMain{
@@ -29,11 +39,13 @@
 
 .lnH2{
     margin: 0;
+    font-size: 27px;
 }
 
 .lnUl{
     margin: 0;
     padding: 0 0 0 20px;
+    font-size: 16px;
 }
 
 .lnH3{
@@ -42,4 +54,5 @@
 
 .lnP{
     margin: 0;
+    font-size: 16px;
 }
