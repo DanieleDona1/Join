@@ -1,0 +1,45 @@
+.lnH1{
+    position: absolute;
+    top: 206px;
+    left: 328px;
+    margin: 0;
+    width: 371px;
+    height: 73px;
+    font-size: 61px;
+    font-weight: 700;
+}
+
+.lnMain{
+    width: 1014px;
+    height: 943px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: absolute;
+    top: 311px;
+    left: 328px;
+
+}
+
+.gap16{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.lnH2{
+    margin: 0;
+}
+
+.lnUl{
+    margin: 0;
+    padding: 0 0 0 20px;
+}
+
+.lnH3{
+    margin: 0;
+}
+
+.lnP{
+    margin: 0;
+}
