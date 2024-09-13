@@ -4,46 +4,60 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join</title>
-    <link rel="stylesheet" href="./style/index.css" />
+    <link rel="stylesheet" href="./css/index.css" />
     <link rel="stylesheet" href="./style.css" />
     <link rel="icon" href="assets/icons/favicon.png" type="image/png">
     <link rel="stylesheet" href="assets/fonts/inter.css">
   </head>
   <body>
-    <div class="maxWidth dColumnCe">
+    <div class="wrapper maxWidth">
+      <img class="logoAnimation" src="assets/img/Logo.svg" alt="" srcset="" />
 
-      <div class="loginHeader dFlexSaCe">
-        <div>LOGO</div>
-        <div class="btnHeader">
-          <button>Not a Join user?</button>
-          <button>Sign up</button>
-        </div>
+      <div class="headerBtnContainer">
+        <button>Not a Join user?</button>
+        <button><a href="#">Sign up</a></button>
       </div>
 
       <div class="loginModal">
-      <div class="modalContent dFlexColumnCeCe">
-        <h2>Log in</h>
-        <form>
-            <div class="inputContainer dFlexColumnCeCe">
-                <input type="email" id="email" placeholder="Email" required />
-                <input type="password" id="password" placeholder="Password" required />
+        <div class="modalContent">
+          <div>
+            <h2>Log in</h2>
+            <div class="underlineHeadline"></div>
+          </div>
+
+          <form onsubmit="return false;">
+            <div class="inputContainer">
+              <input type="email" id="email" placeholder="Email" required />
+              <img src="assets/img/mail.svg" alt="mail" />
+              <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                required
+              />
+              <img src="assets/img/lock.svg" alt="lock" />
             </div>
-          <div class="btnLoginContainer">
+            <label>
+              <input class="rememberCheckbox" type="checkbox" />
+              Remember me
+            </label>
+
+            <div class="btnLoginContainer">
               <button type="submit" class="loginBtn">Log in</button>
-              <button type="button" id="btnGuestLogin" class="btnGuestLogin">Guest Log in</button>
+              <button type="button" id="btnGuestLogin" class="btnGuestLogin">
+                Guest Log in
+              </button>
             </div>
-        </form>
-      </div>
+          </form>
+        </div>
       </div>
 
       <footer>
         <div>
-            <a href="">Privacy Policy</a>
-            <a href="">Legal notice</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Legal notice</a>
         </div>
       </footer>
-
-
     </div>
   </body>
 </html>
