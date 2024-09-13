@@ -9,7 +9,11 @@
   max-width: 1920px;
 }
 
-  .header{
+.d-none{
+  display: none;
+}
+
+.header{
     width: 1440px;
     height: 96px;
     box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
