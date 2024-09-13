@@ -1,27 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Inter";
-}
-
-.maxWidth {
-  max-width: 1920px;
-}
-
-.dFlexSaCe {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.dFlexColumnCeCe {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .navbar {
   position: fixed;
   bottom: 0;
@@ -67,6 +43,6 @@
   width: 1440px;
   height: 96px;
   box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
-  display: none;
+
 }
 
