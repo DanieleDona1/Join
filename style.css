@@ -9,20 +9,6 @@
     max-width: 1920px;
   }
 
-  .dFlexSaCe {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-  }
-
-  .dFlexColumnCeCe {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
   .header{
     width: 1440px;
     height: 96px;
