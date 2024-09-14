@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-    let files = ['templates/header.html', 'templates/navbar.html'];
-    let elementIds = ['header-div', 'navbar-div'];
+  let files = ["templates/header.html", "templates/navbar.html"];
+  let elementIds = ["header-div", "navbar-div"];
 
     for (let i = 0; i < files.length; i++) {
         fetch('/' + files[i])
