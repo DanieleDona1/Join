@@ -32,12 +32,13 @@ a {
 
 .headerBtnContainer {
   position: absolute;
-  top: 50px;
-  right: 100px;
+  top: 67px;
+  left: 1039px;
   display: flex;
+  align-items: center;
   gap: 35px;
-  max-width: 279px;
-  max-height: 49px;
+  width: 279px;
+  height: 49px;
   background: rgba(246, 247, 248, 1);
 }
 
@@ -46,15 +47,23 @@ a {
   font-weight: bold;
 }
 
-.headerBtnContainer button:first-child {
+.headerBtnContainer .btn1 {
   background-color: rgb(246, 247, 248);
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 400;
-  line-height: 24px;
+  width: 200px;
+  height: 24px;
   text-align: left;
 } 
 
+.headerBtnContainer .btn2 {
+  display: flex;
+}
+
+
 .headerBtnContainer a {
+  width: 91px;
+  height: 49px;
   background-color: rgba(42, 54, 71);
   padding: 15px 16px 15px 16px;
   border-radius: 8px;
