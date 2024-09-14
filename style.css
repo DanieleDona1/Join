@@ -4,14 +4,39 @@
   box-sizing: border-box;
   font-family: "Inter";
 }
-
 .maxWidth {
   max-width: 1920px;
 }
 
-.d-none{
+.dNone {
   display: none;
 }
+
+.dFlexCeCe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.dFlexSbCe {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dFlexSeCe {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.dFlexFsCe {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 
 .header{
     width: 1440px;
@@ -60,7 +85,6 @@
   ;
 }
 
-
 .navbar {
   position: fixed;
   z-index: 500;
@@ -101,4 +125,14 @@
   font-family: "open-sans";
   font-weight: 400;
   font-size: 14px;
+}
+
+
+@media screen and (min-width: 481px) and (max-width: 720px){
+  #header-div{
+      display: flex;
+  }
+  #navbar-div{
+      display: flex;
+  }
 }

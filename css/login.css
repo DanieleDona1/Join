@@ -1,3 +1,11 @@
+/* beim verlinken auf style.css kann *{ rausgeworfen werden  */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter";
+}
+
 html {
   height: 100%;
 }
@@ -54,16 +62,16 @@ a {
   text-align: left;
 }
 
-.headerBtnContainer button:nth-child(2) {
+.headerBtnContainer a {
   background-color: rgba(42, 54, 71);
   padding: 15px 16px 15px 16px;
   border-radius: 8px;
   color: white;
   font-size: 16px;
-  transition: background-color 300ms;
+  transition: background-color 200ms;
 }
 
-.headerBtnContainer button:nth-child(2):hover {
+.headerBtnContainer a:hover {
   background-color: rgb(41, 171, 226);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -150,13 +158,12 @@ a {
 
 label {
   padding-left: 39px;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
 }
 
 .rememberCheckbox {
   margin: 40px 0 30px 0;
-  font-size: 16px;
   transform: scale(1.5);
   margin-right: 10px;
   border: 5px solid black;
@@ -182,7 +189,7 @@ label {
   border-radius: 8px;
   font-size: 18px;
   font-weight: bold;
-  transition: background-color 300ms;
+  transition: background-color 200ms;
 }
 .btnLoginContainer button:first-child:hover {
   background-color: rgb(41, 171, 226);
@@ -195,8 +202,8 @@ label {
   padding: 15px 24px 15px 24px;
   border-radius: 8px;
   border: 1px solid black;
-  transition: color 300ms;
-  transition: border 300ms;
+  transition: color 200ms;
+  transition: border 200ms;
   background-color: white;
 }
 
@@ -223,4 +230,63 @@ footer a {
 footer a:hover {
   color: rgb(41, 171, 226);
   transform: scale(1.05);
+}
+
+
+/* wie ist navbar.html mit diesen code verlinkt? Kann rausgelöscht werden*/
+ .maxWidth {
+  max-width: 1920px;
+}
+
+.navbar {
+  position: fixed;
+  z-index: 500;
+  bottom: 0;
+  left: 0;
+  background-color: rgb(42,54,71);
+  width: 100vw;
+  height: 80px;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2px 16px;
+}
+
+.navbar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 0;
+  gap: 4px;
+}
+
+.navbar-item:hover {
+  cursor: pointer;
+}
+
+.navbar-item img {
+  height: 24px;
+  width: 24px;
+
+}
+
+.navbar-item p {
+  color: rgb(205,205,205);
+  font-family: "open-sans";
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.header{
+  width: 1440px;
+  height: 96px;
+  box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
+  display: none;
+}
+/* wird auf style.css verlinkt kann .dNone gelöscht werden  */
+.dNone {
+  display: none;
 }
