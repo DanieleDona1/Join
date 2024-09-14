@@ -4,4 +4,4 @@ git add .
 git commit -m "%*"
 git push
 
-@REM : up.bat added COMMENT 
+@REM : up.bat COMMENT 
