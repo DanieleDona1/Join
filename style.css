@@ -1,15 +1,23 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: border-box;/* nötig? */
   font-family: "Inter";
 }
+.maxWidth {
+  max-width: 1920px;
+}
+
+.dNone {
+  display: none;
+} 
 
 .dFlexCeCe {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 
 .dFlexSbCe {
   display: flex;
@@ -28,8 +36,53 @@
   justify-content: flex-start;
   align-items: center;
 }
-.maxWidth {
-  max-width: 1920px;
+
+
+.header{
+    width: 1440px;
+    height: 96px;
+    box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 40px 20px 348px;
+}
+.header p{
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.header div{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  width: 104px;
+  height: 56px;
+
+}
+
+.header button{
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  width: 32px;
+  height: 32px;
+}
+
+.headerInitials{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 100%;
+  border: 3px solid #2A3647;
+  font-size: 20px;
+  color: #29ABE2;
+  ;
 }
 
 .navbar {
