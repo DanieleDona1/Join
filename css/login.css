@@ -32,13 +32,13 @@ a {
   justify-content: center;
 }
 
-.logoAnimation {
+.logo-animation {
   position: absolute;
   left: 50px;
   top: 50px;
 }
 
-.headerBtnContainer {
+.header-btn-container {
   position: absolute;
   top: 50px;
   right: 100px;
@@ -49,12 +49,12 @@ a {
   background: rgba(246, 247, 248, 1);
 }
 
-.headerBtnContainer button {
+.header-btn-container button {
   border: unset;
   font-weight: bold;
 }
 
-.headerBtnContainer button:first-child {
+.header-btn-container button:first-child {
   background-color: rgb(246, 247, 248);
   font-size: 20px;
   font-weight: 400;
@@ -62,7 +62,7 @@ a {
   text-align: left;
 }
 
-.headerBtnContainer a {
+.header-btn-container a {
   background-color: rgba(42, 54, 71);
   padding: 15px 16px 15px 16px;
   border-radius: 8px;
@@ -71,12 +71,12 @@ a {
   transition: background-color 200ms;
 }
 
-.headerBtnContainer a:hover {
+.header-btn-container a:hover {
   background-color: rgb(41, 171, 226);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.loginModal {
+.login-modal {
   display: flex;
   justify-content: center;
   background-color: white;
@@ -88,12 +88,12 @@ a {
   border-radius: 30px;
 }
 
-.modalContent {
+.modal-content {
   width: 100%;
   max-width: 422px;
 }
 
-.modalContent h2 {
+.modal-content h2 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,14 +102,14 @@ a {
   font-weight: 700;
 }
 
-.modalContent > div {
+.modal-content > div {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.modalContent .underlineHeadline {
+.modal-content .underline-headline {
   border: 3px solid rgba(41, 171, 226, 1);
   width: 100%;
   max-width: 100px;
@@ -117,20 +117,20 @@ a {
   margin-bottom: 21px;
 }
 
-.inputContainer {
+.input-container {
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
 
-.inputContainer input {
+.input-container input {
   display: flex;
   width: 100%;
 }
 
-.inputContainer input:first-child,
-.inputContainer input:nth-child(3) {
+.input-container input:first-child,
+.input-container input:nth-child(3) {
   padding: 12px 21px 12px 21px;
   gap: 10px;
   border-radius: 10px;
@@ -140,7 +140,7 @@ a {
   opacity: 0.4;
 }
 
-.inputContainer img:nth-child(2) {
+.input-container img:nth-child(2) {
   position: absolute;
   top: 19%;
   right: 10px;
@@ -148,7 +148,7 @@ a {
   width: 24px;
 }
 
-.inputContainer img:nth-child(4) {
+.input-container img:nth-child(4) {
   position: absolute;
   bottom: 0%;
   right: 10px;
@@ -162,7 +162,7 @@ label {
   cursor: pointer;
 }
 
-.rememberCheckbox {
+.remember-checkbox {
   margin: 40px 0 30px 0;
   transform: scale(1.5);
   margin-right: 10px;
@@ -170,19 +170,19 @@ label {
   cursor: pointer;
 }
 
-.btnLoginContainer {
+.btn-login-container {
   display: flex;
   gap: 40px;
   justify-content: center;
 }
 
-.btnLoginContainer button {
+.btn-login-container button {
   padding: 4px 2px;
   border: unset;
   cursor: pointer;
 }
 
-.btnLoginContainer button:first-child {
+.btn-login-container button:first-child {
   background-color: rgb(42, 54, 71);
   color: white;
   padding: 15px 24px 15px 24px;
@@ -191,12 +191,12 @@ label {
   font-weight: bold;
   transition: background-color 200ms;
 }
-.btnLoginContainer button:first-child:hover {
+.btn-login-container button:first-child:hover {
   background-color: rgb(41, 171, 226);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.btnLoginContainer button:nth-child(2) {
+.btn-login-container button:nth-child(2) {
   font-size: 18px;
   font-weight: bold;
   padding: 15px 24px 15px 24px;
@@ -207,7 +207,7 @@ label {
   background-color: white;
 }
 
-.btnLoginContainer button:nth-child(2):hover {
+.btn-login-container button:nth-child(2):hover {
   color: rgb(41, 171, 226);
   border: 1px solid rgb(41, 171, 226);
 }
@@ -230,12 +230,6 @@ footer a {
 footer a:hover {
   color: rgb(41, 171, 226);
   transform: scale(1.05);
-}
-
-
-/* wie ist navbar.html mit diesen code verlinkt? Kann rausgelöscht werden*/
- .maxWidth {
-  max-width: 1920px;
 }
 
 .navbar {
@@ -280,13 +274,9 @@ footer a:hover {
   font-size: 14px;
 }
 
-.header{
+.header {
   width: 1440px;
   height: 96px;
   box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
-  display: none;
-}
-/* wird auf style.css verlinkt kann .dNone gelöscht werden  */
-.dNone {
   display: none;
 }
