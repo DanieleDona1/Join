@@ -5,30 +5,31 @@
   font-family: "Inter";
 }
 
-.dFlexCeCe {
-  display: flex;
+.d-flex-c-c {
+  display: f-ex;
   justify-content: center;
   align-items: center;
 }
 
-.dFlexSbCe {
+.d-flex-sb-c {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.dFlexSeCe {
+.d-flex-se-c {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
 
-.dFlexFsCe {
+.d-flex-fs-c {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
-.maxWidth {
+
+.max-Width {
   max-width: 1920px;
 }
 
