@@ -54,16 +54,16 @@ a {
   text-align: left;
 }
 
-.headerBtnContainer button:nth-child(2) {
+.headerBtnContainer a {
   background-color: rgba(42, 54, 71);
   padding: 15px 16px 15px 16px;
   border-radius: 8px;
   color: white;
   font-size: 16px;
-  transition: background-color 300ms;
+  transition: background-color 200ms;
 }
 
-.headerBtnContainer button:nth-child(2):hover {
+.headerBtnContainer a:hover {
   background-color: rgb(41, 171, 226);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -150,13 +150,12 @@ a {
 
 label {
   padding-left: 39px;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
 }
 
 .rememberCheckbox {
   margin: 40px 0 30px 0;
-  font-size: 16px;
   transform: scale(1.5);
   margin-right: 10px;
   border: 5px solid black;
@@ -182,7 +181,7 @@ label {
   border-radius: 8px;
   font-size: 18px;
   font-weight: bold;
-  transition: background-color 300ms;
+  transition: background-color 200ms;
 }
 .btnLoginContainer button:first-child:hover {
   background-color: rgb(41, 171, 226);
@@ -195,8 +194,8 @@ label {
   padding: 15px 24px 15px 24px;
   border-radius: 8px;
   border: 1px solid black;
-  transition: color 300ms;
-  transition: border 300ms;
+  transition: color 200ms;
+  transition: border 200ms;
   background-color: white;
 }
 
