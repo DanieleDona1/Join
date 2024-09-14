@@ -29,10 +29,10 @@ a {
   position: absolute;
   z-index: 1;
   background-color: rgb(246, 247, 248);
-  animation: logoCorner 1000ms linear forwards;
+  animation: moveToCorner 1000ms linear forwards;
 }
 
-@keyframes logoCorner {
+@keyframes moveToCorner {
   from {
     width: 100vw;
     height: 100vh;
@@ -247,7 +247,7 @@ footer a:hover {
   transform: scale(1.05);
 }
 
-@keyframes logoCornerMobile {
+@keyframes moveToCornerMobile {
   from {
     width: 100vw;
     height: 100vh;

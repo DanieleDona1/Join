@@ -1,0 +1,21 @@
+.animated-text {
+    position: absolute;
+    bottom: -100px; /* Startposition außerhalb des sichtbaren Bereichs */
+    opacity: 1;
+    animation: moveAndFade 3s ease-out forwards; /* 3 Sekunden Gesamtzeit */
+  }
+
+  @keyframes moveAndFade {
+    0% {
+      bottom: -100px; /* Startposition außerhalb des sichtbaren Bereichs */
+      opacity: 1;
+    }
+    50% {
+      bottom: 50%; /* Mittige Position */
+      transform: translateY(50%); /* Korrektur für die Höhe des Elements */
+      opacity: 1;
+    }
+    100% {
+      opacity: 0; /* Vollständig transparent */
+    }
+  }

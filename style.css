@@ -117,13 +117,13 @@
     display: flex;
   }
   .logo-animation {
-    animation: logoCornerMobile 1000ms linear forwards;
+    animation: moveToCornerMobile 1000ms linear forwards;
   }
 }
 
 @media screen and (max-width: 480px) {
   .logo-animation {
-    animation: logoCornerMobile 1000ms linear forwards;
+    animation: moveToCornerMobile 1000ms linear forwards;
   }
 
   .header-btn-container {
