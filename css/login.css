@@ -22,6 +22,7 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 0 15px;
 }
 
 .logo-animation {
@@ -46,7 +47,6 @@ a {
     left: 50px;
   }
 }
-
 
 .header-btn-container {
   position: absolute;
@@ -73,8 +73,9 @@ a {
 }
 
 .header-btn-container a {
+  display: flex;
   background-color: rgba(42, 54, 71);
-  padding: 15px 16px 15px 16px;
+  padding: 15px 16px;
   border-radius: 8px;
   color: white;
   font-size: 16px;
@@ -93,7 +94,7 @@ a {
   max-width: 652px;
   max-height: 493px;
   width: 100%;
-  padding: 48px 115px 48px 115px;
+  padding: 40px 10px;
   gap: 32px;
   border-radius: 30px;
 }
@@ -180,19 +181,19 @@ label {
   cursor: pointer;
 }
 
-.btn-login-container {
+.login-btn-container {
   display: flex;
   gap: 40px;
   justify-content: center;
 }
 
-.btn-login-container button {
+.login-btn-container button {
   padding: 4px 2px;
   border: unset;
   cursor: pointer;
 }
 
-.btn-login-container button:first-child {
+.login-btn-container button:first-child {
   background-color: rgb(42, 54, 71);
   color: white;
   width: 100px;
@@ -203,12 +204,12 @@ label {
   font-weight: bold;
   transition: background-color 200ms;
 }
-.btn-login-container button:first-child:hover {
+.login-btn-container button:first-child:hover {
   background-color: rgb(41, 171, 226);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.btn-login-container button:nth-child(2) {
+.login-btn-container button:nth-child(2) {
   font-size: 18px;
   width: 150px;
   height: 44px;
@@ -221,7 +222,7 @@ label {
   background-color: white;
 }
 
-.btn-login-container button:nth-child(2):hover {
+.login-btn-container button:nth-child(2):hover {
   color: rgb(41, 171, 226);
   border: 1px solid rgb(41, 171, 226);
 }
@@ -244,6 +245,22 @@ footer a {
 footer a:hover {
   color: rgb(41, 171, 226);
   transform: scale(1.05);
+}
+
+@keyframes logoCornerMobile {
+  from {
+    width: 100vw;
+    height: 100vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  to {
+    width: 40px;
+    height: 50px;
+    top: 30px;
+    left: 30px;
+  }
 }
 
 .navbar {

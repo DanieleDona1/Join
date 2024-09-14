@@ -38,7 +38,7 @@
   z-index: 500;
   bottom: 0;
   left: 0;
-  background-color: rgb(42,54,71);
+  background-color: rgb(42, 54, 71);
   width: 100vw;
   height: 80px;
 }
@@ -65,17 +65,16 @@
 .navbar-item img {
   height: 24px;
   width: 24px;
-
 }
 
 .navbar-item p {
-  color: rgb(205,205,205);
+  color: rgb(205, 205, 205);
   font-family: "open-sans";
   font-weight: 400;
   font-size: 14px;
 }
 
-.header{
+.header {
   width: 1440px;
   height: 96px;
   box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
@@ -86,11 +85,62 @@
   display: none;
 }
 
-@media screen and (min-width: 481px) and (max-width: 720px){
-  #header-div{
-      display: flex;
+@media screen and (min-width: 1921px) {
+  .section_pad{
+      padding: 64px max(160px, calc(50% - 960px));
   }
-  #navbar-div{
-      display: flex;
+
+  .section-gap {
+      gap: 64px;
+  }
+} 
+
+
+@media screen and (min-width: 1441px) and (max-width: 1920px) {
+ 
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1440px) {
+
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) {
+  
+  
+}
+
+@media screen and (min-width: 481px) and (max-width: 720px) {
+  #header-div {
+    display: flex;
+  }
+  #navbar-div {
+    display: flex;
+  }
+  .logo-animation {
+    animation: logoCornerMobile 1000ms linear forwards;
   }
 }
+
+@media screen and (max-width: 480px) {
+  .logo-animation {
+    animation: logoCornerMobile 1000ms linear forwards;
+  }
+
+  .header-btn-container {
+    position: absolute;
+    top: auto;
+    bottom: 75px;
+    right: auto;
+    left: auto;
+  }
+
+  .header-btn-container button:first-child {
+    font-size: 18px;
+  }
+
+  .header-btn-container a {
+    padding: 12px 13px;
+    font-size: 14px;
+  }
+}
+
