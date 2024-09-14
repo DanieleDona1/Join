@@ -1,3 +1,11 @@
+/* beim verlinken auf style.css kann *{ rausgeworfen werden  */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter";
+}
+
 html {
   height: 100%;
 }
@@ -222,4 +230,63 @@ footer a {
 footer a:hover {
   color: rgb(41, 171, 226);
   transform: scale(1.05);
+}
+
+
+/* wie ist navbar.html mit diesen code verlinkt? Kann rausgelöscht werden*/
+ .maxWidth {
+  max-width: 1920px;
+}
+
+.navbar {
+  position: fixed;
+  z-index: 500;
+  bottom: 0;
+  left: 0;
+  background-color: rgb(42,54,71);
+  width: 100vw;
+  height: 80px;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2px 16px;
+}
+
+.navbar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 0;
+  gap: 4px;
+}
+
+.navbar-item:hover {
+  cursor: pointer;
+}
+
+.navbar-item img {
+  height: 24px;
+  width: 24px;
+
+}
+
+.navbar-item p {
+  color: rgb(205,205,205);
+  font-family: "open-sans";
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.header{
+  width: 1440px;
+  height: 96px;
+  box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
+  display: none;
+}
+/* wird auf style.css verlinkt kann .dNone gelöscht werden  */
+.dNone {
+  display: none;
 }
