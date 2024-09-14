@@ -24,14 +24,19 @@
 
 .navbar {
   position: fixed;
+  z-index: 500;
   bottom: 0;
   left: 0;
-  background-color: rgb(42,54,71);
+  background-color: rgb(42, 54, 71);
   width: 100vw;
   height: 80px;
 }
 
-.navbar-container {
+.navbar-join-icon-container {
+  width: 100px;
+}
+
+.navbar-item-container {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -53,19 +58,32 @@
 .navbar-item img {
   height: 24px;
   width: 24px;
-
 }
 
 .navbar-item p {
-  color: rgb(205,205,205);
+  color: rgb(205, 205, 205);
   font-family: "open-sans";
   font-weight: 400;
   font-size: 14px;
 }
 
-.header{
-  width: 1440px;
+@media (min-width: 1025px) {
+  .navbar {
+    top: 0;
+    width: 232px;
+    height: 100vh;
+  }
+
+  .navbar-item-container {
+    flex-direction: column;
+  }
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 232px;
   height: 96px;
+  width: 100%;
   box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
-  display: none;
 }
