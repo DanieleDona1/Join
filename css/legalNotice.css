@@ -1,0 +1,64 @@
+body{
+    font-family: "Inter";
+}
+
+.lnH1{
+    margin: 0;
+    font-size: 61px;
+    font-weight: 700;
+    font-family: "Inter";
+
+}
+.lnImg{
+    position: absolute;
+    top: 206px;
+    left: 328px;
+    width: 1014px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;   
+}
+
+.lnImg button{
+    border: none;
+    background-color: white;
+    padding: 0;
+}
+
+.lnMain{
+    width: 1014px;
+    height: 943px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: absolute;
+    top: 311px;
+    left: 328px;
+
+}
+
+.gap16{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.lnH2{
+    margin: 0;
+    font-size: 27px;
+}
+
+.lnUl{
+    margin: 0;
+    padding: 0 0 0 20px;
+    font-size: 16px;
+}
+
+.lnH3{
+    margin: 0;
+}
+
+.lnP{
+    margin: 0;
+    font-size: 16px;
+}
