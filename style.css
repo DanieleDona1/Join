@@ -5,6 +5,29 @@
   font-family: "Inter";
 }
 
+.dFlexCeCe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dFlexSbCe {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dFlexSeCe {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.dFlexFsCe {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
 .maxWidth {
   max-width: 1920px;
 }
@@ -55,7 +78,7 @@
   width: 1440px;
   height: 96px;
   box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
-  display: none;
+  /* display: none; */
 }
 
 .dNone {
