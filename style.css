@@ -2,8 +2,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;/* nötig? */
-  font-family: "Inter";
+  font-family: "inter";
 }
+
 .maxWidth {
   max-width: 1920px;
 }
@@ -145,7 +146,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  height: 96px;
+  height: 80px;
   width: 100%;
   box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
   /* display: none; */
@@ -155,14 +156,24 @@
   display: none;
 }
 
+.navbar-d-none {
+  display: none;
+}
+
+main {
+  position: fixed;
+  top: 80px;
+  bottom: 80px;
+  left: 0;
+  right: 0;
+  background-color: rgb(246, 247, 248);
+}
+
 @media (min-width: 1025px) {
-  .d-none {
+  .navbar-d-none {
     display: block;
   }
 
-  .header {
-    left: 232px;
-  }
   .navbar {
     display: flex;
     justify-content: space-between;
@@ -204,5 +215,14 @@
     display: flex;
     flex-direction: column;
     width: 232px;
+  }
+
+  .header {
+    height: 80px;
+  }
+
+  main {
+    left: 232px;
+    bottom: 0;
   }
 }
