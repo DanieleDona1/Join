@@ -1,18 +1,12 @@
-body{
-    font-family: "Inter";
-}
-
 .lnH1{
     margin: 0;
     font-size: 61px;
     font-weight: 700;
-    font-family: "Inter";
-
 }
 .lnImg{
     position: absolute;
-    top: 206px;
-    left: 328px;
+    top: 110px;
+    left: 96px;
     width: 1014px;
     display: flex;
     justify-content: space-between;
@@ -32,8 +26,8 @@ body{
     flex-direction: column;
     gap: 24px;
     position: absolute;
-    top: 311px;
-    left: 328px;
+    top: 215px;
+    left: 96px;
 
 }
 

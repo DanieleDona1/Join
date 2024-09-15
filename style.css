@@ -152,11 +152,12 @@
   /* display: none; */
 }
 
-.d-none {
-  display: none;
+.navbar-item.active, .navbar-disclaimer-links-container a.active {
+  background-color: rgb(9,25,49); 
+  pointer-events: none;
 }
 
-.navbar-d-none {
+.d-none {
   display: none;
 }
 
@@ -167,12 +168,10 @@ main {
   left: 0;
   right: 0;
   background-color: rgb(246, 247, 248);
+  overflow: auto;
 }
 
 @media (min-width: 1025px) {
-  .navbar-d-none {
-    display: block;
-  }
 
   .navbar {
     display: flex;
