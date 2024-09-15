@@ -2,31 +2,61 @@
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Legal Notice</title>
-    <link
-      rel="stylesheet"
-      href="/css/legalNotice.css"/>
-    <link
-      rel="stylesheet"
-      href="/style.css"
-    />
+    <link rel="icon" href="/assets/icons/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="/css/legalNotice.css" />
+    <link rel="stylesheet" href="/style.css" />
     <script src="/script.js"></script>
   </head>
   <body>
-    <div id="header-div"></div>
-    <div id="navbar-div"></div>
+    <header class="header">
+      <img src="/assets/icons/joinHeaderMobile.svg" alt="logo" class="d-none" />
+      <p>Kanban Project Management Tool</p>
+      <div>
+        <button>
+          <img src="/assets/icons/help.svg" alt="help" />
+        </button>
+        <span class="headerInitials">JV</span>
+      </div>
+    </header>
+
+    <nav class="navbar">
+      <div class="navbar-join-icon-container navbar-d-none">
+        <img src="/assets/icons/navbar_join_icon.svg" alt="" />
+      </div>
+      <div class="navbar-item-container">
+        <a href="summary.html" class="navbar-item" data-page="summary">
+          <img src="/assets/icons/summary_Icon.svg" alt="Summary Icon" />
+          <p>Summary</p>
+        </a>
+        <a href="board.html" class="navbar-item" data-page="board">
+          <img src="/assets/icons/board_icon.svg" alt="Board Icon" />
+          <p>Board</p>
+        </a>
+        <a href="add_tasks.html" class="navbar-item" data-page="add_tasks">
+          <img src="/assets/icons/add_tasks.svg" alt="Add Tasks Icon" />
+          <p>Add Tasks</p>
+        </a>
+        <a href="contacts.html" class="navbar-item" data-page="contacts">
+          <img src="/assets/icons/contacts_icon.svg" alt="Contacts Icon" />
+          <p>Contacts</p>
+        </a>
+      </div>
+      <div class="navbar-disclaimer-links-container navbar-d-none">
+        <a href="/html/privacy_policy.html" data-page="privacy_policy"
+          >Privacy Policy</a
+        >
+        <a href="/html/legalNotice.html" data-page="legalNotice"
+          >Legal Notice</a
+        >
+      </div>
+    </nav>
 
     <div class="lnImg">
       <h1 class="lnH1">Legal Notice</h1>
       <button>
-        <img
-          src="/assets/icons/arrow-left-line.svg"
-          alt="back-arrow"
-        />
+        <img src="/assets/icons/arrow-left-line.svg" alt="back-arrow" />
       </button>
     </div>
     <main class="lnMain">
@@ -57,9 +87,7 @@
         <p class="lnP">
           <a href="index.html">Join</a> has been developed as part of a student
           group project in a web development bootcamp at the
-          <a
-            href="https://developerakademie.com/"
-            target="_blank"
+          <a href="https://developerakademie.com/" target="_blank"
             >Developer Akademie GmbH</a
           >. It has an educational purpose and is not intended for extensive
           personal & business usage. As such, we cannot guarantee consistent
@@ -68,9 +96,7 @@
         </p>
         <p class="lnP">
           The design of <a href="index.html">Join</a> is owned by the
-          <a
-            href="https://developerakademie.com/"
-            target="_blank"
+          <a href="https://developerakademie.com/" target="_blank"
             >Developer Akademie GmbH</a
           >. Unauthorized use, reproduction, modification, distribution, or
           replication of the design is strictly prohibited.
@@ -80,9 +106,7 @@
         <h3 class="lnH3">Proprietary rights</h3>
         <p class="lnP">
           Aside from the design owned by
-          <a
-            href="https://developerakademie.com/"
-            target="_blank"
+          <a href="https://developerakademie.com/" target="_blank"
             >Developer Akademie GmbH</a
           >, we, the listed students, retain all proprietary rights in
           <a href="index.html">Join</a>, including any associated copyrighted
