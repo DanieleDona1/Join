@@ -4,50 +4,53 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join</title>
-    
-    <link rel="icon" href="/assets/icons/favicon.png" type="image/png">
-    <link rel="stylesheet" href="/css/login.css" />
-    <link rel="stylesheet" href="/style.css" />
-    <link rel="stylesheet" href="/css/fonts.css">
-    <script src="/script.js" defer></script>
+
+    <link rel="icon" href="assets/icons/favicon.ico" type="image/png" />
+    <link rel="stylesheet" href="./css/login.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./css/fonts.css" />
+    <script src="script.js" defer></script>
   </head>
   <body>
-    <div class="wrapper maxWidth">
-      <img class="logoAnimation" src="/assets/img/Logo.svg" alt="logo" srcset="" />
+    <div class="wrapper max-width-1920">
+      <img class="logo-animation" src="assets/img/Logo.svg" alt="logo" />
 
-
-      <div class="headerBtnContainer">
-        <button class="btn1">Not a Join user?</button>
-        <button  class="btn2"><a href="/html/sign_up.html">Sign up</a></button>
+      <div class="header-btn-container">
+        <button>Not a Join user?</button>
+        <button><a href="./html/sign_up.html">Sign up</a></button>
       </div>
 
-      <div class="loginModal" id="anker">
-        <div class="modalContent">
+      <div class="entry-modal">
+        <div class="modal-content">
           <div>
             <h2>Log in</h2>
-            <div class="underlineHeadline"></div>
+            <div class="underline-headline"></div>
           </div>
 
-          <form onsubmit="return false;">
-            <div class="inputContainer">
+          <form class="input-container" onsubmit="return false;">
+            <div class="input-group">
               <input type="email" id="email" placeholder="Email" required />
-              <img src="/assets/img/mail.svg" alt="mail" />
+              <img src="assets/img/mail.svg" alt="mail" />
+            </div>
+
+            <div class="input-group">
               <input
                 type="password"
                 id="password"
                 placeholder="Password"
                 required
               />
-              <img src="/assets/img/lock.svg" alt="lock" />
+              <img src="assets/img/lock.svg" alt="lock" />
             </div>
+
             <label>
-              <input class="rememberCheckbox" type="checkbox" />
+              <input class="form-checkbox" type="checkbox" />
               Remember me
             </label>
 
-            <div class="btnLoginContainer">
-              <button type="submit" class="loginBtn">Log in</button>
-              <button type="button" id="btnGuestLogin" class="btnGuestLogin">
+            <div class="entry-btn-container" id="btnentryContainer">
+              <button type="submit" class="entry-btn">Log in</button>
+              <button type="button" id="btnGuestentry" class="btn-guest-entry">
                 Guest Log in
               </button>
             </div>
@@ -57,8 +60,8 @@
 
       <footer>
         <div>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Legal notice</a>
+          <a href="/html/privacyPolicy.html">Privacy Policy</a>
+          <a href="/html/legalNotice.html">Legal notice</a>
         </div>
       </footer>
     </div>
