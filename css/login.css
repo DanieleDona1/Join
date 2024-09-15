@@ -130,7 +130,7 @@ a {
 .input-container {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
 }
 
 .input-group {
@@ -152,9 +152,9 @@ a {
 .input-group img {
   position: absolute;
   top: 24px;
-  right: 10px; 
+  right: 15px;
   transform: translateY(-50%);
-  width: 24px;
+  width: 16px;
 }
 
 label {
@@ -163,7 +163,7 @@ label {
   cursor: pointer;
 }
 
-.remember-checkbox {
+.form-checkbox {
   margin: 15px 0 10px 0;
   transform: scale(1.5);
   margin-right: 10px;
@@ -230,7 +230,7 @@ footer a {
 
 footer a:hover {
   color: rgb(41, 171, 226);
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 @keyframes moveToCornerMobile {
@@ -249,6 +249,26 @@ footer a:hover {
   }
 }
 
+/* sign up css  */
+.logo {
+  position: absolute;
+  z-index: 1;
+  /* background-color: rgb(246, 247, 248); */
+  width: 100px;
+  height: 120px;
+  top: 50px;
+  left: 50px;
+}
+
+label span {
+  opacity: 0.4;
+}
+
+.legal-link {
+  color: rgb(41, 171, 226);
+}
+
+/* navbar  */
 .navbar {
   position: fixed;
   z-index: 500;
