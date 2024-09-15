@@ -90,8 +90,8 @@ a {
   display: flex;
   justify-content: center;
   background-color: white;
-  max-width: 652px;
-  max-height: 493px;
+  max-width: 550px;
+  max-height: 520px;
   width: 100%;
   padding: 40px 10px;
   gap: 32px;
@@ -130,23 +130,23 @@ a {
 .input-container {
   display: flex;
   flex-direction: column;
-  gap: 24px;
 }
 
 .input-group {
   position: relative;
+  margin-bottom: 24px;
 }
 
 .input-group input {
   display: flex;
   width: 100%;
-  padding: 12px 21px 12px 21px;
+  padding: 10px 21px 10px 21px;
   gap: 10px;
   border-radius: 10px;
   border: 1px solid black;
   color: rgba(0, 0, 0, 0.1);
   font-size: 18px;
-  opacity: 0.4;
+  opacity: 0.2;
 }
 
 .input-group img {
@@ -161,12 +161,13 @@ label {
   padding-left: 56px;
   font-size: 16px;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 
 .form-checkbox {
   margin: 15px 0 10px 0;
-  transform: scale(1.5);
-  margin-right: 10px;
+  /* transform: scale(1.1); */
+  margin-right: 8px;
   border: 5px solid black;
   cursor: pointer;
 }
@@ -249,11 +250,32 @@ footer a:hover {
   }
 }
 
+/* .animated-text {
+    position: absolute;
+    bottom: -100px; 
+    opacity: 1;
+    animation: moveAndFade 3s ease-out forwards;
+  }
+
+  @keyframes moveAndFade {
+    0% {
+      bottom: -100px;
+      opacity: 1;
+    }
+    50% {
+      bottom: 50%;
+      transform: translateY(50%);
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  } */
+
 /* sign up css  */
 .logo {
   position: absolute;
   z-index: 1;
-  /* background-color: rgb(246, 247, 248); */
   width: 100px;
   height: 120px;
   top: 50px;
@@ -261,11 +283,17 @@ footer a:hover {
 }
 
 label span {
-  opacity: 0.4;
+  font-size: 14px;
+  opacity: 0.25;
 }
 
 .legal-link {
   color: rgb(41, 171, 226);
+  font-size: 14px;
+}
+
+.padding-left-0 {
+  padding-left: 0px;
 }
 
 /* navbar  */
