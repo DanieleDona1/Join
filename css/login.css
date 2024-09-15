@@ -27,28 +27,11 @@ a {
 
 .logo-animation {
   position: absolute;
-  z-index: 1;
-  background-color: rgb(246, 247, 248);
-  animation: moveToCorner 1000ms linear forwards;
+  left: 50px;
+  top: 50px;
 }
 
-@keyframes moveToCorner {
-  from {
-    width: 100vw;
-    height: 100vh;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  to {
-    width: 100px;
-    height: 120px;
-    top: 50px;
-    left: 50px;
-  }
-}
-
-.header-btn-container {
+.headerBtnContainer {
   position: absolute;
   top: 50px;
   right: 100px;
@@ -59,51 +42,51 @@ a {
   background: rgba(246, 247, 248, 1);
 }
 
-.header-btn-container button {
+.headerBtnContainer button {
   border: unset;
   font-weight: bold;
 }
 
-.header-btn-container button:first-child {
+.headerBtnContainer button:first-child {
   background-color: rgb(246, 247, 248);
   font-size: 20px;
   font-weight: 400;
+  line-height: 24px;
   text-align: left;
 }
 
-.header-btn-container a {
-  display: flex;
+.headerBtnContainer a {
   background-color: rgba(42, 54, 71);
-  padding: 15px 16px;
+  padding: 15px 16px 15px 16px;
   border-radius: 8px;
   color: white;
   font-size: 16px;
   transition: background-color 200ms;
 }
 
-.header-btn-container a:hover {
+.headerBtnContainer a:hover {
   background-color: rgb(41, 171, 226);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.entry-modal {
+.loginModal {
   display: flex;
   justify-content: center;
   background-color: white;
-  max-width: 550px;
-  max-height: 520px;
+  max-width: 652px;
+  max-height: 493px;
   width: 100%;
-  padding: 40px 10px;
+  padding: 48px 115px 48px 115px;
   gap: 32px;
   border-radius: 30px;
 }
 
-.modal-content {
+.modalContent {
   width: 100%;
   max-width: 422px;
 }
 
-.modal-content h2 {
+.modalContent h2 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -137,10 +120,14 @@ a {
   margin-bottom: 24px;
 }
 
-.input-group input {
+.inputContainer input {
   display: flex;
   width: 100%;
-  padding: 10px 21px 10px 21px;
+}
+
+.inputContainer input:first-child,
+.inputContainer input:nth-child(3) {
+  padding: 12px 21px 12px 21px;
   gap: 10px;
   border-radius: 10px;
   border: 1px solid black;
