@@ -13,7 +13,8 @@
   </head>
   <body>
     <div class="wrapper max-width-1920">
-      <img class="logo-animation" src="assets/img/Logo.svg" alt="logo" srcset="" />
+      <!-- d-none für animation raus nehmen  -->
+      <img class="logo-animation d-none" src="assets/img/Logo.svg" alt="logo" srcset="" />
 
 
       <div class="header-btn-container">
@@ -21,33 +22,33 @@
         <button><a href="./html/sign_up.html">Sign up</a></button>
       </div>
 
-      <div class="login-modal">
+      <div class="entry-modal">
         <div class="modal-content">
           <div>
             <h2>Log in</h2>
             <div class="underline-headline"></div>
           </div>
 
-          <form onsubmit="return false;">
-            <div class="input-container">
+          <form class="input-container" onsubmit="return false;">
+            
+            <div class="input-group">
               <input type="email" id="email" placeholder="Email" required />
               <img src="assets/img/mail.svg" alt="mail" />
-              <input
-                type="password"
-                id="password"
-                placeholder="Password"
-                required
-              />
+            </div>  
+              
+            <div class="input-group">
+              <input type="password" id="password" placeholder="Password" required />
               <img src="assets/img/lock.svg" alt="lock" />
             </div>
+           
             <label>
               <input class="remember-checkbox" type="checkbox" />
               Remember me
             </label>
 
-            <div class="login-btn-container" id="btnLoginContainer">
-              <button type="submit" class="login-btn">Log in</button>
-              <button type="button" id="btnGuestLogin" class="btn-guest-login">
+            <div class="entry-btn-container" id="btnentryContainer">
+              <button type="submit" class="entry-btn">Log in</button>
+              <button type="button" id="btnGuestentry" class="btn-guest-entry">
                 Guest Log in
               </button>
             </div>

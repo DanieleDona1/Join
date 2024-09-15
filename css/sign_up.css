@@ -1,21 +1,43 @@
-.animated-text {
+
+.wrapper {
+    position: relative;
+    background-color: rgb(246, 247, 248);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+  }
+
+  
+
+
+
+
+
+
+
+
+
+/* .animated-text {
     position: absolute;
-    bottom: -100px; /* Startposition außerhalb des sichtbaren Bereichs */
+    bottom: -100px; 
     opacity: 1;
-    animation: moveAndFade 3s ease-out forwards; /* 3 Sekunden Gesamtzeit */
+    animation: moveAndFade 3s ease-out forwards;
   }
 
   @keyframes moveAndFade {
     0% {
-      bottom: -100px; /* Startposition außerhalb des sichtbaren Bereichs */
+      bottom: -100px;
       opacity: 1;
     }
     50% {
-      bottom: 50%; /* Mittige Position */
-      transform: translateY(50%); /* Korrektur für die Höhe des Elements */
+      bottom: 50%;
+      transform: translateY(50%);
       opacity: 1;
     }
     100% {
-      opacity: 0; /* Vollständig transparent */
+      opacity: 0;
     }
-  }
+  } */

@@ -68,7 +68,6 @@ a {
   background-color: rgb(246, 247, 248);
   font-size: 20px;
   font-weight: 400;
-  line-height: 24px;
   text-align: left;
 }
 
@@ -87,7 +86,7 @@ a {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.login-modal {
+.entry-modal {
   display: flex;
   justify-content: center;
   background-color: white;
@@ -129,19 +128,18 @@ a {
 }
 
 .input-container {
-  position: relative;
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
 
-.input-container input {
-  display: flex;
-  width: 100%;
+.input-group {
+  position: relative;
 }
 
-.input-container input:first-child,
-.input-container input:nth-child(3) {
+.input-group input {
+  display: flex;
+  width: 100%;
   padding: 12px 21px 12px 21px;
   gap: 10px;
   border-radius: 10px;
@@ -151,70 +149,58 @@ a {
   opacity: 0.4;
 }
 
-.input-container img:nth-child(2) {
+.input-group img {
   position: absolute;
-  top: 19%;
-  right: 10px;
-  transform: translateY(-50%);
-  width: 24px;
-}
-
-.input-container img:nth-child(4) {
-  position: absolute;
-  bottom: 0%;
-  right: 10px;
+  top: 24px;
+  right: 10px; 
   transform: translateY(-50%);
   width: 24px;
 }
 
 label {
-  padding-left: 39px;
+  padding-left: 56px;
   font-size: 16px;
   cursor: pointer;
 }
 
 .remember-checkbox {
-  margin: 40px 0 30px 0;
+  margin: 15px 0 10px 0;
   transform: scale(1.5);
   margin-right: 10px;
   border: 5px solid black;
   cursor: pointer;
 }
 
-.login-btn-container {
+.entry-btn-container {
   display: flex;
   gap: 40px;
   justify-content: center;
 }
 
-.login-btn-container button {
+.entry-btn-container button {
   padding: 4px 2px;
   border: unset;
   cursor: pointer;
 }
 
-.login-btn-container button:first-child {
+.entry-btn-container button:first-child {
   background-color: rgb(42, 54, 71);
   color: white;
-  width: 100px;
-  height: 44px;
-  padding: 2px 2px;
+  padding: 10px 25px;
   border-radius: 8px;
   font-size: 18px;
   font-weight: bold;
   transition: background-color 200ms;
 }
-.login-btn-container button:first-child:hover {
+.entry-btn-container button:first-child:hover {
   background-color: rgb(41, 171, 226);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.login-btn-container button:nth-child(2) {
+.entry-btn-container button:nth-child(2) {
   font-size: 18px;
-  width: 150px;
-  height: 44px;
   font-weight: bold;
-  padding: 2px 2px;
+  padding: 10px 15px;
   border-radius: 8px;
   border: 1px solid black;
   transition: color 200ms;
@@ -222,7 +208,7 @@ label {
   background-color: white;
 }
 
-.login-btn-container button:nth-child(2):hover {
+.entry-btn-container button:nth-child(2):hover {
   color: rgb(41, 171, 226);
   border: 1px solid rgb(41, 171, 226);
 }
