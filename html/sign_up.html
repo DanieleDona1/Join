@@ -1,19 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <a href="#anker" onclick="delayedRedirect('../index.html', 1000)">Weiterleitung zur Login mit Verzögern von 1 Sekunde</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join</title>
+    <link rel="icon" href="/assets/icons/favicon.ico" type="image/png" />
+    <link rel="stylesheet" href="/css/login.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="wrapper max-width-1920">
+      <img class="logo" src="/assets/img/Logo.svg" alt="logo" />
 
-<script>
-    function delayedRedirect(url, delay) {
-        setTimeout(function() {
-            window.location.href = url;
-        }, delay);
-    }
-</script>
-</body>
+      <div class="entry-modal">
+        <div class="modal-content">
+          <div>
+            <h2>Sign up</h2>
+            <div class="underline-headline"></div>
+          </div>
+
+          <form class="input-container" onsubmit="return false;">
+            <div class="input-group">
+              <input type="name" id="name" placeholder="Name" required />
+              <img src="/assets/img/person.svg" alt="mail" />
+            </div>
+            <div class="input-group">
+              <input type="email" id="email" placeholder="Email" required />
+              <img src="/assets/img/mail.svg" alt="mail" />
+            </div>
+
+            <div class="input-group">
+              <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                required
+              />
+              <img src="/assets/img/lock.svg" alt="lock" />
+            </div>
+            <div class="input-group">
+              <input
+                type="confirm-password"
+                id="confirmPassword"
+                placeholder="Confirm Password"
+                required
+              />
+              <img src="/assets/img/lock.svg" alt="lock" />
+            </div>
+
+            <label class="d-flex-c-c padding-left-0">
+              <input class="form-checkbox" type="checkbox" />
+              <span>I accept the </span>&nbsp;<a
+                class="legal-link"
+                href="/html/privacyPolicy.html"
+                >Privacy Policy</a
+              >
+            </label>
+
+            <div class="entry-btn-container" id="btnentryContainer">
+              <button type="submit" class="entry-btn" disabled>Sign up</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <footer>
+        <div>
+          <a href="/html/privacyPolicy.html">Privacy Policy</a>
+          <a href="/html/legalNotice.html">Legal notice</a>
+        </div>
+      </footer>
+    </div>
+  </body>
 </html>
