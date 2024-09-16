@@ -1,17 +1,20 @@
 body {
-    display: flex;
-    margin: 0;
-    font-family: "Inter";
+    background-color: bisque;
 }
+
+/* overflow hidden bei open popup */
 
 .pop-up-contact{
     position: absolute;
-    top: 100px;
-    left: 100px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     width: 1212px;
     height: 594px;
     border-radius: 30px;
+    background-color: white;
+    z-index: 999;
 }
 
 .contact-side-info {
@@ -29,6 +32,8 @@ body {
     position: absolute;
     top: 154px;
     left: 47px;
+    width: 56px;
+    height: 67px;
 }
 
 .contact-side-info-div {
@@ -61,6 +66,21 @@ body {
     height: 3px;
 }
 
+.close-popup{
+    display: flex;
+    position: absolute;
+    top: 48px;
+    left: 1132px;
+    border: none;
+    background-color: white;
+}
+
+.close-popup img{
+    width: 32px;
+    height: 32px;
+}
+
+
 .contact-pic{
     width: 120px;
     height: 120px;
@@ -76,8 +96,8 @@ body {
     position: absolute;
     top: 137px;
     left: 742px;
-
-
+    width: 422px;
+    height: 215px;
 }
 
 .contact-field #name::placeholder{
@@ -110,25 +130,62 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-input[type=number] {
-  -moz-appearance: textfield;
-}
+/* input[type=number] {
+  appearance: textfield;
+} */
 
 input{
     width: 422px;
     height: 51px;
     line-height: 30px;
     font-size: 20px;
-    padding: 0 24px;
+    padding: 13px 21px;
+    margin: 0;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    cursor: pointer;
+}
+
+button{
+    cursor: pointer;
 }
 
 .input-button{
     display: flex;
     gap: 24px;
+    width: 364px;
+    height: 56px;
+    position: absolute;
+    top: 400px;
+    left: 742px;
 }
 
 .cancel{
-
+    width: 126px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px;
+    padding: 16px;
+    gap: 4px;
+    font-size: 20px;
+    font-weight: 400;
 }
 
-.create{}
+.create{
+    width: 214px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px;
+    padding: 16px;
+    gap: 4px;
+    font-size: 21px;
+    font-weight: 700;
+    background: #2A3647;
+    color: white;
+}
