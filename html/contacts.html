@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Board</title>
+    <title>Contact</title>
     <link rel="icon" href="/assets/icons/favicon.png" type="image/png" />
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <script src="/script.js" defer></script>
 </head>
-<body>
+<body onload="onloadFunc()">
     <header class="header">
         <img src="/assets/icons/joinHeaderMobile.svg" alt="logo" class="d-none" />
         <p>Kanban Project Management Tool</p>
@@ -53,6 +53,9 @@
         </div>
       </nav>
 
-      <main></main>
+      <main>
+        <button onclick="addContact()">Klick</button>
+      </main>
+    <script src="/js/contact.js"></script>
 </body>
 </html>
