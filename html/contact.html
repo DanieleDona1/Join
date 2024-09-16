@@ -4,10 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/contact.css">
+    <link rel="stylesheet" href="/css/fonts.css">
 </head>
 <body onload="onloadFunc()">
+    <div class="pop-up-contact">
+    <div class="contact-side-info">
+        <img src="/assets/icons/contact_join_logo.png" alt="Join Logo" class="contact-logo">
+        <div class="contact-side-info-div">
+            <div class="add-contact">
+                <span class="add-contact-headline">Add contact</span>
+                <span class="add-contact-info">Tasks are better with a team!</span>
+            </div>
+            <img src="/assets/icons/contac_line_vector.svg" alt="" class="contact-vector">
+        </div>
+    </div>
+    <img src="/assets/icons/add_contact_img.png" alt="Konaktbild" class="contact-pic">
 
-    <button onclick="addContact()">Klick</button>
+    <form>
+        <address class="contact-field">
+            <input type="text" name="name" id="name" placeholder="Name" required>
+            <!-- <img src="/assets/icons/person.png" alt="person"> -->
+            <input type="email" name="email" id="email" placeholder="Email" required>
+            <input type="number" name="phonenumber" id="phonenumber" placeholder="Phone" required>
+        </address>
+        <div class="input-button">
+            <input type="button" value="Cancel" class="cancel">
+            <input type="button" value="Create Contact" onclick="addContact()" class="create">
+        </div>
+    </form>
+</div>
     
     <script src="/js/contact.js"></script>
 </body>
