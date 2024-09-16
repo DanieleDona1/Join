@@ -1,0 +1,191 @@
+body {
+    background-color: bisque;
+}
+
+/* overflow hidden bei open popup */
+
+.pop-up-contact{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    width: 1212px;
+    height: 594px;
+    border-radius: 30px;
+    background-color: white;
+    z-index: 999;
+}
+
+.contact-side-info {
+    width: 467px;
+    height: 594px;
+    background-color: #2A3647;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px 0 0 30px;
+
+}
+
+.contact-logo {
+    position: absolute;
+    top: 154px;
+    left: 47px;
+    width: 56px;
+    height: 67px;
+}
+
+.contact-side-info-div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    width: 371px;
+}
+
+.add-contact{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.add-contact-headline {
+    font-size: 61px;
+    font-weight: 700;
+    color: white;
+}
+
+.add-contact-info {
+    font-size: 27px;
+    font-weight: 400;
+    color: white;
+}
+
+.contact-vector {
+    height: 3px;
+}
+
+.close-popup{
+    display: flex;
+    position: absolute;
+    top: 48px;
+    left: 1132px;
+    border: none;
+    background-color: white;
+}
+
+.close-popup img{
+    width: 32px;
+    height: 32px;
+}
+
+
+.contact-pic{
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    top: 204px;
+    left: 550px;
+}
+
+.contact-field{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    position: absolute;
+    top: 137px;
+    left: 742px;
+    width: 422px;
+    height: 215px;
+}
+
+.contact-field #name::placeholder{
+    background-image: url(/assets/icons/person.png);
+    background-repeat: no-repeat;
+    display: flex;
+    background-position: 100%;
+    background-size: 24px;
+}
+
+.contact-field #email::placeholder{
+    background-image: url(/assets/icons/mail.png);
+    background-repeat: no-repeat;
+    display: flex;
+    background-position: 100%;
+    background-size: 24px;
+}
+
+.contact-field #phonenumber::placeholder{
+    background-image: url(/assets/icons/call.png);
+    background-repeat: no-repeat;
+    display: flex;
+    background-position: 100%;
+    background-size: 24px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* input[type=number] {
+  appearance: textfield;
+} */
+
+input{
+    width: 422px;
+    height: 51px;
+    line-height: 30px;
+    font-size: 20px;
+    padding: 13px 21px;
+    margin: 0;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    cursor: pointer;
+}
+
+button{
+    cursor: pointer;
+}
+
+.input-button{
+    display: flex;
+    gap: 24px;
+    width: 364px;
+    height: 56px;
+    position: absolute;
+    top: 400px;
+    left: 742px;
+}
+
+.cancel{
+    width: 126px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px;
+    padding: 16px;
+    gap: 4px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.create{
+    width: 214px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px;
+    padding: 16px;
+    gap: 4px;
+    font-size: 21px;
+    font-weight: 700;
+    background: #2A3647;
+    color: white;
+}
