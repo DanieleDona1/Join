@@ -94,7 +94,6 @@
   color: rgb(168, 168, 168);
   font-weight: 400;
   font-size: 16px;
-  padding: 8px 60px 8px 60px;
 }
 
 .navbar a:hover {
@@ -156,6 +155,8 @@ main {
   bottom: 80px;
   left: 0;
   right: 0;
+  min-height: calc(100vh - 160px);
+  width: 100vw;
   background-color: rgb(246, 247, 248);
   overflow: auto;
 }
@@ -174,6 +175,10 @@ main {
     width: 232px;
     height: 100vh;
     padding: 64px 0px 64px 0px;
+  }
+
+  .navbar a {
+    padding: 8px 60px 8px 60px;
   }
 
   .navbar-join-icon-container {
@@ -216,6 +221,8 @@ main {
   main {
     left: 232px;
     bottom: 0;
+    min-height: calc(100vh - 80px);
+    max-width: calc(100vw - 232px);
   }
 }
 
