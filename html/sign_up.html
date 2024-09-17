@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/login.css" />
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
-    <script src="script.js" defer></script>
+    <script src="/js/sign_up.js" defer></script>
   </head>
   <body>
     <div class="wrapper max-width-1920">
@@ -21,7 +21,7 @@
             <div class="underline-headline"></div>
           </div>
 
-          <form class="input-container" onsubmit="return false;">
+          <form class="input-container" onsubmit="addUser(); return false">
             <div class="input-group">
               <input type="name" id="name" placeholder="Name" required />
               <img src="/assets/img/person.svg" alt="mail" />
@@ -41,7 +41,7 @@
               <img src="/assets/img/lock.svg" alt="lock" />
             </div>
             <div class="input-group">
-              <input type="confirm-password" id="confirmPassword"
+              <input type="password" id="confirmPassword"
               placeholder="Confirm Password" required />
               <img src="/assets/img/lock.svg" alt="lock" />
             </div>

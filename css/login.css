@@ -143,10 +143,12 @@ a {
   padding: 10px 21px 10px 21px;
   gap: 10px;
   border-radius: 10px;
-  border: 1px solid black;
-  color: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   font-size: 18px;
-  opacity: 0.2;
+}
+
+.input-group input::placeholder {
+  color: rgba(0, 0, 0, 0.2);
 }
 
 .input-group img {
@@ -155,6 +157,12 @@ a {
   right: 15px;
   transform: translateY(-50%);
   width: 16px;
+}
+
+.msg-login-successful {
+  font-size: 18px;
+  color:greenyellow;
+  font-weight: bold;
 }
 
 label {
