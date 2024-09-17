@@ -6,8 +6,24 @@ async function onloadFunc() {
     
 }
 
+function openAddContact(){
+  document.getElementById('background-pop-up').classList.remove('d-none')
+  document.getElementById('pop-up-contact').classList.remove('d-none')
+  document.querySelector('body').classList.add('overflow-hidden')
+}
+
+function closeAddContact(){
+  document.getElementById('background-pop-up').classList.add('d-none')
+  document.getElementById('pop-up-contact').classList.add('d-none')
+  document.querySelector('body').classList.remove('overflow-hidden')
+}
+
 async function addContact(){
-    // let newContact = await addNewContact('Berta', '05824724'); //function mit neuem kontakt zum hinzufügen  || könnte auch addNewCon weg lassen und mit postData und den namen aus inputfeld arbeiten
+  let name = document.getElementById('name').value
+  let mail = document.getElementById('email').value
+  let phone = document.getElementById('phonenumber').value
+
+    let newContact = await addNewContact(name, mail, phone); //function mit neuem kontakt zum hinzufügen  || könnte auch addNewCon weg lassen und mit postData und den namen aus inputfeld arbeiten
 
     console.log(newContact)
 
@@ -57,6 +73,6 @@ async function putData(path = "", data = {}) {
 
 
 // Funktion zum Hinzufügen eines neuen Kontakts / Hilfsfunktion 
-async function addNewContact(name, number) {
-    return await postData("/contact", { name: name, number: number });
+async function addNewContact(name, mail, number) {
+    return await postData("/contact", { name: name, mail: mail, number: number });
 }

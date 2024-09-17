@@ -9,6 +9,15 @@
   max-width: 1920px;
 }
 
+
+.d-none {
+  display: none;
+}
+
+.overflow.hidden{
+  overflow: hidden;
+}
+
 .d-flex-c-c {
   display: flex;
   justify-content: center;
@@ -36,12 +45,15 @@
 .header{
     width: 1440px;
     height: 96px;
-    box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 30px 40px 20px 348px;
     background-color: white;
+    position: fixed;
+    top: 0;
+    z-index: 100;
 }
 
 .header p{
@@ -87,6 +99,7 @@
   background-color: rgb(42, 54, 71);
   width: 100vw;
   height: 80px;
+  z-index: 200;
 }
 
 .navbar a {
@@ -151,9 +164,6 @@ main {
   overflow: auto;
 }
 
-.d-none {
-  display: none;
-}
 
 @media (min-width: 1025px) {
 

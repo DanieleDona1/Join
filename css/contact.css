@@ -1,11 +1,85 @@
-body {
-    background-color: bisque;
-}
-
 /* overflow hidden bei open popup */
 
-.pop-up-contact{
+
+.main-contact-side {
+    width: 456px;
+    height: 100vh;
+    overflow: scroll;
+    background-color: white;
+    box-shadow: 3px 0px 6px 0px rgba(0, 0, 0, 0.2);
+}
+
+.contact-list-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 24px;
+
+
+}
+
+
+
+.contact-list-field button {
+    width: 352px;
+    height: 56px;
+    border: 1px;
+    border-radius: 10px;
+    padding: 12px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    font-size: 21px;
+    font-weight: 700;
+    color: white;
+    background-color: #2A3647;
+}
+
+.contact-text{
     position: absolute;
+    top: 206px;
+    left: 743px;
+    width: 569px;
+    height: 73px;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.contact-text .span-1{
+    font-size: 61px;
+    font-weight: 700;
+}
+
+.contact-text .contact-vector{
+    height: 59px;
+    width: 3px;
+    background-color: #29ABE2;
+    
+}
+
+.contact-text .span-2{
+    max-width: 235px;
+    height: 32px;
+    font-size: 27px;
+    font-weight: 400;
+    color: #2A3647;
+
+}
+
+.background-pop-up{
+    position: fixed;
+    z-index: 999;
+    width: 1440px;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.594);
+}
+
+.pop-up-contact {
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -14,7 +88,6 @@ body {
     height: 594px;
     border-radius: 30px;
     background-color: white;
-    z-index: 999;
 }
 
 .contact-side-info {
@@ -44,7 +117,7 @@ body {
     width: 371px;
 }
 
-.add-contact{
+.add-contact {
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -66,7 +139,7 @@ body {
     height: 3px;
 }
 
-.close-popup{
+.close-popup {
     display: flex;
     position: absolute;
     top: 48px;
@@ -75,13 +148,13 @@ body {
     background-color: white;
 }
 
-.close-popup img{
+.close-popup img {
     width: 32px;
     height: 32px;
 }
 
 
-.contact-pic{
+.contact-pic {
     width: 120px;
     height: 120px;
     position: absolute;
@@ -89,7 +162,7 @@ body {
     left: 550px;
 }
 
-.contact-field{
+.contact-field {
     display: flex;
     flex-direction: column;
     gap: 32px;
@@ -100,7 +173,7 @@ body {
     height: 215px;
 }
 
-.contact-field #name::placeholder{
+.contact-field #name::placeholder {
     background-image: url(/assets/icons/person.png);
     background-repeat: no-repeat;
     display: flex;
@@ -108,7 +181,7 @@ body {
     background-size: 24px;
 }
 
-.contact-field #email::placeholder{
+.contact-field #email::placeholder {
     background-image: url(/assets/icons/mail.png);
     background-repeat: no-repeat;
     display: flex;
@@ -116,7 +189,7 @@ body {
     background-size: 24px;
 }
 
-.contact-field #phonenumber::placeholder{
+.contact-field #phonenumber::placeholder {
     background-image: url(/assets/icons/call.png);
     background-repeat: no-repeat;
     display: flex;
@@ -126,15 +199,15 @@ body {
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* input[type=number] {
   appearance: textfield;
 } */
 
-input{
+input {
     width: 422px;
     height: 51px;
     line-height: 30px;
@@ -146,11 +219,11 @@ input{
     cursor: pointer;
 }
 
-button{
+button {
     cursor: pointer;
 }
 
-.input-button{
+.input-button {
     display: flex;
     gap: 24px;
     width: 364px;
@@ -160,7 +233,7 @@ button{
     left: 742px;
 }
 
-.cancel{
+.cancel {
     width: 126px;
     height: 56px;
     display: flex;
@@ -174,7 +247,7 @@ button{
     font-weight: 400;
 }
 
-.create{
+.create {
     width: 214px;
     height: 56px;
     display: flex;
