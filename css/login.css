@@ -30,6 +30,10 @@ a {
   z-index: 1;
   background-color: rgb(246, 247, 248);
   animation: moveToCorner 1000ms linear forwards;
+  width: 40px;
+    height: 50px;
+    top: 30px;
+    left: 30px;
 }
 
 @keyframes moveToCorner {
@@ -159,9 +163,14 @@ a {
   width: 16px;
 }
 
+input:focus {
+  outline: none;
+  border: 2px solid rgba(41, 171, 226, 1);
+}
+
 .msg-login-successful {
   font-size: 18px;
-  color:greenyellow;
+  color: greenyellow;
   font-weight: bold;
 }
 
@@ -174,7 +183,7 @@ label {
 
 .form-checkbox {
   margin: 15px 0 10px 0;
-  /* transform: scale(1.1); */
+  transform: scale(1.1);
   margin-right: 8px;
   border: 5px solid black;
   cursor: pointer;
@@ -205,7 +214,7 @@ label {
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
-.btn-guest-entry  {
+.btn-guest-entry {
   border: unset;
   font-weight: bold;
   font-size: 18px;
@@ -241,6 +250,10 @@ footer a:hover {
   color: rgb(41, 171, 226);
   transform: scale(1.04);
 }
+
+/* .paused {
+  animation-play-state: paused;
+} */
 
 @keyframes moveToCornerMobile {
   from {
