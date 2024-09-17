@@ -83,7 +83,7 @@ a {
 
 .header-btn-container a:hover {
   background-color: rgb(41, 171, 226);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
 .entry-modal {
@@ -179,12 +179,11 @@ label {
 }
 
 .entry-btn-container button {
-  padding: 4px 2px;
-  border: unset;
   cursor: pointer;
 }
 
-.entry-btn-container button:first-child {
+.entry-btn {
+  border: unset;
   background-color: rgb(42, 54, 71);
   color: white;
   padding: 10px 25px;
@@ -193,14 +192,15 @@ label {
   font-weight: bold;
   transition: background-color 200ms;
 }
-.entry-btn-container button:first-child:hover {
+.entry-btn:hover {
   background-color: rgb(41, 171, 226);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
-.entry-btn-container button:nth-child(2) {
-  font-size: 18px;
+.btn-guest-entry  {
+  border: unset;
   font-weight: bold;
+  font-size: 18px;
   padding: 10px 15px;
   border-radius: 8px;
   border: 1px solid black;
@@ -209,7 +209,7 @@ label {
   background-color: white;
 }
 
-.entry-btn-container button:nth-child(2):hover {
+.btn-guest-entry:hover {
   color: rgb(41, 171, 226);
   border: 1px solid rgb(41, 171, 226);
 }
