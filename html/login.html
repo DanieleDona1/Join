@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join</title>
 
@@ -9,13 +9,19 @@
     <link rel="icon" href="/assets/icons/favicon.png" type="image/png" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/login.css" />
-    <link rel="stylesheet" href="/style.css"/>
+    <link rel="stylesheet" href="/style.css" />
     <script src="/js/sign_up.js" defer></script>
     <script src="/script.js" defer></script>
   </head>
   <body onload="onloadFunc();">
     <div class="wrapper max-width-1920">
-      <a href="/html/login.html"><img class="logo-animation" id="logoAnimation" src="/assets/img/Logo.svg" alt="logo" /></a>
+      <a href="/html/login.html"
+        ><img
+          class="logo-animation"
+          id="logoAnimation"
+          src="/assets/img/Logo.svg"
+          alt="logo"
+      /></a>
 
       <div class="header-btn-container">
         <button>Not a Join user?</button>
@@ -31,37 +37,55 @@
 
           <form class="input-container" onsubmit="login(event); return false;">
             <div class="input-group">
-              <input class="error-input" type="email" id="email" placeholder="Email" required />
+              <input
+                class="error-input"
+                type="email"
+                id="email"
+                placeholder="Email"
+                required
+              />
               <img src="/assets/img/mail.svg" alt="mail" />
             </div>
 
             <div class="input-group">
-              <input class="error-input" onkeydown="removeErrorMsg();"
+              <input
+                class="error-input"
+                onkeydown="removeErrorMsg();"
                 type="password"
                 id="password"
                 placeholder="Password"
                 required
-                />
-                <img src="/assets/img/lock.svg" alt="lock" />
-                <div id="errorMsg" class="error-msg">Check your email and password. Please try again.</div>
+              />
+              <img src="/assets/img/lock.svg" alt="lock" />
+              <div id="errorMsg" class="error-msg">
+                Check your email and password. Please try again.
               </div>
-              
-              <label>
-                <input class="form-checkbox" type="checkbox" />
-                Remember me
-              </label>
-              
+            </div>
+
+            <label>
+              <input class="form-checkbox" type="checkbox" />
+              Remember me
+            </label>
+
             <div class="entry-btn-container" id="btnentryContainer">
               <button type="submit" class="entry-btn">Log in</button>
-              <a href="summary.html"><button type="button" id="btnGuestentry" class="btn-guest-entry">
-                Guest Log in
-              </button>
-            </a>
+              <a href="summary.html"
+                ><button
+                  type="button"
+                  id="btnGuestentry"
+                  class="btn-guest-entry"
+                >
+                  Guest Log in
+                </button>
+              </a>
             </div>
           </form>
         </div>
       </div>
-      <div id="animatedText" class="animated-text"></div>
+
+      <div id="dialogBg" class="dialog-bg">
+        <div id="animatedText" class="animated-text"></div>
+      </div>
 
       <footer>
         <div>

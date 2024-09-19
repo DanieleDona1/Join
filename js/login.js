@@ -14,6 +14,7 @@ function checkMsgUrl() {
 
   if (msg) {
     document.getElementById('animatedText').innerHTML = msg;
+    setTimeout(showDialog, 0.5);
   } else {
     document.getElementById("animatedText").style.display = "none";
   }
@@ -39,8 +40,6 @@ function login(event) {
     document.querySelectorAll(".error-input").forEach(element => {
       element.style.border = "1px solid red";
   });
-
-
     console.log("Kein Benutzer gefunden");
   }
 }
@@ -59,3 +58,16 @@ function checkUser(email, password) {
 function removeErrorMsg() {
   document.getElementById("errorMsg").style.opacity = "0";
 }
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const dialogBg = document.getElementById('dialogBg');
+
+  dialogBg.addEventListener('animationend', () => {
+      dialogBg.style.display = 'none';
+  });
+});
+
+function showDialog() {
+  document.getElementById('dialogBg').style.display = 'flex'; // Setze display auf 'flex'
+};
