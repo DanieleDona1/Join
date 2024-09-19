@@ -1,6 +1,10 @@
-function onloadFunc() {
-    checkMsgUrl();
-    onload();   
+let users = {};
+
+const BASE_URL = "https://joinremotestorage-c8226-default-rtdb.europe-west1.firebasedatabase.app/";
+
+async function onloadFunc() {
+  checkMsgUrl();
+  await onload();  
 }
 
 function checkMsgUrl() {
@@ -14,28 +18,33 @@ function checkMsgUrl() {
   }
 }
 
-BASE_URL = "https://joinremotestorage-c8226-default-rtdb.europe-west1.firebasedatabase.app/";
-
-async function onload() {
-    let response = await fetch(BASE_URL + ".json");
-    let responseAsJson =  await response.json();
-    console.log(responseAsJson);
+async function onload() { 
+  let response = await fetch(BASE_URL + ".json");
+  let responseAsJson = await response.json();
+  users = responseAsJson;
+  console.log("ResponseAsJson ", users);
 }
 
 function login(event) {
   event.preventDefault();
-  let email = document.getElementById("email");
-  let password = document.getElementById("password");
-  let name = document.getElementById("name");
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
 
-  let index = users.findIndex(
-    (user) => user.email == email.value && user.password == password.value
-  );
+  let userkey = checkUser(email, password);
 
-  if (index != -1) {
-    console.log("User gefunden!");
-    window.location.href = `/html/summary.html?msg=${users[index].name}`;
+  if (userkey) {
+    window.location.href = `/html/summary.html?msg=${users.users[userkey].name}`;
   } else {
-    console.log("Kein User gefunden!");
+    console.log('Kein Benutzer gefunden');
   }
+}
+
+function checkUser(email, password) {
+  for (const key in users.users) {
+    const user = users.users[key];
+    if (user.email === email && user.password === password) {
+      return key;
+    }
+  }
+  return null;
 }

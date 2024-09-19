@@ -1,4 +1,3 @@
-let users = [{"name": "Daniel","email": "a@a", "password": "123"}];
 
 function addUser() {
     let  name = document.getElementById('name').value;
@@ -9,9 +8,8 @@ function addUser() {
     console.log(users);
     postData("/users", {"name": name,"email": email, "password": password,})
     
-    // window.location.href = "login.html?msg=Du hast dich erfolgreich registriert!";
+    window.location.href = "login.html?msg=Du hast dich erfolgreich registriert!";
 }
-BASE_URL = "https://joinremotestorage-c8226-default-rtdb.europe-west1.firebasedatabase.app";
 
 async function postData(path="", data={}){
     let response = await fetch(BASE_URL + path + ".json", {
