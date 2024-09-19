@@ -9,22 +9,29 @@
     <link rel="stylesheet" href="/css/fonts.css" />
     <script src="/script.js" defer></script>
 </head>
-<body onload="onloadFunc()">
-    <header class="header">
-        <img src="/assets/icons/joinHeaderMobile.svg" alt="logo" class="d-none" />
-        <p>Kanban Project Management Tool</p>
-        <div>
-          <button>
-            <img src="/assets/icons/help.svg" alt="help" />
-          </button>
-          <span class="headerInitials">JV</span>
-        </div>
-      </header>
+<body onload="onloadFunc()" class="max-width-1920">
+    <header>
+      <img
+        class="header-join-logo"
+        src="/assets/icons/joinHeaderMobile.svg"
+        alt="logo"
+      />
+      <p class="d-none">Kanban Project Management Tool</p>
+      <div class="header-rightside-container d-none">
+        <img
+          class="header-help-icon d-none"
+          src="/assets/icons/help.svg"
+          alt="help"
+        />
+        <span class="header-initials">JV</span>
+      </div>
+    </header>
 
-    <nav class="navbar">
-        <div class="navbar-join-icon-container d-none">
-          <img src="/assets/icons/navbar_join_icon.svg" alt="" />
-        </div>
+    <nav>
+      <div class="navbar-join-icon-container d-none">
+        <img src="/assets/icons/navbar_join_icon.svg" alt="" />
+      </div>
+      <div class="navbar-container-bottom">
         <div class="navbar-item-container">
           <a href="summary.html" class="navbar-item" data-page="summary">
             <img src="/assets/icons/summary_Icon.svg" alt="Summary Icon" />
@@ -51,7 +58,8 @@
             >Legal Notice</a
           >
         </div>
-      </nav>
+      </div>
+    </nav>
 
       <main>
         <button onclick="addContact()">Klick</button>
