@@ -1,13 +1,16 @@
-H1 {
-  margin-top: 48px;
-  margin-left: 16px;
+main h1 {
   font-size: 47px;
   font-weight: 700;
 }
 
-main {
-    position: relative;
-    padding-right: 60px;
+main h2 {
+  margin-top: 35px;
+  font-size: 27px;
+  font-weight: 700;
+}
+
+main p {
+  margin-top: 10px;
 }
 
 .navbar-back-arrow {
@@ -15,5 +18,19 @@ main {
   top: 48px;
   right: 16px;
   width: 32px;
+}
+
+.last-p {
+  margin-bottom: 16px;
+}
+
+.navbar-back-arrow:hover {
+  cursor: pointer;
+}
+
+@media (min-width: 1025px) {
+  main h1 {
+    font-size: 61px;
+  }
 }
 
