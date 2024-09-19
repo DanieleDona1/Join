@@ -4,8 +4,8 @@ function addUser() {
     let  email = document.getElementById('email').value;
     let  password = document.getElementById('password').value;
 
-    users.push({"name": name.value,"email": email.value, "password": password.value,});
-    console.log(users);
+    // users.push({"name": name.value,"email": email.value, "password": password.value,});
+    console.log(responseAsJson);
     postData("/users", {"name": name,"email": email, "password": password,})
     
     window.location.href = "login.html?msg=Du hast dich erfolgreich registriert!";
