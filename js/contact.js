@@ -1,13 +1,25 @@
 const BASE_URL =
   "https://contactstorage-593de-default-rtdb.europe-west1.firebasedatabase.app/";
 let contactList = [];
-let currentList = [];
 
 // array für kontaktliste wo alle daten + spezifische id gespeichert wird und das laden und bearbeiten einfacher macht
 
 async function onloadFunc() {
   console.log(await loadData());
 
+  await createContactlist();
+
+  renderPhoneList();
+}
+
+// Hauptfunktion: Steuert den Sortier- und Renderprozess
+function renderPhoneList() {
+  const sortedContacts = sortContacts(contactList);
+  const groupedContacts = groupContactsByInitial(sortedContacts);
+  displayGroupedContacts(groupedContacts);
+}
+
+async function createContactlist(){
   let data = await loadData("contact"); // holt mittels dieser funct das Json von der Datenbank unter diesem Pfad
 
   let contacts = Object.keys(data); // nimmt die keys der jeweiligen objecte zum weiter verarbeiten
@@ -22,26 +34,64 @@ async function onloadFunc() {
     );
   }
 
-  currentList = contactList;
-  console.log(currentList);
-
-  renderPhoneList();
 }
 
-function renderPhoneList() {
+// Sortiert die Kontakte alphabetisch nach dem Namen
+function sortContacts(contacts) {
+  return contacts.sort((a, b) => a.user.name.localeCompare(b.user.name));
+}
+
+// Gruppiert die Kontakte basierend auf ihrem Anfangsbuchstaben
+function groupContactsByInitial(contacts) {
+  const grouped = {};
+
+  contacts.forEach(contact => {
+    const initial = contact.user.name.charAt(0).toUpperCase();
+    if (!grouped[initial]) {
+      grouped[initial] = [];
+    }
+    grouped[initial].push(contact);
+  });
+
+  return grouped;
+}
+
+// Zeigt die gruppierten Kontakte an
+function displayGroupedContacts(groupedContacts) {
   const content = document.getElementById("content-contactlist");
   content.innerHTML = "";
 
-  for (let i = 0; i < currentList.length; i++) {
-    content.innerHTML += /*html*/ `
-      <div>
-        ${currentList[i].user.name}
-        ${currentList[i].user.number}
-        ${currentList[i].user.mail}
-      </div>
-    `;
+  for (const initial in groupedContacts) {
+    content.innerHTML += `<h2>${initial}</h2>`;
+    groupedContacts[initial].forEach(contact => {
+      content.innerHTML += /*html*/ `
+        <div>
+          <div class="contactlist-name">${contact.user.name}</div>
+          <div  class="contactlist-vector"></div>
+          <div class="contactlist-mail">${contact.user.mail}</div>
+        </div>
+      `;
+    });
   }
 }
+
+
+// function renderPhoneList() {
+//   const content = document.getElementById("content-contactlist");
+//   content.innerHTML = "";
+
+//   for (let i = 0; i < contactList.length; i++) {
+//     content.innerHTML += /*html*/ `
+//       <div>
+//         ${contactList[i].user.name}
+//         ${contactList[i].user.number}
+//         ${contactList[i].user.mail}
+//       </div>
+//     `;
+//   }
+// }
+
+
 
 function showContactList() {}
 
