@@ -9,6 +9,11 @@
   max-width: 1920px;
 }
 
+.max-display-size {
+  max-width: 1920px;
+  max-height: 1080px;
+}
+
 .d-flex-c-c {
   display: flex;
   justify-content: center;
@@ -194,7 +199,7 @@ main {
     width: auto;
     display: flex;
     justify-content: center;
-    padding-bottom: 64px;
+    padding-bottom: 70px;
   }
 
   .navbar-join-icon-container img {
@@ -244,14 +249,19 @@ main {
 @media (min-width: 1921px) {
   nav {
     left: calc((100vw - 1920px) / 2 + 0px);
+    top: calc((100vh - 1080px) / 2 + 0px);
+    max-height: 1080px;
   }
 
   header {
     left: calc((100vw - 1920px) / 2 + 232px);
+    top: calc((100vh - 1080px) / 2 + 0px);
   }
 
   main {
     left: calc((100vw - 1920px) / 2 + 232px);
+    top: calc((100vh - 1080px) / 2 + 80px);
+    min-height: 0;
+    height: 1000px;
   }
 }
-
