@@ -6,7 +6,7 @@ function addUser() {
 
     postData("/users", {"name": name,"email": email, "password": password,})
     
-    window.location.href = "login.html?msg=Du hast dich erfolgreich registriert!";
+    window.location.href = "login.html?msg=You Signed Up successfully";
 }
 
 async function postData(path="", data={}){
