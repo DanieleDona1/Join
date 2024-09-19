@@ -4,15 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join</title>
-    <link rel="icon" href="/assets/icons/favicon.ico" type="image/png" />
+    <link rel="icon" href="/assets/icons/favicon.png" type="image/png" />
     <link rel="stylesheet" href="/css/login.css" />
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
-    <script src="script.js" defer></script>
+    <script src="/js/login.js"></script>
+    <script src="/js/sign_up.js" defer></script>
   </head>
   <body>
     <div class="wrapper max-width-1920">
-      <img class="logo" src="/assets/img/Logo.svg" alt="logo" />
+      <a href="/html/login.html "><img class="logo" src="/assets/img/Logo.svg" alt="logo"/></a>
 
       <div class="entry-modal">
         <div class="modal-content">
@@ -21,7 +22,7 @@
             <div class="underline-headline"></div>
           </div>
 
-          <form class="input-container" onsubmit="return false;">
+          <form class="input-container" onsubmit="addUser(); return false">
             <div class="input-group">
               <input type="name" id="name" placeholder="Name" required />
               <img src="/assets/img/person.svg" alt="mail" />
@@ -41,7 +42,7 @@
               <img src="/assets/img/lock.svg" alt="lock" />
             </div>
             <div class="input-group">
-              <input type="confirm-password" id="confirmPassword"
+              <input type="password" id="confirmPassword"
               placeholder="Confirm Password" required />
               <img src="/assets/img/lock.svg" alt="lock" />
             </div>
@@ -65,7 +66,7 @@
       <footer>
         <div>
           <a href="/html/privacy_policy.html">Privacy Policy</a>
-          <a href="/html/legalNotice.html">Legal notice</a>
+          <a href="/html/legal_notice.html">Legal notice</a>
         </div>
       </footer>
     </div>

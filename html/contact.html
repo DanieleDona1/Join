@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="/css/contact.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/css/fonts.css"
+    />
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body onload="onloadFunc()">
+    <header class="header">
+        <img src="/assets/icons/joinHeaderMobile.svg" alt="logo" class="d-none" />
+        <p>Kanban Project Management Tool</p>
+        <div>
+          <button>
+            <img src="/assets/icons/help.svg" alt="help" />
+          </button>
+          <span class="headerInitials">JV</span>
+        </div>
+      </header>
+  
+      <nav class="navbar">
+        <div class="navbar-join-icon-container d-none">
+          <img src="/assets/icons/navbar_join_icon.svg" alt="" />
+        </div>
+        <div class="navbar-item-container">
+          <a href="summary.html" class="navbar-item" data-page="summary">
+            <img src="/assets/icons/summary_Icon.svg" alt="Summary Icon" />
+            <p>Summary</p>
+          </a>
+          <a href="board.html" class="navbar-item" data-page="board">
+            <img src="/assets/icons/board_icon.svg" alt="Board Icon" />
+            <p>Board</p>
+          </a>
+          <a href="add_tasks.html" class="navbar-item" data-page="add_tasks">
+            <img src="/assets/icons/add_tasks.svg" alt="Add Tasks Icon" />
+            <p>Add Tasks</p>
+          </a>
+          <a href="contacts.html" class="navbar-item" data-page="contacts">
+            <img src="/assets/icons/contact_name_icon.svg" alt="Contacts Icon" />
+            <p>Contacts</p>
+          </a>
+        </div>
+        <div class="navbar-disclaimer-links-container d-none">
+          <a href="/html/privacy_policy.html" data-page="privacy_policy"
+            >Privacy Policy</a
+          >
+          <a href="/html/legal_notice.html" data-page="legalNotice"
+            >Legal Notice</a
+          >
+        </div>
+      </nav>
+    <div class="pop-up-contact d-none">
+        <button class="close-popup">
+            <img src="/assets/icons/close-cross.svg" alt="close" >
+        </button>
+
+        <div class="contact-side-info">
+        <img
+          src="/assets/icons/navbar_join_icon.svg"
+          alt="Join Logo"
+          class="contact-logo"
+        />
+        <div class="contact-side-info-div">
+          <div class="add-contact">
+            <span class="add-contact-headline">Add contact</span>
+            <span class="add-contact-info">Tasks are better with a team!</span>
+          </div>
+          <img
+            src="/assets/icons/contact_line_vector.svg"
+            alt=""
+            class="contact-vector"
+          />
+        </div>
+      </div>
+
+      <img
+        src="/assets/icons/add_contact_img.png"
+        alt="Konaktbild"
+        class="contact-pic"
+      />
+
+      <form>
+        <address class="contact-field">
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Name"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+            required
+          />
+          <input
+            type="number"
+            name="phonenumber"
+            id="phonenumber"
+            placeholder="Phone"
+            min="0"
+            required
+          />
+        </address>
+        <div class="input-button">
+          <button class="cancel">
+            Cancel
+            <img
+              src="/assets/icons/close-cross.svg"
+              alt="close"
+            />
+          </button>
+          <button
+            onclick="addContact()"
+            class="create"
+          >
+            Create contact
+            <img
+              src="/assets/icons/check.svg"
+              alt="close"
+            />
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <script src="/js/contact.js"></script>
+  </body>
+</html>
