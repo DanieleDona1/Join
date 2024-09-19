@@ -61,4 +61,8 @@
     right: 16px;
     width: 32px;
   }
+
+  .navbar-back-arrow:hover {
+    cursor: pointer;
+  }
   

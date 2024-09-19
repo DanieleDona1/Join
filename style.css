@@ -147,7 +147,7 @@ main {
 
 @media (min-width: 1025px) {
   .d-none {
-    display: block;
+    display: flex;
   }
 
   header {
