@@ -75,9 +75,83 @@
       </div>
     </nav>
 
-    <main>
-      <button onclick="addContact()">Klick</button>
-    </main>
+    <div class="pop-up-contact d-none">
+        <button class="close-popup">
+            <img src="/assets/icons/close-cross.svg" alt="close" >
+        </button>
+
+        <div class="contact-side-info">
+        <img
+          src="/assets/icons/navbar_join_icon.svg"
+          alt="Join Logo"
+          class="contact-logo"
+        />
+        <div class="contact-side-info-div">
+          <div class="add-contact">
+            <span class="add-contact-headline">Add contact</span>
+            <span class="add-contact-info">Tasks are better with a team!</span>
+          </div>
+          <img
+            src="/assets/icons/contact_line_vector.svg"
+            alt=""
+            class="contact-vector"
+          />
+        </div>
+      </div>
+
+      <img
+        src="/assets/icons/add_contact_img.png"
+        alt="Konaktbild"
+        class="contact-pic"
+      />
+
+      <form>
+        <address class="contact-field">
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Name"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+            required
+          />
+          <input
+            type="number"
+            name="phonenumber"
+            id="phonenumber"
+            placeholder="Phone"
+            min="0"
+            required
+          />
+        </address>
+        <div class="input-button">
+          <button class="cancel">
+            Cancel
+            <img
+              src="/assets/icons/close-cross.svg"
+              alt="close"
+            />
+          </button>
+          <button
+            onclick="addContact()"
+            class="create"
+          >
+            Create contact
+            <img
+              src="/assets/icons/check.svg"
+              alt="close"
+            />
+          </button>
+        </div>
+      </form>
+    </div>
+
     <script src="/js/contact.js"></script>
   </body>
 </html>

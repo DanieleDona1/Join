@@ -7,22 +7,24 @@ async function onloadFunc() {
 }
 
 async function addContact(){
-    let newContact = await addNewContact('Berta', '05824724'); //function mit neuem kontakt zum hinzufügen  || könnte auch addNewCon weg lassen und mit postData und den namen aus inputfeld arbeiten
+    // let newContact = await addNewContact('Berta', '05824724'); //function mit neuem kontakt zum hinzufügen  || könnte auch addNewCon weg lassen und mit postData und den namen aus inputfeld arbeiten
 
     console.log(newContact)
 
     let contactID = newContact.name; // newContact gibt ein object zurück in dem sich die spezifische id unter name befindet
 
-    await loadData("contact"); // Zeigt alle Kontakte an
+}
 
-    // änders des kontaktes name/nummer
+function deleteContact(){
+  
+}
 
-    // Ändern des Kontakts mittels PUT
-    await putData("/contact/" + contactID, { name: "Berta", number: "9876543210" });
-    console.log("Kontakt aktualisiert");
-    
-    await loadData("contact"); // Zeigt alle Kontakte an
+async function editContact(){
 
+
+  // Ändern des Kontakts mittels PUT
+  await putData("/contact/" + contactID, { name: "Berta", number: "9876543210" });
+  console.log("Kontakt aktualisiert");
 }
 
 async function loadData(path = "") {
