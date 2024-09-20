@@ -186,11 +186,10 @@ label {
   padding-left: 56px;
   font-size: 16px;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .form-checkbox {
-  margin: 15px 0 10px 0;
   transform: scale(1.1);
   margin-right: 8px;
   border: 5px solid black;
@@ -297,8 +296,8 @@ footer a:hover {
   transform: translateX(-50%);
   background: rgba(42, 54, 71, 1);
   border-radius: 10px;
-  color: white;
   animation: moveAndFade 2s linear 500ms both;
+  color: white;
 }
 
 @keyframes moveAndFade {
@@ -331,6 +330,32 @@ label span {
   opacity: 0.25;
 }
 
+.form-checkbox {
+  appearance: none; /* Entfernt das Standarddesign */
+  width: 12px; /* Breite der Checkbox */
+  height: 12px; /* Höhe der Checkbox */
+  background-color: white; /* Hintergrundfarbe schwarz */
+  cursor: pointer; /* Zeiger-Cursor beim Hover */
+  position: relative; /* Position für den Haken */
+  border: 1px solid black; /* Border zur besseren Sichtbarkeit */
+  border-radius: 2px;
+  transition: background-color 0.3s; /* Sanfter Übergang für die Hintergrundfarbe */
+}
+
+.form-checkbox:checked {
+  background-color: rgb(0, 177, 255); /* Hintergrund bleibt schwarz, wenn angeklickt */
+}
+
+.form-checkbox:checked::after {
+  content: '✔'; /* Haken */
+  color: rgb(255, 255, 255); /* Hakenfarbe grün */
+  font-size: 10px; /* Schriftgröße des Häkchens */
+  position: absolute; /* Absolute Position für das Häkchen */
+  top: 50%; /* Vertikale Zentrierung */
+  left: 50%; /* Horizontale Zentrierung */
+  transform: translate(-50%, -50%); /* Zentriert das Häkchen */
+}
+
 .legal-link {
   color: rgb(41, 171, 226);
   font-size: 14px;
@@ -338,6 +363,20 @@ label span {
 
 .padding-left-0 {
   padding-left: 0px;
+}
+
+.margin-top-15px {
+  margin-top: 15px;
+}
+
+.confirm-password {
+  margin-bottom: 8px;
+}
+
+.error-signup-msg {
+  color: red;
+  font-size: 13px;
+  position: absolute;
 }
 
 /* navbar  */

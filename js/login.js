@@ -62,10 +62,12 @@ function removeErrorMsg() {
 
 document.addEventListener('DOMContentLoaded', () => {
   const dialogBg = document.getElementById('dialogBg');
-
-  dialogBg.addEventListener('animationend', () => {
+  
+  if (dialogBg) {
+    dialogBg.addEventListener('animationend', () => {
       dialogBg.style.display = 'none';
-  });
+    });
+  }
 });
 
 function showDialog() {

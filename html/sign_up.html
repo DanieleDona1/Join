@@ -22,7 +22,7 @@
             <div class="underline-headline"></div>
           </div>
 
-          <form class="input-container" onsubmit="addUser(); return false">
+          <form class="input-container">
             <div class="input-group">
               <input type="name" id="name" placeholder="Name" required />
               <img src="/assets/img/person.svg" alt="mail" />
@@ -42,13 +42,14 @@
               <img src="/assets/img/lock.svg" alt="lock" />
             </div>
             <div class="input-group">
-              <input type="password" id="confirmPassword"
+              <input type="password" id="confirmPassword" class="confirm-password"
               placeholder="Confirm Password" required />
               <img src="/assets/img/lock.svg" alt="lock" />
+              <div id="errorSignupMsg" class="error-signup-msg"></div>
             </div>
 
             <label class="d-flex-c-c padding-left-0">
-              <input class="form-checkbox" type="checkbox" />
+              <input id="formCheckbox" class="form-checkbox" type="checkbox" />
               <span>I accept the </span>&nbsp;<a
                 class="legal-link"
                 href="/html/privacy_policy.html"
@@ -56,8 +57,8 @@
               >
             </label>
 
-            <div class="entry-btn-container" id="btnentryContainer">
-              <button type="submit" class="entry-btn">Sign up</button>
+            <div class="entry-btn-container margin-top-15px" id="btnentryContainer">
+              <button onclick="validatePasswordsAndCheckbox()" type="button" class="entry-btn">Sign up</button>
             </div>
           </form>
         </div>
