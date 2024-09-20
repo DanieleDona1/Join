@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function init() {
   highlightActiveLink();
+  updateFavicon();
 });
 
 function highlightActiveLink() {
@@ -21,3 +22,17 @@ function highlightLink(link, currentPath) {
     link.classList.remove("active");
   }
 }
+
+function goBack() {
+  window.history.back();
+}
+
+function updateFavicon() {
+  const favicon = document.getElementById("favicon");
+  const darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+  favicon.href = darkModeMediaQuery.matches
+    ? "/assets/icons/favicons/favicon_dark.png"
+    : "/assets/icons/favicons/favicon_light.png";
+}
+
