@@ -34,6 +34,8 @@ function login(event) {
   let userkey = checkUser(email, password);
 
   if (userkey) {
+    history.replaceState(null, "", "/html/login.html");
+
     window.location.href = `/html/summary.html?msg=${responseAsJson.users[userkey].name}`;
   } else {
     document.getElementById("errorMsg").style.opacity = "1";
@@ -71,5 +73,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function showDialog() {
-  document.getElementById('dialogBg').style.display = 'flex'; // Setze display auf 'flex'
+  document.getElementById('dialogBg').style.display = 'flex';
 };
