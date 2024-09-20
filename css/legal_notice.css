@@ -1,6 +1,6 @@
 .lnH1{
     margin: 0;
-    font-size: 61px;
+    font-size: 47px;
     font-weight: 700;
 }
 .lnImg{
@@ -24,9 +24,8 @@
     flex-direction: column;
     gap: 24px;
     position: absolute;
-    top: 215px;
-    left: 96px;
-
+    top: 150px;
+    padding-right: 60px;
 }
 
 .gap16{
@@ -55,14 +54,12 @@
     font-size: 16px;
 }
 
-.navbar-back-arrow {
-    position: absolute;
-    top: 48px;
-    right: 16px;
-    width: 32px;
-  }
+@media (min-width: 1025px) {
+    .lnH1 {
+      font-size: 61px;
+    }
 
-  .navbar-back-arrow:hover {
-    cursor: pointer;
+    .lnMain{
+        top: 240px;
+    }
   }
-  

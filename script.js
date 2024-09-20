@@ -32,7 +32,7 @@ function updateFavicon() {
   const darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
   favicon.href = darkModeMediaQuery.matches
-    ? "/assets/icons/favicon-dark.png"
-    : "/assets/icons/favicon-light.png";
+    ? "/assets/icons/favicons/favicon_dark.png"
+    : "/assets/icons/favicons/favicon_light.png";
 }
 

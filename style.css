@@ -146,6 +146,17 @@ main {
   overflow: auto;
 }
 
+.navbar-back-arrow {
+  position: absolute;
+  top: 48px;
+  right: 16px;
+  width: 32px;
+}
+
+.navbar-back-arrow:hover {
+  cursor: pointer;
+}
+
 .d-none {
   display: none;
 }
@@ -243,6 +254,10 @@ main {
     max-width: calc(100% - 232px);
     padding-left: 96px;
     padding-top: 126px;
+  }
+
+  .navbar-back-arrow {
+    top: 94px;
   }
 }
 

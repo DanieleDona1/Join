@@ -13,20 +13,11 @@ main p {
   margin-top: 10px;
 }
 
-.navbar-back-arrow {
-  position: absolute;
-  top: 48px;
-  right: 16px;
-  width: 32px;
-}
-
 .last-p {
   margin-bottom: 16px;
 }
 
-.navbar-back-arrow:hover {
-  cursor: pointer;
-}
+
 
 @media (min-width: 1025px) {
   main h1 {
