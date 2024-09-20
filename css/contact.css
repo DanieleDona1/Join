@@ -3,22 +3,20 @@
 
 .main-contact-side {
     width: 456px;
-    height: 100vh;
-    overflow: scroll;
     background-color: white;
     box-shadow: 3px 0px 6px 0px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
 }
 
 .contact-list-field {
+    width: 400px;
+    max-height: 1188px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     padding: 32px 24px;
 
-
 }
-
-
 
 .contact-list-field button {
     width: 352px;
@@ -34,6 +32,62 @@
     font-weight: 700;
     color: white;
     background-color: #2A3647;
+}
+
+.contact-group h2{
+    width: 352px;
+    height: 58px;
+    padding: 17px 36px;
+}
+
+.contactlist-vector{
+    width: 352px;
+    height: 1px;
+    background-color: #D1D1D1;
+}
+
+.contact-item{
+    width: 352px;
+    height: 78px;
+    padding: 15px 24px;
+    display: flex;
+    align-items: center;
+    gap: 35px;
+}
+
+.contact-initials{
+    width: 42px;
+    height: 42px;
+    border-radius: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    box-sizing: border-box;
+    border: 2px solid white;
+    font-size: 12px;
+    font-weight: 400;
+
+}
+
+.contact-name-mail{
+    width: 140px;
+    max-height: 48px;
+    display: flex;
+    flex-direction: column;
+justify-content: space-between;
+
+}
+
+.contactlist-name{
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.contactlist-mail{
+    font-size: 20px;
+    font-weight: 400;
+    text-decoration: none;
 }
 
 .contact-text{
@@ -70,6 +124,7 @@
 
 }
 
+
 .background-pop-up{
     position: fixed;
     z-index: 999;
@@ -77,6 +132,8 @@
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.594);
 }
+
+/* Pop-up Add Contact */
 
 .pop-up-contact {
     position: fixed;
@@ -262,3 +319,26 @@ button {
     background: #2A3647;
     color: white;
 }
+
+.success-message{
+    width: 326px;
+    height: 74px;
+    font-size: 20px;
+    font-weight: 400;
+    background-color: #2A3647;
+    color: white;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 400;
+    z-index: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 1%;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+}
+
+/* Ende Add Contact */

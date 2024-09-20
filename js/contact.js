@@ -10,6 +10,8 @@ async function onloadFunc() {
   await createContactlist();
 
   renderPhoneList();
+
+  setRandomBackgrounds()
 }
 
 // Hauptfunktion: Steuert den Sortier- und Renderprozess
@@ -19,8 +21,8 @@ function renderPhoneList() {
   displayGroupedContacts(groupedContacts);
 }
 
-async function createContactlist(){
-  let data = await loadData("contact"); // holt mittels dieser funct das Json von der Datenbank unter diesem Pfad
+async function createContactlist() {
+  let data = await loadData("contacts"); // holt mittels dieser funct das Json von der Datenbank unter diesem Pfad
 
   let contacts = Object.keys(data); // nimmt die keys der jeweiligen objecte zum weiter verarbeiten
 
@@ -33,7 +35,6 @@ async function createContactlist(){
       }
     );
   }
-
 }
 
 // Sortiert die Kontakte alphabetisch nach dem Namen
@@ -61,37 +62,39 @@ function displayGroupedContacts(groupedContacts) {
   const content = document.getElementById("content-contactlist");
   content.innerHTML = "";
 
+  // Erstelle einen übergeordneten Container
+  let fullContent = '<div class="contacts-wrapper">';
+
+  // Schleife durch die gruppierten Kontakte
   for (const initial in groupedContacts) {
-    content.innerHTML += `<h2>${initial}</h2>`;
+    fullContent += /*html*/ `
+      <div class="contact-group">
+        <h2>${initial}</h2>
+        <div class="contactlist-vector"></div>
+        `;
+
     groupedContacts[initial].forEach(contact => {
-      content.innerHTML += /*html*/ `
-        <div>
-          <div class="contactlist-name">${contact.user.name}</div>
-          <div  class="contactlist-vector"></div>
-          <div class="contactlist-mail">${contact.user.mail}</div>
+      const initials = getInitials(contact.user.name);
+      fullContent += /*html*/ `
+        <div class="contact-item">
+          <div class="contact-initials">${contact.user.initials}</div>
+          <div class="contact-name-mail">
+            <div class="contactlist-name">${contact.user.name}</div>
+            <a href="mailto:${contact.user.mail}" class="contactlist-mail">${contact.user.mail}</a>
         </div>
       `;
     });
+
+    // Schließe die Kontaktgruppe ab
+    fullContent += `</div>`;
   }
+
+  // Schließe den übergeordneten Container
+  fullContent += "</div>";
+
+  // Füge den gesamten HTML-Inhalt in einem Schritt ein
+  content.innerHTML = fullContent;
 }
-
-
-// function renderPhoneList() {
-//   const content = document.getElementById("content-contactlist");
-//   content.innerHTML = "";
-
-//   for (let i = 0; i < contactList.length; i++) {
-//     content.innerHTML += /*html*/ `
-//       <div>
-//         ${contactList[i].user.name}
-//         ${contactList[i].user.number}
-//         ${contactList[i].user.mail}
-//       </div>
-//     `;
-//   }
-// }
-
-
 
 function showContactList() {}
 
@@ -100,18 +103,23 @@ async function addContact() {
   let mail = document.getElementById("email").value;
   let phone = document.getElementById("phonenumber").value;
 
-  let newContact = await addNewContact(name, mail, phone); //function mit neuem kontakt zum hinzufügen  || könnte auch addNewCon weg lassen und mit postData und den namen aus inputfeld arbeiten
+  await addNewContact(name, mail, phone); //function mit neuem kontakt zum hinzufügen  || könnte auch addNewCon weg lassen und mit postData und den namen aus inputfeld arbeiten
+  // Falls erfolgreich, zeige die Nachricht
+  if (addNewContact()) {
+    document.getElementById("success-message").classList.remove('d-none');
 
-  console.log(newContact);
-
-  //let contactID = newContact.name; // newContact gibt ein object zurück in dem sich die spezifische id unter name befindet
+    // Optionale Funktion, um die Nachricht nach 3 Sekunden wieder auszublenden
+    setTimeout(() => {
+      document.getElementById("success-message").classList.add('d-none');
+    }, 3000);
+  }
 }
 
 function deleteContact() {}
 
 async function editContact() {
   // Ändern des Kontakts mittels PUT
-  await putData("/contact/" + contactID, {
+  await putData("/contacts/" + contactID, {
     name: "Berta",
     number: "9876543210",
   });
@@ -145,9 +153,25 @@ async function putData(path = "", data = {}) {
   return (responseToJson = await response.json());
 }
 
-// Funktion zum Hinzufügen eines neuen Kontakts / Hilfsfunktion
+// Hilfsfunktion, um die Initialen zu extrahieren
+function getInitials(fullName) {
+  const nameParts = fullName.split(" "); // Teilt den Namen in Vor- und Nachname
+  const firstInitial = nameParts[0]?.charAt(0).toUpperCase(); // Erste Initiale
+  const lastInitial = nameParts[1]?.charAt(0).toUpperCase() || ""; // Zweite Initiale, falls vorhanden
+  return `${firstInitial}${lastInitial}`; // Kombiniere Initialen
+}
+
 async function addNewContact(name, mail, number) {
-  return await postData("/contact", { name: name, mail: mail, number: number });
+  // Berechne die Initialen basierend auf dem Namen
+  const initials = getInitials(name);
+
+  // Speichere die Daten, einschließlich der Initialen, in der Datenbank
+  await postData("/contacts", {
+    name: name,
+    mail: mail,
+    number: number,
+    initials: initials, // Initialen hinzufügen
+  });
 }
 
 function openAddContact() {
@@ -160,4 +184,25 @@ function closeAddContact() {
   document.getElementById("background-pop-up").classList.add("d-none");
   document.getElementById("pop-up-contact").classList.add("d-none");
   document.querySelector("body").classList.remove("overflow-hidden");
+}
+
+
+
+// Funktion zur Generierung einer zufälligen Hex-Farbe
+function getRandomColor() {
+  let letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+// Funktion zum Setzen der zufälligen Hintergrundfarbe für alle Elemente mit der Klasse "contact-initials"
+function setRandomBackgrounds() {
+  let elements = document.querySelectorAll('.contact-initials');
+  elements.forEach(element => {
+      let randomColor = getRandomColor();
+      element.style.backgroundColor = randomColor;
+  });
 }
