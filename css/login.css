@@ -23,6 +23,7 @@ a {
   align-items: center;
   justify-content: center;
   padding: 0 15px;
+  overflow: hidden;
 }
 
 .logo-animation {
@@ -168,6 +169,13 @@ input:focus {
   border: 2px solid rgba(41, 171, 226, 1);
 }
 
+.error-msg {
+  color: red;
+  font-size: 13px;
+  margin-top: 8px;
+  opacity: 0;
+}
+
 .msg-login-successful {
   font-size: 18px;
   color: greenyellow;
@@ -178,18 +186,11 @@ label {
   padding-left: 56px;
   font-size: 16px;
   cursor: pointer;
-  margin-bottom: 20px;
-}
-
-.form-checkbox {
-  margin: 15px 0 10px 0;
-  transform: scale(1.1);
-  margin-right: 8px;
-  border: 5px solid black;
-  cursor: pointer;
+  margin-bottom: 15px;
 }
 
 .entry-btn-container {
+  margin-top: 15px;
   display: flex;
   gap: 40px;
   justify-content: center;
@@ -271,27 +272,42 @@ footer a:hover {
   }
 }
 
-/* .animated-text {
-    position: absolute;
-    bottom: -100px; 
-    opacity: 1;
-    animation: moveAndFade 3s ease-out forwards;
-  }
+.dialog-bg {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: none;
+}
 
-  @keyframes moveAndFade {
-    0% {
-      bottom: -100px;
-      opacity: 1;
-    }
-    50% {
-      bottom: 50%;
-      transform: translateY(50%);
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  } */
+.animated-text {
+  padding: 10px 15px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(42, 54, 71, 1);
+  border-radius: 10px;
+  animation: moveAndFade 2s linear 500ms both;
+  color: white;
+}
+
+@keyframes moveAndFade {
+  0% {
+    bottom: -100px;
+    opacity: 1;
+  }
+  10% {
+    bottom: 50%;
+    opacity: 1;
+  }
+  100% {
+    bottom: 50%;
+    opacity: 0;
+  }
+}
 
 /* sign up css  */
 .logo {
@@ -308,6 +324,37 @@ label span {
   opacity: 0.25;
 }
 
+.form-checkbox {
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+  /* border: 1px solid black; */
+  border-radius: 2px;
+  margin-right: 8px;
+  transition: background-color 0.3s;
+}
+
+.form-checkbox:checked {
+  background-color: rgb(0, 177, 255);
+}
+
+.form-checkbox:not(:checked) {
+  border: 1px solid black;
+}
+
+.form-checkbox:checked::after {
+  content: '✔';
+  color: rgb(255, 255, 255);
+  font-size: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-60%, -55%);
+}
+
 .legal-link {
   color: rgb(41, 171, 226);
   font-size: 14px;
@@ -315,6 +362,20 @@ label span {
 
 .padding-left-0 {
   padding-left: 0px;
+}
+
+/* .margin-top-15px {
+  margin-top: 15px;
+} */
+
+.confirm-password {
+  margin-bottom: 8px;
+}
+
+.error-signup-msg {
+  color: red;
+  font-size: 13px;
+  position: absolute;
 }
 
 /* navbar  */
