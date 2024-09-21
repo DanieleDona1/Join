@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="/css/login.css" />
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
-    <!-- <script src="/js/login.js"></script> -->
     <script src="/js/sign_up.js" defer></script>
   </head>
   <body>
@@ -22,7 +21,7 @@
             <div class="underline-headline"></div>
           </div>
 
-          <form class="input-container"  onsubmit="validatePasswordsAndCheckbox(); return false;">
+          <form class="input-container"  onsubmit="validatePasswordsAndCheckbox(event);">
             <div class="input-group">
               <input type="name" id="name" placeholder="Name" minlength="3" maxlength="25" required />
               <img src="/assets/img/person.svg" alt="mail" />

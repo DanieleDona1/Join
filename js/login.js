@@ -18,6 +18,7 @@ function checkMsgUrl() {
   } else {
     document.getElementById("animatedText").style.display = "none";
   }
+  history.replaceState(null, "", "/html/login.html");
 }
 
 async function onload() {
@@ -34,7 +35,7 @@ function login(event) {
   let userkey = checkUser(email, password);
 
   if (userkey) {
-    history.replaceState(null, "", "/html/login.html");
+    // history.replaceState(null, "", "/html/login.html");
 
     window.location.href = `/html/summary.html?msg=${responseAsJson.users[userkey].name}`;
   } else {
