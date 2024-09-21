@@ -138,11 +138,61 @@ main {
   top: 80px;
   bottom: 80px;
   height: calc(100vh - 160px);
-  padding-top: 48px;
-  padding-right: 60px;
-  padding-left: 16px;
+  padding: 48px 16px 0;
   background-color: rgb(246, 247, 248);
   overflow: auto;
+}
+
+main a {
+  color: rgb(41, 171, 226);
+  text-decoration: none;
+}
+
+main ol {
+  font-size: 27px;
+  font-weight: bold;
+  list-style-type: none;
+}
+
+main ol li {
+  position: relative;
+  padding-left: 58px;
+}
+
+main ol li::before {
+  content: counter(list-item) ". "; 
+  position: absolute; 
+  left: 0; 
+  top: 0; 
+  font-size: 27px; 
+}
+
+main ul {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+
+main h1 {
+  font-size: 47px;
+  font-weight: 700;
+  margin-bottom: 35px;
+  padding-right: 60px;
+}
+
+main h2 {
+  margin-bottom: 25px;
+  font-size: 27px;
+  font-weight: 700;
+}
+
+main h3 {
+  font-size: 19px;
+}
+
+main p {
+  margin-bottom: 35px;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .navbar-back-arrow {
@@ -236,6 +286,7 @@ main {
   }
 
   .navbar-item p {
+    font-family: "inter";
     font-weight: 400;
     font-size: 16px;
   }
@@ -253,10 +304,17 @@ main {
     max-width: calc(100% - 232px);
     padding-left: 96px;
     padding-top: 126px;
+    padding-right: 133px;
+  }
+
+  main h1 {
+    font-size: 61px;
   }
 
   .navbar-back-arrow {
-    top: 94px;
+    top: 145px;
+    right: 133px;
+    width: 37px;
   }
 }
 
