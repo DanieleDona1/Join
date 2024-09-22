@@ -6,6 +6,7 @@ body {
   display: flex;
   justify-content: center;
   height: 100%;
+  background-color: rgb(246, 247, 248);
 }
 
 a {
@@ -16,7 +17,7 @@ a {
 
 .wrapper {
   position: relative;
-  background-color: rgb(246, 247, 248);
+  /* background-color: rgb(246, 247, 248); */
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -429,4 +430,76 @@ label span {
   height: 96px;
   box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
   display: none;
+}
+
+@media screen and (min-width: 1921px) {
+  .section_pad{
+      padding: 64px max(160px, calc(50% - 960px));
+  }
+
+  .section-gap {
+      gap: 64px;
+  }
+} 
+
+
+@media screen and (min-width: 1441px) and (max-width: 1920px) {
+ 
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1440px) {
+
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) {
+  
+  
+}
+
+@media screen and (min-width: 481px) and (max-width: 720px) {
+  #header-div {
+    display: flex;
+  }
+  #navbar-div {
+    display: flex;
+  }
+  .logo-animation {
+    animation: moveToCornerMobile 1000ms linear forwards;
+  }
+  .logo {
+    width: 40px;
+    height: 50px;
+    top: 30px;
+    left: 30px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .logo-animation {
+    animation: moveToCornerMobile 1000ms linear forwards;
+  }
+
+  .logo {
+    width: 40px;
+    height: 50px;
+    top: 30px;
+    left: 30px;
+  }
+
+  .header-btn-container {
+    position: absolute;
+    top: auto;
+    bottom: 75px;
+    right: auto;
+    left: auto;
+  }
+
+  .header-btn-container button:first-child {
+    font-size: 18px;
+  }
+
+  .header-btn-container a {
+    padding: 12px 13px;
+    font-size: 14px;
+  }
 }
