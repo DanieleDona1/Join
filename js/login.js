@@ -102,16 +102,12 @@ function togglePasswordVisibility(passwordFieldId, visibilityImgId) {
       visibilityBtn.src = "/assets/img/visibility_off.svg";
   }
 }
-// double 
+
 function toggleVisibility(passwordFieldId, passwordLockId, visibilityBtnId) {
   const passwordField = document.getElementById(passwordFieldId);
   const passwordLock = document.getElementById(passwordLockId);
   const visibilityBtn = document.getElementById(visibilityBtnId);
-  
-  managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn);
-}
 
-function managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn) {
   passwordField.addEventListener("input", () => {
     if (passwordField.value.trim() !== "") {
       passwordLock.classList.add("d-none");
