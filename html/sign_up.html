@@ -39,12 +39,24 @@
                 minlength="3" maxlength="25"
                 required
               />
-              <img src="/assets/img/lock.svg" alt="lock" />
+              <img id="passwordLock" src="/assets/img/lock.svg" alt="lock" />
+              <img
+                id="visibilityImg" class="visibilty-btn d-none"
+                onclick="togglePasswordVisibility('password', 'visibilityImg')"
+                src="/assets/img/visibility_off.svg"
+                alt="visibility_off"
+              />
             </div>
             <div class="input-group">
               <input type="password" id="confirmPassword" class="confirm-password"
               placeholder="Confirm Password" minlength="3" maxlength="25" required />
-              <img src="/assets/img/lock.svg" alt="lock" />
+              <img id="passwordLockConfirm" src="/assets/img/lock.svg" alt="lock" />
+              <img
+                id="visibilityImgConfirm" class="visibilty-btn d-none"
+                onclick="togglePasswordVisibility('confirmPassword', 'visibilityImgConfirm')"
+                src="/assets/img/visibility_off.svg"
+                alt="visibility_off"
+              />
               <div id="errorSignupMsg" class="error-signup-msg"></div>
             </div>
 

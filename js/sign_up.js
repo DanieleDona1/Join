@@ -88,3 +88,39 @@ function getFormValues() {
       confirmPassword: confirmPassword
     };
   }
+
+  function togglePasswordVisibility(passwordFieldId, visibilityImgId) {
+    let passwordField = document.getElementById(passwordFieldId);  
+    let visibilityBtn = document.getElementById(visibilityImgId);
+  
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        visibilityBtn.src = "/assets/img/visibility.svg";
+    } else {
+        passwordField.type = "password";
+        visibilityBtn.src = "/assets/img/visibility_off.svg";
+    }
+  }
+
+  function toggleVisibility(passwordFieldId, passwordLockId, visibilityBtnId) {
+    const passwordField = document.getElementById(passwordFieldId);
+    const passwordLock = document.getElementById(passwordLockId);
+    const visibilityBtn = document.getElementById(visibilityBtnId);
+  
+    passwordField.addEventListener("input", () => {
+      if (passwordField.value.trim() !== "") {
+        passwordLock.classList.add("d-none");
+        visibilityBtn.classList.remove("d-none");
+      } else {
+        passwordLock.classList.remove("d-none");
+        visibilityBtn.classList.add("d-none");
+      }
+    });
+  }
+  
+  document.addEventListener("DOMContentLoaded", () => {
+    toggleVisibility("password", "passwordLock", "visibilityImg");
+    toggleVisibility("confirmPassword", "passwordLockConfirm", "visibilityImgConfirm");
+  });
+  
+  
