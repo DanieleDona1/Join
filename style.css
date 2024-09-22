@@ -211,9 +211,9 @@ main p {
 }
 
 @media (min-width: 1025px) {
-  .d-none {
-    display: flex;
-  }
+  /* .d-none { 
+    display: flex; die klasse d-none wird in anderen Dateien verwendet daher kann sie nicht auf flex gesetzt werden
+  } */
 
   header {
     height: 80px;
