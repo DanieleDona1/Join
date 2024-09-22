@@ -13,7 +13,7 @@ function checkMsgUrl() {
   const msg = urlParams.get("msg");
 
   if (msg) {
-    document.getElementById('animatedText').innerHTML = msg;
+    document.getElementById("animatedText").innerHTML = msg;
     setTimeout(showDialog, 0.5);
   } else {
     document.getElementById("animatedText").style.display = "none";
@@ -40,9 +40,8 @@ function login(event) {
     window.location.href = `/html/summary.html?msg=${responseAsJson.users[userkey].name}`;
   } else {
     document.getElementById("errorMsg").style.opacity = "1";
-    document.querySelectorAll(".error-input").forEach(element => {
-      element.style.border = "1px solid red";
-  });
+    document.getElementById("email").style.border = "1px solid red";
+    document.getElementById("password").style.border = "1px solid red";
     console.log("Kein Benutzer gefunden");
   }
 }
@@ -62,17 +61,64 @@ function removeErrorMsg() {
   document.getElementById("errorMsg").style.opacity = "0";
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const dialogBg = document.getElementById("dialogBg");
 
-document.addEventListener('DOMContentLoaded', () => {
-  const dialogBg = document.getElementById('dialogBg');
-  
   if (dialogBg) {
-    dialogBg.addEventListener('animationend', () => {
-      dialogBg.style.display = 'none';
+    dialogBg.addEventListener("animationend", () => {
+      dialogBg.style.display = "none";
     });
   }
 });
 
 function showDialog() {
-  document.getElementById('dialogBg').style.display = 'flex';
-};
+  document.getElementById("dialogBg").style.display = "flex";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+  const errorMessage = document.getElementById("errorMsg");
+
+  const changeBorderToBlack = (inputElement) => {
+    emailInput.style.border = "1px solid rgba(0, 0, 0, 0.2)";
+    inputElement.style.border = "1px solid rgba(0, 0, 0, 0.2)";
+    errorMessage.innerHTML = "";
+  };
+
+  passwordInput.addEventListener("input", () => {
+    changeBorderToBlack(passwordInput);
+  });
+});
+
+function togglePasswordVisibility() {
+  const passwordField = document.getElementById("password");
+  const visibilityBtn = document.getElementById("visibilityBtn");
+
+  if (passwordField.type === "password") {
+      passwordField.type = "text";
+      visibilityBtn.src = "/assets/img/visibility.svg";
+      
+  } else {
+      passwordField.type = "password";
+      visibilityBtn.src = "/assets/img/visibility_off.svg";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const passwordField = document.getElementById("password");
+  const visibiltyBtn = document.getElementById("visibilityBtn");
+  const passwordLock = document.getElementById("passwordLock");
+
+passwordField.addEventListener("input", () => {
+    if (passwordField.value.trim() !== "") {
+      passwordLock.classList.add("d-none");
+      visibiltyBtn.classList.remove("d-none");
+    } else {
+      passwordLock.classList.remove("d-none");
+      visibiltyBtn.classList.add("d-none");
+
+    }
+});
+});

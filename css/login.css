@@ -161,7 +161,11 @@ a {
   top: 24px;
   right: 15px;
   transform: translateY(-50%);
-  width: 16px;
+  width: 20px;
+}
+
+.visibilty-btn {
+  cursor: pointer;
 }
 
 input:focus {

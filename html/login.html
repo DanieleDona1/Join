@@ -37,11 +37,11 @@
           <form class="input-container" onsubmit="login(event); return false;">
             <div class="input-group">
               <input
-                class="error-input"
                 type="email"
                 id="email"
                 placeholder="Email"
-                minlength="3" maxlength="32"
+                minlength="3"
+                maxlength="32"
                 required
               />
               <img src="/assets/img/mail.svg" alt="mail" />
@@ -49,15 +49,21 @@
 
             <div class="input-group">
               <input
-                class="error-input"
                 onkeydown="removeErrorMsg();"
                 type="password"
                 id="password"
                 placeholder="Password"
-                minlength="3" maxlength="25"
+                minlength="3"
+                maxlength="25"
                 required
               />
-              <img src="/assets/img/lock.svg" alt="lock" />
+              <img id="passwordLock" src="/assets/img/lock.svg" alt="lock" />
+              <img
+                id="visibilityBtn" class="visibilty-btn d-none"
+                onclick="togglePasswordVisibility()"
+                src="/assets/img/visibility_off.svg"
+                alt="visibility_off"
+              />
               <div id="errorMsg" class="error-msg">
                 Check your email and password. Please try again.
               </div>
