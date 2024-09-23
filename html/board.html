@@ -14,26 +14,26 @@
     <link rel="stylesheet" href="/css/board.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <script src="/script.js" defer></script>
-</head>
-<body class="max-width-1920">
-  <header>
-    <img
-      class="header-join-logo"
-      src="/assets/icons/header/joinHeaderMobile.svg"
-      alt="logo"
-    />
-    <p class="d-none">Kanban Project Management Tool</p>
-    <div class="header-rightside-container d-none">
-      <a href="help.html">
-        <img
-        class="header-help-icon d-none"
-        src="/assets/icons/header/help.svg"
-        alt="help"
+  </head>
+  <body class="max-width-1920">
+    <header>
+      <img
+        class="header-join-logo"
+        src="/assets/icons/header/joinHeaderMobile.svg"
+        alt="logo"
       />
-      </a>
-      <span class="header-initials">JV</span>
-    </div>
-  </header>
+      <p class="d-none">Kanban Project Management Tool</p>
+      <div class="header-rightside-container d-none">
+        <a href="help.html">
+          <img
+            class="header-help-icon d-none"
+            src="/assets/icons/header/help.svg"
+            alt="help"
+          />
+        </a>
+        <span class="header-initials">JV</span>
+      </div>
+    </header>
 
     <nav>
       <div class="navbar-join-icon-container d-none">
@@ -79,11 +79,10 @@
     </nav>
 
     <main>
-      
       <div class="d-flex-sb-c">
         <h2>Board</h2>
 
-        <div class="searchbarcontainer d-flex-se-c gap-32px">
+        <div class="search-add-container d-flex-se-c gap-32px">
           <div id="searchbar" class="searchbar d-flex-c-c">
             <input
               minlength="3"
@@ -92,12 +91,29 @@
               class="search"
               placeholder="Find Task"
             />
-            <img src="/assets/icons/board/Property 1=Default.svg" alt="Property">
+            <img src="/assets/icons/board/search-lupe.svg" alt="search-btn" />
           </div>
-          <div>Add Task</div>
-      </div>
+
+          <button class="add-task d-flex-c-c">
+            Add Task
+            <img src="/assets/icons/board/add-task-plus.svg" alt="plus" />
+          </button>
+        </div>
 
       </div>
+
+      <div class="section-container d-flex-sb-c">
+        <section id="toDo" class="to-do d-flex-sb-c"><span>to-do</span><img src="/assets/icons/board/plus-button.svg" alt="plus"></section>
+        <section id="inProgress" class="in-progress d-flex-sb-c"><span>in-progress</span><img src="/assets/icons/board/plus-button.svg" alt="plus"></section>
+        <section id="awaitFeedback" class="await-feedback d-flex-sb-c"><span>await-feedback</span><img src="/assets/icons/board/plus-button.svg" alt="plus"></section>
+        <section id="done" class="done d-flex-sb-c"><span>done</span><img src="/assets/icons/board/plus-button.svg" alt="plus"></section>
+
+
+
+      </div>
+
+
+
 
     </main>
   </body>
