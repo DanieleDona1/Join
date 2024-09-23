@@ -160,11 +160,11 @@ main ol li {
 }
 
 main ol li::before {
-  content: counter(list-item) ". "; 
-  position: absolute; 
-  left: 0; 
-  top: 0; 
-  font-size: 27px; 
+  content: counter(list-item) ". ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 27px;
 }
 
 main ul {
@@ -211,9 +211,10 @@ main p {
 }
 
 @media (min-width: 1025px) {
-  /* .d-none { 
-    display: flex; die klasse d-none wird in anderen Dateien verwendet daher kann sie nicht auf flex gesetzt werden
-  } */
+  header .d-none,
+  nav .d-none {
+    display: flex;
+}
 
   header {
     height: 80px;
