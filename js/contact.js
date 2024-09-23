@@ -11,7 +11,7 @@ async function onloadFunc() {
 
   renderPhoneList();
 
-  setRandomBackgrounds()
+  setRandomBackgrounds();
 }
 
 // Hauptfunktion: Steuert den Sortier- und Renderprozess
@@ -76,42 +76,58 @@ function displayGroupedContacts(groupedContacts) {
     groupedContacts[initial].forEach(contact => {
       const initials = getInitials(contact.user.name);
       fullContent += /*html*/ `
+      <div class="contact-profil">
         <div class="contact-item">
           <div class="contact-initials">${contact.user.initials}</div>
           <div class="contact-name-mail">
             <div class="contactlist-name">${contact.user.name}</div>
             <a href="mailto:${contact.user.mail}" class="contactlist-mail">${contact.user.mail}</a>
         </div>
+      </div>
       `;
     });
-
-    // Schließe die Kontaktgruppe ab
     fullContent += `</div>`;
   }
-
-  // Schließe den übergeordneten Container
   fullContent += "</div>";
 
-  // Füge den gesamten HTML-Inhalt in einem Schritt ein
   content.innerHTML = fullContent;
 }
 
-function showContactList() {}
+async function addContact(button) {
+  // Deaktiviere den Button während der Operation
+  button.disabled = true;
 
-async function addContact() {
   let name = document.getElementById("name").value;
   let mail = document.getElementById("email").value;
   let phone = document.getElementById("phonenumber").value;
 
-  await addNewContact(name, mail, phone); //function mit neuem kontakt zum hinzufügen  || könnte auch addNewCon weg lassen und mit postData und den namen aus inputfeld arbeiten
-  // Falls erfolgreich, zeige die Nachricht
-  if (addNewContact()) {
-    document.getElementById("success-message").classList.remove('d-none');
+  try {
+    // Füge den Kontakt hinzu und warte auf das Ergebnis
+    let newContact = await addNewContact(name, mail, phone);
 
-    // Optionale Funktion, um die Nachricht nach 3 Sekunden wieder auszublenden
-    setTimeout(() => {
-      document.getElementById("success-message").classList.add('d-none');
-    }, 3000);
+    // Überprüfe, ob der Kontakt erfolgreich hinzugefügt wurde
+    if (newContact) {
+      // Erfolgsmeldung anzeigen
+      document.getElementById("success-message").classList.remove("d-none");
+
+      // Liste der Kontakte neu rendern
+      renderPhoneList();
+
+      // Pop-up-Fenster schließen
+      closeAddContact();
+
+      // Erfolgsmeldung nach 3 Sekunden wieder ausblenden
+      setTimeout(() => {
+        document.getElementById("success-message").classList.add("d-none");
+      }, 3000);
+    } else {
+      console.error("Kontakt konnte nicht hinzugefügt werden.");
+    }
+  } catch (error) {
+    console.error("Fehler beim Hinzufügen des Kontakts:", error);
+  } finally {
+    // Button wieder aktivieren, wenn der Vorgang abgeschlossen ist
+    button.disabled = false;
   }
 }
 
@@ -139,6 +155,9 @@ async function postData(path = "", data = {}) {
     },
     body: JSON.stringify(data),
   });
+  if (!response.ok) {
+    throw new Error("Network response was not ok " + response.statusText);
+  }
   return (responseToJson = await response.json());
 }
 
@@ -157,7 +176,7 @@ async function putData(path = "", data = {}) {
 function getInitials(fullName) {
   const nameParts = fullName.split(" "); // Teilt den Namen in Vor- und Nachname
   const firstInitial = nameParts[0]?.charAt(0).toUpperCase(); // Erste Initiale
-  const lastInitial = nameParts[1]?.charAt(0).toUpperCase() || ""; // Zweite Initiale, falls vorhanden
+  const lastInitial = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : ""; // Zweite Initiale, falls vorhanden
   return `${firstInitial}${lastInitial}`; // Kombiniere Initialen
 }
 
@@ -186,23 +205,21 @@ function closeAddContact() {
   document.querySelector("body").classList.remove("overflow-hidden");
 }
 
-
-
 // Funktion zur Generierung einer zufälligen Hex-Farbe
 function getRandomColor() {
-  let letters = '0123456789ABCDEF';
-  let color = '#';
+  let letters = "0123456789ABCDEF";
+  let color = "#";
   for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
+    color += letters[Math.floor(Math.random() * 16)];
   }
   return color;
 }
 
 // Funktion zum Setzen der zufälligen Hintergrundfarbe für alle Elemente mit der Klasse "contact-initials"
 function setRandomBackgrounds() {
-  let elements = document.querySelectorAll('.contact-initials');
+  let elements = document.querySelectorAll(".contact-initials");
   elements.forEach(element => {
-      let randomColor = getRandomColor();
-      element.style.backgroundColor = randomColor;
+    let randomColor = getRandomColor();
+    element.style.backgroundColor = randomColor;
   });
 }

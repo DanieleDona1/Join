@@ -12,99 +12,117 @@
       href="/css/contact.css"
     />
     <link
-    rel="stylesheet"
-    href="/css/fonts.css"
+      rel="stylesheet"
+      href="/css/fonts.css"
     />
     <link
-    rel="stylesheet"
-    href="/style.css"
+      rel="stylesheet"
+      href="/style.css"
     />
   </head>
   <body onload="onloadFunc()">
-    <div class="background-pop-up d-none" id="background-pop-up">
-      <div class="pop-up-contact d-none" id="pop-up-contact">
-      <button class="close-popup" onclick="closeAddContact()">
-        <img
-          src="/assets/icons/close-cross.svg"
-          alt="close"
-        />
-      </button>
-
-      <div class="contact-side-info">
-        <img
-          src="/assets/icons/navbar_join_icon.svg"
-          alt="Join Logo"
-          class="contact-logo"
-        />
-        <div class="contact-side-info-div">
-          <div class="add-contact">
-            <span class="add-contact-headline">Add contact</span>
-            <span class="add-contact-info">Tasks are better with a team!</span>
-          </div>
+    <div
+      class="background-pop-up d-none"
+      id="background-pop-up"
+    >
+      <div
+        class="pop-up-contact d-none"
+        id="pop-up-contact"
+      >
+        <button
+          class="close-popup"
+          onclick="closeAddContact()"
+        >
           <img
-            src="/assets/icons/contact_line_vector.svg"
-            alt=""
-            class="contact-vector"
+            src="/assets/icons/close-cross.svg"
+            alt="close"
           />
-        </div>
-      </div>
+        </button>
 
-      <img
-        src="/assets/icons/raw_profil_img.png"
-        alt="Konaktbild"
-        class="contact-pic"
-      />
-
-      <form>
-        <address class="contact-field">
-          <input
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Name"
-            required
+        <div class="contact-side-info">
+          <img
+            src="/assets/icons/navbar_join_icon.svg"
+            alt="Join Logo"
+            class="contact-logo"
           />
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Email"
-            required
-          />
-          <input
-            type="number"
-            name="phonenumber"
-            id="phonenumber"
-            placeholder="Phone"
-            min="0"
-            required
-          />
-        </address>
-        <div class="input-button">
-          <button class="cancel">
-            Cancel
+          <div class="contact-side-info-div">
+            <div class="add-contact">
+              <span class="add-contact-headline">Add contact</span>
+              <span class="add-contact-info"
+                >Tasks are better with a team!</span
+              >
+            </div>
             <img
-              src="/assets/icons/close-cross.svg"
-              alt="close"
+              src="/assets/icons/contact_line_vector.svg"
+              alt=""
+              class="contact-vector"
             />
-          </button>
-          <button
-            onclick="addContact()"
+          </div>
+        </div>
+
+        <img
+          src="/assets/icons/raw_profil_img.png"
+          alt="Konaktbild"
+          class="contact-pic"
+        />
+
+        <form>
+          <address class="contact-field">
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Name"
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
+              required
+            />
+            <input
+              type="number"
+              name="phonenumber"
+              id="phonenumber"
+              placeholder="Phone"
+              min="0"
+              required
+            />
+          </address>
+          <div class="input-button">
+            <button
+              type="reset"
+              class="cancel"
+            >
+              Cancel
+              <img
+                src="/assets/icons/close-cross.svg"
+                alt="close"
+              />
+            </button>
+            <button
+            type="button"
+            onclick="addContact(this)"
             class="create"
+            >
+              Create contact
+              <img
+                src="/assets/icons/check.svg"
+                alt="close"
+              />
+            </button>
+          </div>
+          <div
+            id="success-message"
+            class="success-message d-none"
           >
-            Create contact
-            <img
-              src="/assets/icons/check.svg"
-              alt="close"
-            />
-          </button>
-        </div>
-      </form>
+            Contact succesfully created
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
-  <div id="success-message" class="success-message d-none">
-    Contact succesfully created
-  </div>
 
     <header class="header">
       <img
@@ -190,7 +208,6 @@
         >
       </div>
     </nav>
-    
 
     <main class="main-contact-side">
       <div class="contact-list-field">
@@ -201,10 +218,10 @@
             alt="contact add"
           />
         </button>
-        <div class="contact-list" id="content-contactlist">
-
-        </div>
-
+        <div
+          class="contact-list"
+          id="content-contactlist"
+        ></div>
       </div>
     </main>
     <div class="contact-text">

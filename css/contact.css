@@ -34,28 +34,37 @@
     background-color: #2A3647;
 }
 
-.contact-group h2{
+.contact-group h2 {
     width: 352px;
     height: 58px;
     padding: 17px 36px;
+    font-size: 20px;
+    font-weight: 400;
+
 }
 
-.contactlist-vector{
+.contactlist-vector {
     width: 352px;
     height: 1px;
     background-color: #D1D1D1;
 }
 
-.contact-item{
+.contact-profil {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-item {
     width: 352px;
     height: 78px;
     padding: 15px 24px;
     display: flex;
     align-items: center;
+    flex-direction: row;
     gap: 35px;
 }
 
-.contact-initials{
+.contact-initials {
     width: 42px;
     height: 42px;
     border-radius: 45px;
@@ -70,27 +79,27 @@
 
 }
 
-.contact-name-mail{
-    width: 140px;
+.contact-name-mail {
+    width: 200px;
     max-height: 48px;
     display: flex;
     flex-direction: column;
-justify-content: space-between;
+    justify-content: space-between;
 
 }
 
-.contactlist-name{
+.contactlist-name {
     font-size: 20px;
     font-weight: 400;
 }
 
-.contactlist-mail{
+.contactlist-mail {
     font-size: 20px;
     font-weight: 400;
     text-decoration: none;
 }
 
-.contact-text{
+.contact-text {
     position: absolute;
     top: 206px;
     left: 743px;
@@ -103,19 +112,19 @@ justify-content: space-between;
 
 }
 
-.contact-text .span-1{
+.contact-text .span-1 {
     font-size: 61px;
     font-weight: 700;
 }
 
-.contact-text .contact-vector{
+.contact-text .contact-vector {
     height: 59px;
     width: 3px;
     background-color: #29ABE2;
-    
+
 }
 
-.contact-text .span-2{
+.contact-text .span-2 {
     max-width: 235px;
     height: 32px;
     font-size: 27px;
@@ -125,7 +134,7 @@ justify-content: space-between;
 }
 
 
-.background-pop-up{
+.background-pop-up {
     position: fixed;
     z-index: 999;
     width: 1440px;
@@ -320,7 +329,7 @@ button {
     color: white;
 }
 
-.success-message{
+.success-message {
     width: 326px;
     height: 74px;
     font-size: 20px;
