@@ -9,6 +9,15 @@
   max-width: 1920px;
 }
 
+
+.d-none {
+  display: none;
+}
+
+.overflow.hidden{
+  overflow: hidden;
+}
+
 .max-display-size {
   max-width: 1920px;
   max-height: 1080px;
@@ -45,6 +54,7 @@ nav {
   background-color: rgb(42, 54, 71);
   width: 100vw;
   height: 80px;
+  z-index: 200;
 }
 
 nav a {
