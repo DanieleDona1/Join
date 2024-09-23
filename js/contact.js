@@ -5,13 +5,11 @@ let contactList = [];
 // array für kontaktliste wo alle daten + spezifische id gespeichert wird und das laden und bearbeiten einfacher macht
 
 async function onloadFunc() {
-  console.log(await loadData());
-
   await createContactlist();
 
   renderPhoneList();
 
-  setRandomBackgrounds();
+  
 }
 
 // Hauptfunktion: Steuert den Sortier- und Renderprozess
@@ -91,10 +89,19 @@ function displayGroupedContacts(groupedContacts) {
   fullContent += "</div>";
 
   content.innerHTML = fullContent;
+  setRandomBackgrounds();
 }
 
 async function addContact(button) {
-  // Deaktiviere den Button während der Operation
+  // Referenz auf das Formular
+  let form = document.querySelector('form');
+
+  // Überprüfe, ob das Formular gültig ist
+  if (!form.checkValidity()) {
+    // HTML5-Validierung schlägt fehl, der Browser zeigt eine Fehlermeldung an
+    form.reportValidity(); // Zeigt die entsprechenden Fehlermeldungen für die ungültigen Felder an
+    return; // Verhindert das Fortfahren der Funktion
+  }
   button.disabled = true;
 
   let name = document.getElementById("name").value;
@@ -102,31 +109,21 @@ async function addContact(button) {
   let phone = document.getElementById("phonenumber").value;
 
   try {
-    // Füge den Kontakt hinzu und warte auf das Ergebnis
-    let newContact = await addNewContact(name, mail, phone);
+    // Füge den Kontakt hinzu (warte auf Abschluss, aber prüfe den Rückgabewert nicht)
+    await addNewContact(name, mail, phone);
 
-    // Überprüfe, ob der Kontakt erfolgreich hinzugefügt wurde
-    if (newContact) {
-      // Erfolgsmeldung anzeigen
-      document.getElementById("success-message").classList.remove("d-none");
+    // Erfolgsmeldung anzeigen und Liste neu rendern
+    document.getElementById("success-message").classList.remove('d-none');
+    renderPhoneList();//Lädt nicht neu mit neuem kontakt
+    closeAddContact();
 
-      // Liste der Kontakte neu rendern
-      renderPhoneList();
-
-      // Pop-up-Fenster schließen
-      closeAddContact();
-
-      // Erfolgsmeldung nach 3 Sekunden wieder ausblenden
-      setTimeout(() => {
-        document.getElementById("success-message").classList.add("d-none");
-      }, 3000);
-    } else {
-      console.error("Kontakt konnte nicht hinzugefügt werden.");
-    }
+    setTimeout(() => {
+      document.getElementById("success-message").classList.add('d-none');
+    }, 3000);
+    
   } catch (error) {
     console.error("Fehler beim Hinzufügen des Kontakts:", error);
   } finally {
-    // Button wieder aktivieren, wenn der Vorgang abgeschlossen ist
     button.disabled = false;
   }
 }
@@ -155,9 +152,6 @@ async function postData(path = "", data = {}) {
     },
     body: JSON.stringify(data),
   });
-  if (!response.ok) {
-    throw new Error("Network response was not ok " + response.statusText);
-  }
   return (responseToJson = await response.json());
 }
 

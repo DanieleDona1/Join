@@ -1,5 +1,9 @@
 /* overflow hidden bei open popup */
-
+.main-contact{
+    padding: 0;
+    width: 100%;
+    height: calc(100vh - 96px);
+}
 
 .main-contact-side {
     width: 456px;
@@ -7,18 +11,23 @@
     box-shadow: 3px 0px 6px 0px rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: scroll;
+    position: fixed;
+    top: 96px;
 }
 
 .contact-list-field {
     width: 400px;
-    max-height: 1188px;
+    height: calc(100vh - 90px);
     display: flex;
     flex-direction: column;
     padding: 32px 24px;
 
 }
 
-.contact-list-field button {
+.contact-list-field-button {
     width: 352px;
     height: 56px;
     border: 1px;
@@ -40,6 +49,7 @@
     padding: 17px 36px;
     font-size: 20px;
     font-weight: 400;
+    margin: 0;
 
 }
 
@@ -337,12 +347,7 @@ button {
     background-color: #2A3647;
     color: white;
     border-radius: 20px;
-    font-size: 20px;
-    font-weight: 400;
     z-index: 500;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: absolute;
     top: 1%;
     left: 50%;
