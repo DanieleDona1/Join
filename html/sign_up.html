@@ -13,7 +13,7 @@
   </head>
   <body>
     <div class="wrapper max-width-1920">
-      <a href="/html/login.html "><img class="logo" src="/assets/img/Logo.svg" alt="logo"/></a>
+      <a href="/html/login.html "><img class="logo" src="/assets/icons/auth/Logo.svg" alt="logo"/></a>
 
       <div class="entry-modal">
         <div class="modal-content">
@@ -25,11 +25,11 @@
           <form class="input-container"  onsubmit="validatePasswordsAndCheckbox(event);">
             <div class="input-group">
               <input type="name" id="name" placeholder="Name" minlength="3" maxlength="25" required />
-              <img src="/assets/img/person.svg" alt="mail" />
+              <img src="/assets/icons/auth/person.svg" alt="mail" />
             </div>
             <div class="input-group">
               <input type="email" id="email" placeholder="Email" minlength="3" maxlength="32" required />
-              <img src="/assets/img/mail.svg" alt="mail" />
+              <img src="/assets/icons/auth/mail.svg" alt="mail" />
             </div>
 
             <div class="input-group">
@@ -40,22 +40,22 @@
                 minlength="3" maxlength="25"
                 required
               />
-              <img id="passwordLock" src="/assets/img/lock.svg" alt="lock" />
+              <img id="passwordLock" src="/assets/icons/auth/lock.svg" alt="lock" />
               <img
                 id="visibilityImg" class="visibilty-btn d-none"
                 onclick="togglePasswordVisibility('password', 'visibilityImg')"
-                src="/assets/img/visibility_off.svg"
+                src="/assets/icons/auth/visibility_off.svg"
                 alt="visibility_off"
               />
             </div>
             <div class="input-group">
               <input type="password" id="confirmPassword" class="confirm-password"
               placeholder="Confirm Password" minlength="3" maxlength="25" required />
-              <img id="passwordLockConfirm" src="/assets/img/lock.svg" alt="lock" />
+              <img id="passwordLockConfirm" src="/assets/icons/auth/lock.svg" alt="lock" />
               <img
                 id="visibilityImgConfirm" class="visibilty-btn d-none"
                 onclick="togglePasswordVisibility('confirmPassword', 'visibilityImgConfirm')"
-                src="/assets/img/visibility_off.svg"
+                src="/assets/icons/auth/visibility_off.svg"
                 alt="visibility_off"
               />
               <div id="errorSignupMsg" class="error-signup-msg"></div>
