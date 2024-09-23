@@ -159,7 +159,7 @@ a {
 
 .input-group img {
   position: absolute;
-  top: 24px;
+  top: 22px;
   right: 15px;
   transform: translateY(-50%);
   width: 20px;
@@ -357,7 +357,7 @@ label span {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-60%, -55%);
+  transform: translate(-50%, -53%);
 }
 
 .legal-link {

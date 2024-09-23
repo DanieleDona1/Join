@@ -1,0 +1,28 @@
+main {
+    padding-left: 32px;
+    padding-top: 48px;
+}
+
+main h2 {
+    font-size: 61px;
+    margin-left: 24px;
+}
+
+.gap-32px {
+    gap: 32px;
+}
+
+.search {
+    all: unset;
+}
+
+.searchbar img {
+    border-left: 2px solid rgb(204, 204, 204);
+    padding-left: 12px;
+}
+
+.searchbarcontainer {
+    border: 1px solid rgb(204, 204, 204);
+    padding: 8px 16px;
+    border-radius: 10px;
+}
