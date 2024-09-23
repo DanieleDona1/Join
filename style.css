@@ -6,21 +6,12 @@
 }
 
 .max-width-1920 {
-  max-width: 1920px;
-}
-
-
-.d-none {
-  display: none;
-}
-
-.overflow.hidden{
-  overflow: hidden;
+  max-width: 1440px; /*gesamt breite der seiten soll immer 1440px sein*/
 }
 
 .max-display-size {
-  max-width: 1920px;
-  max-height: 1080px;
+  max-width: 1440px; /*gesamt breite der seiten soll immer 1440px sein und höhe immer 1024px */
+  max-height: 1024px;
 }
 
 .d-flex-c-c {
@@ -104,12 +95,13 @@ nav a:hover {
 
 header {
   position: fixed;
-  z-index: 500;
+  z-index: 200;
   top: 0;
   left: 0;
   display: flex;
   justify-content: space-between;
   width: 100vw;
+  height: 96px;
   padding: 20px 16px;
   background-color: white;
   box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
@@ -220,6 +212,10 @@ main p {
   display: none;
 }
 
+.overflow.hidden{
+  overflow: hidden;
+}
+
 @media (min-width: 1025px) {
   header .d-none,
   nav .d-none {
@@ -227,7 +223,7 @@ main p {
 }
 
   header {
-    height: 80px;
+    height: 96px;
     left: 232px;
     width: calc(100vw - 232px);
     max-width: calc(1920px - 232px);
