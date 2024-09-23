@@ -43,37 +43,45 @@ async function postData(path = "", data = {}) {
 document.addEventListener("DOMContentLoaded", () => {
   const passwordInput = document.getElementById("password");
   const confirmPasswordInput = document.getElementById("confirmPassword");
-  const errorMessage = document.getElementById("errorSignupMsg");
   const checkbox = document.getElementById("formCheckbox");
+  initializePasswordListeners(passwordInput, confirmPasswordInput);
+  initializeCheckboxListener(checkbox);
+});
 
-  const changeBorderToBlack = (inputElement) => {
-    inputElement.style.border = "1px solid rgba(0, 0, 0, 0.2)";
-    errorMessage.innerHTML = '';
-  };
-
-  passwordInput.addEventListener("input", () => {
-    changeBorderToBlack(passwordInput);
-    changeBorderToBlack(confirmPasswordInput);
-  });
-
+function initializePasswordListeners(passwordInput, confirmPasswordInput) {
+  addInputListener(passwordInput, confirmPasswordInput);
   if (confirmPasswordInput) {
-    confirmPasswordInput.addEventListener("input", () => {
-      changeBorderToBlack(confirmPasswordInput);
-      changeBorderToBlack(passwordInput);
-    });
+    addInputListener(confirmPasswordInput, passwordInput);
   }
+}
 
+function initializeCheckboxListener(checkbox) {
   if (checkbox) {
     checkbox.addEventListener("change", () => {
       if (checkbox.checked) {
-        legalText.style.color = "black";
-        legalText.style.opacity = "0.25";
-        checkbox.style.border = "1px solid black";
+        updateCheckboxStyle(checkbox, "black", 0.25);
       }
     });
   }
-});
+}
+  
+function addInputListener(input1, input2){
+  input1.addEventListener("input", () => changeBorderToBlack(input1, input2));
+};
 
+function changeBorderToBlack(...inputElements){
+  const errorMessage = document.getElementById("errorSignupMsg");
+  inputElements.forEach(inputElement => {
+    inputElement.style.border = "1px solid rgba(0, 0, 0, 0.2)";
+  });
+  errorMessage.innerHTML = '';
+};
+
+function updateCheckboxStyle(checkboxElement, color, opacity){
+  legalText.style.color = color;
+  legalText.style.opacity = opacity;
+  checkboxElement.style.border = `1px solid ${color}`;
+};
 
 function getFormValues() {
     let name = document.getElementById("name").value;
@@ -88,7 +96,7 @@ function getFormValues() {
       confirmPassword: confirmPassword
     };
   }
-
+// double 
   function togglePasswordVisibility(passwordFieldId, visibilityImgId) {
     let passwordField = document.getElementById(passwordFieldId);  
     let visibilityBtn = document.getElementById(visibilityImgId);
@@ -101,12 +109,15 @@ function getFormValues() {
         visibilityBtn.src = "/assets/img/visibility_off.svg";
     }
   }
-
+// double 
   function toggleVisibility(passwordFieldId, passwordLockId, visibilityBtnId) {
     const passwordField = document.getElementById(passwordFieldId);
     const passwordLock = document.getElementById(passwordLockId);
     const visibilityBtn = document.getElementById(visibilityBtnId);
+    managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn);
+  }
   
+  function managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn) {
     passwordField.addEventListener("input", () => {
       if (passwordField.value.trim() !== "") {
         passwordLock.classList.add("d-none");

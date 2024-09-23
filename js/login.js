@@ -74,7 +74,6 @@ function showDialog() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-
   const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");
   const errorMessage = document.getElementById("errorMsg");
@@ -84,13 +83,12 @@ document.addEventListener("DOMContentLoaded", () => {
     inputElement.style.border = "1px solid rgba(0, 0, 0, 0.2)";
     errorMessage.innerHTML = "";
   };
-
   passwordInput.addEventListener("input", () => {
     changeBorderToBlack(passwordInput);
   });
 });
 
-// func allgemein
+// double
 function togglePasswordVisibility(passwordFieldId, visibilityImgId) {
   let passwordField = document.getElementById(passwordFieldId);  
   let visibilityBtn = document.getElementById(visibilityImgId);
@@ -104,12 +102,16 @@ function togglePasswordVisibility(passwordFieldId, visibilityImgId) {
       visibilityBtn.src = "/assets/img/visibility_off.svg";
   }
 }
-
+// double 
 function toggleVisibility(passwordFieldId, passwordLockId, visibilityBtnId) {
   const passwordField = document.getElementById(passwordFieldId);
   const passwordLock = document.getElementById(passwordLockId);
   const visibilityBtn = document.getElementById(visibilityBtnId);
+  
+  managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn);
+}
 
+function managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn) {
   passwordField.addEventListener("input", () => {
     if (passwordField.value.trim() !== "") {
       passwordLock.classList.add("d-none");
