@@ -31,7 +31,6 @@ function login(event) {
   event.preventDefault();
   let email = document.getElementById("email").value;
   let password = document.getElementById("password").value;
-
   let userkey = checkUser(email, password);
 
   if (userkey) {
@@ -90,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// func allgemein
+// double
 function togglePasswordVisibility(passwordFieldId, visibilityImgId) {
   let passwordField = document.getElementById(passwordFieldId);  
   let visibilityBtn = document.getElementById(visibilityImgId);
@@ -105,6 +104,7 @@ function togglePasswordVisibility(passwordFieldId, visibilityImgId) {
   }
 }
 
+// double 
 function toggleVisibility(passwordFieldId, passwordLockId, visibilityBtnId) {
   const passwordField = document.getElementById(passwordFieldId);
   const passwordLock = document.getElementById(passwordLockId);
