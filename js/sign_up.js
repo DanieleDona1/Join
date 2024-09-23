@@ -106,7 +106,7 @@ function getFormValues() {
     const passwordField = document.getElementById(passwordFieldId);
     const passwordLock = document.getElementById(passwordLockId);
     const visibilityBtn = document.getElementById(visibilityBtnId);
-
+  
     passwordField.addEventListener("input", () => {
       if (passwordField.value.trim() !== "") {
         passwordLock.classList.add("d-none");

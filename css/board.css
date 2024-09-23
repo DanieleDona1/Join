@@ -1,14 +1,11 @@
 main {
-    padding-top: 48px;
-    padding-right: 32px;
     padding-left: 32px;
-    background-color: rgb(246, 247, 248);
+    padding-top: 48px;
 }
 
 main h2 {
     font-size: 61px;
     margin-left: 24px;
-    margin-bottom: 0;
 }
 
 .gap-32px {
@@ -19,49 +16,13 @@ main h2 {
     all: unset;
 }
 
-.search-add-container {
-    border: 1px solid rgb(204, 204, 204);
-    padding: 8px 16px;
-    border-radius: 10px;
-}
-
 .searchbar img {
     border-left: 2px solid rgb(204, 204, 204);
     padding-left: 12px;
 }
 
-.add-task {
-    border: unset;
-    padding: 10px 15px;
-    background-color: rgba(42, 54, 71, 1);
-    color: white;
-    font-size: 1rem;
-    gap: 8px;
-    font-weight: bold;
+.searchbarcontainer {
+    border: 1px solid rgb(204, 204, 204);
+    padding: 8px 16px;
     border-radius: 10px;
-    cursor: pointer;
-}
-
-.add-task img {
-    width: 16px;
-}
-
-.section-container {
-    margin-top: 40px;
-    gap: 12px;
-}
-
-.section-container section {
-    width: 100%;
-    padding: 0 12px;
-    /* background-color: gray; */
-    color: rgba(66, 82, 110, 1);
-    font-weight: bold;
-    font-size: 1.2rem;
-    
-    /* height: 100%; */
-}
-
-.section-container section img {
-    width: 24px;
 }
