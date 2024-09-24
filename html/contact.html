@@ -10,30 +10,16 @@
       href="/assets/icons/favicons/favicon_light.png"
       id="favicon"
     />
-    <link
-      rel="stylesheet"
-      href="/style.css"
-    />
-    <link rel="stylesheet" href="/css/contact.css">
-    <link rel="stylesheet" href="/css/fonts.css">
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/css/contact.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <script src="/script.js" defer></script>
   </head>
-  <body onload="onloadFunc()"  class="max-display-size">
-    <div
-      class="background-pop-up d-none"
-      id="background-pop-up"
-    >
-      <div
-        class="pop-up-contact d-none"
-        id="pop-up-contact"
-      >
-        <button
-          class="close-popup"
-          onclick="closeAddContact()"
-        >
-          <img
-            src="/assets/icons/close-cross.svg"
-            alt="close"
-          />
+  <body onload="onloadFunc()" class="max-display-size">
+    <div class="background-pop-up d-none" id="background-pop-up">
+      <div class="pop-up-contact d-none" id="pop-up-contact">
+        <button class="close-popup" onclick="closeAddContact()">
+          <img src="/assets/icons/close-cross.svg" alt="close" />
         </button>
 
         <div class="contact-side-info">
@@ -92,35 +78,19 @@
             />
           </address>
           <div class="input-button">
-            <button
-              type="reset"
-              class="cancel"
-            >
+            <button type="reset" class="cancel">
               Cancel
-              <img
-                src="/assets/icons/close-cross.svg"
-                alt="close"
-              />
+              <img src="/assets/icons/close-cross.svg" alt="close" />
             </button>
-            <button
-            type="button"
-            onclick="addContact(this)"
-            class="create"
-            >
+            <button type="button" onclick="addContact(this)" class="create">
               Create contact
-              <img
-                src="/assets/icons/check.svg"
-                alt="close"
-              />
+              <img src="/assets/icons/check.svg" alt="close" />
             </button>
           </div>
         </form>
       </div>
     </div>
-    <div
-      id="success-message"
-      class="d-none success-message d-flex-c-c"
-    >
+    <div id="success-message" class="d-none success-message d-flex-c-c">
       Contact succesfully created
     </div>
 
@@ -142,68 +112,60 @@
         <span class="header-initials">JV</span>
       </div>
     </header>
-  
-      <nav>
-        <div class="navbar-join-icon-container d-none">
-          <img src="/assets/icons/navbar/navbar_join_icon.svg" alt="" />
+
+    <nav>
+      <div class="navbar-join-icon-container d-none">
+        <img src="/assets/icons/navbar/navbar_join_icon.svg" alt="" />
+      </div>
+      <div class="navbar-container-bottom">
+        <div class="navbar-item-container">
+          <a href="summary.html" class="navbar-item" data-page="summary">
+            <img
+              src="/assets/icons/navbar/summary_Icon.svg"
+              alt="Summary Icon"
+            />
+            <p>Summary</p>
+          </a>
+          <a href="board.html" class="navbar-item" data-page="board">
+            <img src="/assets/icons/navbar/board_icon.svg" alt="Board Icon" />
+            <p>Board</p>
+          </a>
+          <a href="add_tasks.html" class="navbar-item" data-page="add_tasks">
+            <img
+              src="/assets/icons/navbar/add_tasks.svg"
+              alt="Add Tasks Icon"
+            />
+            <p>Add Tasks</p>
+          </a>
+          <a href="contact.html" class="navbar-item" data-page="contacts">
+            <img
+              src="/assets/icons/navbar/contacts_icon.svg"
+              alt="Contacts Icon"
+            />
+            <p>Contacts</p>
+          </a>
         </div>
-        <div class="navbar-container-bottom">
-          <div class="navbar-item-container">
-            <a href="summary.html" class="navbar-item" data-page="summary">
-              <img
-                src="/assets/icons/navbar/summary_Icon.svg"
-                alt="Summary Icon"
-              />
-              <p>Summary</p>
-            </a>
-            <a href="board.html" class="navbar-item" data-page="board">
-              <img src="/assets/icons/navbar/board_icon.svg" alt="Board Icon" />
-              <p>Board</p>
-            </a>
-            <a href="add_tasks.html" class="navbar-item" data-page="add_tasks">
-              <img
-                src="/assets/icons/navbar/add_tasks.svg"
-                alt="Add Tasks Icon"
-              />
-              <p>Add Tasks</p>
-            </a>
-            <a href="contact.html" class="navbar-item" data-page="contacts">
-              <img
-                src="/assets/icons/navbar/contacts_icon.svg"
-                alt="Contacts Icon"
-              />
-              <p>Contacts</p>
-            </a>
-          </div>
-          <div class="navbar-disclaimer-links-container d-none">
-            <a href="/html/privacy_policy.html" data-page="privacy_policy"
-              >Privacy Policy</a
-            >
-            <a href="/html/legal_notice.html" data-page="legal_notice"
-              >Legal Notice</a
-            >
-          </div>
+        <div class="navbar-disclaimer-links-container d-none">
+          <a href="/html/privacy_policy.html" data-page="privacy_policy"
+            >Privacy Policy</a
+          >
+          <a href="/html/legal_notice.html" data-page="legal_notice"
+            >Legal Notice</a
+          >
         </div>
-      </nav>
+      </div>
+    </nav>
 
     <main class="main-contact">
       <div class="main-contact-side">
         <div class="contact-list-field">
-        <button onclick="openAddContact()"
-        class="contact-list-field-button">
-          Add new contact
-          <img
-            src="/assets/icons/contact_add.png"
-            alt="contact add"
-          />
-        </button>
-        <div
-          class="contact-list"
-          id="content-contactlist"
-        ></div>
+          <button onclick="openAddContact()" class="contact-list-field-button">
+            Add new contact
+            <img src="/assets/icons/contact_add.png" alt="contact add" />
+          </button>
+          <div class="contact-list" id="content-contactlist"></div>
         </div>
       </div>
-     
     </main>
     <div class="contact-text">
       <span class="span-1">Contacts</span>
