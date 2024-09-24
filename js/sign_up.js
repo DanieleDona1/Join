@@ -1,14 +1,14 @@
 const BASE_URL =
   "https://joinremotestorage-c8226-default-rtdb.europe-west1.firebasedatabase.app/";
-  
+
 function validatePasswordsAndCheckbox(event) {
   event.preventDefault();
-    
-    let formValues = getFormValues();  
 
+  let formValues = getFormValues();
 
   if (formValues.password !== formValues.confirmPassword) {
-    document.getElementById("errorSignupMsg").innerHTML = "Your passwords don't match. Please try again.";
+    document.getElementById("errorSignupMsg").innerHTML =
+      "Your passwords don't match. Please try again.";
     document.getElementById("password").style.border = "1px solid red";
     document.getElementById("confirmPassword").style.border = "1px solid red";
   }
@@ -18,7 +18,10 @@ function validatePasswordsAndCheckbox(event) {
     document.getElementById("legalText").style.opacity = "1";
   }
 
-  if (formValues.password === formValues.confirmPassword && document.getElementById("formCheckbox").checked) {
+  if (
+    formValues.password === formValues.confirmPassword &&
+    document.getElementById("formCheckbox").checked
+  ) {
     addUser(formValues.name, formValues.email, formValues.password);
   }
 }
@@ -48,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const changeBorderToBlack = (inputElement) => {
     inputElement.style.border = "1px solid rgba(0, 0, 0, 0.2)";
-    errorMessage.innerHTML = '';
+    errorMessage.innerHTML = "";
   };
 
   passwordInput.addEventListener("input", () => {
@@ -74,53 +77,54 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-
 function getFormValues() {
-    let name = document.getElementById("name").value;
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-    let confirmPassword = document.getElementById("confirmPassword").value;
-  
-    return {
-      name: name,
-      email: email,
-      password: password,
-      confirmPassword: confirmPassword
-    };
-  }
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
+  let confirmPassword = document.getElementById("confirmPassword").value;
 
-  function togglePasswordVisibility(passwordFieldId, visibilityImgId) {
-    let passwordField = document.getElementById(passwordFieldId);  
-    let visibilityBtn = document.getElementById(visibilityImgId);
-  
-    if (passwordField.type === "password") {
-        passwordField.type = "text";
-        visibilityBtn.src = "/assets/img/visibility.svg";
+  return {
+    name: name,
+    email: email,
+    password: password,
+    confirmPassword: confirmPassword,
+  };
+}
+
+function togglePasswordVisibility(passwordFieldId, visibilityImgId) {
+  let passwordField = document.getElementById(passwordFieldId);
+  let visibilityBtn = document.getElementById(visibilityImgId);
+
+  if (passwordField.type === "password") {
+    passwordField.type = "text";
+    visibilityBtn.src = "/assets/img/visibility.svg";
+  } else {
+    passwordField.type = "password";
+    visibilityBtn.src = "/assets/img/visibility_off.svg";
+  }
+}
+
+function toggleVisibility(passwordFieldId, passwordLockId, visibilityBtnId) {
+  const passwordField = document.getElementById(passwordFieldId);
+  const passwordLock = document.getElementById(passwordLockId);
+  const visibilityBtn = document.getElementById(visibilityBtnId);
+
+  passwordField.addEventListener("input", () => {
+    if (passwordField.value.trim() !== "") {
+      passwordLock.classList.add("d-none");
+      visibilityBtn.classList.remove("d-none");
     } else {
-        passwordField.type = "password";
-        visibilityBtn.src = "/assets/img/visibility_off.svg";
+      passwordLock.classList.remove("d-none");
+      visibilityBtn.classList.add("d-none");
     }
-  }
-
-  function toggleVisibility(passwordFieldId, passwordLockId, visibilityBtnId) {
-    const passwordField = document.getElementById(passwordFieldId);
-    const passwordLock = document.getElementById(passwordLockId);
-    const visibilityBtn = document.getElementById(visibilityBtnId);
-  
-    passwordField.addEventListener("input", () => {
-      if (passwordField.value.trim() !== "") {
-        passwordLock.classList.add("d-none");
-        visibilityBtn.classList.remove("d-none");
-      } else {
-        passwordLock.classList.remove("d-none");
-        visibilityBtn.classList.add("d-none");
-      }
-    });
-  }
-  
-  document.addEventListener("DOMContentLoaded", () => {
-    toggleVisibility("password", "passwordLock", "visibilityImg");
-    toggleVisibility("confirmPassword", "passwordLockConfirm", "visibilityImgConfirm");
   });
-  
-  
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  toggleVisibility("password", "passwordLock", "visibilityImg");
+  toggleVisibility(
+    "confirmPassword",
+    "passwordLockConfirm",
+    "visibilityImgConfirm"
+  );
+});
