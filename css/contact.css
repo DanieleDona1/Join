@@ -106,7 +106,7 @@
 .contactlist-mail {
     font-size: 20px;
     font-weight: 400;
-    text-decoration: none;
+    color: blue;
 }
 
 .contact-text {
@@ -142,6 +142,63 @@
     color: #2A3647;
 
 }
+
+.contact-info{
+    min-width: 461px;
+    height: 364px;
+    position: absolute;
+    top: 311px;
+    left: 750px;
+}
+
+.info-initial-name{
+    min-width: 461px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    gap: 54px;
+}
+
+.info-initial{
+    width: 120px;
+    height: 120px;
+    border-radius: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    box-sizing: border-box;
+    border: 2px solid white;
+    font-size: 47px;
+    font-weight: 500;
+}
+
+.info-name-button{
+    min-width: 287px;
+    height: 88px;
+    gap: 8px;
+
+}
+
+.info-name{
+    min-width: 287px;
+    height: 56px;
+    font-size: 47px;
+    font-weight: 500;
+}
+
+info-edit
+
+info-delete
+
+info-text
+
+info-email
+
+info-phone
+
+
+/*class unterhalb wird nicht angezeigt*/
 
 
 .background-pop-up {
@@ -250,7 +307,7 @@
 }
 
 .contact-field #name::placeholder {
-    background-image: url(/assets/icons/person.png);
+    background-image: url(/assets/icons/contact/person.png);
     background-repeat: no-repeat;
     display: flex;
     background-position: 100%;
@@ -258,7 +315,7 @@
 }
 
 .contact-field #email::placeholder {
-    background-image: url(/assets/icons/mail.png);
+    background-image: url(/assets/icons/contact/mail.png);
     background-repeat: no-repeat;
     display: flex;
     background-position: 100%;
@@ -266,7 +323,7 @@
 }
 
 .contact-field #phonenumber::placeholder {
-    background-image: url(/assets/icons/call.png);
+    background-image: url(/assets/icons/contact/call.png);
     background-repeat: no-repeat;
     display: flex;
     background-position: 100%;

@@ -1,37 +1,33 @@
 const BASE_URL =
   "https://contactstorage-593de-default-rtdb.europe-west1.firebasedatabase.app/";
 let contactList = [];
+let groupedContacts = {}; // Definiere groupedContacts als globale Variable
+
 
 // array für kontaktliste wo alle daten + spezifische id gespeichert wird und das laden und bearbeiten einfacher macht
 
 async function onloadFunc() {
   await createContactlist();
-
   renderPhoneList();
-
-  
 }
 
 // Hauptfunktion: Steuert den Sortier- und Renderprozess
 function renderPhoneList() {
   const sortedContacts = sortContacts(contactList);
-  const groupedContacts = groupContactsByInitial(sortedContacts);
+  groupedContacts = groupContactsByInitial(sortedContacts);
   displayGroupedContacts(groupedContacts);
 }
 
 async function createContactlist() {
-  let data = await loadData("contacts"); // holt mittels dieser funct das Json von der Datenbank unter diesem Pfad
-
-  let contacts = Object.keys(data); // nimmt die keys der jeweiligen objecte zum weiter verarbeiten
+  let data = await loadData("contacts"); // holt mittels dieser Funktion das JSON von der Datenbank unter diesem Pfad
+  let contacts = Object.keys(data); // nimmt die keys der jeweiligen Objekte zum Weiterverarbeiten
 
   for (let i = 0; i < contacts.length; i++) {
-    contactList.push(
-      //ein object in das array pushen mit den ganzen informationen
-      {
-        id: contacts[i], //pusht den jeweiligen key einzeln in das array um extra darauf zuzugreifen
-        user: data[contacts[i]], // pusht die values in dem object unter der speziellen id in das array unter user
-      }
-    );
+    contactList.push({
+      id: contacts[i], // Speichert den jeweiligen Key als ID
+      user: data[contacts[i]], // Speichert die User-Daten
+      color: data[contacts[i]].color // Speichert die Farbe
+    });
   }
 }
 
@@ -56,6 +52,7 @@ function groupContactsByInitial(contacts) {
 }
 
 // Zeigt die gruppierten Kontakte an
+// Zeigt die gruppierten Kontakte sortiert nach ihren Initialen an
 function displayGroupedContacts(groupedContacts) {
   const content = document.getElementById("content-contactlist");
   content.innerHTML = "";
@@ -63,34 +60,79 @@ function displayGroupedContacts(groupedContacts) {
   // Erstelle einen übergeordneten Container
   let fullContent = '<div class="contacts-wrapper">';
 
-  // Schleife durch die gruppierten Kontakte
-  for (const initial in groupedContacts) {
+  // Sortiere die Initialen
+  const sortedInitials = Object.keys(groupedContacts).sort();
+
+  // Schleife durch die sortierten Initialen und gruppierten Kontakte
+  sortedInitials.forEach(initial => {
     fullContent += /*html*/ `
       <div class="contact-group">
         <h2>${initial}</h2>
         <div class="contactlist-vector"></div>
         `;
 
-    groupedContacts[initial].forEach(contact => {
+    groupedContacts[initial].forEach((contact, index) => {
       const initials = getInitials(contact.user.name);
+      const contactColor = contact.color // Verwende die gespeicherte Farbe oder generiere eine neue
       fullContent += /*html*/ `
       <div class="contact-profil">
-        <div class="contact-item">
-          <div class="contact-initials">${contact.user.initials}</div>
+        <div class="contact-item" onclick="getContactInfo('${initial}', ${index})">
+          <div class="contact-initials" style="background-color: ${contactColor};">${initials}</div>
           <div class="contact-name-mail">
             <div class="contactlist-name">${contact.user.name}</div>
-            <a href="mailto:${contact.user.mail}" class="contactlist-mail">${contact.user.mail}</a>
+            <div class="contactlist-mail">${contact.user.mail}</div>
+          </div>
         </div>
       </div>
       `;
     });
     fullContent += `</div>`;
-  }
+  });
+
   fullContent += "</div>";
 
   content.innerHTML = fullContent;
-  setRandomBackgrounds();
 }
+
+
+
+
+function getContactInfo(groupInitial, contactIndex) {
+  const contact = groupedContacts[groupInitial][contactIndex];
+  const contactColor = contact.color; // Verwende die gespeicherte Farbe
+
+  const contactInfo = document.getElementById('contact-info')
+  contactInfo.innerHTML = ''
+
+  contactInfo.innerHTML = /*html*/`
+    <div>
+      <div class="info-initial-name">
+        <div class="info-initial"  style="background-color: ${contactColor};">${contact.user.initials}</div>
+        <div class="info-name-button"> 
+          <div class="info-name">${contact.user.name}</div>
+          <button class="info-edit">Edit</button>
+          <button class="info-delete">Delete</button>
+        </div>
+      </div>
+      <div class="info-text">Contact Information</div>
+      <div>
+        <div class="info-email">
+          <span>Email</span>
+          <a href="mailto:${contact.user.mail}">${contact.user.mail}</a>
+        </div>
+        <div class="info-phone">
+          <span>Phone</span>
+          <span>${contact.user.number}</span>
+        </div>
+      </div>
+
+    </div>
+    
+  `
+}
+
+
+
 
 async function addContact(button) {
   // Referenz auf das Formular
@@ -119,7 +161,7 @@ async function addContact(button) {
     document.getElementById("name").value = "";
     document.getElementById("email").value = "";
     document.getElementById("phonenumber").value = "";
-    
+
      // Aktualisiere die Kontaktliste
      contactList = []; // Leere die vorhandene Liste
      await createContactlist(); // Lade die Kontakte erneut
@@ -187,15 +229,20 @@ function getInitials(fullName) {
 async function addNewContact(name, mail, number) {
   // Berechne die Initialen basierend auf dem Namen
   const initials = getInitials(name);
+  
+  // Generiere eine zufällige Hintergrundfarbe
+  const color = getRandomColor();
 
-  // Speichere die Daten, einschließlich der Initialen, in der Datenbank
+  // Speichere die Daten, einschließlich der Initialen und der Farbe, in der Datenbank
   await postData("/contacts", {
     name: name,
     mail: mail,
     number: number,
     initials: initials, // Initialen hinzufügen
+    color: color // Hintergrundfarbe hinzufügen
   });
 }
+
 
 function openAddContact() {
   document.getElementById("background-pop-up").classList.remove("d-none");
@@ -217,13 +264,4 @@ function getRandomColor() {
     color += letters[Math.floor(Math.random() * 16)];
   }
   return color;
-}
-
-// Funktion zum Setzen der zufälligen Hintergrundfarbe für alle Elemente mit der Klasse "contact-initials"
-function setRandomBackgrounds() {
-  let elements = document.querySelectorAll(".contact-initials");
-  elements.forEach(element => {
-    let randomColor = getRandomColor();
-    element.style.backgroundColor = randomColor;
-  });
 }
