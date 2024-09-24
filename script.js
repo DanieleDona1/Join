@@ -35,4 +35,3 @@ function updateFavicon() {
     ? "/assets/icons/favicons/favicon_dark.png"
     : "/assets/icons/favicons/favicon_light.png";
 }
-

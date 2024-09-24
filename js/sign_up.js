@@ -1,14 +1,14 @@
 const BASE_URL =
   "https://joinremotestorage-c8226-default-rtdb.europe-west1.firebasedatabase.app/";
-  
+
 function validatePasswordsAndCheckbox(event) {
   event.preventDefault();
-    
-    let formValues = getFormValues();  
 
+  let formValues = getFormValues();
 
   if (formValues.password !== formValues.confirmPassword) {
-    document.getElementById("errorSignupMsg").innerHTML = "Your passwords don't match. Please try again.";
+    document.getElementById("errorSignupMsg").innerHTML =
+      "Your passwords don't match. Please try again.";
     document.getElementById("password").style.border = "1px solid red";
     document.getElementById("confirmPassword").style.border = "1px solid red";
   }
@@ -18,7 +18,10 @@ function validatePasswordsAndCheckbox(event) {
     document.getElementById("legalText").style.opacity = "1";
   }
 
-  if (formValues.password === formValues.confirmPassword && document.getElementById("formCheckbox").checked) {
+  if (
+    formValues.password === formValues.confirmPassword &&
+    document.getElementById("formCheckbox").checked
+  ) {
     addUser(formValues.name, formValues.email, formValues.password);
   }
 }
