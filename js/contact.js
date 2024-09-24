@@ -114,9 +114,19 @@ async function addContact(button) {
 
     // Erfolgsmeldung anzeigen und Liste neu rendern
     document.getElementById("success-message").classList.remove('d-none');
-    renderPhoneList();//Lädt nicht neu mit neuem kontakt
-    closeAddContact();
 
+    // Inputfelder leeren
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("phonenumber").value = "";
+    
+     // Aktualisiere die Kontaktliste
+     contactList = []; // Leere die vorhandene Liste
+     await createContactlist(); // Lade die Kontakte erneut
+     renderPhoneList(); // Render die aktualisierte Liste
+     
+     closeAddContact();
+ 
     setTimeout(() => {
       document.getElementById("success-message").classList.add('d-none');
     }, 3000);
