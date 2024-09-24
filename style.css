@@ -308,7 +308,8 @@ main p {
     left: 232px;
     bottom: 0;
     min-height: calc(100vh - 80px);
-    max-width: calc(100% - 232px);
+    width: calc(100vw - 232px);
+    max-width: calc(1920px - 232px);
     padding-left: 96px;
     padding-top: 126px;
     padding-right: 133px;
