@@ -9,12 +9,12 @@
       type="image/png"
       href="/assets/icons/favicons/favicon_light.png"
       id="favicon"
-    />
-    <link
-      rel="stylesheet"
-      href="/style.css"
-    />
+      />
     <link rel="stylesheet" href="/css/contact.css">
+    <link
+    rel="stylesheet"
+    href="/style.css"
+    />
     <link rel="stylesheet" href="/css/fonts.css">
   </head>
   <body onload="onloadFunc()">
@@ -22,9 +22,10 @@
       class="background-pop-up d-none"
       id="background-pop-up"
     >
+      <!-- add contact section  -->
       <section
-        class="pop-up-contact d-none"
-        id="pop-up-contact"
+        class="d-none pop-up-add-contact"
+        id="pop-up-add-contact"
       >
         <button
           class="close-popup"
@@ -105,12 +106,102 @@
             <button
             type="button"
             onclick="addContact(this)"
-            class="create"
-            >
+            class="create">
               Create contact
               <img
                 src="/assets/icons/contact/check.svg"
-                alt="close"
+                alt="check"
+              />
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- edit contact section  -->
+      <section
+        class="d-none pop-up-add-contact"
+        id="pop-up-edit-contact"
+      >
+        <button
+          class="close-popup"
+          onclick="closeEditContact()"
+        >
+          <img
+            src="/assets/icons/contact/close-cross.svg"
+            alt="close"
+          />
+        </button>
+
+        <div class="contact-side-info">
+          <img
+            src="/assets/icons/contact/contact_join_logo.png"
+            alt="Join Logo"
+            class="contact-logo"
+          />
+          <div class="contact-side-info-div">
+            <div class="add-contact">
+              <span class="add-contact-headline">Edit contact</span>
+            </div>
+            <img
+              src="/assets/icons/contact/contact_line_vector.svg"
+              alt=""
+              class="contact-vector"
+            />
+          </div>
+        </div>
+
+        <div
+        id="edit-contact-picture"
+        >
+
+        </div>
+
+        <form>
+          <address class="contact-field">
+            <input
+              type="text"
+              name="name"
+              id="edit-name"
+              placeholder="Name"
+              minlength="2"
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              id="edit-email"
+              placeholder="Email"
+              minlength="6"
+              required
+            />
+            <input
+              type="number"
+              name="phonenumber"
+              id="edit-phonenumber"
+              placeholder="Phone"
+              min="0"
+              minlength="6"
+              required
+            />
+          </address>
+          <div class="input-button">
+            <button
+              type="button"
+              class="edit-delete"
+              id="edit-delete"
+              onclick="deleteContact(value), closeEditContact()"
+            >
+              Delete
+            </button>
+            <button
+            type="button"
+            onclick="editContact(value)"
+            class="edit-save"
+            >
+              Save
+              <img
+                src="/assets/icons/contact/check.svg"
+                alt="check"
               />
             </button>
           </div>
