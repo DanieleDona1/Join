@@ -1,4 +1,4 @@
-let users = [];
+let responseAsJson = {};
 
 const BASE_URL =
   "https://joinremotestorage-c8226-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -8,7 +8,6 @@ async function onloadFunc() {
   await onload();
 }
 
-// check url for animate text "sign up successfully"
 function checkMsgUrl() {
   const urlParams = new URLSearchParams(window.location.search);
   const msg = urlParams.get("msg");
@@ -22,53 +21,39 @@ function checkMsgUrl() {
   history.replaceState(null, "", "/html/login.html");
 }
 
-// load data save as array
 async function onload() {
   let response = await fetch(BASE_URL + ".json");
-  let responseAsJson = await response.json();
+  responseAsJson = await response.json();
+  console.log("ResponseAsJson ", responseAsJson);
+}
 
-  let responseUsers = responseAsJson.users;
-  let userKeysArray = Object.keys(responseUsers);
-
-  for (let i = 0; i < userKeysArray.length; i++) {
-    users.push({
-      user: {
-        id: userKeysArray[i], // id hinzufügen
-        ...responseUsers[userKeysArray[i]], // die Eigenschaften des user-Objekts hinzufügen
-      },
-    });
-  };
-
-  console.log("users: ", users);
-};
-
-// compare user input to datenbank
 function login(event) {
   event.preventDefault();
   let email = document.getElementById("email").value;
   let password = document.getElementById("password").value;
 
-  let userName = checkUser(email, password);
+  let userkey = checkUser(email, password);
 
-  if (userName) {
-    window.location.href = `/html/summary.html?msg=${userName}`;
+  if (userkey) {
+    window.location.href = `/html/summary.html?msg=${responseAsJson.users[userkey].name}`;
   } else {
     document.getElementById("errorMsg").style.opacity = "1";
     document.getElementById("email").style.border = "1px solid red";
     document.getElementById("password").style.border = "1px solid red";
     console.log("Kein Benutzer gefunden");
   }
-};
+}
 
-//  Check User input to firebase
 function checkUser(email, password) {
-  for (let i = 0; i < users.length; i++) {
-    if (users[i].user.email == email && users[i].user.password == password) {
-      return users[i].user.name;
+  for (const key in responseAsJson.users) {
+    const user = responseAsJson.users[key];
+
+    if (user.email == email && user.password == password) {
+      return key;
     }
   }
   return null;
-};
+}
 
 function removeErrorMsg() {
   document.getElementById("errorMsg").style.opacity = "0";
@@ -105,24 +90,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // double
 function togglePasswordVisibility(passwordFieldId, visibilityImgId) {
-  let passwordField = document.getElementById(passwordFieldId);
+  let passwordField = document.getElementById(passwordFieldId);  
   let visibilityBtn = document.getElementById(visibilityImgId);
 
   if (passwordField.type === "password") {
       passwordField.type = "text";
       visibilityBtn.src = "/assets/img/visibility.svg";
-
+      
   } else {
       passwordField.type = "password";
       visibilityBtn.src = "/assets/img/visibility_off.svg";
   }
 }
-// double
+// double 
 function toggleVisibility(passwordFieldId, passwordLockId, visibilityBtnId) {
   const passwordField = document.getElementById(passwordFieldId);
   const passwordLock = document.getElementById(passwordLockId);
   const visibilityBtn = document.getElementById(visibilityBtnId);
-
+  
   managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn);
 }
 
