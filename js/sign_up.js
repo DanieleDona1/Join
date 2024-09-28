@@ -103,10 +103,10 @@ function getFormValues() {
   
     if (passwordField.type === "password") {
         passwordField.type = "text";
-        visibilityBtn.src = "/assets/img/visibility.svg";
+        visibilityBtn.src = "/assets/icons/auth/visibility.svg";
     } else {
         passwordField.type = "password";
-        visibilityBtn.src = "/assets/img/visibility_off.svg";
+        visibilityBtn.src = "/assets/icons/auth/visibility_off.svg";
     }
   }
 // double 

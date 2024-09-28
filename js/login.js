@@ -24,25 +24,33 @@ function checkMsgUrl() {
 
 // load data save as array
 async function onload() {
-  let response = await fetch(BASE_URL + ".json");
-  let responseAsJson = await response.json();
-
-  let responseUsers = responseAsJson.users;
-  let userKeysArray = Object.keys(responseUsers);
+  let usersResponse = await getAllUsers("users");
+  let userKeysArray = Object.keys(usersResponse);
+  // console.log("usersResponse ", usersResponse);
+  // console.log("userKeysArray", userKeysArray);
+  
 
   for (let i = 0; i < userKeysArray.length; i++) {
     users.push({
       user: {
-        id: userKeysArray[i], // id hinzufügen
-        ...responseUsers[userKeysArray[i]], // die Eigenschaften des user-Objekts hinzufügen
+        id: userKeysArray[i],
+        ...usersResponse[userKeysArray[i]],
       },
     });
   };
-
-  console.log("users: ", users);
+  console.log("users", users);
 };
 
-// compare user input to datenbank
+async function getAllUsers(path){
+  let response = await fetch(BASE_URL + path + ".json");
+  let responseAsJson = await response.json();
+  console.log("responseAsJson", responseAsJson);
+  return responseAsJson;
+  
+  
+}
+
+// compare user input to firebase
 function login(event) {
   event.preventDefault();
   let email = document.getElementById("email").value;
@@ -70,6 +78,7 @@ function checkUser(email, password) {
   return null;
 };
 
+// remove message email or password wrong 
 function removeErrorMsg() {
   document.getElementById("errorMsg").style.opacity = "0";
 }
@@ -110,11 +119,11 @@ function togglePasswordVisibility(passwordFieldId, visibilityImgId) {
 
   if (passwordField.type === "password") {
       passwordField.type = "text";
-      visibilityBtn.src = "/assets/img/visibility.svg";
+      visibilityBtn.src = "/assets/icons/auth/visibility.svg";
 
   } else {
       passwordField.type = "password";
-      visibilityBtn.src = "/assets/img/visibility_off.svg";
+      visibilityBtn.src = "/assets/icons/auth/visibility_off.svg";
   }
 }
 // double
@@ -126,6 +135,7 @@ function toggleVisibility(passwordFieldId, passwordLockId, visibilityBtnId) {
   managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn);
 }
 
+// Mangage visibility password icons 
 function managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn) {
   passwordField.addEventListener("input", () => {
     if (passwordField.value.trim() !== "") {
