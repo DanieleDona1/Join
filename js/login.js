@@ -5,7 +5,7 @@ const BASE_URL =
 
 async function onloadFunc() {
   checkMsgUrl();
-  await onload();
+  await loadUsersArray();
 }
 
 // check url for animate text "sign up successfully"
@@ -23,7 +23,7 @@ function checkMsgUrl() {
 }
 
 // load data save as array
-async function onload() {
+async function loadUsersArray() {
   let usersResponse = await getAllUsers("users");
   let userKeysArray = Object.keys(usersResponse);
   // console.log("usersResponse ", usersResponse);
@@ -46,8 +46,6 @@ async function getAllUsers(path){
   let responseAsJson = await response.json();
   console.log("responseAsJson", responseAsJson);
   return responseAsJson;
-  
-  
 }
 
 // compare user input to firebase
