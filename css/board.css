@@ -54,6 +54,7 @@ main h2 {
 .section-container {
     margin-top: 40px;
     gap: 20px;
+    max-width: 1350px;
 }
 
 .section-container section {
@@ -86,18 +87,20 @@ main h2 {
     gap: 16px;
 }
 
-.content .task, .done-content {
+.task {
     background-color: white;
     padding: 8px;
     border-radius: 10px;
-    height: 100%;
+    /* margin-top: 40px; */
 }
 
 .task-category {
     color: white;
     border-radius: 8px;
+}
 
-
+.done-content .task {
+    margin-top: 16px;
 }
 
 .bg-technical-task {
