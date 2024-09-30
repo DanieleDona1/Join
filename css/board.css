@@ -159,7 +159,7 @@ section {
   }
 
   .dialog-bg {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.4);
     position: fixed;
     top: 0;
     left: 0;
@@ -169,4 +169,18 @@ section {
     align-items: center;
     justify-content: center;
     z-index: 1;
+  }
+
+  .detail-task {
+    position: absolute;
+    background-color: white;
+    padding: 16px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 525px;
+    height: 100%;
+    max-height: 700px;
+    
+    z-index: 400;
+
   }
