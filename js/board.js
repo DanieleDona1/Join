@@ -7,28 +7,32 @@ const BASE_URL =
 async function onload() {
   await loadTodosArray();
   updateHtml();
-
-  // addTodo("Template", "Erstellung HTML Template", "Lars", "2017-01-01", "toDo", "Technical Task",);  //TODO Technical Task groß schreiben
-
-  // addTodo("Recipe", "Erstellung neuen Rezept", "", "2017-01-01", "inProgress", "User Story",);
-  // addTodo("Kochwelt", "Architecture", "Peter", "2017-03-01", "done", "User Story",);
+  //TODO Technical Task groß schreiben
+  // addTodo("Template", "Erstellung HTML Template", "2017-03-01", "done", "Technical Task", "Lars", "medium" );
+  // addTodo("Template", "Erstellung HTML Template", "2017-01-01", "toDo", "User Story", "Lars", "urgent" );
+  // addTodo("Template", "Erstellung HTML Template", "2017-06-01", "awaitFeedback", "Technical Task", "Lars", "low" );
+  // addTodo("Template", "Erstellung HTML Template", "2017-08-01", "inProgress", "User Story", "Lars", "medium" );
+  // addTodo("Template", "Erstellung HTML Template", "2017-09-01", "awaitFeedback", "Technical Task", "Lars", "urgent" );
+  // addTodo("Template", "Erstellung HTML Template", "2017-03-01", "toDo", "User Story", "Lars", "low" );
 }
 
 function addTodo(
   title,
   description,
-  assignedTo,
   dueDate,
-  swimlane,
-  task_category
+  category,
+  task_category,
+  assignedTo,
+  prio
 ) {
   postData("/todos", {
     title: title,
     description: description,
-    assignedTo: assignedTo,
     dueDate: dueDate,
-    swimlane: swimlane,
+    category: category,
     task_category: task_category,
+    assignedTo: assignedTo,
+    prio: prio,
   });
 }
 
@@ -47,8 +51,6 @@ async function postData(path = "", data = {}) {
 async function loadTodosArray() {
   let todosResponse = await getAllUsers("todos");
   let todoKeysArray = Object.keys(todosResponse);
-  // console.log("todosResponse ", todosResponse);
-  // console.log("todoKeysArray", todoKeysArray);
 
   for (let i = 0; i < todoKeysArray.length; i++) {
     todos.push({
@@ -67,44 +69,87 @@ async function getAllUsers(path) {
 }
 
 function updateHtml() {
-    updateColumn("toDo", "toDoContent");
-    updateColumn("inProgress", "inProgressContent");
-    updateColumn("awaitFeedback", "awaitFeedbackContent");
-    updateColumn("done", "doneContent");
+  updateColumn("toDo", "toDoContent");
+  updateColumn("inProgress", "inProgressContent");
+  updateColumn("awaitFeedback", "awaitFeedbackContent");
+  updateColumn("done", "doneContent");
+  // console.log(task[0].prio );
 }
 
-function updateColumn(swimlane, contentId) {
-    let tasks = todos.filter((t) => t["swimlane"] === swimlane);
+function updateColumn(category, contentId) {
+  let tasks = todos.filter((t) => t["category"] === category);
 
-    let content = document.getElementById(contentId);
-    content.innerHTML = "";
+  let content = document.getElementById(contentId);
+  content.innerHTML = "";
 
-    for (let i = 0; i < tasks.length; i++) {
-      const element = tasks[i];
-        content.innerHTML += generateHtmlTemplate(i, tasks, element);
-    }
+  for (let i = 0; i < tasks.length; i++) {
+    const element = tasks[i];
+    content.innerHTML += generateHtmlTemplate(i, tasks, element);
+  }
 }
 
-function generateHtmlTemplate(i, task, element){
-    return /*html*/ `
-    <div class="task" draggable="true" ondragstart="startDragging(${element['id']})">
-        <span class="task-category bg-${task[i].task_category.replace(/\s+/g, '-').toLowerCase()}">${task[i].task_category}</span>
+function generateHtmlTemplate(i, task, element) {
+  return /*html*/ `
+    <div class="task" draggable="true" onclick="openTaskDetails(${element['id']})" ondragstart="startDragging(${element['id']})">
+        <span class="task-category bg-${task[i].task_category
+          .replace(/\s+/g, "-")
+          .toLowerCase()}">${task[i].task_category}</span>
         <div class="title">${task[i].title}</div>
         <div class="description">${task[i].description}</div>
+        <div class="subtasks">TODO Subtask</div>
+        <div class="d-flex-sb-c">
+          <div class="members">TODO Members</div>
+          <img src="/assets/icons/board/${task[i].prio}.svg" alt="prio">
+        </div>
     </div>`;
 }
 
+function generateDetailTaskTemplate(id) {
+  return /*html*/ `
+    <div class="task" onclick="event.stopPropagation();">
+        <span class="task-category bg-${todos[id].task_category
+          .replace(/\s+/g, "-")
+          .toLowerCase()}">${todos[id].task_category}</span>
+        <div class="title">${todos[id].title}</div>
+        <div class="description">${todos[id].description}</div>
+        <div class="subtasks">TODO Subtask</div>
+        <div class="d-flex-sb-c">
+          <div class="members">TODO Members</div>
+          <img src="/assets/icons/board/${todos[id].prio}.svg" alt="prio">
+        </div>
+    </div>`;
+}
+
+
 function startDragging(id) {
-    currentDraggedElement = id;
+  currentDraggedElement = id;
 }
 
 function allowDrop(event) {
-    event.preventDefault();
+  event.preventDefault();
 }
 
 function moveTo(category) {
-    todos[currentDraggedElement]['swimlane'] = category;
-    updateHtml();
+  todos[currentDraggedElement]["category"] = category;
+  updateHtml();
+
+  removeHighlightAfterDrop();
+}
+
+function highlight(id) {
+  document.getElementById(id).classList.add("drag-area-highlight");
+}
+
+function removeHighlight(id) {
+  document.getElementById(id).classList.remove("drag-area-highlight");
+}
+
+function removeHighlightAfterDrop() {
+  let contentElements = document.getElementsByClassName("content");
+  for (let i = 0; i < contentElements.length; i++) {
+    contentElements[i].classList.remove("drag-area-highlight");
+  }
+  document.getElementById('doneContent').classList.remove('drag-area-highlight');
 }
 
 // Fill up empty content section
@@ -149,3 +194,16 @@ function mutationCallback(mutationsList, observer) {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
+function openTaskDetails(id) {
+  document.getElementById("dialog").style.display = "flex";
+  document.getElementById(
+    "dialog"
+  ).innerHTML = generateDetailTaskTemplate(id);
+  // document.body.style.overflowY = "hidden";
+}
+function closeDialog() {
+  document.getElementById("dialog").style.display = "none";
+
+  // document.body.style.overflowY = "visible";
+}

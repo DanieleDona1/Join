@@ -112,7 +112,8 @@
           <div
             id="toDoContent"
             class="content"
-            ondragover="allowDrop(event)"
+            ondragleave="removeHighlight('toDoContent')"
+            ondragover="allowDrop(event); highlight('toDoContent');"
             ondrop="moveTo('toDo')"
           ></div>
         </section>
@@ -125,7 +126,8 @@
           <div
             id="inProgressContent"
             class="content"
-            ondragover="allowDrop(event)"
+            ondragleave="removeHighlight('inProgressContent')"
+            ondragover="allowDrop(event); highlight('inProgressContent');"
             ondrop="moveTo('inProgress')"
           ></div>
         </section>
@@ -138,8 +140,9 @@
           <div
             id="awaitFeedbackContent"
             class="content"
-            ondragover="allowDrop(event)"
-            ondrop="moveTo('awaitFeedbacb')"
+            ondragleave="removeHighlight('awaitFeedbackContent')"
+            ondragover="allowDrop(event); highlight('awaitFeedbackContent');"
+            ondrop="moveTo('awaitFeedback')"
           ></div>
         </section>
 
@@ -150,11 +153,13 @@
             <div
               id="doneContent"
               class="done-content"
-              ondragover="allowDrop(event)"
+              ondragleave="removeHighlight('doneContent')"
+              ondragover="allowDrop(event); highlight('doneContent');"
               ondrop="moveTo('done')"
             ></div>
         </section>
       </div>
     </main>
+    <div class="dialog-bg d-none" id="dialog" onclick="closeDialog()"></div>
   </body>
 </html>

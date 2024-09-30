@@ -2,17 +2,13 @@ main {
     padding-top: 48px;
     padding-right: 56px;
     padding-left: 56px;
-    /* background-color: rgb(246, 247, 248); //TODO wieder aktivieren */
-    background-color: gray; /*TODO Zeile löschen */
+    background-color: rgb(246, 247, 248); /* //TODO wieder aktivieren */
+    /* background-color: gray; TODO Zeile löschen */
 }
 
 main h2 {
     font-size: 56px;
     margin-bottom: 0;
-}
-
-.max-width-1920 {
-    max-width: 1920px;
 }
 
 .gap-32px {
@@ -51,21 +47,26 @@ main h2 {
     width: 16px;
 }
 
+section {
+    max-width: 252px;
+}
+
 .section-container {
     margin-top: 40px;
     gap: 20px;
     max-width: 1350px;
+    padding: 0 16px;
+
+    height: 100%;
 }
 
 .section-container section {
     width: 100%;
-    /* padding: 0 12px; */
-    /* background-color: gray; */
     color: rgba(66, 82, 110, 1);
     font-weight: bold;
     font-size: 1.2rem;
     
-    /* height: 100%; */
+    height: 100%;
 }
 
 /* .section-container section div:nth-child(2) {
@@ -85,18 +86,47 @@ main h2 {
     flex-direction: column;
     margin-top: 12px;
     gap: 16px;
+
+    height: 100%;
+}
+
+.drag-area-highlight {
+    /* background-color: rgb(246, 247, 248); */
+    background-color: rgb(0, 0, 0, 0.07);
 }
 
 .task {
     background-color: white;
-    padding: 8px;
-    border-radius: 10px;
-    /* margin-top: 40px; */
+    padding: 16px;
+    border-radius: 16px;
+    max-width: 252px;
+    font-size: 1rem;
+    font-weight: 400;
 }
 
 .task-category {
-    color: white;
+    color: rgb(255, 255, 255);
     border-radius: 8px;
+    padding: 4px 16px;
+    /* display: flex; */
+
+}
+
+.task .title {
+    margin-top: 16px;
+    font-weight: 700;
+}
+.task .description {
+    color: rgb(168, 168, 168);
+    padding: 4px 0;
+}
+
+.task .subtasks {
+    margin: 20px 0;
+}
+
+.done-content {
+    height: 100%;
 }
 
 .done-content .task {
@@ -126,4 +156,17 @@ main h2 {
     text-align: center;
     padding: 10px 4px;
     font-size: 16px;
+  }
+
+  .dialog-bg {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
   }
