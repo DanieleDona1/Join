@@ -73,6 +73,8 @@ function updateHtml() {
   updateColumn("inProgress", "inProgressContent");
   updateColumn("awaitFeedback", "awaitFeedbackContent");
   updateColumn("done", "doneContent");
+
+  openTaskDetails(1); /* TODO Delete*/
   // console.log(task[0].prio );
 }
 
@@ -107,9 +109,12 @@ function generateHtmlTemplate(i, task, element) {
 function generateDetailTaskTemplate(id) {
   return /*html*/ `
     <div class="detail-task" onclick="event.stopPropagation();">
-        <span class="task-category bg-${todos[id].task_category
-          .replace(/\s+/g, "-")
-          .toLowerCase()}">${todos[id].task_category}</span>
+        <div class="d-flex-sb-c">
+          <span class="task-category bg-${todos[id].task_category
+            .replace(/\s+/g, "-")
+            .toLowerCase()}">${todos[id].task_category}</span>
+            <img class="xmark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
+        </div>
         <div class="title">${todos[id].title}</div>
         <div class="description">${todos[id].description}</div>
         <div class="subtasks">TODO Subtask</div>
