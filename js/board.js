@@ -106,7 +106,7 @@ function generateHtmlTemplate(i, task, element) {
 
 function generateDetailTaskTemplate(id) {
   return /*html*/ `
-    <div class="task" onclick="event.stopPropagation();">
+    <div class="detail-task" onclick="event.stopPropagation();">
         <span class="task-category bg-${todos[id].task_category
           .replace(/\s+/g, "-")
           .toLowerCase()}">${todos[id].task_category}</span>
@@ -119,7 +119,6 @@ function generateDetailTaskTemplate(id) {
         </div>
     </div>`;
 }
-
 
 function startDragging(id) {
   currentDraggedElement = id;
