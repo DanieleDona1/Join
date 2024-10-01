@@ -86,6 +86,7 @@ section {
   margin-top: 12px;
   gap: 16px;
   overflow-y: scroll;
+  scrollbar-width: thin;
 
   height: 100%;
 }
@@ -126,6 +127,7 @@ section {
 
 .done-content {
     overflow-y: scroll;
+    scrollbar-width: thin;
   height: 70vh;
 }
 
@@ -255,7 +257,7 @@ section {
 .slide-in {
     /* position: relative; */
     /* display: inline-block; */
-    animation: slide-in 200ms linear forwards; 
+    animation: slide-in 150ms linear forwards; 
 }
 
 @keyframes slide-in {
@@ -270,7 +272,7 @@ section {
 .slide-out {
     /* position: relative;
     display: inline-block; */
-    animation: slide-out 200ms linear forwards; 
+    animation: slide-out 150ms linear forwards; 
 }
 
 @keyframes slide-out {
@@ -278,6 +280,6 @@ section {
         transform: translateX(0);
     }
     100% {
-        transform: translateX(100%);
+        transform: translateX(200%);
     }
 }
