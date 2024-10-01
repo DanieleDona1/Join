@@ -112,7 +112,7 @@ function generateDetailTaskTemplate(id) {
   let taskCategory = todos[id].task_category.replace(/\s+/g, "-").toLowerCase();
   let formattedDate = todos[id].dueDate.replace(/-/g, '/');
   return /*html*/ `
-    <div class="detail-task slide-in" onclick="event.stopPropagation();">
+    <div class="detail-task slide-in dialog-content" onclick="event.stopPropagation();">
         <div class="d-flex-sb-c">
           <span class="task-category bg-${taskCategory}">${todos[id].task_category}</span>
             <img class="xmark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
@@ -217,18 +217,21 @@ function openTaskDetails(id) {
   // document.body.style.overflowY = "hidden";
 }
 function closeDialog() {
-  document.getElementById("dialog").style.display = "none";
-
-  // const dialog = document.getElementById('dialog');
-  //   const content = dialog.querySelector('.dialog-content'); // Dialog-Inhalt finden
-
-  //   if (content) {
-  //       content.classList.add('slide-out'); // Herausfliegen-Animation starten
-  //       content.addEventListener('animationend', function() {
-  //           dialog.classList.add('d-none'); // Dialog nach der Animation verstecken
-  //           dialog.innerHTML = ''; // Den Inhalt entfernen
-  //       }, { once: true }); // Event-Listener wird nur einmal ausgeführt
-  //   }
-
   // document.body.style.overflowY = "visible";
+  animationSlideOut();
+
 }
+
+function animationSlideOut() {
+  const dialog = document.getElementById('dialog');
+  const content = dialog.querySelector('.dialog-content');
+
+      content.classList.add('slide-out');
+      content.addEventListener('animationend', function() {
+          dialog.style.display = "none";
+
+          dialog.classList.add('d-none');
+          // dialog.innerHTML = '';
+      }, { once: true });
+
+    }
