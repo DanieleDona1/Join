@@ -98,9 +98,9 @@ function generateHtmlTemplate(i, task, element) {
           .toLowerCase()}">${task[i].task_category}</span>
         <div class="title">${task[i].title}</div>
         <div class="description">${task[i].description}</div>
-        <div class="subtasks">TODO Subtask</div>
+        <div class="subtasks">/*TODO*/TODO Subtask</div>
         <div class="d-flex-sb-c">
-          <div class="members">TODO Members</div>
+          <div class="members">/*TODO*/TODO Members</div>
           <img src="/assets/icons/board/${task[i].prio}.svg" alt="prio">
         </div>
     </div>`;
@@ -124,9 +124,9 @@ function generateDetailTaskTemplate(id) {
         </div>
 
         <div class="d-flex-sb-c">
-          <div class="members color-blue">Assigned To: <div>TODO Add Members</div></div>
+          <div class="members color-blue">Assigned To: <div>/*TODO*/TODO Add Members</div></div>
         </div>
-        <div class="subtasks color-blue">Subtasks <div>TODO Subtask</div></div>
+        <div class="subtasks color-blue">Subtasks <div>/*TODO*/TODO Subtask</div></div>
         <div class="configuration">
           <div><img src="/assets/icons/board/delete.svg" alt="delete"><span class="color-blue">Delete</span></div>
           <div class="separator "><img src="/assets/icons/board/edit.svg" alt="edit"><span class="color-blue">Edit</span></div>
