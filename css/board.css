@@ -170,7 +170,7 @@ section {
 }
 
 .detail-task {
-    position: relative;
+  position: relative;
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -215,28 +215,37 @@ section {
 }
 
 .configuration {
-    position: absolute;
-    bottom: 40px;
-    right: 40px; 
-    display: flex;
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  display: flex;
 }
 
 .configuration div {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    padding: 2px 8px;    
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 2px 8px;
 }
 
 .configuration span {
-    font-size: 14px;
+  font-size: 14px;
+}
+
+.configuration div:hover span {
+  color: rgb(41, 171, 226);
+  transform: scale(1.04);
 }
 
 .configuration img {
-    width: 16px;
-    margin-right: 8px;
+  width: 16px;
+  margin-right: 8px;
 }
 
-.separator  {
-    border-left: 1px solid rgb(0, 0, 0, 0.2);
+.configuration div:hover img {
+    filter: invert(40%) sepia(60%) saturate(400%) hue-rotate(170deg);
+}
+
+.separator {
+  border-left: 1px solid rgb(0, 0, 0, 0.2);
 }
