@@ -8,13 +8,13 @@ async function onload() {
   await loadTodosArray();
   updateHtml();
   //TODO Technical Task groß schreiben
-  // addTodo("Template", "Erstellung HTML Template", "2017-03-01", "done", "Technical Task", "Lars", "medium" );
-  // addTodo("Template", "Erstellung HTML Template", "2017-01-01", "toDo", "User Story", "Lars", "urgent" );
-  // addTodo("Template", "Erstellung HTML Template", "2017-06-01", "awaitFeedback", "Technical Task", "Lars", "low" );
-  // addTodo("Template", "Erstellung HTML Template", "2017-08-01", "inProgress", "User Story", "Lars", "medium" );
-  // addTodo("Template", "Erstellung HTML Template", "2017-09-01", "awaitFeedback", "Technical Task", "Lars", "urgent" );
-  // addTodo("Template", "Erstellung HTML Template", "2017-03-01", "toDo", "User Story", "Lars", "low" );
-}
+  // addTodo("Template", "Erstellung HTML Template", "2012-03-09", "done", "Technical Task", "Lars", "Medium" );
+  // addTodo("Architecture", "Erstellung CSS", "2013-01-01", "toDo", "User Story", "Lars", "Urgent" );
+  // addTodo("Headline", "Erstellung HTML Template", "2019-06-02", "awaitFeedback", "Technical Task", "Lars", "Low" );
+  // addTodo("Create new function", "Erstellung HTML Template", "2014-08-03", "inProgress", "User Story", "Lars", "Medium" );
+  // addTodo("Template", "Erstellung HTML Template", "2015-09-04", "awaitFeedback", "Technical Task", "Lars", "urgent" );
+  // addTodo("Team Meeting", "Erstellung HTML Template", "2016-03-05", "toDo", "User Story", "Lars", "Low" );
+}  
 
 function addTodo(
   title,
@@ -107,21 +107,29 @@ function generateHtmlTemplate(i, task, element) {
 }
 
 function generateDetailTaskTemplate(id) {
+  let taskCategory = todos[id].task_category.replace(/\s+/g, "-").toLowerCase();
+  let formattedDate = todos[id].dueDate.replace(/-/g, '/');
   return /*html*/ `
     <div class="detail-task" onclick="event.stopPropagation();">
         <div class="d-flex-sb-c">
-          <span class="task-category bg-${todos[id].task_category
-            .replace(/\s+/g, "-")
-            .toLowerCase()}">${todos[id].task_category}</span>
+          <span class="task-category bg-${taskCategory}">${todos[id].task_category}</span>
             <img class="xmark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
         </div>
         <div class="title">${todos[id].title}</div>
         <div class="description">${todos[id].description}</div>
-        <div class="subtasks">TODO Subtask</div>
-        <div class="d-flex-sb-c">
-          <div class="members">TODO Members</div>
-          <img src="/assets/icons/board/${todos[id].prio}.svg" alt="prio">
+        <div class="due-date color-blue">Due date:&nbsp; <span class="color-black">${formattedDate}</span></div><!-- Input type=date dieses Attribut hinzufügen: lang="de-DE" -->
+        <div>
+          <span class="color-blue">Priority:&nbsp; <span class="color-black">${todos[id].prio}</span></span>
+          <img class="prio-img" src="/assets/icons/board/${todos[id].prio}.svg" alt="prio">
         </div>
+
+        <div class="d-flex-sb-c">
+          <div class="members color-blue">Assigned To: <div>TODO Add Members</div></div>
+        </div>
+        <div class="subtasks color-blue">Subtasks <div>TODO Subtask</div></div>
+        <div class="configuration">
+          <div><img src="/assets/icons/board/delete.svg" alt="delete"><span class="color-blue">Delete</span></div>
+          <div class="separator "><img src="/assets/icons/board/edit.svg" alt="edit"><span class="color-blue">Edit</span></div>
     </div>`;
 }
 
