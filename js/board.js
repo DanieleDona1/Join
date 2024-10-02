@@ -135,6 +135,28 @@ function generateDetailTaskTemplate(id) {
     </div>`;
 }
 
+function generatePopUpAddTask(category, contentId) {
+  document.getElementById('dialog').innerHTML = /*html*/`
+  <div class="pop-up-add-Task slide-in dialog-content" onclick="event.stopPropagation();>
+    <div class="d-flex-sb-c">
+      <h2>Add Task</h2>
+      <img class="xmark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
+    </div>
+    /*TODO*/ TODO add_task html and css
+  
+    <button onclick="closeDialog()">Cancel</button>
+    <button onclick="createTask('${category}', '${contentId}'); closeDialog();">Create Task</button>
+    /*createTask Funktion bearbeiten */
+  </div>
+  `;
+  openDialog();  
+}
+
+function createTask(category, contentId) {
+  //Neue Funktion getAllDatadocumentElementById TITLE, DESCRIPTION ASIGNEDTO, ... Input Daten in todos.push() oder firebase auch(Funktion vorhanden)
+  updateColumn(category, contentId);
+}
+
 function startDragging(id) {
   currentDraggedElement = id;
 }
@@ -210,16 +232,20 @@ function mutationCallback(mutationsList, observer) {
 document.addEventListener("DOMContentLoaded", init);
 
 function openTaskDetails(id) {
-  document.getElementById("dialog").style.display = "flex";
   document.getElementById(
     "dialog"
   ).innerHTML = generateDetailTaskTemplate(id);
   // document.body.style.overflowY = "hidden";
+  openDialog();
 }
+
+function openDialog() {
+  document.getElementById("dialog").style.display = "flex";
+}
+
 function closeDialog() {
   // document.body.style.overflowY = "visible";
   animationSlideOut();
-
 }
 
 function animationSlideOut() {
@@ -233,5 +259,4 @@ function animationSlideOut() {
           dialog.classList.add('d-none');
           // dialog.innerHTML = '';
       }, { once: true });
-
-    }
+}
