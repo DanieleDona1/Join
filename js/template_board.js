@@ -37,7 +37,7 @@ function generateHtmlTemplate(i, task, element) {
           </div>
           <div class="subtasks color-blue">Subtasks <div><!-- TODO --> TODO Subtask</div></div>
           <div class="configuration">
-            <div><img src="/assets/icons/board/delete.svg" alt="delete"><span class="color-blue">Delete</span></div>
+            <div onclick="deleteTask('${id}')"><img src="/assets/icons/board/delete.svg" alt="delete"><span class="color-blue">Delete</span></div>
             <div onclick="generateEditTemplate('${id}')" class="separator "><img src="/assets/icons/board/edit.svg" alt="edit"><span class="color-blue">Edit</span></div>
       </div>`;
   }
@@ -64,7 +64,6 @@ function generateHtmlTemplate(i, task, element) {
     document.getElementById('dialog').innerHTML = /*html */`
       <div class="detail-task dialog-content" onclick="event.stopPropagation();">
         <div class=""><img class="xmark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark"></div>
-  
   
         <span>Edit id :  ${id}</span>
   

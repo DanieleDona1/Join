@@ -278,8 +278,6 @@ section {
 }
 
 .slide-in {
-  /* position: relative; */
-  /* display: inline-block; */
   animation: slide-in 150ms linear forwards;
 }
 

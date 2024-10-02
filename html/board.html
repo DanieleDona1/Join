@@ -96,9 +96,15 @@
             <img src="/assets/icons/board/search-lupe.svg" alt="search-btn" />
           </div>
 
-          <button class="add-task d-flex-c-c btn-hover" onclick="generatePopUpAddTask('toDo', 'toDoContent');">
+          <button
+            class="add-task d-flex-c-c btn-hover"
+            onclick="generatePopUpAddTask('toDo', 'toDoContent');"
+          >
             Add Task
-            <img src="/assets/icons/board/add-task-plus.svg" alt="plus-general" />
+            <img
+              src="/assets/icons/board/add-task-plus.svg"
+              alt="plus-general"
+            />
           </button>
         </div>
       </div>
@@ -107,7 +113,11 @@
         <section id="toDo" class="to-do">
           <div class="column-title d-flex-sb-c">
             <span>to-do</span>
-            <button class="plus-button" onclick="generatePopUpAddTask('toDo', 'toDoContent')" aria-label="Add Task To Do"></button>
+            <button
+              class="plus-button"
+              onclick="generatePopUpAddTask('toDo', 'toDoContent')"
+              aria-label="Add Task To Do"
+            ></button>
           </div>
 
           <div
@@ -122,7 +132,11 @@
         <section id="inProgress" class="in-progress">
           <div class="column-title d-flex-sb-c">
             <span>in-progress</span>
-            <button class="plus-button" onclick="generatePopUpAddTask('inProgress', 'inProgressContent')" aria-label="Add Task inProgress"></button>
+            <button
+              class="plus-button"
+              onclick="generatePopUpAddTask('inProgress', 'inProgressContent')"
+              aria-label="Add Task inProgress"
+            ></button>
           </div>
           <div
             id="inProgressContent"
@@ -136,7 +150,11 @@
         <section id="awaitFeedback" class="await-feedback">
           <div class="column-title d-flex-sb-c">
             <span>await-feedback</span>
-            <button class="plus-button" onclick="generatePopUpAddTask('awaitFeedback', 'awaitFeedbackContent')" aria-label="Add Task awaitFeedback"></button>
+            <button
+              class="plus-button"
+              onclick="generatePopUpAddTask('awaitFeedback', 'awaitFeedbackContent')"
+              aria-label="Add Task awaitFeedback"
+            ></button>
           </div>
           <div
             id="awaitFeedbackContent"
@@ -151,13 +169,13 @@
           <div class="column-title d-flex-sb-c">
             <span>done</span>
           </div>
-            <div
-              id="doneContent"
-              class="done-content"
-              ondragleave="removeHighlight('doneContent')"
-              ondragover="allowDrop(event); highlight('doneContent');"
-              ondrop="moveTo('done')"
-            ></div>
+          <div
+            id="doneContent"
+            class="done-content"
+            ondragleave="removeHighlight('doneContent')"
+            ondragover="allowDrop(event); highlight('doneContent');"
+            ondrop="moveTo('done')"
+          ></div>
         </section>
       </div>
     </main>
