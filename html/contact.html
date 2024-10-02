@@ -10,11 +10,120 @@
       href="/assets/icons/favicons/favicon_light.png"
       id="favicon"
     />
-    <link rel="stylesheet" href="/style.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    <script src="/script.js" defer></script>
+    <link
+      rel="stylesheet"
+      href="/style.css"
+    />
+    <link rel="stylesheet" href="/css/contact.css">
+    <link rel="stylesheet" href="/css/fonts.css">
   </head>
-  <body onload="onloadFunc()" class="max-width-1920">
+  <body onload="onloadFunc()"  class="max-display-size">
+    <div
+      class="background-pop-up d-none"
+      id="background-pop-up"
+    >
+      <div
+        class="pop-up-contact d-none"
+        id="pop-up-contact"
+      >
+        <button
+          class="close-popup"
+          onclick="closeAddContact()"
+        >
+          <img
+            src="/assets/icons/close-cross.svg"
+            alt="close"
+          />
+        </button>
+
+        <div class="contact-side-info">
+          <img
+            src="/assets/icons/contact_join_logo.png"
+            alt="Join Logo"
+            class="contact-logo"
+          />
+          <div class="contact-side-info-div">
+            <div class="add-contact">
+              <span class="add-contact-headline">Add contact</span>
+              <span class="add-contact-info"
+                >Tasks are better with a team!</span
+              >
+            </div>
+            <img
+              src="/assets/icons/navbar/navbar_join_icon.svg"
+              alt=""
+              class="contact-vector"
+            />
+          </div>
+        </div>
+
+        <img
+          src="/assets/icons/raw_profil_img.png"
+          alt="Konaktbild"
+          class="contact-pic"
+        />
+
+        <form>
+          <address class="contact-field">
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Name"
+              minlength="2"
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
+              minlength="6"
+              required
+            />
+            <input
+              type="number"
+              name="phonenumber"
+              id="phonenumber"
+              placeholder="Phone"
+              min="0"
+              minlength="6"
+              required
+            />
+          </address>
+          <div class="input-button">
+            <button
+              type="reset"
+              class="cancel"
+            >
+              Cancel
+              <img
+                src="/assets/icons/close-cross.svg"
+                alt="close"
+              />
+            </button>
+            <button
+            type="button"
+            onclick="addContact(this)"
+            class="create"
+            >
+              Create contact
+              <img
+                src="/assets/icons/check.svg"
+                alt="close"
+              />
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div
+      id="success-message"
+      class="d-none success-message d-flex-c-c"
+    >
+      Contact succesfully created
+    </div>
+
     <header>
       <img
         class="header-join-logo"
@@ -23,135 +132,84 @@
       />
       <p class="d-none">Kanban Project Management Tool</p>
       <div class="header-rightside-container d-none">
-        <img
+        <a href="help.html">
+          <img
           class="header-help-icon d-none"
           src="/assets/icons/header/help.svg"
           alt="help"
         />
+        </a>
         <span class="header-initials">JV</span>
       </div>
     </header>
-
-    <nav>
-      <div class="navbar-join-icon-container d-none">
-        <img src="/assets/icons/navbar/navbar_join_icon.svg" alt="" />
-      </div>
-      <div class="navbar-container-bottom">
-        <div class="navbar-item-container">
-          <a href="summary.html" class="navbar-item" data-page="summary">
-            <img
-              src="/assets/icons/navbar/summary_Icon.svg"
-              alt="Summary Icon"
-            />
-            <p>Summary</p>
-          </a>
-          <a href="board.html" class="navbar-item" data-page="board">
-            <img src="/assets/icons/navbar/board_icon.svg" alt="Board Icon" />
-            <p>Board</p>
-          </a>
-          <a href="add_tasks.html" class="navbar-item" data-page="add_tasks">
-            <img
-              src="/assets/icons/navbar/add_tasks.svg"
-              alt="Add Tasks Icon"
-            />
-            <p>Add Tasks</p>
-          </a>
-          <a href="contact.html" class="navbar-item" data-page="contacts">
-            <img
-              src="/assets/icons/navbar/contacts_icon.svg"
-              alt="Contacts Icon"
-            />
-            <p>Contacts</p>
-          </a>
+  
+      <nav>
+        <div class="navbar-join-icon-container d-none">
+          <img src="/assets/icons/navbar/navbar_join_icon.svg" alt="" />
         </div>
-        <div class="navbar-disclaimer-links-container d-none">
-          <a href="/html/privacy_policy.html" data-page="privacy_policy"
-            >Privacy Policy</a
-          >
-          <a href="/html/legal_notice.html" data-page="legal_notice"
-            >Legal Notice</a
-          >
-        </div>
-      </div>
-    </nav>
-
-    <div class="pop-up-contact d-none">
-        <button class="close-popup">
-            <img src="/assets/icons/close-cross.svg" alt="close" >
-        </button>
-
-        <div class="contact-side-info">
-        <img
-          src="/assets/icons/navbar_join_icon.svg"
-          alt="Join Logo"
-          class="contact-logo"
-        />
-        <div class="contact-side-info-div">
-          <div class="add-contact">
-            <span class="add-contact-headline">Add contact</span>
-            <span class="add-contact-info">Tasks are better with a team!</span>
+        <div class="navbar-container-bottom">
+          <div class="navbar-item-container">
+            <a href="summary.html" class="navbar-item" data-page="summary">
+              <img
+                src="/assets/icons/navbar/summary_Icon.svg"
+                alt="Summary Icon"
+              />
+              <p>Summary</p>
+            </a>
+            <a href="board.html" class="navbar-item" data-page="board">
+              <img src="/assets/icons/navbar/board_icon.svg" alt="Board Icon" />
+              <p>Board</p>
+            </a>
+            <a href="add_tasks.html" class="navbar-item" data-page="add_tasks">
+              <img
+                src="/assets/icons/navbar/add_tasks.svg"
+                alt="Add Tasks Icon"
+              />
+              <p>Add Tasks</p>
+            </a>
+            <a href="contact.html" class="navbar-item" data-page="contacts">
+              <img
+                src="/assets/icons/navbar/contacts_icon.svg"
+                alt="Contacts Icon"
+              />
+              <p>Contacts</p>
+            </a>
           </div>
+          <div class="navbar-disclaimer-links-container d-none">
+            <a href="/html/privacy_policy.html" data-page="privacy_policy"
+              >Privacy Policy</a
+            >
+            <a href="/html/legal_notice.html" data-page="legal_notice"
+              >Legal Notice</a
+            >
+          </div>
+        </div>
+      </nav>
+
+    <main class="main-contact">
+      <div class="main-contact-side">
+        <div class="contact-list-field">
+        <button onclick="openAddContact()"
+        class="contact-list-field-button">
+          Add new contact
           <img
-            src="/assets/icons/contact_line_vector.svg"
-            alt=""
-            class="contact-vector"
+            src="/assets/icons/contact_add.png"
+            alt="contact add"
           />
+        </button>
+        <div
+          class="contact-list"
+          id="content-contactlist"
+        ></div>
         </div>
       </div>
-
-      <img
-        src="/assets/icons/add_contact_img.png"
-        alt="Konaktbild"
-        class="contact-pic"
-      />
-
-      <form>
-        <address class="contact-field">
-          <input
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Name"
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Email"
-            required
-          />
-          <input
-            type="number"
-            name="phonenumber"
-            id="phonenumber"
-            placeholder="Phone"
-            min="0"
-            required
-          />
-        </address>
-        <div class="input-button">
-          <button class="cancel">
-            Cancel
-            <img
-              src="/assets/icons/close-cross.svg"
-              alt="close"
-            />
-          </button>
-          <button
-            onclick="addContact()"
-            class="create"
-          >
-            Create contact
-            <img
-              src="/assets/icons/check.svg"
-              alt="close"
-            />
-          </button>
-        </div>
-      </form>
+     
+    </main>
+    <div class="contact-text">
+      <span class="span-1">Contacts</span>
+      <div class="contact-vector"></div>
+      <span class="span-2">Better with a team</span>
     </div>
-
     <script src="/js/contact.js"></script>
   </body>
 </html>
