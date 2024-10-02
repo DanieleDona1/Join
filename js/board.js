@@ -1,4 +1,6 @@
 let todos = [];
+let currentTodos = [];
+
 let currentDraggedElement;
 
 const BASE_URL =
@@ -60,6 +62,7 @@ async function loadTodosArray() {
       ...todosResponse[todoKeysArray[i]],
     });
   }
+  currentTodos = todos;
   console.log("todos", todos);
 }
 
@@ -77,7 +80,7 @@ function updateHtml() {
 }
 
 function updateColumn(category, contentId) {
-  let tasks = todos.filter((t) => t["category"] === category);
+  let tasks = currentTodos.filter((t) => t["category"] === category);
 
   let content = document.getElementById(contentId);
   content.innerHTML = "";
@@ -98,7 +101,7 @@ function startDragging(id) {
 }
 
 function allowDrop(event) {
-  console.log('Event:', event);
+  // console.log('Event:', event); TODO
   event.preventDefault();
   event.stopPropagation();
 }
@@ -183,14 +186,29 @@ function openDialog() {
 function closeDialog() {
   // document.body.style.overflowY = "visible";
   animationSlideOut();
+  let filled = document.getElementById("search").value;
+  if (filled != "") {
+    currentTodos = todos;
+    updateHtml();
+  }
 }
 
 function deleteTask(id) {
-  todos = todos.filter(t => t.id !== id);
+  todos = todos.filter((t) => t.id !== id);
   todos.forEach((element, i) => {
     element.id = i;
   });
+  currentTodos = todos;
   closeDialog();
+  updateHtml();
+}
+
+function searchTitleOrDescription() {
+  let filterWord = document.getElementById("search").value.toLowerCase(); // Suchbegriff in Kleinbuchstaben
+  currentTodos = todos.filter((t) =>
+      t.title.toLowerCase().includes(filterWord) ||
+      t.description.toLowerCase().includes(filterWord)
+  );
   updateHtml();
 }
 
@@ -199,7 +217,8 @@ function animationSlideOut() {
   const content = dialog.querySelector(".dialog-content");
 
   content.classList.add("slide-out");
-  content.addEventListener("animationend",
+  content.addEventListener(
+    "animationend",
     function () {
       dialog.style.display = "none";
       dialog.classList.add("d-none");

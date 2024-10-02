@@ -9,7 +9,7 @@ function generateHtmlTemplate(i, task, element) {
           <div class="subtasks"><!-- TODO -->TODO Subtask</div>
           <div class="d-flex-sb-c">
             <div class="members"><!-- TODO -->TODO Members</div>
-            <img src="/assets/icons/board/${task[i].prio}.svg" alt="prio">
+            <img draggable="false" src="/assets/icons/board/${task[i].prio}.svg" alt="prio">
           </div>
       </div>`;
   }
