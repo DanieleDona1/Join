@@ -13,8 +13,8 @@ async function onload() {
   // addTodo("Headline", "Erstellung HTML Template", "2019-06-02", "awaitFeedback", "Technical Task", ["Sabine", "Fabian"], ["ein Aray für subtask"], "Low" );
   // addTodo("Create new function", "Erstellung HTML Template", "2014-08-03", "inProgress", "User Story", ["Lars", "Fabian"], ["ein Aray für subtask"], "Medium" );
   // addTodo("Template function", "Erstellung HTML Template", "2015-09-04", "awaitFeedback", "Technical Task", ["Karl", "Fabian"], ["fff"], "urgent" );
-  // addTodo("Team Meeting", "Erstellung HTML Template", "2016-03-05", "toDo", "User Story", ["Peter", "Fabian"], ["ein Aray für subtask"], "Low" ); 
-}   
+  // addTodo("Team Meeting", "Erstellung HTML Template", "2016-03-05", "toDo", "User Story", ["Peter", "Fabian"], ["ein Aray für subtask"], "Low" );
+}
 
 function addTodo(
   title,
@@ -66,7 +66,6 @@ async function loadTodosArray() {
 async function getAllUsers(path) {
   let response = await fetch(BASE_URL + path + ".json");
   let responseAsJson = await response.json();
-  //   console.log("responseAsJson", responseAsJson);
   return responseAsJson;
 }
 
@@ -122,7 +121,9 @@ function removeHighlightAfterDrop() {
   for (let i = 0; i < contentElements.length; i++) {
     contentElements[i].classList.remove("drag-area-highlight");
   }
-  document.getElementById('doneContent').classList.remove('drag-area-highlight');
+  document
+    .getElementById("doneContent")
+    .classList.remove("drag-area-highlight");
 }
 
 // Fill up empty content section
@@ -132,7 +133,6 @@ function init() {
   checkAndInsertText(contentElements);
 
   const config = { childList: true };
-
   const observer = createMutationObserver(mutationCallback);
 
   observeContentElements(observer, contentElements, config);
@@ -169,9 +169,7 @@ function mutationCallback(mutationsList, observer) {
 document.addEventListener("DOMContentLoaded", init);
 
 function openTaskDetails(id) {
-  document.getElementById(
-    "dialog"
-  ).innerHTML = generateDetailTaskTemplate(id);
+  document.getElementById("dialog").innerHTML = generateDetailTaskTemplate(id);
   // document.body.style.overflowY = "hidden";
   openDialog();
 }
@@ -185,15 +183,26 @@ function closeDialog() {
   animationSlideOut();
 }
 
+function deleteTask(id) {
+  todos = todos.filter(t => t.id != id);
+  todos.forEach((element, i) => {
+    element.id = i;
+  });
+  closeDialog();
+  updateHtml();
+}
+
 function animationSlideOut() {
-  const dialog = document.getElementById('dialog');
-  const content = dialog.querySelector('.dialog-content');
+  const dialog = document.getElementById("dialog");
+  const content = dialog.querySelector(".dialog-content");
 
-      content.classList.add('slide-out');
-      content.addEventListener('animationend', function() {
-          dialog.style.display = "none";
-
-          dialog.classList.add('d-none');
-          // dialog.innerHTML = '';
-      }, { once: true });
+  content.classList.add("slide-out");
+  content.addEventListener("animationend",
+    function () {
+      dialog.style.display = "none";
+      dialog.classList.add("d-none");
+      // dialog.innerHTML = '';
+    },
+    { once: true }
+  );
 }
