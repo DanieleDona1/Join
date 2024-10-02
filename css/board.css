@@ -9,6 +9,7 @@ main {
 main h2 {
   font-size: 56px;
   margin-bottom: 0;
+  margin-right: 10px;
 }
 
 .gap-32px {
@@ -17,12 +18,18 @@ main h2 {
 
 .search {
   all: unset;
+  padding: 0 4px;
 }
 
 .searchbar {
   border: 1px solid rgb(204, 204, 204);
   padding: 4px 16px;
   border-radius: 10px;
+}
+
+.searchbar input {
+  width: 100%;
+  max-width: 300px;
 }
 
 .searchbar img {
@@ -74,6 +81,7 @@ section {
 
 .section-container section img {
   width: 24px;
+  cursor: pointer;
 }
 
 .column-title {
@@ -85,7 +93,7 @@ section {
   flex-direction: column;
   margin-top: 12px;
   gap: 16px;
-  overflow-y: scroll;
+  overflow-y: auto;
   scrollbar-width: thin;
 
   height: 100%;
@@ -126,8 +134,8 @@ section {
 }
 
 .done-content {
-    overflow-y: scroll;
-    scrollbar-width: thin;
+  overflow-y: auto;
+  scrollbar-width: thin;
   height: 70vh;
 }
 
@@ -177,12 +185,12 @@ section {
   position: relative;
   display: flex;
   flex-direction: column;
-  position: absolute;
+  /* position: absolute; */
   background-color: white;
   padding: 24px;
   border-radius: 16px;
   width: 100%;
-  max-width: 500px;
+  max-width: 440px;
   height: 100%;
   max-height: 700px;
   gap: 20px;
@@ -246,8 +254,15 @@ section {
   margin-right: 8px;
 }
 
+.btn-hover:hover {
+    background-color: rgb(41, 171, 226);
+    color: white
+}
+
+.svg
+
 .configuration div:hover img {
-    filter: invert(40%) sepia(60%) saturate(400%) hue-rotate(170deg);
+  filter: invert(40%) sepia(60%) saturate(400%) hue-rotate(170deg);
 }
 
 .separator {
@@ -255,31 +270,41 @@ section {
 }
 
 .slide-in {
-    /* position: relative; */
-    /* display: inline-block; */
-    animation: slide-in 150ms linear forwards; 
+  /* position: relative; */
+  /* display: inline-block; */
+  animation: slide-in 150ms linear forwards;
 }
 
 @keyframes slide-in {
-    0% {
-        transform: translateX(100%);
-    }
-    100% {
-        transform: translateX(0);
-    }
+  0% {
+    transform: translateX(250%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .slide-out {
-    /* position: relative;
+  /* position: relative;
     display: inline-block; */
-    animation: slide-out 150ms linear forwards; 
+  animation: slide-out 150ms linear forwards;
 }
 
 @keyframes slide-out {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(200%);
-    }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(250%);
+  }
+}
+
+.pop-up-add-Task {
+  width: 100%;
+  background-color: white;
+  max-width: 1000px;
+  height: 100%;
+  max-height: 700px;
+  border-radius: 30px;
+  padding: 72px;
 }

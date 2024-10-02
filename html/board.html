@@ -86,7 +86,7 @@
         <div class="search-add-container d-flex-se-c gap-32px">
           <div id="searchbar" class="searchbar d-flex-c-c">
             <input
-              minlength="3"
+              maxlength="50"
               type="search"
               id="search"
               class="search"
@@ -95,9 +95,9 @@
             <img src="/assets/icons/board/search-lupe.svg" alt="search-btn" />
           </div>
 
-          <button class="add-task d-flex-c-c">
+          <button class="add-task d-flex-c-c btn-hover" onclick="generatePopUpAddTask('toDo', 'toDoContent');">
             Add Task
-            <img src="/assets/icons/board/add-task-plus.svg" alt="plus" />
+            <img src="/assets/icons/board/add-task-plus.svg" alt="plus-general" />
           </button>
         </div>
       </div>
@@ -106,7 +106,7 @@
         <section id="toDo" class="to-do">
           <div class="column-title d-flex-sb-c">
             <span>to-do</span>
-            <img src="/assets/icons/board/plus button.svg" alt="plus" />
+            <img onclick="generatePopUpAddTask('toDo', 'toDoContent')" src="/assets/icons/board/plus button.svg" alt="plus" />
           </div>
 
           <div
@@ -121,7 +121,7 @@
         <section id="inProgress" class="in-progress">
           <div class="column-title d-flex-sb-c">
             <span>in-progress</span>
-            <img src="/assets/icons/board/plus button.svg" alt="plus" />
+            <img onclick="generatePopUpAddTask('inProgress', 'inProgressContent')" src="/assets/icons/board/plus button.svg" alt="plus" />
           </div>
           <div
             id="inProgressContent"
@@ -135,7 +135,7 @@
         <section id="awaitFeedback" class="await-feedback">
           <div class="column-title d-flex-sb-c">
             <span>await-feedback</span>
-            <img src="/assets/icons/board/plus button.svg" alt="plus" />
+            <img onclick="generatePopUpAddTask('awaitFeedback', 'awaitFeedbackContent')" src="/assets/icons/board/plus button.svg" alt="plus" />
           </div>
           <div
             id="awaitFeedbackContent"
