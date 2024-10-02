@@ -18,16 +18,16 @@ function renderPhoneList() {
 }
 
 async function createContactlist() {
-  let data = await loadData("contacts"); // holt mittels dieser Funktion das JSON von der Datenbank unter diesem Pfad
-  let contacts = Object.keys(data); // nimmt die keys der jeweiligen Objekte zum Weiterverarbeiten
+    let data = await loadData("contacts"); // holt mittels dieser Funktion das JSON von der Datenbank unter diesem Pfad
+    let contacts = Object.keys(data); // nimmt die keys der jeweiligen Objekte zum Weiterverarbeiten
 
-  for (let i = 0; i < contacts.length; i++) {
-    contactList.push({
-      id: contacts[i], // Speichert den jeweiligen Key als ID
-      user: data[contacts[i]], // Speichert die User-Daten
-      color: data[contacts[i]].color, // Speichert die Farbe
-    });
-  }
+    for (let i = 0; i < contacts.length; i++) {
+      contactList.push({
+        id: contacts[i], // Speichert den jeweiligen Key als ID
+        user: data[contacts[i]], // Speichert die User-Daten
+        color: data[contacts[i]].color, // Speichert die Farbe
+      });
+    }
 }
 
 // Sortiert die Kontakte alphabetisch nach dem Namen
@@ -266,9 +266,6 @@ function openEditContact(groupedcontact, index) {
   document.querySelector("body").classList.add("overflow-hidden");
 
   renderEditConatct(groupedcontact, index);
-
-  console.log(document.getElementById("edit-save").value);
-  
 }
 
 function closeEditContact() {
@@ -292,9 +289,7 @@ function renderEditConatct(groupedcontact, index) {
   document.getElementById("edit-delete").value = contact.id;
   document.getElementById("edit-save").value = contact.id;
 
-
   //gibt dem 2. button keine id
-
 }
 
 async function deleteContact(id) {
@@ -309,12 +304,11 @@ async function deleteContact(id) {
 }
 
 async function editContact(id) {
-
   console.log(id);
-  
-  let name = document.getElementById("name").value;
-  let mail = document.getElementById("email").value;
-  let number = document.getElementById("phonenumber").value;
+
+  let name = document.getElementById("edit-name").value;
+  let mail = document.getElementById("edit-email").value;
+  let number = document.getElementById("edit-phonenumber").value;
   // Aktuelle Daten abrufen
   let existingData = await loadData("/contacts/" + id);
 
@@ -328,4 +322,10 @@ async function editContact(id) {
 
   // Dann PUT-Request mit dem aktualisierten Datensatz senden
   await putData("/contacts/" + id, updatedData);
+
+  closeEditContact();
+  contactList = []; // Leere die vorhandene Liste
+  await createContactlist(); // Lade die Kontakte erneut
+  renderPhoneList(); // Render die aktualisierte Liste
+  document.getElementById("contact-info").innerHTML = "";
 }
