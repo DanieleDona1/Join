@@ -2,8 +2,7 @@ main {
   padding-top: 48px;
   padding-right: 56px;
   padding-left: 56px;
-  background-color: rgb(246, 247, 248); /* //TODO wieder aktivieren */
-  /* background-color: gray; TODO Zeile löschen */
+  background-color: rgb(246, 247, 248);
 }
 
 main h2 {
@@ -62,8 +61,6 @@ section {
   gap: 20px;
   max-width: 1350px;
   padding: 0 16px;
-
-  /* height: 100%; */
 }
 
 .section-container section {
@@ -74,10 +71,6 @@ section {
 
   height: 70vh;
 }
-
-/* .section-container section div:nth-child(2) {
-    background-color: white; TODO
-} */
 
 .section-container section img {
   width: 24px;
@@ -105,6 +98,7 @@ section {
 }
 
 .task {
+  cursor: pointer;
   background-color: white;
   padding: 16px;
   border-radius: 16px;
@@ -117,13 +111,13 @@ section {
   color: rgb(255, 255, 255);
   border-radius: 8px;
   padding: 4px 16px;
-  /* display: flex; */
 }
 
 .task .title {
   margin-top: 16px;
   font-weight: 700;
 }
+
 .task .description {
   color: rgb(168, 168, 168);
   padding: 4px 0;
@@ -195,10 +189,10 @@ section {
   max-height: 700px;
   gap: 20px;
 }
+
 .detail-task .title {
   font-size: 40px;
   font-weight: bold;
-  /* margin: 16px 0; */
 }
 
 .detail-task .prio-img {
@@ -255,25 +249,25 @@ section {
 }
 
 .btn-hover:hover {
-    background-color: rgb(41, 171, 226);
-    color: white
+  background-color: rgb(41, 171, 226);
+  color: white;
 }
 
 .plus-button {
-    width: 24px;
-    height: 24px;
-    background-image: url('/assets/icons/board/plus-btn.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    border: unset;
-    cursor: pointer;
-    transition: background-image 200ms ease; /* Sanfter Übergang beim Hover */
-  }
+  width: 24px;
+  height: 24px;
+  background-image: url("/assets/icons/board/plus-btn.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: unset;
+  cursor: pointer;
+  transition: background-image 200ms ease;
+}
 
-  .plus-button:hover {
-    background-image: url('/assets/icons/board/plus-btn-hover.svg'); /* Standard-Bild */
-  }
+.plus-button:hover {
+  background-image: url("/assets/icons/board/plus-btn-hover.svg");
+}
 
 .configuration div:hover img {
   filter: invert(40%) sepia(60%) saturate(400%) hue-rotate(170deg);
@@ -299,8 +293,6 @@ section {
 }
 
 .slide-out {
-  /* position: relative;
-    display: inline-block; */
   animation: slide-out 150ms linear forwards;
 }
 
