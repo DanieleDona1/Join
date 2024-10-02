@@ -37,8 +37,8 @@ function generateHtmlTemplate(i, task, element) {
           </div>
           <div class="subtasks color-blue">Subtasks <div><!-- TODO --> TODO Subtask</div></div>
           <div class="configuration">
-            <div onclick="deleteTask('${id}')"><img src="/assets/icons/board/delete.svg" alt="delete"><span class="color-blue">Delete</span></div>
-            <div onclick="generateEditTemplate('${id}')" class="separator "><img src="/assets/icons/board/edit.svg" alt="edit"><span class="color-blue">Edit</span></div>
+            <div onclick="deleteTask(${id})"><img src="/assets/icons/board/delete.svg" alt="delete"><span class="color-blue">Delete</span></div>
+            <div onclick="generateEditTemplate(${id})" class="separator "><img src="/assets/icons/board/edit.svg" alt="edit"><span class="color-blue">Edit</span></div>
       </div>`;
   }
   

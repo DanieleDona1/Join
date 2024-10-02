@@ -98,7 +98,9 @@ function startDragging(id) {
 }
 
 function allowDrop(event) {
+  console.log('Event:', event);
   event.preventDefault();
+  event.stopPropagation();
 }
 
 function moveTo(category) {
@@ -184,7 +186,7 @@ function closeDialog() {
 }
 
 function deleteTask(id) {
-  todos = todos.filter(t => t.id != id);
+  todos = todos.filter(t => t.id !== id);
   todos.forEach((element, i) => {
     element.id = i;
   });
