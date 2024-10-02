@@ -100,20 +100,13 @@ nav a:hover {
 
 header {
   position: fixed;
-<<<<<<< HEAD
-  z-index: 500;
-=======
   z-index: 200;
->>>>>>> Dev-Daniele
   top: 0;
   left: 0;
   display: flex;
   justify-content: space-between;
   width: 100vw;
-<<<<<<< HEAD
-=======
   height: 96px;
->>>>>>> Dev-Daniele
   padding: 20px 16px;
   background-color: white;
   box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
@@ -174,19 +167,11 @@ main ol li {
 }
 
 main ol li::before {
-<<<<<<< HEAD
   content: counter(list-item) ". "; 
   position: absolute; 
   left: 0; 
   top: 0; 
-  font-size: 27px; 
-=======
-  content: counter(list-item) ". ";
-  position: absolute;
-  left: 0;
-  top: 0;
   font-size: 27px;
->>>>>>> Dev-Daniele
 }
 
 main ul {
@@ -232,15 +217,6 @@ main p {
   display: none;
 }
 
-<<<<<<< HEAD
-@media (min-width: 1025px) {
-  /* .d-none { 
-    display: flex; die klasse d-none wird in anderen Dateien verwendet daher kann sie nicht auf flex gesetzt werden
-  } */
-
-  header {
-    height: 80px;
-=======
 .overflow.hidden{
   overflow: hidden;
 }
@@ -253,7 +229,6 @@ main p {
 
   header {
     height: 96px;
->>>>>>> Dev-Daniele
     left: 232px;
     width: calc(100vw - 232px);
     max-width: calc(1920px - 232px);
