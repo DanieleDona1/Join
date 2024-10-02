@@ -224,7 +224,7 @@
   } */
 
     header {
-      height: 80px;
+      height: 96px;
       left: 232px;
       width: calc(100vw - 232px);
       max-width: calc(1920px - 232px);
