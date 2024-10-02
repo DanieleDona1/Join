@@ -259,7 +259,21 @@ section {
     color: white
 }
 
-.svg
+.plus-button {
+    width: 24px;
+    height: 24px;
+    background-image: url('/assets/icons/board/plus-btn.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: unset;
+    cursor: pointer;
+    transition: background-image 200ms ease; /* Sanfter Übergang beim Hover */
+  }
+
+  .plus-button:hover {
+    background-image: url('/assets/icons/board/plus-btn-hover.svg'); /* Standard-Bild */
+  }
 
 .configuration div:hover img {
   filter: invert(40%) sepia(60%) saturate(400%) hue-rotate(170deg);

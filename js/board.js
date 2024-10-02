@@ -137,17 +137,18 @@ function generateDetailTaskTemplate(id) {
 
 function generatePopUpAddTask(category, contentId) {
   document.getElementById('dialog').innerHTML = /*html*/`
-  <div class="pop-up-add-Task slide-in dialog-content" onclick="event.stopPropagation();>
+  <div class="pop-up-add-Task slide-in dialog-content" onclick="event.stopPropagation();">
     <div class="d-flex-sb-c">
       <h2>Add Task</h2>
       <img class="xmark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
     </div>
-    /*TODO*/ TODO add_task html and css
-  
+    <!-- TODO -->TODO add_task html and css
+    
     <button onclick="closeDialog()">Cancel</button>
     <button onclick="createTask('${category}', '${contentId}'); closeDialog();">Create Task</button>
-    /*createTask Funktion bearbeiten */
   </div>
+  <!-- createTask Funktion bearbeiten  -->
+
   `;
   openDialog();  
 }
