@@ -38,6 +38,18 @@
   align-items: center;
 }
 
+.d-flex-sb-s {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.d-flex-e-c {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
 nav {
   position: fixed;
   bottom: 0;
