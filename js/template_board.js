@@ -72,12 +72,22 @@ function generateHtmlTemplate(i, task, element) {
   }
   
   function generateEditTemplate(id) {
+    const dueDate = todos[id].dueDate;
     document.getElementById('dialog').innerHTML = /*html */`
-      <div class="detail-task dialog-content" onclick="event.stopPropagation();">
-        <div class=""><img class="xmark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark"></div>
-  
+      <div class="edit-template detail-task dialog-content" onclick="event.stopPropagation();">
+        <div class="d-flex-e-c"><img class="xmark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark"></div>
+        <label>Title:<br> <input class="title-edit" id="titleEdit" type="text" value="${todos[id].title}" placeholder="Enter a title"></label>
+        <label>Description:<textarea class="textarea-edit" rows="4" cols="50" maxlength="200" placeholder="Enter a description">${todos[id].description}</textarea></label>
+        <label>Due date:<br> <input class="due-edit" id="dueEdit" type="date" onfocus="showPicker();"></label>
+
+        <button onclick="createEditTask(${id})" class="save-edit-btn btn-hover d-flex-c-c configuration">
+          <img src="/assets/icons/board/create_task_ok.svg" alt="create-btn">
+          <img src="/assets/icons/board/check.svg" alt="check">
+        </button>
+
         <span>Edit id :  ${id}</span>
   
       </div>
     `;
   }
+

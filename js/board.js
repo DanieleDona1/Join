@@ -13,10 +13,10 @@ async function onload() {
 }
 //TODO Technical Task groß schreiben
   // addTask({
-  //   title: "Template",
+  //   title: "Optimized Version 2.2",
   //   description: "Erstellung HTML Template",
   //   dueDate: "2024-10-03",
-  //   category: "toDo",
+  //   category: "inProgress",
   //   task_category: "Technical Task",
   //   assignedTo: ["Max Mustermann", "Thomas Müller"],
   //   subtask: ["Array für subtask"],
@@ -25,9 +25,9 @@ async function onload() {
 
   // addTask({
   //   title: "Architecture",
-  //   description: "Erstellung CSS",
+  //   description: "Erstellung HTML CSS",
   //   dueDate: "2019-06-02",
-  //   category: "done",
+  //   category: "awaitFeedback",
   //   task_category: "User Story",
   //   assignedTo: ["Max Mustermann", "Thomas Müller"],
   //   subtask: ["Array für subtask"],
@@ -155,7 +155,7 @@ function updateHtml() {
   updateColumn("toDo", "toDoContent");
   updateColumn("inProgress", "inProgressContent");
   updateColumn("awaitFeedback", "awaitFeedbackContent");
-  updateColumn("done", "doneContent");  
+  updateColumn("done", "doneContent");
 }
 
 function updateColumn(category, contentId) {
@@ -310,4 +310,10 @@ function animationSlideOut() {
     },
     { once: true }
   );
+}
+
+function createEditTask(id) {
+  // TODO if required nicht leer --> getInputfields values --> todos = currentTodos --> udateHtml(); --> generateDetailTaskTemplate(id) --> editTask(); für remote 
+  // else --> message required -->
+  
 }
