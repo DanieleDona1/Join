@@ -1,7 +1,8 @@
 let todos = [];
 let currentTodos = [];
-
+let todoKeysArray = [];
 let currentDraggedElement;
+
 
 const BASE_URL =
   "https://joinremotestorage-c8226-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -9,16 +10,50 @@ const BASE_URL =
 async function onload() {
   await loadTodosArray();
   updateHtml();
-  //TODO Technical Task groß schreiben
-  // addTodo("Template", "Erstellung HTML Template", "2012-03-09", "done", "Technical Task", ["Daniel", "Fabian"], ["ein Aray für subtask"], "Medium" );
-  // addTodo("Architecture", "Erstellung CSS", "2013-01-01", "toDo", "User Story", ["Anna", "Fabian"], ["ein Aray für subtask"], "Urgent" );
-  // addTodo("Headline", "Erstellung HTML Template", "2019-06-02", "awaitFeedback", "Technical Task", ["Sabine", "Fabian"], ["ein Aray für subtask"], "Low" );
-  // addTodo("Create new function", "Erstellung HTML Template", "2014-08-03", "inProgress", "User Story", ["Lars", "Fabian"], ["ein Aray für subtask"], "Medium" );
-  // addTodo("Template function", "Erstellung HTML Template", "2015-09-04", "awaitFeedback", "Technical Task", ["Karl", "Fabian"], ["fff"], "urgent" );
-  // addTodo("Team Meeting", "Erstellung HTML Template", "2016-03-05", "toDo", "User Story", ["Peter", "Fabian"], ["ein Aray für subtask"], "Low" );
+}
+//TODO Technical Task groß schreiben
+  // addTask({
+  //   title: "Template",
+  //   description: "Erstellung HTML Template",
+  //   dueDate: "2024-10-03",
+  //   category: "toDo",
+  //   task_category: "Technical Task",
+  //   assignedTo: ["Max Mustermann", "Thomas Müller"],
+  //   subtask: ["Array für subtask"],
+  //   prio: "Medium",
+  // });
+
+  // addTask({
+  //   title: "Architecture",
+  //   description: "Erstellung CSS",
+  //   dueDate: "2019-06-02",
+  //   category: "done",
+  //   task_category: "User Story",
+  //   assignedTo: ["Max Mustermann", "Thomas Müller"],
+  //   subtask: ["Array für subtask"],
+  //   prio: "Urgent",
+  // });
+
+function getAddTaskData() {
+  const taskData = {
+    title: document.getElementById("title").innerHTML || "Untitled Task",
+    dueDate: document.getElementById("dueDate").value || "2012-03-09",
+    category: document.getElementById("category").value || "ToDo",
+    description:
+      document.getElementById("description").innerHTML ||
+      "No description provided.",
+    task_category:
+      document.getElementById("task_category").value || "Uncategorized",
+    assignedTo: document.getElementById("assignedTo").value || "Unassigned",
+    subtask: document.getElementById("subtask").value || "No subtasks",
+    prio: document.getElementById("prio").innerHTML || "Low",
+  };
+
+  addTask(taskData);
 }
 
-function addTodo(
+// Funktion zum Hinzufügen einer Aufgabe
+function addTask({
   title,
   description,
   dueDate,
@@ -26,17 +61,32 @@ function addTodo(
   task_category,
   assignedTo,
   subtask,
-  prio
-) {
+  prio,
+}) {
+  // Senden der Daten an die API
   postData("/todos", {
-    title: title,
-    description: description,
-    dueDate: dueDate,
-    category: category,
-    task_category: task_category,
-    assignedTo: assignedTo,
-    subtask: subtask,
-    prio: prio,
+    title,
+    description,
+    dueDate,
+    category,
+    task_category,
+    assignedTo,
+    subtask,
+    prio,
+  });
+}
+
+// editTask({title : "New Template",});
+
+function editTask({title, description, dueDate, assignedTo, subtask, prio,}) {
+  // Senden der Daten an die API
+  updateData("/todos/-O8HK6BtQIzTWheGzava", {
+    title,
+    description,
+    dueDate,
+    assignedTo,
+    subtask,
+    prio,
   });
 }
 
@@ -51,10 +101,28 @@ async function postData(path = "", data = {}) {
   return (responseToJson = await response.json());
 }
 
+async function deleteData(path = "", data = {}) {
+  let response = await fetch(BASE_URL + path + ".json", {
+    method: "DELETE",
+  });
+  return (responseToJson = await response.json());
+}
+
+async function updateData(path="", data={}){
+  let response = await fetch(BASE_URL + path + ".json", {
+      method: "PUT",
+      header: {
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+  });
+  return responseToJson = await response.json();
+}
+
 // fills up the firebase to todos array
 async function loadTodosArray() {
   let todosResponse = await getAllUsers("todos");
-  let todoKeysArray = Object.keys(todosResponse);
+  todoKeysArray = Object.keys(todosResponse);
 
   for (let i = 0; i < todoKeysArray.length; i++) {
     todos.push({
@@ -77,6 +145,8 @@ function updateHtml() {
   updateColumn("inProgress", "inProgressContent");
   updateColumn("awaitFeedback", "awaitFeedbackContent");
   updateColumn("done", "doneContent");
+  console.log("updateTodos: ", todos);
+  
 }
 
 function updateColumn(category, contentId) {
@@ -195,17 +265,21 @@ function closeDialog() {
 
 function deleteTask(id) {
   todos = todos.filter((t) => t.id !== id);
-  todos.forEach((element, i) => {
-    element.id = i;
-  });
+  todos.forEach((element, i) => {element.id = i;});
   currentTodos = todos;
+
   closeDialog();
   updateHtml();
+  
+  deleteData(`/todos/${todoKeysArray[id]}`);
+  let newTodoKeysArray = todoKeysArray.filter((t) => t !== todoKeysArray[id]);
+  todoKeysArray = newTodoKeysArray;
 }
 
 function searchTitleOrDescription() {
   let filterWord = document.getElementById("search").value.toLowerCase(); // Suchbegriff in Kleinbuchstaben
-  currentTodos = todos.filter((t) =>
+  currentTodos = todos.filter(
+    (t) =>
       t.title.toLowerCase().includes(filterWord) ||
       t.description.toLowerCase().includes(filterWord)
   );
