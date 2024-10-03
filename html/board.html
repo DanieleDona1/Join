@@ -14,8 +14,10 @@
     <link rel="stylesheet" href="/css/board.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <script src="/script.js" defer></script>
+    <script src="/js/board.js"></script>
+    <script src="/js/template_board.js"></script>
   </head>
-  <body class="max-width-1920">
+  <body class="max-width-1920" onload="onload();">
     <header>
       <img
         class="header-join-logo"
@@ -84,8 +86,8 @@
 
         <div class="search-add-container d-flex-se-c gap-32px">
           <div id="searchbar" class="searchbar d-flex-c-c">
-            <input
-              minlength="3"
+            <input oninput="searchTitleOrDescription()"
+              maxlength="50"
               type="search"
               id="search"
               class="search"
@@ -94,63 +96,89 @@
             <img src="/assets/icons/board/search-lupe.svg" alt="search-btn" />
           </div>
 
-          <button class="add-task d-flex-c-c">
+          <button
+            class="add-task d-flex-c-c btn-hover"
+            onclick="generatePopUpAddTask('toDo', 'toDoContent');"
+          >
             Add Task
-            <img src="/assets/icons/board/add-task-plus.svg" alt="plus" />
+            <img
+              src="/assets/icons/board/add-task-plus.svg"
+              alt="plus-general"
+            />
           </button>
         </div>
-
       </div>
 
-      
       <div class="section-container d-flex-sb-s">
         <section id="toDo" class="to-do">
-          
-          <div class="d-flex-sb-c">
+          <div class="column-title d-flex-sb-c">
             <span>to-do</span>
-            <img src="/assets/icons/board/plus button.svg" alt="plus">
+            <button
+              class="plus-button"
+              onclick="generatePopUpAddTask('toDo', 'toDoContent')"
+              aria-label="Add Task To Do"
+            ></button>
           </div>
 
-          <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, recusandae ab, possimus vero culpa explicabo, voluptatum quia optio voluptate est molestias ipsam quaerat exercitationem. Ratione laudantium ullam doloribus fugiat tenetur?</div>
-        
+          <div
+            id="toDoContent"
+            class="content"
+            ondragleave="removeHighlight('toDoContent')"
+            ondragover="allowDrop(event); highlight('toDoContent');"
+            ondrop="moveTo('toDo')"
+          ></div>
         </section>
-        
-        <section id="inProgress" class="in-progress">
-          
-          <div class="d-flex-sb-c">
-            <span>in-progress</span>
-            <img src="/assets/icons/board/plus button.svg" alt="plus">
-          </div>
 
-          <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, recusandae ab, possimus vero culpa explicabo, voluptatum quia optio voluptate est molestias ipsam quaerat exercitationem. Ratione laudantium ullam doloribus fugiat tenetur?</div>
-        
+        <section id="inProgress" class="in-progress">
+          <div class="column-title d-flex-sb-c">
+            <span>in-progress</span>
+            <button
+              class="plus-button"
+              onclick="generatePopUpAddTask('inProgress', 'inProgressContent')"
+              aria-label="Add Task inProgress"
+            ></button>
+          </div>
+          <div
+            id="inProgressContent"
+            class="content"
+            ondragleave="removeHighlight('inProgressContent')"
+            ondragover="allowDrop(event); highlight('inProgressContent');"
+            ondrop="moveTo('inProgress')"
+          ></div>
         </section>
 
         <section id="awaitFeedback" class="await-feedback">
-          
-          <div class="d-flex-sb-c">
+          <div class="column-title d-flex-sb-c">
             <span>await-feedback</span>
-            <img src="/assets/icons/board/plus button.svg" alt="plus">
+            <button
+              class="plus-button"
+              onclick="generatePopUpAddTask('awaitFeedback', 'awaitFeedbackContent')"
+              aria-label="Add Task awaitFeedback"
+            ></button>
           </div>
-
-          <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, recusandae ab, possimus vero culpa explicabo, voluptatum quia optio voluptate est molestias ipsam quaerat exercitationem. Ratione laudantium ullam doloribus fugiat tenetur?</div>
-          
+          <div
+            id="awaitFeedbackContent"
+            class="content"
+            ondragleave="removeHighlight('awaitFeedbackContent')"
+            ondragover="allowDrop(event); highlight('awaitFeedbackContent');"
+            ondrop="moveTo('awaitFeedback')"
+          ></div>
         </section>
-        
+
         <section id="done" class="done">
-          <div class="d-flex-sb-c">
+          <div class="column-title d-flex-sb-c">
             <span>done</span>
           </div>
-          <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, recusandae ab, possimus vero culpa explicabo, voluptatum quia optio voluptate est molestias ipsam quaerat exercitationem. Ratione laudantium ullam doloribus fugiat tenetur?</div>
+          <div
+          id="doneContent"
+          class="done-content"
+          ondragleave="removeHighlight('doneContent')"
+          ondragover="allowDrop(event); highlight('doneContent');"
+          ondrop="moveTo('done')"
+          ></div>
         </section>
-
-
-
       </div>
-
-
-
-
     </main>
+    <div class="dialog-bg d-none" id="dialog" onclick="closeDialog()"></div>
   </body>
 </html>

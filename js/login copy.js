@@ -1,14 +1,13 @@
-let users = [];
+let responseAsJson = {};
 
 const BASE_URL =
   "https://joinremotestorage-c8226-default-rtdb.europe-west1.firebasedatabase.app/";
 
 async function onloadFunc() {
   checkMsgUrl();
-  await loadUsersArray();
+  await onload();
 }
 
-// check url for animate text "sign up successfully"
 function checkMsgUrl() {
   const urlParams = new URLSearchParams(window.location.search);
   const msg = urlParams.get("msg");
@@ -22,61 +21,40 @@ function checkMsgUrl() {
   history.replaceState(null, "", "/html/login.html");
 }
 
-// load data save as array
-async function loadUsersArray() {
-  let usersResponse = await getAllUsers("users");
-  let userKeysArray = Object.keys(usersResponse);
-  // console.log("usersResponse ", usersResponse);
-  // console.log("userKeysArray", userKeysArray);
-  
-
-  for (let i = 0; i < userKeysArray.length; i++) {
-    users.push({
-      user: {
-        id: userKeysArray[i],
-        ...usersResponse[userKeysArray[i]],
-      },
-    });
-  };
-  console.log("users", users);
-};
-
-async function getAllUsers(path){
-  let response = await fetch(BASE_URL + path + ".json");
-  let responseAsJson = await response.json();
-  console.log("responseAsJson", responseAsJson);
-  return responseAsJson;
+async function onload() {
+  let response = await fetch(BASE_URL + ".json");
+  responseAsJson = await response.json();
+  console.log("ResponseAsJson ", responseAsJson);
 }
 
-// compare user input to firebase
 function login(event) {
   event.preventDefault();
   let email = document.getElementById("email").value;
   let password = document.getElementById("password").value;
 
-  let userName = checkUser(email, password);
+  let userkey = checkUser(email, password);
 
-  if (userName) {
-    window.location.href = `/html/summary.html?msg=${userName}`;
+  if (userkey) {
+    window.location.href = `/html/summary.html?msg=${responseAsJson.users[userkey].name}`;
   } else {
     document.getElementById("errorMsg").style.opacity = "1";
     document.getElementById("email").style.border = "1px solid red";
     document.getElementById("password").style.border = "1px solid red";
     console.log("Kein Benutzer gefunden");
   }
-};
+}
 
-//  Check User input to firebase
 function checkUser(email, password) {
-  for (let i = 0; i < users.length; i++) {
-    if (users[i].user.email == email && users[i].user.password == password) {
-      return users[i].user.name;
+  for (const key in responseAsJson.users) {
+    const user = responseAsJson.users[key];
+
+    if (user.email == email && user.password == password) {
+      return key;
     }
   }
   return null;
-};
+}
 
-// remove message email or password wrong 
 function removeErrorMsg() {
   document.getElementById("errorMsg").style.opacity = "0";
 }
@@ -112,35 +90,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // double
 function togglePasswordVisibility(passwordFieldId, visibilityImgId) {
-  let passwordField = document.getElementById(passwordFieldId);
+  let passwordField = document.getElementById(passwordFieldId);  
   let visibilityBtn = document.getElementById(visibilityImgId);
 
   if (passwordField.type === "password") {
       passwordField.type = "text";
-      visibilityBtn.src = "/assets/icons/auth/visibility.svg";
-
+      visibilityBtn.src = "/assets/img/visibility.svg";
+      
   } else {
       passwordField.type = "password";
-      visibilityBtn.src = "/assets/icons/auth/visibility_off.svg";
+      visibilityBtn.src = "/assets/img/visibility_off.svg";
   }
 }
-// double
+// double 
 function toggleVisibility(passwordFieldId, passwordLockId, visibilityBtnId) {
   const passwordField = document.getElementById(passwordFieldId);
   const passwordLock = document.getElementById(passwordLockId);
   const visibilityBtn = document.getElementById(visibilityBtnId);
-
-<<<<<<< HEAD
-function toggleVisibility(passwordFieldId, passwordLockId, visibilityBtnId) {
-  const passwordField = document.getElementById(passwordFieldId);
-  const passwordLock = document.getElementById(passwordLockId);
-  const visibilityBtn = document.getElementById(visibilityBtnId);
-=======
+  
   managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn);
 }
->>>>>>> Dev-Daniele
 
-// Mangage visibility password icons 
 function managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn) {
   passwordField.addEventListener("input", () => {
     if (passwordField.value.trim() !== "") {
