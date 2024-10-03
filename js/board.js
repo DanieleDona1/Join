@@ -76,11 +76,22 @@ function addTask({
   });
 }
 
-// editTask({title : "New Template",});
+// editTask("keys", { title: "New Template"});
+function editTask(key, { title, description, dueDate, assignedTo, subtask, prio }) {
+  // Senden der Daten an die API
+  updateData(`/todos/${key}`, {
+    title,
+    description,
+    dueDate,
+    assignedTo,
+    subtask,
+    prio,
+  });
+}
 
 function editTask({title, description, dueDate, assignedTo, subtask, prio,}) {
   // Senden der Daten an die API
-  updateData("/todos/-O8HK6BtQIzTWheGzava", {
+  updateData("/todos/keys", {
     title,
     description,
     dueDate,
@@ -93,7 +104,7 @@ function editTask({title, description, dueDate, assignedTo, subtask, prio,}) {
 async function postData(path = "", data = {}) {
   let response = await fetch(BASE_URL + path + ".json", {
     method: "POST",
-    header: {
+    headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
@@ -108,15 +119,15 @@ async function deleteData(path = "", data = {}) {
   return (responseToJson = await response.json());
 }
 
-async function updateData(path="", data={}){
+async function updateData(path = "", data = {}) {
   let response = await fetch(BASE_URL + path + ".json", {
-      method: "PUT",
-      header: {
-          "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data)
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
   });
-  return responseToJson = await response.json();
+  return await response.json();
 }
 
 // fills up the firebase to todos array
@@ -144,9 +155,7 @@ function updateHtml() {
   updateColumn("toDo", "toDoContent");
   updateColumn("inProgress", "inProgressContent");
   updateColumn("awaitFeedback", "awaitFeedbackContent");
-  updateColumn("done", "doneContent");
-  console.log("updateTodos: ", todos);
-  
+  updateColumn("done", "doneContent");  
 }
 
 function updateColumn(category, contentId) {
@@ -245,6 +254,7 @@ document.addEventListener("DOMContentLoaded", init);
 
 function openTaskDetails(id) {
   document.getElementById("dialog").innerHTML = generateDetailTaskTemplate(id);
+  generateAssignedTo(id);
   // document.body.style.overflowY = "hidden";
   openDialog();
 }

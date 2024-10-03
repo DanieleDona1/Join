@@ -33,7 +33,7 @@ function generateHtmlTemplate(i, task, element) {
           </div>
   
           <div class="d-flex-sb-c">
-            <div class="members color-blue">Assigned To: <div><!-- TODO --> TODO Add Members</div></div>
+            <div class="members color-blue">Assigned To: <!-- TODO --> TODO Kontaktlist<div id="assignedToArea${id}"></div></div>
           </div>
           <div class="subtasks color-blue">Subtasks <div><!-- TODO --> TODO Subtask</div></div>
           <div class="configuration">
@@ -41,6 +41,17 @@ function generateHtmlTemplate(i, task, element) {
             <div onclick="generateEditTemplate(${id})" class="separator "><img src="/assets/icons/board/edit.svg" alt="edit"><span class="color-blue">Edit</span></div>
       </div>`;
   }
+
+  function generateAssignedTo(id) {
+    document.getElementById(`assignedToArea${id}`).innerHTML = "";
+  for (let j = 0; j < todos[id].assignedTo.length; j++) {
+    const member = todos[id].assignedTo[j];
+    document.getElementById(`assignedToArea${id}`).innerHTML += `
+        <div>${member}</div>
+        `;
+  }
+}
+
   
   function generatePopUpAddTask(category, contentId) {
     document.getElementById('dialog').innerHTML = /*html*/`
