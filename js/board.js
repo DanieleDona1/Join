@@ -76,7 +76,7 @@ function addTask({
   });
 }
 
-// editTask("-O8HK6C1Om4__cuAx2Ry", { title: "BANANA"});
+// editTask("-O8MwcfV9U4KommG-LGU", { title: "BANANA"});
 
 function editTask(key, { title, description, dueDate, assignedTo, subtask, prio }) {
   // Senden der Daten an die API
@@ -288,6 +288,16 @@ function deleteTask(id) {
 
 function searchTitleOrDescription() {
   let filterWord = document.getElementById("search").value.toLowerCase(); // Suchbegriff in Kleinbuchstaben
+  currentTodos = todos.filter(
+    (t) =>
+      t.title.toLowerCase().includes(filterWord) ||
+      t.description.toLowerCase().includes(filterWord)
+  );
+  updateHtml();
+}
+
+function searchTitleOrDescriptionMobile() {
+  let filterWord = document.getElementById("searchMobile").value.toLowerCase(); // Suchbegriff in Kleinbuchstaben
   currentTodos = todos.filter(
     (t) =>
       t.title.toLowerCase().includes(filterWord) ||
