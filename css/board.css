@@ -111,6 +111,7 @@ section {
   color: rgb(255, 255, 255);
   border-radius: 8px;
   padding: 4px 16px;
+  width: fit-content;
 }
 
 .task .title {
@@ -128,13 +129,12 @@ section {
 }
 
 .done-content {
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
   scrollbar-width: thin;
   height: 70vh;
-}
-
-.done-content .task {
-  margin-top: 16px;
+  gap: 16px;
 }
 
 .bg-technical-task {

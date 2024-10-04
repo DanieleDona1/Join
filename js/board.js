@@ -76,22 +76,13 @@ function addTask({
   });
 }
 
-// editTask("keys", { title: "New Template"});
+editTask("-O8HK6C1Om4__cuAx2Ry", { title: "BANANA"}
+
+);
+
 function editTask(key, { title, description, dueDate, assignedTo, subtask, prio }) {
   // Senden der Daten an die API
   updateData(`/todos/${key}`, {
-    title,
-    description,
-    dueDate,
-    assignedTo,
-    subtask,
-    prio,
-  });
-}
-
-function editTask({title, description, dueDate, assignedTo, subtask, prio,}) {
-  // Senden der Daten an die API
-  updateData("/todos/keys", {
     title,
     description,
     dueDate,
@@ -121,7 +112,7 @@ async function deleteData(path = "", data = {}) {
 
 async function updateData(path = "", data = {}) {
   let response = await fetch(BASE_URL + path + ".json", {
-    method: "PUT",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
@@ -230,6 +221,10 @@ function checkAndInsertText(contentElements) {
   contentElements.forEach((element) => {
     if (element.innerHTML.trim() === "") {
       element.innerHTML = `<div class="no-task">No task to do</div>`;
+      
+      if (element.id === 'doneContent') {
+        changeTextContentDone();
+      }
     }
   });
 }
@@ -250,7 +245,14 @@ function mutationCallback(mutationsList, observer) {
   });
 }
 
+function changeTextContentDone() {
+  let parentElement  = document.getElementById('doneContent');
+  let firstChild = parentElement.children[0];
+  firstChild.textContent = "No task done";
+}
+
 document.addEventListener("DOMContentLoaded", init);
+
 
 function openTaskDetails(id) {
   document.getElementById("dialog").innerHTML = generateDetailTaskTemplate(id);
