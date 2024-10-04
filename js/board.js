@@ -286,22 +286,12 @@ function deleteTask(id) {
   todoKeysArray = newTodoKeysArray;
 }
 
-function searchTitleOrDescription() {
-  let filterWord = document.getElementById("search").value.toLowerCase(); // Suchbegriff in Kleinbuchstaben
+function searchTitleOrDescription(inputId) {
+  let filterWord = document.getElementById(inputId).value.toLowerCase(); // Suchbegriff in Kleinbuchstaben
   currentTodos = todos.filter(
     (t) =>
-      t.title.toLowerCase().includes(filterWord) ||
-      t.description.toLowerCase().includes(filterWord)
-  );
-  updateHtml();
-}
-
-function searchTitleOrDescriptionMobile() {
-  let filterWord = document.getElementById("searchMobile").value.toLowerCase(); // Suchbegriff in Kleinbuchstaben
-  currentTodos = todos.filter(
-    (t) =>
-      t.title.toLowerCase().includes(filterWord) ||
-      t.description.toLowerCase().includes(filterWord)
+      (t.title && t.title.toLowerCase().includes(filterWord)) ||
+      (t.description && t.description.toLowerCase().includes(filterWord))
   );
   updateHtml();
 }
