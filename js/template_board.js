@@ -1,9 +1,9 @@
 function generateHtmlTemplate(i, task, element) {
     return /*html*/ `
       <div class="task" draggable="true" onclick="openTaskDetails(${element['id']})" ondragstart="startDragging(${element['id']})">
-          <span class="task-category bg-${task[i].task_category
+          <div class="task-category bg-${task[i].task_category
             .replace(/\s+/g, "-")
-            .toLowerCase()}">${task[i].task_category}</span>
+            .toLowerCase()}">${task[i].task_category}</div>
           <div class="title">${task[i].title}</div>
           <div class="description">${task[i].description}</div>
           <div class="subtasks"><!-- TODO -->TODO Subtask</div>
