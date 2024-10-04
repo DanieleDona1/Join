@@ -6,7 +6,7 @@ main {
 }
 
 main h2 {
-  font-size: 56px;
+  font-size: clamp(32px, 5vw, 56px);
   margin-bottom: 0;
   margin-right: 10px;
 }
@@ -36,6 +36,25 @@ main h2 {
   padding-left: 12px;
 }
 
+.searchbar-mobile {
+  display: none;
+  border: 1px solid rgb(204, 204, 204);
+  padding: 4px 16px;
+  border-radius: 10px;
+
+  margin-top: 40px;
+  max-width: 370px;
+}
+
+.searchbar-mobile input {
+  width: 100%;
+  max-width: 300px;
+}
+
+.searchbar-mobile img {
+  border-left: 2px solid rgb(204, 204, 204);
+  padding-left: 12px;
+}
 .add-task {
   border: unset;
   padding: 10px 15px;
@@ -52,15 +71,12 @@ main h2 {
   width: 16px;
 }
 
-section {
-  max-width: 252px;
-}
-
 .section-container {
   margin-top: 40px;
   gap: 20px;
   max-width: 1350px;
-  padding: 0 16px;
+  display: flex;
+  height: 72vh;
 }
 
 .section-container section {
@@ -68,8 +84,6 @@ section {
   color: rgba(66, 82, 110, 1);
   font-weight: bold;
   font-size: 1.2rem;
-
-  height: 70vh;
 }
 
 .section-container section img {
@@ -84,13 +98,19 @@ section {
 .content {
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: thin; /* Dünne Scroll-Leiste in Firefox */
   margin-top: 12px;
   gap: 16px;
-  overflow-y: auto;
-  scrollbar-width: thin;
-
-  height: 100%;
+  height: 68vh;
 }
+
+.content::-webkit-scrollbar-thumb {
+  background-color: rgb(41, 171, 226); /* Farbe des Scrollbalkens (Thumb) */
+  border-radius: 10px;
+}
+
+
 
 .drag-area-highlight {
   /* background-color: rgb(246, 247, 248); */
@@ -98,11 +118,12 @@ section {
 }
 
 .task {
+  min-width: 252px;
+  min-height: 225px;
   cursor: pointer;
   background-color: white;
   padding: 16px;
-  border-radius: 16px;
-  max-width: 252px;
+  border-radius: 24px;
   font-size: 1rem;
   font-weight: 400;
 }
@@ -126,15 +147,6 @@ section {
 
 .task .subtasks {
   margin: 20px 0;
-}
-
-.done-content {
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  height: 70vh;
-  gap: 16px;
 }
 
 .bg-technical-task {
@@ -321,7 +333,7 @@ section {
 }
 
 .edit-template input:focus,
-.edit-template textarea:focus, 
+.edit-template textarea:focus,
 .edit-template due-date:focus {
   outline: none;
   border: 2px solid rgba(41, 171, 226, 1);
@@ -332,7 +344,6 @@ section {
 .due-date {
   margin-top: 8px;
 }
-
 
 .edit-template textarea {
   display: flex;
@@ -371,4 +382,69 @@ input[type="date"] {
 
 input[type="date"]::-webkit-calendar-picker-indicator {
   margin-left: 220px;
+}
+
+@media screen and (min-width: 1921px) {
+}
+
+@media screen and (min-width: 1441px) and (max-width: 1920px) {
+}
+@media screen and (min-width: 1281px) and (max-width: 1440px) {
+  main {
+    padding-left: 32px;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .section-container {
+    /* display: flex; */
+    flex-direction: column;
+    height: auto;
+  }
+  .content {
+    flex-direction: row;
+    height: auto;
+    padding-bottom: 10px;
+  }
+} 
+
+@media screen and (min-width: 721px) and (max-width: 1024px) {
+  main {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+  
+}
+
+@media screen and (max-width: 720px) {
+  main {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+  .board-header {
+    align-items: flex-start;
+  }
+  .section-container {
+    margin-top: 20px;
+  }
+  .searchbar {
+    display: none;
+  }
+  .searchbar-mobile {
+    display: flex;
+  }
+  .plus-button {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  main {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+  .content {
+  scrollbar-color: rgb(41, 171, 226) transparent;
+  }
 }

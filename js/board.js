@@ -13,21 +13,21 @@ async function onload() {
 }
 //TODO Technical Task groß schreiben
   // addTask({
-  //   title: "Optimized Version 2.2",
-  //   description: "Erstellung HTML Template",
+  //   title: "BANANA",
+  //   description: "RAM",
   //   dueDate: "2024-10-03",
   //   category: "inProgress",
   //   task_category: "Technical Task",
   //   assignedTo: ["Max Mustermann", "Thomas Müller"],
   //   subtask: ["Array für subtask"],
-  //   prio: "Medium",
+  //   prio: "Low",
   // });
 
   // addTask({
-  //   title: "Architecture",
+  //   title: "Verion 2.0",
   //   description: "Erstellung HTML CSS",
   //   dueDate: "2019-06-02",
-  //   category: "awaitFeedback",
+  //   category: "toDo",
   //   task_category: "User Story",
   //   assignedTo: ["Max Mustermann", "Thomas Müller"],
   //   subtask: ["Array für subtask"],
@@ -76,9 +76,7 @@ function addTask({
   });
 }
 
-editTask("-O8HK6C1Om4__cuAx2Ry", { title: "BANANA"}
-
-);
+// editTask("-O8HK6C1Om4__cuAx2Ry", { title: "BANANA"});
 
 function editTask(key, { title, description, dueDate, assignedTo, subtask, prio }) {
   // Senden der Daten an die API
