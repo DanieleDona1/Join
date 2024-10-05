@@ -33,9 +33,9 @@ a {
   background-color: rgb(246, 247, 248);
   animation: moveToCorner 1000ms linear forwards;
   width: 40px;
-    height: 50px;
-    top: 30px;
-    left: 30px;
+  height: 50px;
+  top: 30px;
+  left: 30px;
 }
 
 @keyframes moveToCorner {
@@ -420,7 +420,7 @@ label span {
 
 .navbar-item p {
   color: rgb(205, 205, 205);
-  font-family: "open-sans";
+  font-family: 'open-sans';
   font-weight: 400;
   font-size: 14px;
 }
@@ -433,27 +433,22 @@ label span {
 }
 
 @media screen and (min-width: 1921px) {
-  .section_pad{
-      padding: 64px max(160px, calc(50% - 960px));
+  .section_pad {
+    padding: 64px max(160px, calc(50% - 960px));
   }
 
   .section-gap {
-      gap: 64px;
+    gap: 64px;
   }
-} 
-
+}
 
 @media screen and (min-width: 1441px) and (max-width: 1920px) {
- 
 }
 
 @media screen and (min-width: 1025px) and (max-width: 1440px) {
-
 }
 
 @media screen and (min-width: 721px) and (max-width: 1024px) {
-  
-  
 }
 
 @media screen and (min-width: 481px) and (max-width: 720px) {
