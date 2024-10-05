@@ -18,7 +18,7 @@ async function onload() {
   //   dueDate: "2024-10-03",
   //   category: "inProgress",
   //   task_category: "Technical Task",
-  //   assignedTo: ["Max Mustermann", "Thomas Müller"],
+  //   assignedTo: ["Test", "Test234"],
   //   subtask: ["Array für subtask"],
   //   prio: "Low",
   // });
@@ -76,6 +76,11 @@ function addTask({
   });
 }
 
+function testFunctionUpdateArray() { 
+  editTask("-O8MxVcXTeF25AhrVK--", { subtask: todos[6].assignedTo });
+}
+
+// editTask("-O8MwcfV9U4KommG-LGU", {todos[id].subtask});
 // editTask("-O8MwcfV9U4KommG-LGU", { title: "BANANA"});
 
 function editTask(key, { title, description, dueDate, assignedTo, subtask, prio }) {
@@ -145,6 +150,8 @@ function updateHtml() {
   updateColumn("inProgress", "inProgressContent");
   updateColumn("awaitFeedback", "awaitFeedbackContent");
   updateColumn("done", "doneContent");
+
+  testFunctionUpdateArray();
 }
 
 function updateColumn(category, contentId) {
@@ -287,7 +294,9 @@ function deleteTask(id) {
 }
 
 function searchTitleOrDescription(inputId) {
-  let filterWord = document.getElementById(inputId).value.toLowerCase(); // Suchbegriff in Kleinbuchstaben
+  let filterWord = document.getElementById(inputId).value.trim().toLowerCase();
+  console.log(filterWord);
+  
   currentTodos = todos.filter(
     (t) =>
       (t.title && t.title.toLowerCase().includes(filterWord)) ||
