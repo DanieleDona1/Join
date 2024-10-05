@@ -148,7 +148,7 @@ function managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBt
 
 document.addEventListener("DOMContentLoaded", () => {
   toggleVisibility("password", "passwordLock", "visibilityImg");
-});
+})
 
 function guestLoginRedirect() {
   // TODO animation  
