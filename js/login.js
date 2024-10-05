@@ -130,15 +130,8 @@ function toggleVisibility(passwordFieldId, passwordLockId, visibilityBtnId) {
   const passwordLock = document.getElementById(passwordLockId);
   const visibilityBtn = document.getElementById(visibilityBtnId);
 
-<<<<<<< HEAD
-function toggleVisibility(passwordFieldId, passwordLockId, visibilityBtnId) {
-  const passwordField = document.getElementById(passwordFieldId);
-  const passwordLock = document.getElementById(passwordLockId);
-  const visibilityBtn = document.getElementById(visibilityBtnId);
-=======
   managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn);
 }
->>>>>>> Dev-Daniele
 
 // Mangage visibility password icons 
 function managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn) {
@@ -155,4 +148,4 @@ function managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBt
 
 document.addEventListener("DOMContentLoaded", () => {
   toggleVisibility("password", "passwordLock", "visibilityImg");
-});
+})
