@@ -289,22 +289,28 @@ footer a:hover {
 }
 
 .animated-text {
+  font-size: 1.3rem;
+  font-weight: bold;
   padding: 10px 15px;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(42, 54, 71, 1);
   border-radius: 10px;
-  animation: moveAndFade 2s linear 500ms both;
+  animation: moveAndFade 3s linear 200ms both;
   color: white;
 }
 
 @keyframes moveAndFade {
   0% {
     bottom: -100px;
+    opacity: 0;
+  }
+  40% {
+    bottom: 50%;
     opacity: 1;
   }
-  10% {
+  70% {
     bottom: 50%;
     opacity: 1;
   }
