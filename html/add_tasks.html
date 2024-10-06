@@ -91,12 +91,27 @@
             type="text"
           ></textarea>
           <p>Assigned to</p>
-          <input placeholder="Select contacts to assign" type="text" />
+          <div class="custom-select">
+            <div class="select-selected">Select contacts to assign</div>
+            <div class="select-items select-hide">
+              <label>Maik Antonatus <input type="checkbox" value="A"></label>
+              <label>Sven Ritter <input type="checkbox" value="B"></label>
+              <label>Tina Sturm <input type="checkbox" value="C"></label>
+            </div>
+          </div>
         </section>
         <div class="divider"></div>
         <section>
           <p>Due date<span>*</span></p>
-          <input type="text" id="dateInput" placeholder="dd/mm/yyyy" oninput="formatDate(this)"/>
+          <div class="input-date">
+            <input
+              type="text"
+              id="dateInput"
+              placeholder="dd/mm/yyyy"
+              oninput="formatDate(this)"
+            />
+            <img src="/assets/icons/add_tasks/calendar.svg" alt="calendar icon" class="icon">
+          </div>
           <p>Prio</p>
           <div class="button-container">
             <button>
@@ -118,8 +133,8 @@
               </div>
               <div class="select-option" data-value="category2">User Story</div>
             </div>
-            <p>Subtasks</p>
           </div>
+          <p>Subtasks</p>
         </section>
       </form>
     </main>

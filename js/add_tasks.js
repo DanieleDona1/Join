@@ -1,29 +1,62 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const selected = document.querySelector('.select-selected');
-    const optionsContainer = document.querySelector('.select-items');
+document.addEventListener('DOMContentLoaded', function initDropdowns() {
+  const dropdowns = document.querySelectorAll('.custom-select'); // Erfasse alle Dropdown-Menüs
 
-    selected.addEventListener('click', function () {
-        optionsContainer.classList.toggle('select-hide');
-        selected.parentElement.classList.toggle('open'); // Klasse für die Öffnung hinzufügen
-    });
+  dropdowns.forEach(dropdown => {
+    const selected = dropdown.querySelector('.select-selected');
+    const optionsContainer = dropdown.querySelector('.select-items');
+    const options = dropdown.querySelectorAll('.select-option');
 
-    const options = document.querySelectorAll('.select-option');
-    options.forEach(option => {
-        option.addEventListener('click', function () {
-            selected.textContent = this.textContent; // Auswahl aktualisieren
-            optionsContainer.classList.add('select-hide'); // Dropdown schließen
-            selected.parentElement.classList.remove('open'); // Klasse entfernen, wenn geschlossen
-        });
-    });
-
-    // Schließe das Dropdown, wenn außerhalb geklickt wird
-    document.addEventListener('click', function (e) {
-        if (!selected.contains(e.target) && !optionsContainer.contains(e.target)) {
-            optionsContainer.classList.add('select-hide');
-            selected.parentElement.classList.remove('open'); // Klasse entfernen, wenn geschlossen
-        }
-    });
+    setupDropdownToggle(selected, optionsContainer);
+    setupOptionSelection(options, selected, optionsContainer);
+    setupClickOutside(dropdown, selected, optionsContainer);
+  });
 });
+
+// Funktion zum Öffnen/Schließen des Dropdowns
+function setupDropdownToggle(selected, optionsContainer) {
+  selected.addEventListener('click', function (e) {
+    e.stopPropagation(); // Verhindere, dass der Klick sofort das Dropdown schließt
+    toggleDropdown(selected, optionsContainer);
+  });
+}
+
+// Funktion zum Aktualisieren der Auswahl und Schließen des Dropdowns
+function setupOptionSelection(options, selected, optionsContainer) {
+  options.forEach(option => {
+    option.addEventListener('click', function () {
+      selectOption(option, selected, optionsContainer);
+    });
+  });
+}
+
+// Funktion zum Schließen des Dropdowns, wenn außerhalb geklickt wird
+function setupClickOutside(dropdown, selected, optionsContainer) {
+  document.addEventListener('click', function (e) {
+    if (!dropdown.contains(e.target)) { // Stelle sicher, dass der Klick außerhalb des Dropdowns war
+      hideDropdown(optionsContainer, selected);
+    }
+  });
+}
+
+// Funktion zum Ein-/Ausblenden des Dropdowns
+function toggleDropdown(selected, optionsContainer) {
+  optionsContainer.classList.toggle('select-hide');
+  selected.parentElement.classList.toggle('open');
+}
+
+// Funktion zum Aktualisieren des ausgewählten Textes und Schließen des Dropdowns
+function selectOption(option, selected, optionsContainer) {
+  selected.textContent = option.textContent;
+  hideDropdown(optionsContainer, selected);
+}
+
+// Funktion zum Schließen des Dropdowns
+function hideDropdown(optionsContainer, selected) {
+  optionsContainer.classList.add('select-hide');
+  selected.parentElement.classList.remove('open');
+}
+
+
 
 function formatDate(input) {
     let value = cleanInput(input.value);
@@ -60,3 +93,7 @@ function formatDate(input) {
     if (year) output += '/' + year;
     return output;
   }
+
+  
+
+  

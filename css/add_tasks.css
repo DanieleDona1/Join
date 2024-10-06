@@ -13,20 +13,21 @@ section {
 
 ::placeholder {
   font-size: 20px;
-  color: rgb(209,209,209);
+  color: rgb(209, 209, 209);
 }
 
 .custom-select {
   position: relative;
-  display: inline-block;
-  width: 100%; /* Breite des Dropdowns */  
+  width: 100%; /* Breite des Dropdowns */
   height: 48px;
+  margin-bottom: 28px;
 }
 
 .select-selected {
+  position: relative;
+  z-index: 2;
   background-color: #fff; /* Hintergrundfarbe des ausgewählten Wertes */
   padding: 10px;
-  margin-bottom: 28px;
   font-size: 20px;
   cursor: pointer;
   border: 1px solid rgb(204, 204, 204);
@@ -36,9 +37,8 @@ section {
 .select-items {
   position: absolute;
   background-color: #fff;
-  border: 1px solid #ccc;
-  z-index: 99;
-  top: calc(100% - 5px);
+  border: 1px solid rgb(204, 204, 204);
+  top: calc(100% - 4px);
   width: 100%; /* Breite anpassen */
   display: none; /* Standardmäßig ausblenden */
 }
@@ -56,13 +56,14 @@ section {
 
 /* Dropdown Pfeil */
 .custom-select::after {
-  content: '▼'; /* Dropdown-Pfeil */
+  content: "▼"; /* Dropdown-Pfeil */
   position: absolute;
   right: 20px;
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none; /* Verhindert, dass der Pfeil klickbar ist */
   font-size: 12px;
+  z-index: 3;
 }
 
 .custom-select.open::after {
@@ -74,12 +75,11 @@ section {
   display: block; /* Dropdown anzeigen */
 }
 
-
 section button {
   height: 56px;
   width: 40%;
   margin-bottom: 28px;
-  border: 1px solid rgb(238,238,238);
+  border: 1px solid rgb(238, 238, 238);
   border-radius: 6px;
   background-color: white;
   font-size: 20px;
@@ -97,7 +97,8 @@ form {
   font-size: 20px;
 }
 
-input {
+input,
+input[type="text"] {
   border: 1px solid rgb(204, 204, 204);
   padding: 12px 21px 12px 21px;
   border-radius: 6px;
@@ -118,9 +119,16 @@ input {
 }
 
 .resizable-textarea:focus,
-input:focus {
+input:focus,
+input[type="text"]:focus {
   border-color: rgb(41, 171, 226); /* Randfarbe ändern bei Fokus */
   outline: none; /* Entfernt den Standard-Fokus-Rahmen */
+  border-width: 2px;
+}
+
+.custom-select.open .select-selected {
+  border-color: rgb(41, 171, 226); /* Blauer Rahmen bei geöffnetem Dropdown */
+  border-width: 2px;
 }
 
 .divider {
@@ -128,4 +136,35 @@ input:focus {
   width: 1.5px;
   background-color: rgb(214, 214, 214); /* Farbe der Trennlinie */
   margin: 0 48px;
+}
+
+.input-date {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+
+.input-date .icon {
+  position: absolute;
+  right: 20px;
+  top: 33%;
+  transform: translateY(-50%);
+  height: 24px;
+  width: 24px;
+  pointer-events: none; /* Verhindert, dass das Bild interaktiv wird */
+}
+
+input[type="checkbox"] {
+cursor: pointer;
+width: 24px;
+height: 24px;
+margin-bottom: 0;
+}
+
+label {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
