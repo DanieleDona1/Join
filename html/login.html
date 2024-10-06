@@ -13,7 +13,13 @@
   </head>
   <body onload="onloadFunc();">
     <div class="wrapper max-width-1920">
-      <a href="/html/login.html"><img class="logo-animation" id="logoAnimation" src="/assets/icons/auth/Logo.svg" alt="logo" /></a>
+      <a href="/html/login.html"
+        ><img
+          class="logo-animation"
+          id="logoAnimation"
+          src="/assets/icons/auth/logo.svg"
+          alt="logo"
+      /></a>
 
       <div class="header-btn-container">
         <button>Not a Join user?</button>
@@ -47,7 +53,12 @@
 
             <div class="entry-btn-container" id="btnentryContainer">
               <button type="submit" class="entry-btn">Log in</button>
-              <a href="summary.html"><button type="button" id="btnGuestentry" class="btn-guest-entry">Guest Log in</button> </a>
+                <button onclick="guestLoginRedirect()"
+                  type="button"
+                  id="btnGuestentry"
+                  class="btn-guest-entry">
+                  Guest Log in
+                </button>
             </div>
           </form>
         </div>

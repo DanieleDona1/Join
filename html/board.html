@@ -88,14 +88,14 @@
           <div>
             <div id="searchbar" class="searchbar d-flex-c-c">
               <input
-                oninput="searchTitleOrDescription()"
+                oninput="searchTitleOrDescription('search')"
                 maxlength="50"
                 type="search"
                 id="search"
                 class="search"
                 placeholder="Find Task"
               />
-              <img src="/assets/icons/board/search-lupe.svg" alt="search-btn" />
+              <img src="/assets/icons/board/search_lupe.svg" alt="search-btn" />
             </div>
           </div>
 
@@ -107,22 +107,23 @@
           >
             Add Task
             <img
-              src="/assets/icons/board/add-task-plus.svg"
+              src="/assets/icons/board/add_task_plus.svg"
               alt="plus-general"
             />
           </button>
         </div>
       </div>
-      <div id="searchbar" class="searchbar-mobile d-flex-c-c">
+
+      <div id="searchbarMobile" class="searchbar-mobile d-flex-c-c">
         <input
-        oninput="searchTitleOrDescription()"
+        oninput="searchTitleOrDescription('searchMobile')"
         maxlength="50"
         type="search"
-        id="search"
+        id="searchMobile"
         class="search"
         placeholder="Find Task"
         />
-        <img src="/assets/icons/board/search-lupe.svg" alt="search-btn" />
+        <img src="/assets/icons/board/search_lupe.svg" alt="search-btn" />
       </div>
 
       <div class="section-container">

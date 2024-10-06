@@ -16,7 +16,7 @@ function checkMsgUrl() {
     document.getElementById('animatedText').innerHTML = msg;
     setTimeout(showDialog, 0.5);
   } else {
-    document.getElementById('animatedText').style.display = 'none';
+    document.getElementById('animatedText').style.display = '';
   }
   history.replaceState(null, '', '/html/login.html');
 }
@@ -72,6 +72,16 @@ function checkUser(email, password) {
     }
   }
   return null;
+}
+
+function guestLoginRedirect() {
+  let animatedElement = document.getElementById('animatedText');
+  document.getElementById('dialogBg').style.display = 'flex';
+  animatedElement.innerHTML = 'You successfully logged in as a guest!';
+  setTimeout(function () {
+    document.getElementById('dialogBg').style.display = 'none';
+    window.location.href = 'summary.html?msg=guest';
+  }, 3000);
 }
 
 // remove message email or password wrong

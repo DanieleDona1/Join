@@ -16,7 +16,7 @@ async function onload() {
 //   dueDate: "2024-10-03",
 //   category: "inProgress",
 //   task_category: "Technical Task",
-//   assignedTo: ["Max Mustermann", "Thomas Müller"],
+//   assignedTo: ["Test", "Test234"],
 //   subtask: ["Array für subtask"],
 //   prio: "Low",
 // });
@@ -32,28 +32,27 @@ async function onload() {
 //   prio: "Urgent",
 // });
 
-function getAddTaskData() {
-  const taskData = {
-    title: document.getElementById('title').innerHTML || 'Untitled Task',
-    dueDate: document.getElementById('dueDate').value || '2012-03-09',
-    category: document.getElementById('category').value || 'ToDo',
-    description: document.getElementById('description').innerHTML || 'No description provided.',
-    task_category: document.getElementById('task_category').value || 'Uncategorized',
-    assignedTo: document.getElementById('assignedTo').value || 'Unassigned',
-    subtask: document.getElementById('subtask').value || 'No subtasks',
-    prio: document.getElementById('prio').innerHTML || 'Low',
-  };
-
-  addTask(taskData);
-}
-
 // Funktion zum Hinzufügen einer Aufgabe
-function addTask({ title, description, dueDate, category, task_category, assignedTo, subtask, prio }) {
-  // Senden der Daten an die API
-  postData('/todos', { title, description, dueDate, category, task_category, assignedTo, subtask, prio });
+async function addTask({ title, description, dueDate, category, task_category, assignedTo, subtask, prio }) {
+  await postData('/todos', {
+    title,
+    description,
+    dueDate,
+    category,
+    task_category,
+    assignedTo,
+    subtask,
+    prio,
+  });
 }
 
-// editTask("-O8HK6C1Om4__cuAx2Ry", { title: "BANANA"});
+function testFunctionUpdateArray() {
+  // TODO Delete Function
+  editTask('-O8MxVcXTeF25AhrVK--', { subtask: todos[6].assignedTo });
+}
+
+// editTask("-O8MwcfV9U4KommG-LGU", {todos[id].subtask});
+// editTask("-O8MwcfV9U4KommG-LGU", { title: "BANANA"});
 
 function editTask(key, { title, description, dueDate, assignedTo, subtask, prio }) {
   // Senden der Daten an die API
@@ -68,6 +67,8 @@ async function postData(path = '', data = {}) {
     },
     body: JSON.stringify(data),
   });
+  console.log('in post');
+  
   return (responseToJson = await response.json());
 }
 
@@ -89,21 +90,23 @@ async function updateData(path = '', data = {}) {
   return await response.json();
 }
 
-// fills up the firebase to todos array
 async function loadTodosArray() {
   let todosResponse = await getAllUsers('todos');
-  todoKeysArray = Object.keys(todosResponse);
+  if (todosResponse) {
+    todoKeysArray = Object.keys(todosResponse);
 
-  for (let i = 0; i < todoKeysArray.length; i++) {
-    todos.push({
-      id: i, //todoKeysArray[i]
-      ...todosResponse[todoKeysArray[i]],
-    });
+    for (let i = 0; i < todoKeysArray.length; i++) {
+      todos.push({
+        id: i,
+        ...todosResponse[todoKeysArray[i]],
+      });
+    }
+    currentTodos = todos;
+    console.log('todos', todos);
+  } else {
+    console.log('No todos found, Database is empty');
   }
-  currentTodos = todos;
-  console.log('todos', todos);
 }
-
 async function getAllUsers(path) {
   let response = await fetch(BASE_URL + path + '.json');
   let responseAsJson = await response.json();
@@ -129,9 +132,40 @@ function updateColumn(category, contentId) {
   }
 }
 
-function createTask(category, contentId) {
-  //Neue Funktion getAllDatadocumentElementById TITLE, DESCRIPTION ASIGNEDTO, ... Input Daten in todos.push() oder firebase auch(Funktion vorhanden)
+async function createTask(category, contentId) {
+  const userInputData = getUserAddTaskData();
+  await addTask(userInputData);
+  await loadTodosArray();
   updateColumn(category, contentId);
+}
+
+function getUserAddTaskData() {
+  return {
+    title: document.getElementById('title') || 'Untitled Task',
+    dueDate: document.getElementById('dueDate') || '2012-03-09',
+    category: 'toDo',
+    description: document.getElementById('description') || 'No description provided.',
+    task_category: document.getElementById('task_category') || 'Uncategorized',
+    assignedTo: document.getElementById('assignedTo') || ['Thomas', 'Müller'] || 'Unassigned',
+    subtask: document.getElementById('subtask') || ['First Subtask', 'Second Subtask'] || 'No subtasks',
+    prio: document.getElementById('prio') || 'Low',
+  };
+}
+
+function convertArraytoObject(arr) {
+  if (Array.isArray(arr)) {
+    let myObject = {};
+    arr.forEach((member, index) => {
+      myObject[`member${index}`] = member;
+    });
+    return myObject;
+  }
+}
+
+function convertObjectToArray(obj) {
+  if (typeof obj === 'object' && !Array.isArray(obj)) {
+    return Object.values(obj);
+  }
 }
 
 function startDragging(id) {
@@ -238,6 +272,7 @@ function closeDialog() {
     currentTodos = todos;
     updateHtml();
   }
+  currentTodos = todos;
 }
 
 function deleteTask(id) {
@@ -255,9 +290,11 @@ function deleteTask(id) {
   todoKeysArray = newTodoKeysArray;
 }
 
-function searchTitleOrDescription() {
-  let filterWord = document.getElementById('search').value.toLowerCase(); // Suchbegriff in Kleinbuchstaben
-  currentTodos = todos.filter((t) => t.title.toLowerCase().includes(filterWord) || t.description.toLowerCase().includes(filterWord));
+function searchTitleOrDescription(inputId) {
+  let filterWord = document.getElementById(inputId).value.trim().toLowerCase();
+  console.log(filterWord);
+
+  currentTodos = todos.filter((t) => (t.title && t.title.toLowerCase().includes(filterWord)) || (t.description && t.description.toLowerCase().includes(filterWord)));
   updateHtml();
 }
 
