@@ -65,8 +65,6 @@ function generatePopUpAddTask(category, contentId) {
       <button onclick="closeDialog()">Cancel</button>
       <button onclick="createTask('${category}', '${contentId}'); closeDialog();">Create Task</button>
     </div>
-      <!-- Funktion createTask bearbeiten  -->
-  
     `;
   openDialog();
 }
