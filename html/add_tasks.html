@@ -1,68 +1,127 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Tasks</title>
-    <link rel="icon" type="image/png" href="/assets/icons/favicons/favicon_light.png" id="favicon">
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/icons/favicons/favicon_light.png"
+      id="favicon"
+    />
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/add_tasks.css" />
     <script src="/script.js" defer></script>
-</head>
-<body class="max-width-1920">
-  <header>
-    <img
-      class="header-join-logo"
-      src="/assets/icons/header/joinHeaderMobile.svg"
-      alt="logo"
-    />
-    <p class="d-none">Kanban Project Management Tool</p>
-    <div class="header-rightside-container d-none">
-      <a href="help.html">
-        <img
-        class="header-help-icon d-none"
-        src="/assets/icons/header/help.svg"
-        alt="help"
+    <script src="/js/add_tasks.js" defer></script>
+  </head>
+  <body class="max-width-1920">
+    <header>
+      <img
+        class="header-join-logo"
+        src="/assets/icons/header/joinHeaderMobile.svg"
+        alt="logo"
       />
-      </a>
-      <span class="header-initials">JV</span>
-    </div>
-  </header>
-
-  <nav>
-    <div class="navbar-join-icon-container d-none">
-      <img src="/assets/icons/navbar/navbar_join_icon.svg" alt="" />
-    </div>
-    <div class="navbar-container-bottom">
-      <div class="navbar-item-container">
-        <a href="summary.html" class="navbar-item" data-page="summary">
-          <img src="/assets/icons/navbar/summary_Icon.svg" alt="Summary Icon" />
-          <p>Summary</p>
+      <p class="d-none">Kanban Project Management Tool</p>
+      <div class="header-rightside-container d-none">
+        <a href="help.html">
+          <img
+            class="header-help-icon d-none"
+            src="/assets/icons/header/help.svg"
+            alt="help"
+          />
         </a>
-        <a href="board.html" class="navbar-item" data-page="board">
-          <img src="/assets/icons/navbar/board_icon.svg" alt="Board Icon" />
-          <p>Board</p>
-        </a>
-        <a href="add_tasks.html" class="navbar-item" data-page="add_tasks">
-          <img src="/assets/icons/navbar/add_tasks.svg" alt="Add Tasks Icon" />
-          <p>Add Tasks</p>
-        </a>
-        <a href="contact.html" class="navbar-item" data-page="contacts">
-          <img src="/assets/icons/navbar/contacts_icon.svg" alt="Contacts Icon" />
-          <p>Contacts</p>
-        </a>
+        <span class="header-initials">JV</span>
       </div>
-      <div class="navbar-disclaimer-links-container d-none">
-        <a href="/html/privacy_policy.html" data-page="privacy_policy"
-          >Privacy Policy</a
-        >
-        <a href="/html/legal_notice.html" data-page="legal_notice"
-          >Legal Notice</a
-        >
-      </div>
-    </div>
-  </nav>
+    </header>
 
-      <main></main>
-</body>
+    <nav>
+      <div class="navbar-join-icon-container d-none">
+        <img src="/assets/icons/navbar/navbar_join_icon.svg" alt="" />
+      </div>
+      <div class="navbar-container-bottom">
+        <div class="navbar-item-container">
+          <a href="summary.html" class="navbar-item" data-page="summary">
+            <img
+              src="/assets/icons/navbar/summary_Icon.svg"
+              alt="Summary Icon"
+            />
+            <p>Summary</p>
+          </a>
+          <a href="board.html" class="navbar-item" data-page="board">
+            <img src="/assets/icons/navbar/board_icon.svg" alt="Board Icon" />
+            <p>Board</p>
+          </a>
+          <a href="add_tasks.html" class="navbar-item" data-page="add_tasks">
+            <img
+              src="/assets/icons/navbar/add_tasks.svg"
+              alt="Add Tasks Icon"
+            />
+            <p>Add Tasks</p>
+          </a>
+          <a href="contact.html" class="navbar-item" data-page="contacts">
+            <img
+              src="/assets/icons/navbar/contacts_icon.svg"
+              alt="Contacts Icon"
+            />
+            <p>Contacts</p>
+          </a>
+        </div>
+        <div class="navbar-disclaimer-links-container d-none">
+          <a href="/html/privacy_policy.html" data-page="privacy_policy"
+            >Privacy Policy</a
+          >
+          <a href="/html/legal_notice.html" data-page="legal_notice"
+            >Legal Notice</a
+          >
+        </div>
+      </div>
+    </nav>
+    <main>
+      <h1>Add Task</h1>
+      <form>
+        <section>
+          <p>Title<span>*</span></p>
+          <input placeholder="Enter a title" type="text" />
+          <p>Description</p>
+          <textarea
+            class="resizable-textarea"
+            placeholder="Enter a Description"
+            type="text"
+          ></textarea>
+          <p>Assigned to</p>
+          <input placeholder="Select contacts to assign" type="text" />
+        </section>
+        <div class="divider"></div>
+        <section>
+          <p>Due date<span>*</span></p>
+          <input type="text" id="dateInput" placeholder="dd/mm/yyyy" oninput="formatDate(this)"/>
+          <p>Prio</p>
+          <div class="button-container">
+            <button>
+              Urgent <img src="/assets/icons/add_tasks/urgent.svg" alt="" />
+            </button>
+            <button>
+              Medium <img src="/assets/icons/add_tasks/medium.svg" alt="" />
+            </button>
+            <button>
+              Low <img src="/assets/icons/add_tasks/low.svg" alt="" />
+            </button>
+          </div>
+          <p>Category<span>*</span></p>
+          <div class="custom-select">
+            <div class="select-selected">Select task category</div>
+            <div class="select-items select-hide">
+              <div class="select-option" data-value="category1">
+                Technical Task
+              </div>
+              <div class="select-option" data-value="category2">User Story</div>
+            </div>
+            <p>Subtasks</p>
+          </div>
+        </section>
+      </form>
+    </main>
+  </body>
 </html>

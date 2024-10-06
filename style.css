@@ -154,9 +154,9 @@ header img {
 
 main {
   position: relative;
-  top: 80px;
+  top: 96px;
   bottom: 80px;
-  height: calc(100vh - 160px);
+  height: calc(100vh - 96px);
   padding: 48px 16px 0;
   background-color: rgb(246, 247, 248);
   overflow: auto;
@@ -283,7 +283,7 @@ main p {
     width: auto;
     display: flex;
     justify-content: center;
-    padding-bottom: 70px;
+    padding-bottom: 100px;
   }
 
   .navbar-join-icon-container img {
@@ -324,10 +324,11 @@ main p {
   main {
     left: 232px;
     bottom: 0;
-    min-height: calc(100vh - 80px);
-    max-width: calc(100% - 232px);
+    min-height: calc(100vh - 96px);
+    width: calc(100vw - 232px);
+    max-width: calc(1920px - 232px);
     padding-left: 96px;
-    padding-top: 126px;
+    padding-top: 100px;
     padding-right: 133px;
   }
 

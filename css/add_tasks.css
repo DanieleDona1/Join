@@ -1,0 +1,131 @@
+span {
+  color: rgb(255, 129, 144);
+}
+
+section p {
+  margin-bottom: 8px;
+  font-size: 20px;
+}
+
+section {
+  width: 100%;
+}
+
+::placeholder {
+  font-size: 20px;
+  color: rgb(209,209,209);
+}
+
+.custom-select {
+  position: relative;
+  display: inline-block;
+  width: 100%; /* Breite des Dropdowns */  
+  height: 48px;
+}
+
+.select-selected {
+  background-color: #fff; /* Hintergrundfarbe des ausgewählten Wertes */
+  padding: 10px;
+  margin-bottom: 28px;
+  font-size: 20px;
+  cursor: pointer;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 6px;
+}
+
+.select-items {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  z-index: 99;
+  top: calc(100% - 5px);
+  width: 100%; /* Breite anpassen */
+  display: none; /* Standardmäßig ausblenden */
+}
+
+.select-option {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Hover-Effekt für Optionen */
+.select-option:hover {
+  background-color: #f0f0f0; /* Hintergrundfarbe beim Hover */
+}
+
+/* Dropdown Pfeil */
+.custom-select::after {
+  content: '▼'; /* Dropdown-Pfeil */
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* Verhindert, dass der Pfeil klickbar ist */
+  font-size: 12px;
+}
+
+.custom-select.open::after {
+  transform: translateY(-50%) rotate(180deg); /* Pfeil um 180 Grad drehen */
+}
+
+/* Einblendung des Dropdowns bei Klick */
+.custom-select.open .select-items {
+  display: block; /* Dropdown anzeigen */
+}
+
+
+section button {
+  height: 56px;
+  width: 40%;
+  margin-bottom: 28px;
+  border: 1px solid rgb(238,238,238);
+  border-radius: 6px;
+  background-color: white;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+form {
+  display: flex;
+  font-size: 20px;
+}
+
+input {
+  border: 1px solid rgb(204, 204, 204);
+  padding: 12px 21px 12px 21px;
+  border-radius: 6px;
+  margin-bottom: 28px;
+  height: 48px;
+  width: 100%;
+  font-size: 20px;
+}
+
+.resizable-textarea {
+  width: 100%;
+  height: 120px;
+  padding: 12px 21px;
+  border: 1px solid rgb(214, 214, 214);
+  border-radius: 6px;
+  margin-bottom: 28px;
+  resize: vertical;
+}
+
+.resizable-textarea:focus,
+input:focus {
+  border-color: rgb(41, 171, 226); /* Randfarbe ändern bei Fokus */
+  outline: none; /* Entfernt den Standard-Fokus-Rahmen */
+}
+
+.divider {
+  height: 424px; /* Höhe der Trennlinie */
+  width: 1.5px;
+  background-color: rgb(214, 214, 214); /* Farbe der Trennlinie */
+  margin: 0 48px;
+}
