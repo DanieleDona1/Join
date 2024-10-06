@@ -72,7 +72,7 @@ a {
 
 .header-btn-container button:first-child {
   background-color: rgb(246, 247, 248);
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 400;
   text-align: left;
 }
@@ -83,7 +83,7 @@ a {
   padding: 15px 16px;
   border-radius: 8px;
   color: white;
-  font-size: 16px;
+  font-size: 1rem;
   transition: background-color 200ms;
 }
 
@@ -114,7 +114,7 @@ a {
   justify-content: center;
   align-items: center;
   padding-bottom: 10px;
-  font-size: 40px;
+  font-size: 2.5rem;
   font-weight: 700;
 }
 
@@ -150,7 +150,7 @@ a {
   gap: 10px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  font-size: 18px;
+  font-size: 1.125px;
 }
 
 .input-group input::placeholder {
@@ -176,20 +176,20 @@ input:focus {
 
 .error-msg {
   color: red;
-  font-size: 13px;
+  font-size: 0.8125rem;
   margin-top: 8px;
   opacity: 0;
 }
 
 .msg-login-successful {
-  font-size: 18px;
+  font-size: 1.125rem;
   color: greenyellow;
   font-weight: bold;
 }
 
 label {
   padding-left: 56px;
-  font-size: 16px;
+  font-size: 1rem;
   cursor: pointer;
   margin-bottom: 15px;
 }
@@ -223,7 +223,7 @@ label {
 .btn-guest-entry {
   border: unset;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 1.25px;
   padding: 10px 15px;
   border-radius: 8px;
   border: 1px solid black;
@@ -331,7 +331,7 @@ footer a:hover {
 }
 
 label span {
-  font-size: 14px;
+  font-size: 0.875rem;
   opacity: 0.25;
 }
 
@@ -359,7 +359,7 @@ label span {
 .form-checkbox:checked::after {
   content: '✔';
   color: rgb(255, 255, 255);
-  font-size: 10px;
+  font-size: 0.625rem;
   position: absolute;
   top: 50%;
   left: 50%;
