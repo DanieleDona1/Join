@@ -66,9 +66,7 @@ async function postData(path = '', data = {}) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
-  });
-  console.log('in post');
-  
+  });  
   return (responseToJson = await response.json());
 }
 
@@ -94,6 +92,7 @@ async function loadTodosArray() {
   let todosResponse = await getAllUsers('todos');
   if (todosResponse) {
     todoKeysArray = Object.keys(todosResponse);
+    todos = [];
 
     for (let i = 0; i < todoKeysArray.length; i++) {
       todos.push({
@@ -102,7 +101,8 @@ async function loadTodosArray() {
       });
     }
     currentTodos = todos;
-    console.log('todos', todos);
+    console.log("todos:",todos);
+    
   } else {
     console.log('No todos found, Database is empty');
   }
@@ -118,6 +118,7 @@ function updateHtml() {
   updateColumn('inProgress', 'inProgressContent');
   updateColumn('awaitFeedback', 'awaitFeedbackContent');
   updateColumn('done', 'doneContent');
+  console.log("currentTodos:", currentTodos);
 }
 
 function updateColumn(category, contentId) {
@@ -129,6 +130,7 @@ function updateColumn(category, contentId) {
   for (let i = 0; i < tasks.length; i++) {
     const element = tasks[i];
     content.innerHTML += generateHtmlTemplate(i, tasks, element);
+    progressText(i);
   }
 }
 
@@ -141,13 +143,13 @@ async function createTask(category, contentId) {
 
 function getUserAddTaskData() {
   return {
-    title: document.getElementById('title') || 'Untitled Task',
+    title: document.getElementById('title') || 'New2',
     dueDate: document.getElementById('dueDate') || '2012-03-09',
     category: 'toDo',
     description: document.getElementById('description') || 'No description provided.',
-    task_category: document.getElementById('task_category') || 'Uncategorized',
-    assignedTo: document.getElementById('assignedTo') || ['Thomas', 'Müller'] || 'Unassigned',
-    subtask: document.getElementById('subtask') || ['First Subtask', 'Second Subtask'] || 'No subtasks',
+    task_category: document.getElementById('task_category') || 'User-Story', // User-Story Technical-Task wichtig großgeschrieben User-Story 
+    assignedTo: document.getElementById('assignedTo') || ['Peter', 'Müller'] || 'Unassigned',
+    subtask: document.getElementById('subtask') || [{text: "1111111", checked: true }, {text: "222222", checked: true }, {text: "3333333", checked: true }] || 'No subtasks',
     prio: document.getElementById('prio') || 'Low',
   };
 }
@@ -295,7 +297,7 @@ function searchTitleOrDescription(inputId) {
   console.log(filterWord);
 
   currentTodos = todos.filter((t) => (t.title && t.title.toLowerCase().includes(filterWord)) || (t.description && t.description.toLowerCase().includes(filterWord)));
-  updateHtml();
+  updateHtml(); 
 }
 
 function animationSlideOut() {
@@ -318,3 +320,28 @@ function createEditTask(id) {
   // TODO if required nicht leer --> getInputfields values --> todos = currentTodos --> udateHtml(); --> generateDetailTaskTemplate(id) --> editTask(); für remote
   // else --> message required -->
 }
+
+function progressText(i) {
+  let progressText = document.getElementById('progressText' + i);
+  if(progressText){
+    progressText.innerHTML = '';
+  }
+  // count how many subtasks exist
+  let subtaskTexts = currentTodos[i].subtask.map(sub => sub.text);
+    let totalSubtasks = subtaskTexts[i].length;
+
+    console.log("subtaskTexts", subtaskTexts);
+    console.log("totalSubtasks", totalSubtasks);
+    
+    // let subtaskChecked = currentTodos.flatMap(todo => 
+    //   todo.subtask.filter(sub => sub.checked === true));
+    //   let totalChecked = subtaskChecked[i].length;
+
+      // console.log("subtaskChecked", subtaskChecked);
+      // console.log("totalChecked", totalChecked);
+
+
+    // progressText.innerHTML = /*html*/`
+    // ${completedTasks} / ${totalSubtasks} Subtasks
+    // `;
+  }

@@ -1,10 +1,18 @@
 function generateHtmlTemplate(i, task, element) {
+  let taskCategory = task[i].task_category.replace(/-/g, ' ');
   return /*html*/ `
       <div class="task" draggable="true" onclick="openTaskDetails(${element['id']})" ondragstart="startDragging(${element['id']})">
-          <div class="task-category bg-${task[i].task_category.replace(/\s+/g, '-').toLowerCase()}">${task[i].task_category}</div>
+          <div class="task-category bg-${task[i].task_category}">${taskCategory}</div>
           <div class="title">${task[i].title}</div>
           <div class="description">${task[i].description}</div>
-          <div class="subtasks"><!-- TODO -->TODO Subtask</div>
+
+          <div class="subtasks">
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+                <div id="progressText${i}" class="progress-text">Subtasks</div>
+          </div>
+
           <div class="d-flex-sb-c">
             <div class="members"><!-- TODO -->TODO Members</div>
             <img draggable="false" src="/assets/icons/board/${task[i].prio}.svg" alt="prio">
