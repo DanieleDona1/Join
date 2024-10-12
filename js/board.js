@@ -130,7 +130,7 @@ function updateColumn(category, contentId) {
   for (let i = 0; i < tasks.length; i++) {
     const element = tasks[i];
     content.innerHTML += generateHtmlTemplate(i, tasks, element);
-    progressText(i);
+    loadProgressText(i);
   }
 }
 
@@ -149,7 +149,7 @@ function getUserAddTaskData() {
     description: document.getElementById('description') || 'No description provided.',
     task_category: document.getElementById('task_category') || 'User-Story', // User-Story Technical-Task wichtig großgeschrieben User-Story 
     assignedTo: document.getElementById('assignedTo') || ['Peter', 'Müller'] || 'Unassigned',
-    subtask: document.getElementById('subtask') || [{text: "1111111", checked: true }, {text: "222222", checked: true }, {text: "3333333", checked: true }] || 'No subtasks',
+    subtask: document.getElementById('subtask') || [{text: "1111111", checked: false }, {text: "222222", checked: false }, {text: "3333333", checked: true }] || 'No subtasks',
     prio: document.getElementById('prio') || 'Low',
   };
 }
@@ -321,17 +321,36 @@ function createEditTask(id) {
   // else --> message required -->
 }
 
-function progressText(i) {
+function loadProgressText(i) {
   let progressText = document.getElementById('progressText' + i);
+  let progressBar = document.getElementById('progressBar' + i);
   if(progressText){
     progressText.innerHTML = '';
   }
-  // count how many subtasks exist
+  // Create Array subtask.text
   let subtaskTexts = currentTodos[i].subtask.map(sub => sub.text);
-    let totalSubtasks = subtaskTexts[i].length;
+  let subtaskStatus = currentTodos[i].subtask.filter(sub => sub.checked === true);
+  let totalSubtasks = subtaskTexts.length;
+  let completedTasks = subtaskStatus.length;
 
-    console.log("subtaskTexts", subtaskTexts);
-    console.log("totalSubtasks", totalSubtasks);
+  progressText.innerHTML = /*html*/`
+    ${completedTasks} / ${totalSubtasks} Subtasks
+    `;
+    let progressValue = completedTasks  / totalSubtasks * 100;
+  progressBar.style.width =  `${progressValue}%`;
+}
+
+function generateSubtaskList() {
+    let subtasksAreahtml = document.getElementById('subtasksAreahtml' + i); //an der stelle i
+    for (let i = 0; i < subtaskTexts.length; i++) {
+      subtasksAreahtml.innerHTML += `<div>${subtaskTexts[i]}</div>`;
+    }
+  }
+    // let totalSubtasks = subtaskTexts[i].length;
+
+
+    // console.log("subtaskTexts", subtaskTexts);
+    // console.log("totalSubtasks", totalSubtasks);
     
     // let subtaskChecked = currentTodos.flatMap(todo => 
     //   todo.subtask.filter(sub => sub.checked === true));
@@ -341,7 +360,4 @@ function progressText(i) {
       // console.log("totalChecked", totalChecked);
 
 
-    // progressText.innerHTML = /*html*/`
-    // ${completedTasks} / ${totalSubtasks} Subtasks
-    // `;
-  }
+    

@@ -8,7 +8,7 @@ function generateHtmlTemplate(i, task, element) {
 
           <div class="subtasks">
             <div class="progress-container">
-                <div class="progress-bar"></div>
+                <div id="progressBar${i}" class="progress-bar"></div>
             </div>
                 <div id="progressText${i}" class="progress-text">Subtasks</div>
           </div>
@@ -41,7 +41,7 @@ function generateDetailTaskTemplate(id) {
           <div class="d-flex-sb-c">
             <div class="members color-blue">Assigned To: <!-- TODO --> TODO Kontaktlist<div id="assignedToArea${id}"></div></div>
           </div>
-          <div class="subtasks color-blue">Subtasks <div><!-- TODO --> TODO Subtask</div></div>
+          <div id="subtasksArea" class="subtasks color-blue">Subtasks <div><!-- TODO --> TODO Subtask</div></div>
           <div class="configuration">
             <div onclick="deleteTask(${id})"><img src="/assets/icons/board/delete.svg" alt="delete"><span class="color-blue">Delete</span></div>
             <div onclick="generateEditTemplate(${id})" class="separator ">
