@@ -88,7 +88,7 @@ main h2 {
 
 .section-container section img {
   position: absolute;
-  right: 24px;  
+  right: 24px;
   width: 24px;
   cursor: pointer;
 }
@@ -111,8 +111,6 @@ main h2 {
   background-color: rgb(41, 171, 226); /* Farbe des Scrollbalkens (Thumb) */
   border-radius: 10px;
 }
-
-
 
 .drag-area-highlight {
   /* background-color: rgb(246, 247, 248); */
@@ -152,7 +150,6 @@ main h2 {
   margin: 20px 0;
   display: flex;
   align-items: center;
-
 }
 
 .progress-container {
@@ -177,8 +174,6 @@ main h2 {
   line-height: 30px;
   white-space: nowrap;
 }
-
-
 
 .bg-Technical-Task {
   background-color: rgba(31, 215, 193, 1);
@@ -292,7 +287,7 @@ main h2 {
 .plus-button {
   width: 24px;
   height: 24px;
-  background-image: url("/assets/icons/board/plus-btn.svg");
+  background-image: url('/assets/icons/board/plus-btn.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -302,7 +297,7 @@ main h2 {
 }
 
 .plus-button:hover {
-  background-image: url("/assets/icons/board/plus-btn-hover.svg");
+  background-image: url('/assets/icons/board/plus-btn-hover.svg');
 }
 
 .configuration div:hover img {
@@ -404,14 +399,14 @@ main h2 {
   width: 40px;
 }
 
-input[type="date"] {
+input[type='date'] {
   color: #333;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 1rem;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
+input[type='date']::-webkit-calendar-picker-indicator {
   margin-left: 220px;
 }
 
@@ -437,14 +432,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     height: auto;
     padding-bottom: 10px;
   }
-} 
+}
 
 @media screen and (min-width: 721px) and (max-width: 1024px) {
   main {
     padding-right: 24px;
     padding-left: 24px;
   }
-  
 }
 
 @media screen and (max-width: 720px) {
@@ -476,6 +470,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding-left: 16px;
   }
   .content {
-  scrollbar-color: rgb(41, 171, 226) transparent;
+    scrollbar-color: rgb(41, 171, 226) transparent;
   }
+}
+.subtask-list {
+  cursor: pointer;
+  padding: 4px; 
+}
+
+.checkbox-img {
+  display: inline-block;
+  background-image: url('/assets/icons/board/checkbox-unchecked.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 16px;
+  height: 20px;
 }

@@ -100,21 +100,20 @@
           </div>
 
           
-
           <button
-            class="add-task d-flex-c-c btn-hover"
-            onclick="generatePopUpAddTask('toDo', 'toDoContent');"
+          class="add-task d-flex-c-c btn-hover"
+          onclick="generatePopUpAddTask('toDo', 'toDoContent');"
           >
-            Add Task
-            <img
-              src="/assets/icons/board/add_task_plus.svg"
-              alt="plus-general"
-            />
-          </button>
-        </div>
+          Add Task
+          <img
+          src="/assets/icons/board/add_task_plus.svg"
+          alt="plus-general"
+          />
+        </button>
       </div>
-
-      <div id="searchbarMobile" class="searchbar-mobile d-flex-c-c">
+    </div>
+    
+    <div id="searchbarMobile" class="searchbar-mobile d-flex-c-c">
         <input
         oninput="searchTitleOrDescription('searchMobile')"
         maxlength="50"
@@ -125,7 +124,7 @@
         />
         <img src="/assets/icons/board/search_lupe.svg" alt="search-btn" />
       </div>
-
+      
       <div class="section-container">
         <section id="toDo" class="to-do">
           <div class="column-title d-flex-sb-c">
@@ -137,7 +136,7 @@
             ></button>
           </div>
           <div
-            id="toDoContent"
+          id="toDoContent"
             class="content"
             ondragleave="removeHighlight('toDoContent')"
             ondragover="allowDrop(event); highlight('toDoContent');"
@@ -167,10 +166,10 @@
           <div class="column-title d-flex-sb-c">
             <span>await-feedback</span>
             <button
-              class="plus-button"
+            class="plus-button"
               onclick="generatePopUpAddTask('awaitFeedback', 'awaitFeedbackContent')"
               aria-label="Add Task awaitFeedback"
-            ></button>
+              ></button>
           </div>
           <div
             id="awaitFeedbackContent"
@@ -178,7 +177,7 @@
             ondragleave="removeHighlight('awaitFeedbackContent')"
             ondragover="allowDrop(event); highlight('awaitFeedbackContent');"
             ondrop="moveTo('awaitFeedback')"
-          ></div>
+            ></div>
         </section>
 
         <section id="done" class="done">
@@ -194,6 +193,7 @@
           ></div>
         </section>
       </div>
+      <div id="subtasksAreahtml"></div>
     </main>
     <div class="dialog-bg d-none" id="dialog" onclick="closeDialog()"></div>
   </body>

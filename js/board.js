@@ -135,21 +135,21 @@ function updateColumn(category, contentId) {
 }
 
 async function createTask(category, contentId) {
-  const userInputData = getUserAddTaskData();
+  const userInputData = getUserAddTaskData(category);
   await addTask(userInputData);
   await loadTodosArray();
   updateColumn(category, contentId);
 }
 
-function getUserAddTaskData() {
+function getUserAddTaskData(swimlane) {
   return {
     title: document.getElementById('title') || 'New2',
     dueDate: document.getElementById('dueDate') || '2012-03-09',
-    category: 'toDo',
+    category: swimlane,
     description: document.getElementById('description') || 'No description provided.',
     task_category: document.getElementById('task_category') || 'User-Story', // User-Story Technical-Task wichtig großgeschrieben User-Story 
     assignedTo: document.getElementById('assignedTo') || ['Peter', 'Müller'] || 'Unassigned',
-    subtask: document.getElementById('subtask') || [{text: "1111111", checked: false }, {text: "222222", checked: false }, {text: "3333333", checked: true }] || 'No subtasks',
+    subtask: document.getElementById('subtask') || [{text: "aaaaaa", checked: false }, {text: "bbbbbb", checked: false }, {text: "cccc", checked: true }] || 'No subtasks',
     prio: document.getElementById('prio') || 'Low',
   };
 }
@@ -257,7 +257,8 @@ document.addEventListener('DOMContentLoaded', init);
 
 function openTaskDetails(id) {
   document.getElementById('dialog').innerHTML = generateDetailTaskTemplate(id);
-  generateAssignedTo(id);
+  // generateAssignedTo(id);
+  loadSubtaskList(id);
   // document.body.style.overflowY = "hidden";
   openDialog();
 }
@@ -340,10 +341,31 @@ function loadProgressText(i) {
   progressBar.style.width =  `${progressValue}%`;
 }
 
-function generateSubtaskList() {
-    let subtasksAreahtml = document.getElementById('subtasksAreahtml' + i); //an der stelle i
-    for (let i = 0; i < subtaskTexts.length; i++) {
-      subtasksAreahtml.innerHTML += `<div>${subtaskTexts[i]}</div>`;
+function loadSubtaskList(i) {
+    let subtaskTexts = currentTodos[i].subtask.map(sub => sub.text);
+    let subtasksList = document.getElementById('subtasksList'); //an der stelle i
+    for (let j = 0; j < subtaskTexts.length; j++) {
+      subtasksList.innerHTML += `
+      <div>
+        <label onclick="toggleCheckboxUrl(${j})" class="subtask-list d-flex-fs-c">
+          <div id="checkboxImg${j}" class="checkbox-img"></div>
+          <span> ${subtaskTexts[j]}</span>
+        </label>
+      </div>`;
+    }
+  }
+
+  function toggleCheckboxUrl(j) {
+    let checkboxImg = document.getElementById('checkboxImg' + j);
+  
+    let currentUrl = checkboxImg.style.backgroundImage || window.getComputedStyle(checkboxImg).backgroundImage;
+
+  
+    if (currentUrl.includes('checkbox-unchecked.svg')) {
+      checkboxImg.style.backgroundImage = "url('/assets/icons/board/checkbox-checked.svg')";
+      // TODO change it in currentTodos
+    } else {
+      checkboxImg.style.backgroundImage = "url('/assets/icons/board/checkbox-unchecked.svg')";
     }
   }
     // let totalSubtasks = subtaskTexts[i].length;
