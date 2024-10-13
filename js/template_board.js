@@ -37,11 +37,11 @@ function generateDetailTaskTemplate(id) {
             <span class="color-blue">Priority:&nbsp; <span class="color-black">${priority}</span></span>
             <img class="prio-img" src="/assets/icons/board/${todos[id].prio}.svg" alt="prio">
           </div>
-  
+
           <div class="d-flex-sb-c">
             <div class="members color-blue">Assigned To: <!-- TODO --> TODO Kontaktlist<div id="assignedToArea${id}"></div></div>
           </div>
-          <div id="subtasksList" class="subtasks color-blue"><div>Subtasks:</div></div>
+          <div id="subtasksList" class="subtasks color-blue">Subtasks <div><!-- TODO --> TODO Subtask</div></div>
           <div class="configuration">
             <div onclick="deleteTask(${id})"><img src="/assets/icons/board/delete.svg" alt="delete"><span class="color-blue">Delete</span></div>
             <div onclick="generateEditTemplate(${id})" class="separator ">
@@ -69,7 +69,7 @@ function generatePopUpAddTask(category, contentId) {
         <img class="xmark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
       </div>
       <!-- TODO -->TODO add_task html and css
-      
+
       <button onclick="closeDialog()">Cancel</button>
       <button onclick="createTask('${category}', '${contentId}'); closeDialog();">Create Task</button>
     </div>
@@ -82,7 +82,7 @@ function generateEditTemplate(id) {
   document.getElementById('dialog').innerHTML = /*html */ `
       <div class="edit-template detail-task dialog-content" onclick="event.stopPropagation();">
         <div class="d-flex-e-c"><img class="xmark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark"></div>
-        <label>Title:<br> 
+        <label>Title:<br>
           <input class="title-edit" id="titleEdit" type="text" value="${todos[id].title}" placeholder="Enter a title">
         </label>
         <label>Description:
@@ -96,7 +96,7 @@ function generateEditTemplate(id) {
         </button>
 
         <span>Edit id :  ${id}</span>
-  
+
       </div>
     `;
 }
