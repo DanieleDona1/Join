@@ -9,28 +9,6 @@ async function onload() {
   await loadTodosArray();
   updateHtml();
 }
-//TODO Technical Task groß schreiben
-// addTask({
-//   title: "BANANA",
-//   description: "RAM",
-//   dueDate: "2024-10-03",
-//   category: "inProgress",
-//   task_category: "Technical Task",
-//   assignedTo: ["Test", "Test234"],
-//   subtask: ["Array für subtask"],
-//   prio: "Low",
-// });
-
-// addTask({
-//   title: "Verion 2.0",
-//   description: "Erstellung HTML CSS",
-//   dueDate: "2019-06-02",
-//   category: "toDo",
-//   task_category: "User Story",
-//   assignedTo: ["Max Mustermann", "Thomas Müller"],
-//   subtask: ["Array für subtask"],
-//   prio: "Urgent",
-// });
 
 // Funktion zum Hinzufügen einer Aufgabe
 async function addTask({ title, description, dueDate, category, task_category, assignedTo, subtask, prio }) {
@@ -66,7 +44,7 @@ async function postData(path = '', data = {}) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
-  });  
+  });
   return (responseToJson = await response.json());
 }
 
@@ -101,8 +79,7 @@ async function loadTodosArray() {
       });
     }
     currentTodos = todos;
-    console.log("todos:",todos);
-    
+    console.log('todos:', todos);
   } else {
     console.log('No todos found, Database is empty');
   }
@@ -118,7 +95,7 @@ function updateHtml() {
   updateColumn('inProgress', 'inProgressContent');
   updateColumn('awaitFeedback', 'awaitFeedbackContent');
   updateColumn('done', 'doneContent');
-  console.log("currentTodos:", currentTodos);
+  console.log('currentTodos:', currentTodos);
 }
 
 function updateColumn(category, contentId) {
@@ -143,13 +120,19 @@ async function createTask(category, contentId) {
 
 function getUserAddTaskData(swimlane) {
   return {
-    title: document.getElementById('title') || 'New2',
+    title: document.getElementById('title') || 'CSS',
     dueDate: document.getElementById('dueDate') || '2012-03-09',
     category: swimlane,
     description: document.getElementById('description') || 'No description provided.',
-    task_category: document.getElementById('task_category') || 'User-Story', // User-Story Technical-Task wichtig großgeschrieben User-Story 
+    task_category: document.getElementById('task_category') || 'Technical-Task', // User-Story Technical-Task wichtig großgeschrieben User-Story
     assignedTo: document.getElementById('assignedTo') || ['Peter', 'Müller'] || 'Unassigned',
-    subtask: document.getElementById('subtask') || [{text: "aaaaaa", checked: false }, {text: "bbbbbb", checked: false }, {text: "cccc", checked: true }] || 'No subtasks',
+    subtask:
+      document.getElementById('subtask') || [
+        { text: 'aaaaaa', checked: false },
+        { text: 'bbbbbb', checked: false },
+        { text: 'cccc', checked: true },
+      ] ||
+      'No subtasks',
     prio: document.getElementById('prio') || 'Low',
   };
 }
@@ -298,7 +281,7 @@ function searchTitleOrDescription(inputId) {
   console.log(filterWord);
 
   currentTodos = todos.filter((t) => (t.title && t.title.toLowerCase().includes(filterWord)) || (t.description && t.description.toLowerCase().includes(filterWord)));
-  updateHtml(); 
+  updateHtml();
 }
 
 function animationSlideOut() {
@@ -325,61 +308,64 @@ function createEditTask(id) {
 function loadProgressText(i) {
   let progressText = document.getElementById('progressText' + i);
   let progressBar = document.getElementById('progressBar' + i);
-  if(progressText){
+  if (progressText) {
     progressText.innerHTML = '';
   }
   // Create Array subtask.text
-  let subtaskTexts = currentTodos[i].subtask.map(sub => sub.text);
-  let subtaskStatus = currentTodos[i].subtask.filter(sub => sub.checked === true);
+  let subtaskTexts = currentTodos[i].subtask.map((sub) => sub.text);
+  let subtaskStatus = currentTodos[i].subtask.filter((sub) => sub.checked === true);
   let totalSubtasks = subtaskTexts.length;
   let completedTasks = subtaskStatus.length;
 
-  progressText.innerHTML = /*html*/`
+  progressText.innerHTML = /*html*/ `
     ${completedTasks} / ${totalSubtasks} Subtasks
     `;
-    let progressValue = completedTasks  / totalSubtasks * 100;
-  progressBar.style.width =  `${progressValue}%`;
+  let progressValue = (completedTasks / totalSubtasks) * 100;
+  progressBar.style.width = `${progressValue}%`;
 }
 
 function loadSubtaskList(i) {
-    let subtaskTexts = currentTodos[i].subtask.map(sub => sub.text);
-    let subtasksList = document.getElementById('subtasksList'); //an der stelle i
-    for (let j = 0; j < subtaskTexts.length; j++) {
-      subtasksList.innerHTML += `
-      <div>
-        <label onclick="toggleCheckboxUrl(${j})" class="subtask-list d-flex-fs-c">
-          <div id="checkboxImg${j}" class="checkbox-img"></div>
-          <span> ${subtaskTexts[j]}</span>
-        </label>
-      </div>`;
-    }
-  }
+  let subtaskStatus = currentTodos[i].subtask.map((sub) => sub.checked);
+  let subtaskTexts = currentTodos[i].subtask.map((sub) => sub.text);
+  let subtasksList = document.getElementById('subtasksList');
 
-  function toggleCheckboxUrl(j) {
-    let checkboxImg = document.getElementById('checkboxImg' + j);
-  
-    let currentUrl = checkboxImg.style.backgroundImage || window.getComputedStyle(checkboxImg).backgroundImage;
-
-  
-    if (currentUrl.includes('checkbox-unchecked.svg')) {
-      checkboxImg.style.backgroundImage = "url('/assets/icons/board/checkbox-checked.svg')";
-      // TODO change it in currentTodos
+  for (let j = 0; j < subtaskTexts.length; j++) {
+    if (subtaskStatus[j]) {
+      checkboxImgUrl = '/assets/icons/board/checkbox-checked.svg';
     } else {
-      checkboxImg.style.backgroundImage = "url('/assets/icons/board/checkbox-unchecked.svg')";
+      checkboxImgUrl = '/assets/icons/board/checkbox-unchecked.svg';
     }
+    subtasksList.innerHTML += `
+      <div>
+      <label onclick="toggleCheckboxUrl(${i},${j})" class="subtask-list d-flex-fs-c">
+      <div id="checkboxImg${j}" class="checkbox-img" style="background-image: url('${checkboxImgUrl}');"></div>
+      <span> ${subtaskTexts[j]}</span>
+      </label>
+      </div>`;
   }
-    // let totalSubtasks = subtaskTexts[i].length;
+}
 
+function toggleCheckboxUrl(i, j) { //updated es nicht auf firebase
+  let checkboxImg = document.getElementById('checkboxImg' + j);
+  let currentUrl = checkboxImg.style.backgroundImage
+  let changeCheckedStatus = todos[i].subtask[j];
+  if (currentUrl.includes('checkbox-unchecked.svg')) {
+    checkboxImg.style.backgroundImage = "url('/assets/icons/board/checkbox-checked.svg')";
+    changeCheckedStatus.checked = true;
+  } else {
+    checkboxImg.style.backgroundImage = "url('/assets/icons/board/checkbox-unchecked.svg')";
+    changeCheckedStatus.checked = false;
+  }
+  loadProgressText(i);
+}
+// let totalSubtasks = subtaskTexts[i].length;
 
-    // console.log("subtaskTexts", subtaskTexts);
-    // console.log("totalSubtasks", totalSubtasks);
-    
-    // let subtaskChecked = currentTodos.flatMap(todo => 
-    //   todo.subtask.filter(sub => sub.checked === true));
-    //   let totalChecked = subtaskChecked[i].length;
+// console.log("subtaskTexts", subtaskTexts);
+// console.log("totalSubtasks", totalSubtasks);
 
-      // console.log("subtaskChecked", subtaskChecked);
-      // console.log("totalChecked", totalChecked);
+// let subtaskChecked = currentTodos.flatMap(todo =>
+//   todo.subtask.filter(sub => sub.checked === true));
+//   let totalChecked = subtaskChecked[i].length;
 
-
-    
+// console.log("subtaskChecked", subtaskChecked);
+// console.log("totalChecked", totalChecked);
