@@ -24,13 +24,11 @@ async function addTask({ title, description, dueDate, category, task_category, a
   });
 }
 
-function testFunctionUpdateArray() {
+function testFunctionUpdateArray(i) {
+  // console.log('todoKeysArray[0]:', todoKeysArray[0]);
   // TODO Delete Function
-  editTask('-O8MxVcXTeF25AhrVK--', { subtask: todos[6].assignedTo });
+  editTask(todoKeysArray[0], { subtask: todos[i].subtask });
 }
-
-// editTask("-O8MwcfV9U4KommG-LGU", {todos[id].subtask});
-// editTask("-O8MwcfV9U4KommG-LGU", { title: "BANANA"});
 
 function editTask(key, { title, description, dueDate, assignedTo, subtask, prio }) {
   // Senden der Daten an die API
@@ -345,9 +343,9 @@ function loadSubtaskList(i) {
   }
 }
 
-function toggleCheckboxUrl(i, j) { //updated es nicht auf firebase
+function toggleCheckboxUrl(i, j) {
   let checkboxImg = document.getElementById('checkboxImg' + j);
-  let currentUrl = checkboxImg.style.backgroundImage
+  let currentUrl = checkboxImg.style.backgroundImage;
   let changeCheckedStatus = todos[i].subtask[j];
   if (currentUrl.includes('checkbox-unchecked.svg')) {
     checkboxImg.style.backgroundImage = "url('/assets/icons/board/checkbox-checked.svg')";
@@ -357,6 +355,8 @@ function toggleCheckboxUrl(i, j) { //updated es nicht auf firebase
     changeCheckedStatus.checked = false;
   }
   loadProgressText(i);
+  editTask(todoKeysArray[i], { subtask: todos[i].subtask });
+
 }
 // let totalSubtasks = subtaskTexts[i].length;
 
