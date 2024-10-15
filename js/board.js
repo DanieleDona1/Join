@@ -5,63 +5,10 @@ let currentDraggedElement;
 
 const BASE_URL = 'https://joinremotestorage-c8226-default-rtdb.europe-west1.firebasedatabase.app/';
 
+//Load all tasks from firebase
 async function onload() {
   await loadTodosArray();
   updateHtml();
-}
-
-// Funktion zum Hinzufügen einer Aufgabe
-async function addTask({ title, description, dueDate, category, task_category, assignedTo, subtask, prio }) {
-  await postData('/todos', {
-    title,
-    description,
-    dueDate,
-    category,
-    task_category,
-    assignedTo,
-    subtask,
-    prio,
-  });
-}
-
-function testFunctionUpdateArray(i) {
-  // console.log('todoKeysArray[0]:', todoKeysArray[0]);
-  // TODO Delete Function
-  editTask(todoKeysArray[0], { subtask: todos[i].subtask });
-}
-
-function editTask(key, { title, description, dueDate, assignedTo, subtask, prio }) {
-  // Senden der Daten an die API
-  updateData(`/todos/${key}`, { title, description, dueDate, assignedTo, subtask, prio });
-}
-
-async function postData(path = '', data = {}) {
-  let response = await fetch(BASE_URL + path + '.json', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  });
-  return (responseToJson = await response.json());
-}
-
-async function deleteData(path = '', data = {}) {
-  let response = await fetch(BASE_URL + path + '.json', {
-    method: 'DELETE',
-  });
-  return (responseToJson = await response.json());
-}
-
-async function updateData(path = '', data = {}) {
-  let response = await fetch(BASE_URL + path + '.json', {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  });
-  return await response.json();
 }
 
 async function loadTodosArray() {
@@ -82,6 +29,7 @@ async function loadTodosArray() {
     console.log('No todos found, Database is empty');
   }
 }
+
 async function getAllUsers(path) {
   let response = await fetch(BASE_URL + path + '.json');
   let responseAsJson = await response.json();
@@ -107,6 +55,47 @@ function updateColumn(category, contentId) {
     content.innerHTML += generateHtmlTemplate(i, tasks, element);
     loadProgressText(i);
   }
+}
+
+function loadProgressText(i) {
+  let progressText = document.getElementById('progressText' + i);
+  let progressBar = document.getElementById('progressBar' + i);
+  if (progressText) {
+    progressText.innerHTML = '';
+  }
+  let subtaskTexts = currentTodos[i].subtask.map((sub) => sub.text);
+  let subtaskStatus = currentTodos[i].subtask.filter((sub) => sub.checked === true);
+  let totalSubtasks = subtaskTexts.length;
+  let completedTasks = subtaskStatus.length;
+
+  progressText.innerHTML = /*html*/ `
+    ${completedTasks} / ${totalSubtasks} Subtasks
+    `;
+  let progressValue = (completedTasks / totalSubtasks) * 100;
+  progressBar.style.width = `${progressValue}%`;
+}
+
+// Funktion zum Hinzufügen einer Aufgabe
+function testFunctionUpdateArray(i) {
+  editTask(todoKeysArray[0], { subtask: todos[i].subtask });
+}
+
+function editTask(key, { title, description, dueDate, assignedTo, subtask, prio }) {
+  // Senden der Daten an die API
+  patchData(`/todos/${key}`, { title, description, dueDate, assignedTo, subtask, prio });
+}
+
+async function addTask({ title, description, dueDate, category, task_category, assignedTo, subtask, prio }) {
+  await postData('/todos', {
+    title,
+    description,
+    dueDate,
+    category,
+    task_category,
+    assignedTo,
+    subtask,
+    prio,
+  });
 }
 
 async function createTask(category, contentId) {
@@ -151,6 +140,7 @@ function convertObjectToArray(obj) {
   }
 }
 
+//Drag&Drop function
 function startDragging(id) {
   currentDraggedElement = id;
 }
@@ -164,7 +154,6 @@ function allowDrop(event) {
 function moveTo(category) {
   todos[currentDraggedElement]['category'] = category;
   updateHtml();
-
   removeHighlightAfterDrop();
 }
 
@@ -274,6 +263,7 @@ function deleteTask(id) {
   todoKeysArray = newTodoKeysArray;
 }
 
+//function searchbar
 function searchTitleOrDescription(inputId) {
   let filterWord = document.getElementById(inputId).value.trim().toLowerCase();
   console.log(filterWord);
@@ -298,30 +288,7 @@ function animationSlideOut() {
   );
 }
 
-function createEditTask(id) {
-  // TODO if required nicht leer --> getInputfields values --> todos = currentTodos --> udateHtml(); --> generateDetailTaskTemplate(id) --> editTask(); für remote
-  // else --> message required -->
-}
-
-function loadProgressText(i) {
-  let progressText = document.getElementById('progressText' + i);
-  let progressBar = document.getElementById('progressBar' + i);
-  if (progressText) {
-    progressText.innerHTML = '';
-  }
-  // Create Array subtask.text
-  let subtaskTexts = currentTodos[i].subtask.map((sub) => sub.text);
-  let subtaskStatus = currentTodos[i].subtask.filter((sub) => sub.checked === true);
-  let totalSubtasks = subtaskTexts.length;
-  let completedTasks = subtaskStatus.length;
-
-  progressText.innerHTML = /*html*/ `
-    ${completedTasks} / ${totalSubtasks} Subtasks
-    `;
-  let progressValue = (completedTasks / totalSubtasks) * 100;
-  progressBar.style.width = `${progressValue}%`;
-}
-
+//load subtask, update progressbar, update firebase
 function loadSubtaskList(i) {
   let subtaskStatus = currentTodos[i].subtask.map((sub) => sub.checked);
   let subtaskTexts = currentTodos[i].subtask.map((sub) => sub.text);
@@ -356,16 +323,4 @@ function toggleCheckboxUrl(i, j) {
   }
   loadProgressText(i);
   editTask(todoKeysArray[i], { subtask: todos[i].subtask });
-
 }
-// let totalSubtasks = subtaskTexts[i].length;
-
-// console.log("subtaskTexts", subtaskTexts);
-// console.log("totalSubtasks", totalSubtasks);
-
-// let subtaskChecked = currentTodos.flatMap(todo =>
-//   todo.subtask.filter(sub => sub.checked === true));
-//   let totalChecked = subtaskChecked[i].length;
-
-// console.log("subtaskChecked", subtaskChecked);
-// console.log("totalChecked", totalChecked);

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/css/board.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <script src="/script.js" defer></script>
+    <script src="/js/remote_storage"></script>
     <script src="/js/board.js"></script>
     <script src="/js/template_board.js"></script>
   </head>
@@ -99,7 +100,7 @@
             </div>
           </div>
 
-          
+
           <button
           class="add-task d-flex-c-c btn-hover"
           onclick="generatePopUpAddTask('toDo', 'toDoContent');"
@@ -112,7 +113,7 @@
         </button>
       </div>
     </div>
-    
+
     <div id="searchbarMobile" class="searchbar-mobile d-flex-c-c">
         <input
         oninput="searchTitleOrDescription('searchMobile')"
@@ -124,7 +125,7 @@
         />
         <img src="/assets/icons/board/search_lupe.svg" alt="search-btn" />
       </div>
-      
+
       <div class="section-container">
         <section id="toDo" class="to-do">
           <div class="column-title d-flex-sb-c">

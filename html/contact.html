@@ -4,226 +4,93 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact</title>
-    <link
-      rel="icon"
-      type="image/png"
-      href="/assets/icons/favicons/favicon_light.png"
-      id="favicon"
-      />
-    <link rel="stylesheet" href="/css/contact.css">
-    <link
-    rel="stylesheet"
-    href="/style.css"
-    />
-    <link rel="stylesheet" href="/css/fonts.css">
+    <link rel="icon" type="image/png" href="/assets/icons/favicons/favicon_light.png" id="favicon" />
+    <link rel="stylesheet" href="/css/contact.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <script src="/js/remote_storage"></script>
   </head>
   <body onload="onloadFunc()">
-    <div
-      class="background-pop-up d-none"
-      id="background-pop-up"
-    >
+    <div class="background-pop-up d-none" id="background-pop-up">
       <!-- add contact section  -->
-      <section
-        class="d-none pop-up-add-contact"
-        id="pop-up-add-contact"
-      >
-        <button
-          class="close-popup"
-          onclick="closeAddContact()"
-        >
-          <img
-            src="/assets/icons/contact/close-cross.svg"
-            alt="close"
-          />
+      <section class="d-none pop-up-add-contact" id="pop-up-add-contact">
+        <button class="close-popup" onclick="closeAddContact()">
+          <img src="/assets/icons/contact/close-cross.svg" alt="close" />
         </button>
 
         <div class="contact-side-info">
-          <img
-            src="/assets/icons/contact/contact_join_logo.png"
-            alt="Join Logo"
-            class="contact-logo"
-          />
+          <img src="/assets/icons/contact/contact_join_logo.png" alt="Join Logo" class="contact-logo" />
           <div class="contact-side-info-div">
             <div class="add-contact">
               <span class="add-contact-headline">Add contact</span>
-              <span class="add-contact-info"
-                >Tasks are better with a team!</span
-              >
+              <span class="add-contact-info">Tasks are better with a team!</span>
             </div>
-            <img
-              src="/assets/icons/contact/contact_line_vector.svg"
-              alt=""
-              class="contact-vector"
-            />
+            <img src="/assets/icons/contact/contact_line_vector.svg" alt="" class="contact-vector" />
           </div>
         </div>
 
-        <img
-          src="/assets/icons/contact/raw_profil_img.png"
-          alt="Konaktbild"
-          class="contact-pic"
-        />
+        <img src="/assets/icons/contact/raw_profil_img.png" alt="Konaktbild" class="contact-pic" />
 
         <form>
           <address class="contact-field">
-            <input
-              type="text"
-              name="name"
-              id="name"
-              placeholder="Name"
-              minlength="2"
-              required
-            />
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Email"
-              minlength="6"
-              required
-            />
-            <input
-              type="number"
-              name="phonenumber"
-              id="phonenumber"
-              placeholder="Phone"
-              min="0"
-              minlength="6"
-              required
-            />
+            <input type="text" name="name" id="name" placeholder="Name" minlength="2" required />
+            <input type="email" name="email" id="email" placeholder="Email" minlength="6" required />
+            <input type="number" name="phonenumber" id="phonenumber" placeholder="Phone" min="0" minlength="6" required />
           </address>
           <div class="input-button">
             <button type="reset" class="cancel">
               Cancel
-              <img
-                src="/assets/icons/contact/close-cross.svg"
-                alt="close"
-              />
+              <img src="/assets/icons/contact/close-cross.svg" alt="close" />
             </button>
-            <button
-            type="button"
-            onclick="addContact(this)"
-            class="create">
+            <button type="button" onclick="addContact(this)" class="create">
               Create contact
-              <img
-                src="/assets/icons/contact/check.svg"
-                alt="check"
-              />
+              <img src="/assets/icons/contact/check.svg" alt="check" />
             </button>
           </div>
         </form>
       </section>
       <!-- edit contact section  -->
-      <section
-        class="d-none pop-up-add-contact"
-        id="pop-up-edit-contact"
-      >
-        <button
-          class="close-popup"
-          onclick="closeEditContact()"
-        >
-          <img
-            src="/assets/icons/contact/close-cross.svg"
-            alt="close"
-          />
+      <section class="d-none pop-up-add-contact" id="pop-up-edit-contact">
+        <button class="close-popup" onclick="closeEditContact()">
+          <img src="/assets/icons/contact/close-cross.svg" alt="close" />
         </button>
 
         <div class="contact-side-info">
-          <img
-            src="/assets/icons/contact/contact_join_logo.png"
-            alt="Join Logo"
-            class="contact-logo"
-          />
+          <img src="/assets/icons/contact/contact_join_logo.png" alt="Join Logo" class="contact-logo" />
           <div class="contact-side-info-div">
             <div class="add-contact">
               <span class="add-contact-headline">Edit contact</span>
             </div>
-            <img
-              src="/assets/icons/contact/contact_line_vector.svg"
-              alt=""
-              class="contact-vector"
-            />
+            <img src="/assets/icons/contact/contact_line_vector.svg" alt="" class="contact-vector" />
           </div>
         </div>
 
-        <div
-        id="edit-contact-picture"
-        >
-
-      
-        </div>
+        <div id="edit-contact-picture"></div>
 
         <form>
           <address class="contact-field">
-            <input
-              type="text"
-              name="name"
-              id="edit-name"
-              placeholder="Name"
-              minlength="2"
-              required
-            />
-            <input
-              type="email"
-              name="email"
-              id="edit-email"
-              placeholder="Email"
-              minlength="6"
-              required
-            />
-            <input
-              type="number"
-              name="phonenumber"
-              id="edit-phonenumber"
-              placeholder="Phone"
-              min="0"
-              minlength="6"
-              required
-            />
+            <input type="text" name="name" id="edit-name" placeholder="Name" minlength="2" required />
+            <input type="email" name="email" id="edit-email" placeholder="Email" minlength="6" required />
+            <input type="number" name="phonenumber" id="edit-phonenumber" placeholder="Phone" min="0" minlength="6" required />
           </address>
           <div class="input-button">
-            <button
-              type="button"
-              class="edit-delete"
-              id="edit-delete"
-              onclick="deleteContact(value), closeEditContact()"
-            >
-              Delete
-            </button>
-            <button
-            type="button"
-            id="edit-save"
-            onclick="editContact(value)"
-            class="edit-save"
-            >
+            <button type="button" class="edit-delete" id="edit-delete" onclick="deleteContact(value), closeEditContact()">Delete</button>
+            <button type="button" id="edit-save" onclick="editContact(value)" class="edit-save">
               Save
-              <img
-                src="/assets/icons/contact/check.svg"
-                alt="check"
-              />
+              <img src="/assets/icons/contact/check.svg" alt="check" />
             </button>
           </div>
         </form>
       </section>
     </div>
-    <div id="success-message" class="d-none success-message d-flex-c-c">
-      Contact succesfully created
-    </div>
+    <div id="success-message" class="d-none success-message d-flex-c-c">Contact succesfully created</div>
 
     <header>
-      <img
-        class="header-join-logo"
-        src="/assets/icons/header/joinHeaderMobile.svg"
-        alt="logo"
-      />
+      <img class="header-join-logo" src="/assets/icons/header/joinHeaderMobile.svg" alt="logo" />
       <p class="d-none">Kanban Project Management Tool</p>
       <div class="header-rightside-container d-none">
         <a href="help.html">
-          <img
-            class="header-help-icon d-none"
-            src="/assets/icons/header/help.svg"
-            alt="help"
-          />
+          <img class="header-help-icon d-none" src="/assets/icons/header/help.svg" alt="help" />
         </a>
         <span class="header-initials">JV</span>
       </div>
@@ -236,10 +103,7 @@
       <div class="navbar-container-bottom">
         <div class="navbar-item-container">
           <a href="summary.html" class="navbar-item" data-page="summary">
-            <img
-              src="/assets/icons/navbar/summary_Icon.svg"
-              alt="Summary Icon"
-            />
+            <img src="/assets/icons/navbar/summary_Icon.svg" alt="Summary Icon" />
             <p>Summary</p>
           </a>
           <a href="board.html" class="navbar-item" data-page="board">
@@ -247,27 +111,17 @@
             <p>Board</p>
           </a>
           <a href="add_tasks.html" class="navbar-item" data-page="add_tasks">
-            <img
-              src="/assets/icons/navbar/add_tasks.svg"
-              alt="Add Tasks Icon"
-            />
+            <img src="/assets/icons/navbar/add_tasks.svg" alt="Add Tasks Icon" />
             <p>Add Tasks</p>
           </a>
           <a href="contact.html" class="navbar-item" data-page="contacts">
-            <img
-              src="/assets/icons/navbar/contacts_icon.svg"
-              alt="Contacts Icon"
-            />
+            <img src="/assets/icons/navbar/contacts_icon.svg" alt="Contacts Icon" />
             <p>Contacts</p>
           </a>
         </div>
         <div class="navbar-disclaimer-links-container d-none">
-          <a href="/html/privacy_policy.html" data-page="privacy_policy"
-            >Privacy Policy</a
-          >
-          <a href="/html/legal_notice.html" data-page="legal_notice"
-            >Legal Notice</a
-          >
+          <a href="/html/privacy_policy.html" data-page="privacy_policy">Privacy Policy</a>
+          <a href="/html/legal_notice.html" data-page="legal_notice">Legal Notice</a>
         </div>
       </div>
     </nav>
@@ -275,18 +129,11 @@
     <main class="main-contact">
       <div class="main-contact-side">
         <div class="contact-list-field">
-        <button onclick="openAddContact()"
-        class="contact-list-field-button">
-          Add new contact
-          <img
-            src="/assets/icons/contact/contact_add.png"
-            alt="contact add"
-          />
-        </button>
-        <div
-          class="contact-list"
-          id="content-contactlist"
-        ></div>
+          <button onclick="openAddContact()" class="contact-list-field-button">
+            Add new contact
+            <img src="/assets/icons/contact/contact_add.png" alt="contact add" />
+          </button>
+          <div class="contact-list" id="content-contactlist"></div>
         </div>
       </div>
     </main>
@@ -295,8 +142,7 @@
       <div class="contact-vector"></div>
       <span class="span-2">Better with a team</span>
     </div>
-    <div id="contact-info" class="contact-info">
-    </div>
+    <div id="contact-info" class="contact-info"></div>
     <script src="/js/contact.js"></script>
   </body>
 </html>
