@@ -104,7 +104,7 @@ function generateEditTemplate(id) {
 function generateSubtaskList(i, j, checkboxImgUrl, subtaskTexts) {
   return /*html*/ `
       <div>
-        <label onclick="toggleCheckboxUrl(${i},${j})" class="subtask-list d-flex-fs-c">
+        <label onclick="toggleCheckboxUrl(${i}, ${j})" class="subtask-list d-flex-fs-c">
           <div id="checkboxImg${j}" class="checkbox-img" style="background-image: url('${checkboxImgUrl}');"></div>
           <span> ${subtaskTexts[j]}</span>
         </label>

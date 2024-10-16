@@ -46,7 +46,6 @@ function updateHtml() {
 
 function updateColumn(category, contentId) {
   let tasks = currentTodos.filter((t) => t['category'] === category);
-
   let content = document.getElementById(contentId);
   content.innerHTML = '';
 
@@ -81,9 +80,9 @@ function testFunctionUpdateArray(i) {
   editTask(todoKeysArray[0], { subtask: todos[i].subtask });
 }
 
-function editTask(key, { title, description, dueDate, assignedTo, subtask, prio }) {
+function editTask(key, { title, description, category, dueDate, assignedTo, subtask, prio }) {
   // Senden der Daten an die API
-  patchData(`/todos/${key}`, { title, description, dueDate, assignedTo, subtask, prio });
+  patchData(`/todos/${key}`, { title, description, category, dueDate, assignedTo, subtask, prio });
 }
 
 async function addTask({ title, description, dueDate, category, task_category, assignedTo, subtask, prio }) {
@@ -151,9 +150,22 @@ function allowDrop(event) {
   event.stopPropagation();
 }
 
-function moveTo(category) {
-  todos[currentDraggedElement]['category'] = category;
+function moveTo(newCategory) {
+  // console.log("currentDraggedElement", currentDraggedElement);
+  // console.log("newCategory: ", newCategory);
+
+  todos[currentDraggedElement]['category'] = newCategory;
+  // console.log("Nach drop category:", todos[currentDraggedElement]['category']);
+
+  editTask(todoKeysArray[currentDraggedElement], { category: todos[currentDraggedElement].category});
+  console.log(todoKeysArray[currentDraggedElement], todos[currentDraggedElement].category);
+
+
+  console.log("nachdrop bevor updateHtml Todo:", todos);
+
+
   updateHtml();
+
   removeHighlightAfterDrop();
 }
 
