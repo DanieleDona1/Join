@@ -150,7 +150,7 @@ a {
   gap: 10px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  font-size: 1.125px;
+  font-size: 1.125rem;
 }
 
 .input-group input::placeholder {
@@ -223,7 +223,7 @@ label {
 .btn-guest-entry {
   border: unset;
   font-weight: bold;
-  font-size: 1.25px;
+  font-size: 1.25rem;
   padding: 10px 15px;
   border-radius: 8px;
   border: 1px solid black;
