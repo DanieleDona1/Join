@@ -12,7 +12,7 @@ async function onload() {
   console.log('todos in loadArray():', todos);
   console.log('currtodos in loadArray():', currentTodos);
   renderTasks();
-  
+
   openTaskDetails(1);
   generateEditTemplate(1);
 }
