@@ -53,7 +53,8 @@ function updateColumn(category, contentId) {
   for (let i = 0; i < tasks.length; i++) {
     const element = tasks[i];
     content.innerHTML += generateHtmlTemplate(i, tasks, element);
-    loadProgressText(i);
+
+    loadProgressText(element['id']);
   }
 }
 
@@ -107,11 +108,11 @@ async function createTask(category, contentId) {
 
 function getUserAddTaskData(swimlane) {
   return {
-    title: document.getElementById('title') || 'CSS',
+    title: document.getElementById('title') || 'Javascript',
     dueDate: document.getElementById('dueDate') || '2012-03-09',
     category: swimlane,
     description: document.getElementById('description') || 'No description provided.',
-    task_category: document.getElementById('task_category') || 'Technical-Task', // User-Story Technical-Task wichtig großgeschrieben User-Story
+    task_category: document.getElementById('task_category') || 'User-Story', // User-Story Technical-Task wichtig großgeschrieben User-Story
     assignedTo: document.getElementById('assignedTo') || ['Peter', 'Müller'] || 'Unassigned',
     subtask:
       document.getElementById('subtask') || [
@@ -120,7 +121,7 @@ function getUserAddTaskData(swimlane) {
         { text: 'cccc', checked: true },
       ] ||
       'No subtasks',
-    prio: document.getElementById('prio') || 'Low',
+    prio: document.getElementById('prio') || 'Urgent',
   };
 }
 
@@ -146,7 +147,6 @@ function startDragging(id) {
 }
 
 function allowDrop(event) {
-  // console.log('Event:', event); TODO
   event.preventDefault();
   event.stopPropagation();
 }
@@ -300,13 +300,7 @@ function loadSubtaskList(i) {
     } else {
       checkboxImgUrl = '/assets/icons/board/checkbox-unchecked.svg';
     }
-    subtasksList.innerHTML += `
-      <div>
-      <label onclick="toggleCheckboxUrl(${i},${j})" class="subtask-list d-flex-fs-c">
-      <div id="checkboxImg${j}" class="checkbox-img" style="background-image: url('${checkboxImgUrl}');"></div>
-      <span> ${subtaskTexts[j]}</span>
-      </label>
-      </div>`;
+    subtasksList.innerHTML += generateSubtaskList(i , j, checkboxImgUrl, subtaskTexts);
   }
 }
 

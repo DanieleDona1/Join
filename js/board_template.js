@@ -8,9 +8,9 @@ function generateHtmlTemplate(i, task, element) {
 
           <div class="subtasks">
             <div class="progress-container">
-                <div id="progressBar${i}" class="progress-bar"></div>
+                <div id="progressBar${element['id']}" class="progress-bar"></div>
             </div>
-                <div id="progressText${i}" class="progress-text">Subtasks</div>
+                <div id="progressText${element['id']}" class="progress-text">Subtasks</div>
           </div>
 
           <div class="d-flex-sb-c">
@@ -41,7 +41,7 @@ function generateDetailTaskTemplate(id) {
           <div class="d-flex-sb-c">
             <div class="members color-blue">Assigned To: <!-- TODO --> TODO Kontaktlist<div id="assignedToArea${id}"></div></div>
           </div>
-          <div id="subtasksList" class="subtasks color-blue">Subtasks <div><!-- TODO --> TODO Subtask</div></div>
+          <div id="subtasksList" class="subtasks color-blue">Subtasks:<div></div></div>
           <div class="configuration">
             <div onclick="deleteTask(${id})"><img src="/assets/icons/board/delete.svg" alt="delete"><span class="color-blue">Delete</span></div>
             <div onclick="generateEditTemplate(${id})" class="separator ">
@@ -99,4 +99,14 @@ function generateEditTemplate(id) {
 
       </div>
     `;
+}
+
+function generateSubtaskList(i, j, checkboxImgUrl, subtaskTexts) {
+  return /*html*/ `
+      <div>
+        <label onclick="toggleCheckboxUrl(${i},${j})" class="subtask-list d-flex-fs-c">
+          <div id="checkboxImg${j}" class="checkbox-img" style="background-image: url('${checkboxImgUrl}');"></div>
+          <span> ${subtaskTexts[j]}</span>
+        </label>
+      </div>`;
 }
