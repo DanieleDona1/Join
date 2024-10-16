@@ -8,7 +8,10 @@ const BASE_URL = 'https://joinremotestorage-c8226-default-rtdb.europe-west1.fire
 //Load all tasks from firebase
 async function onload() {
   await loadTodosArray();
-  updateHtml();
+  currentTodos = todos;
+  console.log('todos in loadArray():', todos);
+  console.log('currtodos in loadArray():', currentTodos);
+  renderTasks();
 }
 
 async function loadTodosArray() {
@@ -23,8 +26,6 @@ async function loadTodosArray() {
         ...todosResponse[todoKeysArray[i]],
       });
     }
-    currentTodos = todos;
-    console.log('todos:', todos);
   } else {
     console.log('No todos found, Database is empty');
   }
@@ -36,43 +37,60 @@ async function getAllUsers(path) {
   return responseAsJson;
 }
 
-function updateHtml() {
+function renderTasks() {
   updateColumn('toDo', 'toDoContent');
   updateColumn('inProgress', 'inProgressContent');
   updateColumn('awaitFeedback', 'awaitFeedbackContent');
   updateColumn('done', 'doneContent');
-  console.log('currentTodos:', currentTodos);
 }
 
 function updateColumn(category, contentId) {
-  let tasks = currentTodos.filter((t) => t['category'] === category);
+  let currentTodosCategory = currentTodos.filter((t) => t['category'] === category);
+  // currentTodosCategory;
+
   let content = document.getElementById(contentId);
   content.innerHTML = '';
 
-  for (let i = 0; i < tasks.length; i++) {
-    const element = tasks[i];
-    content.innerHTML += generateHtmlTemplate(i, tasks, element);
+  for (let i = 0; i < currentTodosCategory.length; i++) {
+    const task = currentTodosCategory[i];
+    content.innerHTML += generateHtmlTemplate(i, task);
 
-    loadProgressText(element['id']);
+    loadProgressText(i, task);
   }
 }
 
-function loadProgressText(i) {
-  let progressText = document.getElementById('progressText' + i);
-  let progressBar = document.getElementById('progressBar' + i);
+function loadProgressText(i, task) {
+  let progressText = document.getElementById('progressText' + task['id']);
+  let progressBar = document.getElementById('progressBar' + task['id']);
   if (progressText) {
     progressText.innerHTML = '';
   }
-  let subtaskTexts = currentTodos[i].subtask.map((sub) => sub.text);
-  let subtaskStatus = currentTodos[i].subtask.filter((sub) => sub.checked === true);
-  let totalSubtasks = subtaskTexts.length;
-  let completedTasks = subtaskStatus.length;
+  let completedTasks = task.subtask.filter((sub) => sub.checked === true).length;
+  let totalSubtasks = task.subtask.length;
 
-  progressText.innerHTML = /*html*/ `
-    ${completedTasks} / ${totalSubtasks} Subtasks
-    `;
-  let progressValue = (completedTasks / totalSubtasks) * 100;
-  progressBar.style.width = `${progressValue}%`;
+    progressText.innerHTML = /*html*/ `
+      ${completedTasks} / ${totalSubtasks} Subtasks
+      `;
+    let progressValue = (completedTasks / totalSubtasks) * 100;
+    progressBar.style.width = `${progressValue}%`;
+
+
+
+
+
+
+
+
+  // let subtaskTexts = currentTodos[id].subtask.map((sub) => sub.text);
+  // let subtaskStatus = currentTodos[id].subtask.filter((sub) => sub.checked === true);
+  // let totalSubtasks = subtaskTexts.length;
+  // let completedTasks = subtaskStatus.length;
+
+  // progressText.innerHTML = /*html*/ `
+  //   ${completedTasks} / ${totalSubtasks} Subtasks
+  //   `;
+  // let progressValue = (completedTasks / totalSubtasks) * 100;
+  // progressBar.style.width = `${progressValue}%`;
 }
 
 // Funktion zum Hinzufügen einer Aufgabe
@@ -107,8 +125,8 @@ async function createTask(category, contentId) {
 
 function getUserAddTaskData(swimlane) {
   return {
-    title: document.getElementById('title') || 'Javascript',
-    dueDate: document.getElementById('dueDate') || '2012-03-09',
+    title: document.getElementById('title') || 'Test',
+    dueDate: document.getElementById('dueDate') || '2020-03-09',
     category: swimlane,
     description: document.getElementById('description') || 'No description provided.',
     task_category: document.getElementById('task_category') || 'User-Story', // User-Story Technical-Task wichtig großgeschrieben User-Story
@@ -117,7 +135,7 @@ function getUserAddTaskData(swimlane) {
       document.getElementById('subtask') || [
         { text: 'aaaaaa', checked: false },
         { text: 'bbbbbb', checked: false },
-        { text: 'cccc', checked: true },
+        { text: 'cccc', checked: false },
       ] ||
       'No subtasks',
     prio: document.getElementById('prio') || 'Urgent',
@@ -151,21 +169,10 @@ function allowDrop(event) {
 }
 
 function moveTo(newCategory) {
-  // console.log("currentDraggedElement", currentDraggedElement);
-  // console.log("newCategory: ", newCategory);
-
   todos[currentDraggedElement]['category'] = newCategory;
-  // console.log("Nach drop category:", todos[currentDraggedElement]['category']);
-
   editTask(todoKeysArray[currentDraggedElement], { category: todos[currentDraggedElement].category});
-  console.log(todoKeysArray[currentDraggedElement], todos[currentDraggedElement].category);
-
-
-  console.log("nachdrop bevor updateHtml Todo:", todos);
-
-
-  updateHtml();
-
+  // currentTodos = todos;
+  renderTasks();
   removeHighlightAfterDrop();
 }
 
@@ -255,7 +262,7 @@ function closeDialog() {
   let filled = document.getElementById('search').value;
   if (filled != '') {
     currentTodos = todos;
-    updateHtml();
+    renderTasks();
   }
   currentTodos = todos;
 }
@@ -268,7 +275,7 @@ function deleteTask(id) {
   currentTodos = todos;
 
   closeDialog();
-  updateHtml();
+  renderTasks();
 
   deleteData(`/todos/${todoKeysArray[id]}`);
   let newTodoKeysArray = todoKeysArray.filter((t) => t !== todoKeysArray[id]);
@@ -281,7 +288,7 @@ function searchTitleOrDescription(inputId) {
   console.log(filterWord);
 
   currentTodos = todos.filter((t) => (t.title && t.title.toLowerCase().includes(filterWord)) || (t.description && t.description.toLowerCase().includes(filterWord)));
-  updateHtml();
+  renderTasks();
 }
 
 function animationSlideOut() {
@@ -302,6 +309,7 @@ function animationSlideOut() {
 
 //load subtask, update progressbar, update firebase
 function loadSubtaskList(i) {
+  // currentTodos = todos;
   let subtaskStatus = currentTodos[i].subtask.map((sub) => sub.checked);
   let subtaskTexts = currentTodos[i].subtask.map((sub) => sub.text);
   let subtasksList = document.getElementById('subtasksList');

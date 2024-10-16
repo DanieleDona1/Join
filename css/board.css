@@ -431,6 +431,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
     flex-direction: row;
     height: auto;
     padding-bottom: 10px;
+    min-height: 200px;
   }
 }
 

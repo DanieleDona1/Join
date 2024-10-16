@@ -1,21 +1,21 @@
-function generateHtmlTemplate(i, task, element) {
-  let taskCategory = task[i].task_category.replace(/-/g, ' ');
+function generateHtmlTemplate(i, task) {
+  let taskCategory = task.task_category.replace(/-/g, ' ');
   return /*html*/ `
-      <div class="task" draggable="true" onclick="openTaskDetails(${element['id']})" ondragstart="startDragging(${element['id']})">
-          <div class="task-category bg-${task[i].task_category}">${taskCategory}</div>
-          <div class="title">${task[i].title}</div>
-          <div class="description">${task[i].description}</div>
+      <div class="task" draggable="true" onclick="openTaskDetails(${task['id']})" ondragstart="startDragging(${task['id']})">
+          <div class="task-category bg-${task.task_category}">${taskCategory}</div>
+          <div class="title">${task.title}</div>
+          <div class="description">${task.description}</div>
 
           <div class="subtasks">
             <div class="progress-container">
-                <div id="progressBar${element['id']}" class="progress-bar"></div>
+                <div id="progressBar${task['id']}" class="progress-bar"></div>
             </div>
-                <div id="progressText${element['id']}" class="progress-text">Subtasks</div>
+                <div id="progressText${task['id']}" class="progress-text">Subtasks</div>
           </div>
 
           <div class="d-flex-sb-c">
             <div class="members"><!-- TODO -->TODO Members</div>
-            <img draggable="false" src="/assets/icons/board/${task[i].prio}.svg" alt="prio">
+            <img draggable="false" src="/assets/icons/board/${task.prio}.svg" alt="prio">
           </div>
       </div>`;
 }
@@ -88,7 +88,7 @@ function generateEditTemplate(id) {
         <label>Description:
           <textarea class="textarea-edit" rows="4" cols="50" maxlength="200" placeholder="Enter a description">${todos[id].description}</textarea>
         </label>
-        <label>Due date:<br> <input class="due-edit" id="dueEdit" type="date" onfocus="showPicker();"></label>
+        <label>Due date:<br> <input class="due-edit" id="dueEdit" type="date" onfocus="showPicker();" value="${dueDate}"></label>
 
         <button onclick="createEditTask(${id})" class="save-edit-btn btn-hover d-flex-c-c configuration">
           <img src="/assets/icons/board/create_task_ok.svg" alt="create-btn">
