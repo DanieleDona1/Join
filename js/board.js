@@ -12,6 +12,9 @@ async function onload() {
   console.log('todos in loadArray():', todos);
   console.log('currtodos in loadArray():', currentTodos);
   renderTasks();
+  
+  openTaskDetails(1);
+  generateEditTemplate(1);
 }
 
 async function loadTodosArray() {
@@ -73,24 +76,6 @@ function loadProgressText(i, task) {
       `;
     let progressValue = (completedTasks / totalSubtasks) * 100;
     progressBar.style.width = `${progressValue}%`;
-
-
-
-
-
-
-
-
-  // let subtaskTexts = currentTodos[id].subtask.map((sub) => sub.text);
-  // let subtaskStatus = currentTodos[id].subtask.filter((sub) => sub.checked === true);
-  // let totalSubtasks = subtaskTexts.length;
-  // let completedTasks = subtaskStatus.length;
-
-  // progressText.innerHTML = /*html*/ `
-  //   ${completedTasks} / ${totalSubtasks} Subtasks
-  //   `;
-  // let progressValue = (completedTasks / totalSubtasks) * 100;
-  // progressBar.style.width = `${progressValue}%`;
 }
 
 // Funktion zum Hinzufügen einer Aufgabe
@@ -138,7 +123,7 @@ function getUserAddTaskData(swimlane) {
         { text: 'cccc', checked: false },
       ] ||
       'No subtasks',
-    prio: document.getElementById('prio') || 'Urgent',
+    prio: document.getElementById('prio') || 'Medium',
   };
 }
 

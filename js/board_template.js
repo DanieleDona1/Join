@@ -51,6 +51,48 @@ function generateDetailTaskTemplate(id) {
       </div>`;
 }
 
+function generateEditTemplate(id) {
+  const dueDate = todos[id].dueDate;
+  document.getElementById('dialog').innerHTML = /*html */ `
+      <div class="edit-template detail-task dialog-content" onclick="event.stopPropagation();">
+        <div class="d-flex-e-c"><img class="xmark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark"></div>
+        <label>Title<br>
+          <input class="title-edit" id="titleEdit" type="text" value="${todos[id].title}" placeholder="Enter a title">
+        </label>
+        <label>Description
+          <textarea class="textarea-edit" rows="4" cols="50" maxlength="200" placeholder="Enter a description">${todos[id].description}</textarea>
+        </label>
+        <label>Due date<br> <input class="due-edit" id="dueEdit" type="date" onfocus="showPicker();" value="${dueDate}"></label>
+
+        <div>
+          <div>Priority</div>
+        </div>
+
+        <button onclick="createEditTask(${id})" class="save-edit-btn btn-hover d-flex-c-c configuration">
+          <img src="/assets/icons/board/create_task_ok.svg" alt="create-btn">
+          <img src="/assets/icons/board/check.svg" alt="check">
+        </button>
+
+        <div>Assigned to</div>
+
+        <div class="subtask-container">
+          <div onclick="">Subtasks</div>
+          <div>
+            <div class="subtask-group">
+              <input id="subtaskInput" class="subtask-input" type="text" placeholder="Add new subtask">
+              <div class="subtask-icons">
+                <img onclick="focusInput()" class="add-subtask" src="/assets/icons/board/property-add.svg" alt="add">
+              </div>
+            </div>
+          </div>
+          <div id="addedSubtaskList" class="added-subtask-list"></div>
+        </div>
+
+
+      </div>
+    `;
+}
+
 function generateAssignedTo(id) {
   document.getElementById(`assignedToArea${id}`).innerHTML = '';
   for (let j = 0; j < todos[id].assignedTo.length; j++) {
@@ -77,29 +119,6 @@ function generatePopUpAddTask(category, contentId) {
   openDialog();
 }
 
-function generateEditTemplate(id) {
-  const dueDate = todos[id].dueDate;
-  document.getElementById('dialog').innerHTML = /*html */ `
-      <div class="edit-template detail-task dialog-content" onclick="event.stopPropagation();">
-        <div class="d-flex-e-c"><img class="xmark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark"></div>
-        <label>Title:<br>
-          <input class="title-edit" id="titleEdit" type="text" value="${todos[id].title}" placeholder="Enter a title">
-        </label>
-        <label>Description:
-          <textarea class="textarea-edit" rows="4" cols="50" maxlength="200" placeholder="Enter a description">${todos[id].description}</textarea>
-        </label>
-        <label>Due date:<br> <input class="due-edit" id="dueEdit" type="date" onfocus="showPicker();" value="${dueDate}"></label>
-
-        <button onclick="createEditTask(${id})" class="save-edit-btn btn-hover d-flex-c-c configuration">
-          <img src="/assets/icons/board/create_task_ok.svg" alt="create-btn">
-          <img src="/assets/icons/board/check.svg" alt="check">
-        </button>
-
-        <span>Edit id :  ${id}</span>
-
-      </div>
-    `;
-}
 
 function generateSubtaskList(i, j, checkboxImgUrl, subtaskTexts) {
   return /*html*/ `
