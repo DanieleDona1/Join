@@ -78,6 +78,22 @@ function loadProgressText(task) {
     progressBar.style.width = `${progressValue}%`;
 }
 
+function loadProgressTextToggle(id) {
+  let progressText = document.getElementById('progressText' + id);
+  let progressBar = document.getElementById('progressBar' + id);
+  if (progressText) {
+    progressText.innerHTML = '';
+  }
+  let completedTasks = todos[id].subtask.filter((sub) => sub.checked === true).length;
+  let totalSubtasks = todos[id].subtask.length;
+
+    progressText.innerHTML = /*html*/ `
+      ${completedTasks} / ${totalSubtasks} Subtasks
+      `;
+    let progressValue = (completedTasks / totalSubtasks) * 100;
+    progressBar.style.width = `${progressValue}%`;
+}
+
 // Funktion zum Hinzufügen einer Aufgabe
 function testFunctionUpdateArray(i) {
   editTask(todoKeysArray[0], { subtask: todos[i].subtask });
@@ -294,8 +310,8 @@ function animationSlideOut() {
 
 //load subtask, update progressbar, update firebase
 function loadSubtaskList(i) {
-  // currentTodos = todos;
   let subtaskStatus = currentTodos[i].subtask.map((sub) => sub.checked);
+
   let subtaskTexts = currentTodos[i].subtask.map((sub) => sub.text);
   let subtasksList = document.getElementById('subtasksList');
 
@@ -320,6 +336,6 @@ function toggleCheckboxUrl(i, j) {
     checkboxImg.style.backgroundImage = "url('/assets/icons/board/checkbox-unchecked.svg')";
     changeCheckedStatus.checked = false;
   }
-  loadProgressText(i);
+  loadProgressTextToggle(i);
   editTask(todoKeysArray[i], { subtask: todos[i].subtask });
 }
