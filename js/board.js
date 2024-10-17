@@ -45,11 +45,11 @@ function renderTasks() {
   updateColumn('inProgress', 'inProgressContent');
   updateColumn('awaitFeedback', 'awaitFeedbackContent');
   updateColumn('done', 'doneContent');
+  currentTodos = todos;
 }
 
 function updateColumn(category, contentId) {
   let currentTodosCategory = currentTodos.filter((t) => t['category'] === category);
-  // currentTodosCategory;
 
   let content = document.getElementById(contentId);
   content.innerHTML = '';
@@ -71,11 +71,11 @@ function loadProgressText(task) {
   let completedTasks = task.subtask.filter((sub) => sub.checked === true).length;
   let totalSubtasks = task.subtask.length;
 
-    progressText.innerHTML = /*html*/ `
+  progressText.innerHTML = /*html*/ `
       ${completedTasks} / ${totalSubtasks} Subtasks
       `;
-    let progressValue = (completedTasks / totalSubtasks) * 100;
-    progressBar.style.width = `${progressValue}%`;
+  let progressValue = (completedTasks / totalSubtasks) * 100;
+  progressBar.style.width = `${progressValue}%`;
 }
 
 function loadProgressTextToggle(id) {
@@ -87,11 +87,11 @@ function loadProgressTextToggle(id) {
   let completedTasks = todos[id].subtask.filter((sub) => sub.checked === true).length;
   let totalSubtasks = todos[id].subtask.length;
 
-    progressText.innerHTML = /*html*/ `
+  progressText.innerHTML = /*html*/ `
       ${completedTasks} / ${totalSubtasks} Subtasks
       `;
-    let progressValue = (completedTasks / totalSubtasks) * 100;
-    progressBar.style.width = `${progressValue}%`;
+  let progressValue = (completedTasks / totalSubtasks) * 100;
+  progressBar.style.width = `${progressValue}%`;
 }
 
 // Funktion zum Hinzufügen einer Aufgabe
@@ -171,7 +171,7 @@ function allowDrop(event) {
 
 function moveTo(newCategory) {
   todos[currentDraggedElement]['category'] = newCategory;
-  editTask(todoKeysArray[currentDraggedElement], { category: todos[currentDraggedElement].category});
+  editTask(todoKeysArray[currentDraggedElement], { category: todos[currentDraggedElement].category });
   // currentTodos = todos;
   renderTasks();
   removeHighlightAfterDrop();
@@ -260,8 +260,9 @@ function openDialog() {
 function closeDialog() {
   // document.body.style.overflowY = "visible";
   animationSlideOut();
-  let filled = document.getElementById('search').value;
-  if (filled != '') {
+  let filled = document.getElementById('search');
+  if (filled.value != '') {
+    filled.value = '';
     currentTodos = todos;
     renderTasks();
   }
@@ -321,7 +322,7 @@ function loadSubtaskList(i) {
     } else {
       checkboxImgUrl = '/assets/icons/board/checkbox-unchecked.svg';
     }
-    subtasksList.innerHTML += generateSubtaskList(i , j, checkboxImgUrl, subtaskTexts);
+    subtasksList.innerHTML += generateSubtaskList(i, j, checkboxImgUrl, subtaskTexts);
   }
 }
 
