@@ -13,8 +13,8 @@ async function onload() {
   console.log('currtodos in loadArray():', currentTodos);
   renderTasks();
 
-  openTaskDetails(1);
-  generateEditTemplate(1);
+  // openTaskDetails(1);
+  // generateEditTemplate(1);
 }
 
 async function loadTodosArray() {
@@ -56,13 +56,13 @@ function updateColumn(category, contentId) {
 
   for (let i = 0; i < currentTodosCategory.length; i++) {
     const task = currentTodosCategory[i];
-    content.innerHTML += generateHtmlTemplate(i, task);
+    content.innerHTML += generateHtmlTemplate(task);
 
-    loadProgressText(i, task);
+    loadProgressText(task);
   }
 }
 
-function loadProgressText(i, task) {
+function loadProgressText(task) {
   let progressText = document.getElementById('progressText' + task['id']);
   let progressBar = document.getElementById('progressBar' + task['id']);
   if (progressText) {

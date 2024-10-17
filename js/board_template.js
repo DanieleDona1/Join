@@ -1,4 +1,4 @@
-function generateHtmlTemplate(i, task) {
+function generateHtmlTemplate(task) {
   let taskCategory = task.task_category.replace(/-/g, ' ');
   return /*html*/ `
       <div class="task" draggable="true" onclick="openTaskDetails(${task['id']})" ondragstart="startDragging(${task['id']})">
