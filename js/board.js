@@ -50,6 +50,7 @@ function renderTasks() {
 
 function updateColumn(category, contentId) {
   let currentTodosCategory = currentTodos.filter((t) => t['category'] === category);
+  let currentTodosId = currentTodosCategory.map((m) => m.id);
 
   let content = document.getElementById(contentId);
   content.innerHTML = '';
@@ -58,34 +59,25 @@ function updateColumn(category, contentId) {
     const task = currentTodosCategory[i];
     content.innerHTML += generateHtmlTemplate(task);
 
-    loadProgressText(task);
+    const { progressText, progressBar } = initializeProgressElements(task['id']);
+    loadProgressText(task, progressText, progressBar);
   }
 }
 
-function loadProgressText(task) {
-  let progressText = document.getElementById('progressText' + task['id']);
-  let progressBar = document.getElementById('progressBar' + task['id']);
+function initializeProgressElements(taskId) {
+  let progressText = document.getElementById('progressText' + taskId);
+  let progressBar = document.getElementById('progressBar' + taskId);
+
   if (progressText) {
-    progressText.innerHTML = '';
+    progressText.innerHTML = ''; // Den Fortschrittstext zurücksetzen
   }
+
+  return { progressText, progressBar }; // Die Elemente zurückgeben
+}
+
+function loadProgressText(task, progressText, progressBar) {
   let completedTasks = task.subtask.filter((sub) => sub.checked === true).length;
   let totalSubtasks = task.subtask.length;
-
-  progressText.innerHTML = /*html*/ `
-      ${completedTasks} / ${totalSubtasks} Subtasks
-      `;
-  let progressValue = (completedTasks / totalSubtasks) * 100;
-  progressBar.style.width = `${progressValue}%`;
-}
-
-function loadProgressTextToggle(id) {
-  let progressText = document.getElementById('progressText' + id);
-  let progressBar = document.getElementById('progressBar' + id);
-  if (progressText) {
-    progressText.innerHTML = '';
-  }
-  let completedTasks = todos[id].subtask.filter((sub) => sub.checked === true).length;
-  let totalSubtasks = todos[id].subtask.length;
 
   progressText.innerHTML = /*html*/ `
       ${completedTasks} / ${totalSubtasks} Subtasks
@@ -337,6 +329,7 @@ function toggleCheckboxUrl(i, j) {
     checkboxImg.style.backgroundImage = "url('/assets/icons/board/checkbox-unchecked.svg')";
     changeCheckedStatus.checked = false;
   }
-  loadProgressTextToggle(i);
+  const { progressText, progressBar } = initializeProgressElements(i);
+  loadProgressText(currentTodos[i], progressText, progressBar);
   editTask(todoKeysArray[i], { subtask: todos[i].subtask });
 }
