@@ -50,7 +50,6 @@ function renderTasks() {
 
 function updateColumn(category, contentId) {
   let currentTodosCategory = currentTodos.filter((t) => t['category'] === category);
-  let currentTodosId = currentTodosCategory.map((m) => m.id);
 
   let content = document.getElementById(contentId);
   content.innerHTML = '';
@@ -71,7 +70,6 @@ function initializeProgressElements(taskId) {
   if (progressText) {
     progressText.innerHTML = ''; // Den Fortschrittstext zurücksetzen
   }
-
   return { progressText, progressBar }; // Die Elemente zurückgeben
 }
 
