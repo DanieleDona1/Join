@@ -1,5 +1,5 @@
 const BASE_URL =
-  "https://contactstorage-593de-default-rtdb.europe-west1.firebasedatabase.app/";
+  'https://joinremotestorage-c8226-default-rtdb.europe-west1.firebasedatabase.app/';
 let contactList = [];
 let groupedContacts = {}; // Definiere groupedContacts als globale Variable
 

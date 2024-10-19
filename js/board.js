@@ -1,7 +1,5 @@
 let currentDraggedElement;
 
-const BASE_URL = 'https://joinremotestorage-c8226-default-rtdb.europe-west1.firebasedatabase.app/';
-
 //Load all tasks from firebase
 async function onload() {
   await loadTodosArray();

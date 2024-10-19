@@ -1,6 +1,3 @@
-const BASE_URL =
-  "https://joinremotestorage-c8226-default-rtdb.europe-west1.firebasedatabase.app/";
-
 function validatePasswordsAndCheckbox(event) {
   event.preventDefault();
 
@@ -67,7 +64,7 @@ function initializeCheckboxListener(checkbox) {
     });
   }
 }
-  
+
 function addInputListener(input1, input2){
   input1.addEventListener("input", () => changeBorderToBlack(input1, input2));
 };
@@ -91,7 +88,7 @@ function getFormValues() {
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
     let confirmPassword = document.getElementById("confirmPassword").value;
-  
+
     return {
       name: name,
       email: email,
@@ -99,27 +96,7 @@ function getFormValues() {
       confirmPassword: confirmPassword
     };
   }
-// double 
-  function togglePasswordVisibility(passwordFieldId, visibilityImgId) {
-    let passwordField = document.getElementById(passwordFieldId);  
-    let visibilityBtn = document.getElementById(visibilityImgId);
-  
-    if (passwordField.type === "password") {
-        passwordField.type = "text";
-        visibilityBtn.src = "/assets/icons/auth/visibility.svg";
-    } else {
-        passwordField.type = "password";
-        visibilityBtn.src = "/assets/icons/auth/visibility_off.svg";
-    }
-  }
-// double 
-  function toggleVisibility(passwordFieldId, passwordLockId, visibilityBtnId) {
-    const passwordField = document.getElementById(passwordFieldId);
-    const passwordLock = document.getElementById(passwordLockId);
-    const visibilityBtn = document.getElementById(visibilityBtnId);
-    managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn);
-  }
-  
+
   function managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn) {
     passwordField.addEventListener("input", () => {
       if (passwordField.value.trim() !== "") {
@@ -131,10 +108,8 @@ function getFormValues() {
       }
     });
   }
-  
+
   document.addEventListener("DOMContentLoaded", () => {
     toggleVisibility("password", "passwordLock", "visibilityImg");
     toggleVisibility("confirmPassword", "passwordLockConfirm", "visibilityImgConfirm");
   });
-  
-  

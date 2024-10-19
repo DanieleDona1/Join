@@ -1,3 +1,13 @@
+main {
+  background-color: rgb(246,247,248);
+}
+
+main h2 {
+  font-size: clamp(32px, 5vw, 48px);
+  margin-bottom: 0;
+  margin-right: 10px;
+}
+
 .summary-container {
   display: flex;
   gap: 20px;
@@ -14,10 +24,12 @@
 }
 
 .grid-container > div{
+  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 30px;
+  gap: 16px;
 }
 
 .to-do {
@@ -27,18 +39,21 @@
   justify-content: center;
   align-items: center;
 }
-.to-do:hover {
+
+.grid-container > div:hover {
   color: white;
   background-color: rgb(42, 54, 71);
+  transform: scale(1.05);
 }
 
 .to-do-img {
+  background-image: url('/assets/icons/summary/edit-dark.svg');
   width: 69px;
   height: 69px;
-  background-image: url('/assets/icons/summary/edit-dark.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  transition: transform 200ms ease, background-image 0s ease;
 }
 
 .to-do:hover .to-do-img {
@@ -50,10 +65,33 @@
   grid-row: 1;
 }
 
+.done-img {
+  background-image: url('/assets/icons/summary/check-dark.svg');
+  width: 69px;
+  height: 69px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 200ms ease, background-image 0s ease;
+}
+
+.done:hover .done-img {
+  background-image: url('/assets/icons/summary/check-light.svg');
+}
+
 .priority {
   grid-column: 1 / 7;
   grid-row: 2;
+}
 
+.priority-img {
+  background-image: url('/assets/icons/summary/urgent.svg');
+  width: 69px;
+  height: 69px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 200ms ease, background-image 0s ease;
 }
 
 .task-in-board {

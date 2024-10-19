@@ -1,7 +1,3 @@
-let users = [];
-
-const BASE_URL = 'https://joinremotestorage-c8226-default-rtdb.europe-west1.firebasedatabase.app/';
-
 async function onloadFunc() {
   checkMsgUrl();
   await loadUsersArray();
@@ -25,8 +21,6 @@ function checkMsgUrl() {
 async function loadUsersArray() {
   let usersResponse = await getAllUsers('users');
   let userKeysArray = Object.keys(usersResponse);
-  // console.log("usersResponse ", usersResponse);
-  // console.log("userKeysArray", userKeysArray);
 
   for (let i = 0; i < userKeysArray.length; i++) {
     users.push({
@@ -52,10 +46,10 @@ function login(event) {
   let email = document.getElementById('email').value;
   let password = document.getElementById('password').value;
 
-  let userName = checkUser(email, password);
+  let userId = checkUser(email, password);
 
-  if (userName) {
-    window.location.href = `/html/summary.html?msg=${userName}`;
+  if (userId) {
+    window.location.href = `/html/summary.html?msg=${userId}`;
   } else {
     document.getElementById('errorMsg').style.opacity = '1';
     document.getElementById('email').style.border = '1px solid red';
@@ -68,7 +62,7 @@ function login(event) {
 function checkUser(email, password) {
   for (let i = 0; i < users.length; i++) {
     if (users[i].user.email == email && users[i].user.password == password) {
-      return users[i].user.name;
+      return users[i].user.id;
     }
   }
   return null;
@@ -117,28 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
     changeBorderToBlack(passwordInput);
   });
 });
-
-// double
-function togglePasswordVisibility(passwordFieldId, visibilityImgId) {
-  let passwordField = document.getElementById(passwordFieldId);
-  let visibilityBtn = document.getElementById(visibilityImgId);
-
-  if (passwordField.type === 'password') {
-    passwordField.type = 'text';
-    visibilityBtn.src = '/assets/icons/auth/visibility.svg';
-  } else {
-    passwordField.type = 'password';
-    visibilityBtn.src = '/assets/icons/auth/visibility_off.svg';
-  }
-}
-// double
-function toggleVisibility(passwordFieldId, passwordLockId, visibilityBtnId) {
-  const passwordField = document.getElementById(passwordFieldId);
-  const passwordLock = document.getElementById(passwordLockId);
-  const visibilityBtn = document.getElementById(visibilityBtnId);
-
-  managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn);
-}
 
 // Mangage visibility password icons
 function managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn) {
