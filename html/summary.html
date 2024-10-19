@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/summary.css" />
     <script src="/script.js" defer></script>
+    <script src="/js/summary.js" defer></script>
   </head>
   <body class="max-width-1920">
     <header>
@@ -59,19 +60,25 @@
       </div>
 
       <div class="summary-container">
-        <div class="grid-container">
-          <div class="to-do">To Do</div>
+
+        <div onclick="redirectToPage()" class="grid-container">
+          <div class="to-do">
+            <div class="to-do-img"></div>
+            <div>
+              <div><!-- TODO --></div>
+              <span>To-do</span>
+            </div>
+          </div>
           <div class="done">Done</div>
           <div class="priority">Priority</div>
           <div class="task-in-board">Task in Board</div>
           <div class="task-in-progress">Task in Progress</div>
           <div class="awaiting-feedback">Awaiting Feedback</div>
         </div>
-        <div class="user-greeting">
-          Greeting, Username
-        </div>
-      </div>
 
+        <div class="user-greeting d-flex-c-c">Greeting, Username</div>
+
+      </div>
     </main>
   </body>
 </html>

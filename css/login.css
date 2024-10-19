@@ -84,7 +84,7 @@ a {
   border-radius: 8px;
   color: white;
   font-size: 1rem;
-  transition: background-color 200ms;
+  transition: background-color 125ms;
 }
 
 .header-btn-container a:hover {
@@ -213,7 +213,7 @@ label {
   border-radius: 8px;
   font-size: 18px;
   font-weight: bold;
-  transition: background-color 200ms;
+  transition: background-color 125ms;
 }
 .entry-btn:hover {
   background-color: rgb(41, 171, 226);
@@ -227,8 +227,8 @@ label {
   padding: 10px 15px;
   border-radius: 8px;
   border: 1px solid black;
-  transition: color 200ms;
-  transition: border 200ms;
+  transition: color 125ms;
+  transition: border 125ms;
   background-color: white;
 }
 

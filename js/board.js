@@ -49,7 +49,10 @@ function renderTasks() {
 }
 
 function updateColumn(category, contentId) {
+  console.log(2, currentTodos);
+
   let currentTodosCategory = currentTodos.filter((t) => t['category'] === category);
+  console.log('nach filter currentTodosCategory', currentTodosCategory);
 
   let content = document.getElementById(contentId);
   content.innerHTML = '';
@@ -61,6 +64,7 @@ function updateColumn(category, contentId) {
     const { progressText, progressBar } = initializeProgressElements(task['id']);
     loadProgressText(task, progressText, progressBar);
   }
+  console.log('Am Ende currTodosCateg', currentTodosCategory);
 }
 
 function initializeProgressElements(taskId) {
@@ -111,13 +115,14 @@ async function createTask(category, contentId) {
   const userInputData = getUserAddTaskData(category);
   await addTask(userInputData);
   await loadTodosArray();
+  currentTodos = todos;
   updateColumn(category, contentId);
 }
 
 function getUserAddTaskData(swimlane) {
   return {
     title: document.getElementById('title') || 'Test',
-    dueDate: document.getElementById('dueDate') || '2020-03-09',
+    dueDate: document.getElementById('dueDate') || '2024-03-09',
     category: swimlane,
     description: document.getElementById('description') || 'No description provided.',
     task_category: document.getElementById('task_category') || 'User-Story', // User-Story Technical-Task wichtig großgeschrieben User-Story
@@ -331,3 +336,9 @@ function toggleCheckboxUrl(i, j) {
   loadProgressText(currentTodos[i], progressText, progressBar);
   editTask(todoKeysArray[i], { subtask: todos[i].subtask });
 }
+
+// function formatDateToInput(id) {
+//   let dueDateStr = todos[id].dueDate
+//   const [day, month, year] = dueDateStr.split("-");
+//   return `${year}-${month}-${day}`;
+// }

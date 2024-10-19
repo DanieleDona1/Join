@@ -62,7 +62,7 @@ function generateEditTemplate(id) {
         <label>Description
           <textarea class="textarea-edit" rows="4" cols="50" maxlength="200" placeholder="Enter a description">${todos[id].description}</textarea>
         </label>
-        <label>Due date<br> <input class="due-edit" id="dueEdit" type="date" onfocus="showPicker();" value="${dueDate}"></label>
+        <label>Due date<br> <input class="due-edit" id="dueEdit" type="date" onfocus="showPicker();" value="${dueDate}" lang="de-DE"></label>
 
         <div>
           <div>Priority</div>
