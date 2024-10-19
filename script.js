@@ -1,3 +1,8 @@
+// board.js Arrays 
+let todos = [];
+let currentTodos = [];
+let todoKeysArray = [];
+
 document.addEventListener("DOMContentLoaded", function init() {
   highlightActiveLink();
   updateFavicon();

@@ -1,6 +1,3 @@
-let todos = [];
-let currentTodos = [];
-let todoKeysArray = [];
 let currentDraggedElement;
 
 const BASE_URL = 'https://joinremotestorage-c8226-default-rtdb.europe-west1.firebasedatabase.app/';
@@ -49,10 +46,7 @@ function renderTasks() {
 }
 
 function updateColumn(category, contentId) {
-  console.log(2, currentTodos);
-
   let currentTodosCategory = currentTodos.filter((t) => t['category'] === category);
-  console.log('nach filter currentTodosCategory', currentTodosCategory);
 
   let content = document.getElementById(contentId);
   content.innerHTML = '';
@@ -64,7 +58,6 @@ function updateColumn(category, contentId) {
     const { progressText, progressBar } = initializeProgressElements(task['id']);
     loadProgressText(task, progressText, progressBar);
   }
-  console.log('Am Ende currTodosCateg', currentTodosCategory);
 }
 
 function initializeProgressElements(taskId) {
@@ -72,9 +65,9 @@ function initializeProgressElements(taskId) {
   let progressBar = document.getElementById('progressBar' + taskId);
 
   if (progressText) {
-    progressText.innerHTML = ''; // Den Fortschrittstext zurücksetzen
+    progressText.innerHTML = '';
   }
-  return { progressText, progressBar }; // Die Elemente zurückgeben
+  return { progressText, progressBar };
 }
 
 function loadProgressText(task, progressText, progressBar) {

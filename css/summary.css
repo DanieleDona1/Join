@@ -13,15 +13,11 @@
 
 }
 
-.grid-container div{
-  background-color: blue;
-  border-radius: 30px;
-}
-
 .grid-container > div{
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 30px;
 }
 
 .to-do {
@@ -31,6 +27,10 @@
   justify-content: center;
   align-items: center;
 }
+.to-do:hover {
+  color: white;
+  background-color: rgb(42, 54, 71);
+}
 
 .to-do-img {
   width: 69px;
@@ -39,6 +39,10 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.to-do:hover .to-do-img {
+  background-image: url('/assets/icons/summary/edit-light.svg');
 }
 
 .done {
