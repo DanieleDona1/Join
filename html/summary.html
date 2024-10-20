@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Summary</title>
     <link rel="icon" type="image/png" href="/assets/icons/favicons/favicon_light.png" id="favicon" />
+    <script src="/script.js"></script>
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/summary.css" />
-    <script src="/script.js" defer></script>
     <script src="/js/summary.js" defer></script>
   </head>
-  <body class="max-width-1920">
+  <body onload="onload()" class="max-width-1920">
     <header>
       <img class="header-join-logo" src="/assets/icons/header/joinHeaderMobile.svg" alt="logo" />
       <p class="d-none">Kanban Project Management Tool</p>
@@ -82,7 +82,12 @@
           <div class="awaiting-feedback">Awaiting Feedback</div>
         </div>
 
-        <div class="user-greeting d-flex-c-c">Greeting, Username</div>
+        <div id="userGreeting" class="user-greeting-container d-flex-c-c">
+          <div>
+            <div id="greeting"></div>
+            <div id="userName"></div>
+          </div>
+        </div>
 
       </div>
     </main>

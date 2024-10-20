@@ -55,6 +55,13 @@
   align-items: center;
 }
 
+.d-flex-col-c-c {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 nav {
   position: fixed;
   bottom: 0;
@@ -179,10 +186,10 @@ main ol li {
 }
 
 main ol li::before {
-  content: counter(list-item) ". "; 
-  position: absolute; 
-  left: 0; 
-  top: 0; 
+  content: counter(list-item) ". ";
+  position: absolute;
+  left: 0;
+  top: 0;
   font-size: 27px;
 }
 

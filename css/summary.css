@@ -109,8 +109,7 @@ main h2 {
   grid-row: 3;
 }
 
-.user-greeting {
+.user-greeting-container {
   width: 100%;
-  background-color: green;
   border-radius: 20px;
 }
