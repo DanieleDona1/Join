@@ -102,7 +102,7 @@ function getUserAddTaskData(swimlane) {
         { text: 'cccc', checked: false },
       ] ||
       'No subtasks',
-    prio: document.getElementById('prio') || 'Medium',
+    prio: document.getElementById('prio') || 'Urgent',
   };
 }
 

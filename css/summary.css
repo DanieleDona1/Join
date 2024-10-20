@@ -109,7 +109,12 @@ main h2 {
   grid-row: 3;
 }
 
+.awaiting-feedback-text {
+  text-align: center;
+}
+
 .user-greeting-container {
   width: 100%;
   border-radius: 20px;
+  font-size: 3rem;
 }

@@ -28,7 +28,7 @@ async function loadUsersArray() {
   console.log('users', users);
 }
 
-// (für board.js und summary.js) 
+// (für board.js und summary.js)
 async function loadTodosArray() {
   let todosResponse = await getAllUsers('todos');
   if (todosResponse) {
@@ -50,7 +50,6 @@ async function loadTodosArray() {
 async function getAllUsers(path) {
   let response = await fetch(BASE_URL + path + '.json');
   let responseAsJson = await response.json();
-  console.log('responseAsJson', responseAsJson);
   return responseAsJson;
 }
 

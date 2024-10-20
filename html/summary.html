@@ -60,26 +60,45 @@
       </div>
 
       <div class="summary-container">
-
         <div onclick="redirectToPage()" class="grid-container">
           <div class="to-do">
             <div class="to-do-img"></div>
             <div>
-              <div><!-- TODO -->TODO</div>
+              <div id="todoAmount" class="todo-amount">0</div>
               <span>To-do</span>
             </div>
           </div>
           <div class="done">
             <div class="done-img"></div>
-            Done
+            <div>
+              <div id="doneAmount" class="done-amount">0</div>
+              <span>Done</span>
+            </div>
           </div>
           <div class="priority">
             <div class="priority-img"></div>
+            <div>
+              <div id="urgentAmount" class="urgent-amount">0</div>
+              <span>Urgent</span>
+            </div>
 
+            <div>
+              <div id="upcomingDeadline"></div>
+              <span id="upcomingText">Upcoming Deadline</span>
+            </div>
           </div>
-          <div class="task-in-board">Task in Board</div>
-          <div class="task-in-progress">Task in Progress</div>
-          <div class="awaiting-feedback">Awaiting Feedback</div>
+          <div class="task-in-board d-flex-col-c-c">
+            <div id="taskInBoard">0</div>
+            <div class="task-in-board-text">Task in Board</div>
+          </div>
+          <div class="task-in-progress d-flex-col-c-c">
+            <div id="taskInProgress">0</div>
+            <div class="task-in-progress-text">Task in Progress</div>
+          </div>
+          <div class="awaiting-feedback d-flex-col-c-c">
+            <div id="taskInFeedback">0</div>
+            <div class="awaiting-feedback-text">Awaiting Feedback</div>
+          </div>
         </div>
 
         <div id="userGreeting" class="user-greeting-container d-flex-c-c">
@@ -88,7 +107,6 @@
             <div id="userName"></div>
           </div>
         </div>
-
       </div>
     </main>
   </body>
