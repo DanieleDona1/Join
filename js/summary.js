@@ -110,27 +110,21 @@ function getCounts(todos) {
 }
 
 function getUpcomingDeadline() {
-  let urgentAmount = todos.filter((todo) => todo['prio'] === 'Urgent');
-  let urgentDueDates = urgentAmount.map((todo) => todo.dueDate);
-  // const getUrgentAmount = getTodoCount(todos, 'prio', 'Urgent');
-  console.log("test: ", urgentDueDates);
+  const urgentAmount = todos.filter((todo) => todo['prio'] === 'Urgent');
+  const urgentDueDates = urgentAmount.map((todo) => todo.dueDate);
 
-  let nextDueDate = getNextDueDate(urgentDueDates);
-
-
-
-
-
-  document.getElementById('upcomingDeadline').innerHTML = nextDueDateFormatted;
-
-
+  if (urgentDueDates.length) {
+    const nextDueDate = getNextDueDate(urgentDueDates);
+    const nextDueDateFormatted = formatDate(nextDueDate);
+    document.getElementById('upcomingDeadline').innerHTML = nextDueDateFormatted;
+  }
 }
 
 function getNextDueDate(urgentDueDates) {
   const dueDatesObjects = urgentDueDates.map(date => {
     return new Date(date);
   });
-  let nextDueDate = dueDatesObjects[0];
+  const nextDueDate = dueDatesObjects[0];
   for (let i = 1; i < dueDatesObjects.length; i++) {
     if (dueDatesObjects[i] < nextDueDate) {  // Vergleiche jedes Datum mit dem bisherigen frühesten Datum
       nextDueDate = dueDatesObjects[i];  // Setze das neu gefundene frühere Datum als nächstes frühestes Datum
@@ -139,4 +133,7 @@ function getNextDueDate(urgentDueDates) {
   return nextDueDate;
 }
 
-
+function formatDate(date) {
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return date.toLocaleDateString('en-US', options);
+}
