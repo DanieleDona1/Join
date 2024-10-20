@@ -90,7 +90,7 @@ async function createTask(category, contentId) {
 function getUserAddTaskData(swimlane) {
   return {
     title: document.getElementById('title') || 'Test',
-    dueDate: document.getElementById('dueDate') || '2024-03-09',
+    dueDate: document.getElementById('dueDate') || '2024-03-10',
     category: swimlane,
     description: document.getElementById('description') || 'No description provided.',
     task_category: document.getElementById('task_category') || 'User-Story', // User-Story Technical-Task wichtig großgeschrieben User-Story

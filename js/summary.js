@@ -4,10 +4,11 @@ function redirectToPage() {
 
 async function onload() {
   await loadUsersArray();
-  await loadTodosArray();
-  console.log('Todos: ', todos);
   greetUser();
+  await loadTodosArray();
   getCounts(todos);
+  console.log('Todos: ', todos);
+  getUpcomingDeadline();
 }
 
 function greetUser() {
@@ -107,4 +108,35 @@ function getCounts(todos) {
   elements.taskInProgress.innerHTML = counts.getProgressAmount;
   elements.taskInFeedback.innerHTML = counts.getFeedbackAmount;
 }
+
+function getUpcomingDeadline() {
+  let urgentAmount = todos.filter((todo) => todo['prio'] === 'Urgent');
+  let urgentDueDates = urgentAmount.map((todo) => todo.dueDate);
+  // const getUrgentAmount = getTodoCount(todos, 'prio', 'Urgent');
+  console.log("test: ", urgentDueDates);
+
+  let nextDueDate = getNextDueDate(urgentDueDates);
+
+
+
+
+
+  document.getElementById('upcomingDeadline').innerHTML = nextDueDateFormatted;
+
+
+}
+
+function getNextDueDate(urgentDueDates) {
+  const dueDatesObjects = urgentDueDates.map(date => {
+    return new Date(date);
+  });
+  let nextDueDate = dueDatesObjects[0];
+  for (let i = 1; i < dueDatesObjects.length; i++) {
+    if (dueDatesObjects[i] < nextDueDate) {  // Vergleiche jedes Datum mit dem bisherigen frühesten Datum
+      nextDueDate = dueDatesObjects[i];  // Setze das neu gefundene frühere Datum als nächstes frühestes Datum
+    }
+  }
+  return nextDueDate;
+}
+
 

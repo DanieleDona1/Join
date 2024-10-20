@@ -30,6 +30,7 @@ main h2 {
   align-items: center;
   border-radius: 30px;
   gap: 16px;
+  text-align: center;
 }
 
 .to-do {
@@ -107,10 +108,6 @@ main h2 {
 .awaiting-feedback {
   grid-column: 5 / span 2;
   grid-row: 3;
-}
-
-.awaiting-feedback-text {
-  text-align: center;
 }
 
 .user-greeting-container {
