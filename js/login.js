@@ -17,30 +17,6 @@ function checkMsgUrl() {
   history.replaceState(null, '', '/html/login.html');
 }
 
-// load data save as array
-async function loadUsersArray() {
-  let usersResponse = await getAllUsers('users');
-  let userKeysArray = Object.keys(usersResponse);
-
-  for (let i = 0; i < userKeysArray.length; i++) {
-    users.push({
-      user: {
-        // id: userKeysArray[i],
-        id: i,
-        ...usersResponse[userKeysArray[i]],
-      },
-    });
-  }
-  console.log('users', users);
-}
-
-async function getAllUsers(path) {
-  let response = await fetch(BASE_URL + path + '.json');
-  let responseAsJson = await response.json();
-  console.log('responseAsJson', responseAsJson);
-  return responseAsJson;
-}
-
 // compare user input to firebase
 function login(event) {
   event.preventDefault();

@@ -47,30 +47,4 @@ function getUserName() {
   return userName;
 }
 
-
-// doppelt summary und login.js
-// load data save as array
-async function loadUsersArray() {
-  let usersResponse = await getAllUsers('users');
-  let userKeysArray = Object.keys(usersResponse);
-
-  for (let i = 0; i < userKeysArray.length; i++) {
-    users.push({
-      user: {
-        // id: userKeysArray[i],
-        id: i,
-        ...usersResponse[userKeysArray[i]],
-      },
-    });
-  }
-  console.log('users', users);
-}
-
-// doppelt summary und login.js
-async function getAllUsers(path) {
-  let response = await fetch(BASE_URL + path + '.json');
-  let responseAsJson = await response.json();
-  return responseAsJson;
-}
-
 // window.location.href = "login.html?msg=You Signed Up successfully";

@@ -11,6 +11,49 @@ document.addEventListener("DOMContentLoaded", function init() {
   updateFavicon();
 });
 
+// load data save as array (für summary.js und login.js)
+async function loadUsersArray() {
+  let usersResponse = await getAllUsers('users');
+  let userKeysArray = Object.keys(usersResponse);
+
+  for (let i = 0; i < userKeysArray.length; i++) {
+    users.push({
+      user: {
+        // id: userKeysArray[i],
+        id: i,
+        ...usersResponse[userKeysArray[i]],
+      },
+    });
+  }
+  console.log('users', users);
+}
+
+// (für board.js und summary.js) 
+async function loadTodosArray() {
+  let todosResponse = await getAllUsers('todos');
+  if (todosResponse) {
+    todoKeysArray = Object.keys(todosResponse);
+    todos = [];
+
+    for (let i = 0; i < todoKeysArray.length; i++) {
+      todos.push({
+        id: i,
+        ...todosResponse[todoKeysArray[i]],
+      });
+    }
+  } else {
+    console.log('No todos found, Database is empty');
+  }
+}
+
+// (für summary.js, login.js und board.js)
+async function getAllUsers(path) {
+  let response = await fetch(BASE_URL + path + '.json');
+  let responseAsJson = await response.json();
+  console.log('responseAsJson', responseAsJson);
+  return responseAsJson;
+}
+
 function highlightActiveLink() {
   const currentPath = window.location.pathname;
   const navLinks = document.querySelectorAll(

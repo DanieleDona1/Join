@@ -12,29 +12,6 @@ async function onload() {
   // generateEditTemplate(1);
 }
 
-async function loadTodosArray() {
-  let todosResponse = await getAllUsers('todos');
-  if (todosResponse) {
-    todoKeysArray = Object.keys(todosResponse);
-    todos = [];
-
-    for (let i = 0; i < todoKeysArray.length; i++) {
-      todos.push({
-        id: i,
-        ...todosResponse[todoKeysArray[i]],
-      });
-    }
-  } else {
-    console.log('No todos found, Database is empty');
-  }
-}
-
-async function getAllUsers(path) {
-  let response = await fetch(BASE_URL + path + '.json');
-  let responseAsJson = await response.json();
-  return responseAsJson;
-}
-
 function renderTasks() {
   updateColumn('toDo', 'toDoContent');
   updateColumn('inProgress', 'inProgressContent');
