@@ -7,7 +7,6 @@ async function onload() {
   greetUser();
   await loadTodosArray();
   getCounts(todos);
-  console.log('Todos: ', todos);
   getUpcomingDeadline();
 }
 
@@ -126,8 +125,8 @@ function getNextDueDate(urgentDueDates) {
   });
   const nextDueDate = dueDatesObjects[0];
   for (let i = 1; i < dueDatesObjects.length; i++) {
-    if (dueDatesObjects[i] < nextDueDate) {  // Vergleiche jedes Datum mit dem bisherigen frühesten Datum
-      nextDueDate = dueDatesObjects[i];  // Setze das neu gefundene frühere Datum als nächstes frühestes Datum
+    if (dueDatesObjects[i] < nextDueDate) {
+      nextDueDate = dueDatesObjects[i];
     }
   }
   return nextDueDate;
