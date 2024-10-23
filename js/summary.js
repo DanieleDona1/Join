@@ -1,9 +1,4 @@
-function redirectToPage() {
-  window.location.href = 'board.html';
-}
-
 async function onload() {
-  await loadUsersArray();
   greetUser();
   await loadTodosArray();
   getCounts(todos);
@@ -32,20 +27,21 @@ function greetUser() {
 }
 
 function getUserName() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const msg = urlParams.get('msg');
   let userName = 'Unknown User';
+  let userNameStorage = getFromLocalStorage('user');
 
-  if (msg) {
-    if (msg !== 'guest') {
-      if (users[msg] && users[msg].user && users[msg].user.name) {
-        userName = users[msg].user.name;
-      }
+  if (userNameStorage) {
+    if (userNameStorage !== 'guest') {
+      userName = userNameStorage;
     } else {
       userName = 'Guest';
     }
   }
   return userName;
+}
+
+function getFromLocalStorage(key) {
+  return localStorage.getItem(key);
 }
 
 function getElementReferences() {
@@ -120,7 +116,7 @@ function getUpcomingDeadline() {
 }
 
 function getNextDueDate(urgentDueDates) {
-  const dueDatesObjects = urgentDueDates.map(date => {
+  const dueDatesObjects = urgentDueDates.map((date) => {
     return new Date(date);
   });
   const nextDueDate = dueDatesObjects[0];
@@ -135,4 +131,8 @@ function getNextDueDate(urgentDueDates) {
 function formatDate(date) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   return date.toLocaleDateString('en-US', options);
+}
+
+function redirectToPage() {
+  window.location.href = 'board.html';
 }

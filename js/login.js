@@ -1,4 +1,5 @@
 async function onloadFunc() {
+  await loadTodosArray();
   checkMsgUrl();
   await loadUsersArray();
 }
@@ -23,13 +24,11 @@ function login(event) {
   let email = document.getElementById('email').value;
   let password = document.getElementById('password').value;
 
-  let userId = checkUser(email, password);
-  console.log("UserId", userId);
-  saveToLocalStorage(userId);
-  
+  let userName = checkUser(email, password);
 
-  if (userId) {
-    window.location.href = `/html/summary.html?msg=${userId}`;
+  if (userName) {
+    saveToLocalStorage("user", userName);
+    window.location.href = `/html/summary.html`; ////?msg=${userId}
   } else {
     document.getElementById('errorMsg').style.opacity = '1';
     document.getElementById('email').style.border = '1px solid red';
@@ -42,23 +41,26 @@ function login(event) {
 function checkUser(email, password) {
   for (let i = 0; i < users.length; i++) {
     if (users[i].user.email == email && users[i].user.password == password) {
-      return users[i].user.id;
+      console.log("Check Id:", users[i].user.id);
+      return users[i].user.name;
     }
   }
   return null;
 }
 
-function saveToLocalStorage(value) {
-  localStorage.setItem("userKey", value)
+
+function saveToLocalStorage(key, value) {
+  localStorage.setItem(key, value);
 }
 
 function guestLoginRedirect() {
   let animatedElement = document.getElementById('animatedText');
   document.getElementById('dialogBg').style.display = 'flex';
   animatedElement.innerHTML = 'You successfully logged in as a guest!';
+  saveToLocalStorage("user", 'guest');
   setTimeout(function () {
     document.getElementById('dialogBg').style.display = 'none';
-    window.location.href = 'summary.html?msg=guest';
+    window.location.href = 'summary.html';
   }, 3000);
 }
 
