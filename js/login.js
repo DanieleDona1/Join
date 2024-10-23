@@ -24,6 +24,9 @@ function login(event) {
   let password = document.getElementById('password').value;
 
   let userId = checkUser(email, password);
+  console.log("UserId", userId);
+  saveToLocalStorage(userId);
+  
 
   if (userId) {
     window.location.href = `/html/summary.html?msg=${userId}`;
@@ -43,6 +46,10 @@ function checkUser(email, password) {
     }
   }
   return null;
+}
+
+function saveToLocalStorage(value) {
+  localStorage.setItem("userKey", value)
 }
 
 function guestLoginRedirect() {

@@ -19,8 +19,8 @@ async function loadUsersArray() {
   for (let i = 0; i < userKeysArray.length; i++) {
     users.push({
       user: {
-        // id: userKeysArray[i],
-        id: i,
+        id: userKeysArray[i],
+        // id: i,
         ...usersResponse[userKeysArray[i]],
       },
     });
