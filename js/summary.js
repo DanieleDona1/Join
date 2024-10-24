@@ -1,3 +1,8 @@
+/**
+ * Initializes the application by greeting the user, loading the todos array, updating counts and display getUpcomingDeadline.
+ * @async
+ * @function onload
+ */
 async function onload() {
   greetUser();
   await loadTodosArray();
@@ -5,12 +10,14 @@ async function onload() {
   getUpcomingDeadline();
 }
 
+/**
+ * Greets the user based on the current time and displays their name.
+ * @function greetUser
+ */
 function greetUser() {
   const userGreetingElement = document.getElementById('greeting');
   const userNameElement = document.getElementById('userName');
-
   const userName = getUserName();
-
   const currentHour = new Date().getHours();
   let greeting;
 
@@ -21,11 +28,15 @@ function greetUser() {
   } else {
     greeting = 'Good evening';
   }
-
   userGreetingElement.innerHTML = `${greeting},`;
   userNameElement.innerHTML = `${userName}!`;
 }
 
+/**
+ * Retrieves the user's name from local storage or returns 'Unknown User' if not found.
+ * @returns {string} The name of the user.
+ * @function getUserName
+ */
 function getUserName() {
   let userName = 'Unknown User';
   let userNameStorage = getFromLocalStorage('user');
@@ -40,10 +51,21 @@ function getUserName() {
   return userName;
 }
 
+/**
+ * Retrieves an item from local storage by key.
+ * @param {string} key - The key for the local storage item.
+ * @returns {string|null} The value stored in local storage, or null if not found.
+ * @function getFromLocalStorage
+ */
 function getFromLocalStorage(key) {
   return localStorage.getItem(key);
 }
 
+/**
+ * Retrieves references to various HTML elements related to todo counts.
+ * @returns {Object} An object containing references to the relevant HTML elements.
+ * @function getElementReferences
+ */
 function getElementReferences() {
   const todoAmount = document.getElementById('todoAmount');
   const doneAmount = document.getElementById('doneAmount');
@@ -62,17 +84,34 @@ function getElementReferences() {
   };
 }
 
-// Funktion, Anzahl Todos für eine bestimmte Kategorie / Priorität berechnen
+/**
+ * Counts the number of todos matching a specified key-value pair.
+ * @param {Array} todos - The array of todo objects.
+ * @param {string} key - The property to match.
+ * @param {string} value - The value to match.
+ * @returns {number} The count of matching todos.
+ * @function getTodoCount
+ */
 function getTodoCount(todos, key, value) {
   return todos.filter((todo) => todo[key] === value).length;
 }
 
-// Funktion, Anzahl Todos für die Gesamtanzahl berechnen
+/**
+ * Calculates the total number of todos in the array.
+ * @param {Array} todos - The array of todo objects.
+ * @returns {number} The total count of todos.
+ * @function getTotalCount
+ */
 function getTotalCount(todos) {
   return todos.length;
 }
 
-// Funktion, Zählungen der Todos berechnen
+/**
+ * Calculates and returns counts of todos based on their categories and priorities.
+ * @param {Array} todos - The array of todo objects.
+ * @returns {Object} An object containing various todo counts.
+ * @function calculateTodoCounts
+ */
 function calculateTodoCounts(todos) {
   const getTodoAmount = getTodoCount(todos, 'category', 'toDo');
   const getDoneAmount = getTodoCount(todos, 'category', 'done');
@@ -91,7 +130,11 @@ function calculateTodoCounts(todos) {
   };
 }
 
-// Funktion, HTML-Elemente aktualisieren
+/**
+ * Updates the HTML elements with the calculated counts of todos.
+ * @param {Array} todos - The array of todo objects.
+ * @function getCounts
+ */
 function getCounts(todos) {
   const elements = getElementReferences();
   const counts = calculateTodoCounts(todos);
@@ -104,6 +147,10 @@ function getCounts(todos) {
   elements.taskInFeedback.innerHTML = counts.getFeedbackAmount;
 }
 
+/**
+ * Finds and displays the upcoming deadline for urgent todos.
+ * @function getUpcomingDeadline
+ */
 function getUpcomingDeadline() {
   const urgentAmount = todos.filter((todo) => todo['prio'] === 'Urgent');
   const urgentDueDates = urgentAmount.map((todo) => todo.dueDate);
@@ -115,6 +162,12 @@ function getUpcomingDeadline() {
   }
 }
 
+/**
+ * Determines the next due date from an array of due date strings.
+ * @param {Array} urgentDueDates - An array of urgent due date strings.
+ * @returns {Date} The next due date.
+ * @function getNextDueDate
+ */
 function getNextDueDate(urgentDueDates) {
   const dueDatesObjects = urgentDueDates.map((date) => {
     return new Date(date);
@@ -128,11 +181,21 @@ function getNextDueDate(urgentDueDates) {
   return nextDueDate;
 }
 
+/**
+ * Formats a date into a human-readable string.
+ * @param {Date} date - The date to format.
+ * @returns {string} The formatted date string.
+ * @function formatDate
+ */
 function formatDate(date) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   return date.toLocaleDateString('en-US', options);
 }
 
+/**
+ * Redirects the user to the specified page.
+ * @function redirectToPage
+ */
 function redirectToPage() {
   window.location.href = 'board.html';
 }
