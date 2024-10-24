@@ -46,7 +46,7 @@ function login(event) {
 
   if (userName) {
     saveToLocalStorage('user', userName);
-    window.location.href = `/html/summary.html`;
+    window.location.href = '/html/summary.html';
   } else {
     document.getElementById('errorMsg').style.opacity = '1';
     document.getElementById('email').style.border = '1px solid red';

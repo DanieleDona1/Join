@@ -1,3 +1,8 @@
+/**
+ * Generates the HTML template for a task.
+ * @param {Object} task - The task object containing task details.
+ * @returns {string} - The HTML string representing the task.
+ */
 function generateHtmlTemplate(task) {
   let taskCategory = task.task_category.replace(/-/g, ' ');
   return /*html*/ `
@@ -20,6 +25,11 @@ function generateHtmlTemplate(task) {
       </div>`;
 }
 
+/**
+ * Generates the detailed HTML template for a specific task.
+ * @param {number} id - The ID of the task to display details for.
+ * @returns {string} - The HTML string for the detailed task view.
+ */
 function generateDetailTaskTemplate(id) {
   let taskCategory = todos[id].task_category.replace(/\s+/g, '-').toLowerCase();
   let formattedDate = todos[id].dueDate.replace(/-/g, '/');
@@ -51,6 +61,10 @@ function generateDetailTaskTemplate(id) {
       </div>`;
 }
 
+/**
+ * Generates the HTML template for editing a specific task.
+ * @param {number} id - The ID of the task to edit.
+ */
 function generateEditTemplate(id) {
   const dueDate = todos[id].dueDate;
   document.getElementById('dialog').innerHTML = /*html */ `
@@ -93,6 +107,10 @@ function generateEditTemplate(id) {
     `;
 }
 
+/**
+ * Generates and displays the assigned members for a specific task.
+ * @param {number} id - The ID of the task whose assigned members are to be displayed.
+ */
 function generateAssignedTo(id) {
   document.getElementById(`assignedToArea${id}`).innerHTML = '';
   for (let j = 0; j < todos[id].assignedTo.length; j++) {
@@ -103,6 +121,11 @@ function generateAssignedTo(id) {
   }
 }
 
+/**
+ * Generates the HTML template for adding a new task.
+ * @param {string} category - The category of the new task.
+ * @param {string} contentId - The ID of the content area where the task will be added.
+ */
 function generatePopUpAddTask(category, contentId) {
   document.getElementById('dialog').innerHTML = /*html*/ `
     <div class="pop-up-add-Task slide-in dialog-content" onclick="event.stopPropagation();">
@@ -119,7 +142,14 @@ function generatePopUpAddTask(category, contentId) {
   openDialog();
 }
 
-
+/**
+ * Generates the HTML template for a subtask.
+ * @param {number} i - The index of the main task.
+ * @param {number} j - The index of the subtask.
+ * @param {string} checkboxImgUrl - The URL for the checkbox image.
+ * @param {string[]} subtaskTexts - The array of subtask texts.
+ * @returns {string} - The HTML string representing the subtask.
+ */
 function generateSubtaskList(i, j, checkboxImgUrl, subtaskTexts) {
   return /*html*/ `
       <div>

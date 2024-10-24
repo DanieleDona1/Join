@@ -361,7 +361,7 @@ label span {
   color: rgb(255, 255, 255);
   font-size: 0.625rem;
   position: absolute;
-  top: 50%;
+  top: 48%;
   left: 50%;
   transform: translate(-50%, -53%);
 }
