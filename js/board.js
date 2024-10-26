@@ -505,7 +505,15 @@ function saveCurrentSubtask(id) {
   currentTodos[id]['subtask'].push({ checked: false, text: subtaskText.value });
 
   document.getElementById('subtaskAddedList').innerHTML += /*html*/ `
-    <li>${subtaskText.value}</li>
+  <div class="subtask-item${id} subtask-group subtask-list-group">
+  <!-- &bull; -->
+              <input id="subtaskListInput" readonly class="subtask-input" type="text" value="${subtaskText.value}">
+              <div id="subtaskListIcons" class="subtask-list-icons">
+              <div class="d-flex-c-c">
+                <img onclick="" class="add-subtask" src="/assets/icons/board/edit.svg" alt="close">
+                <img class="mg-left" onclick="saveCurrentSubtask(${id})" class="add-subtask" src="/assets/icons/board/delete.svg" alt="check">
+                </div>
+              </div>
   `;
   resetInputField();
 }
@@ -519,12 +527,8 @@ function resetInputField() {
 function createEditTask(i) {
   todos = currentTodos;
 
-
-  //hier weitere Felder hinzufügen
-
-
+  //hier weitere Felder hinzufügen saveTitle, saveDescription, saveDueDate
   saveSubtaskAddedList(i);
-
 
   closeDialog();
 }
@@ -533,4 +537,14 @@ function saveSubtaskAddedList(i) {
   if (document.getElementById('subtaskAddedList').innerHTML !== '') {
     editTask(todoKeysArray[i], { subtask: todos[i].subtask });
   }
+}
+
+function editItem(listItem) {
+  // Speichere den aktuellen Text
+  const currentText = listItem.innerText;
+
+  // Erstelle ein Eingabefeld und setze den aktuellen Text
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.value = currentText;
 }

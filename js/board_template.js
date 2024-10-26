@@ -93,16 +93,15 @@ function generateEditTemplate(id) {
               <div id="subtaskIcons" class="subtask-icons">
                 <img onclick="focusInput()" class="add-subtask" src="/assets/icons/board/property-add.svg" alt="add">
               </div>
-              <!-- <div id="newSubtaskAdded" class="new-subtask-added"></div> -->
             </div>
           </div>
-          <ul id="subtaskAddedList" class="subtask-added-list"></ul>
+          <div id="subtaskAddedList" class="subtask-added-list"></div>
 
-          <button onclick="createEditTask(${id})" class="save-edit-btn btn-hover d-flex-c-c configuration">
-            <img src="/assets/icons/board/create_task_ok.svg" alt="create-btn">
-            <img src="/assets/icons/board/check.svg" alt="check">
-          </button>
         </div>
+        <button onclick="createEditTask(${id})" class="save-edit-btn btn-hover d-flex-c-c configuration">
+          <img src="/assets/icons/board/create_task_ok.svg" alt="create-btn">
+          <img src="/assets/icons/board/check.svg" alt="check">
+        </button>
       </div>
     `;
 }
