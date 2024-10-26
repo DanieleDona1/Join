@@ -74,7 +74,7 @@ function generateEditTemplate(id) {
           <input class="title-edit" id="titleEdit" type="text" value="${todos[id].title}" placeholder="Enter a title">
         </label>
         <label>Description
-          <textarea class="textarea-edit" rows="4" cols="50" maxlength="200" placeholder="Enter a description">${todos[id].description}</textarea>
+          <textarea class="textarea-edit" rows="4" cols="50" maxlength="300" placeholder="Enter a description">${todos[id].description}</textarea>
         </label>
         <label>Due date<br> <input class="due-edit" id="dueEdit" type="date" onfocus="showPicker();" value="${dueDate}" lang="de-DE"></label>
 
@@ -82,10 +82,6 @@ function generateEditTemplate(id) {
           <div>Priority</div>
         </div>
 
-        <button onclick="createEditTask(${id})" class="save-edit-btn btn-hover d-flex-c-c configuration">
-          <img src="/assets/icons/board/create_task_ok.svg" alt="create-btn">
-          <img src="/assets/icons/board/check.svg" alt="check">
-        </button>
 
         <div>Assigned to</div>
 
@@ -93,16 +89,20 @@ function generateEditTemplate(id) {
           <div onclick="">Subtasks</div>
           <div>
             <div class="subtask-group">
-              <input id="subtaskInput" class="subtask-input" type="text" placeholder="Add new subtask">
-              <div class="subtask-icons">
+              <input id="subtaskInput" class="subtask-input" oninput="onInputSubtask(${id})" type="text" placeholder="Add new subtask">
+              <div id="subtaskIcons" class="subtask-icons">
                 <img onclick="focusInput()" class="add-subtask" src="/assets/icons/board/property-add.svg" alt="add">
               </div>
+              <!-- <div id="newSubtaskAdded" class="new-subtask-added"></div> -->
             </div>
           </div>
-          <div id="addedSubtaskList" class="added-subtask-list"></div>
+          <ul id="subtaskAddedList" class="subtask-added-list"></ul>
+
+          <button onclick="createEditTask(${id})" class="save-edit-btn btn-hover d-flex-c-c configuration">
+            <img src="/assets/icons/board/create_task_ok.svg" alt="create-btn">
+            <img src="/assets/icons/board/check.svg" alt="check">
+          </button>
         </div>
-
-
       </div>
     `;
 }

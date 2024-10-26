@@ -14,8 +14,8 @@ async function onload() {
   console.log('currtodos in loadArray():', currentTodos);
   renderTasks();
 
-  // openTaskDetails(1);
-  // generateEditTemplate(1);
+  openTaskDetails(0);
+  generateEditTemplate(0);
 }
 
 /**
@@ -52,6 +52,7 @@ function updateColumn(category, contentId) {
 
     const { progressText, progressBar } = initializeProgressElements(task['id']);
     loadProgressText(task, progressText, progressBar);
+    console.log('task:', task);
   }
 }
 
@@ -101,7 +102,6 @@ function loadProgressText(task, progressText, progressBar) {
  * @returns {void}
  */
 function editTask(key, { title, description, category, dueDate, assignedTo, subtask, prio }) {
-  // Senden der Daten an die API
   patchData(`/todos/${key}`, { title, description, category, dueDate, assignedTo, subtask, prio });
 }
 
@@ -436,7 +436,6 @@ function animationSlideOut() {
     function () {
       dialog.style.display = 'none';
       dialog.classList.add('d-none');
-      // dialog.innerHTML = '';
     },
     { once: true }
   );
@@ -487,3 +486,51 @@ function toggleCheckboxUrl(i, j) {
 //   const [day, month, year] = dueDateStr.split("-");
 //   return `${year}-${month}-${day}`;
 // }
+function focusInput() {
+  document.getElementById('subtaskInput').focus();
+  console.log('currentTodos:', currentTodos);
+}
+
+function onInputSubtask(id) {
+  document.getElementById('subtaskIcons').innerHTML = /*html*/ `
+    <div class="d-flex-c-c">
+      <img onclick="focusInput(); resetInputField();" class="add-subtask" src="/assets/icons/board/property-close.svg" alt="close">
+      <img class="mg-left" onclick="saveCurrentSubtask(${id})" class="add-subtask" src="/assets/icons/board/property-check.svg" alt="check">
+    </div>
+  `;
+}
+
+function saveCurrentSubtask(id) {
+  let subtaskText = document.getElementById('subtaskInput');
+  currentTodos[id]['subtask'].push({ checked: false, text: subtaskText.value });
+
+  document.getElementById('subtaskAddedList').innerHTML += /*html*/ `
+    <li>${subtaskText.value}</li>
+  `;
+  resetInputField();
+}
+
+function resetInputField() {
+  document.getElementById('subtaskInput').value = '';
+  document.getElementById('subtaskIcons').innerHTML = /*html*/ `
+    <img onclick="focusInput()" class="add-subtask" src="/assets/icons/board/property-add.svg" alt="add">`;
+}
+
+function createEditTask(i) {
+  todos = currentTodos;
+
+
+  //hier weitere Felder hinzufügen
+
+
+  saveSubtaskAddedList(i);
+
+
+  closeDialog();
+}
+
+function saveSubtaskAddedList(i) {
+  if (document.getElementById('subtaskAddedList').innerHTML !== '') {
+    editTask(todoKeysArray[i], { subtask: todos[i].subtask });
+  }
+}

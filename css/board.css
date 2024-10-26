@@ -220,6 +220,8 @@ main h2 {
   height: 100%;
   max-height: 700px;
   gap: 20px;
+  overflow-y: auto;
+  scrollbar-width: thin;
 }
 
 .detail-task .title {
@@ -352,7 +354,7 @@ main h2 {
 .edit-template input {
   display: flex;
   width: 100%;
-  padding: 10px 21px 10px 21px;
+  padding: 10px 64px 10px 16px;
   gap: 10px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -376,7 +378,7 @@ main h2 {
   display: flex;
   resize: none;
   width: 100%;
-  padding: 10px 21px 10px 21px;
+  padding: 10px 16px;
   gap: 10px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -496,6 +498,23 @@ input[type='date']::-webkit-calendar-picker-indicator {
 
 .subtask-icons{
   position: absolute;
-  right: 6px;
+  right: 10px;
   top: 10px;
+  cursor: pointer;
+}
+.subtask-icons img{
+  width: 24px;
+}
+
+.subtask-icons img:hover {
+  background-color: rgb(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+
+.mg-left {
+  margin-left: 8px;
+}
+
+.subtask-added-list {
+  padding: 10px 20px;
 }
