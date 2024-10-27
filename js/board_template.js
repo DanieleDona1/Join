@@ -35,30 +35,34 @@ function generateDetailTaskTemplate(id) {
   let formattedDate = todos[id].dueDate.replace(/-/g, '/');
   let priority = todos[id].prio.charAt(0).toUpperCase() + todos[id].prio.slice(1);
   return /*html*/ `
-      <div class="detail-task slide-in dialog-content" onclick="event.stopPropagation();">
-          <div class="d-flex-sb-c">
-            <span class="task-category bg-${taskCategory}">${todos[id].task_category}</span>
-              <img class="xmark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
-          </div>
-          <div class="title">${todos[id].title}</div>
-          <div class="description">${todos[id].description}</div>
-          <div class="due-date color-blue">Due date:&nbsp; <span class="color-black">${formattedDate}</span></div><!-- Input type=date dieses Attribut hinzufügen: lang="de-DE" -->
-          <div>
-            <span class="color-blue">Priority:&nbsp; <span class="color-black">${priority}</span></span>
-            <img class="prio-img" src="/assets/icons/board/${todos[id].prio}.svg" alt="prio">
-          </div>
-
-          <div class="d-flex-sb-c">
-            <div class="members color-blue">Assigned To: <!-- TODO --> TODO Kontaktlist<div id="assignedToArea${id}"></div></div>
-          </div>
-          <div id="subtasksList" class="subtasks color-blue">Subtasks:<div></div></div>
-          <div class="configuration">
-            <div onclick="deleteTask(${id})"><img src="/assets/icons/board/delete.svg" alt="delete"><span class="color-blue">Delete</span></div>
-            <div onclick="generateEditTemplate(${id})" class="separator ">
-            <img src="/assets/icons/board/edit.svg" alt="edit">
-            <span class="color-blue">Edit</span>
-          </div>
-      </div>`;
+      <div class="wrapper dialog-content" onclick="event.stopPropagation();">
+        <div class="detail-task slide-in scrollbar">
+            <!-- <div class="d-flex-sb-c">
+              <span class="task-category bg-${taskCategory}">${todos[id].task_category}</span> -->
+                <div class="x-container">
+                  <img class="x-mark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
+                </div>
+            <!-- </div> -->
+            <div class="title">${todos[id].title}</div>
+            <div class="description">${todos[id].description}</div>
+            <div class="due-date color-blue">Due date:&nbsp; <span class="color-black">${formattedDate}</span></div><!-- Input type=date dieses Attribut hinzufügen: lang="de-DE" -->
+            <div>
+              <span class="color-blue">Priority:&nbsp; <span class="color-black">${priority}</span></span>
+              <img class="prio-img" src="/assets/icons/board/${todos[id].prio}.svg" alt="prio">
+            </div>
+            <div class="d-flex-sb-c">
+              <div class="members color-blue">Assigned To: <!-- TODO --> TODO Kontaktlist<div id="assignedToArea${id}"></div></div>
+            </div>
+            <div id="subtasksList" class="subtasks color-blue">Subtasks:<div></div></div>
+            <div class="configuration">
+              <div onclick="deleteTask(${id})"><img src="/assets/icons/board/delete.svg" alt="delete"><span class="color-blue">Delete</span></div>
+              <div onclick="generateEditTemplate(${id})" class="separator ">
+              <img src="/assets/icons/board/edit.svg" alt="edit">
+              <span class="color-blue">Edit</span>
+            </div>
+        </div>
+      </div>
+      `;
 }
 
 /**
@@ -68,40 +72,41 @@ function generateDetailTaskTemplate(id) {
 function generateEditTemplate(id) {
   const dueDate = todos[id].dueDate;
   document.getElementById('dialog').innerHTML = /*html */ `
-      <div class="edit-template detail-task dialog-content" onclick="event.stopPropagation();">
-        <div class="d-flex-e-c"><img class="xmark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark"></div>
-        <label>Title<br>
-          <input class="title-edit" id="titleEdit" type="text" value="${todos[id].title}" placeholder="Enter a title">
-        </label>
-        <label>Description
-          <textarea class="textarea-edit" rows="4" cols="50" maxlength="300" placeholder="Enter a description">${todos[id].description}</textarea>
-        </label>
-        <label>Due date<br> <input class="due-edit" id="dueEdit" type="date" onfocus="showPicker();" value="${dueDate}" lang="de-DE"></label>
-
-        <div>
-          <div>Priority</div>
-        </div>
-
-
-        <div>Assigned to</div>
-
-        <div class="subtask-container">
-          <div onclick="">Subtasks</div>
+      <div class="wrapper dialog-content" onclick="event.stopPropagation();">
+        <div class="edit-template detail-task scrollbar" >
+            <div class="x-container">
+              <img class="x-mark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
+            </div>
+          <label>Title<br>
+            <input class="title-edit" id="titleEdit" type="text" value="${todos[id].title}" placeholder="Enter a title">
+          </label>
+          <label>Description
+            <textarea class="textarea-edit" rows="4" cols="50" maxlength="300" placeholder="Enter a description">${todos[id].description}</textarea>
+          </label>
+          <label>Due date<br> <input class="due-edit" id="dueEdit" type="date" onfocus="showPicker();" value="${dueDate}" lang="de-DE"></label>
           <div>
-            <div class="subtask-group">
-              <input id="subtaskInput" class="subtask-input" oninput="onInputSubtask(${id})" type="text" placeholder="Add new subtask">
-              <div id="subtaskIcons" class="subtask-icons">
-                <img onclick="focusInput()" class="add-subtask" src="/assets/icons/board/property-add.svg" alt="add">
+            <div>Priority</div>
+          </div>
+          <div>Assigned to</div>
+          <div class="subtask-container">
+            <div onclick="">Subtasks</div>
+            <div>
+              <div class="subtask-group">
+                <input id="subtaskInput" class="subtask-input" oninput="onInputSubtask(${id})" type="text" placeholder="Add new subtask">
+                <div id="subtaskIcons" class="subtask-icons">
+                  <img onclick="focusInput()" class="add-subtask" src="/assets/icons/board/property-add.svg" alt="add">
+                </div>
               </div>
             </div>
+            <div id="subtaskAddedList" class="subtask-added-list"></div>
           </div>
-          <div id="subtaskAddedList" class="subtask-added-list"></div>
-
+          <div class="configuration">
+            <button onclick="createEditTask(${id})" class="save-edit-btn btn-hover d-flex-c-c">
+              <img src="/assets/icons/board/create_task_ok.svg" alt="create-btn">
+              <img src="/assets/icons/board/check.svg" alt="check">
+            </button>
+          </div>
         </div>
-        <button onclick="createEditTask(${id})" class="save-edit-btn btn-hover d-flex-c-c configuration">
-          <img src="/assets/icons/board/create_task_ok.svg" alt="create-btn">
-          <img src="/assets/icons/board/check.svg" alt="check">
-        </button>
       </div>
     `;
 }
@@ -130,7 +135,7 @@ function generatePopUpAddTask(category, contentId) {
     <div class="pop-up-add-Task slide-in dialog-content" onclick="event.stopPropagation();">
       <div class="d-flex-sb-c">
         <h2>Add Task</h2>
-        <img class="xmark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
+        <img class="x-mark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
       </div>
       <!-- TODO -->TODO add_task html and css
 

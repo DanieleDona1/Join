@@ -501,21 +501,48 @@ function onInputSubtask(id) {
 }
 
 function saveCurrentSubtask(id) {
+  // <!-- &bull; -->
   let subtaskText = document.getElementById('subtaskInput');
+  let todosLength = todos[id]['subtask'].length
   currentTodos[id]['subtask'].push({ checked: false, text: subtaskText.value });
 
-  document.getElementById('subtaskAddedList').innerHTML += /*html*/ `
-  <div class="subtask-item${id} subtask-group subtask-list-group">
-  <!-- &bull; -->
-              <input id="subtaskListInput" readonly class="subtask-input" type="text" value="${subtaskText.value}">
-              <div id="subtaskListIcons" class="subtask-list-icons">
-              <div class="d-flex-c-c">
-                <img onclick="" class="add-subtask" src="/assets/icons/board/edit.svg" alt="close">
-                <img class="mg-left" onclick="saveCurrentSubtask(${id})" class="add-subtask" src="/assets/icons/board/delete.svg" alt="check">
-                </div>
-              </div>
-  `;
+  renderSubtaskAddedList(todosLength, id, subtaskText);
+
   resetInputField();
+}
+
+function renderSubtaskAddedList(todosLength, id, subtaskText) {
+  let subtaskAddedList = document.getElementById('subtaskAddedList');
+  for (let i = todosLength; i < currentTodos[id]['subtask'].length; i++) {
+    subtaskAddedList.innerHTML += generateSubtaskAddedListTemplate(i, subtaskText);
+  }
+}
+
+function generateSubtaskAddedListTemplate(i, subtaskText) {
+  return /*html*/ `
+  <div class="subtask-item${i} subtask-group subtask-list-group">
+    <input onclick="readonlyToggle(${i});" id="subtaskListInput${i}" readonly class="subtask-input" type="text" value="${subtaskText.value}">
+    <div id="subtaskListIcons" class="subtask-list-icons">
+      <div id="subtaskAddedListIcons" class="d-flex-c-c">
+        <img onclick="readonlyToggle(${i});" class="add-subtask" src="/assets/icons/board/edit.svg" alt="edit">
+        <img class="mg-left" class="add-subtask" src="/assets/icons/board/delete.svg" alt="check">
+      </div>
+    </div>
+    `;
+}
+
+function readonlyToggle(index) {
+  const inputField = document.getElementById(`subtaskListInput${index}`);
+  inputField.readOnly = !inputField.readOnly;
+  if (!inputField.readOnly) {
+      inputField.focus();
+      inputField.setSelectionRange(inputField.value.length, inputField.value.length);
+  }
+
+  let subtaskAddedListIcons = document.getElementById('subtaskAddedListIcons');
+  subtaskAddedListIcons.innerHTML = /*html*/`
+      <img onclick="removeAddedSubtask(index)" class="add-subtask" src="/assets/icons/board/property-delete.svg" alt="close">
+      <img class="mg-left" onclick="editAddedSubtask(index)" class="add-subtask" src="/assets/icons/board/property-check.svg" alt="check"></img>`;
 }
 
 function resetInputField() {
