@@ -215,6 +215,7 @@ main h2 {
   padding-bottom: 40px;
   width: 100%;
   max-width: 440px;
+  /* min-height: 650px; */
 }
 
 .scrollbar {
@@ -235,6 +236,7 @@ main h2 {
   height: 100%;
   max-height: 650px;
   gap: 20px;
+  min-height: 650px;
 }
 
 .detail-task .title {
@@ -565,7 +567,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 .subtask-list-icons img:hover {
-  transform: scale(1.10);
+  transform: scale(1.08);
 }
 
 .subtask-list-group input {

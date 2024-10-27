@@ -35,8 +35,8 @@ function generateDetailTaskTemplate(id) {
   let formattedDate = todos[id].dueDate.replace(/-/g, '/');
   let priority = todos[id].prio.charAt(0).toUpperCase() + todos[id].prio.slice(1);
   return /*html*/ `
-      <div class="wrapper dialog-content" onclick="event.stopPropagation();">
-        <div class="detail-task slide-in scrollbar">
+      <div class="wrapper dialog-content slide-in" onclick="event.stopPropagation();">
+        <div class="detail-task scrollbar">
             <!-- <div class="d-flex-sb-c">
               <span class="task-category bg-${taskCategory}">${todos[id].task_category}</span> -->
                 <div class="x-container">

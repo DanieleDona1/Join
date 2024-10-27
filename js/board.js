@@ -9,7 +9,7 @@ let currentDraggedElement;
  */
 async function onload() {
   await loadTodosArray();
-  currentTodos = todos;
+  currentTodos = JSON.parse(JSON.stringify(todos));
   console.log('todos in loadArray():', todos);
   console.log('currtodos in loadArray():', currentTodos);
   renderTasks();
@@ -29,7 +29,7 @@ function renderTasks() {
   updateColumn('inProgress', 'inProgressContent');
   updateColumn('awaitFeedback', 'awaitFeedbackContent');
   updateColumn('done', 'doneContent');
-  currentTodos = todos;
+  currentTodos = JSON.parse(JSON.stringify(todos));
 }
 
 /**
@@ -139,7 +139,7 @@ async function createTask(category, contentId) {
   const userInputData = getUserAddTaskData(category);
   await addTask(userInputData);
   await loadTodosArray();
-  currentTodos = todos;
+  currentTodos = JSON.parse(JSON.stringify(todos));
   updateColumn(category, contentId);
 }
 
@@ -152,7 +152,7 @@ async function createTask(category, contentId) {
  */
 function getUserAddTaskData(swimlane) {
   return {
-    title: document.getElementById('title') || 'Test',
+    title: document.getElementById('title') || 'Template',
     dueDate: document.getElementById('dueDate') || '2024-03-10',
     category: swimlane,
     description: document.getElementById('description') || 'No description provided.',
@@ -386,10 +386,10 @@ function closeDialog() {
   let filled = document.getElementById('search');
   if (filled.value != '') {
     filled.value = '';
-    currentTodos = todos;
+    currentTodos = JSON.parse(JSON.stringify(todos));
     renderTasks();
   }
-  currentTodos = todos;
+  currentTodos = JSON.parse(JSON.stringify(todos));
 }
 
 /**
@@ -401,7 +401,7 @@ function deleteTask(id) {
   todos.forEach((element, i) => {
     element.id = i;
   });
-  currentTodos = todos;
+  currentTodos = JSON.parse(JSON.stringify(todos));
 
   closeDialog();
   renderTasks();
@@ -503,46 +503,80 @@ function onInputSubtask(id) {
 function saveCurrentSubtask(id) {
   // <!-- &bull; -->
   let subtaskText = document.getElementById('subtaskInput');
-  let todosLength = todos[id]['subtask'].length
   currentTodos[id]['subtask'].push({ checked: false, text: subtaskText.value });
+  console.log("4saveTod length:", currentTodos[id]['subtask'].length);
+  console.log("4todoLength:", todos[id]['subtask'].length);
+  console.log("4todos", todos);
 
-  renderSubtaskAddedList(todosLength, id, subtaskText);
+
+
+  renderSubtaskAddedList(id);
 
   resetInputField();
+  console.log("currTodo:1", currentTodos);
+
 }
 
-function renderSubtaskAddedList(todosLength, id, subtaskText) {
+function renderSubtaskAddedList(id) {
+  let todosLength = todos[id]['subtask'].length;
   let subtaskAddedList = document.getElementById('subtaskAddedList');
+  subtaskAddedList.innerHTML = '';
+  console.log("todoLength:", todosLength);
+  console.log("cTod length:", currentTodos[id]['subtask'].length);
+
   for (let i = todosLength; i < currentTodos[id]['subtask'].length; i++) {
-    subtaskAddedList.innerHTML += generateSubtaskAddedListTemplate(i, subtaskText);
+    subtaskAddedList.innerHTML += generateSubtaskAddedListTemplate(id, i);
   }
 }
 
-function generateSubtaskAddedListTemplate(i, subtaskText) {
+function generateSubtaskAddedListTemplate(id, i) {
   return /*html*/ `
   <div class="subtask-item${i} subtask-group subtask-list-group">
-    <input onclick="readonlyToggle(${i});" id="subtaskListInput${i}" readonly class="subtask-input" type="text" value="${subtaskText.value}">
+    <input onclick="readonlyToggle(${id}, ${i});" id="subtaskListInput${i}" readonly class="subtask-input" type="text" value="${currentTodos[id]['subtask'][i].text}">
     <div id="subtaskListIcons" class="subtask-list-icons">
-      <div id="subtaskAddedListIcons" class="d-flex-c-c">
+      <div id="subtaskAddedListIcons${i}" class="d-flex-c-c">
         <img onclick="readonlyToggle(${i});" class="add-subtask" src="/assets/icons/board/edit.svg" alt="edit">
-        <img class="mg-left" class="add-subtask" src="/assets/icons/board/delete.svg" alt="check">
+        <img onclick="removeAddedSubtask(${id}, ${i})" class="mg-left" class="add-subtask" src="/assets/icons/board/delete.svg" alt="delete">
       </div>
     </div>
     `;
 }
 
-function readonlyToggle(index) {
+function readonlyToggle(id, index) {
   const inputField = document.getElementById(`subtaskListInput${index}`);
   inputField.readOnly = !inputField.readOnly;
   if (!inputField.readOnly) {
       inputField.focus();
       inputField.setSelectionRange(inputField.value.length, inputField.value.length);
-  }
 
-  let subtaskAddedListIcons = document.getElementById('subtaskAddedListIcons');
+      inputField.addEventListener('blur', () => {
+        inputField.readOnly = true;
+        updateIcons(id, index);
+    }, { once: true });
+
+
+      let subtaskAddedListIcons = document.getElementById('subtaskAddedListIcons' + index);
+      subtaskAddedListIcons.innerHTML = /*html*/`
+          <img onclick="removeAddedSubtask(${index}, ${id})" class="add-subtask" src="/assets/icons/board/property-delete.svg" alt="delete">
+          <img class="mg-left" onclick="editAddedSubtask(index)" class="add-subtask" src="/assets/icons/board/property-check.svg" alt="check"></img>`;
+  }
+}
+
+function updateIcons(id, index) {
+  const subtaskAddedListIcons = document.getElementById('subtaskAddedListIcons' + index);
   subtaskAddedListIcons.innerHTML = /*html*/`
-      <img onclick="removeAddedSubtask(index)" class="add-subtask" src="/assets/icons/board/property-delete.svg" alt="close">
-      <img class="mg-left" onclick="editAddedSubtask(index)" class="add-subtask" src="/assets/icons/board/property-check.svg" alt="check"></img>`;
+      <img onclick="readonlyToggle(${index})" class="add-subtask" src="/assets/icons/board/edit.svg" alt="edit">
+      <img class="mg-left" onclick="removeAddedSubtask(${id}, ${index})" class="add-subtask" src="/assets/icons/board/delete.svg" alt="delete">
+  `;
+}
+
+function removeAddedSubtask(id, index) {
+  currentTodos[id]['subtask'].splice(index, 1);
+  renderSubtaskAddedList(id);
+  console.log("currTodo:2", currentTodos);
+
+
+  // TODO
 }
 
 function resetInputField() {
@@ -552,7 +586,9 @@ function resetInputField() {
 }
 
 function createEditTask(i) {
-  todos = currentTodos;
+  todos = JSON.parse(JSON.stringify(currentTodos));
+  console.log('wird aufgerufen');
+
 
   //hier weitere Felder hinzufügen saveTitle, saveDescription, saveDueDate
   saveSubtaskAddedList(i);
