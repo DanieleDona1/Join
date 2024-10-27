@@ -11,19 +11,35 @@ section {
   width: 100%;
 }
 
+input:hover,
+textarea:hover,
+.select-selected:hover,
+button:hover {
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(38, 40, 40, 0.5);
+}
+
+input[type="checkbox"] {
+  height: 20px;
+  width: 20px;
+  margin: 0;
+}
+
 ::placeholder {
   font-size: 20px;
-  color: rgb(209,209,209);
+  color: rgb(209, 209, 209);
 }
 
 .custom-select {
   position: relative;
   display: inline-block;
-  width: 100%; /* Breite des Dropdowns */  
+  width: 100%; /* Breite des Dropdowns */
   height: 48px;
+  border: none;
 }
 
 .select-selected {
+  position: relative;
   background-color: #fff; /* Hintergrundfarbe des ausgewählten Wertes */
   padding: 10px;
   margin-bottom: 28px;
@@ -31,19 +47,25 @@ section {
   cursor: pointer;
   border: 1px solid rgb(204, 204, 204);
   border-radius: 6px;
+  z-index: 2;
 }
 
 .select-items {
   position: absolute;
+  top: 35px;
+  padding-top: 12px;
   background-color: #fff;
   border: 1px solid #ccc;
-  z-index: 99;
-  top: calc(100% - 5px);
+  border-radius: 12px;
   width: 100%; /* Breite anpassen */
   display: none; /* Standardmäßig ausblenden */
+  z-index: 1;
 }
 
 .select-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 10px;
   cursor: pointer;
   font-size: 20px;
@@ -52,17 +74,19 @@ section {
 /* Hover-Effekt für Optionen */
 .select-option:hover {
   background-color: #f0f0f0; /* Hintergrundfarbe beim Hover */
+  border-radius: 12px;
 }
 
 /* Dropdown Pfeil */
 .custom-select::after {
-  content: '▼'; /* Dropdown-Pfeil */
+  content: "▼"; /* Dropdown-Pfeil */
   position: absolute;
   right: 20px;
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none; /* Verhindert, dass der Pfeil klickbar ist */
   font-size: 12px;
+  z-index: 2;
 }
 
 .custom-select.open::after {
@@ -74,12 +98,11 @@ section {
   display: block; /* Dropdown anzeigen */
 }
 
-
 section button {
   height: 56px;
   width: 40%;
   margin-bottom: 28px;
-  border: 1px solid rgb(238,238,238);
+  border: 1px solid rgb(238, 238, 238);
   border-radius: 6px;
   background-color: white;
   font-size: 20px;
@@ -118,7 +141,9 @@ input {
 }
 
 .resizable-textarea:focus,
-input:focus {
+input:focus,
+.custom-select:focus-within .select-selected {
+  border-width: 1.5px;
   border-color: rgb(41, 171, 226); /* Randfarbe ändern bei Fokus */
   outline: none; /* Entfernt den Standard-Fokus-Rahmen */
 }
