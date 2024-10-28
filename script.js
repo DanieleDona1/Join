@@ -22,16 +22,18 @@ document.addEventListener('DOMContentLoaded', function init() {
  */
 async function loadUsersArray() {
   let usersResponse = await getAllUsers('users');
-  let userKeysArray = Object.keys(usersResponse);
+  if (usersResponse) {
+    let userKeysArray = Object.keys(usersResponse);
 
-  for (let i = 0; i < userKeysArray.length; i++) {
-    users.push({
-      user: {
-        // userKey: userKeysArray[i],
-        id: i,
-        ...usersResponse[userKeysArray[i]],
-      },
-    });
+    for (let i = 0; i < userKeysArray.length; i++) {
+      users.push({
+        user: {
+          userKey: userKeysArray[i],
+          id: i,
+          ...usersResponse[userKeysArray[i]],
+        },
+      });
+    }
   }
   console.log('users', users);
 }

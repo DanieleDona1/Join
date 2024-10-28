@@ -42,10 +42,10 @@ function login(event) {
   event.preventDefault();
   let email = document.getElementById('email').value;
   let password = document.getElementById('password').value;
-  let userName = checkUser(email, password);
+  let userKey = checkUser(email, password);
 
-  if (userName) {
-    saveToLocalStorage('user', userName);
+  if (userKey) {
+    saveToLocalStorage('user', userKey);
     window.location.href = '/html/summary.html';
   } else {
     document.getElementById('errorMsg').style.opacity = '1';
@@ -64,7 +64,7 @@ function login(event) {
 function checkUser(email, password) {
   for (let i = 0; i < users.length; i++) {
     if (users[i].user.email == email && users[i].user.password == password) {
-      return users[i].user.name;
+      return users[i].user.userKey;
     }
   }
   return null;
@@ -92,10 +92,9 @@ function guestLoginRedirect() {
   let animatedElement = document.getElementById('animatedText');
   document.getElementById('dialogBg').style.display = 'flex';
   animatedElement.innerHTML = 'You successfully logged in as a guest!';
-  saveToLocalStorage('user', 'guest');
   setTimeout(function () {
     document.getElementById('dialogBg').style.display = 'none';
-    window.location.href = 'summary.html';
+    window.location.href = 'summary.html?msg=guest';
   }, 3000);
 }
 

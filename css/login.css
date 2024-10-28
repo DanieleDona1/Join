@@ -306,7 +306,7 @@ footer a:hover {
     bottom: -100px;
     opacity: 0;
   }
-  40% {
+  30% {
     bottom: 50%;
     opacity: 1;
   }

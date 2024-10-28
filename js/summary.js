@@ -4,7 +4,7 @@
  * @function onload
  */
 async function onload() {
-  greetUser();
+  await greetUser();
   await loadTodosArray();
   getCounts(todos);
   getUpcomingDeadline();
@@ -14,10 +14,10 @@ async function onload() {
  * Greets the user based on the current time and displays their name.
  * @function greetUser
  */
-function greetUser() {
+async function greetUser() {
   const userGreetingElement = document.getElementById('greeting');
   const userNameElement = document.getElementById('userName');
-  const userName = getUserName();
+  const userName = await getUserName();
   const currentHour = new Date().getHours();
   let greeting;
 
@@ -37,18 +37,21 @@ function greetUser() {
  * @returns {string} The name of the user.
  * @function getUserName
  */
-function getUserName() {
+async function getUserName() {
   let userName = 'Unknown User';
-  let userNameStorage = getFromLocalStorage('user');
+  let userStorageKey = getFromLocalStorage('user');
+  userName = await getAllUsers(`users/${userStorageKey}/name`);
 
-  if (userNameStorage) {
-    if (userNameStorage !== 'guest') {
-      userName = userNameStorage;
-    } else {
-      userName = 'Guest';
-    }
+  const urlParams = new URLSearchParams(window.location.search);
+  const msg = urlParams.get('msg');
+
+  if (userName) {
+    return userName;
+  } else if (msg == 'guest') {
+    return 'Guest';
+  } else {
+    return '';
   }
-  return userName;
 }
 
 /**
