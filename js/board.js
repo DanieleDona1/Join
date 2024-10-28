@@ -52,7 +52,6 @@ function updateColumn(category, contentId) {
 
     const { progressText, progressBar } = initializeProgressElements(task['id']);
     loadProgressText(task, progressText, progressBar);
-    console.log('task:', task);
   }
 }
 
@@ -153,13 +152,12 @@ async function createTask(category, contentId) {
 function getUserAddTaskData(swimlane) {
   return {
     title: document.getElementById('title') || 'Template',
-    dueDate: document.getElementById('dueDate') || '2024-03-10',
+    dueDate: document.getElementById('dueDate') || '2024-03-10', //Format sollte so sein wenn ich mich nicht täusche ;)
     category: swimlane,
     description: document.getElementById('description') || 'No description provided.',
     task_category: document.getElementById('task_category') || 'User-Story', // User-Story Technical-Task wichtig großgeschrieben User-Story
     assignedTo: document.getElementById('assignedTo') || ['Peter', 'Müller'] || 'Unassigned',
-    subtask:
-      document.getElementById('subtask') || [
+    subtask: document.getElementById('subtask') || [
         { text: 'aaaaaa', checked: false },
         { text: 'bbbbbb', checked: false },
         { text: 'cccc', checked: false },
@@ -481,16 +479,11 @@ function toggleCheckboxUrl(i, j) {
   editTask(todoKeysArray[i], { subtask: todos[i].subtask });
 }
 
-// function formatDateToInput(id) { /*TODO*/
-//   let dueDateStr = todos[id].dueDate
-//   const [day, month, year] = dueDateStr.split("-");
-//   return `${year}-${month}-${day}`;
-// }
-function focusInput() {
-  document.getElementById('subtaskInput').focus();
-  console.log('currentTodos:', currentTodos);
-}
-
+/**
+ * Updates the subtask icons based on the input state.
+ *
+ * @param {number} id - The ID of the current todo item.
+ */
 function onInputSubtask(id) {
   document.getElementById('subtaskIcons').innerHTML = /*html*/ `
     <div class="d-flex-c-c">
@@ -500,114 +493,217 @@ function onInputSubtask(id) {
   `;
 }
 
+/**
+ * Saves the current subtask with a bullet point.
+ *
+ * @param {number} id - The ID of the current todo item.
+ */
 function saveCurrentSubtask(id) {
-  // <!-- &bull; -->
   let subtaskText = document.getElementById('subtaskInput');
-  currentTodos[id]['subtask'].push({ checked: false, text: subtaskText.value });
-  console.log("4saveTod length:", currentTodos[id]['subtask'].length);
-  console.log("4todoLength:", todos[id]['subtask'].length);
-  console.log("4todos", todos);
+  let bulletPoint = '• ';
+  let subtaskValueWithBullet = bulletPoint + subtaskText.value;
 
-
+  currentTodos[id]['subtask'].push({ checked: false, text: subtaskValueWithBullet });
 
   renderSubtaskAddedList(id);
-
   resetInputField();
-  console.log("currTodo:1", currentTodos);
-
 }
 
+/**
+ * Renders the list of added subtasks.
+ *
+ * @param {number} id - The ID of the current todo item.
+ */
 function renderSubtaskAddedList(id) {
   let todosLength = todos[id]['subtask'].length;
   let subtaskAddedList = document.getElementById('subtaskAddedList');
   subtaskAddedList.innerHTML = '';
-  console.log("todoLength:", todosLength);
-  console.log("cTod length:", currentTodos[id]['subtask'].length);
 
   for (let i = todosLength; i < currentTodos[id]['subtask'].length; i++) {
     subtaskAddedList.innerHTML += generateSubtaskAddedListTemplate(id, i);
   }
 }
 
-function generateSubtaskAddedListTemplate(id, i) {
-  return /*html*/ `
-  <div class="subtask-item${i} subtask-group subtask-list-group">
-    <input onclick="readonlyToggle(${id}, ${i});" id="subtaskListInput${i}" readonly class="subtask-input" type="text" value="${currentTodos[id]['subtask'][i].text}">
-    <div id="subtaskListIcons" class="subtask-list-icons">
-      <div id="subtaskAddedListIcons${i}" class="d-flex-c-c">
-        <img onclick="readonlyToggle(${i});" class="add-subtask" src="/assets/icons/board/edit.svg" alt="edit">
-        <img onclick="removeAddedSubtask(${id}, ${i})" class="mg-left" class="add-subtask" src="/assets/icons/board/delete.svg" alt="delete">
-      </div>
-    </div>
-    `;
-}
-
-function readonlyToggle(id, index) {
-  const inputField = document.getElementById(`subtaskListInput${index}`);
-  inputField.readOnly = !inputField.readOnly;
-  if (!inputField.readOnly) {
-      inputField.focus();
-      inputField.setSelectionRange(inputField.value.length, inputField.value.length);
-
-      inputField.addEventListener('blur', () => {
-        inputField.readOnly = true;
-        updateIcons(id, index);
-    }, { once: true });
-
-
-      let subtaskAddedListIcons = document.getElementById('subtaskAddedListIcons' + index);
-      subtaskAddedListIcons.innerHTML = /*html*/`
-          <img onclick="removeAddedSubtask(${index}, ${id})" class="add-subtask" src="/assets/icons/board/property-delete.svg" alt="delete">
-          <img class="mg-left" onclick="editAddedSubtask(index)" class="add-subtask" src="/assets/icons/board/property-check.svg" alt="check"></img>`;
-  }
-}
-
-function updateIcons(id, index) {
-  const subtaskAddedListIcons = document.getElementById('subtaskAddedListIcons' + index);
-  subtaskAddedListIcons.innerHTML = /*html*/`
-      <img onclick="readonlyToggle(${index})" class="add-subtask" src="/assets/icons/board/edit.svg" alt="edit">
-      <img class="mg-left" onclick="removeAddedSubtask(${id}, ${index})" class="add-subtask" src="/assets/icons/board/delete.svg" alt="delete">
-  `;
-}
-
-function removeAddedSubtask(id, index) {
-  currentTodos[id]['subtask'].splice(index, 1);
-  renderSubtaskAddedList(id);
-  console.log("currTodo:2", currentTodos);
-
-
-  // TODO
-}
-
+/**
+ * Resets the input field and its associated icons.
+ */
 function resetInputField() {
   document.getElementById('subtaskInput').value = '';
   document.getElementById('subtaskIcons').innerHTML = /*html*/ `
     <img onclick="focusInput()" class="add-subtask" src="/assets/icons/board/property-add.svg" alt="add">`;
 }
 
+/**
+ * Toggles the readonly state of a subtask input field.
+ *
+ * @param {number} id - The ID of the current todo item.
+ * @param {number} index - The index of the subtask.
+ */
+function readonlyToggle(id, index) {
+  const inputField = document.getElementById(`subtaskListInput${index}`);
+  const subtaskItem = document.getElementById(`subtask-item${index}`);
+
+  toggleReadOnly(inputField);
+
+  if (!inputField.readOnly) {
+    focusInputField(inputField);
+    updateIconsOnFocus(id, index);
+    preventRemoveIconFocus(id, index);
+    addFocusOutListener(inputField, subtaskItem, id, index);
+  }
+}
+
+/**
+ * Toggles the readonly state of the input field.
+ *
+ * @param {HTMLInputElement} inputField - The input field to toggle.
+ */
+function toggleReadOnly(inputField) {
+  inputField.readOnly = !inputField.readOnly;
+}
+
+/**
+ * Focuses the input field and sets the selection range.
+ *
+ * @param {HTMLInputElement} inputField - The input field to focus.
+ */
+function focusInputField(inputField) {
+  inputField.focus();
+  inputField.setSelectionRange(inputField.value.length, inputField.value.length);
+}
+
+/**
+ * Prevents focus on the remove icon when clicked.
+ *
+ * @param {number} id - The ID of the current todo item.
+ * @param {number} index - The index of the subtask.
+ */
+function preventRemoveIconFocus(id, index) {
+  const removeIconOnFocus = document.getElementById(`removeIconOnFocus${index}`);
+  if (removeIconOnFocus) {
+    removeIconOnFocus.addEventListener("mousedown", (event) => {
+      event.preventDefault();
+    });
+  }
+}
+
+/**
+ * Adds a focus out listener to the input field.
+ *
+ * @param {HTMLInputElement} inputField - The input field to add the listener to.
+ * @param {HTMLElement} subtaskItem - The parent subtask item element.
+ * @param {number} id - The ID of the current todo item.
+ * @param {number} index - The index of the subtask.
+ */
+function addFocusOutListener(inputField, subtaskItem, id, index) {
+  const handleFocusOut = (event) => {
+    if (shouldHandleFocusOut(event, subtaskItem)) {
+      handleSubtaskEdit(id, index);
+      updateIconsOffFocus(id, index);
+      inputField.readOnly = true;
+      document.removeEventListener('focusout', handleFocusOut);
+    }
+  };
+  inputField.addEventListener('focusout', handleFocusOut);
+}
+
+/**
+ * Determines whether to handle focus out events.
+ *
+ * @param {FocusEvent} event - The focus out event.
+ * @param {HTMLElement} subtaskItem - The parent subtask item element.
+ * @returns {boolean} True if focus out should be handled, false otherwise.
+ */
+function shouldHandleFocusOut(event, subtaskItem) {
+  return !subtaskItem.contains(event.relatedTarget) && event.relatedTarget?.id !== 'removeIconOnFocus';
+}
+
+/**
+ * Handles the editing of a subtask when focus is lost.
+ *
+ * @param {number} id - The ID of the current todo item.
+ * @param {number} index - The index of the subtask.
+ */
+function handleSubtaskEdit(id, index) {
+  if (currentTodos[id]['subtask'][index]) {
+    currentEditSubtask(id, index);
+  }
+}
+
+/**
+ * Updates the icons displayed when the input field is focused.
+ *
+ * @param {number} id - The ID of the current todo item.
+ * @param {number} index - The index of the subtask.
+ */
+function updateIconsOnFocus(id, index) {
+  const subtaskAddedListIcons = document.getElementById('subtaskAddedListIcons' + index);
+  subtaskAddedListIcons.innerHTML = /*html*/ `
+      <img id="removeIconOnFocus${index}" onclick="removeAddedSubtask(${id}, ${index});" class="add-subtask" src="/assets/icons/board/property-delete.svg" alt="delete">
+      <img class="mg-left" onclick="currentEditSubtask(${id}, ${index})" class="add-subtask" src="/assets/icons/board/property-check.svg" alt="check">
+    `;
+}
+
+/**
+ * Updates the icons displayed when the input field is not focused.
+ *
+ * @param {number} id - The ID of the current todo item.
+ * @param {number} index - The index of the subtask.
+ */
+function updateIconsOffFocus(id, index) {
+  const subtaskAddedListIcons = document.getElementById('subtaskAddedListIcons' + index);
+  if (subtaskAddedListIcons) {
+
+    subtaskAddedListIcons.innerHTML = /*html*/ `
+      <img onclick="readonlyToggle(${index});" class="add-subtask" src="/assets/icons/board/edit.svg" alt="edit">
+      <img class="mg-left" onclick="removeAddedSubtask(${id}, ${index})" class="add-subtask" src="/assets/icons/board/delete.svg" alt="delete">
+      `;
+    }
+}
+
+/**
+ * Updates the current text of the subtask when edited.
+ *
+ * @param {number} id - The ID of the current todo item.
+ * @param {number} index - The index of the subtask.
+ */
+function currentEditSubtask(id, index) {
+  const inputField = document.getElementById(`subtaskListInput${index}`);
+  currentTodos[id]['subtask'][index].text = inputField.value;
+}
+
+/**
+ * Saves the added subtasks for a given todo item.
+ *
+ * @param {number} i - The index of the todo item in the list.
+ */
+function saveSubtaskAddedList(i) {
+  if (document.getElementById('subtaskAddedList').innerHTML !== '') {
+    editTask(todoKeysArray[i], { subtask: currentTodos[i].subtask });
+  }
+}
+
+/**
+ * Removes a subtask from the list.
+ *
+ * @param {number} id - The ID of the current todo item.
+ * @param {number} index - The index of the subtask to remove.
+ */
+function removeAddedSubtask(id, index) {
+  currentTodos[id]['subtask'].splice(index, 1);
+  renderSubtaskAddedList(id);
+}
+
+/**
+ * Creates and saves an edited task.
+ *
+ * @param {number} i - The index of the todo item being edited.
+ */
 function createEditTask(i) {
   todos = JSON.parse(JSON.stringify(currentTodos));
-  console.log('wird aufgerufen');
-
 
   //hier weitere Felder hinzufügen saveTitle, saveDescription, saveDueDate
   saveSubtaskAddedList(i);
 
   closeDialog();
-}
-
-function saveSubtaskAddedList(i) {
-  if (document.getElementById('subtaskAddedList').innerHTML !== '') {
-    editTask(todoKeysArray[i], { subtask: todos[i].subtask });
-  }
-}
-
-function editItem(listItem) {
-  // Speichere den aktuellen Text
-  const currentText = listItem.innerText;
-
-  // Erstelle ein Eingabefeld und setze den aktuellen Text
-  const input = document.createElement('input');
-  input.type = 'text';
-  input.value = currentText;
 }

@@ -529,10 +529,6 @@ input[type='date']::-webkit-calendar-picker-indicator {
   position: relative;
 }
 
-/* .subtask-input:hover {
-  cursor: pointer;
-} */
-
 .subtask-icons{
   position: absolute;
   right: 10px;
@@ -562,7 +558,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
   font-size: 1rem;
 }
 
-.subtask-list-group:hover input {
+.subtask-list-group:hover input{
   background-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -585,11 +581,18 @@ input[type='date']::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
-/* .subtask-list-icons img:hover {
-  background-color: rgb(0, 0, 0, 0.1);
-  border-radius: 50%;
-} */
-
 .subtask-list-icons img{
   width: 20px;
+}
+
+.subtask-list-group input:focus {
+  border-bottom: 2px solid rgb(41, 171, 226);
+}
+
+.bullet-point {
+  margin-right: 40px;  /* Verringert den Abstand zwischen Bullet Point und Eingabefeld */
+  font-size: 1.2em;    /* Größe des Bullet Points */
+  color: #333;         /* Farbe des Bullet Points */
+  display: inline-block;
+  vertical-align: middle; /* Ze ntriert das Bullet Point mit dem Eingabefeld */
 }
