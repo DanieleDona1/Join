@@ -28,8 +28,12 @@ async function greetUser() {
   } else {
     greeting = 'Good evening';
   }
-  userGreetingElement.innerHTML = `${greeting},`;
-  userNameElement.innerHTML = `${userName}!`;
+  if (userName) {
+    userGreetingElement.innerHTML = `${greeting},`;
+    userNameElement.innerHTML = `${userName}!`;
+  } else {
+    userGreetingElement.innerHTML = `${greeting}!`;
+  }
 }
 
 /**
@@ -38,7 +42,7 @@ async function greetUser() {
  * @function getUserName
  */
 async function getUserName() {
-  let userName = 'Unknown User';
+  let userName = '';
   let userStorageKey = getFromLocalStorage('user');
   userName = await getAllUsers(`users/${userStorageKey}/name`);
 
@@ -50,7 +54,7 @@ async function getUserName() {
   } else if (msg == 'guest') {
     return 'Guest';
   } else {
-    return '';
+    return false;
   }
 }
 
