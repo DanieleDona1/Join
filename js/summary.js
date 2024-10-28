@@ -44,7 +44,7 @@ async function greetUser() {
 async function getUserName() {
   let userName = '';
   let userStorageKey = getFromLocalStorage('user');
-  userName = await getAllUsers(`users/${userStorageKey}/name`);
+  userName = await getDataAsJson(`users/${userStorageKey}/name`);
 
   const urlParams = new URLSearchParams(window.location.search);
   const msg = urlParams.get('msg');

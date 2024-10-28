@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function init() {
  * @function loadTodosArray
  */
 async function loadUsersArray() {
-  let usersResponse = await getAllUsers('users');
+  let usersResponse = await getDataAsJson('users');
   if (usersResponse) {
     let userKeysArray = Object.keys(usersResponse);
 
@@ -44,7 +44,7 @@ async function loadUsersArray() {
  * @function loadTodosArray
  */
 async function loadTodosArray() {
-  let todosResponse = await getAllUsers('todos');
+  let todosResponse = await getDataAsJson('todos');
   if (todosResponse) {
     todoKeysArray = Object.keys(todosResponse);
     todos = [];
@@ -65,9 +65,9 @@ async function loadTodosArray() {
  * @async
  * @param {string} path - The path to fetch data from ('users' or 'todos').
  * @returns {Promise<Object>} The response data as JSON.
- * @function getAllUsers
+ * @function getDataAsJson
  */
-async function getAllUsers(path) {
+async function getDataAsJson(path) {
   let response = await fetch(BASE_URL + path + '.json');
   let responseAsJson = await response.json();
   return responseAsJson;
