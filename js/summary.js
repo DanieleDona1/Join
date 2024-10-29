@@ -46,12 +46,9 @@ async function getUserName() {
   let userStorageKey = getFromLocalStorage('user');
   userName = await getDataAsJson(`users/${userStorageKey}/name`);
 
-  const urlParams = new URLSearchParams(window.location.search);
-  const msg = urlParams.get('msg');
-
   if (userName) {
     return userName;
-  } else if (msg == 'guest') {
+  } else if (userStorageKey == 'Guest') {
     return 'Guest';
   } else {
     return false;
