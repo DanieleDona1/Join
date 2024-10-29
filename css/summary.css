@@ -1,16 +1,50 @@
 main {
   background-color: rgb(246,247,248);
+  padding-top: 72px;
 }
 
 main h2 {
-  font-size: clamp(32px, 5vw, 48px);
+  font-size: clamp(2rem, 5vw, 3rem);
   margin-bottom: 0;
   margin-right: 10px;
+}
+
+.headline {
+  margin-bottom: 40px;
+  gap: 24px;
+}
+
+.separator {
+  width: 3px;
+  height: 40px;
+  background-color: rgb(41, 171, 226);
+  border-radius: 10px;
+}
+
+.underline-seperator {
+  position: relative;
+}
+
+.underline-seperator::after{
+    content: "";
+    position: absolute;
+    bottom: -24px;
+    left: 0;
+    width: 72px;
+    height: 3px;
+    background-color: rgb(41, 171, 226);
+    opacity: 0;
 }
 
 .summary-container {
   display: flex;
   gap: 20px;
+  font-size: 3rem;
+}
+.summary-container span{
+  display: flex;
+  gap: 20px;
+  font-size: 1rem;
 }
 
 .grid-container {
@@ -31,6 +65,7 @@ main h2 {
   border-radius: 30px;
   gap: 16px;
   text-align: center;
+  padding: 8px;
 }
 
 .to-do {
@@ -95,6 +130,18 @@ main h2 {
   transition: transform 200ms ease, background-image 0s ease;
 }
 
+.upcoming-separator {
+  margin: 0 clamp(8px, 2vw, 56px);
+  background-color: rgb(209, 209, 209);
+  height: 100px;
+  width: 2px;
+}
+
+.upcoming-deadline {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
 .task-in-board {
   grid-column: 1 / span 2;
   grid-row: 3;
@@ -114,4 +161,19 @@ main h2 {
   width: 100%;
   border-radius: 20px;
   font-size: 3rem;
+}
+
+/* .user-greeting-group {
+  text-align: center;
+} */
+
+.greeting {
+  font-size: clamp(2rem, 5vw, 3rem);
+
+  color: rgb(42, 54, 71);
+}
+
+.user-name {
+  font-size: clamp(3rem, 5vw, 4rem);
+  color: rgb(41, 171, 226);
 }

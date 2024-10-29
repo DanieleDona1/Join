@@ -54,9 +54,10 @@
     </nav>
 
     <main>
-      <div class="d-flex-fs-c">
+      <div class="d-flex-fs-c headline">
         <h2>Join 360</h2>
-        <span>Key Metrics at a Glance</span>
+        <div class="separator"></div>
+        <span class="underline-seperator">Key Metrics at a Glance</span>
       </div>
 
       <div class="summary-container">
@@ -82,29 +83,32 @@
               <span>Urgent</span>
             </div>
 
-            <div>
-              <div id="upcomingDeadline">-</div>
-              <span id="upcomingText">Upcoming Deadline</span>
+            <div class="d-flex-c-c">
+              <div class="separator upcoming-separator"></div>
+              <div>
+                <div id="upcomingDeadline" class="upcoming-deadline">-</div>
+                <span id="upcomingText">Upcoming Deadline</span>
+              </div>
             </div>
           </div>
           <div class="task-in-board d-flex-col-c-c">
             <div id="taskInBoard">0</div>
-            <div class="task-in-board-text">Task in Board</div>
+            <span class="task-in-board-text">Task in Board</span>
           </div>
           <div class="task-in-progress d-flex-col-c-c">
             <div id="taskInProgress">0</div>
-            <div class="task-in-progress-text">Task in Progress</div>
+            <span class="task-in-progress-text">Task in Progress</span>
           </div>
           <div class="awaiting-feedback d-flex-col-c-c">
             <div id="taskInFeedback">0</div>
-            <div class="awaiting-feedback-text">Awaiting Feedback</div>
+            <span class="awaiting-feedback-text">Awaiting Feedback</span>
           </div>
         </div>
 
         <div id="userGreeting" class="user-greeting-container d-flex-c-c">
-          <div>
-            <div id="greeting"></div>
-            <div id="userName"></div>
+          <div class="user-greeting-group">
+            <div class="greeting" id="greeting"></div>
+            <div class="user-name" id="userName"></div>
           </div>
         </div>
       </div>
