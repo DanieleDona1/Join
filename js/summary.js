@@ -24,7 +24,6 @@ function mobileGreeting() {
   greetingDialog.innerHTML = getGreetingText() + '!';
   greetingDialog.classList.add('opacity-animation');
   hideElementAfterTimeout('greetingDialog', 2200);
-
 }
 
 /**

@@ -44,7 +44,7 @@ main h2 {
 .summary-container span{
   display: flex;
   gap: 20px;
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 4vw, 1rem);
 }
 
 .grid-container {
@@ -139,9 +139,9 @@ main h2 {
 }
 
 .upcoming-deadline {
-  font-size: clamp(1rem, 5vw, 1.3rem);
+  font-size: clamp(1rem, 4.5vw, 1.3rem);
   font-weight: bold;
-  
+
 }
 
 .task-in-board {
