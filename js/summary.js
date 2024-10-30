@@ -5,10 +5,39 @@
  */
 async function onload() {
   mobileGreeting();
+  desktopLoadingBar();
   await loadTodosArray();
   getCounts(todos);
   await desktopGreetUser();
   getUpcomingDeadline();
+}
+
+/**
+ * Displays a greeting message in a dialog element on mobile view.
+ * - Sets the greeting text within the dialog using the current time-based greeting from getGreetingText().
+ * - Adds an animation class to make the dialog appear with a specific animation.
+ *
+ * @function mobileGreeting
+ */
+function mobileGreeting() {
+  let greetingDialog = document.getElementById('greetingDialog');
+  greetingDialog.innerHTML = getGreetingText() + '!';
+  greetingDialog.classList.add('opacity-animation');
+}
+
+/**
+ * Starts the loading animation for the desktop loading bar.
+ * Adds `loading-animation` to the fill and `opacity-animation`
+ * to the loading bar dialog.
+ *
+ * @function desktopLoadingBar
+ * @returns {void}
+ */
+function desktopLoadingBar() {
+  let loadingFill = document.getElementById('loadingFill');
+  let loadingBarDialog = document.getElementById('loadingBarDialog');
+  loadingFill.classList.add('loading-animation');
+  loadingBarDialog.classList.add('opacity-animation');
 }
 
 /**
@@ -28,19 +57,6 @@ async function desktopGreetUser() {
   } else {
     userGreetingElement.innerHTML = `${greeting}!`;
   }
-}
-
-/**
- * Displays a greeting message in a dialog element on mobile view.
- * - Sets the greeting text within the dialog using the current time-based greeting from getGreetingText().
- * - Adds an animation class to make the dialog appear with a specific animation.
- *
- * @function mobileGreeting
- */
-function mobileGreeting() {
-  let greetingDialog = document.getElementById('greetingDialog');
-  greetingDialog.innerHTML = getGreetingText() + '!';
-  greetingDialog.classList.add('show-animation');
 }
 
 /**

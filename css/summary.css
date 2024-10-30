@@ -188,18 +188,20 @@ main h2 {
 
 /* Standardmäßig versteckt */
 .greeting-dialog {
-  position: fixed;
+  opacity: 0;
   display: none;
+  position: fixed;
   height: 100vh;
   width: 100vw;
   background-color: white;
-  opacity: 0;
   z-index: 1;
+  font-size: 2.5rem;
 }
 
+
 /* Animation für das Ein- und Ausblenden */
-.show-animation {
-  animation: fadeInOut 2000ms forwards;
+.opacity-animation {
+  animation: fadeInOut 2200ms forwards;
 }
 
 @keyframes fadeInOut {
@@ -209,12 +211,66 @@ main h2 {
   10% {
     opacity: 1;
   }
-  80% {
+  85% {
     opacity: 1;
   }
   100% {
     opacity: 0;
   }
+}
+
+.loading-bar-dialog {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(255, 255, 255); /* leicht transparent */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.loading-bar {
+  margin-left: 116px;
+  width: 80%;
+  max-width: 200px;
+  height: 8px;
+  background-color: rgb(188, 188, 188);
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+}
+
+.loading-fill {
+  height: 100%;
+  width: 0;
+  background-color: rgb(41, 171, 226);
+  border-radius: 5px;
+}
+
+@keyframes loading-animation {
+  0% {
+    width: 0;
+  }
+  25% {
+    width: 30%;
+  }
+  35% {
+    width: 50%;
+  }
+  65% {
+    width: 75%;
+  }
+  80% {
+    width: 85%;
+  }
+  100% {
+    width: 98%;
+  }
+}
+
+.loading-animation {
+  animation: loading-animation 2000ms ease-in-out forwards;
 }
 
 @media screen and (min-width: 1921px) {
@@ -236,6 +292,10 @@ main h2 {
 }
 
 @media screen and (max-width: 1024px) {
+  .loading-bar-dialog {
+    display: none;
+  }
+
   .greeting-dialog {
     display: flex;
   }
