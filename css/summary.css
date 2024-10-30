@@ -4,7 +4,7 @@ main {
 }
 
 main h2 {
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(2.5rem, 5vw, 3rem);
   margin-bottom: 0;
   margin-right: 10px;
 }
@@ -51,7 +51,7 @@ main h2 {
   display: grid;
   width: 100%;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 175px 175px 175px;
+  grid-template-rows: 170px 170px 170px;
   gap: 20px;
   cursor: pointer;
 
@@ -63,9 +63,9 @@ main h2 {
   justify-content: center;
   align-items: center;
   border-radius: 30px;
-  gap: 16px;
+  /* gap: 10px; */
   text-align: center;
-  padding: 8px;
+  padding: 10px;
 }
 
 .to-do {
@@ -131,10 +131,11 @@ main h2 {
 }
 
 .upcoming-separator {
-  margin: 0 clamp(8px, 2vw, 56px);
+  margin: 0 clamp(4px, 5vw, 72px);
   background-color: rgb(209, 209, 209);
   height: 100px;
   width: 2px;
+  border-radius: 10px;
 }
 
 .upcoming-deadline {
@@ -169,11 +170,86 @@ main h2 {
 
 .greeting {
   font-size: clamp(2rem, 5vw, 3rem);
-
   color: rgb(42, 54, 71);
 }
 
 .user-name {
-  font-size: clamp(3rem, 5vw, 4rem);
+  font-size: clamp(3rem, 4vw, 4rem);
   color: rgb(41, 171, 226);
+}
+
+.width-50 {
+  width: 50%;
+}
+
+.gap-16 {
+  gap: 16px;
+}
+
+@media screen and (min-width: 1921px) {
+
+}
+
+@media screen and (max-width: 1920px) {
+  main {
+    padding-right: 0px;
+    padding-left: 75px;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  main {
+    padding-left: 75px;
+    padding-bottom: 96px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .user-greeting-container {
+    display: none;
+  }
+  main {
+    padding-right: 96px;
+    padding-left: 120px;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  main {
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+  .grid-container {
+    grid-template-rows: 130px 130px 130px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  main {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .headline {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .summary-container {
+    margin-top: 70px;
+  }
+
+  .grid-container {
+    gap: 16px;
+  }
+
+  .underline-seperator::after{
+    opacity: 1;
+}
 }

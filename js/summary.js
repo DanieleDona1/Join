@@ -18,6 +18,7 @@ async function greetUser() {
   const userGreetingElement = document.getElementById('greeting');
   const userNameElement = document.getElementById('userName');
   const userName = await getUserName();
+  
   const currentHour = new Date().getHours();
   let greeting;
 

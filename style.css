@@ -43,6 +43,12 @@
   align-items: center;
 }
 
+.d-flex-fe-c {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .d-flex-sb-s {
   display: flex;
   justify-content: space-between;
@@ -240,7 +246,7 @@ main p {
   overflow: hidden;
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 1225px) {
   header .d-none,
   nav .d-none {
     display: flex;
