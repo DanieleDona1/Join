@@ -4,17 +4,18 @@
  * @function onload
  */
 async function onload() {
-  await greetUser();
+  mobileGreeting();
   await loadTodosArray();
   getCounts(todos);
+  await desktopGreetUser();
   getUpcomingDeadline();
 }
 
 /**
  * Greets the user based on the current time and displays their name.
- * @function greetUser
+ * @function desktopGreetUser
  */
-async function greetUser() {
+async function desktopGreetUser() {
   const userName = await getUserName();
   const greeting = getGreetingText();
 
@@ -27,6 +28,19 @@ async function greetUser() {
   } else {
     userGreetingElement.innerHTML = `${greeting}!`;
   }
+}
+
+/**
+ * Displays a greeting message in a dialog element on mobile view.
+ * - Sets the greeting text within the dialog using the current time-based greeting from getGreetingText().
+ * - Adds an animation class to make the dialog appear with a specific animation.
+ *
+ * @function mobileGreeting
+ */
+function mobileGreeting() {
+  let greetingDialog = document.getElementById('greetingDialog');
+  greetingDialog.innerHTML = getGreetingText() + '!';
+  greetingDialog.classList.add('show-animation');
 }
 
 /**

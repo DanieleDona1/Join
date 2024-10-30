@@ -84,8 +84,8 @@ main h2 {
 
 .to-do-img {
   background-image: url('/assets/icons/summary/edit-dark.svg');
-  width: 69px;
-  height: 69px;
+  width: clamp(48px, 10vw, 69px);
+  height: clamp(48px, 10vw, 69px);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -103,8 +103,8 @@ main h2 {
 
 .done-img {
   background-image: url('/assets/icons/summary/check-dark.svg');
-  width: 69px;
-  height: 69px;
+  width: clamp(48px, 10vw, 69px);
+  height: clamp(48px, 10vw, 69px);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -122,8 +122,8 @@ main h2 {
 
 .priority-img {
   background-image: url('/assets/icons/summary/urgent.svg');
-  width: 69px;
-  height: 69px;
+  width: clamp(48px, 10vw, 69px);
+  height: clamp(48px, 10vw, 69px);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -186,6 +186,37 @@ main h2 {
   gap: 16px;
 }
 
+/* Standardmäßig versteckt */
+.greeting-dialog {
+  position: fixed;
+  display: none;
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  opacity: 0;
+  z-index: 1;
+}
+
+/* Animation für das Ein- und Ausblenden */
+.show-animation {
+  animation: fadeInOut 2000ms forwards;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 @media screen and (min-width: 1921px) {
 
 }
@@ -205,6 +236,10 @@ main h2 {
 }
 
 @media screen and (max-width: 1024px) {
+  .greeting-dialog {
+    display: flex;
+  }
+
   .user-greeting-container {
     display: none;
   }
