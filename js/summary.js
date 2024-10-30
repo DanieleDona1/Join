@@ -15,25 +15,37 @@ async function onload() {
  * @function greetUser
  */
 async function greetUser() {
+  const userName = await getUserName();
+  const greeting = getGreetingText();
+
   const userGreetingElement = document.getElementById('greeting');
   const userNameElement = document.getElementById('userName');
-  const userName = await getUserName();
-  
-  const currentHour = new Date().getHours();
-  let greeting;
 
-  if (currentHour < 12) {
-    greeting = 'Good morning';
-  } else if (currentHour < 18) {
-    greeting = 'Good afternoon';
-  } else {
-    greeting = 'Good evening';
-  }
   if (userName) {
     userGreetingElement.innerHTML = `${greeting},`;
     userNameElement.innerHTML = `${userName}!`;
   } else {
     userGreetingElement.innerHTML = `${greeting}!`;
+  }
+}
+
+/**
+ * Returns a greeting text based on the current hour of the day.
+ * - "Good morning" for hours before 12 PM
+ * - "Good afternoon" for hours between 12 PM and 6 PM
+ * - "Good evening" for hours after 6 PM
+ *
+ * @returns {string} A greeting text appropriate to the time of day.
+ */
+function getGreetingText() {
+  const currentHour = new Date().getHours();
+
+  if (currentHour < 12) {
+    return 'Good morning';
+  } else if (currentHour < 18) {
+    return 'Good afternoon';
+  } else {
+    return 'Good evening';
   }
 }
 
