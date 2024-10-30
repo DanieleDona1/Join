@@ -139,8 +139,9 @@ main h2 {
 }
 
 .upcoming-deadline {
-  font-size: 1.3rem;
+  font-size: clamp(1rem, 5vw, 1.3rem);
   font-weight: bold;
+  
 }
 
 .task-in-board {

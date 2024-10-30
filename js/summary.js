@@ -23,6 +23,8 @@ function mobileGreeting() {
   let greetingDialog = document.getElementById('greetingDialog');
   greetingDialog.innerHTML = getGreetingText() + '!';
   greetingDialog.classList.add('opacity-animation');
+  hideElementAfterTimeout('greetingDialog', 2200);
+
 }
 
 /**
@@ -35,9 +37,25 @@ function mobileGreeting() {
  */
 function desktopLoadingBar() {
   let loadingFill = document.getElementById('loadingFill');
-  let loadingBarDialog = document.getElementById('loadingBarDialog');
   loadingFill.classList.add('loading-animation');
-  loadingBarDialog.classList.add('opacity-animation');
+  hideElementAfterTimeout('loadingBarDialog', 2000);
+}
+
+/**
+ * Hides an element after a specified delay.
+ *
+ * @function hideElementAfterTimeout
+ * @param {string} elementId - The ID of the element to hide.
+ * @param {number} delay - The delay in milliseconds before hiding the element.
+ * @returns {void}
+ */
+function hideElementAfterTimeout(elementId, delay) {
+  const element = document.getElementById(elementId);
+  if (element) {
+    setTimeout(() => {
+      element.style.display = 'none';
+    }, delay);
+  }
 }
 
 /**
