@@ -53,9 +53,11 @@ function generateDetailTaskTemplate(id) {
             <div class="d-flex-sb-c">
               <div class="members color-blue">Assigned To: <!-- TODO --> TODO Kontaktlist<div id="assignedToArea${id}"></div></div>
             </div>
-            <div id="subtasksList" class="subtasks color-blue">Subtasks:<div></div></div>
+            <div id="subtasksList" class="subtasks color-blue">Subtasks:</div>
             <div class="configuration">
-              <div onclick="deleteTask(${id})"><img src="/assets/icons/board/delete.svg" alt="delete"><span class="color-blue">Delete</span></div>
+              <div onclick="deleteTask(${id})"><img src="/assets/icons/board/delete.svg" alt="delete">
+                <span class="color-blue">Delete</span>
+              </div>
               <div onclick="generateEditTemplate(${id})" class="separator ">
               <img src="/assets/icons/board/edit.svg" alt="edit">
               <span class="color-blue">Edit</span>
@@ -158,8 +160,8 @@ function generateSubtaskList(i, j, checkboxImgUrl, subtaskTexts) {
   return /*html*/ `
       <div>
         <label onclick="toggleCheckboxUrl(${i}, ${j})" class="subtask-list d-flex-fs-c">
-          <div id="checkboxImg${j}" class="checkbox-img" style="background-image: url('${checkboxImgUrl}');"></div>
-          <span> ${subtaskTexts[j]}</span>
+          <p id="checkboxImg${j}" class="checkbox-img" style="background-image: url('${checkboxImgUrl}');"></p>
+          <span class="text-wrap"> ${subtaskTexts[j]}</span>
         </label>
       </div>`;
 }

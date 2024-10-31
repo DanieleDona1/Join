@@ -5,7 +5,6 @@
  */
 async function onload() {
   mobileGreeting();
-  desktopLoadingBar();
   await loadTodosArray();
   getCounts(todos);
   await desktopGreetUser();
@@ -24,20 +23,6 @@ function mobileGreeting() {
   greetingDialog.innerHTML = getGreetingText() + '!';
   greetingDialog.classList.add('opacity-animation');
   hideElementAfterTimeout('greetingDialog', 2200);
-}
-
-/**
- * Starts the loading animation for the desktop loading bar.
- * Adds `loading-animation` to the fill and `opacity-animation`
- * to the loading bar dialog.
- *
- * @function desktopLoadingBar
- * @returns {void}
- */
-function desktopLoadingBar() {
-  let loadingFill = document.getElementById('loadingFill');
-  loadingFill.classList.add('loading-animation');
-  hideElementAfterTimeout('loadingBarDialog', 2000);
 }
 
 /**
