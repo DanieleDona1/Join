@@ -73,3 +73,25 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   });
 });
+
+
+// _______________________Subtask Javascript Code_______________________________
+
+/**
+ * Updates the subtask icons based on the input state.
+ *
+ * @param {number} id - The ID of the current todo item.
+ */
+function onInputSubtaskAddTask() {
+    let subtaskInput = document.getElementById('subtaskInput');
+    if (subtaskInput.value !== '') {
+    document.getElementById('subtaskIcons').innerHTML = /*html*/ `
+      <div class="d-flex-c-c">
+        <img onclick="focusInput(); resetInputField();" class="add-subtask" src="/assets/icons/board/property-close.svg" alt="close">
+        <img class="mg-left" onclick="saveCurrentSubtask()" class="add-subtask" src="/assets/icons/board/property-check.svg" alt="check">
+      </div>
+    `;
+    } else {
+      resetInputField()
+    }
+  }

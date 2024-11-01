@@ -510,28 +510,50 @@ function updateProgress(i) {
  * @param {number} id - The ID of the current todo item.
  */
 function onInputSubtask(id) {
+  let subtaskInput = document.getElementById('subtaskInput');
+  if (subtaskInput.value !== '') {
   document.getElementById('subtaskIcons').innerHTML = /*html*/ `
     <div class="d-flex-c-c">
-      <img onclick="focusInput(); resetInputField();" class="add-subtask" src="/assets/icons/board/property-close.svg" alt="close">
+      <img onclick="focusInput(); resetInputField(${id});" class="add-subtask" src="/assets/icons/board/property-close.svg" alt="close">
       <img class="mg-left" onclick="saveCurrentSubtask(${id})" class="add-subtask" src="/assets/icons/board/property-check.svg" alt="check">
     </div>
   `;
+  } else {
+    resetInputField()
+  }
 }
 
 /**
- * Saves the current subtask with a bullet point.
- *
+ * Retrieves the value from the subtask input field and prepends a bullet point.
+ * @returns {string} The subtask text with a bullet point.
+ */
+function getSubtaskWithBullet() {
+  let subtaskText = document.getElementById('subtaskInput');
+  let bulletPoint = '• ';
+  return bulletPoint + subtaskText.value;
+}
+
+/**
+ * Saves the current subtask with a bullet point and renders the updated list.
  * @param {number} id - The ID of the current todo item.
  */
 function saveCurrentSubtask(id) {
-  let subtaskText = document.getElementById('subtaskInput');
-  let bulletPoint = '• ';
-  let subtaskValueWithBullet = bulletPoint + subtaskText.value;
-
+  let subtaskValueWithBullet = getSubtaskWithBullet();
   currentTodos[id]['subtask'].push({ checked: false, text: subtaskValueWithBullet });
 
   renderSubtaskAddedList(id);
   resetInputField();
+}
+
+
+/**
+ * Focuses the subtask input field if it exists.
+ */
+function focusInput() {
+  let subtaskInput = document.getElementById('subtaskInput');
+  if (subtaskInput) {
+    subtaskInput.focus();
+  }
 }
 
 /**
