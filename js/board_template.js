@@ -53,7 +53,10 @@ function generateDetailTaskTemplate(id) {
             <div class="d-flex-sb-c">
               <div class="members color-blue">Assigned To: <!-- TODO --> TODO Kontaktlist<div id="assignedToArea${id}"></div></div>
             </div>
-            <div id="subtasksList" class="subtasks color-blue">Subtasks:</div>
+            <div>
+              <div>Subtasks:</div>
+              <div id="subtasksList" class="subtasks color-blue"></div>
+            </div>
             <div class="configuration">
               <div onclick="deleteTask(${id})"><img src="/assets/icons/board/delete.svg" alt="delete">
                 <span class="color-blue">Delete</span>
@@ -158,12 +161,12 @@ function generatePopUpAddTask(category, contentId) {
  */
 function generateSubtaskList(i, j, checkboxImgUrl, subtaskTexts) {
   return /*html*/ `
-      <div>
-        <label onclick="toggleCheckboxUrl(${i}, ${j})" class="subtask-list d-flex-fs-c">
-          <p id="checkboxImg${j}" class="checkbox-img" style="background-image: url('${checkboxImgUrl}');"></p>
-          <span class="text-wrap"> ${subtaskTexts[j]}</span>
-        </label>
-      </div>`;
+      <label>
+        <div onclick="toggleCheckbox(${i}, ${j})" class="subtask-list d-flex-fs-c bg-hover">
+          <div id="checkboxImg${j}" class="checkbox-img" style="background-image: url('${checkboxImgUrl}');"></div>
+          <p class="text-wrap "> ${subtaskTexts[j]}</p>
+        </div>
+      </label>`;
 }
 
 /**

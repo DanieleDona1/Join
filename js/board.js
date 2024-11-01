@@ -14,8 +14,8 @@ async function onload() {
   console.log('currtodos in loadArray():', currentTodos);
   renderTasks();
 
-  openTaskDetails(0);
-  generateEditTemplate(0);
+  // openTaskDetails(0);
+  // generateEditTemplate(0);
 }
 
 /**
@@ -66,9 +66,9 @@ function initializeProgressElements(taskId) {
   let progressText = document.getElementById('progressText' + taskId);
   let progressBar = document.getElementById('progressBar' + taskId);
 
-  if (progressText) {
-    progressText.innerHTML = '';
-  }
+  // if (progressText) {
+  //   progressText.innerHTML = '';
+  // }
   return { progressText, progressBar };
 }
 
@@ -151,14 +151,14 @@ async function createTask(category, contentId) {
  */
 function getUserAddTaskData(swimlane) {
   return {
-    title: document.getElementById('title') || 'Template',
+    title: document.getElementById('title') || 'HTML',
     dueDate: document.getElementById('dueDate') || '2024-03-10', //Format sollte so sein wenn ich mich nicht täusche ;)
     category: swimlane,
     description: document.getElementById('description') || 'No description provided.',
     task_category: document.getElementById('task_category') || 'User-Story', // User-Story Technical-Task wichtig großgeschrieben User-Story
     assignedTo: document.getElementById('assignedTo') || ['Peter', 'Müller'] || 'Unassigned',
     subtask: document.getElementById('subtask') || [
-        { text: 'aaaaaa', checked: false },
+        { text: 'aaajkglgjkhgjhgjhghjgjjkhz kjlhkjhkjhlkjhlkjhlkjMM hkjhhgjhgjhgjhgjhgaa', checked: false },
         { text: 'bbbbbb', checked: false },
         { text: 'cccc', checked: false },
       ] ||
@@ -459,24 +459,49 @@ function loadSubtaskList(i) {
 }
 
 /**
- * Toggles the checkbox image for a subtask and updates its checked status.
- * @param {number} i - The index of the main task.
- * @param {number} j - The index of the subtask.
+ * Toggles the checkbox image, updates the subtask status, and refreshes progress.
+ * @param {number} i - Index of the main task in the todos array.
+ * @param {number} j - Index of the subtask within the main task.
  */
-function toggleCheckboxUrl(i, j) {
+function toggleCheckbox(i, j) {
+  toggleCheckboxImage(j);
+  updateSubtaskStatus(i, j);
+  updateProgress(i);
+}
+
+/**
+ * Toggles the checkbox image between checked and unchecked.
+ * @param {number} j - Index of the subtask checkbox.
+ */
+function toggleCheckboxImage(j) {
   let checkboxImg = document.getElementById('checkboxImg' + j);
-  let currentUrl = checkboxImg.style.backgroundImage;
-  let changeCheckedStatus = todos[i].subtask[j];
-  if (currentUrl.includes('checkbox-unchecked.svg')) {
+  const isUnchecked = checkboxImg.style.backgroundImage.includes('checkbox-unchecked.svg');
+
+  if (isUnchecked) {
     checkboxImg.style.backgroundImage = "url('/assets/icons/board/checkbox-checked.svg')";
-    changeCheckedStatus.checked = true;
   } else {
     checkboxImg.style.backgroundImage = "url('/assets/icons/board/checkbox-unchecked.svg')";
-    changeCheckedStatus.checked = false;
   }
+}
+
+/**
+ * Updates the checked status of the specified subtask and saves it.
+ * @param {number} i - Index of the main task in the todos array.
+ * @param {number} j - Index of the subtask to update.
+ */
+function updateSubtaskStatus(i, j) {
+  todos[i].subtask[j].checked = !todos[i].subtask[j].checked;
+  currentTodos = JSON.parse(JSON.stringify(todos)); // State aktualisieren
+  editTask(todoKeysArray[i], { subtask: todos[i].subtask }); // Lokale Speicherung
+}
+
+/**
+ * Refreshes the progress bar and progress text display for the task.
+ * @param {number} i - Index of the main task in the todos array.
+ */
+function updateProgress(i) {
   const { progressText, progressBar } = initializeProgressElements(i);
   loadProgressText(currentTodos[i], progressText, progressBar);
-  editTask(todoKeysArray[i], { subtask: todos[i].subtask });
 }
 
 /**

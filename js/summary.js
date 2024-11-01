@@ -93,8 +93,8 @@ async function getUserName() {
 
   if (userName) {
     return userName;
-  } else if (userStorageKey == 'Guest') {
-    return 'Guest';
+  // } else if (userStorageKey == 'Guest') {
+  //   return 'Guest';
   } else {
     return false;
   }

@@ -447,13 +447,21 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 .subtask-list {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 12px;
   cursor: pointer;
-  padding: 4px 4px 4px 16px;
 }
 
-.text-wrap{
+.bg-hover:hover {
+  background-color: rgba(204, 204, 204, 0.3);
+}
+
+.text-wrap {
+  max-width: 90%;
   white-space: normal;
-  /* overflow-wrap: normal; */
+  overflow-wrap: break-word;
+  flex-grow: 1;
 }
 
 .checkbox-img {
@@ -461,9 +469,13 @@ input[type='date']::-webkit-calendar-picker-indicator {
   background-image: url('/assets/icons/board/checkbox-unchecked.svg');
   background-repeat: no-repeat;
   background-size: contain;
-  width: 20px;
-  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  margin-right: 10px;
+  margin-left: 14px;
 }
+
+
 
 @media screen and (min-width: 1921px) {
 }

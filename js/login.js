@@ -94,7 +94,7 @@ function guestLoginRedirect() {
   animatedElement.innerHTML = 'You successfully logged in as a guest!';
   setTimeout(function () {
     document.getElementById('dialogBg').style.display = 'none';
-    saveToLocalStorage('user', 'Guest');
+    // saveToLocalStorage('user', 'Guest');
     window.location.href = 'summary.html';
   }, 3000);
 }
