@@ -545,17 +545,6 @@ function saveCurrentSubtask(id) {
   resetInputField();
 }
 
-
-/**
- * Focuses the subtask input field if it exists.
- */
-function focusInput() {
-  let subtaskInput = document.getElementById('subtaskInput');
-  if (subtaskInput) {
-    subtaskInput.focus();
-  }
-}
-
 /**
  * Renders the list of added subtasks.
  *
@@ -578,6 +567,16 @@ function resetInputField() {
   document.getElementById('subtaskInput').value = '';
   document.getElementById('subtaskIcons').innerHTML = /*html*/ `
     <img onclick="focusInput()" class="add-subtask" src="/assets/icons/board/property-add.svg" alt="add">`;
+}
+
+/**
+ * Focuses the subtask input field if it exists.
+ */
+function focusInput() {
+  let subtaskInput = document.getElementById('subtaskInput');
+  if (subtaskInput) {
+    subtaskInput.focus();
+  }
 }
 
 /**
@@ -606,6 +605,8 @@ function readonlyToggle(id, index) {
  * @param {HTMLInputElement} inputField - The input field to toggle.
  */
 function toggleReadOnly(inputField) {
+  console.log("inputField", inputField);
+
   inputField.readOnly = !inputField.readOnly;
 }
 
@@ -622,10 +623,9 @@ function focusInputField(inputField) {
 /**
  * Prevents focus on the remove icon when clicked.
  *
- * @param {number} id - The ID of the current todo item.
  * @param {number} index - The index of the subtask.
  */
-function preventRemoveIconFocus(id, index) {
+function preventRemoveIconFocus(index) {
   const removeIconOnFocus = document.getElementById(`removeIconOnFocus${index}`);
   if (removeIconOnFocus) {
     removeIconOnFocus.addEventListener("mousedown", (event) => {
