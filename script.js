@@ -6,6 +6,54 @@ let todoKeysArray = [];
 let users = [];
 
 let currentSubtasks = [];
+
+/**
+ * Checks if the user is logged in by verifying if getUserName() returns a valid value.
+ * If not, redirects the user to the login page.
+ */
+async function isUserLoggedIn() {
+  if(Boolean(await getUserName()) === false) {
+    redirectToPage('login.html');
+  }
+  console.log('User is login');
+}
+
+/**
+ * Retrieves the user's name from local storage or returns 'Unknown User' if not found.
+ * @returns {string} The name of the user.
+ * @function getUserName
+ */
+async function getUserName() {
+  let userName = '';
+  let userStorageKey = getFromLocalStorage('user');
+  userName = await getDataAsJson(`users/${userStorageKey}/name`);
+
+  if (userName) {
+    return userName;
+  } else {
+    return false;
+  }
+}
+
+/**
+ * Retrieves an item from local storage by key.
+ * @param {string} key - The key for the local storage item.
+ * @returns {string|null} The value stored in local storage, or null if not found.
+ * @function getFromLocalStorage
+ */
+function getFromLocalStorage(key) {
+  return localStorage.getItem(key);
+}
+
+/**
+ * Redirects the browser to the specified page.
+ *
+ * @param {string} link - The URL or path of the page to redirect to.
+ */
+function redirectToPage(link) {
+  window.location.href = link;
+}
+
 /**
  * Initializes the application when the DOM is fully loaded.
  * Highlights the active link and updates the favicon.

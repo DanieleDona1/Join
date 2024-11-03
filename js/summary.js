@@ -4,6 +4,7 @@
  * @function onload
  */
 async function onload() {
+  await isUserLoggedIn();
   mobileGreeting();
   await loadTodosArray();
   getCounts(todos);
@@ -79,35 +80,6 @@ function getGreetingText() {
   } else {
     return 'Good evening';
   }
-}
-
-/**
- * Retrieves the user's name from local storage or returns 'Unknown User' if not found.
- * @returns {string} The name of the user.
- * @function getUserName
- */
-async function getUserName() {
-  let userName = '';
-  let userStorageKey = getFromLocalStorage('user');
-  userName = await getDataAsJson(`users/${userStorageKey}/name`);
-
-  if (userName) {
-    return userName;
-  // } else if (userStorageKey == 'Guest') {
-  //   return 'Guest';
-  } else {
-    return false;
-  }
-}
-
-/**
- * Retrieves an item from local storage by key.
- * @param {string} key - The key for the local storage item.
- * @returns {string|null} The value stored in local storage, or null if not found.
- * @function getFromLocalStorage
- */
-function getFromLocalStorage(key) {
-  return localStorage.getItem(key);
 }
 
 /**
@@ -239,12 +211,4 @@ function getNextDueDate(urgentDueDates) {
 function formatDate(date) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   return date.toLocaleDateString('en-US', options);
-}
-
-/**
- * Redirects the user to the specified page.
- * @function redirectToPage
- */
-function redirectToPage() {
-  window.location.href = 'board.html';
 }

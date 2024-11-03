@@ -1,11 +1,10 @@
-const BASE_URL =
-  'https://joinremotestorage-c8226-default-rtdb.europe-west1.firebasedatabase.app/';
 let contactList = [];
 let groupedContacts = {}; // Definiere groupedContacts als globale Variable
 
 // array für kontaktliste wo alle daten + spezifische id gespeichert wird und das laden und bearbeiten einfacher macht
 
 async function onloadFunc() {
+  // await isUserLoggedIn();  // wenn user nicht eingeloggt ist, wird er auf login Seite weitergeleitet
   await createContactlist();
   renderPhoneList();
 }

@@ -2,12 +2,13 @@ let currentDraggedElement;
 
 /**
  * Loads all tasks from Firebase and renders them.
- *
- * @async
- * @function onload
- * @returns {Promise<void>}
- */
+*
+* @async
+* @function onload
+* @returns {Promise<void>}
+*/
 async function onload() {
+  await isUserLoggedIn();
   await loadTodosArray();
   currentTodos = JSON.parse(JSON.stringify(todos));
   console.log('todos in loadArray():', todos);
@@ -386,6 +387,7 @@ function closeDialog() {
     renderTasks();
   }
   currentTodos = JSON.parse(JSON.stringify(todos));
+  currentSubtasks = [];
 }
 
 /**
