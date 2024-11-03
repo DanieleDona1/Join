@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/css/board.css" defer>
     <script src="/js/add_tasks.js" defer></script>
     <script src="/js/board.js" defer></script>
+    <script src="/js/board_template.js" defer></script>
     <!-- script hinzugefügt  -->
   </head>
   <body class="max-width-1920">
@@ -140,7 +141,7 @@
               <div onclick="">Subtasks</div>
               <div>
                 <div class="subtask-group">
-                  <input id="subtaskInput" class="subtask-input" oninput="onInputSubtaskAddTask()" type="text" placeholder="Add new subtask">
+                  <input id="subtaskInput" class="subtask-input" oninput="onInputSubtask()" type="text" placeholder="Add new subtask">
                   <div id="subtaskIcons" class="subtask-icons">
                     <img onclick="focusInput()" class="add-subtask" src="/assets/icons/board/property-add.svg" alt="add">
                   </div>

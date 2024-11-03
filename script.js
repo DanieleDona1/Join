@@ -5,6 +5,7 @@ let currentTodos = [];
 let todoKeysArray = [];
 let users = [];
 
+let currentSubtasks = [];
 /**
  * Initializes the application when the DOM is fully loaded.
  * Highlights the active link and updates the favicon.
