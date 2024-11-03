@@ -37,24 +37,25 @@ function generateDetailTaskTemplate(id) {
   return /*html*/ `
       <div class="wrapper dialog-content slide-in" onclick="event.stopPropagation();">
         <div class="detail-task scrollbar">
-            <!-- <div class="d-flex-sb-c">
-              <span class="task-category bg-${taskCategory}">${todos[id].task_category}</span> -->
                 <div class="x-container">
                   <img class="x-mark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
                 </div>
             <!-- </div> -->
             <div class="title">${todos[id].title}</div>
             <div class="description">${todos[id].description}</div>
-            <div class="due-date color-blue">Due date:&nbsp; <span class="color-black">${formattedDate}</span></div><!-- Input type=date dieses Attribut hinzufügen: lang="de-DE" -->
+            <h3 class="color-blue">Due date:</h3>
+            <span class="color-black">${formattedDate}</span><!-- Input type=date dieses Attribut hinzufügen: lang="de-DE" -->
             <div>
-              <span class="color-blue">Priority:&nbsp; <span class="color-black">${priority}</span></span>
+              <h3 class="color-blue">Priority</h3>
+              <span class="color-black">${priority}</span>
               <img class="prio-img" src="/assets/icons/board/${todos[id].prio}.svg" alt="prio">
             </div>
-            <div class="d-flex-sb-c">
-              <div class="members color-blue">Assigned To: <!-- TODO --> TODO Kontaktlist<div id="assignedToArea${id}"></div></div>
+            <div class="d-flex-co-sb-c">
+              <h3 class="color-blue">Assigned To:</h3>
+              <div class="members color-blue"> <!-- TODO --> TODO Kontaktlist<div id="assignedToArea${id}"></div></div>
             </div>
             <div>
-              <div>Subtasks:</div>
+              <h3 class="color-blue">Subtasks:</h3>
               <div id="subtasksList" class="subtasks color-blue"></div>
             </div>
             <div class="configuration">
@@ -94,7 +95,7 @@ function generateEditTemplate(id) {
           </div>
           <div id="assignedTo">Assigned to</div>
           <div class="subtask-container">
-            <div onclick="">Subtasks</div>
+            <div>Subtasks</div>
             <div>
               <div class="subtask-group">
                 <input id="subtaskInput" class="subtask-input" oninput="onInputSubtask(${id})" type="text" placeholder="Add new subtask">
