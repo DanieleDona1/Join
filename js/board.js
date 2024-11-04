@@ -447,6 +447,7 @@ function loadSubtaskList(i) {
   let subtaskStatus = currentTodos[i].subtask.map((sub) => sub.checked);
   let subtaskTexts = currentTodos[i].subtask.map((sub) => sub.text);
   let subtasksList = document.getElementById('subtasksList');
+  let checkboxImgUrl;
 
   for (let j = 0; j < subtaskTexts.length; j++) {
     if (subtaskStatus[j]) {
@@ -551,8 +552,9 @@ function resetInputField() {
  * Sets the subtask as unchecked by default, then renders the updated subtask list and resets the input field.
  */
 function addCurrentSubtask() {
-  let subtaskValueWithBullet = getSubtaskWithBullet();
-  currentSubtasks.push({ checked: false, text: subtaskValueWithBullet });
+  let subtaskInput = document.getElementById('subtaskInput');
+
+  currentSubtasks.push({ checked: false, text: subtaskInput.value });
 
   renderSubtaskAddedList();
   resetInputField();
@@ -563,10 +565,9 @@ function addCurrentSubtask() {
  *
  * @returns {string} - The input value prefixed with a bullet point.
  */
-function getSubtaskWithBullet() {
-  let subtaskText = document.getElementById('subtaskInput');
+function getSubtaskWithBullet(subtaskInput) {
   let bulletPoint = '• ';
-  return bulletPoint + subtaskText.value;
+  return bulletPoint + subtaskInput;
 }
 
 /**
@@ -729,10 +730,19 @@ function currentEditSubtask(index) {
  * @param {number} i - The index of the task in the todoKeysArray to which the subtasks are being saved.
  */
 function saveSubtaskAddedList(i) {
+  console.log('CurrentSubtasks: ', currentSubtasks);
+
   if (currentSubtasks.length > 0) {
     editTask(todoKeysArray[i], { subtask: currentSubtasks });
   }
 }
+// function saveCurrentSubtask(id) {
+//   let subtaskValueWithBullet = getSubtaskWithBullet();
+//   currentTodos[id]['subtask'].push({ checked: false, text: subtaskValueWithBullet });
+
+//   renderSubtaskAddedList(id);
+//   resetInputField();
+// }
 
 /**
  * Removes a subtask from the currentSubtasks array at the specified index
