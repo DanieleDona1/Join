@@ -31,7 +31,7 @@ function generateHtmlTemplate(task) {
  * @returns {string} - The HTML string for the detailed task view.
  */
 function generateDetailTaskTemplate(id) {
-  let taskCategory = todos[id].task_category.replace(/\s+/g, '-').toLowerCase();
+  // let taskCategory = todos[id].task_category.replace(/\s+/g, '-').toLowerCase();
   let formattedDate = todos[id].dueDate.replace(/-/g, '/');
   let priority = todos[id].prio.charAt(0).toUpperCase() + todos[id].prio.slice(1);
   return /*html*/ `
@@ -107,7 +107,7 @@ function generateEditTemplate(id) {
             <div id="subtaskAddedList" class="subtask-added-list"></div>
           </div>
           <div class="configuration">
-            <button onclick="createEditTask(${id})" class="save-edit-btn btn-hover d-flex-c-c">
+            <button onclick="editTask(${id})" class="save-edit-btn btn-hover d-flex-c-c">
               <img src="/assets/icons/board/create_task_ok.svg" alt="create-btn">
               <img src="/assets/icons/board/check.svg" alt="check">
             </button>

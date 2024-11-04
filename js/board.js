@@ -2,11 +2,11 @@ let currentDraggedElement;
 
 /**
  * Loads all tasks from Firebase and renders them.
-*
-* @async
-* @function onload
-* @returns {Promise<void>}
-*/
+ *
+ * @async
+ * @function onload
+ * @returns {Promise<void>}
+ */
 async function onload() {
   await isUserLoggedIn();
   await loadTodosArray();
@@ -31,6 +31,8 @@ function renderTasks() {
   updateColumn('awaitFeedback', 'awaitFeedbackContent');
   updateColumn('done', 'doneContent');
   currentTodos = JSON.parse(JSON.stringify(todos));
+  console.log(343462);
+
 }
 
 /**
@@ -80,14 +82,19 @@ function initializeProgressElements(taskId) {
  * @returns {void}
  */
 function loadProgressText(task, progressText, progressBar) {
-  let completedTasks = task.subtask.filter((sub) => sub.checked === true).length;
-  let totalSubtasks = task.subtask.length;
+  const subtasks = task.subtask || [];
+  const completedTasks = subtasks.filter((sub) => sub.checked).length;
+  const totalSubtasks = subtasks.length;
 
-  progressText.innerHTML = /*html*/ `
-      ${completedTasks} / ${totalSubtasks} Subtasks
-      `;
-  let progressValue = (completedTasks / totalSubtasks) * 100;
-  progressBar.style.width = `${progressValue}%`;
+  progressText.innerHTML = `${completedTasks} / ${totalSubtasks} Subtasks`;
+
+  let progressValue;
+  if (totalSubtasks > 0) {
+    progressValue = (completedTasks / totalSubtasks) * 100;
+  } else {
+    progressValue = 0; // Setze den Fortschritt auf 0, wenn es keine Subtasks gibt
+  }
+  progressBar.style.width = progressValue + '%';
 }
 
 /**
@@ -155,14 +162,8 @@ function getUserAddTaskData(swimlane) {
     description: document.getElementById('description') || 'No description provided.',
     task_category: document.getElementById('task_category') || 'User-Story', // User-Story Technical-Task wichtig großgeschrieben User-Story
     assignedTo: document.getElementById('assignedTo') || ['Peter', 'Müller'] || 'Unassigned',
-    subtask:
-      document.getElementById('subtask') || [
-        { text: 'aaajkglgjkhgjhgjhghjgjjkhz kjlhkjhkjhlkjhlkjhlkjMM hkjhhgjhgjhgjhgjhgaa', checked: false },
-        { text: 'bbbbbb', checked: false },
-        { text: 'cccc', checked: false },
-      ] ||
-      'No subtasks',
-    prio: document.getElementById('prio') || 'Urgent',
+    subtask: currentSubtasks,
+    prio: document.getElementById('prio') || 'Medium',
   };
 }
 
@@ -387,7 +388,7 @@ function closeDialog() {
     renderTasks();
   }
   currentTodos = JSON.parse(JSON.stringify(todos));
-  currentSubtasks = [];
+  // currentSubtasks = [];
 }
 
 /**
@@ -444,18 +445,22 @@ function animationSlideOut() {
  * @param {number} i - The index of the task in the currentTodos array.
  */
 function loadSubtaskList(i) {
-  let subtaskStatus = currentTodos[i].subtask.map((sub) => sub.checked);
-  let subtaskTexts = currentTodos[i].subtask.map((sub) => sub.text);
-  let subtasksList = document.getElementById('subtasksList');
-  let checkboxImgUrl;
+  console.log(1, currentTodos[i]);
+  console.log(2, currentTodos[i].subtask);
+  if (currentTodos[i].subtask) {
+    let subtasksList = document.getElementById('subtasksList');
+    let checkboxImgUrl;
+    let subtaskStatus = currentTodos[i].subtask.map((sub) => sub.checked);
+    let subtaskTexts = currentTodos[i].subtask.map((sub) => sub.text);
 
-  for (let j = 0; j < subtaskTexts.length; j++) {
-    if (subtaskStatus[j]) {
-      checkboxImgUrl = '/assets/icons/board/checkbox-checked.svg';
-    } else {
-      checkboxImgUrl = '/assets/icons/board/checkbox-unchecked.svg';
+    for (let j = 0; j < subtaskTexts.length; j++) {
+      if (subtaskStatus[j]) {
+        checkboxImgUrl = '/assets/icons/board/checkbox-checked.svg';
+      } else {
+        checkboxImgUrl = '/assets/icons/board/checkbox-unchecked.svg';
+      }
+      subtasksList.innerHTML += generateSubtaskList(i, j, checkboxImgUrl, subtaskTexts);
     }
-    subtasksList.innerHTML += generateSubtaskList(i, j, checkboxImgUrl, subtaskTexts);
   }
 }
 
@@ -555,6 +560,7 @@ function addCurrentSubtask() {
   let subtaskInput = document.getElementById('subtaskInput');
 
   currentSubtasks.push({ checked: false, text: subtaskInput.value });
+  console.log('CurrentSubtask: ', currentSubtasks);
 
   renderSubtaskAddedList();
   resetInputField();
@@ -727,22 +733,18 @@ function currentEditSubtask(index) {
  * Saves the current list of subtasks to the specified task in storage,
  * only if there are subtasks present in the currentSubtasks array.
  *
- * @param {number} i - The index of the task in the todoKeysArray to which the subtasks are being saved.
+ * @param {number} id - The index of the task in the todoKeysArray to which the subtasks are being saved.
  */
-function saveSubtaskAddedList(i) {
-  console.log('CurrentSubtasks: ', currentSubtasks);
-
+function saveCurrentSubtask(i) {
   if (currentSubtasks.length > 0) {
-    editTask(todoKeysArray[i], { subtask: currentSubtasks });
+    if (!currentTodos[i]['subtask']) {
+      currentTodos[i]['subtask'] = [...currentSubtasks];
+    } else {
+      currentTodos[i]['subtask'] = [...currentTodos[i]['subtask'], ...currentSubtasks];
+    }
+    editTask(todoKeysArray[i], { subtask: currentTodos[i]['subtask'] });
   }
 }
-// function saveCurrentSubtask(id) {
-//   let subtaskValueWithBullet = getSubtaskWithBullet();
-//   currentTodos[id]['subtask'].push({ checked: false, text: subtaskValueWithBullet });
-
-//   renderSubtaskAddedList(id);
-//   resetInputField();
-// }
 
 /**
  * Removes a subtask from the currentSubtasks array at the specified index
@@ -755,11 +757,20 @@ function removeAddedSubtask(index) {
   renderSubtaskAddedList();
 }
 
-function createEditTask(i) {
-  todos = JSON.parse(JSON.stringify(currentTodos));
+function editTask(i) {
+  // Die Task im Board werden mit dem Inhalt let currentTodos = []; gerendert
 
   //hier weitere Felder hinzufügen saveTitle, saveDescription, saveDueDate
-  saveSubtaskAddedList(i);
 
+
+  saveCurrentSubtask(i);
+
+
+
+
+
+
+  renderTasks();
+  todos = JSON.parse(JSON.stringify(currentTodos));
   closeDialog();
 }
