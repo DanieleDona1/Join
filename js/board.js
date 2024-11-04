@@ -100,12 +100,12 @@ function loadProgressText(task, progressText, progressBar) {
 /**
  * Edits a task's properties and sends the update to the API.
  *
- * @function editTask
+ * @function editTaskRemote
  * @param {string} key - The task key.
  * @param {Object} taskData - The updated task data.
  * @returns {void}
  */
-function editTask(key, { title, description, category, dueDate, assignedTo, subtask, prio }) {
+function editTaskRemote(key, { title, description, category, dueDate, assignedTo, subtask, prio }) {
   patchData(`/todos/${key}`, { title, description, category, dueDate, assignedTo, subtask, prio });
 }
 
@@ -229,7 +229,7 @@ function allowDrop(event) {
  */
 function moveTo(newCategory) {
   todos[currentDraggedElement]['category'] = newCategory;
-  editTask(todoKeysArray[currentDraggedElement], { category: todos[currentDraggedElement].category });
+  editTaskRemote(todoKeysArray[currentDraggedElement], { category: todos[currentDraggedElement].category });
   // currentTodos = todos;
   renderTasks();
   removeHighlightAfterDrop();
@@ -498,7 +498,7 @@ function toggleCheckboxImage(j) {
 function updateSubtaskStatus(i, j) {
   todos[i].subtask[j].checked = !todos[i].subtask[j].checked;
   currentTodos = JSON.parse(JSON.stringify(todos)); // State aktualisieren
-  editTask(todoKeysArray[i], { subtask: todos[i].subtask }); // Lokale Speicherung
+  editTaskRemote(todoKeysArray[i], { subtask: todos[i].subtask }); // Lokale Speicherung
 }
 
 /**
@@ -742,7 +742,7 @@ function saveCurrentSubtask(i) {
     } else {
       currentTodos[i]['subtask'] = [...currentTodos[i]['subtask'], ...currentSubtasks];
     }
-    editTask(todoKeysArray[i], { subtask: currentTodos[i]['subtask'] });
+    editTaskRemote(todoKeysArray[i], { subtask: currentTodos[i]['subtask'] });
   }
 }
 
