@@ -43,16 +43,19 @@ function validatePasswords(formValues) {
  */
 function validateCheckbox() {
   const checkbox = document.getElementById('formCheckbox');
+  const legalLink =  document.getElementById('legalLink');
   const legalText = document.getElementById('legalText');
   if (!checkbox.checked) {
     checkbox.style.border = '2px solid red';
     legalText.style.color = 'red';
     legalText.style.opacity = '1';
+    legalLink.classList.add('color-red');
     return false;
   }
   checkbox.style.border = '';
   legalText.style.color = '';
   legalText.style.opacity = '';
+  legalLink.classList.remove('color-red');
   return true;
 }
 
@@ -98,7 +101,7 @@ function initializeCheckboxListener(checkbox) {
   if (checkbox) {
     checkbox.addEventListener('change', () => {
       if (checkbox.checked) {
-        updateCheckboxStyle(checkbox, 'black', 0.25);
+        updateCheckboxStyle(checkbox);
       }
     });
   }
@@ -126,15 +129,21 @@ function changeBorderToBlack(...inputElements) {
 }
 
 /**
- * Updates the style of the checkbox and legal text.
- * @param {HTMLInputElement} checkboxElement - The checkbox element.
- * @param {string} color - The color to set.
- * @param {number} opacity - The opacity to set.
+ * Resets the styles of the checkbox, legal text, and legal link elements.
+ *
+ * This function clears any applied border style on the checkbox, restores
+ * the default color and opacity of the legal text, and removes the 'color-red'
+ * class from the legal link.
+ *
+ * @param {HTMLInputElement} checkboxElement - The checkbox input element whose style will be reset.
  */
-function updateCheckboxStyle(checkboxElement, color, opacity) {
-  legalText.style.color = color;
-  legalText.style.opacity = opacity;
-  checkboxElement.style.border = `1px solid ${color}`;
+function updateCheckboxStyle(checkboxElement) {
+  const legalLink =  document.getElementById('legalLink');
+  const legalText = document.getElementById('legalText');
+  checkboxElement.style.border = '';
+  legalText.style.color = '';
+  legalText.style.opacity = '';
+  legalLink.classList.remove('color-red');
 }
 
 /**

@@ -11,8 +11,8 @@ async function onload() {
   await isUserLoggedIn();
   await loadTodosArray();
   currentTodos = JSON.parse(JSON.stringify(todos));
-  console.log('todos in loadArray():', todos);
-  console.log('currtodos in loadArray():', currentTodos);
+  // console.log('todos in loadArray():', todos);
+  // console.log('currtodos in loadArray():', currentTodos);
   renderTasks();
 
   // openTaskDetails(0);
@@ -31,8 +31,6 @@ function renderTasks() {
   updateColumn('awaitFeedback', 'awaitFeedbackContent');
   updateColumn('done', 'doneContent');
   currentTodos = JSON.parse(JSON.stringify(todos));
-  console.log(343462);
-
 }
 
 /**
@@ -445,7 +443,7 @@ function animationSlideOut() {
  * @param {number} i - The index of the task in the currentTodos array.
  */
 function loadSubtaskList(i) {
-  console.log(1, currentTodos[i]);
+  // console.log(1, currentTodos[i]);
   console.log(2, currentTodos[i].subtask);
   if (currentTodos[i].subtask) {
     let subtasksList = document.getElementById('subtasksList');
@@ -738,9 +736,13 @@ function currentEditSubtask(index) {
 function saveCurrentSubtask(i) {
   if (currentSubtasks.length > 0) {
     if (!currentTodos[i]['subtask']) {
+      console.log('Eins');
       currentTodos[i]['subtask'] = [...currentSubtasks];
     } else {
+      console.log('Zwei');
       currentTodos[i]['subtask'] = [...currentTodos[i]['subtask'], ...currentSubtasks];
+      console.log('currentTodos.subtask: ', currentTodos[i]['subtask']);
+
     }
     editTaskRemote(todoKeysArray[i], { subtask: currentTodos[i]['subtask'] });
   }
@@ -770,7 +772,10 @@ function editTask(i) {
 
 
 
-  renderTasks();
+
+
+
   todos = JSON.parse(JSON.stringify(currentTodos));
+  renderTasks();
   closeDialog();
 }

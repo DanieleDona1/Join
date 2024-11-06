@@ -83,20 +83,13 @@ function saveToLocalStorage(key, value) {
 }
 
 /**
- * Redirects guest users and displays a success message animation.
+ * Redirects guest users.
  *
  * @function guestLoginRedirect
  * @returns {void}
  */
 function guestLoginRedirect() {
-  let animatedElement = document.getElementById('animatedText');
-  document.getElementById('dialogBg').style.display = 'flex';
-  animatedElement.innerHTML = 'You successfully logged in as a guest!';
-  setTimeout(function () {
-    document.getElementById('dialogBg').style.display = 'none';
-    // saveToLocalStorage('user', 'Guest');
-    window.location.href = 'summary.html';
-  }, 3000);
+  redirectToPage('summary.html');
 }
 
 /**
