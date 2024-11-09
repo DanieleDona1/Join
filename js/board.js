@@ -15,8 +15,8 @@ async function onload() {
   console.log('currtodos:', currentTodos);
   renderTasks();
 
-  // openTaskDetails(0);
-  // generateEditTemplate(0);
+  openTaskDetails(0);
+  generateEditTemplate(0);
 }
 
 /**
@@ -769,10 +769,7 @@ function getUserChangedData(i) {
   currentTodos[i]['dueDate'] = dueDate;
 
 // function editTaskRemote(key, { title, description, category, dueDate, assignedTo, subtask, prio }) {
-
   editTaskRemote(todoKeysArray[i], { title: currentTodos[i].title, description: currentTodos[i].description,  dueDate: currentTodos[i].dueDate});
-
-
 
 }
 
