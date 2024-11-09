@@ -77,6 +77,8 @@ function generateDetailTaskTemplate(id) {
  */
 function generateEditTemplate(id) {
   const dueDate = todos[id].dueDate;
+  console.log('duedate: ',dueDate);
+
   document.getElementById('dialog').innerHTML = /*html */ `
       <div class="wrapper dialog-content" onclick="event.stopPropagation();">
         <div class="edit-template detail-task scrollbar" >
@@ -84,12 +86,12 @@ function generateEditTemplate(id) {
               <img class="x-mark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
             </div>
           <label>Title<br>
-            <input class="title-edit" id="titleEdit" type="text" value="${todos[id].title}" placeholder="Enter a title">
+            <input id="titleEdit" class="title-edit" type="text" value="${todos[id].title}" placeholder="Enter a title">
           </label>
           <label>Description
-            <textarea class="textarea-edit" rows="4" cols="50" maxlength="300" placeholder="Enter a description">${todos[id].description}</textarea>
+            <textarea id="textareaEdit" class="textarea-edit" rows="4" cols="50" maxlength="300" placeholder="Enter a description">${todos[id].description}</textarea>
           </label>
-          <label>Due date<br> <input class="due-edit" id="dueEdit" type="date" onfocus="showPicker();" value="${dueDate}" lang="de-DE"></label>
+          <label>Due date<br> <input id="dateEdit" class="due-edit" type="date" onfocus="showPicker();" value="${dueDate}" lang="de-DE"></label>
           <div>
             <div>Priority</div>
           </div>
