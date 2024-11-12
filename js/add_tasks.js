@@ -18,7 +18,7 @@ function formatDate(input) {
 
 function cleanInput(value) {
   // Entferne alle Nicht-Zahlen
-  return value.replace(/\D/g, '');
+  return value.replace(/\D/g, "");
 }
 
 function extractDateParts(value) {
@@ -32,16 +32,18 @@ function extractDateParts(value) {
 
 function validateDate(day, month) {
   // Überprüfe und begrenze Tag und Monat
-  day = day > 31 ? '31' : day;
-  month = month > 12 ? '12' : month;
+  day = day > 31 ? "31" : day;
+  month = month > 12 ? "12" : month;
   return { day, month };
 }
 
 function formatOutput(day, month, year) {
   // Setze den formatierten Wert zusammen
   let output = day;
-  if (month) output += '/' + month;
-  if (year) output += '/' + year;
+  if (month) output += "/" + month;
+  if (year) output += "/" + year;
+  if (month) output += "/" + month;
+  if (year) output += "/" + year;
   return output;
 }
 
@@ -93,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   const dropdown = document.getElementById("drop-down-1");
   const selectItems = dropdown.querySelector(".select-items");
-  const initialsDisplay = document.getElementById('initials-display');
+  const initialsDisplay = document.getElementById("initials-display");
 
   // Erstelle Optionen für das Dropdown mit einer for-Schleife
   for (let i = 0; i < contacts.length; i++) {
@@ -125,9 +127,8 @@ document.addEventListener("DOMContentLoaded", function () {
     dropdownOptions[i].addEventListener("click", function () {
       const checkbox = this.querySelector('input[type="checkbox"]');
       const customCheckbox = this.querySelector(".custom-checkbox");
-      const initials = this.querySelector(".initial").textContent; 
+      const initials = this.querySelector(".initial").textContent;
       const contact = contacts[i];
-
 
       // Toggle die Checkbox
       checkbox.checked = !checkbox.checked;
@@ -152,9 +153,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Aktualisiere die Anzeige der Initialen
       initialsDisplay.innerHTML = ""; // Clear previous initials
-      for (let j = 0; j < selectedInitials.length; j++) {
-        initialsDisplay.innerHTML += `<div class="initial" style="background-color: ${contact.color};">${selectedInitials[j]}</div>`;
-      }
+      selectedInitials.forEach(function (initial) {
+        // Finde den Kontakt, dessen Initiale übereinstimmt
+        const contactForInitial = contacts.find((contact) => {
+          const contactInitials =
+            contact.firstName.charAt(0).toUpperCase() +
+            contact.lastName.charAt(0).toUpperCase();
+
+          return contactInitials === initial;
+        });
+
+        // Wenn ein Kontakt für die Initialen gefunden wurde, dann die Farbe setzen
+        if (contactForInitial) {
+          initialsDisplay.innerHTML += `<div class="initial" style="background-color: ${contactForInitial.color}; margin-right: 10px;">${initial}</div>`;
+        }
+      });
     });
   }
 });

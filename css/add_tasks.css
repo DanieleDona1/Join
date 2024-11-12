@@ -169,12 +169,11 @@ input:focus,
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 32px;
-  height: 32px;
+  width: 50px;
+  height: 50px;
   border: 2px solid white;
   border-radius: 50%;
   color: white;
-  font-weight: bold;
   font-size: 12px;
 }
 
@@ -218,7 +217,11 @@ input:focus,
   transform: rotate(45deg); /* Häkchen drehen */
 }
 
-.selected-initials {
-margin-top: 25px;
+#selected-initials {
+margin-top: 10px;
+display: flex;
+}
+#initials-display {
+  display: flex;
 }
 
