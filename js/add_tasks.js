@@ -18,7 +18,7 @@ function formatDate(input) {
 
 function cleanInput(value) {
   // Entferne alle Nicht-Zahlen
-  return value.replace(/\D/g, "");
+  return value.replace(/\D/g, '');
 }
 
 function extractDateParts(value) {
@@ -32,16 +32,16 @@ function extractDateParts(value) {
 
 function validateDate(day, month) {
   // Überprüfe und begrenze Tag und Monat
-  day = day > 31 ? "31" : day;
-  month = month > 12 ? "12" : month;
+  day = day > 31 ? '31' : day;
+  month = month > 12 ? '12' : month;
   return { day, month };
 }
 
 function formatOutput(day, month, year) {
   // Setze den formatierten Wert zusammen
   let output = day;
-  if (month) output += "/" + month;
-  if (year) output += "/" + year;
+  if (month) output += '/' + month;
+  if (year) output += '/' + year;
   return output;
 }
 

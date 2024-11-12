@@ -4,35 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Tasks</title>
-    <link
-      rel="icon"
-      type="image/png"
-      href="/assets/icons/favicons/favicon_light.png"
-      id="favicon"
-    />
+    <link rel="icon" type="image/png" href="/assets/icons/favicons/favicon_light.png" id="favicon" />
+
+    <script src="/script.js"></script>
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/add_tasks.css" />
-    <script src="/script.js" defer></script>
+    <link rel="stylesheet" href="/css/board.css" defer />
     <script src="/js/add_tasks.js" defer></script>
     <script src="/js/board.js" defer></script>
+    <script src="/js/board_template.js" defer></script>
     <!-- script hinzugefügt  -->
   </head>
   <body class="max-width-1920">
     <header>
-      <img
-        class="header-join-logo"
-        src="/assets/icons/header/joinHeaderMobile.svg"
-        alt="logo"
-      />
+      <img class="header-join-logo" src="/assets/icons/header/joinHeaderMobile.svg" alt="logo" />
       <p class="d-none">Kanban Project Management Tool</p>
       <div class="header-rightside-container d-none">
         <a href="help.html">
-          <img
-            class="header-help-icon d-none"
-            src="/assets/icons/header/help.svg"
-            alt="help"
-          />
+          <img class="header-help-icon d-none" src="/assets/icons/header/help.svg" alt="help" />
         </a>
         <span class="header-initials">JV</span>
       </div>
@@ -45,10 +35,7 @@
       <div class="navbar-container-bottom">
         <div class="navbar-item-container">
           <a href="summary.html" class="navbar-item" data-page="summary">
-            <img
-              src="/assets/icons/navbar/summary_Icon.svg"
-              alt="Summary Icon"
-            />
+            <img src="/assets/icons/navbar/summary_Icon.svg" alt="Summary Icon" />
             <p>Summary</p>
           </a>
           <a href="board.html" class="navbar-item" data-page="board">
@@ -56,27 +43,17 @@
             <p>Board</p>
           </a>
           <a href="add_tasks.html" class="navbar-item" data-page="add_tasks">
-            <img
-              src="/assets/icons/navbar/add_tasks.svg"
-              alt="Add Tasks Icon"
-            />
+            <img src="/assets/icons/navbar/add_tasks.svg" alt="Add Tasks Icon" />
             <p>Add Tasks</p>
           </a>
           <a href="contact.html" class="navbar-item" data-page="contacts">
-            <img
-              src="/assets/icons/navbar/contacts_icon.svg"
-              alt="Contacts Icon"
-            />
+            <img src="/assets/icons/navbar/contacts_icon.svg" alt="Contacts Icon" />
             <p>Contacts</p>
           </a>
         </div>
         <div class="navbar-disclaimer-links-container d-none">
-          <a href="/html/privacy_policy.html" data-page="privacy_policy"
-            >Privacy Policy</a
-          >
-          <a href="/html/legal_notice.html" data-page="legal_notice"
-            >Legal Notice</a
-          >
+          <a href="/html/privacy_policy.html" data-page="privacy_policy">Privacy Policy</a>
+          <a href="/html/legal_notice.html" data-page="legal_notice">Legal Notice</a>
         </div>
       </div>
     </nav>
@@ -87,16 +64,11 @@
           <p>Title<span>*</span></p>
           <input placeholder="Enter a title" type="text" />
           <p>Description</p>
-          <textarea
-            class="resizable-textarea"
-            placeholder="Enter a Description"
-            type="text"
-          ></textarea>
+          <textarea class="resizable-textarea" placeholder="Enter a Description" type="text"></textarea>
           <p>Assigned to</p>
           <div class="custom-select" id="drop-down-1">
-            <div class="select-selected" tabindex="0">
-              Select contacts to assign
-            </div>
+            <div class="select-selected" tabindex="0">Select contacts to assign</div>
+            <div class="select-items"></div>
             <div class="select-items select-hide"></div>
           </div>
           <div id="selected-initials" style="margin-top: 10px;">
@@ -106,12 +78,7 @@
         <div class="divider"></div>
         <section>
           <p>Due date<span>*</span></p>
-          <input
-            type="text"
-            id="dateInput"
-            placeholder="dd/mm/yyyy"
-            oninput="formatDate(this)"
-          />
+          <input type="text" id="dateInput" placeholder="dd/mm/yyyy" oninput="formatDate(this)" />
           <p>Prio</p>
           <div class="button-container">
             <button class="task-button" data-color="urgent">
@@ -128,14 +95,24 @@
           <div class="custom-select" id="drop-down-2">
             <div class="select-selected" tabindex="1">Select task category</div>
             <div class="select-items select-hide">
-              <div class="select-option" data-value="category1">
-                Technical Task
-              </div>
+              <div class="select-option" data-value="category1">Technical Task</div>
               <div class="select-option" data-value="category2">User Story</div>
             </div>
-            <p>Subtasks</p>
-            <button onclick="createTask('toDo', 'toDoContent')">
-              Create Task</button
+
+            <div class="subtask-container">
+              <div onclick="">Subtasks</div>
+              <div>
+                <div class="subtask-group">
+                  <input id="subtaskInput" class="subtask-input" oninput="onInputSubtask()" type="text" placeholder="Add new subtask" />
+                  <div id="subtaskIcons" class="subtask-icons">
+                    <img onclick="focusInput()" class="add-subtask" src="/assets/icons/board/property-add.svg" alt="add" />
+                  </div>
+                </div>
+              </div>
+              <div id="subtaskAddedList" class="subtask-added-list"></div>
+            </div>
+
+            <button onclick="createTask('toDo', 'toDoContent')">Create Task</button
             ><!-- Hier ein button eingefügt -->
           </div>
         </section>

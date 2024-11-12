@@ -31,7 +31,7 @@ a {
   position: absolute;
   z-index: 1;
   background-color: rgb(246, 247, 248);
-  animation: moveToCorner 1000ms linear forwards;
+  animation: moveToCorner 700ms linear forwards;
   width: 40px;
   height: 50px;
   top: 30px;
@@ -306,7 +306,7 @@ footer a:hover {
     bottom: -100px;
     opacity: 0;
   }
-  40% {
+  30% {
     bottom: 50%;
     opacity: 1;
   }
@@ -332,7 +332,6 @@ footer a:hover {
 
 label span {
   font-size: 0.875rem;
-  opacity: 0.25;
 }
 
 .form-checkbox {
@@ -361,23 +360,32 @@ label span {
   color: rgb(255, 255, 255);
   font-size: 0.625rem;
   position: absolute;
-  top: 50%;
+  top: 48%;
   left: 50%;
   transform: translate(-50%, -53%);
+}
+
+.legal-text {
+  color: rgb(169, 169, 169);
 }
 
 .legal-link {
   color: rgb(41, 171, 226);
   font-size: 14px;
+  font-weight: 500;
+}
+
+.legal-link:hover {
+  text-decoration: underline;
+}
+
+.color-red {
+  color: red;
 }
 
 .padding-left-0 {
   padding-left: 0px;
 }
-
-/* .margin-top-15px {
-  margin-top: 15px;
-} */
 
 .confirm-password {
   margin-bottom: 8px;

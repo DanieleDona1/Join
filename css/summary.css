@@ -1,23 +1,57 @@
 main {
   background-color: rgb(246,247,248);
+  padding-top: 72px;
 }
 
 main h2 {
-  font-size: clamp(32px, 5vw, 48px);
+  font-size: clamp(2.5rem, 5vw, 3rem);
   margin-bottom: 0;
   margin-right: 10px;
+}
+
+.headline {
+  margin-bottom: 40px;
+  gap: 24px;
+}
+
+.separator {
+  width: 3px;
+  height: 40px;
+  background-color: rgb(41, 171, 226);
+  border-radius: 10px;
+}
+
+.underline-seperator {
+  position: relative;
+}
+
+.underline-seperator::after{
+    content: "";
+    position: absolute;
+    bottom: -24px;
+    left: 0;
+    width: 72px;
+    height: 3px;
+    background-color: rgb(41, 171, 226);
+    opacity: 0;
 }
 
 .summary-container {
   display: flex;
   gap: 20px;
+  font-size: 3rem;
+}
+.summary-container span{
+  display: flex;
+  gap: 20px;
+  font-size: clamp(0.9rem, 4vw, 1rem);
 }
 
 .grid-container {
   display: grid;
   width: 100%;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 175px 175px 175px;
+  grid-template-rows: 170px 170px 170px;
   gap: 20px;
   cursor: pointer;
 
@@ -29,8 +63,9 @@ main h2 {
   justify-content: center;
   align-items: center;
   border-radius: 30px;
-  gap: 16px;
+  /* gap: 10px; */
   text-align: center;
+  padding: 10px;
 }
 
 .to-do {
@@ -49,8 +84,8 @@ main h2 {
 
 .to-do-img {
   background-image: url('/assets/icons/summary/edit-dark.svg');
-  width: 69px;
-  height: 69px;
+  width: clamp(48px, 10vw, 69px);
+  height: clamp(48px, 10vw, 69px);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -68,8 +103,8 @@ main h2 {
 
 .done-img {
   background-image: url('/assets/icons/summary/check-dark.svg');
-  width: 69px;
-  height: 69px;
+  width: clamp(48px, 10vw, 69px);
+  height: clamp(48px, 10vw, 69px);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -87,12 +122,26 @@ main h2 {
 
 .priority-img {
   background-image: url('/assets/icons/summary/urgent.svg');
-  width: 69px;
-  height: 69px;
+  width: clamp(48px, 10vw, 69px);
+  height: clamp(48px, 10vw, 69px);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   transition: transform 200ms ease, background-image 0s ease;
+}
+
+.upcoming-separator {
+  margin: 0 clamp(4px, 5vw, 72px);
+  background-color: rgb(209, 209, 209);
+  height: 100px;
+  width: 2px;
+  border-radius: 10px;
+}
+
+.upcoming-deadline {
+  font-size: clamp(1rem, 4.5vw, 1.3rem);
+  font-weight: bold;
+
 }
 
 .task-in-board {
@@ -114,4 +163,135 @@ main h2 {
   width: 100%;
   border-radius: 20px;
   font-size: 3rem;
+}
+
+/* .user-greeting-group {
+  text-align: center;
+} */
+
+.greeting {
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: rgb(42, 54, 71);
+}
+
+.user-name {
+  font-size: clamp(3rem, 4vw, 4rem);
+  color: rgb(41, 171, 226);
+}
+
+.width-50 {
+  width: 50%;
+}
+
+.gap-16 {
+  gap: 16px;
+}
+
+/* Standardmäßig versteckt */
+.greeting-dialog {
+  opacity: 0;
+  display: none;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  z-index: 1;
+  font-size: 2.5rem;
+}
+
+
+/* Animation für das Ein- und Ausblenden */
+.opacity-animation {
+  animation: fadeInOut 2200ms forwards;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media screen and (min-width: 1921px) {
+
+}
+
+@media screen and (max-width: 1920px) {
+  main {
+    padding-right: 0px;
+    padding-left: 75px;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  main {
+    padding-left: 75px;
+    padding-bottom: 96px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .loading-bar-dialog {
+    display: none;
+  }
+
+  .greeting-dialog {
+    display: flex;
+  }
+
+  .user-greeting-container {
+    display: none;
+  }
+  main {
+    padding-right: 96px;
+    padding-left: 120px;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  main {
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+  .grid-container {
+    grid-template-rows: 130px 130px 130px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  main {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .headline {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .summary-container {
+    margin-top: 70px;
+  }
+
+  .grid-container {
+    gap: 16px;
+  }
+
+  .underline-seperator::after{
+    opacity: 1;
+}
 }

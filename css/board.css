@@ -11,6 +11,10 @@ main h2 {
   margin-right: 10px;
 }
 
+h3 {
+  margin-top: 16px;
+}
+
 .gap-32px {
   gap: 32px;
 }
@@ -109,12 +113,11 @@ main h2 {
 }
 
 .content::-webkit-scrollbar-thumb {
-  background-color: rgb(41, 171, 226); /* Farbe des Scrollbalkens (Thumb) */
+  background-color: rgb(41, 171, 226);
   border-radius: 10px;
 }
 
 .drag-area-highlight {
-  /* background-color: rgb(246, 247, 248); */
   background-color: rgb(0, 0, 0, 0.07);
 }
 
@@ -208,18 +211,36 @@ main h2 {
   z-index: 1;
 }
 
+.wrapper {
+  background-color: white;
+  border-radius: 16px;
+  padding-right: 10px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  width: 100%;
+  max-width: 440px;
+  /* min-height: 650px; */
+}
+
+.scrollbar {
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 15px;
+}
+
 .detail-task {
   position: relative;
   display: flex;
   flex-direction: column;
-  background-color: white;
-  padding: 24px;
-  border-radius: 16px;
-  width: 100%;
-  max-width: 440px;
+  padding: 0px 14px 0px 24px;
   height: 100%;
-  max-height: 700px;
-  gap: 20px;
+  max-height: 650px;
+  /* gap: 20px; */
+  min-height: 650px;
 }
 
 .detail-task .title {
@@ -232,6 +253,7 @@ main h2 {
   margin-left: 4px;
 }
 
+
 .color-blue {
   color: rgb(42, 54, 71);
 }
@@ -240,23 +262,37 @@ main h2 {
   color: rgb(0, 0, 0);
 }
 
-.xmark {
+.x-container {
+  position: sticky;
+  background-color: white;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  top: 0px;
+}
+
+.x-mark {
   width: 32px;
   cursor: pointer;
   padding: 8px;
   border-radius: 50%;
 }
 
-.xmark:hover {
+.x-mark:hover {
   background-color: rgb(0, 0, 0, 0.1);
   border-radius: 50%;
 }
 
 .configuration {
-  position: absolute;
-  bottom: 40px;
-  right: 40px;
+  position: sticky;
+  left: 290px;
+  bottom: 0px;
+  margin-top: auto;
+  background-color: white;
   display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 10px 0 0px 0;
 }
 
 .configuration div {
@@ -352,7 +388,7 @@ main h2 {
 .edit-template input {
   display: flex;
   width: 100%;
-  padding: 10px 21px 10px 21px;
+  padding: 10px 64px 10px 16px;
   gap: 10px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -376,7 +412,7 @@ main h2 {
   display: flex;
   resize: none;
   width: 100%;
-  padding: 10px 21px 10px 21px;
+  padding: 10px 16px;
   gap: 10px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -391,9 +427,12 @@ main h2 {
   border-radius: 8px;
   padding: 12px 16px;
   width: 88px;
-  height: 56px;
+  min-height: 56px;
   padding: 10px 25px;
   transition: background-color 200ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .save-edit-btn img {
@@ -412,8 +451,21 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 .subtask-list {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 12px;
   cursor: pointer;
-  padding: 4px;
+}
+
+.bg-hover:hover {
+  background-color: rgba(204, 204, 204, 0.3);
+}
+
+.text-wrap {
+  max-width: 90%;
+  white-space: normal;
+  overflow-wrap: break-word;
+  flex-grow: 1;
 }
 
 .checkbox-img {
@@ -421,9 +473,13 @@ input[type='date']::-webkit-calendar-picker-indicator {
   background-image: url('/assets/icons/board/checkbox-unchecked.svg');
   background-repeat: no-repeat;
   background-size: contain;
-  width: 16px;
-  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  margin-right: 10px;
+  margin-left: 14px;
 }
+
+
 
 @media screen and (min-width: 1921px) {
 }
@@ -496,6 +552,68 @@ input[type='date']::-webkit-calendar-picker-indicator {
 
 .subtask-icons{
   position: absolute;
-  right: 6px;
+  right: 10px;
   top: 10px;
+  cursor: pointer;
+}
+.subtask-icons img{
+  width: 24px;
+}
+
+.subtask-icons img:hover {
+  background-color: rgb(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+
+.mg-left {
+  margin-left: 8px;
+}
+
+.subtask-added-list {
+  padding: 10px 10px 0px 10px;
+}
+
+.subtask-list-group input {
+  border: none;
+  padding: 4px 64px 4px 16px;
+  font-size: 1rem;
+}
+
+.subtask-list-group:hover input{
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.subtask-list-icons img:hover {
+  transform: scale(1.08);
+}
+
+.subtask-list-group input {
+  transition: background-color 125ms;
+}
+
+.subtask-list-group input:focus {
+  border: 2px solid white;
+}
+
+.subtask-list-icons {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  cursor: pointer;
+}
+
+.subtask-list-icons img{
+  width: 20px;
+}
+
+.subtask-list-group input:focus {
+  border-bottom: 2px solid rgb(41, 171, 226);
+}
+
+.bullet-point {
+  margin-right: 40px;  /* Verringert den Abstand zwischen Bullet Point und Eingabefeld */
+  font-size: 1.2em;    /* Größe des Bullet Points */
+  color: #333;         /* Farbe des Bullet Points */
+  display: inline-block;
+  vertical-align: middle; /* Ze ntriert das Bullet Point mit dem Eingabefeld */
 }

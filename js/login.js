@@ -1,9 +1,23 @@
+/**
+ * Loads todos and users, and checks for a message in the URL.
+ *
+ * @async
+ * @function onloadFunc
+ * @returns {Promise<void>}
+ */
 async function onloadFunc() {
+  await loadTodosArray();
   checkMsgUrl();
   await loadUsersArray();
 }
 
-// check url for animate text "sign up successfully"
+/**
+ * Checks the URL for a 'msg' parameter and displays it by starting an animation.
+ * Updates the URL to '/html/login.html'.
+ *
+ * @function
+ * @returns {void}
+ */
 function checkMsgUrl() {
   const urlParams = new URLSearchParams(window.location.search);
   const msg = urlParams.get('msg');
@@ -17,16 +31,22 @@ function checkMsgUrl() {
   history.replaceState(null, '', '/html/login.html');
 }
 
-// compare user input to firebase
+/**
+ * Validates user login against stored users and redirects on success.
+ *
+ * @function login
+ * @param {Event} event - The event triggered by form submission.
+ * @returns {void}
+ */
 function login(event) {
   event.preventDefault();
   let email = document.getElementById('email').value;
   let password = document.getElementById('password').value;
+  let userKey = checkUser(email, password);
 
-  let userId = checkUser(email, password);
-
-  if (userId) {
-    window.location.href = `/html/summary.html?msg=${userId}`;
+  if (userKey) {
+    saveToLocalStorage('user', userKey);
+    window.location.href = '/html/summary.html';
   } else {
     document.getElementById('errorMsg').style.opacity = '1';
     document.getElementById('email').style.border = '1px solid red';
@@ -35,31 +55,60 @@ function login(event) {
   }
 }
 
-//  Check User input to firebase
+/**
+ * Checks the URL for a 'msg' parameter and displays it with an animation.
+ *
+ * @function checkMsgUrl
+ * @returns {void}
+ */
 function checkUser(email, password) {
   for (let i = 0; i < users.length; i++) {
     if (users[i].user.email == email && users[i].user.password == password) {
-      return users[i].user.id;
+      return users[i].user.userKey;
     }
   }
   return null;
 }
 
-function guestLoginRedirect() {
-  let animatedElement = document.getElementById('animatedText');
-  document.getElementById('dialogBg').style.display = 'flex';
-  animatedElement.innerHTML = 'You successfully logged in as a guest!';
-  setTimeout(function () {
-    document.getElementById('dialogBg').style.display = 'none';
-    window.location.href = 'summary.html?msg=guest';
-  }, 3000);
+/**
+ * Saves a key-value pair to local storage.
+ *
+ * @function saveToLocalStorage
+ * @param {string} key - The key under which to store the value.
+ * @param {string} value - The value to store.
+ * @returns {void}
+ */
+function saveToLocalStorage(key, value) {
+  localStorage.setItem(key, value);
 }
 
-// remove message email or password wrong
+/**
+ * Redirects guest users.
+ *
+ * @function guestLoginRedirect
+ * @returns {void}
+ */
+function guestLoginRedirect() {
+  redirectToPage('summary.html');
+}
+
+/**
+ * Hides the error message on the login form.
+ *
+ * @function removeErrorMsg
+ * @returns {void}
+ */
 function removeErrorMsg() {
   document.getElementById('errorMsg').style.opacity = '0';
 }
 
+/**
+ * Sets up event listeners for DOM content loaded events.
+ * Sets up an event listener for the dialog background to hide it once the animation ends.
+ *
+ * @function
+ * @returns {void}
+ */
 document.addEventListener('DOMContentLoaded', () => {
   const dialogBg = document.getElementById('dialogBg');
 
@@ -70,10 +119,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+/**
+ * Displays a dialog box.
+ *
+ * @function showDialog
+ * @returns {void}
+ */
 function showDialog() {
   document.getElementById('dialogBg').style.display = 'flex';
 }
 
+/**
+ * Manages input border styles and error message visibility.
+ *
+ * @function
+ * @returns {void}
+ */
 document.addEventListener('DOMContentLoaded', () => {
   const emailInput = document.getElementById('email');
   const passwordInput = document.getElementById('password');
@@ -89,7 +150,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Mangage visibility password icons
+/**
+ * Manages the visibility of password icons based on input.
+ *
+ * @function managePasswordVisibilityIcons
+ * @param {HTMLElement} passwordField - The password input field.
+ * @param {HTMLElement} passwordLock - The locked icon element.
+ * @param {HTMLElement} visibilityBtn - The visibility toggle button.
+ * @returns {void}
+ */
 function managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn) {
   passwordField.addEventListener('input', () => {
     if (passwordField.value.trim() !== '') {
@@ -102,6 +171,12 @@ function managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBt
   });
 }
 
+/**
+ * Initializes the password visibility toggle.
+ *
+ * @function
+ * @returns {void}
+ */
 document.addEventListener('DOMContentLoaded', () => {
   toggleVisibility('password', 'passwordLock', 'visibilityImg');
 });
