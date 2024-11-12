@@ -97,12 +97,11 @@
             <div class="select-selected" tabindex="0">
               Select contacts to assign
             </div>
-            <div class="select-items">
-              <div class="select-option" data-value="option1">Option 1 <input type="checkbox"></div>
-              <div class="select-option" data-value="option2">Option 2 <input type="checkbox"></div>
-          </div>
             <div class="select-items select-hide"></div>
           </div>
+          <div id="selected-initials" style="margin-top: 10px;">
+            <div id="initials-display"></div>
+        </div>
         </section>
         <div class="divider"></div>
         <section>
@@ -115,13 +114,13 @@
           />
           <p>Prio</p>
           <div class="button-container">
-            <button>
+            <button class="task-button" data-color="urgent">
               Urgent <img src="/assets/icons/add_tasks/urgent.svg" alt="" />
             </button>
-            <button>
+            <button class="task-button" data-color="medium">
               Medium <img src="/assets/icons/add_tasks/medium.svg" alt="" />
             </button>
-            <button>
+            <button class="task-button" data-color="low">
               Low <img src="/assets/icons/add_tasks/low.svg" alt="" />
             </button>
           </div>

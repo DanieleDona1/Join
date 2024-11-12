@@ -23,6 +23,7 @@ input[type="checkbox"] {
   height: 20px;
   width: 20px;
   margin: 0;
+  display: none;
 }
 
 ::placeholder {
@@ -60,6 +61,8 @@ input[type="checkbox"] {
   width: 100%; /* Breite anpassen */
   display: none; /* Standardmäßig ausblenden */
   z-index: 1;
+  overflow: auto;
+  max-height: 225px;
 }
 
 .select-option {
@@ -138,6 +141,7 @@ input {
   border-radius: 6px;
   margin-bottom: 28px;
   resize: vertical;
+  font-size: 20px;
 }
 
 .resizable-textarea:focus,
@@ -154,3 +158,67 @@ input:focus,
   background-color: rgb(214, 214, 214); /* Farbe der Trennlinie */
   margin: 0 48px;
 }
+
+.contact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.initial {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border: 2px solid white;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.name {
+  padding-left: 12px;
+}
+
+.select-option.active {
+  background-color: rgb(42,54,71); /* Hintergrundfarbe für die aktive Option */
+  color: white;
+  border-radius: 12px;
+}
+
+.custom-checkbox {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #0f0e0e; /* Rahmenfarbe */
+  border-radius: 25%; /* Runde Ecken */
+  background-color: #fff; /* Hintergrundfarbe */
+  position: relative;
+  cursor: pointer; /* Zeiger-Cursor */
+}
+
+/* Erstelle den "Haken" für die Checkbox */
+.custom-checkbox.checked {
+  border-color: white; /* Rahmenfarbe wenn aktiv */
+  background-color: rgb(42,54,71);
+}
+
+/* Füge das Häkchen hinzu */
+.custom-checkbox.checked:after {
+  content: '';
+  position: absolute;
+  left: 8px; /* Position des Häkchens */
+  top: -6px; /* Position des Häkchens */
+  width: 4px; /* Breite des Häkchens */
+  height: 18px; /* Höhe des Häkchens */
+  border: solid white; /* Häkchenfarbe */
+  border-width: 0 2px 2px 0; /* Häkchenform */
+  transform: rotate(45deg); /* Häkchen drehen */
+}
+
+.selected-initials {
+margin-top: 25px;
+}
+
