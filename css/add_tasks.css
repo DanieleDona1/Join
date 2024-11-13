@@ -42,7 +42,7 @@ input[type="checkbox"] {
 .select-selected {
   position: relative;
   background-color: #fff; /* Hintergrundfarbe des ausgewählten Wertes */
-  padding: 10px;
+  padding: 10px 21px;
   margin-bottom: 28px;
   font-size: 20px;
   cursor: pointer;
@@ -146,7 +146,7 @@ input {
 
 .resizable-textarea:focus,
 input:focus,
-.custom-select:focus-within .select-selected {
+.custom-select:focus-within  {
   border-width: 1.5px;
   border-color: rgb(41, 171, 226); /* Randfarbe ändern bei Fokus */
   outline: none; /* Entfernt den Standard-Fokus-Rahmen */
@@ -182,7 +182,11 @@ input:focus,
 }
 
 .select-option.active {
-  background-color: rgb(42,54,71); /* Hintergrundfarbe für die aktive Option */
+  background-color: rgb(
+    42,
+    54,
+    71
+  ); /* Hintergrundfarbe für die aktive Option */
   color: white;
   border-radius: 12px;
 }
@@ -201,12 +205,12 @@ input:focus,
 /* Erstelle den "Haken" für die Checkbox */
 .custom-checkbox.checked {
   border-color: white; /* Rahmenfarbe wenn aktiv */
-  background-color: rgb(42,54,71);
+  background-color: rgb(42, 54, 71);
 }
 
 /* Füge das Häkchen hinzu */
 .custom-checkbox.checked:after {
-  content: '';
+  content: "";
   position: absolute;
   left: 8px; /* Position des Häkchens */
   top: -6px; /* Position des Häkchens */
@@ -218,10 +222,110 @@ input:focus,
 }
 
 #selected-initials {
-margin-top: 10px;
-display: flex;
+  margin-top: 10px;
+  display: flex;
 }
+
 #initials-display {
   display: flex;
 }
 
+.subtask-group {
+  position: relative;
+}
+
+.subtask-icons {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.subtask-icons img {
+  width: 24px;
+}
+
+.subtask-icons img:hover {
+  background-color: rgb(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+
+.mg-left {
+  margin-left: 8px;
+}
+
+.subtask-added-list {
+  padding: 10px 10px 0px 10px;
+}
+
+.subtask-list-group input {
+  border: none;
+  padding: 4px 64px 4px 16px;
+  font-size: 1rem;
+}
+
+.subtask-list-group:hover input {
+  background-color: rgb(238,238,238);
+}
+
+.subtask-list-icons img:hover {
+  transform: scale(1.08);
+}
+
+.subtask-list-group input {
+  transition: background-color 125ms;
+  background-color: rgb(246, 247, 248);
+  margin-bottom: 5px;
+  height: 30px;
+  width: 100%;
+}
+
+.subtask-list-group input:focus {
+  border: 2px solid white;
+}
+
+.subtask-list-icons {
+  position: absolute;
+  right: 10px;
+  top: 6px;
+  cursor: pointer;
+}
+
+.subtask-list-icons img {
+  width: 20px;
+}
+
+
+.bullet-point {
+  margin-right: 40px; /* Verringert den Abstand zwischen Bullet Point und Eingabefeld */
+  font-size: 1.2em; /* Größe des Bullet Points */
+  color: #333; /* Farbe des Bullet Points */
+  display: inline-block;
+  vertical-align: middle; /* Ze ntriert das Bullet Point mit dem Eingabefeld */
+}
+
+.subtask-list-input {
+  margin-bottom: 0;
+  height: 30px;
+}
+
+.subtask-input {
+  margin-bottom: 0;
+}
+
+.subtask-list-group .subtask-list-icons {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.subtask-list-group:hover .subtask-list-icons {
+  opacity: 1;
+}
+
+.icon-separator {
+  display: inline-block;
+  width: 1px;
+  height: 20px; /* Höhe des Strichs, passend zur Icon-Größe */
+  background-color: #ccc; /* Farbe des Strichs */
+  margin: 0 8px; /* Abstand zwischen den Icons und dem Strich */
+}

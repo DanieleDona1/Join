@@ -163,6 +163,7 @@ header img {
 .navbar-disclaimer-links-container a.active {
   background-color: rgb(9, 25, 49);
   pointer-events: none;
+  color: white;
 }
 
 main {

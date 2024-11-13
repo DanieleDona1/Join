@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/add_tasks.css" />
-    <link rel="stylesheet" href="/css/board.css" defer />
     <script src="/js/add_tasks.js" defer></script>
     <script src="/js/board.js" defer></script>
     <script src="/js/board_template.js" defer></script>
@@ -72,7 +71,6 @@
           <div class="custom-select" id="drop-down-1">
             <div class="select-selected" tabindex="0">Select contacts to assign</div>
             <div class="select-items"></div>
-            <div class="select-items select-hide"></div>
           </div>
           <div id="selected-initials">
             <div id="initials-display"></div>
@@ -103,7 +101,7 @@
             </div>
 
             <div class="subtask-container">
-              <div onclick="">Subtasks</div>
+              <p>Subtasks</p>
               <div>
                 <div class="subtask-group">
                   <input id="subtaskInput" class="subtask-input" oninput="onInputSubtask()" type="text" placeholder="Add new subtask" />
