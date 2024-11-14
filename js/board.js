@@ -15,8 +15,8 @@ async function onload() {
   console.log('currtodos:', currentTodos);
   renderTasks();
 
-  openTaskDetails(0);
-  generateEditTemplate(0);
+  // openTaskDetails(0);
+  // generateEditTemplate(0);
 }
 
 /**
