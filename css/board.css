@@ -572,10 +572,10 @@ input[type='date']::-webkit-calendar-picker-indicator {
 .subtask-icons{
   position: absolute;
   right: 10px;
-  top: 10px;
+  top: 25%;
   cursor: pointer;
 }
-.subtask-icons img{
+.subtask-icons img {
   width: 24px;
 }
 

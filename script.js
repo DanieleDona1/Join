@@ -8,11 +8,16 @@ let users = [];
 let currentSubtasks = [];
 
 /**
- * Checks if the user is logged in by verifying if getUserName() returns a valid value.
- * If not, redirects the user to the login page.
+ * Checks if the user is logged in. If neither a valid username nor a guest login is found,
+ * the user is redirected to the login page.
+ *
+ * @async
  */
 async function isUserLoggedIn() {
-  if (Boolean(await getUserName()) === false && checkIfUserIsGuest() === 'Guest') {
+  const userName = await getUserName();
+  const isGuest = await checkIfUserIsGuest();
+
+  if (userName === false && isGuest !== 'Guest') {
     redirectToPage('login.html');
   }
 }
