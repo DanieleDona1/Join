@@ -387,7 +387,7 @@ function closeDialog() {
     renderTasks();
   }
   currentTodos = JSON.parse(JSON.stringify(todos));
-  // currentSubtasks = [];
+  currentSubtasks = [];
 }
 
 /**
@@ -558,7 +558,6 @@ function addCurrentSubtask() {
   let subtaskInput = document.getElementById('subtaskInput');
 
   currentSubtasks.push({ checked: false, text: subtaskInput.value });
-  console.log('CurrentSubtask: ', currentSubtasks);
 
   renderSubtaskAddedList();
   resetInputField();
