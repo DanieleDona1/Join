@@ -171,3 +171,41 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll(".task-button");
+
+  function updateButtonIcons() {
+    buttons.forEach(button => {
+      const color = button.getAttribute("data-color");
+      const img = button.querySelector("img");
+
+      // Setze das Bild je nach Aktivitätsstatus des Buttons
+      img.src = button.classList.contains("active") 
+        ? `/assets/icons/add_tasks/active_icon_${color}.svg` 
+        : `/assets/icons/add_tasks/inactive_icon_${color}.svg`;
+    });
+  }
+
+  function activateButton(selectedButton) {
+    // Überprüfen, ob der Button bereits aktiv ist
+    if (!selectedButton.classList.contains("active")) {
+      // Entferne die aktive Klasse von allen Buttons
+      buttons.forEach(button => button.classList.remove("active"));
+
+      // Füge die aktive Klasse zum ausgewählten Button hinzu
+      selectedButton.classList.add("active");
+
+      // Aktualisiere die Icons basierend auf dem aktiven Status
+      updateButtonIcons();
+    }
+  }
+
+  // Füge jedem Button ein Click-Event hinzu
+  buttons.forEach(button => {
+    button.addEventListener("click", () => activateButton(button));
+  });
+
+  // Initialisiere die Icons beim Laden der Seite
+  updateButtonIcons();
+});
