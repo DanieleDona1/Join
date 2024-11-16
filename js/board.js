@@ -226,9 +226,9 @@ function allowDrop(event) {
  * @returns {void}
  */
 function moveTo(newCategory) {
-  currentTodos[currentDraggedElement]['category'] = newCategory;
+  todos[currentDraggedElement]['category'] = newCategory;
   editTaskRemote(todoKeysArray[currentDraggedElement], { category: todos[currentDraggedElement].category });
-  // currentTodos = todos;
+  currentTodos = JSON.parse(JSON.stringify(todos));
   renderTasks();
   removeHighlightAfterDrop();
 }
