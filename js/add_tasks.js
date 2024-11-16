@@ -12,6 +12,7 @@ const contacts = [
 ];
 
 const selectedInitials = [];
+const activePriority = "medium"; //TODO kannst du der activePriority Variable, die ausgesuchte Priorität zuweisen, wenn auf die buttons geklickt wird urgent, medium und low, Standardmäßig ist medium zugewiesen.
 
 function formatDate(input) {
   let value = cleanInput(input.value);
