@@ -89,6 +89,7 @@ function saveToLocalStorage(key, value) {
  * @returns {void}
  */
 function guestLoginRedirect() {
+  saveToLocalStorage('user', 'Guest');
   redirectToPage('summary.html');
 }
 
