@@ -1,3 +1,7 @@
+// async function onloadAddtasks() {
+//   await isUserLoggedIn();
+// }
+
 const contacts = [
   { firstName: "Sofia", lastName: "Müller", color: "red" },
   { firstName: "Anton", lastName: "Mayer", color: "blue" },
@@ -110,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
               <div class="contact">
                 <div class="initial" style="background-color: ${contact.color};">${initials}</div>
                 <div class="name">${contact.firstName} ${contact.lastName}</div>
-              </div> 
+              </div>
               <input type="checkbox" />
               <div class="custom-checkbox"></div>
           </div>
@@ -181,8 +185,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const img = button.querySelector("img");
 
       // Setze das Bild je nach Aktivitätsstatus des Buttons
-      img.src = button.classList.contains("active") 
-        ? `/assets/icons/add_tasks/active_icon_${color}.svg` 
+      img.src = button.classList.contains("active")
+        ? `/assets/icons/add_tasks/active_icon_${color}.svg`
         : `/assets/icons/add_tasks/inactive_icon_${color}.svg`;
     });
   }
