@@ -4,6 +4,8 @@
  * @returns {string} - The HTML string representing the task.
  */
 function generateHtmlTemplate(task) {
+  console.log('task:', task);
+  
   let taskCategory = task.task_category.replace(/-/g, ' ');
   return /*html*/ `
       <div class="task" draggable="true" onclick="openTaskDetails(${task['id']})" ondragstart="startDragging(${task['id']})">

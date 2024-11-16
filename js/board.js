@@ -161,7 +161,7 @@ function getUserAddTaskData(swimlane) {
     task_category: document.getElementById('task_category') || 'User-Story', // User-Story Technical-Task wichtig großgeschrieben User-Story
     assignedTo: document.getElementById('assignedTo') || ['Peter', 'Müller'] || 'Unassigned',
     subtask: currentSubtasks,
-    prio: document.getElementById('prio') || 'Medium',
+    prio: document.getElementById('prio') || 'medium',
   };
 }
 
