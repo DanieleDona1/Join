@@ -571,6 +571,9 @@ function addCurrentSubtask() {
  */
 function getSubtaskWithBullet(subtaskInput) {
   let bulletPoint = '• ';
+  if (subtaskInput.startsWith(bulletPoint)) {
+    return subtaskInput;
+  }
   return bulletPoint + subtaskInput;
 }
 
