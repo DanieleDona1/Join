@@ -11,8 +11,8 @@ async function onload() {
   await isUserLoggedIn();
   await loadTodosArray();
   currentTodos = JSON.parse(JSON.stringify(todos));
-  // console.log('todos in loadArray():', todos);
-  // console.log('currtodos in loadArray():', currentTodos);
+  console.log('todos:', todos);
+  console.log('currtodos:', currentTodos);
   renderTasks();
 
   // openTaskDetails(0);
@@ -155,7 +155,7 @@ async function createTask(category, contentId) {
 function getUserAddTaskData(swimlane) {
   return {
     title: document.getElementById('title') || 'HTML',
-    dueDate: document.getElementById('dueDate') || '2024-03-10', //Format sollte so sein wenn ich mich nicht täusche ;)
+    dueDate: document.getElementById('dueDate') || '2024-12-31', //yy--mm--dd Format
     category: swimlane,
     description: document.getElementById('description') || 'No description provided.',
     task_category: document.getElementById('task_category') || 'User-Story', // User-Story Technical-Task wichtig großgeschrieben User-Story
@@ -361,7 +361,8 @@ document.addEventListener('DOMContentLoaded', init);
  */
 function openTaskDetails(id) {
   document.getElementById('dialog').innerHTML = generateDetailTaskTemplate(id);
-  // generateAssignedTo(id);
+  console.log('todos', todos);
+
   loadSubtaskList(id);
   // document.body.style.overflowY = "hidden";
   openDialog();
@@ -443,8 +444,7 @@ function animationSlideOut() {
  * @param {number} i - The index of the task in the currentTodos array.
  */
 function loadSubtaskList(i) {
-  // console.log(1, currentTodos[i]);
-  console.log(2, currentTodos[i].subtask);
+
   if (currentTodos[i].subtask) {
     let subtasksList = document.getElementById('subtasksList');
     let checkboxImgUrl;
@@ -759,11 +759,25 @@ function removeAddedSubtask(index) {
   renderSubtaskAddedList();
 }
 
+function getUserChangedData(i) {
+  let editTitle = document.getElementById('titleEdit').value;
+  let textareaEdit = document.getElementById('textareaEdit').value;
+  let dueDate = document.getElementById('dateEdit').value;
+
+  currentTodos[i]['title'] = editTitle;
+  currentTodos[i]['description'] = textareaEdit;
+  currentTodos[i]['dueDate'] = dueDate;
+
+// function editTaskRemote(key, { title, description, category, dueDate, assignedTo, subtask, prio }) {
+  editTaskRemote(todoKeysArray[i], { title: currentTodos[i].title, description: currentTodos[i].description,  dueDate: currentTodos[i].dueDate});
+
+}
+
 function editTask(i) {
-  // Die Task im Board werden mit dem Inhalt let currentTodos = []; gerendert
+  // Die Task im Board werden mit dem Inhalt let currentTodos = []; gerendert, deswegen greift getUserChangedData() und saveCurrentSubtask() auf currentTodos
 
-  //hier weitere Felder hinzufügen saveTitle, saveDescription, saveDueDate
 
+  getUserChangedData(i);
 
   saveCurrentSubtask(i);
 
