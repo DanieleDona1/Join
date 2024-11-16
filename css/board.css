@@ -6,16 +6,23 @@ main {
 }
 
 main h2 {
-  font-size: 56px;
+  font-size: clamp(32px, 5vw, 56px);
   margin-bottom: 0;
   margin-right: 10px;
 }
 
+h3 {
+  margin-top: 16px;
+}
+
 .gap-32px {
+  gap: 32px;
   gap: 32px;
 }
 
 .search {
+  all: unset;
+  padding: 0 4px;
   all: unset;
   padding: 0 4px;
 }
@@ -36,6 +43,25 @@ main h2 {
   padding-left: 12px;
 }
 
+.searchbar-mobile {
+  display: none;
+  border: 1px solid rgb(204, 204, 204);
+  padding: 4px 16px;
+  border-radius: 10px;
+
+  margin-top: 40px;
+  max-width: 370px;
+}
+
+.searchbar-mobile input {
+  width: 100%;
+  max-width: 300px;
+}
+
+.searchbar-mobile img {
+  border-left: 2px solid rgb(204, 204, 204);
+  padding-left: 12px;
+}
 .add-task {
   border: unset;
   padding: 10px 15px;
@@ -60,7 +86,8 @@ section {
   margin-top: 40px;
   gap: 20px;
   max-width: 1350px;
-  padding: 0 16px;
+  display: flex;
+  height: 72vh;
 }
 
 .section-container section {
@@ -68,11 +95,11 @@ section {
   color: rgba(66, 82, 110, 1);
   font-weight: bold;
   font-size: 1.2rem;
-
-  height: 70vh;
 }
 
 .section-container section img {
+  position: absolute;
+  right: 24px;
   width: 24px;
   cursor: pointer;
 }
@@ -84,25 +111,31 @@ section {
 .content {
   display: flex;
   flex-direction: column;
-  margin-top: 12px;
-  gap: 16px;
   overflow-y: auto;
   scrollbar-width: thin;
+  margin-top: 12px;
+  gap: 16px;
+  height: 68vh;
+  min-width: 252px;
+}
 
-  height: 100%;
+.content::-webkit-scrollbar-thumb {
+  background-color: rgb(41, 171, 226);
+  border-radius: 10px;
 }
 
 .drag-area-highlight {
-  /* background-color: rgb(246, 247, 248); */
   background-color: rgb(0, 0, 0, 0.07);
 }
 
 .task {
+  position: relative;
+  min-width: 252px;
+  min-height: 225px;
   cursor: pointer;
   background-color: white;
-  padding: 16px;
-  border-radius: 16px;
-  max-width: 252px;
+  padding: 16px 20px 16px 16px;
+  border-radius: 24px;
   font-size: 1rem;
   font-weight: 400;
 }
@@ -126,22 +159,38 @@ section {
 
 .task .subtasks {
   margin: 20px 0;
-}
-
-.done-content {
   display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  height: 70vh;
-  gap: 16px;
+  align-items: center;
 }
 
-.bg-technical-task {
+.progress-container {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 8px;
+}
+
+.progress-bar {
+  width: 50%;
+  height: 100%;
+  background-color: rgb(69, 137, 255);
+  border-radius: 25px 0 0 25px;
+}
+
+.progress-text {
+  margin-left: 10px;
+  font-size: 0.75rem;
+  color: rgb(51, 51, 51);
+  line-height: 30px;
+  white-space: nowrap;
+}
+
+.bg-Technical-Task {
   background-color: rgba(31, 215, 193, 1);
 }
 
-.bg-user-story {
+.bg-User-Story {
   background-color: rgb(0, 56, 255);
 }
 
@@ -169,22 +218,40 @@ section {
   z-index: 1;
 }
 
+.wrapper {
+  background-color: white;
+  border-radius: 16px;
+  padding-right: 10px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  width: 100%;
+  max-width: 440px;
+  /* min-height: 650px; */
+}
+
+.scrollbar {
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 15px;
+}
+
 .detail-task {
   position: relative;
   display: flex;
   flex-direction: column;
-  background-color: white;
-  padding: 24px;
-  border-radius: 16px;
-  width: 100%;
-  max-width: 440px;
+  padding: 0px 14px 0px 24px;
   height: 100%;
-  max-height: 700px;
-  gap: 20px;
+  max-height: 650px;
+  /* gap: 20px; */
+  min-height: 650px;
 }
 
 .detail-task .title {
-  font-size: 40px;
+  font-size: clamp(1.75rem, 4vw + 1rem, 2.5rem);
   font-weight: bold;
 }
 
@@ -201,23 +268,37 @@ section {
   color: rgb(0, 0, 0);
 }
 
-.xmark {
+.x-container {
+  position: sticky;
+  background-color: white;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  top: 0px;
+}
+
+.x-mark {
   width: 32px;
   cursor: pointer;
   padding: 8px;
   border-radius: 50%;
 }
 
-.xmark:hover {
+.x-mark:hover {
   background-color: rgb(0, 0, 0, 0.1);
   border-radius: 50%;
 }
 
 .configuration {
-  position: absolute;
-  bottom: 40px;
-  right: 40px;
+  position: sticky;
+  left: 290px;
+  bottom: 0px;
+  margin-top: auto;
+  background-color: white;
   display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 10px 0 0px 0;
 }
 
 .configuration div {
@@ -249,7 +330,7 @@ section {
 .plus-button {
   width: 24px;
   height: 24px;
-  background-image: url("/assets/icons/board/plus-btn.svg");
+  background-image: url('/assets/icons/board/plus-btn.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -259,7 +340,7 @@ section {
 }
 
 .plus-button:hover {
-  background-image: url("/assets/icons/board/plus-btn-hover.svg");
+  background-image: url('/assets/icons/board/plus-btn-hover.svg');
 }
 
 .configuration div:hover img {
@@ -313,7 +394,7 @@ section {
 .edit-template input {
   display: flex;
   width: 100%;
-  padding: 10px 21px 10px 21px;
+  padding: 10px 64px 10px 16px;
   gap: 10px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -321,7 +402,7 @@ section {
 }
 
 .edit-template input:focus,
-.edit-template textarea:focus, 
+.edit-template textarea:focus,
 .edit-template due-date:focus {
   outline: none;
   border: 2px solid rgba(41, 171, 226, 1);
@@ -333,12 +414,15 @@ section {
   margin-top: 8px;
 }
 
+.title-edit.title-edit {
+  padding: 10px 32px 10px 16px;
+}
 
 .edit-template textarea {
   display: flex;
   resize: none;
   width: 100%;
-  padding: 10px 21px 10px 21px;
+  padding: 10px 16px;
   gap: 10px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -353,22 +437,202 @@ section {
   border-radius: 8px;
   padding: 12px 16px;
   width: 88px;
-  height: 56px;
+  min-height: 56px;
   padding: 10px 25px;
   transition: background-color 200ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .save-edit-btn img {
   width: 40px;
 }
 
-input[type="date"] {
-  color: #333;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+.due-edit.due-edit {
+  position: relative;
+}
+
+.due-edit {
+  position: relative;
+}
+
+input[type='date'] {
+  padding-right: 35px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.subtask-list {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 12px;
+}
+
+.bg-hover:hover {
+  background-color: rgba(204, 204, 204, 0.3);
+}
+
+.text-wrap {
+  max-width: 90%;
+  white-space: normal;
+  overflow-wrap: break-word;
+  flex-grow: 1;
+}
+
+.checkbox-img {
+  display: inline-block;
+  background-image: url('/assets/icons/board/checkbox-unchecked.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  min-width: 20px;
+  min-height: 20px;
+  margin-right: 10px;
+  margin-left: 14px;
+}
+
+
+
+@media screen and (min-width: 1921px) {
+}
+
+@media screen and (min-width: 1441px) and (max-width: 1920px) {
+}
+@media screen and (min-width: 1281px) and (max-width: 1440px) {
+  main {
+    padding-left: 32px;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .section-container {
+    /* display: flex; */
+    flex-direction: column;
+    height: auto;
+  }
+  .content {
+    flex-direction: row;
+    height: auto;
+    padding-bottom: 10px;
+    min-height: 200px;
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) {
+  main {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  main {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+  .board-header {
+    align-items: flex-start;
+  }
+  .section-container {
+    margin-top: 20px;
+  }
+  .searchbar {
+    display: none;
+  }
+  .searchbar-mobile {
+    display: flex;
+  }
+  .plus-button {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  main {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+  .content {
+    scrollbar-color: rgb(41, 171, 226) transparent;
+  }
+}
+
+.subtask-group {
+  position: relative;
+}
+
+.subtask-icons{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+.subtask-icons img{
+  width: 24px;
+}
+
+.subtask-icons img:hover {
+  background-color: rgb(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+
+.mg-left {
+  margin-left: 8px;
+}
+
+.subtask-added-list {
+  padding: 10px 10px 0px 10px;
+}
+
+.subtask-list-group input {
+  border: none;
+  padding: 4px 64px 4px 16px;
   font-size: 1rem;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
-  margin-left: 220px;
+.subtask-list-group:hover input{
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.subtask-list-icons img:hover {
+  transform: scale(1.08);
+}
+
+.subtask-list-group input {
+  transition: background-color 125ms;
+}
+
+.subtask-list-group input:focus {
+  border: 2px solid white;
+}
+
+.subtask-list-icons {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  cursor: pointer;
+}
+
+.subtask-list-icons img{
+  width: 20px;
+}
+
+.subtask-list-group input:focus {
+  border-bottom: 2px solid rgb(41, 171, 226);
+}
+
+.bullet-point {
+  margin-right: 40px;  /* Verringert den Abstand zwischen Bullet Point und Eingabefeld */
+  font-size: 1.2em;    /* Größe des Bullet Points */
+  color: #333;         /* Farbe des Bullet Points */
+  display: inline-block;
+  vertical-align: middle; /* Ze ntriert das Bullet Point mit dem Eingabefeld */
 }

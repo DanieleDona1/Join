@@ -10,12 +10,13 @@
       href="/assets/icons/favicons/favicon_light.png"
       id="favicon"
     />
+    <script src="/script.js"></script>
+    <script src="/js/board.js"></script>
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="/css/board.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
-    <script src="/script.js" defer></script>
-    <script src="/js/board.js"></script>
-    <script src="/js/template_board.js"></script>
+    <script src="/js/remote_storage.js"></script>
+    <script src="/js/board_template.js"></script>
   </head>
   <body class="max-width-1920" onload="onload();">
     <header>
@@ -81,35 +82,51 @@
     </nav>
 
     <main>
-      <div class="d-flex-sb-c">
+      <div class="board-header d-flex-sb-c">
         <h2>Board</h2>
 
         <div class="search-add-container d-flex-se-c gap-32px">
-          <div id="searchbar" class="searchbar d-flex-c-c">
-            <input oninput="searchTitleOrDescription()"
-              maxlength="50"
-              type="search"
-              id="search"
-              class="search"
-              placeholder="Find Task"
-            />
-            <img src="/assets/icons/board/search-lupe.svg" alt="search-btn" />
+          <div>
+            <div id="searchbar" class="searchbar d-flex-c-c">
+              <input
+                oninput="searchTitleOrDescription('search')"
+                maxlength="50"
+                type="search"
+                id="search"
+                class="search"
+                placeholder="Find Task"
+              />
+              <img src="/assets/icons/board/search_lupe.svg" alt="search-btn" />
+            </div>
           </div>
 
+
           <button
-            class="add-task d-flex-c-c btn-hover"
-            onclick="generatePopUpAddTask('toDo', 'toDoContent');"
+          class="add-task d-flex-c-c btn-hover"
+          onclick="generatePopUpAddTask('toDo', 'toDoContent');"
           >
-            Add Task
-            <img
-              src="/assets/icons/board/add-task-plus.svg"
-              alt="plus-general"
-            />
-          </button>
-        </div>
+          Add Task
+          <img
+          src="/assets/icons/board/add_task_plus.svg"
+          alt="plus-general"
+          />
+        </button>
+      </div>
+    </div>
+
+    <div id="searchbarMobile" class="searchbar-mobile d-flex-c-c">
+        <input
+        oninput="searchTitleOrDescription('searchMobile')"
+        maxlength="50"
+        type="search"
+        id="searchMobile"
+        class="search"
+        placeholder="Find Task"
+        />
+        <img src="/assets/icons/board/search_lupe.svg" alt="search-btn" />
       </div>
 
-      <div class="section-container d-flex-sb-s">
+      <div class="section-container">
         <section id="toDo" class="to-do">
           <div class="column-title d-flex-sb-c">
             <span>to-do</span>
@@ -119,9 +136,8 @@
               aria-label="Add Task To Do"
             ></button>
           </div>
-
           <div
-            id="toDoContent"
+          id="toDoContent"
             class="content"
             ondragleave="removeHighlight('toDoContent')"
             ondragover="allowDrop(event); highlight('toDoContent');"
@@ -151,10 +167,10 @@
           <div class="column-title d-flex-sb-c">
             <span>await-feedback</span>
             <button
-              class="plus-button"
+            class="plus-button"
               onclick="generatePopUpAddTask('awaitFeedback', 'awaitFeedbackContent')"
               aria-label="Add Task awaitFeedback"
-            ></button>
+              ></button>
           </div>
           <div
             id="awaitFeedbackContent"
@@ -162,7 +178,7 @@
             ondragleave="removeHighlight('awaitFeedbackContent')"
             ondragover="allowDrop(event); highlight('awaitFeedbackContent');"
             ondrop="moveTo('awaitFeedback')"
-          ></div>
+            ></div>
         </section>
 
         <section id="done" class="done">
@@ -170,14 +186,15 @@
             <span>done</span>
           </div>
           <div
-          id="doneContent"
-          class="done-content content"
-          ondragleave="removeHighlight('doneContent')"
-          ondragover="allowDrop(event); highlight('doneContent');"
-          ondrop="moveTo('done')"
+            id="doneContent"
+            class="done-content content"
+            ondragleave="removeHighlight('doneContent')"
+            ondragover="allowDrop(event); highlight('doneContent');"
+            ondrop="moveTo('done')"
           ></div>
         </section>
       </div>
+      <div id="subtasksAreahtml"></div>
     </main>
     <div class="dialog-bg d-none" id="dialog" onclick="closeDialog()"></div>
   </body>

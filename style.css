@@ -1,18 +1,17 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  /* nötig? */
-  font-family: "inter";
+  box-sizing: border-box; /* nötig? */
+  font-family: 'inter';
 }
 
 .max-width-1920 {
-  max-width: 1440px;
-  /*gesamt breite der seiten soll immer 1440px sein*/
+  max-width: 1440px; /*gesamt breite der seiten soll immer 1440px sein*/
 }
 
 .max-display-size {
-  max-width: 1440px;
+  max-width: 1440px; /*gesamt breite der seiten soll immer 1440px sein und höhe immer 1024px */
+  max-height: 1024px;
 }
 
 .d-flex-c-c {
@@ -39,6 +38,12 @@
   align-items: center;
 }
 
+.d-flex-fe-c {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .d-flex-sb-s {
   display: flex;
   justify-content: space-between;
@@ -48,6 +53,13 @@
 .d-flex-e-c {
   display: flex;
   justify-content: end;
+  align-items: center;
+}
+
+.d-flex-col-c-c {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
@@ -101,7 +113,7 @@ nav a:hover {
 
 .navbar-item p {
   color: rgb(205, 205, 205);
-  font-family: "open-sans";
+  font-family: 'open-sans';
   font-weight: 400;
   font-size: 14px;
 }
@@ -146,13 +158,14 @@ header img {
 .navbar-disclaimer-links-container a.active {
   background-color: rgb(9, 25, 49);
   pointer-events: none;
+  color: white;
 }
 
 main {
   position: relative;
-  top: 80px;
+  top: 96px;
   bottom: 80px;
-  height: calc(100vh - 160px);
+  height: calc(100vh - 96px);
   padding: 48px 16px 0;
   background-color: rgb(246, 247, 248);
   overflow: auto;
@@ -175,7 +188,7 @@ main ol li {
 }
 
 main ol li::before {
-  content: counter(list-item) ". ";
+  content: counter(list-item) '. ';
   position: absolute;
   left: 0;
   top: 0;
@@ -229,10 +242,11 @@ main p {
   overflow: hidden;
 }
 
-@media (min-width: 1025px) {
-  /* .d-none { 
-    display: flex; die klasse d-none wird in anderen Dateien verwendet daher kann sie nicht auf flex gesetzt werden
-  } */
+@media (min-width: 1225px) {
+  header .d-none,
+  nav .d-none {
+    display: flex;
+  }
 
   header {
     height: 96px;
@@ -278,8 +292,7 @@ main p {
     width: auto;
     display: flex;
     justify-content: center;
-    padding-bottom: 70px;
-    padding-bottom: 70px;
+    padding-bottom: 100px;
   }
 
 
@@ -315,8 +328,7 @@ main p {
   }
 
   .navbar-item p {
-    font-family: "inter";
-    font-family: "inter";
+    font-family: 'inter';
     font-weight: 400;
     font-size: 16px;
   }
@@ -330,14 +342,11 @@ main p {
   main {
     left: 232px;
     bottom: 0;
-    min-height: calc(100vh - 80px);
-    max-width: calc(100% - 232px);
+    min-height: calc(100vh - 96px);
+    width: calc(100vw - 232px);
+    max-width: calc(1920px - 232px);
     padding-left: 96px;
-    padding-top: 126px;
-    padding-right: 133px;
-    max-width: calc(100% - 232px);
-    padding-left: 96px;
-    padding-top: 126px;
+    padding-top: 100px;
     padding-right: 133px;
   }
 

@@ -31,11 +31,11 @@ a {
   position: absolute;
   z-index: 1;
   background-color: rgb(246, 247, 248);
-  animation: moveToCorner 1000ms linear forwards;
+  animation: moveToCorner 700ms linear forwards;
   width: 40px;
-    height: 50px;
-    top: 30px;
-    left: 30px;
+  height: 50px;
+  top: 30px;
+  left: 30px;
 }
 
 @keyframes moveToCorner {
@@ -72,7 +72,7 @@ a {
 
 .header-btn-container button:first-child {
   background-color: rgb(246, 247, 248);
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 400;
   text-align: left;
 }
@@ -83,8 +83,8 @@ a {
   padding: 15px 16px;
   border-radius: 8px;
   color: white;
-  font-size: 16px;
-  transition: background-color 200ms;
+  font-size: 1rem;
+  transition: background-color 125ms;
 }
 
 .header-btn-container a:hover {
@@ -114,7 +114,7 @@ a {
   justify-content: center;
   align-items: center;
   padding-bottom: 10px;
-  font-size: 40px;
+  font-size: 2.5rem;
   font-weight: 700;
 }
 
@@ -150,7 +150,7 @@ a {
   gap: 10px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 .input-group input::placeholder {
@@ -176,20 +176,20 @@ input:focus {
 
 .error-msg {
   color: red;
-  font-size: 13px;
+  font-size: 0.8125rem;
   margin-top: 8px;
   opacity: 0;
 }
 
 .msg-login-successful {
-  font-size: 18px;
+  font-size: 1.125rem;
   color: greenyellow;
   font-weight: bold;
 }
 
 label {
   padding-left: 56px;
-  font-size: 16px;
+  font-size: 1rem;
   cursor: pointer;
   margin-bottom: 15px;
 }
@@ -213,7 +213,7 @@ label {
   border-radius: 8px;
   font-size: 18px;
   font-weight: bold;
-  transition: background-color 200ms;
+  transition: background-color 125ms;
 }
 .entry-btn:hover {
   background-color: rgb(41, 171, 226);
@@ -223,12 +223,12 @@ label {
 .btn-guest-entry {
   border: unset;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 1.25rem;
   padding: 10px 15px;
   border-radius: 8px;
   border: 1px solid black;
-  transition: color 200ms;
-  transition: border 200ms;
+  transition: color 125ms;
+  transition: border 125ms;
   background-color: white;
 }
 
@@ -289,22 +289,28 @@ footer a:hover {
 }
 
 .animated-text {
+  font-size: 1.3rem;
+  font-weight: bold;
   padding: 10px 15px;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(42, 54, 71, 1);
   border-radius: 10px;
-  animation: moveAndFade 2s linear 500ms both;
+  animation: moveAndFade 3s linear 200ms both;
   color: white;
 }
 
 @keyframes moveAndFade {
   0% {
     bottom: -100px;
+    opacity: 0;
+  }
+  30% {
+    bottom: 50%;
     opacity: 1;
   }
-  10% {
+  70% {
     bottom: 50%;
     opacity: 1;
   }
@@ -325,8 +331,7 @@ footer a:hover {
 }
 
 label span {
-  font-size: 14px;
-  opacity: 0.25;
+  font-size: 0.875rem;
 }
 
 .form-checkbox {
@@ -353,25 +358,34 @@ label span {
 .form-checkbox:checked::after {
   content: '✔';
   color: rgb(255, 255, 255);
-  font-size: 10px;
+  font-size: 0.625rem;
   position: absolute;
-  top: 50%;
+  top: 48%;
   left: 50%;
   transform: translate(-50%, -53%);
+}
+
+.legal-text {
+  color: rgb(169, 169, 169);
 }
 
 .legal-link {
   color: rgb(41, 171, 226);
   font-size: 14px;
+  font-weight: 500;
+}
+
+.legal-link:hover {
+  text-decoration: underline;
+}
+
+.color-red {
+  color: red;
 }
 
 .padding-left-0 {
   padding-left: 0px;
 }
-
-/* .margin-top-15px {
-  margin-top: 15px;
-} */
 
 .confirm-password {
   margin-bottom: 8px;
@@ -420,7 +434,7 @@ label span {
 
 .navbar-item p {
   color: rgb(205, 205, 205);
-  font-family: "open-sans";
+  font-family: 'open-sans';
   font-weight: 400;
   font-size: 14px;
 }
@@ -433,27 +447,22 @@ label span {
 }
 
 @media screen and (min-width: 1921px) {
-  .section_pad{
-      padding: 64px max(160px, calc(50% - 960px));
+  .section_pad {
+    padding: 64px max(160px, calc(50% - 960px));
   }
 
   .section-gap {
-      gap: 64px;
+    gap: 64px;
   }
-} 
-
+}
 
 @media screen and (min-width: 1441px) and (max-width: 1920px) {
- 
 }
 
 @media screen and (min-width: 1025px) and (max-width: 1440px) {
-
 }
 
 @media screen and (min-width: 721px) and (max-width: 1024px) {
-  
-  
 }
 
 @media screen and (min-width: 481px) and (max-width: 720px) {

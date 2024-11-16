@@ -1,11 +1,10 @@
-const BASE_URL =
-  "https://contactstorage-593de-default-rtdb.europe-west1.firebasedatabase.app/";
 let contactList = [];
 let groupedContacts = {}; // Definiere groupedContacts als globale Variable
 
 // array für kontaktliste wo alle daten + spezifische id gespeichert wird und das laden und bearbeiten einfacher macht
 
 async function onloadFunc() {
+  // await isUserLoggedIn();  // wenn user nicht eingeloggt ist, wird er auf login Seite weitergeleitet
   await createContactlist();
   renderPhoneList();
 }
@@ -103,7 +102,7 @@ function getContactInfo(groupInitial, contactIndex) {
   contactInfo.innerHTML = /*html*/ `
       <div class="info-initial-name">
         <div class="info-initial"  style="background-color: ${contactColor};">${contact.user.initials}</div>
-        <div class="info-name-button"> 
+        <div class="info-name-button">
           <div class="info-name">${contact.user.name}</div>
           <div class="info-buttons">
             <button class="info-edit" onclick="openEditContact('${groupInitial}', ${contactIndex})">
@@ -130,7 +129,7 @@ function getContactInfo(groupInitial, contactIndex) {
       </div>
 
     </div>
-    
+
   `;
 }
 
@@ -181,35 +180,6 @@ async function addContact(button) {
 
 async function loadData(path = "") {
   let response = await fetch(BASE_URL + path + ".json");
-  return (responseToJson = await response.json());
-}
-
-async function postData(path = "", data = {}) {
-  let response = await fetch(BASE_URL + path + ".json", {
-    method: "POST", // Fügt Daten zum gewählten Pfad hinzu
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  return (responseToJson = await response.json());
-}
-
-async function putData(path = "", data = {}) {
-  let response = await fetch(BASE_URL + path + ".json", {
-    method: "PUT", // Überschreibt den Wert im gewählten Pfad
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  return (responseToJson = await response.json());
-}
-
-async function deleteData(path = "") {
-  let response = await fetch(BASE_URL + path + ".json", {
-    method: "DELETE",
-  });
   return (responseToJson = await response.json());
 }
 
