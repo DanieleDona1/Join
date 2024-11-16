@@ -15,7 +15,6 @@ async function isUserLoggedIn() {
   if(Boolean(await getUserName()) === false) {
     redirectToPage('login.html');
   }
-  console.log('User is login');
 }
 
 /**

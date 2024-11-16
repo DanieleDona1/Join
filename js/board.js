@@ -11,8 +11,8 @@ async function onload() {
   await isUserLoggedIn();
   await loadTodosArray();
   currentTodos = JSON.parse(JSON.stringify(todos));
-  console.log('todos:', todos);
-  console.log('currtodos:', currentTodos);
+  console.log('onload todos:', todos);
+  console.log('onload currtodos:', currentTodos);
   renderTasks();
 
   // openTaskDetails(0);
@@ -226,7 +226,7 @@ function allowDrop(event) {
  * @returns {void}
  */
 function moveTo(newCategory) {
-  todos[currentDraggedElement]['category'] = newCategory;
+  currentTodos[currentDraggedElement]['category'] = newCategory;
   editTaskRemote(todoKeysArray[currentDraggedElement], { category: todos[currentDraggedElement].category });
   // currentTodos = todos;
   renderTasks();
