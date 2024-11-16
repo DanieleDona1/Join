@@ -12,7 +12,7 @@ let currentSubtasks = [];
  * If not, redirects the user to the login page.
  */
 async function isUserLoggedIn() {
-  if(Boolean(await getUserName()) === false) {
+  if (Boolean(await getUserName()) === false && checkIfUserIsGuest() === 'Guest') {
     redirectToPage('login.html');
   }
 }
@@ -25,10 +25,25 @@ async function isUserLoggedIn() {
 async function getUserName() {
   let userName = '';
   let userStorageKey = getFromLocalStorage('user');
-  userName = await getDataAsJson(`users/${userStorageKey}/name`);
 
+  userName = await getDataAsJson(`users/${userStorageKey}/name`);
   if (userName) {
     return userName;
+  } else {
+    return false;
+  }
+}
+
+/**
+ * Checks if the current user is logged in as a guest.
+ *
+ * @async
+ * @returns {Promise<'Guest' | false>} A promise that resolves to 'Guest' if the user is a guest, or `false` otherwise.
+ */
+async function checkIfUserIsGuest() {
+  let userStorageKey = getFromLocalStorage('user');
+  if (userStorageKey === 'Guest') {
+    return 'Guest';
   } else {
     return false;
   }
