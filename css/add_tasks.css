@@ -363,3 +363,34 @@ input:focus,
   height: 20px;
   margin-left: 10px;
 }
+
+.clear-create-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 135px;
+}
+
+.clear-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 110px;
+  border-color: rgb(42, 54, 71);
+}
+
+.clear-button img,
+.create-button img {
+  margin-left: 5px;
+}
+
+.create-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: rgb(42, 54, 71);
+  font-size: 21px;
+  font-weight: 700;
+  border: none;
+  margin-left: 16px;
+}
