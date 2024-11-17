@@ -11,8 +11,8 @@ async function onload() {
   await isUserLoggedIn();
   await loadTodosArray();
   currentTodos = JSON.parse(JSON.stringify(todos));
-  console.log('todos:', todos);
-  console.log('currtodos:', currentTodos);
+  console.log('onload todos:', todos);
+  console.log('onload currtodos:', currentTodos);
   renderTasks();
 
   // openTaskDetails(0);
@@ -161,7 +161,7 @@ function getUserAddTaskData(swimlane) {
     task_category: document.getElementById('task_category') || 'User-Story', // User-Story Technical-Task wichtig großgeschrieben User-Story
     assignedTo: document.getElementById('assignedTo') || ['Peter', 'Müller'] || 'Unassigned',
     subtask: currentSubtasks,
-    prio: document.getElementById('prio') || 'Medium',
+    prio: document.getElementById('prio') || 'medium',
   };
 }
 
@@ -228,7 +228,7 @@ function allowDrop(event) {
 function moveTo(newCategory) {
   todos[currentDraggedElement]['category'] = newCategory;
   editTaskRemote(todoKeysArray[currentDraggedElement], { category: todos[currentDraggedElement].category });
-  // currentTodos = todos;
+  currentTodos = JSON.parse(JSON.stringify(todos));
   renderTasks();
   removeHighlightAfterDrop();
 }
@@ -387,7 +387,7 @@ function closeDialog() {
     renderTasks();
   }
   currentTodos = JSON.parse(JSON.stringify(todos));
-  // currentSubtasks = [];
+  currentSubtasks = [];
 }
 
 /**
@@ -558,7 +558,6 @@ function addCurrentSubtask() {
   let subtaskInput = document.getElementById('subtaskInput');
 
   currentSubtasks.push({ checked: false, text: subtaskInput.value });
-  console.log('CurrentSubtask: ', currentSubtasks);
 
   renderSubtaskAddedList();
   resetInputField();
@@ -571,6 +570,9 @@ function addCurrentSubtask() {
  */
 function getSubtaskWithBullet(subtaskInput) {
   let bulletPoint = '• ';
+  if (subtaskInput.startsWith(bulletPoint)) {
+    return subtaskInput;
+  }
   return bulletPoint + subtaskInput;
 }
 
