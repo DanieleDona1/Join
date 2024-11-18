@@ -1,5 +1,4 @@
-let contactList = [];
-let groupedContacts = {}; // Definiere groupedContacts als globale Variable
+
 
 // array für kontaktliste wo alle daten + spezifische id gespeichert wird und das laden und bearbeiten einfacher macht
 
