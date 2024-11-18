@@ -32,11 +32,6 @@ function generateHtmlTemplate(task) {
  */
 function generateDetailTaskTemplate(id) {
   const dueDate = todos[id].dueDate;
-
-  // let taskCategory = todos[id].task_category.replace(/\s+/g, '-').toLowerCase();
-  console.log(todos[id].dueDate);
-
-  // let formattedDate = todos[id].dueDate.replace(/-/g, '/');
   let priority = todos[id].prio.charAt(0).toUpperCase() + todos[id].prio.slice(1);
   return /*html*/ `
       <div class="wrapper dialog-content slide-in" onclick="event.stopPropagation();">
@@ -45,15 +40,11 @@ function generateDetailTaskTemplate(id) {
               <div class="task-category bg-${todos[id].task_category}">${todos[id].task_category}</div>
               <img class="x-mark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
             </div>
-
-
             <div class="title">${todos[id].title}</div>
             <div class="description">${todos[id].description}</div>
             <div class="detail-group">
               <strong>Due date:</strong>
-            <input id="dateEdit" class="due-edit" type="date" onfocus="showPicker();" value="${dueDate}" lang="de-DE">
-
-              <!-- <span>${formattedDate}</span> -->
+              <input id="dateEdit" class="detail-due-edit" type="date" value="${dueDate}" lang="de-DE" disabled>
             </div>
             <div class="detail-group">
               <strong>Priority:</strong>

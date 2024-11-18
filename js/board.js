@@ -16,7 +16,7 @@ async function onload() {
   renderTasks();
 
   openTaskDetails(0);
-  generateEditTemplate(0);
+  // generateEditTemplate(0);
 }
 
 /**
