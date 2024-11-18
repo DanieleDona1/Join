@@ -276,6 +276,11 @@ section {
   padding-left: 16px;
 }
 
+.detail-due-edit:disabled {
+  color: black;
+  border: unset;
+}
+
 .x-task-category-container {
   position: sticky;
   background-color: white;
