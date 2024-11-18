@@ -27,6 +27,7 @@ async function createContactlist() {
         color: data[contacts[i]].color, // Speichert die Farbe
       });
     }
+    console.log(contactList);
 }
 
 // Sortiert die Kontakte alphabetisch nach dem Namen

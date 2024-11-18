@@ -4,8 +4,6 @@
  * @returns {string} - The HTML string representing the task.
  */
 function generateHtmlTemplate(task) {
-  console.log('task:', task);
-  
   let taskCategory = task.task_category.replace(/-/g, ' ');
   return /*html*/ `
       <div class="task" draggable="true" onclick="openTaskDetails(${task['id']})" ondragstart="startDragging(${task['id']})">
@@ -33,40 +31,50 @@ function generateHtmlTemplate(task) {
  * @returns {string} - The HTML string for the detailed task view.
  */
 function generateDetailTaskTemplate(id) {
+  const dueDate = todos[id].dueDate;
+
   // let taskCategory = todos[id].task_category.replace(/\s+/g, '-').toLowerCase();
-  let formattedDate = todos[id].dueDate.replace(/-/g, '/');
+  console.log(todos[id].dueDate);
+
+  // let formattedDate = todos[id].dueDate.replace(/-/g, '/');
   let priority = todos[id].prio.charAt(0).toUpperCase() + todos[id].prio.slice(1);
   return /*html*/ `
       <div class="wrapper dialog-content slide-in" onclick="event.stopPropagation();">
         <div class="detail-task scrollbar">
-                <div class="x-container">
-                  <img class="x-mark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
-                </div>
-            <!-- </div> -->
+            <div class="x-task-category-container d-flex-sb-c">
+              <div class="task-category bg-${todos[id].task_category}">${todos[id].task_category}</div>
+              <img class="x-mark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
+            </div>
+
+
             <div class="title">${todos[id].title}</div>
             <div class="description">${todos[id].description}</div>
-            <h3 class="color-blue">Due date:</h3>
-            <span class="color-black">${formattedDate}</span><!-- Input type=date dieses Attribut hinzufügen: lang="de-DE" -->
-            <div>
-              <h3 class="color-blue">Priority</h3>
-              <span class="color-black">${priority}</span>
+            <div class="detail-group">
+              <strong>Due date:</strong>
+            <input id="dateEdit" class="due-edit" type="date" onfocus="showPicker();" value="${dueDate}" lang="de-DE">
+
+              <!-- <span>${formattedDate}</span> -->
+            </div>
+            <div class="detail-group">
+              <strong>Priority:</strong>
+              <span class="padding-left-16px">${priority}</span>
               <img class="prio-img" src="/assets/icons/board/${todos[id].prio}.svg" alt="prio">
             </div>
-            <div class="d-flex-co-sb-c">
-              <h3 class="color-blue">Assigned To:</h3>
-              <div class="members color-blue"> <!-- TODO --> TODO Kontaktlist<div id="assignedToArea${id}"></div></div>
+            <div class="detail-group">
+              <strong>Assigned To:</strong>
+              <div class="members"> <!-- TODO --> TODO Kontaktlist<div id="assignedToArea${id}"></div></div>
             </div>
-            <div>
-              <h3 class="color-blue">Subtasks:</h3>
-              <div id="subtasksList" class="subtasks color-blue"></div>
+            <div class="detail-group">
+              <strong>Subtasks:</strong>
+              <div id="subtasksList" class="subtasks"></div>
             </div>
             <div class="configuration">
               <div onclick="deleteTask(${id})"><img src="/assets/icons/board/delete.svg" alt="delete">
-                <span class="color-blue">Delete</span>
+                <span>Delete</span>
               </div>
               <div onclick="generateEditTemplate(${id})" class="separator ">
               <img src="/assets/icons/board/edit.svg" alt="edit">
-              <span class="color-blue">Edit</span>
+              <span>Edit</span>
             </div>
         </div>
       </div>
@@ -79,25 +87,25 @@ function generateDetailTaskTemplate(id) {
  */
 function generateEditTemplate(id) {
   const dueDate = todos[id].dueDate;
-  console.log('duedate: ', dueDate);
-
   document.getElementById('dialog').innerHTML = /*html */ `
       <div class="wrapper dialog-content" onclick="event.stopPropagation();">
         <div class="edit-template detail-task scrollbar" >
-            <div class="x-container">
+            <div class="x-task-category-container d-flex-sb-c">
+              <div></div>
               <img class="x-mark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
             </div>
-          <h4>Title</h4>
+          <strong>Title</strong>
             <input id="titleEdit" class="title-edit" type="text" value="${todos[id].title}" placeholder="Enter a title">
-          <h4>Description</h4>
+          <strong>Description</strong>
             <textarea id="textareaEdit" class="textarea-edit" rows="4" cols="50" maxlength="300" placeholder="Enter a description">${todos[id].description}</textarea>
-          <h4>Due date</h4>
+          <strong>Due date</strong>
             <input id="dateEdit" class="due-edit" type="date" onfocus="showPicker();" value="${dueDate}" lang="de-DE">
-          <h4>Priority</h4>
-          <h4 id="assignedTo">Assigned to</h4>
+          <strong>Priority</strong>
+
+          <strong id="assignedTo">Assigned to</strong>
 
           <div class="subtask-container">
-            <h4>Subtasks</h4>
+            <strong>Subtasks</strong>
             <div>
               <div class="subtask-group">
                 <input id="subtaskInput" class="subtask-input" oninput="onInputSubtask(${id})" type="text" placeholder="Add new subtask">
