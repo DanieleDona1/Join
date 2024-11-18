@@ -15,8 +15,8 @@ async function onload() {
   console.log('onload currtodos:', currentTodos);
   renderTasks();
 
-  // openTaskDetails(0);
-  // generateEditTemplate(0);
+  openTaskDetails(0);
+  generateEditTemplate(0);
 }
 
 /**
@@ -154,7 +154,7 @@ async function createTask(category, contentId) {
  */
 function getUserAddTaskData(swimlane) {
   return {
-    title: document.getElementById('title') || 'HTML',
+    title: document.getElementById('title') || 'HTML TESTTTTTT jfdsfjhsdaöfjkasd',
     dueDate: document.getElementById('dueDate') || '2024-12-31', //yy--mm--dd Format
     category: swimlane,
     description: document.getElementById('description') || 'No description provided.',
