@@ -116,13 +116,26 @@
           <p>Prio</p>
           <div class="button-container">
             <button class="task-button" data-color="urgent" type="button">
-              Urgent <img src="/assets/icons/add_tasks/inactive_icon_urgent.svg" alt="" />
+              Urgent
+              <img
+                src="/assets/icons/add_tasks/inactive_icon_urgent.svg"
+                alt=""
+              />
             </button>
-            <button class="task-button active" data-color="medium" type="button">
-              Medium <img src="/assets/icons/add_tasks/active_icon_medium.svg" alt="" />
+            <button
+              class="task-button active"
+              data-color="medium"
+              type="button"
+            >
+              Medium
+              <img
+                src="/assets/icons/add_tasks/active_icon_medium.svg"
+                alt=""
+              />
             </button>
             <button class="task-button" data-color="low" type="button">
-              Low <img src="/assets/icons/add_tasks/inactive_icon_low.svg" alt="" />
+              Low
+              <img src="/assets/icons/add_tasks/inactive_icon_low.svg" alt="" />
             </button>
           </div>
           <p>Category<span>*</span></p>
@@ -158,10 +171,18 @@
               </div>
               <div id="subtaskAddedList" class="subtask-added-list"></div>
             </div>
-
-            <button onclick="createTask('toDo', 'toDoContent')">
-              Create Task</button
-            ><!-- Hier ein button eingefügt -->
+            <div class="clear-create-button-container">
+              <button class="clear-button">
+                Clear<img src="/assets/icons/add_tasks/clear.png" alt="" />
+              </button>
+              <button
+                class="create-button"
+                onclick="createTask('toDo', 'toDoContent')"
+              >
+                Create Task
+                <img src="/assets/icons/add_tasks/create.png" alt="" />
+              </button>
+            </div>
           </div>
         </section>
       </form>
