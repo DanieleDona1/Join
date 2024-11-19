@@ -4,12 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Board</title>
-    <link
-      rel="icon"
-      type="image/png"
-      href="/assets/icons/favicons/favicon_light.png"
-      id="favicon"
-    />
+    <link rel="icon" type="image/png" href="/assets/icons/favicons/favicon_light.png" id="favicon" />
     <script src="/script.js"></script>
     <script src="/js/board.js"></script>
     <link rel="stylesheet" href="/style.css" />
@@ -20,21 +15,23 @@
   </head>
   <body class="max-width-1920" onload="onload();">
     <header>
-      <img
-        class="header-join-logo"
-        src="/assets/icons/header/joinHeaderMobile.svg"
-        alt="logo"
-      />
+      <img class="header-join-logo" src="/assets/icons/header/joinHeaderMobile.svg" alt="logo" />
       <p class="d-none">Kanban Project Management Tool</p>
       <div class="header-rightside-container d-none">
         <a href="help.html">
-          <img
-            class="header-help-icon d-none"
-            src="/assets/icons/header/help.svg"
-            alt="help"
-          />
+          <img class="header-help-icon d-none" src="/assets/icons/header/help.svg" alt="help" />
         </a>
-        <span id="headerInitials" class="header-initials">G</span>
+
+        <div class="dropdown-container">
+          <span id="headerInitials" class="header-initials d-flex-c-c" tabindex="0">G</span>
+          <div class="dropdown-menu">
+            <ul>
+              <li><a href="/html/legal_notice.html">Legal Notice</a></li>
+              <li><a href="/html/privacy_policy.html">Privacy Policy</a></li>
+              <li><a onclick="removeUserToken()" href="/html/login.html">Log out</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -45,17 +42,11 @@
       <div class="navbar-container-bottom">
         <div class="navbar-item-container">
           <a href="summary.html" class="navbar-item" data-page="summary">
-            <img
-              src="/assets/icons/navbar/summary_Icon.svg"
-              alt="Summary Icon"
-            />
+            <img src="/assets/icons/navbar/summary_Icon.svg" alt="Summary Icon" />
             <p>Summary</p>
           </a>
           <a href="add_tasks.html" class="navbar-item" data-page="add_tasks">
-            <img
-              src="/assets/icons/navbar/add_tasks.svg"
-              alt="Add Tasks Icon"
-            />
+            <img src="/assets/icons/navbar/add_tasks.svg" alt="Add Tasks Icon" />
             <p>Add Tasks</p>
           </a>
           <a href="board.html" class="navbar-item" data-page="board">
@@ -63,20 +54,13 @@
             <p>Board</p>
           </a>
           <a href="contact.html" class="navbar-item" data-page="contacts">
-            <img
-              src="/assets/icons/navbar/contacts_icon.svg"
-              alt="Contacts Icon"
-            />
+            <img src="/assets/icons/navbar/contacts_icon.svg" alt="Contacts Icon" />
             <p>Contacts</p>
           </a>
         </div>
         <div class="navbar-disclaimer-links-container d-none">
-          <a href="/html/privacy_policy.html" data-page="privacy_policy"
-            >Privacy Policy</a
-          >
-          <a href="/html/legal_notice.html" data-page="legal_notice"
-            >Legal Notice</a
-          >
+          <a href="/html/privacy_policy.html" data-page="privacy_policy">Privacy Policy</a>
+          <a href="/html/legal_notice.html" data-page="legal_notice">Legal Notice</a>
         </div>
       </div>
     </nav>
@@ -88,41 +72,20 @@
         <div class="search-add-container d-flex-se-c gap-32px">
           <div>
             <div id="searchbar" class="searchbar d-flex-c-c">
-              <input
-                oninput="searchTitleOrDescription('search')"
-                maxlength="50"
-                type="search"
-                id="search"
-                class="search"
-                placeholder="Find Task"
-              />
+              <input oninput="searchTitleOrDescription('search')" maxlength="50" type="search" id="search" class="search" placeholder="Find Task" />
               <img src="/assets/icons/board/search_lupe.svg" alt="search-btn" />
             </div>
           </div>
 
-
-          <button
-          class="add-task d-flex-c-c btn-hover"
-          onclick="generatePopUpAddTask('toDo', 'toDoContent');"
-          >
-          Add Task
-          <img
-          src="/assets/icons/board/add_task_plus.svg"
-          alt="plus-general"
-          />
-        </button>
+          <button class="add-task d-flex-c-c btn-hover" onclick="generatePopUpAddTask('toDo', 'toDoContent');">
+            Add Task
+            <img src="/assets/icons/board/add_task_plus.svg" alt="plus-general" />
+          </button>
+        </div>
       </div>
-    </div>
 
-    <div id="searchbarMobile" class="searchbar-mobile d-flex-c-c">
-        <input
-        oninput="searchTitleOrDescription('searchMobile')"
-        maxlength="50"
-        type="search"
-        id="searchMobile"
-        class="search"
-        placeholder="Find Task"
-        />
+      <div id="searchbarMobile" class="searchbar-mobile d-flex-c-c">
+        <input oninput="searchTitleOrDescription('searchMobile')" maxlength="50" type="search" id="searchMobile" class="search" placeholder="Find Task" />
         <img src="/assets/icons/board/search_lupe.svg" alt="search-btn" />
       </div>
 
@@ -130,29 +93,15 @@
         <section id="toDo" class="to-do">
           <div class="column-title d-flex-sb-c">
             <span>to-do</span>
-            <button
-              class="plus-button"
-              onclick="generatePopUpAddTask('toDo', 'toDoContent')"
-              aria-label="Add Task To Do"
-            ></button>
+            <button class="plus-button" onclick="generatePopUpAddTask('toDo', 'toDoContent')" aria-label="Add Task To Do"></button>
           </div>
-          <div
-          id="toDoContent"
-            class="content"
-            ondragleave="removeHighlight('toDoContent')"
-            ondragover="allowDrop(event); highlight('toDoContent');"
-            ondrop="moveTo('toDo')"
-          ></div>
+          <div id="toDoContent" class="content" ondragleave="removeHighlight('toDoContent')" ondragover="allowDrop(event); highlight('toDoContent');" ondrop="moveTo('toDo')"></div>
         </section>
 
         <section id="inProgress" class="in-progress">
           <div class="column-title d-flex-sb-c">
             <span>in-progress</span>
-            <button
-              class="plus-button"
-              onclick="generatePopUpAddTask('inProgress', 'inProgressContent')"
-              aria-label="Add Task inProgress"
-            ></button>
+            <button class="plus-button" onclick="generatePopUpAddTask('inProgress', 'inProgressContent')" aria-label="Add Task inProgress"></button>
           </div>
           <div
             id="inProgressContent"
@@ -166,11 +115,7 @@
         <section id="awaitFeedback" class="await-feedback">
           <div class="column-title d-flex-sb-c">
             <span>await-feedback</span>
-            <button
-            class="plus-button"
-              onclick="generatePopUpAddTask('awaitFeedback', 'awaitFeedbackContent')"
-              aria-label="Add Task awaitFeedback"
-              ></button>
+            <button class="plus-button" onclick="generatePopUpAddTask('awaitFeedback', 'awaitFeedbackContent')" aria-label="Add Task awaitFeedback"></button>
           </div>
           <div
             id="awaitFeedbackContent"
@@ -178,20 +123,14 @@
             ondragleave="removeHighlight('awaitFeedbackContent')"
             ondragover="allowDrop(event); highlight('awaitFeedbackContent');"
             ondrop="moveTo('awaitFeedback')"
-            ></div>
+          ></div>
         </section>
 
         <section id="done" class="done">
           <div class="column-title d-flex-sb-c">
             <span>done</span>
           </div>
-          <div
-            id="doneContent"
-            class="done-content content"
-            ondragleave="removeHighlight('doneContent')"
-            ondragover="allowDrop(event); highlight('doneContent');"
-            ondrop="moveTo('done')"
-          ></div>
+          <div id="doneContent" class="done-content content" ondragleave="removeHighlight('doneContent')" ondragover="allowDrop(event); highlight('doneContent');" ondrop="moveTo('done')"></div>
         </section>
       </div>
       <div id="subtasksAreahtml"></div>

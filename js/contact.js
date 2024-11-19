@@ -6,6 +6,7 @@ async function onloadFunc() {
   // await isUserLoggedIn();  // wenn user nicht eingeloggt ist, wird er auf login Seite weitergeleitet
   await createContactlist();
   renderPhoneList();
+  await generateHeaderInitials();
 }
 
 // Hauptfunktion: Steuert den Sortier- und Renderprozess

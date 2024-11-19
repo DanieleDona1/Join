@@ -10,6 +10,8 @@ async function onload() {
   getCounts(todos);
   await desktopGreetUser();
   getUpcomingDeadline();
+  await generateHeaderInitials();
+
 }
 
 /**

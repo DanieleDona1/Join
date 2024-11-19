@@ -229,18 +229,39 @@ function toggleVisibility(passwordFieldId, passwordLockId, visibilityBtnId) {
   managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn);
 }
 
+/**
+ * Fetches the user's name and updates the 'headerInitials' element with their initials.
+ *
+ * @async
+ * @returns {Promise<void>}
+ */
 async function generateHeaderInitials() {
   let userName = await getUserName();
   if (userName) {
     let initialsName = generateInitials(userName);
     document.getElementById('headerInitials').innerHTML = initialsName;
-
-    console.log('ll', initialsName);
   }
-
 }
 
+/**
+ * Generates initials from a user's name (e.g., 'John Doe' → 'JD').
+ *
+ * @param {string} userName - The user's full name.
+ * @returns {string} The user's initials.
+ */
 function generateInitials(userName) {
   const nameParts = userName.match(/([A-ZÄÖÜ]?[a-zäöüß]+)|([A-ZÄÖÜ])/g);
-  return nameParts.slice(0, 2).map((part) => part.charAt(0).toUpperCase()).join('');
+  return nameParts
+    .slice(0, 2)
+    .map((part) => part.charAt(0).toUpperCase())
+    .join('');
+}
+
+/**
+ * Removes the user token from localStorage.
+ *
+ * @returns {void}
+ */
+function removeUserToken() {
+  localStorage.removeItem('user');
 }
