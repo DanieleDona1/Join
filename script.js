@@ -238,6 +238,12 @@ function toggleVisibility(passwordFieldId, passwordLockId, visibilityBtnId) {
  * @async
  * @returns {Promise<void>}
  */
+/**
+ * Fetches the user's name and updates the 'headerInitials' element with their initials.
+ *
+ * @async
+ * @returns {Promise<void>}
+ */
 async function generateHeaderInitials() {
   let userName = await getUserName();
   if (userName) {
