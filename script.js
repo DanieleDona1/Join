@@ -228,3 +228,19 @@ function toggleVisibility(passwordFieldId, passwordLockId, visibilityBtnId) {
 
   managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn);
 }
+
+async function generateHeaderInitials() {
+  let userName = await getUserName();
+  if (userName) {
+    let initialsName = generateInitials(userName);
+    document.getElementById('headerInitials').innerHTML = initialsName;
+
+    console.log('ll', initialsName);
+  }
+
+}
+
+function generateInitials(userName) {
+  const nameParts = userName.match(/([A-ZÄÖÜ]?[a-zäöüß]+)|([A-ZÄÖÜ])/g);
+  return nameParts.slice(0, 2).map((part) => part.charAt(0).toUpperCase()).join('');
+}
