@@ -141,10 +141,15 @@ header img {
   margin-right: 16px;
 }
 
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
 .header-initials {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  user-select: none;
   width: 32px;
   height: 32px;
   border: 2px solid rgb(42, 54, 71);
@@ -152,6 +157,40 @@ header img {
   color: rgb(41, 171, 226);
   font-weight: bold;
   font-size: 11px;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 64px;
+  right: 0;
+  background-color: rgb(42, 54, 71);
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  width: 200px;
+  border-radius: 10px 0px 10px 10px;
+}
+
+.dropdown-menu ul {
+  list-style-type: none;
+}
+
+.dropdown-menu ul li {
+  padding: 8px 12px;
+}
+
+.dropdown-menu ul li a {
+  text-decoration: none;
+  color: rgb(205, 205, 205);
+}
+
+.dropdown-menu ul li:hover {
+  background-color: rgb(51, 75, 109);
+}
+
+.dropdown-container:focus-within .dropdown-menu {
+  display: block;
 }
 
 .navbar-item.active,

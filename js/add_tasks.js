@@ -1,18 +1,19 @@
-// async function onloadAddtasks() {
-//   await isUserLoggedIn();
-// }
+async function onloadAddtasks() {
+  await isUserLoggedIn();
+  await generateHeaderInitials();
+}
 
 const contacts = [
-  { firstName: "Sofia", lastName: "Müller", color: "red" },
-  { firstName: "Anton", lastName: "Mayer", color: "blue" },
-  { firstName: "Anja", lastName: "Schulz", color: "green" },
-  { firstName: "Benedikt", lastName: "Ziegler", color: "purple" },
-  { firstName: "David", lastName: "Eisenberg", color: "orange" },
-  { firstName: "Max", lastName: "Mustermann", color: "brown" },
+  { firstName: 'Sofia', lastName: 'Müller', color: 'red' },
+  { firstName: 'Anton', lastName: 'Mayer', color: 'blue' },
+  { firstName: 'Anja', lastName: 'Schulz', color: 'green' },
+  { firstName: 'Benedikt', lastName: 'Ziegler', color: 'purple' },
+  { firstName: 'David', lastName: 'Eisenberg', color: 'orange' },
+  { firstName: 'Max', lastName: 'Mustermann', color: 'brown' },
 ];
 
 const selectedInitials = [];
-const activePriority = "medium"; //TODO kannst du der activePriority Variable, die ausgesuchte Priorität zuweisen, wenn auf die buttons geklickt wird urgent, medium und low, Standardmäßig ist medium zugewiesen.
+const activePriority = 'medium'; //TODO kannst du der activePriority Variable, die ausgesuchte Priorität zuweisen, wenn auf die buttons geklickt wird urgent, medium und low, Standardmäßig ist medium zugewiesen.
 
 function formatDate(input) {
   let value = cleanInput(input.value);
@@ -23,7 +24,7 @@ function formatDate(input) {
 
 function cleanInput(value) {
   // Entferne alle Nicht-Zahlen
-  return value.replace(/\D/g, "");
+  return value.replace(/\D/g, '');
 }
 
 function extractDateParts(value) {
@@ -37,75 +38,72 @@ function extractDateParts(value) {
 
 function validateDate(day, month) {
   // Überprüfe und begrenze Tag und Monat
-  day = day > 31 ? "31" : day;
-  month = month > 12 ? "12" : month;
+  day = day > 31 ? '31' : day;
+  month = month > 12 ? '12' : month;
   return { day, month };
 }
 
 function formatOutput(day, month, year) {
   // Setze den formatierten Wert zusammen
   let output = day;
-  if (month) output += "/" + month;
-  if (year) output += "/" + year;
+  if (month) output += '/' + month;
+  if (year) output += '/' + year;
+  if (month) output += '/' + month;
+  if (year) output += '/' + year;
   return output;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
   // Hole alle Dropdowns
-  const customSelects = document.querySelectorAll(".custom-select");
+  const customSelects = document.querySelectorAll('.custom-select');
 
   customSelects.forEach((customSelect) => {
-    const selected = customSelect.querySelector(".select-selected");
-    const optionsContainer = customSelect.querySelector(".select-items");
-    const selectId = customSelect.getAttribute("id");
+    const selected = customSelect.querySelector('.select-selected');
+    const optionsContainer = customSelect.querySelector('.select-items');
+    const selectId = customSelect.getAttribute('id');
 
     // Toggle das Dropdown beim Klicken auf die ausgewählte Option
-    selected.addEventListener("click", function () {
-      optionsContainer.classList.toggle("select-hide");
-      customSelect.classList.toggle("open"); // Klasse für die Öffnung hinzufügen
+    selected.addEventListener('click', function () {
+      optionsContainer.classList.toggle('select-hide');
+      customSelect.classList.toggle('open'); // Klasse für die Öffnung hinzufügen
     });
 
-    const options = optionsContainer.querySelectorAll(".select-option");
+    const options = optionsContainer.querySelectorAll('.select-option');
     options.forEach((option) => {
-      option.addEventListener("click", function () {
+      option.addEventListener('click', function () {
         // Überprüfe, ob es sich um dropdown1 handelt
-        if (selectId === "drop-down-2") {
+        if (selectId === 'drop-down-2') {
           selected.textContent = this.textContent; // Text aktualisieren für dropdown1
-          optionsContainer.classList.add("select-hide"); // dropdown1 schließen
-          customSelect.classList.remove("open"); // Klasse entfernen
+          optionsContainer.classList.add('select-hide'); // dropdown1 schließen
+          customSelect.classList.remove('open'); // Klasse entfernen
         }
       });
     });
   });
 
   // Schließe das Dropdown, wenn außerhalb geklickt wird
-  document.addEventListener("click", function (e) {
+  document.addEventListener('click', function (e) {
     customSelects.forEach((customSelect) => {
-      const selected = customSelect.querySelector(".select-selected");
-      const optionsContainer = customSelect.querySelector(".select-items");
+      const selected = customSelect.querySelector('.select-selected');
+      const optionsContainer = customSelect.querySelector('.select-items');
 
-      if (
-        !selected.contains(e.target) &&
-        !optionsContainer.contains(e.target)
-      ) {
-        optionsContainer.classList.add("select-hide");
-        customSelect.classList.remove("open"); // Klasse entfernen, wenn geschlossen
+      if (!selected.contains(e.target) && !optionsContainer.contains(e.target)) {
+        optionsContainer.classList.add('select-hide');
+        customSelect.classList.remove('open'); // Klasse entfernen, wenn geschlossen
       }
     });
   });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const dropdown = document.getElementById("drop-down-1");
-  const selectItems = dropdown.querySelector(".select-items");
-  const initialsDisplay = document.getElementById("initials-display");
+document.addEventListener('DOMContentLoaded', function () {
+  const dropdown = document.getElementById('drop-down-1');
+  const selectItems = dropdown.querySelector('.select-items');
+  const initialsDisplay = document.getElementById('initials-display');
 
   // Erstelle Optionen für das Dropdown mit einer for-Schleife
   for (let i = 0; i < contacts.length; i++) {
     const contact = contacts[i];
-    const initials =
-      contact.firstName.charAt(0).toUpperCase() +
-      contact.lastName.charAt(0).toUpperCase();
+    const initials = contact.firstName.charAt(0).toUpperCase() + contact.lastName.charAt(0).toUpperCase();
 
     // HTML-Template für die Option
     const optionTemplate = `
@@ -123,24 +121,24 @@ document.addEventListener("DOMContentLoaded", function () {
     selectItems.innerHTML += optionTemplate; // Füge die Option mit innerHTML hinzu
   }
 
-  const dropdownOptions = document.querySelectorAll(".select-option");
+  const dropdownOptions = document.querySelectorAll('.select-option');
 
   // Verwende eine for-Schleife, um die Event Listener hinzuzufügen
   for (let i = 0; i < dropdownOptions.length; i++) {
-    dropdownOptions[i].addEventListener("click", function () {
+    dropdownOptions[i].addEventListener('click', function () {
       const checkbox = this.querySelector('input[type="checkbox"]');
-      const customCheckbox = this.querySelector(".custom-checkbox");
-      const initials = this.querySelector(".initial").textContent;
+      const customCheckbox = this.querySelector('.custom-checkbox');
+      const initials = this.querySelector('.initial').textContent;
       const contact = contacts[i];
 
       // Toggle die Checkbox
       checkbox.checked = !checkbox.checked;
 
       // Toggle die aktive Klasse für die Hintergrundfarbe
-      this.classList.toggle("active"); // Klasse für die aktive Hintergrundfarbe hinzufügen/entfernen
+      this.classList.toggle('active'); // Klasse für die aktive Hintergrundfarbe hinzufügen/entfernen
 
       // Toggle die Klasse für die benutzerdefinierte Checkbox
-      customCheckbox.classList.toggle("checked"); // Klasse für die benutzerdefinierte Checkbox hinzufügen/entfernen
+      customCheckbox.classList.toggle('checked'); // Klasse für die benutzerdefinierte Checkbox hinzufügen/entfernen
 
       // Wenn die Checkbox aktiv ist, füge die Initiale hinzu, andernfalls entferne sie
       if (checkbox.checked) {
@@ -155,13 +153,11 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       // Aktualisiere die Anzeige der Initialen
-      initialsDisplay.innerHTML = ""; // Clear previous initials
+      initialsDisplay.innerHTML = ''; // Clear previous initials
       selectedInitials.forEach(function (initial) {
         // Finde den Kontakt, dessen Initiale übereinstimmt
         const contactForInitial = contacts.find((contact) => {
-          const contactInitials =
-            contact.firstName.charAt(0).toUpperCase() +
-            contact.lastName.charAt(0).toUpperCase();
+          const contactInitials = contact.firstName.charAt(0).toUpperCase() + contact.lastName.charAt(0).toUpperCase();
 
           return contactInitials === initial;
         });
@@ -175,29 +171,27 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const buttons = document.querySelectorAll(".task-button");
+document.addEventListener('DOMContentLoaded', () => {
+  const buttons = document.querySelectorAll('.task-button');
 
   function updateButtonIcons() {
     buttons.forEach((button) => {
-      const color = button.getAttribute("data-color");
-      const img = button.querySelector("img");
+      const color = button.getAttribute('data-color');
+      const img = button.querySelector('img');
 
       // Setze das Bild je nach Aktivitätsstatus des Buttons
-      img.src = button.classList.contains("active")
-        ? `/assets/icons/add_tasks/active_icon_${color}.svg`
-        : `/assets/icons/add_tasks/inactive_icon_${color}.svg`;
+      img.src = button.classList.contains('active') ? `/assets/icons/add_tasks/active_icon_${color}.svg` : `/assets/icons/add_tasks/inactive_icon_${color}.svg`;
     });
   }
 
   function activateButton(selectedButton) {
     // Überprüfen, ob der Button bereits aktiv ist
-    if (!selectedButton.classList.contains("active")) {
+    if (!selectedButton.classList.contains('active')) {
       // Entferne die aktive Klasse von allen Buttons
-      buttons.forEach((button) => button.classList.remove("active"));
+      buttons.forEach((button) => button.classList.remove('active'));
 
       // Füge die aktive Klasse zum ausgewählten Button hinzu
-      selectedButton.classList.add("active");
+      selectedButton.classList.add('active');
 
       // Aktualisiere die Icons basierend auf dem aktiven Status
       updateButtonIcons();
@@ -206,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Füge jedem Button ein Click-Event hinzu
   buttons.forEach((button) => {
-    button.addEventListener("click", () => activateButton(button));
+    button.addEventListener('click', () => activateButton(button));
   });
 
   // Initialisiere die Icons beim Laden der Seite
