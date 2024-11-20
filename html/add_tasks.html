@@ -36,12 +36,20 @@
           />
         </a>
         <div class="dropdown-container">
-          <span id="headerInitials" class="header-initials d-flex-c-c" tabindex="0"></span>
+          <span
+            id="headerInitials"
+            class="header-initials d-flex-c-c"
+            tabindex="0"
+          ></span>
           <div class="dropdown-menu">
             <ul>
               <li><a href="/html/legal_notice.html">Legal Notice</a></li>
               <li><a href="/html/privacy_policy.html">Privacy Policy</a></li>
-              <li><a onclick="removeUserToken()" href="/html/login.html">Log out</a></li>
+              <li>
+                <a onclick="removeUserToken()" href="/html/login.html"
+                  >Log out</a
+                >
+              </li>
             </ul>
           </div>
         </div>
@@ -92,12 +100,17 @@
     </nav>
     <main>
       <h1>Add Task</h1>
-      <form>
+      <form id="form-add-task">
         <section>
           <p>Title<span>*</span></p>
-          <input id="input-field-title" placeholder="Enter a title" type="text" />
+          <input
+            id="input-field-title"
+            placeholder="Enter a title"
+            type="text"
+          />
           <p>Description</p>
-          <textarea id="input-field-description"
+          <textarea
+            id="input-field-description"
             class="resizable-textarea"
             placeholder="Enter a Description"
             type="text"
@@ -117,7 +130,8 @@
         <div class="divider"></div>
         <section>
           <p>Due date<span>*</span></p>
-          <input id="input-field-date"
+          <input
+            id="input-field-date"
             type="text"
             placeholder="dd/mm/yyyy"
             oninput="formatDate(this)"
@@ -181,7 +195,9 @@
               <div id="subtaskAddedList" class="subtask-added-list"></div>
             </div>
             <div class="clear-create-button-container">
-              <button class="clear-button">Clear &nbsp;&#10006;</button>
+              <button id="clear-button" type="button" class="clear-button">
+                Clear &nbsp;&#10006;
+              </button>
               <button
                 class="create-button"
                 onclick="createTask('toDo', 'toDoContent')"

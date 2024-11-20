@@ -4,16 +4,16 @@ async function onloadAddtasks() {
 }
 
 const contacts = [
-  { firstName: 'Sofia', lastName: 'Müller', color: 'red' },
-  { firstName: 'Anton', lastName: 'Mayer', color: 'blue' },
-  { firstName: 'Anja', lastName: 'Schulz', color: 'green' },
-  { firstName: 'Benedikt', lastName: 'Ziegler', color: 'purple' },
-  { firstName: 'David', lastName: 'Eisenberg', color: 'orange' },
-  { firstName: 'Max', lastName: 'Mustermann', color: 'brown' },
+  { firstName: "Sofia", lastName: "Müller", color: "red" },
+  { firstName: "Anton", lastName: "Mayer", color: "blue" },
+  { firstName: "Anja", lastName: "Schulz", color: "green" },
+  { firstName: "Benedikt", lastName: "Ziegler", color: "purple" },
+  { firstName: "David", lastName: "Eisenberg", color: "orange" },
+  { firstName: "Max", lastName: "Mustermann", color: "brown" },
 ];
 
 const selectedInitials = [];
-const activePriority = 'medium'; //TODO kannst du der activePriority Variable, die ausgesuchte Priorität zuweisen, wenn auf die buttons geklickt wird urgent, medium und low, Standardmäßig ist medium zugewiesen.
+const activePriority = "medium";
 
 function formatDate(input) {
   let value = cleanInput(input.value);
@@ -23,12 +23,10 @@ function formatDate(input) {
 }
 
 function cleanInput(value) {
-  // Entferne alle Nicht-Zahlen
-  return value.replace(/\D/g, '');
+  return value.replace(/\D/g, "");
 }
 
 function extractDateParts(value) {
-  // Teile den Wert in Tag, Monat und Jahr auf
   return {
     day: value.substring(0, 2),
     month: value.substring(2, 4),
@@ -37,73 +35,70 @@ function extractDateParts(value) {
 }
 
 function validateDate(day, month) {
-  // Überprüfe und begrenze Tag und Monat
-  day = day > 31 ? '31' : day;
-  month = month > 12 ? '12' : month;
+  day = day > 31 ? "31" : day;
+  month = month > 12 ? "12" : month;
   return { day, month };
 }
 
 function formatOutput(day, month, year) {
-  // Setze den formatierten Wert zusammen
   let output = day;
   if (month) output += "/" + month;
   if (year) output += "/" + year;
   return output;
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  // Hole alle Dropdowns
-  const customSelects = document.querySelectorAll('.custom-select');
+document.addEventListener("DOMContentLoaded", function () {
+  const customSelects = document.querySelectorAll(".custom-select");
 
   customSelects.forEach((customSelect) => {
-    const selected = customSelect.querySelector('.select-selected');
-    const optionsContainer = customSelect.querySelector('.select-items');
-    const selectId = customSelect.getAttribute('id');
+    const selected = customSelect.querySelector(".select-selected");
+    const optionsContainer = customSelect.querySelector(".select-items");
+    const selectId = customSelect.getAttribute("id");
 
-    // Toggle das Dropdown beim Klicken auf die ausgewählte Option
-    selected.addEventListener('click', function () {
-      optionsContainer.classList.toggle('select-hide');
-      customSelect.classList.toggle('open'); // Klasse für die Öffnung hinzufügen
+    selected.addEventListener("click", function () {
+      optionsContainer.classList.toggle("select-hide");
+      customSelect.classList.toggle("open");
     });
 
-    const options = optionsContainer.querySelectorAll('.select-option');
+    const options = optionsContainer.querySelectorAll(".select-option");
     options.forEach((option) => {
-      option.addEventListener('click', function () {
-        // Überprüfe, ob es sich um dropdown1 handelt
-        if (selectId === 'drop-down-2') {
-          selected.textContent = this.textContent; // Text aktualisieren für dropdown1
-          optionsContainer.classList.add('select-hide'); // dropdown1 schließen
-          customSelect.classList.remove('open'); // Klasse entfernen
+      option.addEventListener("click", function () {
+        if (selectId === "drop-down-2") {
+          selected.textContent = this.textContent;
+          optionsContainer.classList.add("select-hide");
+          customSelect.classList.remove("open");
         }
       });
     });
   });
 
-  // Schließe das Dropdown, wenn außerhalb geklickt wird
-  document.addEventListener('click', function (e) {
+  document.addEventListener("click", function (e) {
     customSelects.forEach((customSelect) => {
-      const selected = customSelect.querySelector('.select-selected');
-      const optionsContainer = customSelect.querySelector('.select-items');
+      const selected = customSelect.querySelector(".select-selected");
+      const optionsContainer = customSelect.querySelector(".select-items");
 
-      if (!selected.contains(e.target) && !optionsContainer.contains(e.target)) {
-        optionsContainer.classList.add('select-hide');
-        customSelect.classList.remove('open'); // Klasse entfernen, wenn geschlossen
+      if (
+        !selected.contains(e.target) &&
+        !optionsContainer.contains(e.target)
+      ) {
+        optionsContainer.classList.add("select-hide");
+        customSelect.classList.remove("open");
       }
     });
   });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-  const dropdown = document.getElementById('drop-down-1');
-  const selectItems = dropdown.querySelector('.select-items');
-  const initialsDisplay = document.getElementById('initials-display');
+document.addEventListener("DOMContentLoaded", function () {
+  const dropdown = document.getElementById("drop-down-1");
+  const selectItems = dropdown.querySelector(".select-items");
+  const initialsDisplay = document.getElementById("initials-display");
 
-  // Erstelle Optionen für das Dropdown mit einer for-Schleife
   for (let i = 0; i < contacts.length; i++) {
     const contact = contacts[i];
-    const initials = contact.firstName.charAt(0).toUpperCase() + contact.lastName.charAt(0).toUpperCase();
+    const initials =
+      contact.firstName.charAt(0).toUpperCase() +
+      contact.lastName.charAt(0).toUpperCase();
 
-    // HTML-Template für die Option
     const optionTemplate = `
           <div class="select-option" id="option-${contact.firstName}-${contact.lastName}" data-value="${contact.firstName} ${contact.lastName}">
               <div class="contact">
@@ -115,30 +110,23 @@ document.addEventListener('DOMContentLoaded', function () {
           </div>
       `;
 
-    // Option zum Dropdown hinzufügen
-    selectItems.innerHTML += optionTemplate; // Füge die Option mit innerHTML hinzu
+    selectItems.innerHTML += optionTemplate;
   }
 
-  const dropdownOptions = document.querySelectorAll('.select-option');
+  const dropdownOptions = document.querySelectorAll(".select-option");
 
-  // Verwende eine for-Schleife, um die Event Listener hinzuzufügen
   for (let i = 0; i < dropdownOptions.length; i++) {
-    dropdownOptions[i].addEventListener('click', function () {
+    dropdownOptions[i].addEventListener("click", function () {
       const checkbox = this.querySelector('input[type="checkbox"]');
-      const customCheckbox = this.querySelector('.custom-checkbox');
-      const initials = this.querySelector('.initial').textContent;
+      const customCheckbox = this.querySelector(".custom-checkbox");
+      const initials = this.querySelector(".initial").textContent;
       const contact = contacts[i];
 
-      // Toggle die Checkbox
       checkbox.checked = !checkbox.checked;
 
-      // Toggle die aktive Klasse für die Hintergrundfarbe
-      this.classList.toggle('active'); // Klasse für die aktive Hintergrundfarbe hinzufügen/entfernen
+      this.classList.toggle("active");
+      customCheckbox.classList.toggle("checked");
 
-      // Toggle die Klasse für die benutzerdefinierte Checkbox
-      customCheckbox.classList.toggle('checked'); // Klasse für die benutzerdefinierte Checkbox hinzufügen/entfernen
-
-      // Wenn die Checkbox aktiv ist, füge die Initiale hinzu, andernfalls entferne sie
       if (checkbox.checked) {
         if (!selectedInitials.includes(initials)) {
           selectedInitials.push(initials);
@@ -150,17 +138,16 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }
 
-      // Aktualisiere die Anzeige der Initialen
-      initialsDisplay.innerHTML = ''; // Clear previous initials
+      initialsDisplay.innerHTML = "";
       selectedInitials.forEach(function (initial) {
-        // Finde den Kontakt, dessen Initiale übereinstimmt
         const contactForInitial = contacts.find((contact) => {
-          const contactInitials = contact.firstName.charAt(0).toUpperCase() + contact.lastName.charAt(0).toUpperCase();
+          const contactInitials =
+            contact.firstName.charAt(0).toUpperCase() +
+            contact.lastName.charAt(0).toUpperCase();
 
           return contactInitials === initial;
         });
 
-        // Wenn ein Kontakt für die Initialen gefunden wurde, dann die Farbe setzen
         if (contactForInitial) {
           initialsDisplay.innerHTML += `<div class="initial" style="background-color: ${contactForInitial.color}; margin-right: 10px;">${initial}</div>`;
         }
@@ -169,82 +156,65 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  const buttons = document.querySelectorAll('.task-button');
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll(".task-button");
 
   function updateButtonIcons() {
     buttons.forEach((button) => {
       const color = button.getAttribute("data-color");
       const img = button.querySelector("img");
 
-      // Setze das Bild je nach Aktivitätsstatus des Buttons
-      img.src = button.classList.contains('active') ? `/assets/icons/add_tasks/active_icon_${color}.svg` : `/assets/icons/add_tasks/inactive_icon_${color}.svg`;
+      img.src = button.classList.contains("active")
+        ? `/assets/icons/add_tasks/active_icon_${color}.svg`
+        : `/assets/icons/add_tasks/inactive_icon_${color}.svg`;
     });
   }
 
   function activateButton(selectedButton) {
-    // Überprüfen, ob der Button bereits aktiv ist
-    if (!selectedButton.classList.contains('active')) {
-      // Entferne die aktive Klasse von allen Buttons
+    if (!selectedButton.classList.contains("active")) {
       buttons.forEach((button) => button.classList.remove("active"));
-
-      // Füge die aktive Klasse zum ausgewählten Button hinzu
-      selectedButton.classList.add('active');
-
-      // Aktualisiere die Icons basierend auf dem aktiven Status
+      selectedButton.classList.add("active");
       updateButtonIcons();
     }
   }
 
-  // Füge jedem Button ein Click-Event hinzu
   buttons.forEach((button) => {
     button.addEventListener("click", () => activateButton(button));
   });
 
-  // Initialisiere die Icons beim Laden der Seite
   updateButtonIcons();
 });
 
-let subtaskCounter = 0; // Zähler für die Subtask-IDs
+let subtaskCounter = 0;
 
-// Funktion, um ein Subtask hinzuzufügen
 function addSubtask() {
   const subtaskInput = document.getElementById("subtaskInput");
   const subtaskValue = subtaskInput.value.trim();
 
-  // Wenn das Subtask nicht leer ist
   if (subtaskValue) {
-    // Subtask in die Liste der hinzugefügten Subtasks einfügen
     const subtaskList = document.getElementById("subtaskAddedList");
 
-    // Neues Input-Element für das Subtask
     const subtaskInputElement = document.createElement("input");
 
-    // Berechnen der nächsten verfügbaren ID
-    const subtaskId = `subtaskListInput${subtaskCounter}`; // ID basierend auf der Anzahl der Subtasks
+    const subtaskId = `subtaskListInput${subtaskCounter}`;
 
     subtaskInputElement.classList.add("subtask-input");
-    subtaskInputElement.id = subtaskId; // Eindeutige ID für jedes Subtask
+    subtaskInputElement.id = subtaskId;
     subtaskInputElement.type = "text";
     subtaskInputElement.value = `• ${subtaskValue}`;
-    subtaskInputElement.readOnly = true; // readonly, damit der Text nicht bearbeitet wird
+    subtaskInputElement.readOnly = true;
 
-    // Subtask-Element zur Liste hinzufügen
     subtaskList.appendChild(subtaskInputElement);
 
-    // Eingabefeld leeren
     subtaskInput.value = "";
 
-    // Den Subtask-Zähler erhöhen
     subtaskCounter++;
   }
 }
 
-// Funktion zum Absenden des Formulars und Speichern der Subtasks und ausgewählten Kontakte
 document.querySelector("form").addEventListener("submit", function (event) {
-  event.preventDefault(); // Verhindert das Standardformular-Absenden
+  event.preventDefault();
 
-  // Holen der Formulardaten
   const title = document.querySelector("input[type='text']").value;
   const description = document.querySelector("textarea").value;
   const dueDate = document.getElementById("input-field-date").value;
@@ -255,17 +225,14 @@ document.querySelector("form").addEventListener("submit", function (event) {
     "#drop-down-2 .select-selected"
   ).textContent;
 
-  // Subtasks aus den input-Feldern mit spezifischen IDs holen
   const subtasksList = [];
 
-  // Abrufen der Subtasks anhand ihrer IDs (z.B. subtaskListInput0, subtaskListInput1, ...)
   const subtaskItems = document.querySelectorAll("[id^='subtaskListInput']");
 
   subtaskItems.forEach((item) => {
-    subtasksList.push(item.value.trim()); // Holen des Werts und Entfernen von Leerzeichen
+    subtasksList.push(item.value.trim());
   });
 
-  // Abrufen der aktiven Checkboxen (ausgewählten Kontakte)
   const selectedContacts = [];
 
   const activeCheckboxes = document.querySelectorAll(
@@ -274,78 +241,80 @@ document.querySelector("form").addEventListener("submit", function (event) {
 
   activeCheckboxes.forEach((checkbox) => {
     const parentOption = checkbox.closest(".select-option");
-    const name = parentOption.querySelector(".name").textContent; // Holen des Namens
-    const initials = parentOption.querySelector(".initial").textContent; // Holen der Initialen
+    const name = parentOption.querySelector(".name").textContent;
+    const initials = parentOption.querySelector(".initial").textContent;
 
-    // Speichern von Name und Initialen des aktiven Kontakts
     selectedContacts.push({ name, initials });
   });
 
-  // Überprüfung, ob Subtasks und ausgewählte Kontakte korrekt abgerufen wurden
   console.log("Subtasks List: ", subtasksList);
   console.log("Selected Contacts: ", selectedContacts);
 
-  // Speichern der Formulardaten im localStorage
   localStorage.setItem("taskTitle", title);
   localStorage.setItem("taskDescription", description);
   localStorage.setItem("taskDueDate", dueDate);
   localStorage.setItem("taskPriority", priority);
   localStorage.setItem("taskCategory", category);
 
-  // Speichern der Subtasks im localStorage
-  localStorage.setItem("taskSubtasks", JSON.stringify(subtasksList)); // Subtasks als JSON speichern
+  localStorage.setItem("taskSubtasks", JSON.stringify(subtasksList));
 
-  // Speichern der ausgewählten Kontakte im localStorage (mit Name und Initialen)
-  localStorage.setItem("taskAssignedTo", JSON.stringify(selectedContacts)); // Kontakte speichern
+  localStorage.setItem("taskAssignedTo", JSON.stringify(selectedContacts));
 
   alert("Task saved!");
 });
 
-
-// Funktion zum Wechseln zum nächsten Feld basierend auf den IDs
 function moveToNextField(event) {
   if (event.key === "Enter") {
-    event.preventDefault(); // Verhindert das Absenden des Formulars
+    event.preventDefault();
 
-    // Alle Felder mit den IDs 'input-field-' (z.B. input-field-title, input-field-description, ...)
     const formElements = Array.from(
       document.querySelectorAll('[id^="input-field-"]')
     );
 
-    // Den Index des aktuell fokussierten Elements finden
     const currentIndex = formElements.findIndex((el) => el === event.target);
 
-    // Das nächste Element finden
     let nextElement = formElements[currentIndex + 1];
 
-    // Wenn es das letzte Element 'input-field-date' ist, dann zum 'subtaskInput' springen
     if (!nextElement) {
-      nextElement = document.getElementById("subtaskInput"); // Setze den Fokus auf 'subtaskInput'
+      nextElement = document.getElementById("subtaskInput");
     }
 
-    // Den Fokus auf das nächste ausfüllbare Element setzen
     if (nextElement) {
       nextElement.focus();
     }
   }
 }
 
-// Event-Listener für alle Felder mit den IDs, die mit 'input-field-' beginnen
 document.querySelectorAll('[id^="input-field-"]').forEach((input) => {
   input.addEventListener("keydown", moveToNextField);
 });
 
-// Speziellen Event-Listener für das 'subtaskInput'-Feld, um das Absenden des Formulars zu verhindern
-document.getElementById("subtaskInput").addEventListener("keydown", function (event) {
-  if (event.key === "Enter") {
-    event.preventDefault(); // Verhindert das Absenden des Formulars im 'subtaskInput'-Feld
-    addCurrentSubtask(); // Ruft die Funktion addCurrentSubtask auf (optional, je nachdem, wie du es nutzen möchtest)
-  }
+document
+  .getElementById("subtaskInput")
+  .addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      if (event.target.value.trim() === "") {
+        event.preventDefault();
+      } else {
+        addCurrentSubtask();
+        event.preventDefault();
+      }
+    }
+  });
+
+document.getElementById("clear-button").addEventListener("click", function () {
+  document.getElementById("form-add-task").reset();
+
+  document.querySelectorAll(".task-button").forEach((button) => {
+    button.classList.remove("active");
+    const img = button.querySelector("img");
+    const color = button.getAttribute("data-color");
+    img.src = `/assets/icons/add_tasks/inactive_icon_${color}.svg`;
+  });
+
+  const mediumButton = document.querySelector("[data-color='medium']");
+  mediumButton.classList.add("active");
+
+  const mediumButtonImg = mediumButton.querySelector("img");
+  mediumButtonImg.src = `/assets/icons/add_tasks/active_icon_medium.svg`;
 });
-
-// Event-Listener für das Formular, um das Absenden bei Enter zu verhindern
-document.querySelector("form").addEventListener("submit", function (event) {
-  event.preventDefault(); // Verhindert das Absenden des Formulars
-});
-
-
