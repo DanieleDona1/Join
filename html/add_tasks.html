@@ -24,19 +24,13 @@
           <img class="header-help-icon d-none" src="/assets/icons/header/help.svg" alt="help" />
         </a>
         <div class="dropdown-container">
-          <span
-            id="headerInitials"
-            class="header-initials d-flex-c-c"
-            tabindex="0"
-          ></span>
+          <span id="headerInitials" class="header-initials d-flex-c-c" tabindex="0"></span>
           <div class="dropdown-menu">
             <ul>
               <li><a href="/html/legal_notice.html">Legal Notice</a></li>
               <li><a href="/html/privacy_policy.html">Privacy Policy</a></li>
               <li>
-                <a onclick="removeUserToken()" href="/html/login.html"
-                  >Log out</a
-                >
+                <a onclick="removeUserToken()" href="/html/login.html">Log out</a>
               </li>
             </ul>
           </div>
@@ -78,18 +72,9 @@
       <form id="form-add-task">
         <section>
           <p>Title<span>*</span></p>
-          <input
-            id="input-field-title"
-            placeholder="Enter a title"
-            type="text"
-          />
+          <input id="input-field-title" placeholder="Enter a title" type="text" />
           <p>Description</p>
-          <textarea
-            id="input-field-description"
-            class="resizable-textarea"
-            placeholder="Enter a Description"
-            type="text"
-          ></textarea>
+          <textarea id="input-field-description" class="resizable-textarea" placeholder="Enter a Description" type="text"></textarea>
           <p>Assigned to</p>
           <div class="custom-select" id="drop-down-1">
             <div class="select-selected" tabindex="0">Select contacts to assign</div>
@@ -104,12 +89,7 @@
         <div class="divider"></div>
         <section>
           <p>Due date<span>*</span></p>
-          <input
-            id="input-field-date"
-            type="text"
-            placeholder="dd/mm/yyyy"
-            oninput="formatDate(this)"
-          />
+          <input id="input-field-date" type="text" placeholder="dd/mm/yyyy" oninput="formatDate(this)" />
           <p>Prio</p>
           <div class="button-container">
             <button onclick="setPriority()" class="task-button" data-color="urgent" type="button">
@@ -146,15 +126,8 @@
               <div id="subtaskAddedList" class="subtask-added-list"></div>
             </div>
             <div class="clear-create-button-container">
-              <button id="clear-button" type="button" class="clear-button">
-                Clear &nbsp;&#10006;
-              </button>
-              <button
-                class="create-button"
-                onclick="createTask('toDo', 'toDoContent')"
-              >
-                Create Task &nbsp;&nbsp;&#10003;
-              </button>
+              <button id="clear-button" type="button" class="clear-button">Clear &nbsp;&#10006;</button>
+              <button class="create-button" onclick="createAddTask('toDo')">Create Task &nbsp;&nbsp;&#10003;</button>
             </div>
           </div>
         </section>
