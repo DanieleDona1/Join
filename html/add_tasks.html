@@ -86,9 +86,9 @@
       <form>
         <section>
           <p>Title<span>*</span></p>
-          <input placeholder="Enter a title" type="text" />
+          <input id="input-field-title" placeholder="Enter a title" type="text" />
           <p>Description</p>
-          <textarea
+          <textarea id="input-field-description"
             class="resizable-textarea"
             placeholder="Enter a Description"
             type="text"
@@ -103,13 +103,13 @@
           <div id="selected-initials">
             <div id="initials-display"></div>
           </div>
+          <p class="required-note"><span>*</span>This field is required</p>
         </section>
         <div class="divider"></div>
         <section>
           <p>Due date<span>*</span></p>
-          <input
+          <input id="input-field-date"
             type="text"
-            id="dateInput"
             placeholder="dd/mm/yyyy"
             oninput="formatDate(this)"
           />
@@ -172,15 +172,12 @@
               <div id="subtaskAddedList" class="subtask-added-list"></div>
             </div>
             <div class="clear-create-button-container">
-              <button class="clear-button">
-                Clear<img src="/assets/icons/add_tasks/clear.png" alt="" />
-              </button>
+              <button class="clear-button">Clear &nbsp;&#10006;</button>
               <button
                 class="create-button"
                 onclick="createTask('toDo', 'toDoContent')"
               >
-                Create Task
-                <img src="/assets/icons/add_tasks/create.png" alt="" />
+                Create Task &nbsp;&nbsp;&#10003;
               </button>
             </div>
           </div>

@@ -375,4 +375,8 @@ main p {
     min-height: 0;
     height: 1000px;
   }
+
+  body {
+    background-color: rgb(53, 49, 49);
+  }
 }
