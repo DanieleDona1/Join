@@ -229,6 +229,7 @@ section {
   align-items: center;
   justify-content: center;
   z-index: 1;
+  padding-left: 250px;
 }
 
 .wrapper {
@@ -539,7 +540,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
   }
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1225px) {
   .section-container {
     /* display: flex; */
     flex-direction: column;
@@ -550,6 +551,9 @@ input[type='date']::-webkit-calendar-picker-indicator {
     height: auto;
     padding-bottom: 10px;
     min-height: 200px;
+  }
+  .dialog-bg {
+    padding-left: 0px;
   }
 }
 
