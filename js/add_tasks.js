@@ -47,8 +47,6 @@ function formatOutput(day, month, year) {
   let output = day;
   if (month) output += "/" + month;
   if (year) output += "/" + year;
-  if (month) output += "/" + month;
-  if (year) output += "/" + year;
   return output;
 }
 
@@ -111,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // HTML-Template für die Option
     const optionTemplate = `
-          <div class="select-option" data-value="${contact.firstName} ${contact.lastName}">
+          <div class="select-option" id="option-${contact.firstName}-${contact.lastName}" data-value="${contact.firstName} ${contact.lastName}">
               <div class="contact">
                 <div class="initial" style="background-color: ${contact.color};">${initials}</div>
                 <div class="name">${contact.firstName} ${contact.lastName}</div>
@@ -181,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const buttons = document.querySelectorAll(".task-button");
 
   function updateButtonIcons() {
-    buttons.forEach(button => {
+    buttons.forEach((button) => {
       const color = button.getAttribute("data-color");
       const img = button.querySelector("img");
 
@@ -196,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Überprüfen, ob der Button bereits aktiv ist
     if (!selectedButton.classList.contains("active")) {
       // Entferne die aktive Klasse von allen Buttons
-      buttons.forEach(button => button.classList.remove("active"));
+      buttons.forEach((button) => button.classList.remove("active"));
 
       // Füge die aktive Klasse zum ausgewählten Button hinzu
       selectedButton.classList.add("active");
@@ -207,10 +205,155 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Füge jedem Button ein Click-Event hinzu
-  buttons.forEach(button => {
+  buttons.forEach((button) => {
     button.addEventListener("click", () => activateButton(button));
   });
 
   // Initialisiere die Icons beim Laden der Seite
   updateButtonIcons();
 });
+
+let subtaskCounter = 0; // Zähler für die Subtask-IDs
+
+// Funktion, um ein Subtask hinzuzufügen
+function addSubtask() {
+  const subtaskInput = document.getElementById("subtaskInput");
+  const subtaskValue = subtaskInput.value.trim();
+
+  // Wenn das Subtask nicht leer ist
+  if (subtaskValue) {
+    // Subtask in die Liste der hinzugefügten Subtasks einfügen
+    const subtaskList = document.getElementById("subtaskAddedList");
+
+    // Neues Input-Element für das Subtask
+    const subtaskInputElement = document.createElement("input");
+
+    // Berechnen der nächsten verfügbaren ID
+    const subtaskId = `subtaskListInput${subtaskCounter}`; // ID basierend auf der Anzahl der Subtasks
+
+    subtaskInputElement.classList.add("subtask-input");
+    subtaskInputElement.id = subtaskId; // Eindeutige ID für jedes Subtask
+    subtaskInputElement.type = "text";
+    subtaskInputElement.value = `• ${subtaskValue}`;
+    subtaskInputElement.readOnly = true; // readonly, damit der Text nicht bearbeitet wird
+
+    // Subtask-Element zur Liste hinzufügen
+    subtaskList.appendChild(subtaskInputElement);
+
+    // Eingabefeld leeren
+    subtaskInput.value = "";
+
+    // Den Subtask-Zähler erhöhen
+    subtaskCounter++;
+  }
+}
+
+// Funktion zum Absenden des Formulars und Speichern der Subtasks und ausgewählten Kontakte
+document.querySelector("form").addEventListener("submit", function (event) {
+  event.preventDefault(); // Verhindert das Standardformular-Absenden
+
+  // Holen der Formulardaten
+  const title = document.querySelector("input[type='text']").value;
+  const description = document.querySelector("textarea").value;
+  const dueDate = document.getElementById("input-field-date").value;
+  const priority = document
+    .querySelector(".task-button.active")
+    .getAttribute("data-color");
+  const category = document.querySelector(
+    "#drop-down-2 .select-selected"
+  ).textContent;
+
+  // Subtasks aus den input-Feldern mit spezifischen IDs holen
+  const subtasksList = [];
+
+  // Abrufen der Subtasks anhand ihrer IDs (z.B. subtaskListInput0, subtaskListInput1, ...)
+  const subtaskItems = document.querySelectorAll("[id^='subtaskListInput']");
+
+  subtaskItems.forEach((item) => {
+    subtasksList.push(item.value.trim()); // Holen des Werts und Entfernen von Leerzeichen
+  });
+
+  // Abrufen der aktiven Checkboxen (ausgewählten Kontakte)
+  const selectedContacts = [];
+
+  const activeCheckboxes = document.querySelectorAll(
+    ".select-option input[type='checkbox']:checked"
+  );
+
+  activeCheckboxes.forEach((checkbox) => {
+    const parentOption = checkbox.closest(".select-option");
+    const name = parentOption.querySelector(".name").textContent; // Holen des Namens
+    const initials = parentOption.querySelector(".initial").textContent; // Holen der Initialen
+
+    // Speichern von Name und Initialen des aktiven Kontakts
+    selectedContacts.push({ name, initials });
+  });
+
+  // Überprüfung, ob Subtasks und ausgewählte Kontakte korrekt abgerufen wurden
+  console.log("Subtasks List: ", subtasksList);
+  console.log("Selected Contacts: ", selectedContacts);
+
+  // Speichern der Formulardaten im localStorage
+  localStorage.setItem("taskTitle", title);
+  localStorage.setItem("taskDescription", description);
+  localStorage.setItem("taskDueDate", dueDate);
+  localStorage.setItem("taskPriority", priority);
+  localStorage.setItem("taskCategory", category);
+
+  // Speichern der Subtasks im localStorage
+  localStorage.setItem("taskSubtasks", JSON.stringify(subtasksList)); // Subtasks als JSON speichern
+
+  // Speichern der ausgewählten Kontakte im localStorage (mit Name und Initialen)
+  localStorage.setItem("taskAssignedTo", JSON.stringify(selectedContacts)); // Kontakte speichern
+
+  alert("Task saved!");
+});
+
+
+// Funktion zum Wechseln zum nächsten Feld basierend auf den IDs
+function moveToNextField(event) {
+  if (event.key === "Enter") {
+    event.preventDefault(); // Verhindert das Absenden des Formulars
+
+    // Alle Felder mit den IDs 'input-field-' (z.B. input-field-title, input-field-description, ...)
+    const formElements = Array.from(
+      document.querySelectorAll('[id^="input-field-"]')
+    );
+
+    // Den Index des aktuell fokussierten Elements finden
+    const currentIndex = formElements.findIndex((el) => el === event.target);
+
+    // Das nächste Element finden
+    let nextElement = formElements[currentIndex + 1];
+
+    // Wenn es das letzte Element 'input-field-date' ist, dann zum 'subtaskInput' springen
+    if (!nextElement) {
+      nextElement = document.getElementById("subtaskInput"); // Setze den Fokus auf 'subtaskInput'
+    }
+
+    // Den Fokus auf das nächste ausfüllbare Element setzen
+    if (nextElement) {
+      nextElement.focus();
+    }
+  }
+}
+
+// Event-Listener für alle Felder mit den IDs, die mit 'input-field-' beginnen
+document.querySelectorAll('[id^="input-field-"]').forEach((input) => {
+  input.addEventListener("keydown", moveToNextField);
+});
+
+// Speziellen Event-Listener für das 'subtaskInput'-Feld, um das Absenden des Formulars zu verhindern
+document.getElementById("subtaskInput").addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault(); // Verhindert das Absenden des Formulars im 'subtaskInput'-Feld
+    addCurrentSubtask(); // Ruft die Funktion addCurrentSubtask auf (optional, je nachdem, wie du es nutzen möchtest)
+  }
+});
+
+// Event-Listener für das Formular, um das Absenden bei Enter zu verhindern
+document.querySelector("form").addEventListener("submit", function (event) {
+  event.preventDefault(); // Verhindert das Absenden des Formulars
+});
+
+

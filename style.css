@@ -398,11 +398,4 @@ main p {
     min-height: 0;
     height: 1000px;
   }
-
-  main {
-    left: calc((100vw - 1920px) / 2 + 232px);
-    top: calc((100vh - 1080px) / 2 + 80px);
-    min-height: 0;
-    height: 1000px;
-  }
 }
