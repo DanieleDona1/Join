@@ -156,11 +156,11 @@ async function createTask(category, contentId) {
 function getUserAddTaskData(swimlane) {
   return {
     title: document.getElementById('input-field-title')?.value || 'No title',
-    dueDate: document.getElementById("input-field-date")?.value || '2024-12-31', //yy--mm--dd Format
+    dueDate: dueDate, //yy-mm-dd Format
     category: swimlane,
     description: document.getElementById('input-field-description')?.value || 'No description provided.',
     task_category: currentTaskCategory, // User-Story Technical-Task wichtig großgeschrieben User-Story
-    assignedTo: document.getElementById('assignedTo') || ['Peter', 'Müller'] || 'Unassigned',
+    assignedTo: selectedContacts || ['Peter', 'Müller'] || 'Unassigned',
     subtask: currentSubtasks,
     prio: activePriority
   };

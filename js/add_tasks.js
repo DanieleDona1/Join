@@ -305,7 +305,8 @@ document.getElementById('clear-button').addEventListener('click', function () {
 
 // Die Funktion wird ausgeführt, wenn auf den Button Create Task geklickt und damit die Task erstellt wird
 async function createAddTask(category) {
-  //TODO Die 3 Zeilen unter dem Kommentar dürfen nur ausgeführt werden, wenn alle Pflichtfelder ausgefüllt wurden. Also mit if () irgendwie und es müssen die Felder eine error msg geben die leer sind.
+  //TODO Die 4 Zeilen unter dem Kommentar dürfen nur ausgeführt werden, wenn alle Pflichtfelder ausgefüllt wurden. Also mit if () irgendwie und es müssen die Felder eine error msg geben die leer sind.
+  formateDueDate();
   const userInputData = getUserAddTaskData(category); //hier werden alle Daten geholt die der User in add Task eingegeben hat
   await addTask(userInputData); //hier werden die geholten Daten auf Firebase gespeichert
   redirectToPage('board.html'); //hier wird auf board.html weitergeleitet, dort erscheint automatisch die neu erstellte Task in der toDo Category
@@ -321,4 +322,19 @@ function setPriority() {
 // wird ausgeführt wenn eine Category ausgesucht wurde Technical-Task oder User-Story. Das Ausgewählte wird in currentTaskCategory gespeichert
 function setCategory(choosenCategory) {
   currentTaskCategory = choosenCategory;
+}
+
+// DueDate muss in einem bestimmten Format sein 
+function formateDueDate() {
+  const inputDate = document.getElementById("input-field-date")?.value
+  dueDate = formatDateToYMD(inputDate);
+}
+
+function formatDateToYMD(dateString) {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
 }
