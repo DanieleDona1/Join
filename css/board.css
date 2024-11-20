@@ -40,8 +40,13 @@ h3 {
   padding-left: 12px;
 }
 
-.searchbar-mobile {
+.searchbar-container-mobile {
   display: none;
+  /* display: flex; */
+  flex-direction: column;
+}
+
+.searchbar-mobile {
   border: 1px solid rgb(204, 204, 204);
   padding: 4px 16px;
   border-radius: 10px;
@@ -59,6 +64,14 @@ h3 {
   border-left: 2px solid rgb(204, 204, 204);
   padding-left: 12px;
 }
+
+.search-result-msg {
+  color: red;
+  font-weight: 500;
+  padding-left: 8px;
+  opacity: 0;
+}
+
 .add-task {
   border: unset;
   padding: 10px 15px;
@@ -551,10 +564,10 @@ input[type='date']::-webkit-calendar-picker-indicator {
   .section-container {
     margin-top: 20px;
   }
-  .searchbar {
+  .searchbar-container {
     display: none;
   }
-  .searchbar-mobile {
+  .searchbar-container-mobile {
     display: flex;
   }
   .plus-button {
