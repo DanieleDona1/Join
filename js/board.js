@@ -155,14 +155,14 @@ async function createTask(category, contentId) {
  */
 function getUserAddTaskData(swimlane) {
   return {
-    title: document.getElementById('title') || 'HTML TESTTTTTT jfdsfjhsdaöfjkasd',
-    dueDate: document.getElementById('dueDate') || '2024-12-31', //yy--mm--dd Format
+    title: document.getElementById('input-field-title')?.value || 'No title',
+    dueDate: document.getElementById("input-field-date")?.value || '2024-12-31', //yy--mm--dd Format
     category: swimlane,
-    description: document.getElementById('description') || 'No description provided.',
-    task_category: document.getElementById('task_category') || 'User-Story', // User-Story Technical-Task wichtig großgeschrieben User-Story
+    description: document.getElementById('input-field-description')?.value || 'No description provided.',
+    task_category: currentTaskCategory, // User-Story Technical-Task wichtig großgeschrieben User-Story
     assignedTo: document.getElementById('assignedTo') || ['Peter', 'Müller'] || 'Unassigned',
     subtask: currentSubtasks,
-    prio: document.getElementById('prio') || 'medium',
+    prio: activePriority
   };
 }
 

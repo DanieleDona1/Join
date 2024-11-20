@@ -8,8 +8,10 @@ let users = [];
 
 // Alle current Arrays wird auf addTask und board benötigt
 let currentSubtasks = [];
-// let activePriority = "medium"; //TODO activePriority Variable zuweisen, der ausgesuchten Priorität, wenn auf die buttons geklickt wird urgent, medium und low. Standardmäßig ist medium zugewiesen.
-// let currentTaskCategory = ''; //Zuweisen "User-Story" oder "Technical-Task" mit Bindestrich
+let activePriority = "medium"; //TODO activePriority Variable zuweisen, der ausgesuchten Priorität, wenn auf die buttons geklickt wird urgent, medium und low. Standardmäßig ist medium zugewiesen.
+let currentTaskCategory = ''; //Zuweisen "User-Story" oder "Technical-Task" mit Bindestrich
+let selectedContacts = [];
+
 
 // contactList.js Arrays
 let contactList = [];
