@@ -1,5 +1,4 @@
-let contactList = [];
-let groupedContacts = {}; // Definiere groupedContacts als globale Variable
+
 
 // array für kontaktliste wo alle daten + spezifische id gespeichert wird und das laden und bearbeiten einfacher macht
 
@@ -7,6 +6,7 @@ async function onloadFunc() {
   // await isUserLoggedIn();  // wenn user nicht eingeloggt ist, wird er auf login Seite weitergeleitet
   await createContactlist();
   renderPhoneList();
+  await generateHeaderInitials();
 }
 
 // Hauptfunktion: Steuert den Sortier- und Renderprozess
@@ -27,6 +27,7 @@ async function createContactlist() {
         color: data[contacts[i]].color, // Speichert die Farbe
       });
     }
+    console.log(contactList);
 }
 
 // Sortiert die Kontakte alphabetisch nach dem Namen

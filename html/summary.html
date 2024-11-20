@@ -19,7 +19,16 @@
         <a href="help.html">
           <img class="header-help-icon d-none" src="/assets/icons/header/help.svg" alt="help" />
         </a>
-        <span class="header-initials">JV</span>
+        <div class="dropdown-container">
+          <span id="headerInitials" class="header-initials d-flex-c-c" tabindex="0"></span>
+          <div class="dropdown-menu">
+            <ul>
+              <li><a href="/html/legal_notice.html">Legal Notice</a></li>
+              <li><a href="/html/privacy_policy.html">Privacy Policy</a></li>
+              <li><a onclick="removeUserToken()" href="/html/login.html">Log out</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -33,13 +42,13 @@
             <img src="/assets/icons/navbar/summary_Icon.svg" alt="Summary Icon" />
             <p>Summary</p>
           </a>
-          <a href="board.html" class="navbar-item" data-page="board">
-            <img src="/assets/icons/navbar/board_icon.svg" alt="Board Icon" />
-            <p>Board</p>
-          </a>
           <a href="add_tasks.html" class="navbar-item" data-page="add_tasks">
             <img src="/assets/icons/navbar/add_tasks.svg" alt="Add Tasks Icon" />
             <p>Add Tasks</p>
+          </a>
+          <a href="board.html" class="navbar-item" data-page="board">
+            <img src="/assets/icons/navbar/board_icon.svg" alt="Board Icon" />
+            <p>Board</p>
           </a>
           <a href="contact.html" class="navbar-item" data-page="contacts">
             <img src="/assets/icons/navbar/contacts_icon.svg" alt="Contacts Icon" />
@@ -59,7 +68,6 @@
         <div class="loading-fill" id="loadingFill"></div>
       </div>
     </div>
-
 
     <main>
       <div class="d-flex-fs-c headline">

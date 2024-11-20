@@ -1,11 +1,19 @@
 const BASE_URL = 'https://joinremotestorage-c8226-default-rtdb.europe-west1.firebasedatabase.app/';
 
+// login und board Arrays
 let todos = [];
 let currentTodos = [];
 let todoKeysArray = [];
 let users = [];
 
+// Alle current Arrays wird auf addTask und board benötigt
 let currentSubtasks = [];
+// let activePriority = "medium"; //TODO activePriority Variable zuweisen, der ausgesuchten Priorität, wenn auf die buttons geklickt wird urgent, medium und low. Standardmäßig ist medium zugewiesen.
+// let currentTaskCategory = ''; //Zuweisen "User-Story" oder "Technical-Task" mit Bindestrich
+
+// contactList.js Arrays
+let contactList = [];
+let groupedContacts = {}; // Definiere groupedContacts als globale Variable
 
 /**
  * Checks if the user is logged in. If neither a valid username nor a guest login is found,
@@ -219,4 +227,43 @@ function toggleVisibility(passwordFieldId, passwordLockId, visibilityBtnId) {
   const visibilityBtn = document.getElementById(visibilityBtnId);
 
   managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn);
+}
+
+/**
+ * Fetches the user's name and updates the 'headerInitials' element with their initials.
+ *
+ * @async
+ * @returns {Promise<void>}
+ */
+async function generateHeaderInitials() {
+  let userName = await getUserName();
+  if (userName) {
+    let initialsName = generateInitials(userName);
+    document.getElementById('headerInitials').innerHTML = initialsName;
+  } else {
+    document.getElementById('headerInitials').innerHTML = 'G';
+  }
+}
+
+/**
+ * Generates initials from a user's name (e.g., 'John Doe' → 'JD').
+ *
+ * @param {string} userName - The user's full name.
+ * @returns {string} The user's initials.
+ */
+function generateInitials(userName) {
+  const nameParts = userName.match(/([A-ZÄÖÜ]?[a-zäöüß]+)|([A-ZÄÖÜ])/g);
+  return nameParts
+    .slice(0, 2)
+    .map((part) => part.charAt(0).toUpperCase())
+    .join('');
+}
+
+/**
+ * Removes the user token from localStorage.
+ *
+ * @returns {void}
+ */
+function removeUserToken() {
+  localStorage.removeItem('user');
 }

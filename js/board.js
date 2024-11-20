@@ -14,6 +14,7 @@ async function onload() {
   console.log('onload todos:', todos);
   console.log('onload currtodos:', currentTodos);
   renderTasks();
+  await generateHeaderInitials();
 
   // openTaskDetails(0);
   // generateEditTemplate(0);
@@ -154,7 +155,7 @@ async function createTask(category, contentId) {
  */
 function getUserAddTaskData(swimlane) {
   return {
-    title: document.getElementById('title') || 'HTML',
+    title: document.getElementById('title') || 'HTML TESTTTTTT jfdsfjhsdaöfjkasd',
     dueDate: document.getElementById('dueDate') || '2024-12-31', //yy--mm--dd Format
     category: swimlane,
     description: document.getElementById('description') || 'No description provided.',
@@ -414,10 +415,15 @@ function deleteTask(id) {
  * @param {string} inputId - The ID of the input field containing the search term.
  */
 function searchTitleOrDescription(inputId) {
+  document.getElementById('searchResultMsg').style.opacity = '0';
+  document.getElementById('searchResultMsgMobile').style.opacity = '0';
   let filterWord = document.getElementById(inputId).value.trim().toLowerCase();
-  console.log(filterWord);
 
   currentTodos = todos.filter((t) => (t.title && t.title.toLowerCase().includes(filterWord)) || (t.description && t.description.toLowerCase().includes(filterWord)));
+  if (currentTodos.length === 0) {
+    document.getElementById('searchResultMsg').style.opacity = '1';
+    document.getElementById('searchResultMsgMobile').style.opacity = '1';
+  }
   renderTasks();
 }
 
