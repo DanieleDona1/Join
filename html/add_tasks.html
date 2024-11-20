@@ -74,7 +74,11 @@
           <p>Title<span>*</span></p>
           <input id="input-field-title" placeholder="Enter a title" type="text" />
           <p>Description</p>
-          <textarea id="input-field-description" class="resizable-textarea" placeholder="Enter a Description" type="text"></textarea>
+          <textarea id="input-field-description"
+            class="resizable-textarea"
+            placeholder="Enter a Description"
+            type="text"
+          ></textarea>
           <p>Assigned to</p>
           <div class="custom-select" id="drop-down-1">
             <div class="select-selected" tabindex="0">Select contacts to assign</div>
@@ -84,11 +88,16 @@
             <div id="initials-display"></div>
           </div>
           <p class="required-note"><span>*</span>This field is required</p>
+          <p class="required-note"><span>*</span>This field is required</p>
         </section>
         <div class="divider"></div>
         <section>
           <p>Due date<span>*</span></p>
-          <input id="input-field-date" type="text" placeholder="dd/mm/yyyy" oninput="formatDate(this)" />
+          <input id="input-field-date"
+            type="text"
+            placeholder="dd/mm/yyyy"
+            oninput="formatDate(this)"
+          />
           <p>Prio</p>
           <div class="button-container">
             <button onclick="setPriority()" class="task-button" data-color="urgent" type="button">
@@ -125,8 +134,13 @@
               <div id="subtaskAddedList" class="subtask-added-list"></div>
             </div>
             <div class="clear-create-button-container">
-              <button id="clear-button" type="button" class="clear-button">Clear &nbsp;&#10006;</button>
-              <button class="create-button" onclick="createAddTask('toDo')">Create Task &nbsp;&nbsp;&#10003;</button>
+              <button class="clear-button">Clear &nbsp;&#10006;</button>
+              <button
+                class="create-button"
+                onclick="createTask('toDo', 'toDoContent')"
+              >
+                Create Task &nbsp;&nbsp;&#10003;
+              </button>
             </div>
           </div>
         </section>

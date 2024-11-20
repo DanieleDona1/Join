@@ -41,8 +41,8 @@ function validateDate(day, month) {
 
 function formatOutput(day, month, year) {
   let output = day;
-  if (month) output += '/' + month;
-  if (year) output += '/' + year;
+  if (month) output += "/" + month;
+  if (year) output += "/" + year;
   return output;
 }
 
@@ -153,188 +153,176 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateButtonIcons() {
     buttons.forEach((button) => {
-      const color = button.getAttribute('data-color');
-      const img = button.querySelector('img');
+      const color = button.getAttribute("data-color");
+      const img = button.querySelector("img");
 
       img.src = button.classList.contains('active') ? `/assets/icons/add_tasks/active_icon_${color}.svg` : `/assets/icons/add_tasks/inactive_icon_${color}.svg`;
     });
   }
 
   function activateButton(selectedButton) {
-    if (!selectedButton.classList.contains('active')) {
-      buttons.forEach((button) => button.classList.remove('active'));
-      selectedButton.classList.add('active');
+    // Überprüfen, ob der Button bereits aktiv ist
+    if (!selectedButton.classList.contains("active")) {
+      // Entferne die aktive Klasse von allen Buttons
+      buttons.forEach((button) => button.classList.remove("active"));
+
+      // Füge die aktive Klasse zum ausgewählten Button hinzu
+      selectedButton.classList.add("active");
+
+      // Aktualisiere die Icons basierend auf dem aktiven Status
       updateButtonIcons();
     }
   }
 
+  // Füge jedem Button ein Click-Event hinzu
   buttons.forEach((button) => {
-    button.addEventListener('click', () => activateButton(button));
+    button.addEventListener("click", () => activateButton(button));
   });
 
   updateButtonIcons();
 });
 
-let subtaskCounter = 0;
+let subtaskCounter = 0; // Zähler für die Subtask-IDs
 
+// Funktion, um ein Subtask hinzuzufügen
 function addSubtask() {
-  const subtaskInput = document.getElementById('subtaskInput');
+  const subtaskInput = document.getElementById("subtaskInput");
   const subtaskValue = subtaskInput.value.trim();
 
+  // Wenn das Subtask nicht leer ist
   if (subtaskValue) {
-    const subtaskList = document.getElementById('subtaskAddedList');
+    // Subtask in die Liste der hinzugefügten Subtasks einfügen
+    const subtaskList = document.getElementById("subtaskAddedList");
 
-    const subtaskInputElement = document.createElement('input');
+    // Neues Input-Element für das Subtask
+    const subtaskInputElement = document.createElement("input");
 
-    const subtaskId = `subtaskListInput${subtaskCounter}`;
+    // Berechnen der nächsten verfügbaren ID
+    const subtaskId = `subtaskListInput${subtaskCounter}`; // ID basierend auf der Anzahl der Subtasks
 
-    subtaskInputElement.classList.add('subtask-input');
-    subtaskInputElement.id = subtaskId;
-    subtaskInputElement.type = 'text';
+    subtaskInputElement.classList.add("subtask-input");
+    subtaskInputElement.id = subtaskId; // Eindeutige ID für jedes Subtask
+    subtaskInputElement.type = "text";
     subtaskInputElement.value = `• ${subtaskValue}`;
-    subtaskInputElement.readOnly = true;
+    subtaskInputElement.readOnly = true; // readonly, damit der Text nicht bearbeitet wird
 
+    // Subtask-Element zur Liste hinzufügen
     subtaskList.appendChild(subtaskInputElement);
 
-    subtaskInput.value = '';
+    // Eingabefeld leeren
+    subtaskInput.value = "";
 
+    // Den Subtask-Zähler erhöhen
     subtaskCounter++;
   }
 }
 
-document.querySelector('form').addEventListener('submit', function (event) {
-  event.preventDefault();
+// Funktion zum Absenden des Formulars und Speichern der Subtasks und ausgewählten Kontakte
+document.querySelector("form").addEventListener("submit", function (event) {
+  event.preventDefault(); // Verhindert das Standardformular-Absenden
 
+  // Holen der Formulardaten
   const title = document.querySelector("input[type='text']").value;
-  const description = document.querySelector('textarea').value;
-  const dueDate = document.getElementById('input-field-date').value;
-  const priority = document.querySelector('.task-button.active').getAttribute('data-color');
-  const category = document.querySelector('#drop-down-2 .select-selected').textContent;
-  console.log('category', category);
+  const description = document.querySelector("textarea").value;
+  const dueDate = document.getElementById("input-field-date").value;
+  const priority = document
+    .querySelector(".task-button.active")
+    .getAttribute("data-color");
+  const category = document.querySelector(
+    "#drop-down-2 .select-selected"
+  ).textContent;
 
-
+  // Subtasks aus den input-Feldern mit spezifischen IDs holen
   const subtasksList = [];
 
+  // Abrufen der Subtasks anhand ihrer IDs (z.B. subtaskListInput0, subtaskListInput1, ...)
   const subtaskItems = document.querySelectorAll("[id^='subtaskListInput']");
 
   subtaskItems.forEach((item) => {
-    subtasksList.push(item.value.trim());
+    subtasksList.push(item.value.trim()); // Holen des Werts und Entfernen von Leerzeichen
   });
 
-  // const selectedContacts = []; steht jetzt in der script.js global verfügbar
+  // Abrufen der aktiven Checkboxen (ausgewählten Kontakte)
+  const selectedContacts = [];
 
-  const activeCheckboxes = document.querySelectorAll(".select-option input[type='checkbox']:checked");
+  const activeCheckboxes = document.querySelectorAll(
+    ".select-option input[type='checkbox']:checked"
+  );
 
   activeCheckboxes.forEach((checkbox) => {
-    const parentOption = checkbox.closest('.select-option');
-    const name = parentOption.querySelector('.name').textContent;
-    const initials = parentOption.querySelector('.initial').textContent;
+    const parentOption = checkbox.closest(".select-option");
+    const name = parentOption.querySelector(".name").textContent; // Holen des Namens
+    const initials = parentOption.querySelector(".initial").textContent; // Holen der Initialen
 
+    // Speichern von Name und Initialen des aktiven Kontakts
     selectedContacts.push({ name, initials });
   });
 
-  console.log('Subtasks List: ', subtasksList);
-  console.log('Selected Contacts: ', selectedContacts);
+  // Überprüfung, ob Subtasks und ausgewählte Kontakte korrekt abgerufen wurden
+  console.log("Subtasks List: ", subtasksList);
+  console.log("Selected Contacts: ", selectedContacts);
 
-  localStorage.setItem('taskTitle', title);
-  localStorage.setItem('taskDescription', description);
-  localStorage.setItem('taskDueDate', dueDate);
-  localStorage.setItem('taskPriority', priority);
-  localStorage.setItem('taskCategory', category);
+  // Speichern der Formulardaten im localStorage
+  localStorage.setItem("taskTitle", title);
+  localStorage.setItem("taskDescription", description);
+  localStorage.setItem("taskDueDate", dueDate);
+  localStorage.setItem("taskPriority", priority);
+  localStorage.setItem("taskCategory", category);
 
-  localStorage.setItem('taskSubtasks', JSON.stringify(subtasksList));
+  // Speichern der Subtasks im localStorage
+  localStorage.setItem("taskSubtasks", JSON.stringify(subtasksList)); // Subtasks als JSON speichern
 
-  localStorage.setItem('taskAssignedTo', JSON.stringify(selectedContacts));
+  // Speichern der ausgewählten Kontakte im localStorage (mit Name und Initialen)
+  localStorage.setItem("taskAssignedTo", JSON.stringify(selectedContacts)); // Kontakte speichern
 
-  console.log('selectedContacts', selectedContacts);
-
-  alert('Task saved!');
+  alert("Task saved!");
 });
 
+
+// Funktion zum Wechseln zum nächsten Feld basierend auf den IDs
 function moveToNextField(event) {
-  if (event.key === 'Enter') {
-    event.preventDefault();
+  if (event.key === "Enter") {
+    event.preventDefault(); // Verhindert das Absenden des Formulars
 
-    const formElements = Array.from(document.querySelectorAll('[id^="input-field-"]'));
+    // Alle Felder mit den IDs 'input-field-' (z.B. input-field-title, input-field-description, ...)
+    const formElements = Array.from(
+      document.querySelectorAll('[id^="input-field-"]')
+    );
 
+    // Den Index des aktuell fokussierten Elements finden
     const currentIndex = formElements.findIndex((el) => el === event.target);
 
+    // Das nächste Element finden
     let nextElement = formElements[currentIndex + 1];
 
+    // Wenn es das letzte Element 'input-field-date' ist, dann zum 'subtaskInput' springen
     if (!nextElement) {
-      nextElement = document.getElementById('subtaskInput');
+      nextElement = document.getElementById("subtaskInput"); // Setze den Fokus auf 'subtaskInput'
     }
 
+    // Den Fokus auf das nächste ausfüllbare Element setzen
     if (nextElement) {
       nextElement.focus();
     }
   }
 }
 
+// Event-Listener für alle Felder mit den IDs, die mit 'input-field-' beginnen
 document.querySelectorAll('[id^="input-field-"]').forEach((input) => {
-  input.addEventListener('keydown', moveToNextField);
+  input.addEventListener("keydown", moveToNextField);
 });
 
-document.getElementById('subtaskInput').addEventListener('keydown', function (event) {
-  if (event.key === 'Enter') {
-    if (event.target.value.trim() === '') {
-      event.preventDefault();
-    } else {
-      addCurrentSubtask();
-      event.preventDefault();
-    }
+// Speziellen Event-Listener für das 'subtaskInput'-Feld, um das Absenden des Formulars zu verhindern
+document.getElementById("subtaskInput").addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault(); // Verhindert das Absenden des Formulars im 'subtaskInput'-Feld
+    addCurrentSubtask(); // Ruft die Funktion addCurrentSubtask auf (optional, je nachdem, wie du es nutzen möchtest)
   }
 });
 
-document.getElementById('clear-button').addEventListener('click', function () {
-  document.getElementById('form-add-task').reset();
-
-  document.querySelectorAll('.task-button').forEach((button) => {
-    button.classList.remove('active');
-    const img = button.querySelector('img');
-    const color = button.getAttribute('data-color');
-    img.src = `/assets/icons/add_tasks/inactive_icon_${color}.svg`;
-  });
-
-  const mediumButton = document.querySelector("[data-color='medium']");
-  mediumButton.classList.add('active');
-
-  const mediumButtonImg = mediumButton.querySelector('img');
-  mediumButtonImg.src = `/assets/icons/add_tasks/active_icon_medium.svg`;
+// Event-Listener für das Formular, um das Absenden bei Enter zu verhindern
+document.querySelector("form").addEventListener("submit", function (event) {
+  event.preventDefault(); // Verhindert das Absenden des Formulars
 });
 
-// Die Funktion wird ausgeführt, wenn auf den Button Create Task geklickt und damit die Task erstellt wird
-async function createAddTask(category) {
-  //TODO Die 4 Zeilen unter dem Kommentar dürfen nur ausgeführt werden, wenn alle Pflichtfelder ausgefüllt wurden. Also mit if () irgendwie und es müssen die Felder eine error msg geben die leer sind.
-  formateDueDate();
-  const userInputData = getUserAddTaskData(category); //hier werden alle Daten geholt die der User in add Task eingegeben hat
-  await addTask(userInputData); //hier werden die geholten Daten auf Firebase gespeichert
-  redirectToPage('board.html'); //hier wird auf board.html weitergeleitet, dort erscheint automatisch die neu erstellte Task in der toDo Category
-}
 
-// wird ausgeführt wenn auf einer der priority button geklickt wird, und speichert den ausgewählten button in der activePriority Variable in der script.js
-function setPriority() {
-  setTimeout(() => {
-    activePriority = document.querySelector('.task-button.active').getAttribute('data-color');
-  }, 10);
-}
-
-// wird ausgeführt wenn eine Category ausgesucht wurde Technical-Task oder User-Story. Das Ausgewählte wird in currentTaskCategory gespeichert
-function setCategory(choosenCategory) {
-  currentTaskCategory = choosenCategory;
-}
-
-// DueDate muss in einem bestimmten Format sein 
-function formateDueDate() {
-  const inputDate = document.getElementById("input-field-date")?.value
-  dueDate = formatDateToYMD(inputDate);
-}
-
-function formatDateToYMD(dateString) {
-  const date = new Date(dateString);
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const day = date.getDate().toString().padStart(2, '0');
-
-  return `${year}-${month}-${day}`;
-}
