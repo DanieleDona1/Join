@@ -240,6 +240,8 @@ async function generateHeaderInitials() {
   if (userName) {
     let initialsName = generateInitials(userName);
     document.getElementById('headerInitials').innerHTML = initialsName;
+  } else if (checkIfUserIsGuest() == 'Guest') {
+    document.getElementById('headerInitials').innerHTML = 'G';
   }
 }
 
