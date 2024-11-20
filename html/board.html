@@ -70,11 +70,13 @@
         <h2>Board</h2>
 
         <div class="search-add-container d-flex-se-c gap-32px">
-          <div>
+
+          <div class="searchbar-container">
             <div id="searchbar" class="searchbar d-flex-c-c">
               <input oninput="searchTitleOrDescription('search')" maxlength="50" type="search" id="search" class="search" placeholder="Find Task" />
               <img src="/assets/icons/board/search_lupe.svg" alt="search-btn" />
             </div>
+            <span id="searchResultMsg" class="search-result-msg">No results found</span>
           </div>
 
           <button class="add-task d-flex-c-c btn-hover" onclick="generatePopUpAddTask('toDo', 'toDoContent');">
@@ -84,9 +86,12 @@
         </div>
       </div>
 
-      <div id="searchbarMobile" class="searchbar-mobile d-flex-c-c">
-        <input oninput="searchTitleOrDescription('searchMobile')" maxlength="50" type="search" id="searchMobile" class="search" placeholder="Find Task" />
-        <img src="/assets/icons/board/search_lupe.svg" alt="search-btn" />
+      <div class="searchbar-container-mobile">
+        <div id="searchbarMobile" class="searchbar-mobile d-flex-c-c">
+          <input oninput="searchTitleOrDescription('searchMobile')" maxlength="50" type="search" id="searchMobile" class="search" placeholder="Find Task" />
+          <img src="/assets/icons/board/search_lupe.svg" alt="search-btn" />
+        </div>
+        <span id="searchResultMsgMobile" class="search-result-msg">No results found</span>
       </div>
 
       <div class="section-container">
