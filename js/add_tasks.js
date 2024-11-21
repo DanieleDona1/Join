@@ -138,7 +138,6 @@ function handleDropdownOptions(initialsDisplay) {
 function toggleOptionSelection(option, index) {
   const checkbox = option.querySelector('input[type="checkbox"]');
   const customCheckbox = option.querySelector('.custom-checkbox');
-  try {
     const initials = option.querySelector('.initial').textContent;
     const contact = contacts[index];
 
@@ -156,7 +155,6 @@ function toggleOptionSelection(option, index) {
         selectedInitials.splice(index, 1);
       }
     }
-  } catch {}
   }
 
   // Aktualisiert die Anzeige der Initialen auf der Seite
