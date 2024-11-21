@@ -138,7 +138,7 @@ function getTotalCount(todos) {
 function calculateTodoCounts(todos) {
   const getTodoAmount = getTodoCount(todos, 'category', 'toDo');
   const getDoneAmount = getTodoCount(todos, 'category', 'done');
-  const getUrgentAmount = getTodoCount(todos, 'prio', 'Urgent');
+  const getUrgentAmount = getTodoCount(todos, 'prio', 'urgent');
   const getBoardAmount = getTotalCount(todos);
   const getProgressAmount = getTodoCount(todos, 'category', 'inProgress');
   const getFeedbackAmount = getTodoCount(todos, 'category', 'awaitingFeedback');
@@ -175,7 +175,7 @@ function getCounts(todos) {
  * @function getUpcomingDeadline
  */
 function getUpcomingDeadline() {
-  const urgentAmount = todos.filter((todo) => todo['prio'] === 'Urgent');
+  const urgentAmount = todos.filter((todo) => todo['prio'] === 'urgent' || 'Urgent');
   const urgentDueDates = urgentAmount.map((todo) => todo.dueDate);
 
   if (urgentDueDates.length) {

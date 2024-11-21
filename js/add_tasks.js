@@ -321,10 +321,27 @@ async function createAddTask(category) {
 function setPriority() {
   setTimeout(() => {
     activePriority = document.querySelector('.task-button.active').getAttribute('data-color');
+    console.log('activePrio:', activePriority);
   }, 10);
+  
 }
 
 // wird ausgeführt wenn eine Category ausgesucht wurde Technical-Task oder User-Story. Das Ausgewählte wird in currentTaskCategory gespeichert
 function setCategory(choosenCategory) {
   currentTaskCategory = choosenCategory;
+}
+
+// DueDate muss in einem bestimmten Format sein
+function formateDueDate() {
+  const inputDate = document.getElementById("input-field-date")?.value
+  dueDate = formatDateToYMD(inputDate);
+}
+
+function formatDateToYMD(dateString) {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
 }
