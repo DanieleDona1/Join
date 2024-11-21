@@ -538,7 +538,7 @@ function onInputSubtask(id) {
     document.getElementById('subtaskIcons').innerHTML = /*html*/ `
     <div class="d-flex-c-c">
       <img onclick="focusInput(); resetInputField(${id});" class="add-subtask" src="/assets/icons/board/property-close.svg" alt="close">
-      <img class="mg-left" onclick="addCurrentSubtask(${id})" class="add-subtask" src="/assets/icons/board/property-check.svg" alt="check">
+      <img class="mg-left" onclick="addCurrentSubtask()" class="add-subtask" src="/assets/icons/board/property-check.svg" alt="check">
     </div>
   `;
   } else {
@@ -564,6 +564,8 @@ function addCurrentSubtask() {
   let subtaskInput = document.getElementById('subtaskInput');
 
   currentSubtasks.push({ checked: false, text: subtaskInput.value });
+  console.log('currentSubtasks add:', currentSubtasks);
+
 
   renderSubtaskAddedList();
   resetInputField();
