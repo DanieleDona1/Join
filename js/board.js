@@ -362,8 +362,6 @@ document.addEventListener('DOMContentLoaded', init);
  */
 function openTaskDetails(id) {
   document.getElementById('dialog').innerHTML = generateDetailTaskTemplate(id);
-  console.log('todos', todos);
-
   loadSubtaskList(id);
   // document.body.style.overflowY = "hidden";
   openDialog();
@@ -562,10 +560,7 @@ function resetInputField() {
  */
 function addCurrentSubtask() {
   let subtaskInput = document.getElementById('subtaskInput');
-
   currentSubtasks.push({ checked: false, text: subtaskInput.value });
-  console.log('currentSubtasks add:', currentSubtasks);
-
 
   renderSubtaskAddedList();
   resetInputField();
@@ -746,13 +741,9 @@ function currentEditSubtask(index) {
 function saveCurrentSubtask(i) {
   if (currentSubtasks.length > 0) {
     if (!currentTodos[i]['subtask']) {
-      console.log('Eins');
       currentTodos[i]['subtask'] = [...currentSubtasks];
     } else {
-      console.log('Zwei');
       currentTodos[i]['subtask'] = [...currentTodos[i]['subtask'], ...currentSubtasks];
-      console.log('currentTodos.subtask: ', currentTodos[i]['subtask']);
-
     }
     editTaskRemote(todoKeysArray[i], { subtask: currentTodos[i]['subtask'] });
   }
