@@ -177,6 +177,8 @@ function getCounts(todos) {
 function getUpcomingDeadline() {
   const urgentAmount = todos.filter((todo) => todo['prio'] === 'urgent' || 'Urgent');
   const urgentDueDates = urgentAmount.map((todo) => todo.dueDate);
+  console.log('urgentDueDates', urgentDueDates);
+
 
   if (urgentDueDates.length) {
     const nextDueDate = getNextDueDate(urgentDueDates);

@@ -323,7 +323,7 @@ function setPriority() {
     activePriority = document.querySelector('.task-button.active').getAttribute('data-color');
     console.log('activePrio:', activePriority);
   }, 10);
-  
+
 }
 
 // wird ausgeführt wenn eine Category ausgesucht wurde Technical-Task oder User-Story. Das Ausgewählte wird in currentTaskCategory gespeichert
