@@ -74,6 +74,12 @@
     gap: 35px;
 }
 
+.contact-item:hover{
+    background-color: #2A3647;
+    color: white;
+    border-radius: 10px;
+}
+
 .contact-initials {
     width: 42px;
     height: 42px;
