@@ -283,6 +283,10 @@ h3 {
   padding-left: 16px;
 }
 
+.detail-due-edit {
+  background-color: white;
+}
+
 .detail-due-edit:disabled {
   color: black;
   border: unset;
@@ -343,6 +347,10 @@ h3 {
 .btn-hover:hover {
   background-color: rgb(41, 171, 226);
   color: white;
+}
+
+.mg-b-16px {
+  margin-bottom: 16px;
 }
 
 .plus-button {
