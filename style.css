@@ -385,7 +385,7 @@ main p {
     width: calc(100vw - 232px);
     max-width: calc(1920px - 232px);
     padding-left: 96px;
-    padding-top: 100px;
+    padding-top: 80px;
     padding-right: 133px;
   }
 
