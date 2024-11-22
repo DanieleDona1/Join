@@ -131,7 +131,8 @@ main h2 {
 }
 
 .upcoming-separator {
-  margin: 0 clamp(4px, 5vw, 72px);
+  margin-left: clamp(4px, 5vw, 72px);
+  margin-right: clamp(4px, 5vw, 66px);
   background-color: rgb(209, 209, 209);
   height: 100px;
   width: 2px;

@@ -44,7 +44,7 @@ input[type="checkbox"] {
   position: relative;
   background-color: #fff; /* Hintergrundfarbe des ausgewählten Wertes */
   padding: 10px 21px;
-  margin-bottom: 28px;
+  /* margin-bottom: 28px; */
   font-size: 20px;
   cursor: pointer;
   border: 1px solid rgb(204, 204, 204);
@@ -128,10 +128,17 @@ input {
   border: 1px solid rgb(204, 204, 204);
   padding: 12px 21px 12px 21px;
   border-radius: 6px;
-  margin-bottom: 28px;
+  /* margin-bottom: 28px; */
   height: 48px;
   width: 100%;
   font-size: 20px;
+}
+
+.error-msg-addtask {
+  margin-top: 4px;
+  margin-bottom: 28px;
+  color: red;
+  font-size: 0.8rem;
 }
 
 .resizable-textarea {
@@ -407,4 +414,16 @@ input:focus,
 .required-note {
   margin-top: 45%;
   font-size: 16px;
+}
+
+.mg-b-28 {
+  margin-bottom: 28px;
+}
+
+.mg-t-28 {
+  margin-top: 28px;
+}
+
+.d-none {
+  display: none;
 }

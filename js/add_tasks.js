@@ -276,12 +276,45 @@ document.getElementById('clear-button').addEventListener('click', function () {
 
 // Die Funktion wird ausgeführt, wenn auf den Button Create Task geklickt und damit die Task erstellt wird
 async function createAddTask(category) {
-  //TODO Die 4 Zeilen unter dem Kommentar dürfen nur ausgeführt werden, wenn alle Pflichtfelder ausgefüllt wurden. Also mit if () irgendwie und es müssen die Felder eine error msg geben die leer sind.
-  formateDueDate();
-  const userInputData = getUserAddTaskData(category); //hier werden alle Daten geholt die der User in add Task eingegeben hat
-  await addTask(userInputData); //hier werden die geholten Daten auf Firebase gespeichert
-  redirectToPage('board.html'); //hier wird auf board.html weitergeleitet, dort erscheint automatisch die neu erstellte Task in der toDo Category
+  if (checkRequiredFields()) {
+    formateDueDate();
+    const userInputData = getUserAddTaskData(category); //hier werden alle Daten geholt die der User in add Task eingegeben hat
+    await addTask(userInputData); //hier werden die geholten Daten auf Firebase gespeichert
+    redirectToPage('board.html'); //hier wird auf board.html weitergeleitet, dort erscheint automatisch die neu erstellte Task in der toDo Category
+  }
 }
+
+function checkRequiredFields() {
+  let valid = true;
+
+  valid &= checkField('input-field-title', 'titleError');
+  valid &= checkField('input-field-date', 'dueDateError');
+  valid &= checkCategory();
+
+  return valid;
+}
+
+function checkField(inputId, errorId) {
+  let input = document.getElementById(inputId);
+  let error = document.getElementById(errorId);
+
+  if (input.value.trim() === '') {
+    error.classList.remove('d-none');
+    return false;
+  }
+  return true;
+}
+
+function checkCategory() {
+  let categoryError = document.getElementById('categoryError');
+
+  if (currentTaskCategory === '') {
+    categoryError.classList.remove('d-none');
+    return false;
+  }
+  return true;
+}
+
 
 // wird ausgeführt wenn auf einer der priority button geklickt wird, und speichert den ausgewählten button in der activePriority Variable in der script.js
 function setPriority() {
@@ -299,7 +332,13 @@ function setCategory(choosenCategory) {
 // DueDate muss in einem bestimmten Format sein
 function formateDueDate() {
   const inputDate = document.getElementById('input-field-date')?.value;
+  console.log('inputDate:', typeof(inputDate));
+
   dueDate = formatDateToYMD(inputDate);
+  if (dueDate === 'NaN-NaN-NaN') {
+    console.log('lol');
+  }
+
 }
 
 function formatDateToYMD(dateString) {

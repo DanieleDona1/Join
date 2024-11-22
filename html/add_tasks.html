@@ -71,8 +71,11 @@
       <h1>Add Task</h1>
       <form id="form-add-task">
         <section>
-          <p>Title<span>*</span></p>
-          <input id="input-field-title" placeholder="Enter a title" type="text" />
+          <div class="mg-b-28">
+            <p>Title<span>*</span></p>
+            <input id="input-field-title" placeholder="Enter a title" type="text" />
+            <div id="titleError" class="error-msg-addtask d-none">This field is required</div>
+          </div>
           <p>Description</p>
           <textarea id="input-field-description" class="resizable-textarea" placeholder="Enter a Description" type="text"></textarea>
           <p>Assigned to</p>
@@ -87,8 +90,11 @@
         </section>
         <div class="divider"></div>
         <section>
-          <p>Due date<span>*</span></p>
-          <input id="input-field-date" type="text" placeholder="dd/mm/yyyy" oninput="formatDate(this)" />
+          <div class="mg-b-28">
+            <p>Due date<span>*</span></p>
+            <input id="input-field-date" type="text" placeholder="dd/mm/yyyy" oninput="formatDate(this)"/>
+            <div id="dueDateError" class="error-msg-addtask d-none">This field is required</div>
+          </div>
           <p>Prio</p>
           <div class="button-container">
             <button onclick="setPriority()" class="task-button" data-color="urgent" type="button">
@@ -111,8 +117,9 @@
               <div onclick="setCategory('Technical-Task')" class="select-option" data-value="category1">Technical Task</div>
               <div onclick="setCategory('User-Story')" class="select-option" data-value="category2">User Story</div>
             </div>
+            <div id="categoryError" class="error-msg-addtask d-none">This field is required</div>
 
-            <div class="subtask-container">
+            <div class="subtask-container mg-t-28">
               <p>Subtasks</p>
               <div>
                 <div class="subtask-group">
