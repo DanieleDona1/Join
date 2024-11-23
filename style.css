@@ -363,6 +363,7 @@ main p {
     width: 232px;
     height: 46px;
     padding: 15px 53px 15px 53px;
+    border-radius: 0;
   }
 
   .navbar-item p {
