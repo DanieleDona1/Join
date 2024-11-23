@@ -455,4 +455,8 @@ input:focus,
   .subtask-container {
     padding-bottom: 300px;
   }
+
+  .subtask-list-group .subtask-list-icons {
+    opacity: 1;
+  }
 }
