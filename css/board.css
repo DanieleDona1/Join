@@ -222,6 +222,7 @@ h3 {
   align-items: center;
   justify-content: center;
   z-index: 1;
+  padding-left: 250px;
 }
 
 .wrapper {
@@ -280,6 +281,10 @@ h3 {
 
 .detail-task .padding-left-16px {
   padding-left: 16px;
+}
+
+.detail-due-edit {
+  background-color: white;
 }
 
 .detail-due-edit:disabled {
@@ -342,6 +347,10 @@ h3 {
 .btn-hover:hover {
   background-color: rgb(41, 171, 226);
   color: white;
+}
+
+.mg-b-16px {
+  margin-bottom: 16px;
 }
 
 .plus-button {
@@ -532,7 +541,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
   }
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1225px) {
   .section-container {
     /* display: flex; */
     flex-direction: column;
@@ -543,6 +552,9 @@ input[type='date']::-webkit-calendar-picker-indicator {
     height: auto;
     padding-bottom: 10px;
     min-height: 200px;
+  }
+  .dialog-bg {
+    padding-left: 0px;
   }
 }
 

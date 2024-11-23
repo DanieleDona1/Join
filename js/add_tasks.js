@@ -4,16 +4,15 @@ async function onloadAddtasks() {
 }
 
 const contacts = [
-  { firstName: "Sofia", lastName: "Müller", color: "red" },
-  { firstName: "Anton", lastName: "Mayer", color: "blue" },
-  { firstName: "Anja", lastName: "Schulz", color: "green" },
-  { firstName: "Benedikt", lastName: "Ziegler", color: "purple" },
-  { firstName: "David", lastName: "Eisenberg", color: "orange" },
-  { firstName: "Max", lastName: "Mustermann", color: "brown" },
+  { firstName: 'Sofia', lastName: 'Müller', color: 'red' },
+  { firstName: 'Anton', lastName: 'Mayer', color: 'blue' },
+  { firstName: 'Anja', lastName: 'Schulz', color: 'green' },
+  { firstName: 'Benedikt', lastName: 'Ziegler', color: 'purple' },
+  { firstName: 'David', lastName: 'Eisenberg', color: 'orange' },
+  { firstName: 'Max', lastName: 'Mustermann', color: 'brown' },
 ];
 
 const selectedInitials = [];
-const activePriority = "medium";
 
 function formatDate(input) {
   let value = cleanInput(input.value);
@@ -23,7 +22,7 @@ function formatDate(input) {
 }
 
 function cleanInput(value) {
-  return value.replace(/\D/g, "");
+  return value.replace(/\D/g, '');
 }
 
 function extractDateParts(value) {
@@ -35,306 +34,318 @@ function extractDateParts(value) {
 }
 
 function validateDate(day, month) {
-  day = day > 31 ? "31" : day;
-  month = month > 12 ? "12" : month;
+  day = day > 31 ? '31' : day;
+  month = month > 12 ? '12' : month;
   return { day, month };
 }
 
 function formatOutput(day, month, year) {
   let output = day;
-  if (month) output += "/" + month;
-  if (year) output += "/" + year;
+  if (month) output += '/' + month;
+  if (year) output += '/' + year;
   return output;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  const customSelects = document.querySelectorAll(".custom-select");
+document.addEventListener('DOMContentLoaded', function () {
+  const customSelects = document.querySelectorAll('.custom-select');
 
   customSelects.forEach((customSelect) => {
-    const selected = customSelect.querySelector(".select-selected");
-    const optionsContainer = customSelect.querySelector(".select-items");
-    const selectId = customSelect.getAttribute("id");
+    const selected = customSelect.querySelector('.select-selected');
+    const optionsContainer = customSelect.querySelector('.select-items');
+    const selectId = customSelect.getAttribute('id');
 
-    selected.addEventListener("click", function () {
-      optionsContainer.classList.toggle("select-hide");
-      customSelect.classList.toggle("open");
+    selected.addEventListener('click', function () {
+      optionsContainer.classList.toggle('select-hide');
+      customSelect.classList.toggle('open');
     });
 
-    const options = optionsContainer.querySelectorAll(".select-option");
+    const options = optionsContainer.querySelectorAll('.select-option');
     options.forEach((option) => {
-      option.addEventListener("click", function () {
-        if (selectId === "drop-down-2") {
+      option.addEventListener('click', function () {
+        if (selectId === 'drop-down-2') {
           selected.textContent = this.textContent;
-          optionsContainer.classList.add("select-hide");
-          customSelect.classList.remove("open");
+          optionsContainer.classList.add('select-hide');
+          customSelect.classList.remove('open');
         }
       });
     });
   });
 
-  document.addEventListener("click", function (e) {
+  // öffnet drop down?
+  document.addEventListener('click', function (e) {
     customSelects.forEach((customSelect) => {
-      const selected = customSelect.querySelector(".select-selected");
-      const optionsContainer = customSelect.querySelector(".select-items");
+      const selected = customSelect.querySelector('.select-selected');
+      const optionsContainer = customSelect.querySelector('.select-items');
 
-      if (
-        !selected.contains(e.target) &&
-        !optionsContainer.contains(e.target)
-      ) {
-        optionsContainer.classList.add("select-hide");
-        customSelect.classList.remove("open");
+      if (!selected.contains(e.target) && !optionsContainer.contains(e.target)) {
+        optionsContainer.classList.add('select-hide');
+        customSelect.classList.remove('open');
       }
     });
   });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const dropdown = document.getElementById("drop-down-1");
-  const selectItems = dropdown.querySelector(".select-items");
-  const initialsDisplay = document.getElementById("initials-display");
+document.addEventListener('DOMContentLoaded', function () {
+  const dropdown = document.getElementById('drop-down-1');
+  const selectItems = dropdown.querySelector('.select-items');
+  const initialsDisplay = document.getElementById('initials-display');
 
-  for (let i = 0; i < contacts.length; i++) {
-    const contact = contacts[i];
-    const initials =
-      contact.firstName.charAt(0).toUpperCase() +
-      contact.lastName.charAt(0).toUpperCase();
-
-    const optionTemplate = `
-          <div class="select-option" id="option-${contact.firstName}-${contact.lastName}" data-value="${contact.firstName} ${contact.lastName}">
-              <div class="contact">
-                <div class="initial" style="background-color: ${contact.color};">${initials}</div>
-                <div class="name">${contact.firstName} ${contact.lastName}</div>
-              </div>
-              <input type="checkbox" />
-              <div class="custom-checkbox"></div>
-          </div>
-      `;
-
-    selectItems.innerHTML += optionTemplate;
-  }
-
-  const dropdownOptions = document.querySelectorAll(".select-option");
-
-  for (let i = 0; i < dropdownOptions.length; i++) {
-    dropdownOptions[i].addEventListener("click", function () {
-      const checkbox = this.querySelector('input[type="checkbox"]');
-      const customCheckbox = this.querySelector(".custom-checkbox");
-      const initials = this.querySelector(".initial").textContent;
-      const contact = contacts[i];
-
-      checkbox.checked = !checkbox.checked;
-
-      this.classList.toggle("active");
-      customCheckbox.classList.toggle("checked");
-
-      if (checkbox.checked) {
-        if (!selectedInitials.includes(initials)) {
-          selectedInitials.push(initials);
-        }
-      } else {
-        const index = selectedInitials.indexOf(initials);
-        if (index > -1) {
-          selectedInitials.splice(index, 1);
-        }
-      }
-
-      initialsDisplay.innerHTML = "";
-      selectedInitials.forEach(function (initial) {
-        const contactForInitial = contacts.find((contact) => {
-          const contactInitials =
-            contact.firstName.charAt(0).toUpperCase() +
-            contact.lastName.charAt(0).toUpperCase();
-
-          return contactInitials === initial;
-        });
-
-        if (contactForInitial) {
-          initialsDisplay.innerHTML += `<div class="initial" style="background-color: ${contactForInitial.color}; margin-right: 10px;">${initial}</div>`;
-        }
-      });
-    });
-  }
+  createContactOptions(selectItems);
+  handleDropdownOptions(initialsDisplay);
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const buttons = document.querySelectorAll(".task-button");
+// Erstellt alle Optionen im Dropdown-Menü basierend auf den Kontakten
+function createContactOptions(selectItems) {
+  contacts.forEach(contact => {
+    const initials = getInitials(contact);
+    const optionTemplate = getOptionTemplate(contact, initials);
+    selectItems.innerHTML += optionTemplate;
+  });
+}
 
-  function updateButtonIcons() {
-    buttons.forEach((button) => {
-      const color = button.getAttribute("data-color");
-      const img = button.querySelector("img");
+// Gibt Initialen eines contacts zurück
+function getInitials(contact) {
+  return contact.firstName.charAt(0).toUpperCase() + contact.lastName.charAt(0).toUpperCase();
+}
 
-      img.src = button.classList.contains("active")
-        ? `/assets/icons/add_tasks/active_icon_${color}.svg`
-        : `/assets/icons/add_tasks/inactive_icon_${color}.svg`;
+// html template Kontaktoption
+function getOptionTemplate(contact, initials) {
+  return `
+    <div class="select-option" id="option-${contact.firstName}-${contact.lastName}" data-value="${contact.firstName} ${contact.lastName}">
+        <div class="contact">
+          <div class="initial" style="background-color: ${contact.color};">${initials}</div>
+          <div class="name">${contact.firstName} ${contact.lastName}</div>
+        </div>
+        <input type="checkbox" />
+        <div class="custom-checkbox"></div>
+    </div>
+  `;
+}
+
+// Auswahl von Dropdown optionen und das Anzeigen der Initialen
+function handleDropdownOptions(initialsDisplay) {
+  const dropdownOptions = document.querySelectorAll('.select-option');
+
+  dropdownOptions.forEach((option, index) => {
+    option.addEventListener('click', function () {
+      toggleOptionSelection(this, index);
+      updateInitialsDisplay(initialsDisplay);
     });
-  }
+  });
+}
 
-  function activateButton(selectedButton) {
-    if (!selectedButton.classList.contains("active")) {
-      buttons.forEach((button) => button.classList.remove("active"));
-      selectedButton.classList.add("active");
-      updateButtonIcons();
+// schaltet die Auswahl einer Option um und aktualisiert
+function toggleOptionSelection(option, index) {
+  const checkbox = option.querySelector('input[type="checkbox"]');
+  const customCheckbox = option.querySelector('.custom-checkbox');
+    const initials = option.querySelector('.initial').textContent;
+    const contact = contacts[index];
+
+    checkbox.checked = !checkbox.checked;
+    option.classList.toggle('active');
+    customCheckbox.classList.toggle('checked');
+
+    if (checkbox.checked) {
+      if (!selectedInitials.includes(initials)) {
+        selectedInitials.push(initials);
+      }
+    } else {
+      const index = selectedInitials.indexOf(initials);
+      if (index > -1) {
+        selectedInitials.splice(index, 1);
+      }
     }
   }
 
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => activateButton(button));
+  // Aktualisiert die Anzeige der Initialen auf der Seite
+function updateInitialsDisplay(initialsDisplay) {
+  initialsDisplay.innerHTML = '';
+
+  selectedInitials.forEach(initial => {
+    const contactForInitial = findContactByInitial(initial);
+    if (contactForInitial) {
+      initialsDisplay.innerHTML += createInitialElement(contactForInitial);
+    }
   });
+}
 
-  updateButtonIcons();
-});
+// Sucht Kontakt basierend auf Initialen
+function findContactByInitial(initial) {
+  return contacts.find(contact => {
+    const contactInitials = getInitials(contact);
+    return contactInitials === initial;
+  });
+}
 
-let subtaskCounter = 0;
-
-function addSubtask() {
-  const subtaskInput = document.getElementById("subtaskInput");
-  const subtaskValue = subtaskInput.value.trim();
-
-  if (subtaskValue) {
-    const subtaskList = document.getElementById("subtaskAddedList");
-
-    const subtaskInputElement = document.createElement("input");
-
-    const subtaskId = `subtaskListInput${subtaskCounter}`;
-
-    subtaskInputElement.classList.add("subtask-input");
-    subtaskInputElement.id = subtaskId;
-    subtaskInputElement.type = "text";
-    subtaskInputElement.value = `• ${subtaskValue}`;
-    subtaskInputElement.readOnly = true;
-
-    subtaskList.appendChild(subtaskInputElement);
-
-    subtaskInput.value = "";
-
-    subtaskCounter++;
-  }
+// Erstellt das html für einzelnen Initiale
+function createInitialElement(contact) {
+  return `<div class="initial" style="background-color: ${contact.color}; margin-right: 10px;">${getInitials(contact)}</div>`;
 }
 
 
+// Der ausgewählte Prio Button wird in der entsprechenden Farbe angezeigt
+document.addEventListener('DOMContentLoaded', () => {
+  const buttons = document.querySelectorAll('.task-button');
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      buttons.forEach((btn) => btn.classList.remove('active'));
+      button.classList.add('active');
+      updateButtonIcons(buttons);
+    });
+  });
+  updateButtonIcons(buttons);
+});
+
+// aktualisiert Hintergrundfarbe des ausgewählten prio btn
+function updateButtonIcons(buttons) {
+  buttons.forEach((button) => {
+    const color = button.getAttribute('data-color');
+    const img = button.querySelector('img');
+    const iconType = button.classList.contains('active') ? 'active' : 'inactive';
+    img.src = `/assets/icons/add_tasks/${iconType}_icon_${color}.svg`;
+  });
+}
+
+
+// verhindert form tag absendung. selectedContacts Array befüllt. Hier muss color hinzugefügt werden
+document.querySelector('form').addEventListener('submit', function (event) {
+  event.preventDefault();
+
+  const activeCheckboxes = document.querySelectorAll(".select-option input[type='checkbox']:checked");
+
+  activeCheckboxes.forEach((checkbox) => {
+    const parentOption = checkbox.closest('.select-option');
+    const name = parentOption.querySelector('.name').textContent;
+    const initials = parentOption.querySelector('.initial').textContent;
+
+    selectedContacts.push({ name, initials });
+  });
+});
+
+// springt zum nächsten Inputfeld beim betätigen der Enter Taste
 function moveToNextField(event) {
-  if (event.key === "Enter") {
+  if (event.key === 'Enter') {
     event.preventDefault();
 
-    const formElements = Array.from(
-      document.querySelectorAll('[id^="input-field-"]')
-    );
-
+    const formElements = Array.from(document.querySelectorAll('[id^="input-field-"]'));
     const currentIndex = formElements.findIndex((el) => el === event.target);
-
     let nextElement = formElements[currentIndex + 1];
 
     if (!nextElement) {
-      nextElement = document.getElementById("subtaskInput");
-    }
-
-    if (nextElement) {
+      nextElement = document.getElementById('subtaskInput');
+    } else {
       nextElement.focus();
     }
   }
 }
 
+// Event Listener für Inputfeld beim betätigen der Enter Taste
 document.querySelectorAll('[id^="input-field-"]').forEach((input) => {
-  input.addEventListener("keydown", moveToNextField);
+  input.addEventListener('keydown', moveToNextField);
 });
 
-document
-  .getElementById("subtaskInput")
-  .addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      if (event.target.value.trim() === "") {
-        event.preventDefault();
-      } else {
-        addCurrentSubtask();
-        event.preventDefault();
-      }
+document.getElementById('subtaskInput').addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') {
+    if (event.target.value.trim() === '') {
+      event.preventDefault();
+    } else {
+      addCurrentSubtask();
+      event.preventDefault();
     }
-  });
+  }
+});
 
-document.getElementById("clear-button").addEventListener("click", function () {
-  document.getElementById("form-add-task").reset();
+// btn listener cleared alle Inputfelder
+document.getElementById('clear-button').addEventListener('click', function () {
+  document.getElementById('form-add-task').reset();
 
-  document.querySelectorAll(".task-button").forEach((button) => {
-    button.classList.remove("active");
-    const img = button.querySelector("img");
-    const color = button.getAttribute("data-color");
+  document.querySelectorAll('.task-button').forEach((button) => {
+    button.classList.remove('active');
+    const img = button.querySelector('img');
+    const color = button.getAttribute('data-color');
     img.src = `/assets/icons/add_tasks/inactive_icon_${color}.svg`;
   });
 
   const mediumButton = document.querySelector("[data-color='medium']");
-  mediumButton.classList.add("active");
+  mediumButton.classList.add('active');
 
-  const mediumButtonImg = mediumButton.querySelector("img");
+  const mediumButtonImg = mediumButton.querySelector('img');
   mediumButtonImg.src = `/assets/icons/add_tasks/active_icon_medium.svg`;
 });
 
+// Die Funktion wird ausgeführt, wenn auf den Button Create Task geklickt und damit die Task erstellt wird
+async function createAddTask(category) {
+  if (checkRequiredFields()) {
+    formateDueDate();
+    const userInputData = getUserAddTaskData(category); //hier werden alle Daten geholt die der User in add Task eingegeben hat
+    await addTask(userInputData); //hier werden die geholten Daten auf Firebase gespeichert
+    redirectToPage('board.html'); //hier wird auf board.html weitergeleitet, dort erscheint automatisch die neu erstellte Task in der toDo Category
+  }
+}
+
+function checkRequiredFields() {
+  let valid = true;
+
+  valid &= checkField('input-field-title', 'titleError');
+  valid &= checkField('input-field-date', 'dueDateError');
+  valid &= checkCategory();
+
+  return valid;
+}
+
+function checkField(inputId, errorId) {
+  let input = document.getElementById(inputId);
+  let error = document.getElementById(errorId);
+
+  if (input.value.trim() === '') {
+    error.classList.remove('d-none');
+    return false;
+  }
+  return true;
+}
+
+function checkCategory() {
+  let categoryError = document.getElementById('categoryError');
+
+  if (currentTaskCategory === '') {
+    categoryError.classList.remove('d-none');
+    return false;
+  }
+  return true;
+}
 
 
-document.getElementById("create-button").addEventListener("click", function () {
-  // Verhindert das Standardverhalten (optional, falls der Button ein Submit-Button ist)
-  event.preventDefault();
+// wird ausgeführt wenn auf einer der priority button geklickt wird, und speichert den ausgewählten button in der activePriority Variable in der script.js
+function setPriority() {
+  setTimeout(() => {
+    activePriority = document.querySelector('.task-button.active').getAttribute('data-color');
+    console.log('activePrio:', activePriority);
+  }, 10);
+}
 
-  const title = document.querySelector("input[type='text']").value;
-  const description = document.querySelector("textarea").value;
-  const dueDate = document.getElementById("input-field-date").value;
-  const priority = document
-    .querySelector(".task-button.active")
-    .getAttribute("data-color");
-  const category = document.querySelector(
-    "#drop-down-2 .select-selected"
-  ).textContent;
+// wird ausgeführt wenn eine Category ausgesucht wurde Technical-Task oder User-Story. Das Ausgewählte wird in currentTaskCategory gespeichert
+function setCategory(choosenCategory) {
+  currentTaskCategory = choosenCategory;
+}
 
-  const subtasksList = [];
+// DueDate muss in einem bestimmten Format sein
+function formateDueDate() {
+  const inputDate = document.getElementById('input-field-date')?.value;
+  console.log('inputDate:', typeof(inputDate));
 
-  const subtaskItems = document.querySelectorAll("[id^='subtaskListInput']");
+  dueDate = formatDateToYMD(inputDate);
+  if (dueDate === 'NaN-NaN-NaN') {
+    console.log('lol');
+  }
 
-  subtaskItems.forEach((item) => {
-    subtasksList.push(item.value.trim());
-  });
+}
 
-  const selectedContacts = [];
+function formatDateToYMD(dateString) {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
 
-  const activeCheckboxes = document.querySelectorAll(
-    ".select-option input[type='checkbox']:checked"
-  );
-
-  activeCheckboxes.forEach((checkbox) => {
-    const parentOption = checkbox.closest(".select-option");
-    const name = parentOption.querySelector(".name").textContent;
-    const initials = parentOption.querySelector(".initial").textContent;
-
-    selectedContacts.push({ name, initials });
-  });
-
-  console.log("Subtasks List: ", subtasksList);
-  console.log("Selected Contacts: ", selectedContacts);
-
-  localStorage.setItem("taskTitle", title);
-  localStorage.setItem("taskDescription", description);
-  localStorage.setItem("taskDueDate", dueDate);
-  localStorage.setItem("taskPriority", priority);
-  localStorage.setItem("taskCategory", category);
-
-  localStorage.setItem("taskSubtasks", JSON.stringify(subtasksList));
-
-  localStorage.setItem("taskAssignedTo", JSON.stringify(selectedContacts));
-
-  alert("Task saved!");
-
-  // Formular zurücksetzen und Buttons zurücksetzen wie beim Clear-Button
-  document.getElementById("form-add-task").reset();
-
-  document.querySelectorAll(".task-button").forEach((button) => {
-    button.classList.remove("active");
-    const img = button.querySelector("img");
-    const color = button.getAttribute("data-color");
-    img.src = `/assets/icons/add_tasks/inactive_icon_${color}.svg`;
-  });
-
-  const mediumButton = document.querySelector("[data-color='medium']");
-  mediumButton.classList.add("active");
-
-  const mediumButtonImg = mediumButton.querySelector("img");
-  mediumButtonImg.src = `/assets/icons/add_tasks/active_icon_medium.svg`;
-});
+  return `${year}-${month}-${day}`;
+}

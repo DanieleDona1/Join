@@ -104,6 +104,9 @@ nav a:hover {
   background-color: rgb(42, 54, 71);
   padding: 15px 0;
   gap: 4px;
+  width: 80px;
+  height: 76px;
+  border-radius: 16px;
 }
 
 .navbar-item:hover {
@@ -381,7 +384,7 @@ main p {
     width: calc(100vw - 232px);
     max-width: calc(1920px - 232px);
     padding-left: 96px;
-    padding-top: 100px;
+    padding-top: 80px;
     padding-right: 133px;
   }
 

@@ -155,14 +155,14 @@ async function createTask(category, contentId) {
  */
 function getUserAddTaskData(swimlane) {
   return {
-    title: document.getElementById('title') || 'HTML TESTTTTTT jfdsfjhsdaöfjkasd',
-    dueDate: document.getElementById('dueDate') || '2024-12-31', //yy--mm--dd Format
+    title: document.getElementById('input-field-title')?.value || 'No title',
+    dueDate: dueDate, //yy-mm-dd Format
     category: swimlane,
-    description: document.getElementById('description') || 'No description provided.',
-    task_category: document.getElementById('task_category') || 'User-Story', // User-Story Technical-Task wichtig großgeschrieben User-Story
-    assignedTo: document.getElementById('assignedTo') || ['Peter', 'Müller'] || 'Unassigned',
+    description: document.getElementById('input-field-description')?.value || 'No description provided.',
+    task_category: currentTaskCategory, // User-Story Technical-Task wichtig großgeschrieben User-Story
+    assignedTo: selectedContacts || ['Peter', 'Müller'] || 'Unassigned',
     subtask: currentSubtasks,
-    prio: document.getElementById('prio') || 'medium',
+    prio: activePriority
   };
 }
 
@@ -362,8 +362,6 @@ document.addEventListener('DOMContentLoaded', init);
  */
 function openTaskDetails(id) {
   document.getElementById('dialog').innerHTML = generateDetailTaskTemplate(id);
-  console.log('todos', todos);
-
   loadSubtaskList(id);
   // document.body.style.overflowY = "hidden";
   openDialog();
@@ -538,7 +536,7 @@ function onInputSubtask(id) {
     document.getElementById('subtaskIcons').innerHTML = /*html*/ `
     <div class="d-flex-c-c">
       <img onclick="focusInput(); resetInputField(${id});" class="add-subtask" src="/assets/icons/board/property-close.svg" alt="close">
-      <img class="mg-left" onclick="addCurrentSubtask(${id})" class="add-subtask" src="/assets/icons/board/property-check.svg" alt="check">
+      <img class="mg-left" onclick="addCurrentSubtask()" class="add-subtask" src="/assets/icons/board/property-check.svg" alt="check">
     </div>
   `;
   } else {
@@ -562,7 +560,6 @@ function resetInputField() {
  */
 function addCurrentSubtask() {
   let subtaskInput = document.getElementById('subtaskInput');
-
   currentSubtasks.push({ checked: false, text: subtaskInput.value });
 
   renderSubtaskAddedList();
@@ -744,13 +741,9 @@ function currentEditSubtask(index) {
 function saveCurrentSubtask(i) {
   if (currentSubtasks.length > 0) {
     if (!currentTodos[i]['subtask']) {
-      console.log('Eins');
       currentTodos[i]['subtask'] = [...currentSubtasks];
     } else {
-      console.log('Zwei');
       currentTodos[i]['subtask'] = [...currentTodos[i]['subtask'], ...currentSubtasks];
-      console.log('currentTodos.subtask: ', currentTodos[i]['subtask']);
-
     }
     editTaskRemote(todoKeysArray[i], { subtask: currentTodos[i]['subtask'] });
   }
