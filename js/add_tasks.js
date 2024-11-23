@@ -212,7 +212,67 @@ function addSubtask() {
   }
 }
 
-document.querySelector("form").addEventListener("submit", function (event) {
+
+function moveToNextField(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+
+    const formElements = Array.from(
+      document.querySelectorAll('[id^="input-field-"]')
+    );
+
+    const currentIndex = formElements.findIndex((el) => el === event.target);
+
+    let nextElement = formElements[currentIndex + 1];
+
+    if (!nextElement) {
+      nextElement = document.getElementById("subtaskInput");
+    }
+
+    if (nextElement) {
+      nextElement.focus();
+    }
+  }
+}
+
+document.querySelectorAll('[id^="input-field-"]').forEach((input) => {
+  input.addEventListener("keydown", moveToNextField);
+});
+
+document
+  .getElementById("subtaskInput")
+  .addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      if (event.target.value.trim() === "") {
+        event.preventDefault();
+      } else {
+        addCurrentSubtask();
+        event.preventDefault();
+      }
+    }
+  });
+
+document.getElementById("clear-button").addEventListener("click", function () {
+  document.getElementById("form-add-task").reset();
+
+  document.querySelectorAll(".task-button").forEach((button) => {
+    button.classList.remove("active");
+    const img = button.querySelector("img");
+    const color = button.getAttribute("data-color");
+    img.src = `/assets/icons/add_tasks/inactive_icon_${color}.svg`;
+  });
+
+  const mediumButton = document.querySelector("[data-color='medium']");
+  mediumButton.classList.add("active");
+
+  const mediumButtonImg = mediumButton.querySelector("img");
+  mediumButtonImg.src = `/assets/icons/add_tasks/active_icon_medium.svg`;
+});
+
+
+
+document.getElementById("create-button").addEventListener("click", function () {
+  // Verhindert das Standardverhalten (optional, falls der Button ein Submit-Button ist)
   event.preventDefault();
 
   const title = document.querySelector("input[type='text']").value;
@@ -261,48 +321,8 @@ document.querySelector("form").addEventListener("submit", function (event) {
   localStorage.setItem("taskAssignedTo", JSON.stringify(selectedContacts));
 
   alert("Task saved!");
-});
 
-function moveToNextField(event) {
-  if (event.key === "Enter") {
-    event.preventDefault();
-
-    const formElements = Array.from(
-      document.querySelectorAll('[id^="input-field-"]')
-    );
-
-    const currentIndex = formElements.findIndex((el) => el === event.target);
-
-    let nextElement = formElements[currentIndex + 1];
-
-    if (!nextElement) {
-      nextElement = document.getElementById("subtaskInput");
-    }
-
-    if (nextElement) {
-      nextElement.focus();
-    }
-  }
-}
-
-document.querySelectorAll('[id^="input-field-"]').forEach((input) => {
-  input.addEventListener("keydown", moveToNextField);
-});
-
-document
-  .getElementById("subtaskInput")
-  .addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      if (event.target.value.trim() === "") {
-        event.preventDefault();
-      } else {
-        addCurrentSubtask();
-        event.preventDefault();
-      }
-    }
-  });
-
-document.getElementById("clear-button").addEventListener("click", function () {
+  // Formular zurücksetzen und Buttons zurücksetzen wie beim Clear-Button
   document.getElementById("form-add-task").reset();
 
   document.querySelectorAll(".task-button").forEach((button) => {
