@@ -756,7 +756,15 @@ function saveCurrentSubtask(i) {
  * @param {number} index - The index of the subtask to be removed.
  */
 function removeAddedSubtask(index) {
-  currentSubtasks.splice(index, 1);
+  if (index === 'all') {
+    // Alle Subtasks löschen
+    currentSubtasks = [];
+  } else {
+    // Spezifischen Subtask basierend auf dem Index entfernen
+    currentSubtasks.splice(index, 1);
+  }
+
+  // Subtasks neu rendern
   renderSubtaskAddedList();
 }
 

@@ -264,6 +264,8 @@ input:focus,
 
 .subtask-added-list {
   padding: 10px 10px 0px 10px;
+  max-height: 125px;
+  overflow-y: auto;
 }
 
 .subtask-list-group input {

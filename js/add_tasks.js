@@ -136,6 +136,13 @@ function handleDropdownOptions(initialsDisplay) {
 
 // schaltet die Auswahl einer Option um und aktualisiert
 function toggleOptionSelection(option, index) {
+  const dropdownParent = option.closest('.custom-select');
+
+  // Überspringe die Logik für "drop-down-2"
+  if (dropdownParent && dropdownParent.id === 'drop-down-2') {
+    return;
+  }
+  
   const checkbox = option.querySelector('input[type="checkbox"]');
   const customCheckbox = option.querySelector('.custom-checkbox');
     const initials = option.querySelector('.initial').textContent;
@@ -272,6 +279,8 @@ document.getElementById('clear-button').addEventListener('click', function () {
 
   const mediumButtonImg = mediumButton.querySelector('img');
   mediumButtonImg.src = `/assets/icons/add_tasks/active_icon_medium.svg`;
+
+  removeAddedSubtask('all');
 });
 
 // Die Funktion wird ausgeführt, wenn auf den Button Create Task geklickt und damit die Task erstellt wird
