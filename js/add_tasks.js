@@ -265,8 +265,10 @@ document.getElementById('subtaskInput').addEventListener('keydown', function (ev
 
 // btn listener cleared alle Inputfelder
 document.getElementById('clear-button').addEventListener('click', function () {
+  // Formular zurücksetzen
   document.getElementById('form-add-task').reset();
 
+  // Prioritätsbuttons zurücksetzen
   document.querySelectorAll('.task-button').forEach((button) => {
     button.classList.remove('active');
     const img = button.querySelector('img');
@@ -274,14 +276,61 @@ document.getElementById('clear-button').addEventListener('click', function () {
     img.src = `/assets/icons/add_tasks/inactive_icon_${color}.svg`;
   });
 
+  // Standard-Prioritätsbutton setzen (Medium)
   const mediumButton = document.querySelector("[data-color='medium']");
   mediumButton.classList.add('active');
 
   const mediumButtonImg = mediumButton.querySelector('img');
   mediumButtonImg.src = `/assets/icons/add_tasks/active_icon_medium.svg`;
 
+  // Subtasks entfernen
   removeAddedSubtask('all');
+
+  // **Dropdown für die Aufgabenkategorie zurücksetzen (drop-down-2)**
+  const dropDown2 = document.getElementById('drop-down-2');
+  const selectedCategory = dropDown2.querySelector('.select-selected');
+  selectedCategory.textContent = 'Select task category';
+
+  // Variable für die aktuelle Kategorie zurücksetzen
+  currentTaskCategory = '';
+
+  // **Fehlermeldungen ausblenden**
+  // Alle Elemente mit der Klasse 'error-msg-addtask' auswählen und ausblenden
+  const errorMessages = document.querySelectorAll('.error-msg-addtask');
+  errorMessages.forEach(error => error.classList.add('d-none'));
+
+  // Aktive Klasse von Optionen entfernen
+  const categoryOptions = dropDown2.querySelectorAll('.select-option');
+  categoryOptions.forEach(option => {
+    option.classList.remove('active');
+  });
+
+  // **Kontaktdropdown zurücksetzen (drop-down-1)**
+  const dropDown1 = document.getElementById('drop-down-1');
+  const selectedContactsDiv = dropDown1.querySelector('.select-selected');
+  selectedContactsDiv.textContent = 'Select contacts to assign';
+
+  // Arrays für ausgewählte Initialen und Kontakte leeren
+  selectedInitials.length = 0;
+  selectedContacts.length = 0;
+
+  // Initialen-Anzeige leeren
+  document.getElementById('initials-display').innerHTML = '';
+
+  // Kontrollkästchen deaktivieren und aktive Klassen entfernen
+  const selectOptions = dropDown1.querySelectorAll('.select-option');
+  selectOptions.forEach(option => {
+    const checkbox = option.querySelector('input[type="checkbox"]');
+    const customCheckbox = option.querySelector('.custom-checkbox');
+    if (checkbox.checked) {
+      checkbox.checked = false;
+    }
+    option.classList.remove('active');
+    customCheckbox.classList.remove('checked');
+  });
 });
+
+
 
 // Die Funktion wird ausgeführt, wenn auf den Button Create Task geklickt und damit die Task erstellt wird
 async function createAddTask(category) {
