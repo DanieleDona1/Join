@@ -15,7 +15,8 @@ let dueDate = ''; //'2024-12-31', //yy-mm-dd Format
 
 
 // contactList.js Arrays
-// let contactList = [];
+let contactList = [];
+let contactKeys = [];
 let groupedContacts = {}; // Definiere groupedContacts als globale Variable
 
 /**
@@ -269,4 +270,15 @@ function generateInitials(userName) {
  */
 function removeUserToken() {
   localStorage.removeItem('user');
+}
+
+/**
+ * Fetches data from a JSON file at the specified path.
+ *
+ * @param {string} [path=""] - The path to the JSON file (without the ".json" extension).
+ * @returns {Promise<Object>} A promise that resolves to the JSON data from the file.
+ */
+async function loadData(path = "") {
+  let response = await fetch(BASE_URL + path + ".json");
+  return (responseToJson = await response.json());
 }

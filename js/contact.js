@@ -19,13 +19,13 @@ function renderPhoneList() {
 
 async function createContactlist() {
     let data = await loadData("contacts"); // holt mittels dieser Funktion das JSON von der Datenbank unter diesem Pfad
-    let contacts = Object.keys(data); // nimmt die keys der jeweiligen Objekte zum Weiterverarbeiten
+    contactKeys = Object.keys(data); // nimmt die keys der jeweiligen Objekte zum Weiterverarbeiten
 
-    for (let i = 0; i < contacts.length; i++) {
+    for (let i = 0; i < contactKeys.length; i++) {
       contactList.push({
-        id: contacts[i], // Speichert den jeweiligen Key als ID
-        user: data[contacts[i]], // Speichert die User-Daten
-        color: data[contacts[i]].color, // Speichert die Farbe
+        id: contactKeys[i], // Speichert den jeweiligen Key als ID
+        user: data[contactKeys[i]], // Speichert die User-Daten
+        color: data[contactKeys[i]].color, // Speichert die Farbe
       });
     }
     console.log(contactList);
@@ -177,11 +177,6 @@ async function addContact(button) {
   } finally {
     button.disabled = false;
   }
-}
-
-async function loadData(path = "") {
-  let response = await fetch(BASE_URL + path + ".json");
-  return (responseToJson = await response.json());
 }
 
 // Hilfsfunktion, um die Initialen zu extrahieren

@@ -1,6 +1,7 @@
 async function onloadAddtasks() {
   await isUserLoggedIn();
   await generateHeaderInitials();
+  createContactlistAddTask();
 }
 
 const contacts = [
@@ -11,6 +12,20 @@ const contacts = [
   { firstName: "David", lastName: "Eisenberg", color: "orange" },
   { firstName: "Max", lastName: "Mustermann", color: "brown" },
 ];
+
+// async function createContactlistAddTask() {
+//   let data = await loadData("contacts"); // holt mittels dieser Funktion das JSON von der Datenbank unter diesem Pfad
+//   let contacts = Object.keys(data); // nimmt die keys der jeweiligen Objekte zum Weiterverarbeiten
+
+//   for (let i = 0; i < contacts.length; i++) {
+//     contactList.push({
+//       id: contacts[i], // Speichert den jeweiligen Key als ID
+//       user: data[contacts[i]], // Speichert die User-Daten
+//       color: data[contacts[i]].color, // Speichert die Farbe
+//     });
+//   }
+//   console.log(contactList);
+// }
 
 const selectedInitials = [];
 
