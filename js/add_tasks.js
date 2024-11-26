@@ -11,9 +11,7 @@ function splitName(fullName) {
   let nameParts = fullName.split(' ');
   let firstName = nameParts[0];
   let lastName = nameParts.slice(1).join(' ');
-  if (nameParts.length === 1) {
-    lastName = '';
-  }
+
   return { firstName, lastName };
 }
 
@@ -115,8 +113,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const initialsDisplay = document.getElementById("initials-display");
 
   setTimeout(() => {
-    createContactOptions(selectItems); // Call this function after 500ms
-    handleDropdownOptions(initialsDisplay); // Call this function after 500ms
+    createContactOptions(selectItems);
+    handleDropdownOptions(initialsDisplay);
   }, 500);
 });
 
@@ -284,7 +282,6 @@ function updateButtonIcons(buttons) {
   });
 }
 
-// verhindert form tag absendung. selectedContacts Array befüllt. Hier muss color hinzugefügt werden
 document.querySelector("form").addEventListener("submit", function (event) {
   event.preventDefault();
 
@@ -295,11 +292,14 @@ document.querySelector("form").addEventListener("submit", function (event) {
   activeCheckboxes.forEach((checkbox) => {
     const parentOption = checkbox.closest(".select-option");
     const name = parentOption.querySelector(".name").textContent;
-    const initials = parentOption.querySelector(".initial").textContent;
 
-    selectedContacts.push({ name, initials });
+    const contact = contactList.find(contact =>
+      `${contact.firstName} ${contact.lastName}` === name
+    );
+      selectedContacts.push(contact.id);
   });
 });
+
 
 // springt zum nächsten Inputfeld beim betätigen der Enter Taste
 function moveToNextField(event) {
