@@ -13,6 +13,7 @@ async function onloadFunc() {
 function renderPhoneList() {
   const sortedContacts = sortContacts(contactList);
   groupedContacts = groupContactsByInitial(sortedContacts);
+  console.log('groupedContacts', groupedContacts);
   displayGroupedContacts(groupedContacts);
 }
 
@@ -46,7 +47,6 @@ function groupContactsByInitial(contacts) {
     }
     grouped[initial].push(contact);
   });
-
   return grouped;
 }
 

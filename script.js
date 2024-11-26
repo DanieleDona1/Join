@@ -15,7 +15,7 @@ let dueDate = ''; //'2024-12-31', //yy-mm-dd Format
 
 
 // contactList.js Arrays
-let contactList = [];
+// let contactList = [];
 let groupedContacts = {}; // Definiere groupedContacts als globale Variable
 
 /**
