@@ -1,33 +1,39 @@
+const selectedInitials = [];
+
 async function onloadAddtasks() {
   await isUserLoggedIn();
   await generateHeaderInitials();
-  createContactlistAddTask();
+  await createContactlistAddTask();
 }
 
-const contacts = [
-  { firstName: "Sofia", lastName: "Müller", color: "red" },
-  { firstName: "Anton", lastName: "Mayer", color: "blue" },
-  { firstName: "Anja", lastName: "Schulz", color: "green" },
-  { firstName: "Benedikt", lastName: "Ziegler", color: "purple" },
-  { firstName: "David", lastName: "Eisenberg", color: "orange" },
-  { firstName: "Max", lastName: "Mustermann", color: "brown" },
-];
+// FunktionAufteilen vollständigen Namens in Vorname und Nachname
+function splitName(fullName) {
+  let nameParts = fullName.split(' ');
+  let firstName = nameParts[0];
+  let lastName = nameParts.slice(1).join(' ');
+  if (nameParts.length === 1) {
+    lastName = '';
+  }
+  return { firstName, lastName };
+}
 
-// async function createContactlistAddTask() {
-//   let data = await loadData("contacts"); // holt mittels dieser Funktion das JSON von der Datenbank unter diesem Pfad
-//   let contacts = Object.keys(data); // nimmt die keys der jeweiligen Objekte zum Weiterverarbeiten
+// Funktion zum Erstellen der Kontaktliste
+async function createContactlistAddTask() {
+  let data = await loadData("contacts");
+  let contactKeys = Object.keys(data);
 
-//   for (let i = 0; i < contacts.length; i++) {
-//     contactList.push({
-//       id: contacts[i], // Speichert den jeweiligen Key als ID
-//       user: data[contacts[i]], // Speichert die User-Daten
-//       color: data[contacts[i]].color, // Speichert die Farbe
-//     });
-//   }
-//   console.log(contactList);
-// }
+  for (let i = 0; i < contactKeys.length; i++) {
+    let fullName = data[contactKeys[i]].name;
+    let { firstName, lastName } = splitName(fullName);
 
-const selectedInitials = [];
+    contactList.push({
+      id: contactKeys[i],
+      color: data[contactKeys[i]].color,
+      firstName: firstName,
+      lastName: lastName,
+    });
+  }
+}
 
 function formatDate(input) {
   let value = cleanInput(input.value);
@@ -108,13 +114,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const selectItems = dropdown.querySelector(".select-items");
   const initialsDisplay = document.getElementById("initials-display");
 
-  createContactOptions(selectItems);
-  handleDropdownOptions(initialsDisplay);
+  setTimeout(() => {
+    createContactOptions(selectItems); // Call this function after 500ms
+    handleDropdownOptions(initialsDisplay); // Call this function after 500ms
+  }, 500);
 });
 
 // Erstellt alle Optionen im Dropdown-Menü basierend auf den Kontakten
 function createContactOptions(selectItems) {
-  contacts.forEach((contact) => {
+  contactList.forEach((contact) => {
     const initials = getInitials(contact);
     const optionTemplate = getOptionTemplate(contact, initials);
     selectItems.innerHTML += optionTemplate;
@@ -237,7 +245,7 @@ function updateInitialsDisplay(initialsDisplay) {
 
 // Sucht Kontakt basierend auf Initialen
 function findContactByInitial(initial) {
-  return contacts.find((contact) => {
+  return contactList.find((contact) => {
     const contactInitials = getInitials(contact);
     return contactInitials === initial;
   });
