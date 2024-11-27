@@ -160,7 +160,7 @@ function getUserAddTaskData(swimlane) {
     category: swimlane,
     description: document.getElementById('input-field-description')?.value || 'No description provided.',
     task_category: currentTaskCategory, // User-Story Technical-Task wichtig großgeschrieben User-Story
-    assignedTo: selectedContacts || ['Peter', 'Müller'] || 'Unassigned',
+    assignedTo: selectedContacts,
     subtask: currentSubtasks,
     prio: activePriority
   };
@@ -424,6 +424,12 @@ function searchTitleOrDescription(inputId) {
   }
   renderTasks();
 }
+
+function createAddTaskBtnBoard(category, contentId) {
+  createContactlistAddTask();
+  generatePopUpAddTask(category, contentId);
+}
+
 
 /**
  * Handles the animation for sliding out the dialog.
