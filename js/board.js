@@ -116,7 +116,7 @@ function loadMembers(i) {
       const initialsName = generateInitials(name);
       if (initialsName) {
         document.getElementById('membersContainer' + i).innerHTML += /*html*/ `
-        <div class="">
+        <div class="initial-board-wrapper">
           <div class="initial-board d-flex-c-c" style="background-color: ${selectedContacts[0].color};">${initialsName}</div>
         </div>
       `;
