@@ -284,9 +284,9 @@ function moveToNextField(event) {
 
     if (!nextElement) {
       nextElement = document.getElementById('subtaskInput');
-    } else {
-      nextElement.focus();
     }
+
+    nextElement.focus(); // Fokus auf das nächste Element setzen
   }
 }
 
