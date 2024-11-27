@@ -283,9 +283,9 @@ function moveToNextField(event) {
 
     if (!nextElement) {
       nextElement = document.getElementById('subtaskInput');
-    } else {
-      nextElement.focus();
     }
+
+    nextElement.focus(); // Fokus auf das nächste Element setzen
   }
 }
 
@@ -294,16 +294,16 @@ document.querySelectorAll('[id^="input-field-"]').forEach((input) => {
   input.addEventListener('keydown', moveToNextField);
 });
 
-// document.getElementById('subtaskInput').addEventListener('keydown', function (event) {
-//   if (event.key === 'Enter') {
-//     if (event.target.value.trim() === '') {
-//       event.preventDefault();
-//     } else {
-//       addCurrentSubtask();
-//       event.preventDefault();
-//     }
-//   }
-// });
+document.getElementById('subtaskInput').addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') {
+    if (event.target.value.trim() === '') {
+      event.preventDefault();
+    } else {
+      addCurrentSubtask();
+      event.preventDefault();
+    }
+  }
+});
 
 // btn listener cleared alle Inputfelder
 function resetForm() {
@@ -489,3 +489,4 @@ function formatDateToYMD(dateString) {
 
   return `${year}-${month}-${day}`;
 }
+
