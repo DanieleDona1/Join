@@ -19,7 +19,7 @@ function generateHtmlTemplate(task) {
           </div>
 
           <div class="d-flex-sb-c">
-            <div id="membersContainer${task['id']}" class="members-container d-flex-c-c"><!-- TODO -->TODO Members</div>
+            <div id="membersContainer${task['id']}" class="members-container d-flex-c-c"></div>
             <img draggable="false" src="/assets/icons/board/${task.prio}.svg" alt="prio">
           </div>
       </div>`;
