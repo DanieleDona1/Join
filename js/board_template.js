@@ -208,6 +208,13 @@ function memberHtmlTemplate(initialsName) {
     `;
 }
 
+/**
+ * Generates an HTML template for a member's initials and name.
+ *
+ * @param {string} initialsName - The member's initials.
+ * @param {string} name - The member's full name.
+ * @returns {string} - The HTML string for the member detail.
+ */
 function memberDetailTaskTemplate(initialsName, name) {
   return /*html*/ `
     <div class="initial-board-wrapper d-flex-fs-c">

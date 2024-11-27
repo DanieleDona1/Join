@@ -19,7 +19,7 @@ async function onload() {
   renderTasks();
   await generateHeaderInitials();
 
-  openTaskDetails(0);
+  // openTaskDetails(0);
   // generateEditTemplate(0);
 }
 
@@ -390,9 +390,8 @@ document.addEventListener('DOMContentLoaded', init);
 function openTaskDetails(id) {
   document.getElementById('dialog').innerHTML = generateDetailTaskTemplate(id);
   loadSubtaskList(id);
-  // document.body.style.overflowY = "hidden";
-  openDialog();
   loadAssignedToList(id);
+  openDialog();
 }
 
 /**
@@ -476,8 +475,13 @@ function animationSlideOut() {
   );
 }
 
+/**
+ * Loads and displays the list of members assigned to a specific task.
+ *
+ * @param {number} i - The index of the task in the `currentTodos` array.
+ * Updates the `membersDetailTask` container with member initials and names for each contact in the `assignedTo` list.
+ */
 function loadAssignedToList(i) {
-  // TODO
   if (currentTodos[i].assignedTo) {
     const selectedContactsKeys = currentTodos[i].assignedTo.map((t) => t);
     let membersContainer = document.getElementById('membersDetailTask');
