@@ -5,6 +5,7 @@ async function onloadAddtasks() {
   await generateHeaderInitials();
   await createContactlistAddTask();
   loadDropDown();
+  subtaskKeyDownAddSubtask();
 }
 
 // FunktionAufteilen vollständigen Namens in Vorname und Nachname
@@ -111,8 +112,8 @@ function loadDropDown() {
   const selectItems = dropdown.querySelector('.select-items');
   const initialsDisplay = document.getElementById('initials-display');
 
-    createContactOptions(selectItems);
-    handleDropdownOptions(initialsDisplay);
+  createContactOptions(selectItems);
+  handleDropdownOptions(initialsDisplay);
 }
 
 // Erstellt alle Optionen im Dropdown-Menü basierend auf den Kontakten
@@ -294,16 +295,21 @@ document.querySelectorAll('[id^="input-field-"]').forEach((input) => {
   input.addEventListener('keydown', moveToNextField);
 });
 
-// document.getElementById('subtaskInput').addEventListener('keydown', function (event) {
-//   if (event.key === 'Enter') {
-//     if (event.target.value.trim() === '') {
-//       event.preventDefault();
-//     } else {
-//       addCurrentSubtask();
-//       event.preventDefault();
-//     }
-//   }
-// });
+function subtaskKeyDownAddSubtask() {
+  const subtaskInput = document.getElementById('subtaskInput');
+  if (subtaskInput) {
+    subtaskInput.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') {
+        if (event.target.value.trim() === '') {
+          event.preventDefault();
+        } else {
+          addCurrentSubtask();
+          event.preventDefault();
+        }
+      }
+    });
+  }
+}
 
 // btn listener cleared alle Inputfelder
 function resetForm() {

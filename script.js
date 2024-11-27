@@ -8,11 +8,10 @@ let users = [];
 
 // Alle current Arrays wird auf addTask und board benötigt
 let currentSubtasks = [];
-let activePriority = "medium"; //Standardmäßig ist medium zugewiesen.
+let activePriority = 'medium'; //Standardmäßig ist medium zugewiesen.
 let currentTaskCategory = ''; //Zuweisen "User-Story" oder "Technical-Task" mit Bindestrich
 let selectedContacts = [];
 let dueDate = ''; //'2024-12-31', //yy-mm-dd Format
-
 
 // contactList.js und addtask Arrays
 let contactList = [];
@@ -256,7 +255,12 @@ async function generateHeaderInitials() {
  * @returns {string} The user's initials.
  */
 function generateInitials(userName) {
+  // Suche nach Wörtern mit Buchstaben (Ignorieren von Zahlen)
   const nameParts = userName.match(/([A-ZÄÖÜ]?[a-zäöüß]+)|([A-ZÄÖÜ])/g);
+
+  if (!nameParts) {
+    return false;
+  }
   return nameParts
     .slice(0, 2)
     .map((part) => part.charAt(0).toUpperCase())
@@ -278,7 +282,7 @@ function removeUserToken() {
  * @param {string} [path=""] - The path to the JSON file (without the ".json" extension).
  * @returns {Promise<Object>} A promise that resolves to the JSON data from the file.
  */
-async function loadData(path = "") {
-  let response = await fetch(BASE_URL + path + ".json");
+async function loadData(path = '') {
+  let response = await fetch(BASE_URL + path + '.json');
   return (responseToJson = await response.json());
 }

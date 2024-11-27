@@ -11,8 +11,11 @@ async function onload() {
   await isUserLoggedIn();
   await loadTodosArray();
   currentTodos = JSON.parse(JSON.stringify(todos));
+  await createContactlistAddTask();
   console.log('onload todos:', todos);
-  console.log('onload currtodos:', currentTodos);
+  console.log('onload currentTodos:', currentTodos);
+  console.log('contactList:', contactList);
+
   renderTasks();
   await generateHeaderInitials();
 
@@ -54,6 +57,8 @@ function updateColumn(category, contentId) {
 
     const { progressText, progressBar } = initializeProgressElements(task['id']);
     loadProgressText(task, progressText, progressBar);
+
+    loadMembers(task['id']);
   }
 }
 
@@ -95,6 +100,39 @@ function loadProgressText(task, progressText, progressBar) {
   }
   progressBar.style.width = progressValue + '%';
 }
+
+function loadMembers(i) {
+  // TODO
+  if (currentTodos[i].assignedTo) {
+    const selectedContactsKeys = currentTodos[i].assignedTo.map((t) => t);
+    const membersContainer = document.getElementById('membersContainer' + i);
+    membersContainer.innerHTML = '';
+
+    for (let j = 0; j < selectedContactsKeys.length; j++) {
+      selectedContacts = contactList.filter((f) => f.id === selectedContactsKeys[j]);
+      console.log('selectedContacts', selectedContacts[0].firstName);
+      const name = selectedContacts[0].firstName + ' ' + selectedContacts[0].lastName;
+
+      const initialsName = generateInitials(name);
+      if (initialsName) {
+        document.getElementById('membersContainer' + i).innerHTML += /*html*/ `
+        <div class="">
+          <div class="initial-board d-flex-c-c" style="background-color: ${selectedContacts[0].color};">${initialsName}</div>
+        </div>
+      `;
+      }
+    }
+  }
+}
+//     <div class="select-option" id="option-${contact.firstName}-${contact.lastName}" data-value="${contact.firstName} ${contact.lastName}">
+//         <div class="contact">
+//           <div class="initial" style="background-color: ${contact.color};">${initials}</div>
+//           <div class="name">${contact.firstName} ${contact.lastName}</div>
+//         </div>
+//         <input type="checkbox" />
+//         <div class="custom-checkbox"></div>
+//     </div>
+//   `;
 
 /**
  * Edits a task's properties and sends the update to the API.
@@ -797,6 +835,7 @@ async function loadPopUpAddTask(category, contentId) {
   generatePopUpAddTask(category, contentId);
   await createContactlistAddTask();
   // loadDropDown(); uncomment later
+  subtaskKeyDownAddSubtask();
 }
 
 function editTask(i) {
@@ -805,15 +844,6 @@ function editTask(i) {
   getUserChangedData(i);
 
   saveCurrentSubtask(i);
-
-
-
-
-
-
-
-
-  
 
   todos = JSON.parse(JSON.stringify(currentTodos));
   renderTasks();

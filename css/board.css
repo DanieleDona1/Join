@@ -192,6 +192,15 @@ h3 {
   white-space: nowrap;
 }
 
+.initial-board {
+  width: 40px;
+  height: 40px;
+  border: 2px solid white;
+  border-radius: 50%;
+  color: white;
+  font-size: 12px;
+}
+
 .bg-Technical-Task {
   background-color: rgba(31, 215, 193, 1);
 }
