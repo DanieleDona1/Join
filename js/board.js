@@ -788,6 +788,12 @@ function getUserChangedData(i) {
 
 }
 
+async function loadPopUpAddTask(category, contentId) {
+  await createContactlistAddTask();
+  generatePopUpAddTask(category, contentId);
+  // loadDropDown(); später entkommentieren
+}
+
 function editTask(i) {
   // Die Task im Board werden mit dem Inhalt let currentTodos = []; gerendert, deswegen greift getUserChangedData() und saveCurrentSubtask() auf currentTodos
 

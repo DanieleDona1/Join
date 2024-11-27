@@ -80,7 +80,7 @@
             <span id="searchResultMsg" class="search-result-msg">No results found</span>
           </div>
 
-          <button class="add-task d-flex-c-c btn-hover mg-b-16px" onclick="generatePopUpAddTask('toDo', 'toDoContent');">
+          <button class="add-task d-flex-c-c btn-hover mg-b-16px" onclick="loadPopUpAddTask('toDo', 'toDoContent');">
             Add Task
             <img src="/assets/icons/board/add_task_plus.svg" alt="plus-general" />
           </button>
@@ -99,7 +99,7 @@
         <section id="toDo" class="to-do">
           <div class="column-title d-flex-sb-c">
             <span>to-do</span>
-            <button class="plus-button" onclick="generatePopUpAddTask('toDo', 'toDoContent')" aria-label="Add Task To Do"></button>
+            <button class="plus-button" onclick="loadPopUpAddTask('toDo', 'toDoContent')" aria-label="Add Task To Do"></button>
           </div>
           <div id="toDoContent" class="content" ondragleave="removeHighlight('toDoContent')" ondragover="allowDrop(event); highlight('toDoContent');" ondrop="moveTo('toDo')"></div>
         </section>
@@ -107,7 +107,7 @@
         <section id="inProgress" class="in-progress">
           <div class="column-title d-flex-sb-c">
             <span>in-progress</span>
-            <button class="plus-button" onclick="generatePopUpAddTask('inProgress', 'inProgressContent')" aria-label="Add Task inProgress"></button>
+            <button class="plus-button" onclick="loadPopUpAddTask('inProgress', 'inProgressContent')" aria-label="Add Task inProgress"></button>
           </div>
           <div
             id="inProgressContent"
@@ -121,7 +121,7 @@
         <section id="awaitFeedback" class="await-feedback">
           <div class="column-title d-flex-sb-c">
             <span>await-feedback</span>
-            <button class="plus-button" onclick="generatePopUpAddTask('awaitFeedback', 'awaitFeedbackContent')" aria-label="Add Task awaitFeedback"></button>
+            <button class="plus-button" onclick="loadPopUpAddTask('awaitFeedback', 'awaitFeedbackContent')" aria-label="Add Task awaitFeedback"></button>
           </div>
           <div
             id="awaitFeedbackContent"

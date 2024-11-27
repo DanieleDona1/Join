@@ -111,10 +111,8 @@ function loadDropDown() {
   const selectItems = dropdown.querySelector('.select-items');
   const initialsDisplay = document.getElementById('initials-display');
 
-  setTimeout(() => {
     createContactOptions(selectItems);
     handleDropdownOptions(initialsDisplay);
-  }, 500);
 }
 
 // Erstellt alle Optionen im Dropdown-Menü basierend auf den Kontakten
