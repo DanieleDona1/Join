@@ -53,7 +53,7 @@ function generateDetailTaskTemplate(id) {
             </div>
             <div class="detail-group">
               <strong>Assigned To:</strong>
-              <div class="members"> <!-- TODO --> TODO Kontaktlist<div id="assignedToArea${id}"></div></div>
+              <div id="membersDetailTask" class="members-detail-task"> <!-- TODO --> TODO Kontaktlist<div id="assignedToArea${id}"></div></div>
             </div>
             <div class="detail-group">
               <strong>Subtasks:</strong>
@@ -204,6 +204,15 @@ function memberHtmlTemplate(initialsName) {
   return /*html*/ `
     <div class="initial-board-wrapper">
       <div class="initial-board d-flex-c-c" style="background-color: ${selectedContacts[0].color};">${initialsName}</div>
+    </div>
+    `;
+}
+
+function memberDetailTaskTemplate(initialsName, name) {
+  return /*html*/ `
+    <div class="initial-board-wrapper d-flex-fs-c">
+      <div class="initial-board d-flex-c-c" style="background-color: ${selectedContacts[0].color};">${initialsName}</div>
+      <div class="member-name">${name}</div>
     </div>
     `;
 }

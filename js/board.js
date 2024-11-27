@@ -19,7 +19,7 @@ async function onload() {
   renderTasks();
   await generateHeaderInitials();
 
-  // openTaskDetails(0);
+  openTaskDetails(0);
   // generateEditTemplate(0);
 }
 
@@ -392,6 +392,7 @@ function openTaskDetails(id) {
   loadSubtaskList(id);
   // document.body.style.overflowY = "hidden";
   openDialog();
+  loadAssignedToList(id);
 }
 
 /**
@@ -473,6 +474,25 @@ function animationSlideOut() {
     },
     { once: true }
   );
+}
+
+function loadAssignedToList(i) {
+  // TODO
+  if (currentTodos[i].assignedTo) {
+    const selectedContactsKeys = currentTodos[i].assignedTo.map((t) => t);
+    let membersContainer = document.getElementById('membersDetailTask');
+    membersContainer.innerHTML = '';
+
+    for (let j = 0; j < selectedContactsKeys.length; j++) {
+      selectedContacts = contactList.filter((f) => f.id === selectedContactsKeys[j]);
+      const name = selectedContacts[0].firstName + ' ' + selectedContacts[0].lastName;
+      const initialsName = generateInitials(name);
+
+      if (initialsName) {
+        membersContainer.innerHTML += memberDetailTaskTemplate(initialsName, name);
+      }
+    }
+  }
 }
 
 /**

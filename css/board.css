@@ -145,6 +145,7 @@ h3 {
   border-radius: 24px;
   font-size: 1rem;
   font-weight: 400;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
 }
 
 .task-category {
@@ -210,7 +211,7 @@ h3 {
 }
 
 .initial-board-wrapper:nth-child(1) {
-    margin-right: 0px;
+  margin-right: 0px;
 }
 
 .initial-board {
@@ -220,6 +221,19 @@ h3 {
   border-radius: 50%;
   color: white;
   font-size: 12px;
+}
+
+.members-detail-task {
+  padding-left: 20px;
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.member-name {
+  padding-left: 16px;
+  font-size: 18px;
 }
 
 .bg-Technical-Task {
@@ -298,7 +312,6 @@ h3 {
   font-weight: 700;
   margin-right: 16px;
 }
-
 
 .detail-task .prio-img {
   width: 16px;
@@ -456,7 +469,6 @@ h3 {
   margin-top: 16px;
 }
 
-
 .edit-template input {
   display: flex;
   width: 100%;
@@ -558,8 +570,6 @@ input[type='date']::-webkit-calendar-picker-indicator {
   margin-left: 14px;
 }
 
-
-
 @media screen and (min-width: 1921px) {
 }
 
@@ -633,7 +643,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
   margin-top: 6px;
 }
 
-.subtask-icons{
+.subtask-icons {
   position: absolute;
   right: 10px;
   top: 25%;
@@ -662,7 +672,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
   font-size: 1rem;
 }
 
-.subtask-list-group:hover input{
+.subtask-list-group:hover input {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -685,7 +695,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
-.subtask-list-icons img{
+.subtask-list-icons img {
   width: 20px;
 }
 
@@ -694,9 +704,9 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 .bullet-point {
-  margin-right: 40px;  /* Verringert den Abstand zwischen Bullet Point und Eingabefeld */
-  font-size: 1.2em;    /* Größe des Bullet Points */
-  color: #333;         /* Farbe des Bullet Points */
+  margin-right: 40px; /* Verringert den Abstand zwischen Bullet Point und Eingabefeld */
+  font-size: 1.2em; /* Größe des Bullet Points */
+  color: #333; /* Farbe des Bullet Points */
   display: inline-block;
   vertical-align: middle; /* Ze ntriert das Bullet Point mit dem Eingabefeld */
 }
