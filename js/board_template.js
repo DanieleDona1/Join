@@ -19,7 +19,7 @@ function generateHtmlTemplate(task) {
           </div>
 
           <div class="d-flex-sb-c">
-            <div id="membersContainer${task['id']}" class="members-container d-flex-c-c"></div>
+            <div id="membersContainer${task['id']}" class="members-container d-flex-fs-c"></div>
           </div>
           <img draggable="false" src="/assets/icons/board/${task.prio}.svg" alt="prio">
       </div>`;
@@ -192,4 +192,18 @@ function generateSubtaskAddedListTemplate(i) {
     </div>
   </div>
   `;
+}
+
+/**
+ * Generates HTML template for a member's initials displayed inside a circle.
+ *
+ * @param {string} initialsName - The initials of the member to display inside the circle.
+ * @returns {string} The HTML string for the member's initials circle.
+ */
+function memberHtmlTemplate(initialsName) {
+  return /*html*/ `
+    <div class="initial-board-wrapper">
+      <div class="initial-board d-flex-c-c" style="background-color: ${selectedContacts[0].color};">${initialsName}</div>
+    </div>
+    `;
 }

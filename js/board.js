@@ -101,8 +101,11 @@ function loadProgressText(task, progressText, progressBar) {
   progressBar.style.width = progressValue + '%';
 }
 
+/**
+ * Loads the assigned members for a task and displays their initials in the respective container.
+ * @param {number} i - The index of the current task.
+ */
 function loadMembers(i) {
-  // TODO
   if (currentTodos[i].assignedTo) {
     const selectedContactsKeys = currentTodos[i].assignedTo.map((t) => t);
     const membersContainer = document.getElementById('membersContainer' + i);
@@ -110,29 +113,15 @@ function loadMembers(i) {
 
     for (let j = 0; j < selectedContactsKeys.length; j++) {
       selectedContacts = contactList.filter((f) => f.id === selectedContactsKeys[j]);
-      console.log('selectedContacts', selectedContacts[0].firstName);
       const name = selectedContacts[0].firstName + ' ' + selectedContacts[0].lastName;
-
       const initialsName = generateInitials(name);
+
       if (initialsName) {
-        document.getElementById('membersContainer' + i).innerHTML += /*html*/ `
-        <div class="initial-board-wrapper">
-          <div class="initial-board d-flex-c-c" style="background-color: ${selectedContacts[0].color};">${initialsName}</div>
-        </div>
-      `;
+        document.getElementById('membersContainer' + i).innerHTML += memberHtmlTemplate(initialsName);
       }
     }
   }
 }
-//     <div class="select-option" id="option-${contact.firstName}-${contact.lastName}" data-value="${contact.firstName} ${contact.lastName}">
-//         <div class="contact">
-//           <div class="initial" style="background-color: ${contact.color};">${initials}</div>
-//           <div class="name">${contact.firstName} ${contact.lastName}</div>
-//         </div>
-//         <input type="checkbox" />
-//         <div class="custom-checkbox"></div>
-//     </div>
-//   `;
 
 /**
  * Edits a task's properties and sends the update to the API.

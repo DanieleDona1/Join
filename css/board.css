@@ -106,7 +106,7 @@ h3 {
 .section-container section img {
   position: absolute;
   right: 24px;
-  bottom: 40px;
+  bottom: 32px;
   width: 24px;
   cursor: pointer;
 }
@@ -198,6 +198,19 @@ h3 {
   width: 180px;
   overflow-x: auto;
   scrollbar-width: thin;
+  padding-left: 10px;
+}
+
+.initial-board-wrapper {
+  position: relative;
+}
+
+.initial-board-wrapper .initial-board {
+  margin-left: -10px;
+}
+
+.initial-board-wrapper:nth-child(1) {
+    margin-right: 0px;
 }
 
 .initial-board {
