@@ -162,7 +162,7 @@ function getUserAddTaskData(swimlane) {
     task_category: currentTaskCategory, // User-Story Technical-Task wichtig großgeschrieben User-Story
     assignedTo: selectedContacts,
     subtask: currentSubtasks,
-    prio: activePriority
+    prio: activePriority,
   };
 }
 
@@ -430,7 +430,6 @@ function createAddTaskBtnBoard(category, contentId) {
   generatePopUpAddTask(category, contentId);
 }
 
-
 /**
  * Handles the animation for sliding out the dialog.
  */
@@ -454,7 +453,6 @@ function animationSlideOut() {
  * @param {number} i - The index of the task in the currentTodos array.
  */
 function loadSubtaskList(i) {
-
   if (currentTodos[i].subtask) {
     let subtasksList = document.getElementById('subtasksList');
     let checkboxImgUrl;
@@ -783,20 +781,26 @@ function getUserChangedData(i) {
   currentTodos[i]['description'] = textareaEdit;
   currentTodos[i]['dueDate'] = dueDate;
 
-// function editTaskRemote(key, { title, description, category, dueDate, assignedTo, subtask, prio }) {
-  editTaskRemote(todoKeysArray[i], { title: currentTodos[i].title, description: currentTodos[i].description,  dueDate: currentTodos[i].dueDate});
-
+  // function editTaskRemote(key, { title, description, category, dueDate, assignedTo, subtask, prio }) {
+  editTaskRemote(todoKeysArray[i], { title: currentTodos[i].title, description: currentTodos[i].description, dueDate: currentTodos[i].dueDate });
 }
 
+/**
+ * Loads the popup for adding a task and the contact list.
+ *
+ * @async
+ * @param {string} category - The task category.
+ * @param {string} contentId - The ID of the content area.
+ * @returns {Promise<void>} - Resolves when the popup and contact list are loaded.
+ */
 async function loadPopUpAddTask(category, contentId) {
-  await createContactlistAddTask();
   generatePopUpAddTask(category, contentId);
-  // loadDropDown(); später entkommentieren
+  await createContactlistAddTask();
+  // loadDropDown(); uncomment later
 }
 
 function editTask(i) {
   // Die Task im Board werden mit dem Inhalt let currentTodos = []; gerendert, deswegen greift getUserChangedData() und saveCurrentSubtask() auf currentTodos
-
 
   getUserChangedData(i);
 
@@ -809,6 +813,7 @@ function editTask(i) {
 
 
 
+  
 
   todos = JSON.parse(JSON.stringify(currentTodos));
   renderTasks();
