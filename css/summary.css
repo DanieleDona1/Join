@@ -115,9 +115,10 @@ main h2 {
   background-image: url('/assets/icons/summary/check-light.svg');
 }
 
-.priority {
+.priority.priority {
   grid-column: 1 / 7;
   grid-row: 2;
+  /* padding: 40px; */
 }
 
 .priority-img {
@@ -131,8 +132,8 @@ main h2 {
 }
 
 .upcoming-separator {
-  margin-left: clamp(4px, 5vw, 72px);
-  margin-right: clamp(4px, 5vw, 66px);
+  /* margin-left: clamp(4px, 5vw, 72px);
+  margin-right: clamp(4px, 5vw, 66px); */
   background-color: rgb(209, 209, 209);
   height: 100px;
   width: 2px;
