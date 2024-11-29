@@ -13,6 +13,7 @@
     <script src="/js/remote_storage.js"></script>
     <script src="/js/board_template.js"></script>
     <script src="/js/add_tasks.js" defer></script>
+    <link rel="stylesheet" href="/css/add_tasks.css">
   </head>
   <body class="max-width-1920" onload="onload();">
     <header>
@@ -97,7 +98,7 @@
 
       <div class="section-container">
         <section id="toDo" class="to-do">
-          <div class="column-title d-flex-sb-c">
+          <div class="column-title">
             <span>to-do</span>
             <button class="plus-button" onclick="loadPopUpAddTask('toDo', 'toDoContent')" aria-label="Add Task To Do"></button>
           </div>
@@ -105,7 +106,7 @@
         </section>
 
         <section id="inProgress" class="in-progress">
-          <div class="column-title d-flex-sb-c">
+          <div class="column-title">
             <span>in-progress</span>
             <button class="plus-button" onclick="loadPopUpAddTask('inProgress', 'inProgressContent')" aria-label="Add Task inProgress"></button>
           </div>
@@ -119,7 +120,7 @@
         </section>
 
         <section id="awaitFeedback" class="await-feedback">
-          <div class="column-title d-flex-sb-c">
+          <div class="column-title">
             <span>await-feedback</span>
             <button class="plus-button" onclick="loadPopUpAddTask('awaitFeedback', 'awaitFeedbackContent')" aria-label="Add Task awaitFeedback"></button>
           </div>
@@ -133,8 +134,9 @@
         </section>
 
         <section id="done" class="done">
-          <div class="column-title d-flex-sb-c">
+          <div class="column-title">
             <span>done</span>
+            <span class="placeholder">P</span>
           </div>
           <div id="doneContent" class="done-content content" ondragleave="removeHighlight('doneContent')" ondragover="allowDrop(event); highlight('doneContent');" ondrop="moveTo('done')"></div>
         </section>

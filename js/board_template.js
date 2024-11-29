@@ -95,6 +95,18 @@ function generateEditTemplate(id) {
 
           <strong id="assignedTo">Assigned to</strong>
 
+
+          <div class="custom-select" id="drop-down-1">
+            <div class="select-selected" tabindex="0">
+              Select contacts to assign
+            </div>
+            <div class="select-items"></div>
+          </div>
+          <div id="selected-initials">
+            <div id="initials-display"></div>
+          </div>
+
+
           <div class="subtask-container">
             <strong>Subtasks</strong>
             <div>
