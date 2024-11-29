@@ -113,6 +113,19 @@ h3 {
 
 .column-title {
   margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.placeholder {
+  color: transparent;
+  width: 24px;
+  height: 24px;
+}
+
+.plus-button {
+  margin-bottom: 0;
 }
 
 .content {
