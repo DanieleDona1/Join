@@ -171,7 +171,7 @@ a {
 
 input:focus {
   outline: none;
-  border: 2px solid rgba(41, 171, 226, 1);
+  border: 1.8px solid rgba(41, 171, 226, 1);
 }
 
 .error-msg {

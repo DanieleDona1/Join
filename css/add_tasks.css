@@ -17,7 +17,7 @@ form textarea:hover,
 .select-selected:hover,
 button:hover {
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(38, 40, 40, 0.5);
+  box-shadow: 0 4px 6px rgba(38, 40, 40, 0.15);
 }
 
 form input[type="checkbox"] {
@@ -141,7 +141,7 @@ form input {
   font-size: 0.8rem;
 }
 
-.resizable-textarea {
+form .resizable-textarea {
   width: 100%;
   height: 120px;
   padding: 12px 21px;
@@ -152,10 +152,10 @@ form input {
   font-size: 20px;
 }
 
-.resizable-textarea:focus,
+form .resizable-textarea:focus,
 input:focus,
 .custom-select:focus-within {
-  border-width: 1.5px;
+  border-width: 1.8px;
   border-color: rgb(41, 171, 226); /* Randfarbe ändern bei Fokus */
   outline: none; /* Entfernt den Standard-Fokus-Rahmen */
 }
