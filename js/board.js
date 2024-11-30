@@ -19,8 +19,8 @@ async function onload() {
   renderTasks();
   await generateHeaderInitials();
 
-  // openTaskDetails(0);
-  // generateEditTemplate(0);
+  openTaskDetails(0);
+  generateEditTemplate(0);
 }
 
 /**
@@ -871,4 +871,73 @@ function editTask(i) {
   todos = JSON.parse(JSON.stringify(currentTodos));
   renderTasks();
   closeDialog();
+}
+
+const contacts = [
+  { initials: 'AB', name: 'Alice Brown', id: '-fdsafdsa' },
+  { initials: 'CD', name: 'Charlie Davis', id: '-bvvfdasdsa' },
+  { initials: 'EF', name: 'Eva Fischer', id: '-xyyyxdfads' },
+  { initials: 'TF', name: 'Tom Fischer', id: '-ddxyyyxdfads' },
+  { initials: 'CF', name: 'Claudia Fischer', id: '-ääxyyyxdfads' },
+];
+
+function toggleDropdown(dropdownId, openContactsId) {
+  const dropdown = document.getElementById(dropdownId);
+  const selectDiv = document.getElementById(openContactsId);
+  const isOpen = dropdown.style.display === 'block';
+
+  if (isOpen) {
+    dropdown.style.display = 'none';
+    selectDiv.classList.remove('open');
+    document.getElementById('memberInitialsContainer').classList.remove('mg-b-200');
+  } else {
+    dropdown.style.display = 'block';
+    selectDiv.classList.add('open');
+    document.getElementById('memberInitialsContainer').classList.add('mg-b-200');
+    populateDropdown(dropdownId);
+  }
+}
+
+function populateDropdown(dropdownId) {
+  const dropdown = document.getElementById(dropdownId);
+  dropdown.innerHTML = ''; // Clear existing content
+  contacts.forEach((contact) => {
+    const contactItemHTML = createContactItem(contact);
+    dropdown.innerHTML += contactItemHTML;
+  });
+
+  const dropdownContent = document.getElementById(dropdownId);
+  dropdownContent.addEventListener('change', function (event) {
+    if (event.target && event.target.classList.contains('contact-checkbox')) {
+      const checkbox = event.target;
+      const contactId = checkbox.id;
+
+      toggleContactSelection(checkbox, contactId);
+    }
+  });
+}
+
+function createContactItem(contact) {
+  return /*html*/ `
+    <label class="contact-select-wrapper" for="${contact.id}">
+      <div class="contact-label">${contact.initials} - ${contact.name}</div>
+      <input type="checkbox" id="${contact.id}" class="contact-checkbox" />
+      <span class="checkbox-image"></span>  <!-- Das Bild wird hier dargestellt -->
+    </label>
+  `;
+}
+
+function toggleContactSelection(checkbox, contactId) {
+  const contactDiv = document.querySelector(`[for="${contactId}"]`);
+
+  contactDiv.classList.toggle('selected-contact', checkbox.checked);
+
+  if (checkbox.checked) {
+    // if (arr.indexOf(item) === -1) {
+    //   arr.push(item);
+  // }
+    console.log('checked');
+  } else {
+    console.log('unchecked');
+  }
 }

@@ -96,15 +96,15 @@ function generateEditTemplate(id) {
           <strong id="assignedTo">Assigned to</strong>
 
 
-          <div class="custom-select" id="drop-down-1">
-            <div class="select-selected" tabindex="0">
-              Select contacts to assign
+          <div class="contact-select-container">
+            <div id="customSelectGroup" class="custom-select-group">
+              <input id="selectContactsDiv" class="custom-select" readonly onclick="toggleDropdown('dropdown', 'customSelectGroup')" placeholder="Select contacts to assign"/>
             </div>
-            <div class="select-items"></div>
+            <div class="dropdown-wrapper">
+              <div id="dropdown" class="dropdown-content"><!-- Hier werden die Kontaktinformationen durch JavaScript eingefügt --></div>
+            </div>
           </div>
-          <div id="selected-initials">
-            <div id="initials-display"></div>
-          </div>
+          <div id="memberInitialsContainer" class="initials-container">dsfaf</div>
 
 
           <div class="subtask-container">

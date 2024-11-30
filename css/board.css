@@ -718,9 +718,114 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 .bullet-point {
-  margin-right: 40px; /* Verringert den Abstand zwischen Bullet Point und Eingabefeld */
-  font-size: 1.2em; /* Größe des Bullet Points */
-  color: #333; /* Farbe des Bullet Points */
+  margin-right: 40px;
+  font-size: 1.2em;
+  color: #333;
   display: inline-block;
-  vertical-align: middle; /* Ze ntriert das Bullet Point mit dem Eingabefeld */
+  vertical-align: middle;
 }
+
+
+
+.contact-select-container {
+  position: relative;
+  /* width: 250px; */
+  width: 100%;
+}
+
+.custom-select-group {
+  position: relative;
+
+}
+
+.custom-select-group::after {
+  content: '▼';
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  pointer-events: none;
+  font-size: 12px;
+  z-index: 2;
+  transform: translateY(-50%);
+}
+
+.custom-select-group.open::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.custom-select {
+  padding: 10px 32px 10px 16px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.custom-select::placeholder {
+  color: black;
+  font-size: 1rem;
+}
+
+.dropdown-content {
+  position: absolute;
+  width: 99%;
+  background-color: white;
+  max-height: 200px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0px 0px 4px 4px;
+}
+
+.contact-select-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  cursor: pointer;
+  position: relative;
+  border-radius: 10px;
+}
+
+.contact-select-wrapper:hover {
+  background-color: rgba(128, 128, 128, 0.1);
+}
+
+.contact-label {
+  display: inline-block;
+}
+
+.checkbox-image {
+  width: 20px;
+  height: 20px;
+  background-image: url('/assets/icons/board/checkbox_unchecked.svg');
+  background-size: cover;
+  display: inline-block;
+  transition: background-image 150ms ease;
+}
+
+.contact-select-container input[type='checkbox'] {
+  display: none;
+}
+
+input[type='checkbox']:checked + .checkbox-image {
+  background-image: url('/assets/icons/board/checkbox_checked.svg');
+}
+
+input:focus {
+  outline: none;
+  border: 1.8px solid rgba(41, 171, 226, 1);
+}
+
+.contact-select-container .selected-contact {
+  background-color: rgb(42, 54, 71);
+  color: white;
+}
+
+.mg-b-200 {
+  margin-bottom: 200px;
+}
+
+/* .initials-container {
+  position: absolute;
+} */
