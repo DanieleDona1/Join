@@ -53,7 +53,7 @@ function generateDetailTaskTemplate(id) {
             </div>
             <div class="detail-group">
               <strong>Assigned To:</strong>
-              <div id="membersDetailTask" class="members-detail-task"> <!-- TODO --> TODO Kontaktlist<div id="assignedToArea${id}"></div></div>
+              <div id="membersDetailTask" class="members-detail-task"><div id="assignedToArea${id}"></div></div>
             </div>
             <div class="detail-group">
               <strong>Subtasks:</strong>

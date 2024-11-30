@@ -58,7 +58,7 @@ function updateColumn(category, contentId) {
     const { progressText, progressBar } = initializeProgressElements(task['id']);
     loadProgressText(task, progressText, progressBar);
 
-    loadMembers(task['id']);
+    loadMembersInitials(task['id'], 'membersContainer');
   }
 }
 
@@ -103,24 +103,34 @@ function loadProgressText(task, progressText, progressBar) {
 
 /**
  * Loads the assigned members for a task and displays their initials in the respective container.
- * @param {number} i - The index of the current task.
+ * Array are used contactList - createContactlistAddTask() and keys-currentTodos[i].assignedTo and selectedContacts.
  */
-function loadMembers(i) {
+function loadMembersInitials(i, initialsContainerId) {
   if (currentTodos[i].assignedTo) {
-    const selectedContactsKeys = currentTodos[i].assignedTo.map((t) => t);
-    const membersContainer = document.getElementById('membersContainer' + i);
+    const selectedContactsKeys = getSelectedContactsKey(i);
+    const membersContainer = document.getElementById(initialsContainerId + i);
     membersContainer.innerHTML = '';
-
     for (let j = 0; j < selectedContactsKeys.length; j++) {
       selectedContacts = contactList.filter((f) => f.id === selectedContactsKeys[j]);
+
       const name = selectedContacts[0].firstName + ' ' + selectedContacts[0].lastName;
       const initialsName = generateInitials(name);
 
       if (initialsName) {
-        document.getElementById('membersContainer' + i).innerHTML += memberHtmlTemplate(initialsName);
+        membersContainer.innerHTML += memberHtmlTemplate(initialsName);
       }
     }
   }
+}
+
+/**
+ * Retrieves the list of contacts assigned to a specific todo item.
+ *
+ * @param {number} i - The index of the todo item in the `currentTodos` array.
+ * @returns {Array} An array of contacts assigned to the todo item at index `i`.
+ */
+function getSelectedContactsKey(i) {
+  return currentTodos[i].assignedTo.map((t) => t)
 }
 
 /**
