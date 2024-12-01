@@ -107,13 +107,13 @@ function loadProgressText(task, progressText, progressBar) {
  */
 function loadMembersInitials(i, initialsContainerId) {
   if (currentTodos[i].assignedTo) {
-    const selectedContactsKeys = getSelectedContactsKey(i);
+    selectedContactsKeys = getSelectedContactsKey(i);
     const membersContainer = document.getElementById(initialsContainerId + i);
     membersContainer.innerHTML = '';
     for (let j = 0; j < selectedContactsKeys.length; j++) {
       selectedContacts = contactList.filter((f) => f.id === selectedContactsKeys[j]);
 
-      const name = selectedContacts[0].firstName + ' ' + selectedContacts[0].lastName;
+      const name = getName(selectedContacts[0]);
       const initialsName = generateInitials(name);
 
       if (initialsName) {
@@ -124,13 +124,25 @@ function loadMembersInitials(i, initialsContainerId) {
 }
 
 /**
+ * Combines first and last name from an object into a full name.
+ *
+ * @param {Object} arr - The object containing `firstName` and `lastName` properties.
+ * @param {string} arr.firstName - The first name.
+ * @param {string} arr.lastName - The last name.
+ * @returns {string} The full name, combining first and last name.
+ */
+function getName(arr) {
+  return arr.firstName + ' ' + arr.lastName;
+}
+
+/**
  * Retrieves the list of contacts assigned to a specific todo item.
  *
  * @param {number} i - The index of the todo item in the `currentTodos` array.
  * @returns {Array} An array of contacts assigned to the todo item at index `i`.
  */
 function getSelectedContactsKey(i) {
-  return currentTodos[i].assignedTo.map((t) => t)
+  return currentTodos[i].assignedTo.map((t) => t);
 }
 
 /**
@@ -423,7 +435,13 @@ function closeDialog() {
     renderTasks();
   }
   currentTodos = JSON.parse(JSON.stringify(todos));
+  clearAllArrays();
+}
+
+function clearAllArrays() {
   currentSubtasks = [];
+  selectedContactsKeys = [];
+  // TODO
 }
 
 /**
@@ -861,25 +879,25 @@ async function loadPopUpAddTask(category, contentId) {
   subtaskKeyDownAddSubtask();
 }
 
+function saveCurrentAssignedTo(i) {
+  currentTodos[i]['assignedTo'] = selectedContactsKeys;
+  editTaskRemote(todoKeysArray[i], { assignedTo: currentTodos[i]['assignedTo'] });
+  console.log('geklappt');
+
+}
+
+
 function editTask(i) {
   // Die Task im Board werden mit dem Inhalt let currentTodos = []; gerendert, deswegen greift getUserChangedData() und saveCurrentSubtask() auf currentTodos
 
   getUserChangedData(i);
-
+  saveCurrentAssignedTo(i);
   saveCurrentSubtask(i);
 
   todos = JSON.parse(JSON.stringify(currentTodos));
   renderTasks();
   closeDialog();
 }
-
-const contacts = [
-  { initials: 'AB', name: 'Alice Brown', id: '-fdsafdsa' },
-  { initials: 'CD', name: 'Charlie Davis', id: '-bvvfdasdsa' },
-  { initials: 'EF', name: 'Eva Fischer', id: '-xyyyxdfads' },
-  { initials: 'TF', name: 'Tom Fischer', id: '-ddxyyyxdfads' },
-  { initials: 'CF', name: 'Claudia Fischer', id: '-ääxyyyxdfads' },
-];
 
 function toggleDropdown(dropdownId, openContactsId) {
   const dropdown = document.getElementById(dropdownId);
@@ -900,12 +918,30 @@ function toggleDropdown(dropdownId, openContactsId) {
 
 function populateDropdown(dropdownId) {
   const dropdown = document.getElementById(dropdownId);
-  dropdown.innerHTML = ''; // Clear existing content
-  contacts.forEach((contact) => {
+  dropdown.innerHTML = '';
+  contactList.forEach((contact) => {
     const contactItemHTML = createContactItem(contact);
     dropdown.innerHTML += contactItemHTML;
   });
+  toggleSelectionOnChange(dropdownId);
+}
 
+function createContactItem(contact) {
+  let name = getName(contact);
+  let initials = getInitials(contact);
+  return /*html*/ `
+    <label class="contact-select-wrapper" for="${contact.id}">
+      <div class="d-flex-fs-c">
+        <div class="contact-label initial-edit d-flex-c-c" style="background-color: ${contact.color};">${initials}</div>
+        <span class="contact-name">${name}</span>
+      </div>
+      <input type="checkbox" id="${contact.id}" class="contact-checkbox" />
+      <span class="checkbox-image"></span>  <!-- Das Bild wird hier dargestellt -->
+    </label>
+  `;
+}
+
+function toggleSelectionOnChange(dropdownId) {
   const dropdownContent = document.getElementById(dropdownId);
   dropdownContent.addEventListener('change', function (event) {
     if (event.target && event.target.classList.contains('contact-checkbox')) {
@@ -917,27 +953,23 @@ function populateDropdown(dropdownId) {
   });
 }
 
-function createContactItem(contact) {
-  return /*html*/ `
-    <label class="contact-select-wrapper" for="${contact.id}">
-      <div class="contact-label">${contact.initials} - ${contact.name}</div>
-      <input type="checkbox" id="${contact.id}" class="contact-checkbox" />
-      <span class="checkbox-image"></span>  <!-- Das Bild wird hier dargestellt -->
-    </label>
-  `;
-}
-
-function toggleContactSelection(checkbox, contactId) {
-  const contactDiv = document.querySelector(`[for="${contactId}"]`);
-
+function toggleContactSelection(checkbox, contactKey) {
+  const contactDiv = document.querySelector(`[for="${contactKey}"]`);
   contactDiv.classList.toggle('selected-contact', checkbox.checked);
 
   if (checkbox.checked) {
-    // if (arr.indexOf(item) === -1) {
-    //   arr.push(item);
-  // }
+    if (selectedContactsKeys.indexOf(contactKey) === -1) {
+      selectedContactsKeys.push(contactKey);
+      console.log('selectedContactsKeys:', selectedContactsKeys);
+    }
+    // TODO currentTodos assignedTo hinzufügen
     console.log('checked');
   } else {
     console.log('unchecked');
+    const index = selectedContactsKeys.indexOf(contactKey);
+    if (index !== -1) {
+      selectedContactsKeys.splice(index, 1);
+      console.log('selectedContactsKeys:', selectedContactsKeys);
+    }
   }
 }

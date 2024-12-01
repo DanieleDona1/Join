@@ -11,6 +11,7 @@ let currentSubtasks = [];
 let activePriority = 'medium'; //Standardmäßig ist medium zugewiesen.
 let currentTaskCategory = ''; //Zuweisen "User-Story" oder "Technical-Task" mit Bindestrich
 let selectedContacts = [];
+let selectedContactsKeys = [];
 let dueDate = ''; //'2024-12-31', //yy-mm-dd Format
 
 // contactList.js und addtask Arrays
