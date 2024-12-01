@@ -19,8 +19,8 @@ async function onload() {
   renderTasks();
   await generateHeaderInitials();
 
-  openTaskDetails(0);
-  generateEditTemplate(0);
+  // openTaskDetails(0);
+  // generateEditTemplate(0);
 }
 
 /**
