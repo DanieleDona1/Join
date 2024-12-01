@@ -411,6 +411,7 @@ document.addEventListener('DOMContentLoaded', init);
  */
 function openTaskDetails(id) {
   document.getElementById('dialog').innerHTML = generateDetailTaskTemplate(id);
+  activePriority = todos[id].prio;
   loadSubtaskList(id);
   loadAssignedToList(id);
   openDialog();
@@ -883,14 +884,13 @@ function saveCurrentAssignedTo(i) {
   currentTodos[i]['assignedTo'] = selectedContactsKeys;
   editTaskRemote(todoKeysArray[i], { assignedTo: currentTodos[i]['assignedTo'] });
   console.log('geklappt');
-
 }
-
 
 function editTask(i) {
   // Die Task im Board werden mit dem Inhalt let currentTodos = []; gerendert, deswegen greift getUserChangedData() und saveCurrentSubtask() auf currentTodos
 
   getUserChangedData(i);
+  // savePriority 
   saveCurrentAssignedTo(i);
   saveCurrentSubtask(i);
 
@@ -900,6 +900,7 @@ function editTask(i) {
 }
 
 function toggleDropdown(dropdownId, openContactsId) {
+  selectedContactsKeys = [];
   const dropdown = document.getElementById(dropdownId);
   const selectDiv = document.getElementById(openContactsId);
   const isOpen = dropdown.style.display === 'block';
@@ -907,11 +908,11 @@ function toggleDropdown(dropdownId, openContactsId) {
   if (isOpen) {
     dropdown.style.display = 'none';
     selectDiv.classList.remove('open');
-    document.getElementById('memberInitialsContainer').classList.remove('mg-b-200');
+    document.getElementById('memberEditInitialsContainer').classList.remove('mg-b-200');
   } else {
     dropdown.style.display = 'block';
     selectDiv.classList.add('open');
-    document.getElementById('memberInitialsContainer').classList.add('mg-b-200');
+    document.getElementById('memberEditInitialsContainer').classList.add('mg-b-200');
     populateDropdown(dropdownId);
   }
 }
@@ -936,7 +937,7 @@ function createContactItem(contact) {
         <span class="contact-name">${name}</span>
       </div>
       <input type="checkbox" id="${contact.id}" class="contact-checkbox" />
-      <span class="checkbox-image"></span>  <!-- Das Bild wird hier dargestellt -->
+      <span class="checkbox-image"></span>
     </label>
   `;
 }
@@ -956,20 +957,29 @@ function toggleSelectionOnChange(dropdownId) {
 function toggleContactSelection(checkbox, contactKey) {
   const contactDiv = document.querySelector(`[for="${contactKey}"]`);
   contactDiv.classList.toggle('selected-contact', checkbox.checked);
+  const index = selectedContactsKeys.indexOf(contactKey);
 
   if (checkbox.checked) {
-    if (selectedContactsKeys.indexOf(contactKey) === -1) {
+    if (index === -1) {
       selectedContactsKeys.push(contactKey);
-      console.log('selectedContactsKeys:', selectedContactsKeys);
     }
-    // TODO currentTodos assignedTo hinzufügen
-    console.log('checked');
   } else {
-    console.log('unchecked');
-    const index = selectedContactsKeys.indexOf(contactKey);
     if (index !== -1) {
       selectedContactsKeys.splice(index, 1);
-      console.log('selectedContactsKeys:', selectedContactsKeys);
     }
+  }
+  loadEditMembersInitials();
+}
+
+function loadEditMembersInitials() {
+  const membersContainer = document.getElementById('memberEditInitialsContainer');
+  membersContainer.innerHTML = '';
+  for (let j = 0; j < selectedContactsKeys.length; j++) {
+    selectedContacts = contactList.filter((f) => f.id === selectedContactsKeys[j]);
+
+    const name = getName(selectedContacts[0]);
+    const initialsName = generateInitials(name);
+
+    membersContainer.innerHTML += memberEditHtmlTemplate(initialsName);
   }
 }

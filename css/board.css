@@ -503,6 +503,10 @@ h3 {
   padding: 10px 32px 10px 16px;
 }
 
+.textarea-edit {
+  min-height: 88px;
+}
+
 .edit-template textarea {
   display: flex;
   resize: none;
@@ -725,8 +729,6 @@ input[type='date']::-webkit-calendar-picker-indicator {
   vertical-align: middle;
 }
 
-
-
 .contact-select-container {
   position: relative;
   /* width: 250px; */
@@ -735,7 +737,6 @@ input[type='date']::-webkit-calendar-picker-indicator {
 
 .custom-select-group {
   position: relative;
-
 }
 
 .custom-select-group::after {
@@ -768,6 +769,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 
 .dropdown-content {
   position: absolute;
+  z-index: 1;
   width: 99%;
   background-color: white;
   max-height: 200px;
@@ -842,6 +844,19 @@ input:focus {
   margin-left: 8px;
 }
 
-/* .initials-container {
-  position: absolute;
-} */
+.initials-container {
+  height: auto;
+  width: 100%;
+  /* width: 200px; */
+  /* overflow-x: auto; */
+  margin-top: 8px;
+  display: flex;
+  margin-bottom: 16px;
+  /* flex-grow: 1; */
+  /* flex-shrink: 1; */
+}
+
+.initial-board-wrapper .margin {
+  margin-left: 0;
+  margin-right: 28px;
+}
