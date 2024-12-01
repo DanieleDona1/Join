@@ -411,7 +411,6 @@ document.addEventListener('DOMContentLoaded', init);
  */
 function openTaskDetails(id) {
   document.getElementById('dialog').innerHTML = generateDetailTaskTemplate(id);
-  activePriority = todos[id].prio;
   loadSubtaskList(id);
   loadAssignedToList(id);
   openDialog();
@@ -883,14 +882,12 @@ async function loadPopUpAddTask(category, contentId) {
 function saveCurrentAssignedTo(i) {
   currentTodos[i]['assignedTo'] = selectedContactsKeys;
   editTaskRemote(todoKeysArray[i], { assignedTo: currentTodos[i]['assignedTo'] });
-  console.log('geklappt');
 }
 
 function editTask(i) {
   // Die Task im Board werden mit dem Inhalt let currentTodos = []; gerendert, deswegen greift getUserChangedData() und saveCurrentSubtask() auf currentTodos
-
   getUserChangedData(i);
-  // savePriority 
+  // savePrio
   saveCurrentAssignedTo(i);
   saveCurrentSubtask(i);
 
@@ -900,7 +897,6 @@ function editTask(i) {
 }
 
 function toggleDropdown(dropdownId, openContactsId) {
-  selectedContactsKeys = [];
   const dropdown = document.getElementById(dropdownId);
   const selectDiv = document.getElementById(openContactsId);
   const isOpen = dropdown.style.display === 'block';
@@ -980,6 +976,6 @@ function loadEditMembersInitials() {
     const name = getName(selectedContacts[0]);
     const initialsName = generateInitials(name);
 
-    membersContainer.innerHTML += memberEditHtmlTemplate(initialsName);
+      membersContainer.innerHTML += memberEditHtmlTemplate(initialsName);
   }
 }
