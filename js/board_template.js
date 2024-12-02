@@ -91,11 +91,13 @@ function generateEditTemplate(id) {
             <textarea id="textareaEdit" class="textarea-edit" rows="4" cols="50" maxlength="300" placeholder="Enter a description">${todos[id].description}</textarea>
           <strong>Due date</strong>
             <input id="dateEdit" class="due-edit" type="date" onfocus="showPicker();" value="${dueDate}" lang="de-DE">
+
+
           <strong>Priority</strong>
 
+
+
           <strong id="assignedTo">Assigned to</strong>
-
-
           <div class="contact-select-container">
             <div id="customSelectGroup" class="custom-select-group">
               <input id="selectContactsDiv" class="custom-select" readonly onclick="toggleDropdown('dropdown', 'customSelectGroup')" placeholder="Select contacts to assign"/>
@@ -104,8 +106,7 @@ function generateEditTemplate(id) {
               <div id="dropdown" class="dropdown-content"><!-- Hier werden die Kontaktinformationen durch JavaScript eingefügt --></div>
             </div>
           </div>
-          <div id="memberInitialsContainer" class="initials-container">dsfaf</div>
-
+          <div id="memberEditInitialsContainer" class="initials-container"></div>
 
           <div class="subtask-container">
             <strong>Subtasks</strong>
@@ -232,6 +233,20 @@ function memberDetailTaskTemplate(initialsName, name) {
     <div class="initial-board-wrapper d-flex-fs-c">
       <div class="initial-board d-flex-c-c" style="background-color: ${selectedContacts[0].color};">${initialsName}</div>
       <div class="member-name">${name}</div>
+    </div>
+    `;
+}
+
+/**
+ * Generates HTML template for a member's initials displayed inside a circle.
+ *
+ * @param {string} initialsName - The initials of the member to display inside the circle.
+ * @returns {string} The HTML string for the member's initials circle.
+ */
+function memberHtmlTemplate(initialsName) {
+  return /*html*/ `
+    <div class="initial-board-wrapper">
+      <div class="initial-board d-flex-c-c" style="background-color: ${selectedContacts[0].color};">${initialsName}</div>
     </div>
     `;
 }
