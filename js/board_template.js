@@ -250,3 +250,17 @@ function memberHtmlTemplate(initialsName) {
     </div>
     `;
 }
+
+/**
+ * Generates an HTML template for displaying a member's initials with a background color.
+ *
+ * @param {string} initialsName - The initials of the member to display.
+ * @returns {string} The HTML string for the member's initials with the selected background color.
+ */
+function memberEditHtmlTemplate(initialsName) {
+  return /*html*/ `
+    <div class="initial-board-wrapper">
+      <div class="initial-board margin d-flex-c-c" style="background-color: ${selectedContacts[0].color};">${initialsName}</div>
+    </div>
+    `;
+}
