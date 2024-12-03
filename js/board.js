@@ -438,6 +438,9 @@ function closeDialog() {
   clearAllArrays();
 }
 
+/**
+ * Clears all arrays used to store current subtasks, selected contact keys, and other related data.
+ */
 function clearAllArrays() {
   currentSubtasks = [];
   selectedContactsKeys = [];
@@ -480,6 +483,7 @@ function searchTitleOrDescription(inputId) {
   renderTasks();
 }
 
+// TODO jsdoc 
 function createAddTaskBtnBoard(category, contentId) {
   createContactlistAddTask();
   generatePopUpAddTask(category, contentId);
@@ -851,6 +855,11 @@ function removeAddedSubtask(index) {
   renderSubtaskAddedList();
 }
 
+/**
+ * Updates the todo data for the specified index based on user input and sends the updated data to a remote server.
+ *
+ * @param {number} i - The index of the todo item in the `currentTodos` array to update.
+ */
 function getUserChangedData(i) {
   let editTitle = document.getElementById('titleEdit').value;
   let textareaEdit = document.getElementById('textareaEdit').value;
@@ -958,6 +967,8 @@ function toggleContactSelection(checkbox, contactKey) {
   if (checkbox.checked) {
     if (index === -1) {
       selectedContactsKeys.push(contactKey);
+      console.log(selectedContactsKeys);
+
     }
   } else {
     if (index !== -1) {
