@@ -19,8 +19,8 @@ async function onload() {
   renderTasks();
   await generateHeaderInitials();
 
-  openTaskDetails(0);
-  generateEditTemplate(0);
+  // openTaskDetails(0);
+  // generateEditTemplate(0);
 }
 
 /**
@@ -483,7 +483,12 @@ function searchTitleOrDescription(inputId) {
   renderTasks();
 }
 
-// TODO jsdoc 
+/**
+ * Creates the "Add Task" button board by generating the contact list and opening the task creation popup.
+ *
+ * @param {string} category - The category for the task being added.
+ * @param {string} contentId - The ID of the content area where the task is being added.
+ */
 function createAddTaskBtnBoard(category, contentId) {
   createContactlistAddTask();
   generatePopUpAddTask(category, contentId);
@@ -844,14 +849,10 @@ function saveCurrentSubtask(i) {
  */
 function removeAddedSubtask(index) {
   if (index === 'all') {
-    // Alle Subtasks löschen
     currentSubtasks = [];
   } else {
-    // Spezifischen Subtask basierend auf dem Index entfernen
     currentSubtasks.splice(index, 1);
   }
-
-  // Subtasks neu rendern
   renderSubtaskAddedList();
 }
 
@@ -888,6 +889,11 @@ async function loadPopUpAddTask(category, contentId) {
   subtaskKeyDownAddSubtask();
 }
 
+/**
+ * Saves the assigned contacts for a specific todo item and sends the updated data to a remote server.
+ *
+ * @param {number} i - The index of the todo item in the `currentTodos` array to update.
+ */
 function saveCurrentAssignedTo(i) {
   currentTodos[i]['assignedTo'] = selectedContactsKeys;
   editTaskRemote(todoKeysArray[i], { assignedTo: currentTodos[i]['assignedTo'] });
@@ -968,7 +974,6 @@ function toggleContactSelection(checkbox, contactKey) {
     if (index === -1) {
       selectedContactsKeys.push(contactKey);
       console.log(selectedContactsKeys);
-
     }
   } else {
     if (index !== -1) {
@@ -987,6 +992,6 @@ function loadEditMembersInitials() {
     const name = getName(selectedContacts[0]);
     const initialsName = generateInitials(name);
 
-      membersContainer.innerHTML += memberEditHtmlTemplate(initialsName);
+    membersContainer.innerHTML += memberEditHtmlTemplate(initialsName);
   }
 }
