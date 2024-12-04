@@ -102,6 +102,7 @@ a {
   padding: 40px 10px;
   gap: 32px;
   border-radius: 30px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 .modal-content {
@@ -510,5 +511,11 @@ label span {
   .header-btn-container a {
     padding: 12px 13px;
     font-size: 14px;
+  }
+}
+
+@media (min-width: 1921px) {
+  .body {
+    background-color: white;
   }
 }
