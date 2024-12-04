@@ -63,7 +63,7 @@ function generateDetailTaskTemplate(id) {
               <div onclick="deleteTask(${id})"><img src="/assets/icons/board/delete.svg" alt="delete">
                 <span>Delete</span>
               </div>
-              <div onclick="generateEditTemplate(${id})" class="separator ">
+              <div onclick="openEditTask(${id})" class="separator ">
               <img src="/assets/icons/board/edit.svg" alt="edit">
               <span>Edit</span>
             </div>
@@ -75,10 +75,10 @@ function generateDetailTaskTemplate(id) {
 /**
  * Generates the HTML template for editing a specific task.
  * @param {number} id - The ID of the task to edit.
+ * @param {number} dueDate - The due Date of the task to edit.
  */
-function generateEditTemplate(id) {
-  const dueDate = todos[id].dueDate;
-  document.getElementById('dialog').innerHTML = /*html */ `
+function generateEditTemplate(id, dueDate) {
+   return /*html */ `
       <div class="wrapper dialog-content" onclick="event.stopPropagation();">
         <div class="edit-template detail-task scrollbar" >
             <div class="x-task-category-container d-flex-sb-c">
@@ -94,6 +94,26 @@ function generateEditTemplate(id) {
 
 
           <strong>Priority</strong>
+          <div class="priority-container">
+            <div class="priority priority-urgent active" id="urgentDetailTask" onclick="changePriority('urgent')" tabindex="0">
+                <div>
+                    <span>Urgent</span>
+                    <span class="urgent-img"></span>
+                </div>
+            </div>
+            <div class="priority priority-medium" id="mediumDetailTask" onclick="changePriority('medium')" tabindex="0">
+                <div>
+                    <span>Medium</span>
+                    <span class="medium-img"></span>
+                </div>
+            </div>
+            <div class="priority priority-low" id="lowDetailTask" onclick="changePriority('low')" tabindex="0">
+                <div>
+                    <span>Low</span>
+                    <span class="low-img"></span>
+                </div>
+            </div>
+          </div>
 
 
 

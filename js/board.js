@@ -19,8 +19,8 @@ async function onload() {
   renderTasks();
   await generateHeaderInitials();
 
-  // openTaskDetails(0);
-  // generateEditTemplate(0);
+  openTaskDetails(0);
+  openEditTask(0);
 }
 
 /**
@@ -410,10 +410,22 @@ document.addEventListener('DOMContentLoaded', init);
  * @param {number} id - The ID of the task to display.
  */
 function openTaskDetails(id) {
+  loadCurrentPriority(id);
   document.getElementById('dialog').innerHTML = generateDetailTaskTemplate(id);
   loadSubtaskList(id);
   loadAssignedToList(id);
   openDialog();
+}
+
+/**
+ * Opens the edit dialog for a specific task.
+ *
+ * @param {number} id - The ID of the task to be edited.
+ */
+function openEditTask(id) {
+  const dueDate = todos[id].dueDate;
+  document.getElementById('dialog').innerHTML = generateEditTemplate(id, dueDate);
+  setFocusBasedOnPriority();
 }
 
 /**
@@ -444,7 +456,7 @@ function closeDialog() {
 function clearAllArrays() {
   currentSubtasks = [];
   selectedContactsKeys = [];
-  // TODO
+  activePriority = 'medium';
 }
 
 /**
@@ -994,4 +1006,40 @@ function loadEditMembersInitials() {
 
     membersContainer.innerHTML += memberEditHtmlTemplate(initialsName);
   }
+}
+
+function loadCurrentPriority(i) {
+  let currentPrio = currentTodos[i].prio;
+  activePriority = currentPrio;
+}
+
+function setFocusBasedOnPriority() {
+  if (activePriority === 'urgent') {
+    document.getElementById('urgentDetailTask').classList.add('active');
+    document.getElementById('mediumDetailTask').classList.remove('active');
+    document.getElementById('lowDetailTask').classList.remove('active');
+  } else if (activePriority === 'medium') {
+    document.getElementById('mediumDetailTask').classList.add('active');
+    document.getElementById('urgentDetailTask').classList.remove('active');
+    document.getElementById('lowDetailTask').classList.remove('active');
+  } else if (activePriority === 'low') {
+    document.getElementById('lowDetailTask').classList.add('active');
+    document.getElementById('mediumDetailTask').classList.remove('active');
+    document.getElementById('urgentDetailTask').classList.remove('active');
+  }
+}
+
+function setPriorityColor(priority) {
+  if (priority === 'urgent') {
+    activePriority = 'urgent';
+  } else if (priority === 'medium') {
+    activePriority = 'medium';
+  } else if (priority === 'low') {
+    activePriority = 'low';
+  }
+}
+
+function changePriority(priority) {
+  setPriorityColor(priority);
+  setFocusBasedOnPriority();
 }

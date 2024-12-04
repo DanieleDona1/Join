@@ -860,3 +860,74 @@ input:focus {
   margin-left: 0;
   margin-right: 28px;
 }
+
+.priority {
+  display: inline-block;
+  padding: 10px;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+}
+
+.priority div {
+  display: flex;
+  align-items: center;
+}
+
+.priority span {
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.urgent-img,
+.medium-img,
+.low-img {
+  width: 20px;
+  height: 16px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  }
+
+.priority-urgent.active {
+  background-color: rgb(255, 61, 0);
+  color: white;
+  outline: none;
+}
+
+.urgent-img {
+  background-image: url('/assets/icons/add_tasks/inactive_icon_urgent.svg');
+}
+
+.priority-urgent.active .urgent-img {
+  background-image: url('/assets/icons/add_tasks/active_icon_urgent.svg');
+}
+
+.priority-medium.active {
+  background-color: rgb(255, 168, 0);
+  color: white;
+  outline: none;
+}
+
+.medium-img {
+  background-image: url('/assets/icons/add_tasks/inactive_icon_medium.svg');
+}
+
+.priority-medium.active .medium-img {
+  background-image: url('/assets/icons/add_tasks/active_icon_medium.svg');
+}
+
+.priority-low.active {
+  background-color: rgb(122, 226, 41);
+  color: white;
+  outline: none;
+}
+
+.low-img {
+  background-image: url('/assets/icons/add_tasks/inactive_icon_low.svg');
+}
+
+.priority-low.active .low-img {
+  background-image: url('/assets/icons/add_tasks/active_icon_low.svg');
+}
