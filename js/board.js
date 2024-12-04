@@ -47,17 +47,14 @@ function renderTasks() {
  */
 function updateColumn(category, contentId) {
   let currentTodosCategory = currentTodos.filter((t) => t['category'] === category);
-
   let content = document.getElementById(contentId);
   content.innerHTML = '';
 
   for (let i = 0; i < currentTodosCategory.length; i++) {
     const task = currentTodosCategory[i];
     content.innerHTML += generateHtmlTemplate(task);
-
     const { progressText, progressBar } = initializeProgressElements(task['id']);
     loadProgressText(task, progressText, progressBar);
-
     loadMembersInitials(task['id'], 'membersContainer');
   }
 }
@@ -901,6 +898,11 @@ async function loadPopUpAddTask(category, contentId) {
   subtaskKeyDownAddSubtask();
 }
 
+/**
+ * Saves the current priority to the specified todo and updates the remote task.
+ *
+ * @param {number} i - The index of the todo item in the currentTodos array.
+ */
 function saveCurrentPriority(i) {
   currentTodos[i]['prio'] = activePriority;
   editTaskRemote(todoKeysArray[i], { assignedTo: currentTodos[i]['assignedTo'] });
@@ -916,8 +918,16 @@ function saveCurrentAssignedTo(i) {
   editTaskRemote(todoKeysArray[i], { assignedTo: currentTodos[i]['assignedTo'] });
 }
 
+/**
+ * Edits the specified task by updating its data and re-rendering the task board.
+ *
+ * This function retrieves and saves user changes (priority, assigned person, subtasks),
+ * updates the `currentTodos` array, and triggers a re-render of the task board.
+ *
+ * @param {number} i - The index of the task in the `currentTodos` array.
+ */
 function editTask(i) {
-  // Die Task im Board werden mit dem Inhalt let currentTodos = []; gerendert, deswegen greift getUserChangedData() und saveCurrentSubtask() auf currentTodos
+  // TODO Die Task im Board werden mit dem Inhalt let currentTodos = []; gerendert, deswegen greift getUserChangedData() und saveCurrentSubtask() auf currentTodos
   getUserChangedData(i);
   saveCurrentPriority(i);
   saveCurrentAssignedTo(i);
@@ -928,6 +938,15 @@ function editTask(i) {
   closeDialog();
 }
 
+/**
+ * Toggles the visibility of a dropdown menu and updates related UI elements.
+ *
+ * This function checks whether the dropdown is open or closed, and either shows or hides it.
+ * It also updates the appearance of the associated container and populates the dropdown with options if opened.
+ *
+ * @param {string} dropdownId - The ID of the dropdown element to toggle.
+ * @param {string} openContactsId - The ID of the element that controls the dropdown's open/close state.
+ */
 function toggleDropdown(dropdownId, openContactsId) {
   const dropdown = document.getElementById(dropdownId);
   const selectDiv = document.getElementById(openContactsId);
@@ -945,31 +964,28 @@ function toggleDropdown(dropdownId, openContactsId) {
   }
 }
 
+/**
+ * Populates the dropdown with contact list items.
+ *
+ * This function clears the existing content of the dropdown and adds new contact items
+ * from the `contactList`. It also attaches a selection change handler to the dropdown.
+ *
+ * @param {string} dropdownId - The ID of the dropdown element to populate.
+ */
 function populateDropdown(dropdownId) {
   const dropdown = document.getElementById(dropdownId);
   dropdown.innerHTML = '';
   contactList.forEach((contact) => {
-    const contactItemHTML = createContactItem(contact);
+    const contactItemHTML = createContactItemTemplate(contact);
     dropdown.innerHTML += contactItemHTML;
   });
   toggleSelectionOnChange(dropdownId);
 }
 
-function createContactItem(contact) {
-  let name = getName(contact);
-  let initials = getInitials(contact);
-  return /*html*/ `
-    <label class="contact-select-wrapper" for="${contact.id}">
-      <div class="d-flex-fs-c">
-        <div class="contact-label initial-edit d-flex-c-c" style="background-color: ${contact.color};">${initials}</div>
-        <span class="contact-name">${name}</span>
-      </div>
-      <input type="checkbox" id="${contact.id}" class="contact-checkbox" />
-      <span class="checkbox-image"></span>
-    </label>
-  `;
-}
-
+/**
+ * Toggles selection of a contact when a checkbox is changed in a dropdown.
+ * @param {string} dropdownId - The ID of the dropdown element containing checkboxes.
+ */
 function toggleSelectionOnChange(dropdownId) {
   const dropdownContent = document.getElementById(dropdownId);
   dropdownContent.addEventListener('change', function (event) {
@@ -982,6 +998,12 @@ function toggleSelectionOnChange(dropdownId) {
   });
 }
 
+/**
+ * Toggles the selection state of a contact when a checkbox is checked or unchecked.
+ * Updates the contact's visual state and manages the list of selected contacts.
+ * @param {HTMLInputElement} checkbox - The checkbox element that was toggled.
+ * @param {string} contactKey - The unique key or ID associated with the contact.
+ */
 function toggleContactSelection(checkbox, contactKey) {
   const contactDiv = document.querySelector(`[for="${contactKey}"]`);
   contactDiv.classList.toggle('selected-contact', checkbox.checked);
@@ -1000,6 +1022,10 @@ function toggleContactSelection(checkbox, contactKey) {
   loadEditMembersInitials();
 }
 
+/**
+ * Loads and displays the initials of the selected contacts in the member edit container.
+ * Clears the container and populates it with the initials of the currently selected contacts.
+ */
 function loadEditMembersInitials() {
   const membersContainer = document.getElementById('memberEditInitialsContainer');
   membersContainer.innerHTML = '';
@@ -1013,27 +1039,34 @@ function loadEditMembersInitials() {
   }
 }
 
+/**
+ * Loads the priority of the current todo item and sets it as the active priority.
+ * @param {number} i - The index of the todo item in the currentTodos array.
+ */
 function loadCurrentPriority(i) {
   let currentPrio = currentTodos[i].prio;
   activePriority = currentPrio;
 }
 
+/**
+ * Sets the focus on the task details based on the current active priority.
+ * It adds the 'active' class to the task element that matches the active priority
+ * and removes it from the other task elements.
+ */
 function setFocusBasedOnPriority() {
-  if (activePriority === 'urgent') {
-    document.getElementById('urgentDetailTask').classList.add('active');
-    document.getElementById('mediumDetailTask').classList.remove('active');
-    document.getElementById('lowDetailTask').classList.remove('active');
-  } else if (activePriority === 'medium') {
-    document.getElementById('mediumDetailTask').classList.add('active');
-    document.getElementById('urgentDetailTask').classList.remove('active');
-    document.getElementById('lowDetailTask').classList.remove('active');
-  } else if (activePriority === 'low') {
-    document.getElementById('lowDetailTask').classList.add('active');
-    document.getElementById('mediumDetailTask').classList.remove('active');
-    document.getElementById('urgentDetailTask').classList.remove('active');
-  }
+  const priorities = ['urgent', 'medium', 'low'];
+
+  priorities.forEach((prio) => {
+    const element = document.getElementById(`${prio}DetailTask`);
+    element.classList.toggle('active', activePriority === prio);
+  });
 }
 
+/**
+ * Sets the active priority based on the given priority value.
+ * Updates the activePriority variable to match the provided priority ('urgent', 'medium', or 'low').
+ * @param {string} priority - The priority to set ('urgent', 'medium', or 'low').
+ */
 function setPriorityColor(priority) {
   if (priority === 'urgent') {
     activePriority = 'urgent';
@@ -1044,6 +1077,11 @@ function setPriorityColor(priority) {
   }
 }
 
+/**
+ * Changes the active priority and updates the focus based on the new priority.
+ * Sets the activePriority and updates the UI to reflect the new priority's focus.
+ * @param {string} priority - The new priority to set ('urgent', 'medium', or 'low').
+ */
 function changePriority(priority) {
   setPriorityColor(priority);
   setFocusBasedOnPriority();

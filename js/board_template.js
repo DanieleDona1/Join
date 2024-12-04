@@ -284,3 +284,25 @@ function memberEditHtmlTemplate(initialsName) {
     </div>
     `;
 }
+
+/**
+ * Creates an HTML template for a contact item, including name, initials, and a checkbox.
+ * @param {Object} contact - The contact object containing details to display.
+ * @param {string} contact.id - The unique ID of the contact.
+ * @param {string} contact.color - The background color for the contact's initials.
+ * @returns {string} The HTML template for the contact item.
+ */
+function createContactItemTemplate(contact) {
+  let name = getName(contact);
+  let initials = getInitials(contact);
+  return /*html*/ `
+    <label class="contact-select-wrapper" for="${contact.id}">
+      <div class="d-flex-fs-c">
+        <div class="contact-label initial-edit d-flex-c-c" style="background-color: ${contact.color};">${initials}</div>
+        <span class="contact-name">${name}</span>
+      </div>
+      <input type="checkbox" id="${contact.id}" class="contact-checkbox" />
+      <span class="checkbox-image"></span>
+    </label>
+  `;
+}
