@@ -19,8 +19,8 @@ async function onload() {
   renderTasks();
   await generateHeaderInitials();
 
-  openTaskDetails(0);
-  openEditTask(0);
+  // openTaskDetails(0);
+  // openEditTask(0);
 }
 
 /**
@@ -901,6 +901,11 @@ async function loadPopUpAddTask(category, contentId) {
   subtaskKeyDownAddSubtask();
 }
 
+function saveCurrentPriority(i) {
+  currentTodos[i]['prio'] = activePriority;
+  editTaskRemote(todoKeysArray[i], { assignedTo: currentTodos[i]['assignedTo'] });
+}
+
 /**
  * Saves the assigned contacts for a specific todo item and sends the updated data to a remote server.
  *
@@ -914,7 +919,7 @@ function saveCurrentAssignedTo(i) {
 function editTask(i) {
   // Die Task im Board werden mit dem Inhalt let currentTodos = []; gerendert, deswegen greift getUserChangedData() und saveCurrentSubtask() auf currentTodos
   getUserChangedData(i);
-  // savePrio
+  saveCurrentPriority(i);
   saveCurrentAssignedTo(i);
   saveCurrentSubtask(i);
 
