@@ -847,13 +847,9 @@ input:focus {
 .initials-container {
   height: auto;
   width: 100%;
-  /* width: 200px; */
-  /* overflow-x: auto; */
   margin-top: 8px;
   display: flex;
-  margin-bottom: 16px;
-  /* flex-grow: 1; */
-  /* flex-shrink: 1; */
+  /* margin-bottom: 16px; */
 }
 
 .initial-board-wrapper .margin {
