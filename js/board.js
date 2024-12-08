@@ -905,7 +905,7 @@ async function loadPopUpAddTask(category, contentId) {
  */
 function saveCurrentPriority(i) {
   currentTodos[i]['prio'] = activePriority;
-  editTaskRemote(todoKeysArray[i], { assignedTo: currentTodos[i]['assignedTo'] });
+  editTaskRemote(todoKeysArray[i], { prio: currentTodos[i]['prio'] });
 }
 
 /**
