@@ -914,8 +914,10 @@ function saveCurrentPriority(i) {
  * @param {number} i - The index of the todo item in the `currentTodos` array to update.
  */
 function saveCurrentAssignedTo(i) {
-  currentTodos[i]['assignedTo'] = selectedContactsKeys;
-  editTaskRemote(todoKeysArray[i], { assignedTo: currentTodos[i]['assignedTo'] });
+  if (selectedContactsKeys.length > 0) {
+    currentTodos[i]['assignedTo'] = selectedContactsKeys;
+    editTaskRemote(todoKeysArray[i], { assignedTo: currentTodos[i]['assignedTo'] });
+}
 }
 
 /**
@@ -1005,6 +1007,7 @@ function toggleSelectionOnChange(dropdownId) {
  * @param {string} contactKey - The unique key or ID associated with the contact.
  */
 function toggleContactSelection(checkbox, contactKey) {
+  // selectedContactsKeys = [];
   const contactDiv = document.querySelector(`[for="${contactKey}"]`);
   contactDiv.classList.toggle('selected-contact', checkbox.checked);
   const index = selectedContactsKeys.indexOf(contactKey);
