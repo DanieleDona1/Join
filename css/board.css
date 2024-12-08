@@ -467,6 +467,7 @@ h3 {
   max-height: 700px;
   border-radius: 30px;
   padding: 72px;
+  overflow-y: auto;
 }
 
 .edit-template {

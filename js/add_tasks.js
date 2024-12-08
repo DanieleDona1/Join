@@ -68,7 +68,7 @@ function formatOutput(day, month, year) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  const customSelects = document.querySelectorAll('.custom-select');
+  const customSelects = document.querySelectorAll('.add-task-custom-select');
 
   customSelects.forEach((customSelect) => {
     const selected = customSelect.querySelector('.select-selected');
@@ -159,7 +159,7 @@ function handleDropdownOptions(initialsDisplay) {
 // schaltet die Auswahl einer Option um und aktualisiert
 // Überprüft, ob das Dropdown 'drop-down-2' ist
 function isDropDown2(option) {
-  const dropdownParent = option.closest('.custom-select');
+  const dropdownParent = option.closest('.add-task-custom-select');
   return dropdownParent && dropdownParent.id === 'drop-down-2';
 }
 

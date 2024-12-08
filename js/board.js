@@ -429,7 +429,11 @@ function openEditTask(id) {
  * Displays the dialog for task details.
  */
 function openDialog() {
-  document.getElementById('dialog').style.display = 'flex';
+  const dialog = document.getElementById('dialog');
+  const content = dialog.querySelector('.dialog-content');
+
+  content.classList.remove('slide-out');
+  dialog.style.display = 'flex';
 }
 
 /**
@@ -894,7 +898,7 @@ function getUserChangedData(i) {
 async function loadPopUpAddTask(category, contentId) {
   generatePopUpAddTask(category, contentId);
   await createContactlistAddTask();
-  // loadDropDown(); uncomment later
+   loadDropDown(); 
   subtaskKeyDownAddSubtask();
 }
 

@@ -32,7 +32,7 @@ form input[type="checkbox"] {
   color: rgb(209, 209, 209);
 }
 
-.custom-select {
+.add-task-custom-select {
   position: relative;
   display: inline-block;
   width: 100%; /* Breite des Dropdowns */
@@ -82,7 +82,7 @@ form input[type="checkbox"] {
 }
 
 /* Dropdown Pfeil */
-.custom-select::after {
+.add-task-custom-select::after {
   content: "▼"; /* Dropdown-Pfeil */
   position: absolute;
   right: 20px;
@@ -93,12 +93,12 @@ form input[type="checkbox"] {
   z-index: 2;
 }
 
-.custom-select.open::after {
+.add-task-custom-select.open::after {
   transform: translateY(-50%) rotate(180deg); /* Pfeil um 180 Grad drehen */
 }
 
 /* Einblendung des Dropdowns bei Klick */
-.custom-select.open .select-items {
+.add-task-custom-select.open .select-items {
   display: block; /* Dropdown anzeigen */
 }
 
@@ -154,7 +154,7 @@ form .resizable-textarea {
 
 form .resizable-textarea:focus,
 input:focus,
-.custom-select:focus-within {
+.add-task-custom-select:focus-within {
   border-width: 1.8px;
   border-color: rgb(41, 171, 226); /* Randfarbe ändern bei Fokus */
   outline: none; /* Entfernt den Standard-Fokus-Rahmen */

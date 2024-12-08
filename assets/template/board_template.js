@@ -172,18 +172,7 @@ function generateAssignedTo(id) {
  * @param {string} contentId - The ID of the content area where the task will be added.
  */
 function generatePopUpAddTask(category, contentId) {
-  document.getElementById('dialog').innerHTML = /*html*/ `
-    <div class="pop-up-add-Task slide-in dialog-content" onclick="event.stopPropagation();">
-      <div class="d-flex-sb-c">
-        <h2>Add Task</h2>
-        <img class="x-mark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
-      </div>
-      <!-- TODO -->TODO add_task html and css
 
-      <button onclick="closeDialog()">Cancel</button>
-      <button onclick="createTask('${category}', '${contentId}'); closeDialog();">Create Task</button>
-    </div>
-    `;
   openDialog();
 }
 
