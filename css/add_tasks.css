@@ -1,4 +1,5 @@
-form span {
+form span,
+.required-note span {
   color: rgb(255, 129, 144);
   vertical-align: top;
 }
