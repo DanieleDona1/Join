@@ -467,7 +467,8 @@ h3 {
   height: 84%;
   background-color: white;
   border-radius: 30px;
-  padding: 72px;
+  padding: 30px;
+  overflow:auto;
 }
 
 .edit-template {
