@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact</title>
+    <link rel="icon" type="image/png" href="/assets/icons/favicons/favicon_light.png" id="favicon" />
     <script src="/script.js"></script>
     <script src="/js/contact.js"></script>
-    <link rel="icon" type="image/png" href="/assets/icons/favicons/favicon_light.png" id="favicon" />
     <link rel="stylesheet" href="/css/contact.css" />
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
@@ -15,8 +15,8 @@
   <body onload="onloadFunc()">
     <div class="background-pop-up d-none" id="background-pop-up">
       <!-- add contact section  -->
-      <section class="d-none pop-up-add-contact" id="pop-up-add-contact">
-        <button class="close-popup" onclick="closeAddContact()">
+      <section class="d-none pop-up-add-contact slide-in" id="pop-up-add-contact">
+        <button class="close-popup slide-out" onclick="closeAddContact()">
           <img src="/assets/icons/contact/close-cross.svg" alt="close" />
         </button>
 
@@ -27,7 +27,7 @@
               <span class="add-contact-headline">Add contact</span>
               <span class="add-contact-info">Tasks are better with a team!</span>
             </div>
-            <img src="/assets/icons/contact/contact_line_vector.svg" alt="" class="contact-vector" />
+            <img src="/assets/icons/contact/contact_line_vector.svg" alt="" class="add-contact-vector" />
           </div>
         </div>
 
@@ -106,7 +106,6 @@
         </div>
       </div>
     </header>
-
     <nav>
       <div class="navbar-join-icon-container d-none">
         <img src="/assets/icons/navbar/navbar_join_icon.svg" alt="" />
@@ -139,20 +138,23 @@
 
     <main class="main-contact">
       <div class="main-contact-side">
-        <div class="contact-list-field">
+        <div id="contact-list-field" class="contact-list-field">
           <button onclick="openAddContact()" class="contact-list-field-button">
-            Add new contact
+            <span>Add new contact</span>
             <img src="/assets/icons/contact/contact_add.png" alt="contact add" />
           </button>
           <div class="contact-list" id="content-contactlist"></div>
         </div>
       </div>
     </main>
-    <div class="contact-text">
+    <div id="contact-info-window" class="d-none">
+    </div>
+    <div id="contact-text-large" class="contact-text">
       <span class="span-1">Contacts</span>
       <div class="contact-vector"></div>
       <span class="span-2">Better with a team</span>
     </div>
     <div id="contact-info" class="contact-info"></div>
+
   </body>
 </html>

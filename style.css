@@ -417,19 +417,6 @@ main p {
     left: calc((100vw - 1920px) / 2 + 232px);
     top: calc((100vh - 1080px) / 2 + 0px);
   }
-}
-
-@media (min-width: 1921px) {
-  nav {
-    left: calc((100vw - 1920px) / 2 + 0px);
-    top: calc((100vh - 1080px) / 2 + 0px);
-    max-height: 1080px;
-  }
-
-  header {
-    left: calc((100vw - 1920px) / 2 + 232px);
-    top: calc((100vh - 1080px) / 2 + 0px);
-  }
 
   main {
     left: calc((100vw - 1920px) / 2 + 232px);

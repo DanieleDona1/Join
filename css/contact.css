@@ -1,5 +1,5 @@
 /* overflow hidden bei open popup */
-.main-contact{
+.main-contact {
     padding: 0;
     width: 100%;
     height: calc(100vh - 96px);
@@ -74,7 +74,7 @@
     gap: 35px;
 }
 
-.contact-item:hover{
+.contact-item:hover {
     background-color: #2A3647;
     color: white;
     border-radius: 10px;
@@ -131,12 +131,14 @@
 .contact-text .span-1 {
     font-size: 61px;
     font-weight: 700;
+    order: 1;
 }
 
-.contact-text .contact-vector {
+.contact-vector {
     height: 59px;
     width: 3px;
     background-color: #29ABE2;
+    order: 2;
 
 }
 
@@ -146,12 +148,12 @@
     font-size: 27px;
     font-weight: 400;
     color: #2A3647;
-
+    order: 3;
 }
 
-.contact-info{
+.contact-info {
     min-width: 461px;
-    height: 364px;
+    height: auto;
     position: absolute;
     top: 311px;
     left: 750px;
@@ -160,7 +162,7 @@
     gap: 21px;
 }
 
-.info-initial-name{
+.info-initial-name {
     min-width: 461px;
     height: 120px;
     display: flex;
@@ -168,7 +170,7 @@
     gap: 54px;
 }
 
-.info-initial{
+.info-initial {
     width: 120px;
     height: 120px;
     border-radius: 70px;
@@ -182,28 +184,28 @@
     font-weight: 500;
 }
 
-.info-name-button{
+.info-name-button {
     min-width: 287px;
     height: 88px;
     gap: 8px;
 
 }
 
-.info-name{
+.info-name {
     min-width: 287px;
     height: 56px;
     font-size: 47px;
     font-weight: 500;
 }
 
-.info-buttons{
+.info-buttons {
     width: 159px;
     height: 24px;
     display: flex;
     justify-content: space-between;
 }
 
-.info-edit{
+.info-edit {
     width: 62px;
     height: 24px;
     border: none;
@@ -216,11 +218,11 @@
     cursor: pointer;
 }
 
-.info-edit:hover{
+.info-edit:hover {
     filter: brightness(0) saturate(100%) invert(30%) sepia(93%) saturate(2162%) hue-rotate(214deg) brightness(99%) contrast(108%);
 }
 
-.info-delete{
+.info-delete {
     width: 81px;
     height: 24px;
     border: none;
@@ -234,11 +236,11 @@
 
 }
 
-.info-delete:hover{
+.info-delete:hover {
     filter: brightness(0) saturate(100%) invert(30%) sepia(93%) saturate(2162%) hue-rotate(214deg) brightness(99%) contrast(108%);
 }
 
-.info-text{
+.info-text {
     max-width: 207px;
     height: 74px;
     display: flex;
@@ -247,7 +249,7 @@
     font-weight: 400;
 }
 
-.info-email-phone{
+.info-email-phone {
     min-width: 140px;
     height: 128px;
     display: flex;
@@ -255,7 +257,7 @@
     gap: 22px;
 }
 
-.info-email{
+.info-email {
     min-width: 140px;
     height: 53px;
     display: flex;
@@ -263,18 +265,18 @@
     gap: 15px;
 }
 
-.info-email span{
+.info-email span {
     font-size: 16px;
-    font-weight: 700;        
+    font-weight: 700;
 }
 
-.info-email a{
+.info-email a {
     text-decoration: none;
     color: rgb(38, 107, 255);
 }
 
 
-.info-phone{
+.info-phone {
     min-width: 140px;
     height: 53px;
     display: flex;
@@ -282,11 +284,39 @@
     gap: 15px;
 }
 
-.info-phone span:first-child{
+.info-phone span:first-child {
     font-size: 16px;
     font-weight: 700;
 }
 
+.slide-in {
+    animation: slide-in 150ms linear forwards;
+}
+
+@keyframes slide-in {
+    0% {
+        transform: translate(50%, -50%);
+        /* Rechts außerhalb */
+    }
+
+    100% {
+        transform: translate(-50%, -50%);
+        /* Zentriert */
+    }
+}
+
+.slide-out {
+    animation: slide-out 150ms linear forwards;
+}
+
+@keyframes slide-out {
+    0% {
+        transform: translate(-50%, -50%); /* Ausgangsposition: zentriert */
+    }
+    100% {
+        transform: translate(50%, -50%); /* Zielposition: nach rechts außerhalb */
+    }
+}
 
 
 /*class unterhalb wird nicht angezeigt*/
@@ -359,8 +389,10 @@
     color: white;
 }
 
-.contact-vector {
+.add-contact-vector {
     height: 3px;
+    width: 90px;
+    background-color: #29ABE2;
 }
 
 .close-popup {
@@ -509,7 +541,7 @@ button {
 
 /* Edit Contact */
 
-.edit-contact-pic{
+.edit-contact-pic {
     width: 120px;
     height: 120px;
     position: absolute;
@@ -526,7 +558,7 @@ button {
     font-weight: 500;
 }
 
-.edit-delete{
+.edit-delete {
     width: 113px;
     height: 55px;
     display: flex;
@@ -540,7 +572,7 @@ button {
     font-weight: 400;
 }
 
-.edit-save{
+.edit-save {
     width: 111px;
     height: 57px;
     display: flex;
@@ -575,4 +607,290 @@ button {
     background-position: 95%;
     background-size: 24px;
 }
+#toggleButtons {
+    background-color: #2A3647;
+    width: 56px;
+    height: 56px;
+    position: absolute;
+    bottom: 128px;
+    right: 50px;
+    border-radius: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
 /* Ende Edit Contact */
+
+#contact-info-window {
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(246, 247, 248);
+    
+  }
+
+/* responsive */
+@media screen and (min-width: 1430px) {
+    .main-contact{
+        max-width: calc(1440px - 232px);
+    }
+}
+
+@media (max-width: 1430px) {
+    .contact-text{
+        flex-direction: column;
+        max-width: 300px;
+        height: auto;
+        align-items: flex-start;
+        gap: 16px;
+        top: 150px;
+    }
+    .contact-vector{
+        width: 100px;
+        height: 3px;
+        order: 4;
+    }
+    .info-initial{
+        width: 90px;
+        height: 90px;
+        font-size: 40px;
+    }
+    .info-name{
+        font-size: 40px;
+    }
+    .info-initial-name{
+        gap: 30px;
+    }
+    .info-text{
+        height: 50px;
+    }
+    .contact-info{
+        gap: 15px;
+    }
+
+}
+
+@media (max-width: 1224px) {
+    #contact-text-large{
+        position: absolute;
+        left: 500px;
+    }
+    .contact-info{
+        left: 500px;
+    }
+    .contact-list-field{
+        height: calc(100vh - 175px);
+    }
+    .pop-up-add-contact{
+        height: 100vh;
+        width: 100%;
+    }
+    .contact-side-info{
+        width: 100%;
+        height: 45vh;
+        border-radius: 30px 30px 0 0 ;
+    }
+    .contact-field{
+        top: 55vh;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+    .contact-logo{
+        display: none;
+    }
+    .contact-pic{
+        top: calc(45vh - 60px) ;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+    .edit-contact-pic{
+        top: calc(45vh - 60px) ;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+    .input-button{
+        top: 80vh;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+    .close-popup{
+        display: flex;
+        position: fixed;
+        top: 50px;
+        left: 90%; 
+        background-color: #2A3647;
+    }
+    .close-popup img{
+        filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(2%) hue-rotate(61deg) brightness(110%) contrast(101%);    }
+}
+
+@media screen and (min-width: 850px) {
+    #contact-info-window{
+        display: none;
+    }
+    #toggleButtons{
+        display: none;
+
+    }
+}
+
+@media screen and (max-width: 850px) {
+    #contact-text-large{
+        display: none;
+    }
+    .contact-info{
+        display: none;
+        
+    } 
+    .contact-list{
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%,0);
+    }
+    .main-contact-side{
+        width: 100%;
+    }
+    .contact-list-field-button span{
+        display: none;
+    }
+
+    .contact-list-field-button{
+        position: fixed;
+        bottom: 128px;
+        right: 50px;
+        width: 56px;
+        height: 56px;
+        border-radius: 46px;
+        z-index: 100;
+    }
+    .contact-list-field{
+        width: 100%;
+        padding: 0px 24px;
+    }
+    
+    .back-info-wrapper{
+        position: absolute;
+        top: 128px;
+        right: 50px;
+        background-color: transparent;
+        border: 0;
+        display: flex;
+    }
+    .back-info-wrapper img{
+        width: 32px;
+        height: 32px;
+    }
+
+
+    #contact-text-small{
+        top: 128px;
+        left: 80px;
+        width: 213px;
+        
+    }
+    .contact-info-wrapper{
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 280px;
+        left: 80px;
+        gap: 16px;
+    }
+    .info-initial-name{
+        display: flex;
+        min-width: 330px;
+        min-height: 80px;
+        gap: 20px;
+    }
+    .info-initial{
+        min-width: 80px;
+        max-width: 80px;
+        height: 80px;
+    }
+    .info-name-button{
+        display: flex;
+        align-items: center;
+    }
+    .info-name{
+        font-size: 36px;
+        height: auto;
+    }
+    .info-buttons{
+        display: none;
+        position: absolute;
+        bottom: 140px;
+        right: 50px;
+        flex-direction: column;
+        width: 116px;
+        height: 100px;
+        font-size: 16px;
+        padding: 10px;
+        border-radius: 20px 20px 0 20px;
+
+        background-color: white;
+    }
+    .info-delete, .info-edit{
+        width: 96px;
+        height: 40px;
+        padding: 8px;
+        gap: 8px;
+
+    }
+    .info-text{
+        height: 24px;
+        font-size: 20px;
+    }
+    .contact-text .span-1{
+        font-size: 47px;
+    }
+    .contact-text .span-2{
+        font-size: 20px;
+    }   
+    .cancel{
+        display: none;
+    }
+    
+    #toggleButtons {
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .close-popup{
+        left: 85%;
+    }
+    
+    
+}
+@media screen and (max-width: 500px) {
+    #contact-text-small{
+        top: 128px;
+        left: 16px;
+        width: 213px;
+    }
+    .contact-info-wrapper{
+        left: 16px;
+    }
+    .info-initial-name{
+        min-width: 330px;
+        gap: 20px;
+    }
+    .info-initial{
+        width: 80px;
+        height: 80px;
+    }
+    .info-name-button{
+        display: flex;
+        align-items: center;
+    }
+    .info-text{
+        height: 24px;
+        font-size: 20px;
+    }
+    .contact-text .span-1{
+        font-size: 47px;
+    }
+    .contact-text .span-2{
+        font-size: 20px;
+    }   
+}

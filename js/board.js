@@ -432,7 +432,7 @@ function animationSlideOut() {
   const dialog = document.getElementById('dialog');
   const content = dialog.querySelector('.dialog-content');
 
-  content.classList.add('slide-out');
+  content.classList.add('slide-out'); 
   content.addEventListener(
     'animationend',
     function () {

@@ -95,17 +95,15 @@ function displayGroupedContacts(groupedContacts) {
 
 function getContactInfo(groupInitial, contactIndex) {
   const contact = groupedContacts[groupInitial][contactIndex];
-  const contactColor = contact.color; // Verwende die gespeicherte Farbe
+  const contactColor = contact.color;
 
-  const contactInfo = document.getElementById("contact-info");
-  contactInfo.innerHTML = "";
-
-  contactInfo.innerHTML = /*html*/ `
+  // Kontaktdaten HTML
+  const contactHTML = /*html*/ `
       <div class="info-initial-name">
-        <div class="info-initial"  style="background-color: ${contactColor};">${contact.user.initials}</div>
+        <div class="info-initial" style="background-color: ${contactColor};">${contact.user.initials}</div>
         <div class="info-name-button">
           <div class="info-name">${contact.user.name}</div>
-          <div class="info-buttons">
+          <div class="info-buttons" id="editDeleteButtons">
             <button class="info-edit" onclick="openEditContact('${groupInitial}', ${contactIndex})">
               <img src="/assets/icons/contact/contact_info_edit.png" alt="">
               Edit
@@ -128,10 +126,52 @@ function getContactInfo(groupInitial, contactIndex) {
           <span>${contact.user.number}</span>
         </div>
       </div>
-
-    </div>
-
   `;
+
+  // Übergeordneten Container für "Contacts" und Kontaktdaten
+  const contactWrapperHTML = /*html*/ `
+    <div id="contact-text-small" class="contact-text">
+      <span class="span-1">Contacts</span>
+      <div class="contact-vector"></div>
+      <span class="span-2">Better with a team</span>
+    </div>
+    <button onclick="closeContactInfoWindow()" class="back-info-wrapper">
+    <img src="/assets/icons/arrow_left_line.svg" alt="button-back">
+    </button>
+    <div class="contact-info-wrapper">
+      ${contactHTML}
+    </div>
+    <button id="toggleButtons" onclick="toggleEditDelete()">
+    <img src="/assets/icons/contact/more_vert.png" alt="">
+    </button>
+    `;
+
+  if (window.innerWidth <= 850) {
+    // Für kleine Bildschirme: Popup
+    const popup = document.getElementById("contact-info-window");
+    popup.innerHTML = contactWrapperHTML;
+    popup.classList.remove("d-none");
+    document.getElementById("contact-list-field").classList.add("d-none");
+  } else {
+    // Für große Bildschirme: Standardbereich
+    const contactInfo = document.getElementById("contact-info");
+    contactInfo.innerHTML = contactHTML;
+    document.getElementById("contact-info-window").classList.add("d-none"); // Popup ausblenden
+  }
+}
+
+
+
+// Schließen des Popups
+function closeContactInfoWindow() {
+  document.getElementById("contact-list-field").classList.remove("d-none");
+  document.getElementById("contact-info-window").classList.add("d-none");
+}
+
+
+function closeContactInfoWindow() {
+  document.getElementById("contact-info-window").classList.add("d-none");
+  document.getElementById("background-pop-up").classList.add("d-none");
 }
 
 async function addContact(button) {
@@ -210,14 +250,30 @@ async function addNewContact(name, mail, number) {
 }
 
 function openAddContact() {
+  console.log("animationend fired");
   document.getElementById("background-pop-up").classList.remove("d-none");
-  document.getElementById("pop-up-add-contact").classList.remove("d-none");
+  document.getElementById("pop-up-add-contact").classList.remove("d-none", "slide-out");
   document.querySelector("body").classList.add("overflow-hidden");
-}
+  
+} 
 
 function closeAddContact() {
   document.getElementById("background-pop-up").classList.add("d-none");
   document.getElementById("pop-up-add-contact").classList.add("d-none");
+  document.querySelector("body").classList.remove("overflow-hidden");
+}
+
+function openEditContact(groupedcontact, index) {
+  document.getElementById("pop-up-edit-contact").classList.remove("d-none");
+  document.getElementById("background-pop-up").classList.remove("d-none");
+  document.querySelector("body").classList.add("overflow-hidden");
+  
+  renderEditConatct(groupedcontact, index);
+}
+
+function closeEditContact() {
+  document.getElementById("pop-up-edit-contact").classList.add("d-none");
+  document.getElementById("background-pop-up").classList.add("d-none");
   document.querySelector("body").classList.remove("overflow-hidden");
 }
 
@@ -229,20 +285,6 @@ function getRandomColor() {
     color += letters[Math.floor(Math.random() * 16)];
   }
   return color;
-}
-
-function openEditContact(groupedcontact, index) {
-  document.getElementById("pop-up-edit-contact").classList.remove("d-none");
-  document.getElementById("background-pop-up").classList.remove("d-none");
-  document.querySelector("body").classList.add("overflow-hidden");
-
-  renderEditConatct(groupedcontact, index);
-}
-
-function closeEditContact() {
-  document.getElementById("pop-up-edit-contact").classList.add("d-none");
-  document.getElementById("background-pop-up").classList.add("d-none");
-  document.querySelector("body").classList.remove("overflow-hidden");
 }
 
 function renderEditConatct(groupedcontact, index) {
@@ -299,4 +341,14 @@ async function editContact(id) {
   await createContactlist(); // Lade die Kontakte erneut
   renderPhoneList(); // Render die aktualisierte Liste
   document.getElementById("contact-info").innerHTML = "";
+}
+
+
+function toggleEditDelete() {
+  const editDeleteButtons = document.getElementById('editDeleteButtons');
+  if (editDeleteButtons.style.display === 'none' || editDeleteButtons.style.display === '') {
+    editDeleteButtons.style.display = 'flex'; // Buttons anzeigen
+  } else {
+    editDeleteButtons.style.display = 'none'; // Buttons ausblenden
+  }
 }
