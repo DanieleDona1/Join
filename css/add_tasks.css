@@ -10,6 +10,8 @@ section p {
 }
 
 section {
+  display: flex;
+  flex-direction: column;
   width: 100%;
 }
 
@@ -39,6 +41,7 @@ form input[type="checkbox"] {
   width: 100%; /* Breite des Dropdowns */
   height: 48px;
   border: none;
+  margin-bottom: 28px;
 }
 
 .select-selected {
@@ -121,8 +124,10 @@ section button {
 }
 
 form {
+  position: relative;
   display: flex;
   font-size: 20px;
+  height: 85%;
 }
 
 form input {
@@ -144,7 +149,7 @@ form input {
 
 form .resizable-textarea {
   width: 100%;
-  height: 120px;
+  min-height: 120px;
   padding: 12px 21px;
   border: 1px solid rgb(214, 214, 214);
   border-radius: 6px;
@@ -379,8 +384,11 @@ input:focus,
 
 .clear-create-button-container {
   display: flex;
+  margin-top: auto;
+  padding-top: 40px;
   justify-content: flex-end;
-  margin-top: 33%;
+  margin-bottom: 5%;
+
 }
 
 .clear-button {
@@ -419,11 +427,12 @@ input:focus,
 }
 
 .required-note {
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 48%;
+  margin-top: auto;
+  padding-top: 110px;
+  margin-bottom: 10%;
   font-size: 16px;
 }
+
 
 .mg-b-28 {
   margin-bottom: 28px;
@@ -437,12 +446,30 @@ input:focus,
   display: none;
 }
 
+
+@media (max-width: 1225px) {
+
+  .clear-create-button-container,
+  .required-note {
+    padding-bottom: 60px;
+  }
+}
+
+
 @media (max-width: 900px) {
   form {
     display: block;
+    height: 100vh
   }
+
   .required-note {
-    margin-top: 36px;
+    padding-bottom: 30px;
+    position: fixed;
+    bottom: 70px;
+    left: 20px;
+    z-index: 15;
+    background-color: rgb(246,247,248);
+    padding: 5px;
   }
 
   .divider {
@@ -450,19 +477,20 @@ input:focus,
   }
 
   .clear-create-button-container {
-    margin-top: 80px;
-    padding-bottom: 100px;
+    padding-bottom: 30px;
     position: fixed;
-    bottom: -15px;
+    bottom: 60px;
     right: 60px;
     z-index: 15;
   }
 
   .subtask-container {
-    padding-bottom: 300px;
+    padding-bottom: 200px;
   }
 
   .subtask-list-group .subtask-list-icons {
     opacity: 1;
   }
 }
+
+

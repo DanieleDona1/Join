@@ -172,7 +172,11 @@ function generateAssignedTo(id) {
  * @param {string} contentId - The ID of the content area where the task will be added.
  */
 function generatePopUpAddTask() {
-  openDialog();
+  if (window.innerWidth < 900) {
+    window.location.href = "/html/add_tasks.html"; 
+  } else {
+    openDialog();
+  }
 }
 
 /**
