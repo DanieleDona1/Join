@@ -899,8 +899,8 @@ function getUserChangedData(i) {
  * @param {string} contentId - The ID of the content area.
  * @returns {Promise<void>} - Resolves when the popup and contact list are loaded.
  */
-async function loadPopUpAddTask(category, contentId) {
-  generatePopUpAddTask(category, contentId);
+async function loadPopUpAddTask() {
+  generatePopUpAddTask();
   await createContactlistAddTask();
    loadDropDown();
   subtaskKeyDownAddSubtask();

@@ -171,8 +171,7 @@ function generateAssignedTo(id) {
  * @param {string} category - The category of the new task.
  * @param {string} contentId - The ID of the content area where the task will be added.
  */
-function generatePopUpAddTask(category, contentId) {
-
+function generatePopUpAddTask() {
   openDialog();
 }
 
