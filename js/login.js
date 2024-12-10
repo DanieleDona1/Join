@@ -88,9 +88,9 @@ function saveToLocalStorage(key, value) {
  * @function guestLoginRedirect
  * @returns {void}
  */
-function guestLoginRedirect() {
+function guestLoginRedirect(url) {
   saveToLocalStorage('user', 'Guest');
-  redirectToPage('summary.html');
+  redirectToPage(url);
 }
 
 /**
