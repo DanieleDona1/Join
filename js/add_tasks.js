@@ -6,401 +6,314 @@ async function onloadAddtasks() {
   await createContactlistAddTask();
   loadDropDown();
   subtaskKeyDownAddSubtask();
+  initTaskButtons();
+  setClearButtonHandler();
+  initCustomDropdowns();
+  initFieldNavigation();
 }
 
-// FunktionAufteilen vollständigen Namens in Vorname und Nachname
+// Namen splitten
 function splitName(fullName) {
-  let nameParts = fullName.split(' ');
-  let firstName = nameParts[0];
-  let lastName = nameParts.slice(1).join(' ');
-
-  return { firstName, lastName };
+  let p = fullName.split(' ');
+  let f = p[0];
+  let l = p.slice(1).join(' ');
+  return { firstName: f, lastName: l };
 }
 
-// Funktion zum Erstellen der Kontaktliste
+// Kontaktliste erstellen
 async function createContactlistAddTask() {
   let data = await loadData('contacts');
-  let contactKeys = Object.keys(data);
-
-  for (let i = 0; i < contactKeys.length; i++) {
-    let fullName = data[contactKeys[i]].name;
-    let { firstName, lastName } = splitName(fullName);
-
-    contactList.push({
-      id: contactKeys[i],
-      color: data[contactKeys[i]].color,
-      firstName: firstName,
-      lastName: lastName,
-    });
+  let keys = Object.keys(data);
+  for (let i = 0; i < keys.length; i++) {
+    let full = data[keys[i]].name;
+    let { firstName, lastName } = splitName(full);
+    contactList.push({id:keys[i],color:data[keys[i]].color,firstName,lastName});
   }
 }
 
+// Datum formatieren
 function formatDate(input) {
-  let value = cleanInput(input.value);
-  let { day, month, year } = extractDateParts(value);
+  let val = cleanInput(input.value);
+  let { day, month, year } = extractDateParts(val);
   ({ day, month } = validateDate(day, month));
   input.value = formatOutput(day, month, year);
 }
 
-function cleanInput(value) {
-  return value.replace(/\D/g, '');
-}
+function cleanInput(value) { return value.replace(/\D/g,''); }
 
 function extractDateParts(value) {
   return {
-    day: value.substring(0, 2),
-    month: value.substring(2, 4),
-    year: value.substring(4, 8),
+    day: value.substring(0,2),
+    month: value.substring(2,4),
+    year: value.substring(4,8)
   };
 }
 
 function validateDate(day, month) {
-  day = day > 31 ? '31' : day;
-  month = month > 12 ? '12' : month;
+  if(day>31) day='31';
+  if(month>12) month='12';
   return { day, month };
 }
 
-function formatOutput(day, month, year) {
-  let output = day;
-  if (month) output += '/' + month;
-  if (year) output += '/' + year;
-  return output;
+function formatOutput(d,m,y) {
+  let out=d;
+  if(m) out+='/'+m;
+  if(y) out+='/'+y;
+  return out;
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  const customSelects = document.querySelectorAll('.add-task-custom-select');
-
-  customSelects.forEach((customSelect) => {
-    const selected = customSelect.querySelector('.select-selected');
-    const optionsContainer = customSelect.querySelector('.select-items');
-    const selectId = customSelect.getAttribute('id');
-
-    selected.addEventListener('click', function () {
-      optionsContainer.classList.toggle('select-hide');
-      customSelect.classList.toggle('open');
-    });
-
-    const options = optionsContainer.querySelectorAll('.select-option');
-    options.forEach((option) => {
-      option.addEventListener('click', function () {
-        if (selectId === 'drop-down-2') {
-          selected.textContent = this.textContent;
-          optionsContainer.classList.add('select-hide');
-          customSelect.classList.remove('open');
-        }
-      });
-    });
-  });
-
-  // öffnet drop down?
-  document.addEventListener('click', function (e) {
-    customSelects.forEach((customSelect) => {
-      const selected = customSelect.querySelector('.select-selected');
-      const optionsContainer = customSelect.querySelector('.select-items');
-
-      if (!selected.contains(e.target) && !optionsContainer.contains(e.target)) {
-        optionsContainer.classList.add('select-hide');
-        customSelect.classList.remove('open');
-      }
-    });
-  });
-});
-
-// bereitet die Dropdown Optionen und eine Anzeige für Initialen vor.
+// Dropdown laden
 function loadDropDown() {
-  const dropdown = document.getElementById('drop-down-1');
-  const selectItems = dropdown.querySelector('.select-items');
-  const initialsDisplay = document.getElementById('initials-display');
-
-  createContactOptions(selectItems);
-  handleDropdownOptions(initialsDisplay);
+  const dd = document.getElementById('drop-down-1');
+  const items = dd.querySelector('.select-items');
+  const disp = document.getElementById('initials-display');
+  createContactOptions(items);
+  handleDropdownOptions(disp);
 }
 
-// Erstellt alle Optionen im Dropdown-Menü basierend auf den Kontakten
-function createContactOptions(selectItems) {
-  contactList.forEach((contact) => {
-    const initials = getInitials(contact);
-    const optionTemplate = getOptionTemplate(contact, initials);
-    selectItems.innerHTML += optionTemplate;
-  });
+function createContactOptions(items) {
+  for (let i=0;i<contactList.length;i++){
+    let c=contactList[i],inits=getInitials(c);
+    items.innerHTML+=getOptionTemplate(c,inits);
+  }
 }
 
-// Gibt Initialen eines contacts zurück
-function getInitials(contact) {
-  return contact.firstName.charAt(0).toUpperCase() + contact.lastName.charAt(0).toUpperCase();
+function getInitials(c) {
+  return c.firstName.charAt(0).toUpperCase()+c.lastName.charAt(0).toUpperCase();
 }
 
-// html template Kontaktoption
-function getOptionTemplate(contact, initials) {
+function getOptionTemplate(c,inits) {
   return `
-    <div class="select-option" id="option-${contact.firstName}-${contact.lastName}" data-value="${contact.firstName} ${contact.lastName}">
-        <div class="contact">
-          <div class="initial" style="background-color: ${contact.color};">${initials}</div>
-          <div class="name">${contact.firstName} ${contact.lastName}</div>
-        </div>
-        <input type="checkbox" />
-        <div class="custom-checkbox"></div>
+    <div class="select-option" data-value="${c.firstName} ${c.lastName}" id="option-${c.firstName}-${c.lastName}">
+      <div class="contact">
+        <div class="initial" style="background-color:${c.color};">${inits}</div>
+        <div class="name">${c.firstName} ${c.lastName}</div>
+      </div>
+      <input type="checkbox"/>
+      <div class="custom-checkbox"></div>
     </div>
   `;
 }
 
-// Auswahl von Dropdown optionen und das Anzeigen der Initialen
-function handleDropdownOptions(initialsDisplay) {
-  const dropdownOptions = document.querySelectorAll('.select-option');
-
-  dropdownOptions.forEach((option, index) => {
-    option.addEventListener('click', function () {
-      toggleOptionSelection(this, index);
-      updateInitialsDisplay(initialsDisplay);
+function handleDropdownOptions(disp) {
+  const opts=document.querySelectorAll('.select-option');
+  for(let i=0;i<opts.length;i++){
+    opts[i].addEventListener('click',()=>{
+      toggleOptionSelection(opts[i]);
+      updateInitialsDisplay(disp);
     });
-  });
+  }
 }
 
-// schaltet die Auswahl einer Option um und aktualisiert
-// Überprüft, ob das Dropdown 'drop-down-2' ist
 function isDropDown2(option) {
-  const dropdownParent = option.closest('.add-task-custom-select');
-  return dropdownParent && dropdownParent.id === 'drop-down-2';
+  const p=option.closest('.add-task-custom-select');
+  return p&&p.id==='drop-down-2';
 }
 
-// Schaltet das Kontrollkästchen und die zugehörigen Klassen um
-function toggleCheckboxAndClasses(option) {
-  const checkbox = option.querySelector('input[type="checkbox"]');
-  const customCheckbox = option.querySelector('.custom-checkbox');
-  const initials = option.querySelector('.initial').textContent;
-
-  checkbox.checked = !checkbox.checked;
-  option.classList.toggle('active');
-  customCheckbox.classList.toggle('checked');
-
-  return { initials, checked: checkbox.checked };
-}
-
-// Aktualisiert das 'selectedInitials'-Array basierend auf dem Kontrollkästchen-Status
-function updateSelectedInitials(initials, checked) {
-  if (checked) {
-    if (!selectedInitials.includes(initials)) {
-      selectedInitials.push(initials);
-    }
-  } else {
-    const idx = selectedInitials.indexOf(initials);
-    if (idx > -1) {
-      selectedInitials.splice(idx, 1);
-    }
-  }
-}
-
-// Hauptfunktion zur Handhabung der Auswahl einer Option
-function toggleOptionSelection(option, index) {
-  if (isDropDown2(option)) {
-    return;
-  }
-
+function toggleOptionSelection(option) {
+  if(isDropDown2(option)) return;
   const { initials, checked } = toggleCheckboxAndClasses(option);
-  updateSelectedInitials(initials, checked);
+  updateSelectedInitials(initials,checked);
 }
 
-// Beispiel: Hinzufügen der Event Listener für die Optionen
-function handleDropdownOptions(initialsDisplay) {
-  const dropdownOptions = document.querySelectorAll('.select-option');
-
-  dropdownOptions.forEach((option, index) => {
-    option.addEventListener('click', function () {
-      toggleOptionSelection(this, index);
-      updateInitialsDisplay(initialsDisplay);
-    });
-  });
+function toggleCheckboxAndClasses(opt) {
+  const box=opt.querySelector('input[type="checkbox"]');
+  const c=opt.querySelector('.custom-checkbox');
+  const inits=opt.querySelector('.initial').textContent;
+  box.checked=!box.checked;
+  opt.classList.toggle('active');
+  c.classList.toggle('checked');
+  return { initials:inits, checked:box.checked };
 }
 
-// Aktualisiert die Anzeige der Initialen auf der Seite
-function updateInitialsDisplay(initialsDisplay) {
-  initialsDisplay.innerHTML = '';
-
-  selectedInitials.forEach((initial) => {
-    const contactForInitial = findContactByInitial(initial);
-    if (contactForInitial) {
-      initialsDisplay.innerHTML += createInitialElement(contactForInitial);
-    }
-  });
-}
-
-// Sucht Kontakt basierend auf Initialen
-function findContactByInitial(initial) {
-  return contactList.find((contact) => {
-    const contactInitials = getInitials(contact);
-    return contactInitials === initial;
-  });
-}
-
-// Erstellt das html für einzelnen Initiale
-function createInitialElement(contact) {
-  return `<div class="initial" style="background-color: ${contact.color}; margin-right: 10px;">${getInitials(contact)}</div>`;
-}
-
-// Der ausgewählte Prio Button wird in der entsprechenden Farbe angezeigt
-document.addEventListener('DOMContentLoaded', () => {
-  const buttons = document.querySelectorAll('.task-button');
-
-  buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-      buttons.forEach((btn) => btn.classList.remove('active'));
-      button.classList.add('active');
-      updateButtonIcons(buttons);
-    });
-  });
-  updateButtonIcons(buttons);
-});
-
-// aktualisiert Hintergrundfarbe des ausgewählten prio btn
-function updateButtonIcons(buttons) {
-  buttons.forEach((button) => {
-    const color = button.getAttribute('data-color');
-    const img = button.querySelector('img');
-    const iconType = button.classList.contains('active') ? 'active' : 'inactive';
-    img.src = `/assets/icons/add_tasks/${iconType}_icon_${color}.svg`;
-  });
-}
-
-function activeCheckboxesRemote() {
-  const activeCheckboxes = document.querySelectorAll(".select-option input[type='checkbox']:checked");
-
-  activeCheckboxes.forEach((checkbox) => {
-    const parentOption = checkbox.closest('.select-option');
-    const name = parentOption.querySelector('.name').textContent;
-    const contact = contactList.find((contact) => `${contact.firstName} ${contact.lastName}` === name);
-
-    selectedContacts.push(contact.id);
-  });
-}
-
-// springt zum nächsten Inputfeld beim betätigen der Enter Taste
-function moveToNextField(event) {
-  if (event.key === 'Enter') {
-    event.preventDefault();
-
-    const formElements = Array.from(document.querySelectorAll('[id^="input-field-"]'));
-    const currentIndex = formElements.findIndex((el) => el === event.target);
-    let nextElement = formElements[currentIndex + 1];
-
-    if (!nextElement) {
-      nextElement = document.getElementById('subtaskInput');
-    }
-
-    nextElement.focus(); // Fokus auf das nächste Element setzen
+function updateSelectedInitials(inits,check) {
+  if(check){
+    if(selectedInitials.indexOf(inits)===-1) selectedInitials.push(inits);
+  } else {
+    let idx=selectedInitials.indexOf(inits);
+    if(idx>-1) selectedInitials.splice(idx,1);
   }
 }
 
-// Event Listener für Inputfeld beim betätigen der Enter Taste
-document.querySelectorAll('[id^="input-field-"]').forEach((input) => {
-  input.addEventListener('keydown', moveToNextField);
-});
+function updateInitialsDisplay(disp) {
+  disp.innerHTML='';
+  for(let i=0;i<selectedInitials.length;i++){
+    let contactForInit=findContactByInitial(selectedInitials[i]);
+    if(contactForInit) disp.innerHTML+=createInitialElement(contactForInit);
+  }
+}
 
+function findContactByInitial(initial) {
+  for(let i=0;i<contactList.length;i++){
+    if(getInitials(contactList[i])===initial)return contactList[i];
+  }
+  return null;
+}
+
+function createInitialElement(c) {
+  return `<div class="initial" style="background-color:${c.color};margin-right:10px;">${getInitials(c)}</div>`;
+}
+
+// Task Buttons
+function initTaskButtons() {
+  const btns=document.querySelectorAll('.task-button');
+  for(let i=0;i<btns.length;i++){
+    btns[i].addEventListener('click',()=>{
+      deactivateAllButtons(btns);
+      btns[i].classList.add('active');
+      updateButtonIcons(btns);
+    });
+  }
+  updateButtonIcons(btns);
+}
+
+function deactivateAllButtons(btns) {
+  for(let i=0;i<btns.length;i++) btns[i].classList.remove('active');
+}
+
+function updateButtonIcons(btns) {
+  for(let i=0;i<btns.length;i++){
+    let b=btns[i], c=b.getAttribute('data-color');
+    let img=b.querySelector('img');
+    let t=b.classList.contains('active')?'active':'inactive';
+    img.src=`/assets/icons/add_tasks/${t}_icon_${c}.svg`;
+  }
+}
+
+// Checkboxes ermitteln
+function activeCheckboxesRemote() {
+  const checked=document.querySelectorAll(".select-option input[type='checkbox']:checked");
+  for(let i=0;i<checked.length;i++){
+    const p=checked[i].closest('.select-option');
+    const n=p.querySelector('.name').textContent;
+    for(let j=0;j<contactList.length;j++){
+      if(`${contactList[j].firstName} ${contactList[j].lastName}`===n){
+        selectedContacts.push(contactList[j].id);break;
+      }
+    }
+  }
+}
+
+// Next Field on Enter
+function moveToNextField(e) {
+  if (e.key === 'Enter') {
+    e.preventDefault(); // Verhindert das Standardverhalten (Formular abschicken)
+    const fields = Array.from(document.querySelectorAll('[id^="input-field-"]'));
+    const currentIndex = fields.indexOf(e.target); // Aktuelles Feld finden
+    const nextField = fields[currentIndex + 1] || document.getElementById('subtaskInput');
+    if (nextField) nextField.focus(); // Fokus auf das nächste Feld setzen
+  }
+}
+
+function preventFormSubmit() {
+  const form = document.querySelector('form'); // Selektiere das Formular
+  if (form) {
+    form.addEventListener('submit', (e) => e.preventDefault()); // Verhindere Formular-Submit
+  }
+}
+
+function initFieldNavigation() {
+  // Event-Listener für Eingabefelder
+  const inputFields = document.querySelectorAll('[id^="input-field-"]');
+  for (let i = 0; i < inputFields.length; i++) {
+    inputFields[i].addEventListener('keydown', moveToNextField);
+  }
+
+  // Event-Listener für das Formular
+  preventFormSubmit();
+}
+
+// Input Feld Keydown
 function subtaskKeyDownAddSubtask() {
-  const subtaskInput = document.getElementById('subtaskInput');
-  if (subtaskInput) {
-    subtaskInput.addEventListener('keydown', function (event) {
-      if (event.key === 'Enter') {
-        if (event.target.value.trim() === '') {
-          event.preventDefault();
-        } else {
-          addCurrentSubtask();
-          event.preventDefault();
-        }
+  const inp=document.getElementById('subtaskInput');
+  if(inp){
+    inp.addEventListener('keydown',(e)=>{
+      if(e.key==='Enter'){
+        if(e.target.value.trim()===''){e.preventDefault();}
+        else{addCurrentSubtask();e.preventDefault();}
       }
     });
   }
 }
 
-// btn listener cleared alle Inputfelder
+// Reset Form
 function resetForm() {
-  document.getElementById('form-add-task').reset();
+  const f=document.getElementById('form-add-task');
+  if(f) f.reset();
 }
 
-// Funktion zum Zurücksetzen der Prioritätsbuttons
 function resetPriorityButtons() {
-  document.querySelectorAll('.task-button').forEach((button) => {
-    button.classList.remove('active');
-    const img = button.querySelector('img');
-    const color = button.getAttribute('data-color');
-    img.src = `/assets/icons/add_tasks/inactive_icon_${color}.svg`;
-  });
+  const btns=document.querySelectorAll('.task-button');
+  for(let i=0;i<btns.length;i++){
+    btns[i].classList.remove('active');
+    const img=btns[i].querySelector('img');
+    const c=btns[i].getAttribute('data-color');
+    img.src=`/assets/icons/add_tasks/inactive_icon_${c}.svg`;
+  }
 }
 
-// Funktion zum Setzen des Standard-Prioritätsbuttons (Medium)
 function setDefaultPriority() {
-  const mediumButton = document.querySelector("[data-color='medium']");
-  mediumButton.classList.add('active');
-
-  const mediumButtonImg = mediumButton.querySelector('img');
-  mediumButtonImg.src = `/assets/icons/add_tasks/active_icon_medium.svg`;
+  const mb=document.querySelector('[data-color="medium"]');
+  if(mb){
+    mb.classList.add('active');
+    const img=mb.querySelector('img');
+    img.src=`/assets/icons/add_tasks/active_icon_medium.svg`;
+  }
 }
 
-// Funktion zum Entfernen der Subtasks
-function clearSubtasks() {
-  removeAddedSubtask('all');
-}
+function clearSubtasks() { removeAddedSubtask('all'); }
 
-// Funktion zum Ausblenden aller Fehlermeldungen
 function hideAllErrorMessages() {
-  const errorMessages = document.querySelectorAll('.error-msg-addtask');
-  errorMessages.forEach((error) => error.classList.add('d-none'));
+  const errs=document.querySelectorAll('.error-msg-addtask');
+  for(let i=0;i<errs.length;i++) errs[i].classList.add('d-none');
 }
 
-// Funktion zum Zurücksetzen des Dropdowns für die Aufgabenkategorie (drop-down-2)
 function resetCategoryDropdown() {
-  const dropDown2 = document.getElementById('drop-down-2');
-  const selectedCategory = dropDown2.querySelector('.select-selected');
-  selectedCategory.textContent = 'Select task category';
-
-  currentTaskCategory = '';
+  const d2=document.getElementById('drop-down-2');
+  if(!d2)return;
+  const s=d2.querySelector('.select-selected');
+  if(s) s.textContent='Select task category';
+  currentTaskCategory='';
 }
 
-// Funktion zum Entfernen der aktiven Klasse von Kategorie-Optionen
 function resetCategoryOptions() {
-  const dropDown2 = document.getElementById('drop-down-2');
-  const categoryOptions = dropDown2.querySelectorAll('.select-option');
-  categoryOptions.forEach((option) => {
-    option.classList.remove('active');
-  });
+  const d2=document.getElementById('drop-down-2');
+  if(!d2)return;
+  const opts=d2.querySelectorAll('.select-option');
+  for(let i=0;i<opts.length;i++) opts[i].classList.remove('active');
 }
 
-// Funktion zum Leeren der Arrays für ausgewählte Initialen und Kontakte
 function clearSelectedContacts() {
-  selectedInitials.length = 0;
-  selectedContacts.length = 0;
+  selectedInitials.length=0;
+  selectedContacts.length=0;
 }
 
-// Funktion zum Leeren der Anzeige der Initialen
 function clearInitialsDisplay() {
-  document.getElementById('initials-display').innerHTML = '';
+  const d=document.getElementById('initials-display');
+  if(d)d.innerHTML='';
 }
 
-// Funktion zum Deaktivieren aller Kontrollkästchen und Entfernen aktiver Klassen im Kontaktdropdown
-function uncheckAllContactOptions(dropDown) {
-  const selectOptions = dropDown.querySelectorAll('.select-option');
-  selectOptions.forEach((option) => {
-    const checkbox = option.querySelector('input[type="checkbox"]');
-    const customCheckbox = option.querySelector('.custom-checkbox');
-    if (checkbox.checked) {
-      checkbox.checked = false;
-    }
-    option.classList.remove('active');
-    customCheckbox.classList.remove('checked');
-  });
+function uncheckAllContactOptions(dd) {
+  const opts=dd.querySelectorAll('.select-option');
+  for(let i=0;i<opts.length;i++){
+    const box=opts[i].querySelector('input[type="checkbox"]');
+    const c=opts[i].querySelector('.custom-checkbox');
+    if(box.checked)box.checked=false;
+    opts[i].classList.remove('active');
+    c.classList.remove('checked');
+  }
 }
 
-// Funktion zum Zurücksetzen des Kontaktdropdowns (drop-down-1)
 function resetContactsDropdown() {
-  const dropDown1 = document.getElementById('drop-down-1');
-  const selectedContactsDiv = dropDown1.querySelector('.select-selected');
-  selectedContactsDiv.textContent = 'Select contacts to assign';
-
+  const d1=document.getElementById('drop-down-1');
+  if(!d1)return;
+  const sel=d1.querySelector('.select-selected');
+  if(sel) sel.textContent='Select contacts to assign';
   clearSelectedContacts();
   clearInitialsDisplay();
-  uncheckAllContactOptions(dropDown1);
+  uncheckAllContactOptions(d1);
 }
 
-// Funktion zum Zurücksetzen aller Komponenten
 function clearAll() {
   resetForm();
   resetPriorityButtons();
@@ -412,86 +325,106 @@ function clearAll() {
   resetContactsDropdown();
 }
 
-// Funktion zum Binden der clearAll-Funktion an den "Clear"-Button
 function setClearButtonHandler() {
-  const clearButton = document.getElementById('clear-button');
-  if (clearButton) {
-    clearButton.addEventListener('click', clearAll);
-  }
+  const c=document.getElementById('clear-button');
+  if(c) c.addEventListener('click',clearAll);
 }
 
-document.addEventListener('DOMContentLoaded', setClearButtonHandler);
-
-// Die Funktion wird ausgeführt, wenn auf den Button Create Task geklickt und damit die Task erstellt wird
-async function createAddTask(category) {
-  if (checkRequiredFields()) {
+// Create Task
+async function createAddTask(cat) {
+  if(checkRequiredFields()){
     activeCheckboxesRemote();
     formateDueDate();
-    const userInputData = getUserAddTaskData(category); //hier werden alle Daten geholt die der User in add Task eingegeben hat
-    await addTask(userInputData); //hier werden die geholten Daten auf Firebase gespeichert
-    redirectToPage('board.html'); //hier wird auf board.html weitergeleitet, dort erscheint automatisch die neu erstellte Task in der toDo Category
+    const d=getUserAddTaskData(cat);
+    await addTask(d);
+    redirectToPage('board.html');
   }
 }
 
 function checkRequiredFields() {
-  let valid = true;
-
-  valid &= checkField('input-field-title', 'titleError');
-  valid &= checkField('input-field-date', 'dueDateError');
-  valid &= checkCategory();
-
-  return valid;
+  let v=true;
+  v&=checkField('input-field-title','titleError');
+  v&=checkField('input-field-date','dueDateError');
+  v&=checkCategory();
+  return v;
 }
 
-function checkField(inputId, errorId) {
-  let input = document.getElementById(inputId);
-  let error = document.getElementById(errorId);
-
-  if (input.value.trim() === '') {
-    error.classList.remove('d-none');
-    return false;
-  }
+function checkField(id,errId) {
+  const inp=document.getElementById(id);
+  const err=document.getElementById(errId);
+  if(!inp||inp.value.trim()===''){if(err)err.classList.remove('d-none');return false;}
   return true;
 }
 
 function checkCategory() {
-  let categoryError = document.getElementById('categoryError');
-
-  if (currentTaskCategory === '') {
-    categoryError.classList.remove('d-none');
-    return false;
-  }
+  const catErr=document.getElementById('categoryError');
+  if(currentTaskCategory===''){if(catErr)catErr.classList.remove('d-none');return false;}
   return true;
 }
 
-// wird ausgeführt wenn auf einer der priority button geklickt wird, und speichert den ausgewählten button in der activePriority Variable in der script.js
 function setPriority() {
-  setTimeout(() => {
-    activePriority = document.querySelector('.task-button.active').getAttribute('data-color');
-  }, 10);
+  setTimeout(()=>{
+    const b=document.querySelector('.task-button.active');
+    activePriority=b?b.getAttribute('data-color'):'';
+  },10);
 }
 
-// wird ausgeführt wenn eine Category ausgesucht wurde Technical-Task oder User-Story. Das Ausgewählte wird in currentTaskCategory gespeichert
-function setCategory(choosenCategory) {
-  currentTaskCategory = choosenCategory;
-}
+function setCategory(c) { currentTaskCategory=c; }
 
-// DueDate muss in einem bestimmten Format sein
 function formateDueDate() {
-  const inputDate = document.getElementById('input-field-date')?.value;
-  console.log('inputDate:', typeof inputDate);
+  const val=document.getElementById('input-field-date')?.value;
+  dueDate=formatDateToYMD(val);
+  if(dueDate==='NaN-NaN-NaN')console.log('lol');
+}
 
-  dueDate = formatDateToYMD(inputDate);
-  if (dueDate === 'NaN-NaN-NaN') {
-    console.log('lol');
+function formatDateToYMD(ds) {
+  const d=new Date(ds);
+  const y=d.getFullYear();
+  const m=(d.getMonth()+1).toString().padStart(2,'0');
+  const day=d.getDate().toString().padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+
+// Custom Dropdowns ohne DOMContentLoaded
+function initCustomDropdowns() {
+  const cS=document.querySelectorAll('.add-task-custom-select');
+  for(let i=0;i<cS.length;i++) setupCustomSelect(cS[i]);
+  setupOutsideClickForCustomSelects(cS);
+}
+
+function setupCustomSelect(c) {
+  const s=c.querySelector('.select-selected');
+  const oC=c.querySelector('.select-items');
+  const sId=c.getAttribute('id');
+  s.addEventListener('click',()=>{
+    oC.classList.toggle('select-hide');
+    c.classList.toggle('open');
+  });
+  addOptionListeners(oC,sId,s,c);
+}
+
+function addOptionListeners(oC,sId,s,c) {
+  const o=oC.querySelectorAll('.select-option');
+  for(let i=0;i<o.length;i++){
+    o[i].addEventListener('click',()=>{
+      if(sId==='drop-down-2'){
+        s.textContent=o[i].textContent;
+        oC.classList.add('select-hide');
+        c.classList.remove('open');
+      }
+    });
   }
 }
 
-function formatDateToYMD(dateString) {
-  const date = new Date(dateString);
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const day = date.getDate().toString().padStart(2, '0');
-
-  return `${year}-${month}-${day}`;
+function setupOutsideClickForCustomSelects(cS) {
+  document.addEventListener('click',(e)=>{
+    for(let i=0;i<cS.length;i++){
+      const s=cS[i].querySelector('.select-selected');
+      const oC=cS[i].querySelector('.select-items');
+      if(!s.contains(e.target)&&!oC.contains(e.target)){
+        oC.classList.add('select-hide');
+        cS[i].classList.remove('open');
+      }
+    }
+  });
 }
