@@ -1,11 +1,13 @@
 const BASE_URL = 'https://joinremotestorage-c8226-default-rtdb.europe-west1.firebasedatabase.app/';
 
 // login und board Arrays
+// login und board Arrays
 let todos = [];
 let currentTodos = [];
 let todoKeysArray = [];
 let users = [];
 
+// Alle current Arrays wird auf addTask und board benötigt
 // Alle current Arrays wird auf addTask und board benötigt
 let currentSubtasks = [];
 let activePriority = 'medium'; //Standardmäßig ist medium zugewiesen.

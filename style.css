@@ -14,11 +14,6 @@
   max-height: 1024px;
 }
 
-.max-display-size {
-  max-width: 1920px;
-  max-height: 1080px;
-}
-
 .d-flex-c-c {
   display: flex;
   justify-content: center;
@@ -147,6 +142,11 @@ header img {
 .header-help-icon {
   width: 20px;
   margin-right: 16px;
+}
+
+.dropdown-container {
+  position: relative;
+  display: inline-block;
 }
 
 .dropdown-container {
@@ -342,9 +342,17 @@ main p {
     padding-bottom: 100px;
   }
 
+
   .navbar-join-icon-container img {
     width: 100px;
     height: 122px;
+  }
+
+  .navbar-container-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
   }
 
   .navbar-container-bottom {
@@ -391,6 +399,12 @@ main p {
 
   main h1 {
     font-size: 61px;
+  }
+
+  .navbar-back-arrow {
+    top: 145px;
+    right: 133px;
+    width: 37px;
   }
 
   .navbar-back-arrow {

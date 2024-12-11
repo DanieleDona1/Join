@@ -208,6 +208,8 @@ function getUserAddTaskData(swimlane) {
   return {
     title: document.getElementById('input-field-title')?.value || 'No title',
     dueDate: dueDate, //yy-mm-dd Format
+    title: document.getElementById('input-field-title')?.value || 'No title',
+    dueDate: dueDate, //yy-mm-dd Format
     category: swimlane,
     description: document.getElementById('input-field-description')?.value || 'No description provided.',
     task_category: currentTaskCategory, // User-Story Technical-Task wichtig großgeschrieben User-Story
@@ -491,9 +493,15 @@ function deleteTask(id) {
 function searchTitleOrDescription(inputId) {
   document.getElementById('searchResultMsg').style.opacity = '0';
   document.getElementById('searchResultMsgMobile').style.opacity = '0';
+  document.getElementById('searchResultMsg').style.opacity = '0';
+  document.getElementById('searchResultMsgMobile').style.opacity = '0';
   let filterWord = document.getElementById(inputId).value.trim().toLowerCase();
 
   currentTodos = todos.filter((t) => (t.title && t.title.toLowerCase().includes(filterWord)) || (t.description && t.description.toLowerCase().includes(filterWord)));
+  if (currentTodos.length === 0) {
+    document.getElementById('searchResultMsg').style.opacity = '1';
+    document.getElementById('searchResultMsgMobile').style.opacity = '1';
+  }
   if (currentTodos.length === 0) {
     document.getElementById('searchResultMsg').style.opacity = '1';
     document.getElementById('searchResultMsgMobile').style.opacity = '1';
@@ -519,7 +527,7 @@ function animationSlideOut() {
   const dialog = document.getElementById('dialog');
   const content = dialog.querySelector('.dialog-content');
 
-  content.classList.add('slide-out');
+  content.classList.add('slide-out'); 
   content.addEventListener(
     'animationend',
     function () {
@@ -647,6 +655,7 @@ function onInputSubtask(id) {
     <div class="d-flex-c-c">
       <img onclick="focusInput(); resetInputField(${id});" class="add-subtask" src="/assets/icons/board/property-close.svg" alt="close">
       <img class="mg-left" onclick="addCurrentSubtask()" class="add-subtask" src="/assets/icons/board/property-check.svg" alt="check">
+      <img class="mg-left" onclick="addCurrentSubtask()" class="add-subtask" src="/assets/icons/board/property-check.svg" alt="check">
     </div>
   `;
   } else {
@@ -683,6 +692,9 @@ function addCurrentSubtask() {
  */
 function getSubtaskWithBullet(subtaskInput) {
   let bulletPoint = '• ';
+  if (subtaskInput.startsWith(bulletPoint)) {
+    return subtaskInput;
+  }
   if (subtaskInput.startsWith(bulletPoint)) {
     return subtaskInput;
   }

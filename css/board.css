@@ -17,9 +17,12 @@ h3 {
 
 .gap-32px {
   gap: 32px;
+  gap: 32px;
 }
 
 .search {
+  all: unset;
+  padding: 0 4px;
   all: unset;
   padding: 0 4px;
 }
@@ -38,6 +41,12 @@ h3 {
 .searchbar img {
   border-left: 2px solid rgb(204, 204, 204);
   padding-left: 12px;
+}
+
+.searchbar-container-mobile {
+  display: none;
+  /* display: flex; */
+  flex-direction: column;
 }
 
 .searchbar-container-mobile {
@@ -86,6 +95,10 @@ h3 {
 
 .add-task img {
   width: 16px;
+}
+
+section {
+  max-width: 252px;
 }
 
 .section-container {

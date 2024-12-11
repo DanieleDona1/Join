@@ -2,6 +2,7 @@ form span,
 .required-note span {
   color: rgb(255, 129, 144);
   vertical-align: top;
+  vertical-align: top;
 }
 
 section p {
@@ -135,6 +136,7 @@ form input {
   padding: 12px 21px 12px 21px;
   border-radius: 6px;
   /* margin-bottom: 28px; */
+  /* margin-bottom: 28px; */
   height: 48px;
   width: 100%;
   font-size: 20px;
@@ -196,11 +198,7 @@ input:focus,
 }
 
 .select-option.active {
-  background-color: rgb(
-    42,
-    54,
-    71
-  ); /* Hintergrundfarbe für die aktive Option */
+  background-color: rgb(42, 54, 71); /* Hintergrundfarbe für die aktive Option */
   color: white;
   border-radius: 12px;
 }

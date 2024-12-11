@@ -53,7 +53,7 @@ function login(event) {
     document.getElementById('password').style.border = '1px solid red';
     console.log('Kein Benutzer gefunden');
   }
-}
+};
 
 /**
  * Checks the URL for a 'msg' parameter and displays it with an animation.
@@ -68,7 +68,7 @@ function checkUser(email, password) {
     }
   }
   return null;
-}
+};
 
 /**
  * Saves a key-value pair to local storage.
