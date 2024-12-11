@@ -932,3 +932,11 @@ input:focus {
 .priority-low.active .low-img {
   background-image: url('/assets/icons/add_tasks/active_icon_low.svg');
 }
+
+.error-msg-edit-template {
+  margin-top: 4px;
+  /* margin-bottom: 28px; */
+  color: red;
+  font-size: 0.8rem;
+
+}
