@@ -18,6 +18,7 @@ async function onload() {
 
   renderTasks();
   await generateHeaderInitials();
+  onloadAddtasks();
 
   // openTaskDetails(0);
   // openEditTask(0);
