@@ -938,6 +938,8 @@ function saveCurrentAssignedTo(i) {
  * @param {number} i - The index of the task in the `currentTodos` array.
  */
 function editTask(i) {
+  if (checkRequiredTitleEditFields()) {
+
   // TODO Die Task im Board werden mit dem Inhalt let currentTodos = []; gerendert, deswegen greift getUserChangedData() und saveCurrentSubtask() auf currentTodos
   getUserChangedData(i);
   saveCurrentPriority(i);
@@ -947,6 +949,7 @@ function editTask(i) {
   todos = JSON.parse(JSON.stringify(currentTodos));
   renderTasks();
   closeDialog();
+  }
 }
 
 /**
@@ -1097,4 +1100,12 @@ function setPriorityColor(priority) {
 function changePriority(priority) {
   setPriorityColor(priority);
   setFocusBasedOnPriority();
+}
+
+function checkRequiredTitleEditFields() {
+  let valid = true;
+
+  valid &= checkField('titleEdit', 'titleErrorEdit');
+
+  return valid;
 }

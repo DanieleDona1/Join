@@ -87,6 +87,7 @@ function generateEditTemplate(id, dueDate) {
             </div>
           <strong>Title</strong>
             <input id="titleEdit" class="title-edit" type="text" value="${todos[id].title}" placeholder="Enter a title">
+            <div id="titleErrorEdit" class="error-msg-edit-template d-none">This field is required</div>
           <strong>Description</strong>
             <textarea id="textareaEdit" class="textarea-edit" rows="4" cols="50" maxlength="300" placeholder="Enter a description">${todos[id].description}</textarea>
           <strong>Due date</strong>
@@ -173,7 +174,7 @@ function generateAssignedTo(id) {
  */
 function generatePopUpAddTask() {
   if (window.innerWidth < 900) {
-    window.location.href = "/html/add_tasks.html"; 
+    window.location.href = "/html/add_tasks.html";
   } else {
     openDialog();
   }
