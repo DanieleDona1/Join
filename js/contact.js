@@ -168,12 +168,6 @@ function closeContactInfoWindow() {
   document.getElementById("contact-info-window").classList.add("d-none");
 }
 
-
-function closeContactInfoWindow() {
-  document.getElementById("contact-info-window").classList.add("d-none");
-  document.getElementById("background-pop-up").classList.add("d-none");
-}
-
 async function addContact(button) {
   // Referenz auf das Formular
   let form = document.querySelector("form");
