@@ -172,10 +172,158 @@ function generateAssignedTo(id) {
  * @param {string} category - The category of the new task.
  * @param {string} contentId - The ID of the content area where the task will be added.
  */
-function generatePopUpAddTask() {
+function generatePopUpAddTask(category, contentId) {
   if (window.innerWidth < 900) {
     window.location.href = "/html/add_tasks.html";
   } else {
+    document.getElementById('dialog').innerHTML = /*html*/ `
+    <div class="pop-up-add-Task slide-in dialog-content" onclick="event.stopPropagation();">
+        <div class="d-flex-sb-c">
+          <h2>Add Task</h2>
+          <img class="x-mark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
+        </div>
+        <form id="form-add-task">
+          <section>
+            <div class="mg-b-28">
+              <p>Title<span>*</span></p>
+              <input
+                id="input-field-title"
+                placeholder="Enter a title"
+                type="text"
+                required
+              />
+              <div id="titleError" class="error-msg-addtask d-none">
+                This field is required
+              </div>
+            </div>
+            <p>Description</p>
+            <textarea
+              id="input-field-description"
+              class="resizable-textarea"
+              placeholder="Enter a Description"
+              type="text"
+            ></textarea>
+            <p>Assigned to</p>
+            <div class="add-task-custom-select" id="drop-down-1">
+              <div class="select-selected" tabindex="0">
+                Select contacts to assign
+              </div>
+              <div class="select-items"></div>
+            </div>
+            <div id="selected-initials">
+              <div id="initials-display"></div>
+            </div>
+            <p class="required-note"><span>*</span>This field is required</p>
+          </section>
+          <div class="divider"></div>
+          <section>
+            <div class="mg-b-28">
+              <p>Due date<span>*</span></p>
+              <input
+                id="input-field-date"
+                type="text"
+                placeholder="dd/mm/yyyy"
+                oninput="formatDate(this)"
+              />
+              <div id="dueDateError" class="error-msg-addtask d-none">
+                This field is required
+              </div>
+            </div>
+            <p>Prio</p>
+            <div class="button-container">
+              <button
+                onclick="setPriority()"
+                class="task-button"
+                data-color="urgent"
+                type="button"
+              >
+                Urgent
+                <img
+                  src="/assets/icons/add_tasks/inactive_icon_urgent.svg"
+                  alt=""
+                />
+              </button>
+              <button
+                onclick="setPriority()"
+                class="task-button active"
+                data-color="medium"
+                type="button"
+              >
+                Medium
+                <img
+                  src="/assets/icons/add_tasks/active_icon_medium.svg"
+                  alt=""
+                />
+              </button>
+              <button
+                onclick="setPriority()"
+                class="task-button"
+                data-color="low"
+                type="button"
+              >
+                Low
+                <img src="/assets/icons/add_tasks/inactive_icon_low.svg" alt="" />
+              </button>
+            </div>
+            <p>Category<span>*</span></p>
+            <div class="add-task-custom-select" id="drop-down-2">
+              <div class="select-selected" tabindex="1">Select task category</div>
+              <div class="select-items select-hide">
+                <div
+                  onclick="setCategory('Technical-Task')"
+                  class="select-option"
+                  data-value="category1"
+                >
+                  Technical Task
+                </div>
+                <div
+                  onclick="setCategory('User-Story')"
+                  class="select-option"
+                  data-value="category2"
+                >
+                  User Story
+                </div>
+              </div>
+              <div id="categoryError" class="error-msg-addtask d-none">
+                This field is required
+              </div>
+            </div>
+            <div class="subtask-container mg-t-28">
+              <p>Subtasks</p>
+              <div>
+                <div class="subtask-group">
+                  <input
+                    id="subtaskInput"
+                    class="subtask-input"
+                    oninput="onInputSubtask()"
+                    type="text"
+                    placeholder="Add new subtask"
+                  />
+                  <div id="subtaskIcons" class="subtask-icons">
+                    <img
+                      onclick="focusInput()"
+                      class="add-subtask"
+                      src="/assets/icons/board/property-add.svg"
+                      alt="add"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div id="subtaskAddedList" class="subtask-added-list"></div>
+            </div>
+            <div class="clear-create-button-container">
+              <button id="clear-button" type="button" class="clear-button">
+                Clear &nbsp;&#10006;
+              </button>
+              <button class="create-button" onclick="createAddTask('toDo'); return false;">
+                Create Task &nbsp;&nbsp;&#10003;
+              </button>
+            </div>
+          </section>
+        </form>
+      </div>
+    `;
+    onloadAddtasks();
     openDialog();
   }
 }
