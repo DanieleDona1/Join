@@ -75,7 +75,7 @@ function displayGroupedContacts(groupedContacts) {
       const contactColor = contact.color; // Verwende die gespeicherte Farbe oder generiere eine neue
       fullContent += /*html*/ `
       <div class="contact-profil">
-        <div class="contact-item" onclick="getContactInfo('${initial}', ${index})">
+        <div class="contact-item" onclick="getContactInfo('${initial}', ${index})" tabindex="0">
           <div class="contact-initials" style="background-color: ${contactColor};">${initials}</div>
           <div class="contact-name-mail">
             <div class="contactlist-name">${contact.user.name}</div>

@@ -338,6 +338,7 @@ async function createAddTask(cat) {
     const d=getUserAddTaskData(cat);
     await addTask(d);
     redirectToPage('./board.html');
+    console.log(selectedContacts);
   }
 }
 
