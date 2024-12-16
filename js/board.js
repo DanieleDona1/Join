@@ -655,7 +655,6 @@ function onInputSubtask(id) {
     <div class="d-flex-c-c">
       <img onclick="focusInput(); resetInputField(${id});" class="add-subtask" src="../assets/icons/board/property-close.svg" alt="close">
       <img class="mg-left" onclick="addCurrentSubtask()" class="add-subtask" src="../assets/icons/board/property-check.svg" alt="check">
-      <img class="mg-left" onclick="addCurrentSubtask()" class="add-subtask" src="../assets/icons/board/property-check.svg" alt="check">
     </div>
   `;
   } else {
