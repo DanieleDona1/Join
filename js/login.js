@@ -13,7 +13,7 @@ async function onloadFunc() {
 
 /**
  * Checks the URL for a 'msg' parameter and displays it by starting an animation.
- * Updates the URL to '/html/login.html'.
+ * Updates the URL to './login.html'.
  *
  * @function
  * @returns {void}
@@ -28,7 +28,7 @@ function checkMsgUrl() {
   } else {
     document.getElementById('animatedText').style.display = '';
   }
-  history.replaceState(null, '', '/html/login.html');
+  history.replaceState(null, '', './login.html');
 }
 
 /**

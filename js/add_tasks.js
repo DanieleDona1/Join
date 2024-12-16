@@ -337,7 +337,7 @@ async function createAddTask(cat) {
     formateDueDate();
     const d=getUserAddTaskData(cat);
     await addTask(d);
-    redirectToPage('board.html');
+    redirectToPage('./board.html');
   }
 }
 
