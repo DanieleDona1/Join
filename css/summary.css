@@ -83,7 +83,7 @@ main h2 {
 }
 
 .to-do-img {
-  background-image: url('/assets/icons/summary/edit-dark.svg');
+  background-image: url('../assets/icons/summary/edit-dark.svg');
   width: clamp(48px, 10vw, 69px);
   height: clamp(48px, 10vw, 69px);
   background-size: contain;
@@ -93,7 +93,7 @@ main h2 {
 }
 
 .to-do:hover .to-do-img {
-  background-image: url('/assets/icons/summary/edit-light.svg');
+  background-image: url('../assets/icons/summary/edit-light.svg');
 }
 
 .done {
@@ -102,7 +102,7 @@ main h2 {
 }
 
 .done-img {
-  background-image: url('/assets/icons/summary/check-dark.svg');
+  background-image: url('../assets/icons/summary/check-dark.svg');
   width: clamp(48px, 10vw, 69px);
   height: clamp(48px, 10vw, 69px);
   background-size: contain;
@@ -112,7 +112,7 @@ main h2 {
 }
 
 .done:hover .done-img {
-  background-image: url('/assets/icons/summary/check-light.svg');
+  background-image: url('../assets/icons/summary/check-light.svg');
 }
 
 .priority.priority {
@@ -122,7 +122,7 @@ main h2 {
 }
 
 .priority-img {
-  background-image: url('/assets/icons/summary/urgent.svg');
+  background-image: url('../assets/icons/summary/urgent.svg');
   width: clamp(48px, 10vw, 69px);
   height: clamp(48px, 10vw, 69px);
   background-size: contain;

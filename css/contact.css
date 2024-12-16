@@ -430,7 +430,7 @@
 }
 
 .contact-field #name::placeholder {
-    background-image: url(/assets/icons/contact/person.png);
+    background-image: url(../assets/icons/contact/person.png);
     background-repeat: no-repeat;
     display: flex;
     background-position: 100%;
@@ -438,7 +438,7 @@
 }
 
 .contact-field #email::placeholder {
-    background-image: url(/assets/icons/contact/mail.png);
+    background-image: url(../assets/icons/contact/mail.png);
     background-repeat: no-repeat;
     display: flex;
     background-position: 100%;
@@ -446,7 +446,7 @@
 }
 
 .contact-field #phonenumber::placeholder {
-    background-image: url(/assets/icons/contact/call.png);
+    background-image: url(../assets/icons/contact/call.png);
     background-repeat: no-repeat;
     display: flex;
     background-position: 100%;
@@ -588,21 +588,21 @@ button {
 }
 
 .contact-field #edit-name {
-    background-image: url(/assets/icons/contact/person.png);
+    background-image: url(../assets/icons/contact/person.png);
     background-repeat: no-repeat;
     background-position: 95%;
     background-size: 24px;
 }
 
 .contact-field #edit-email {
-    background-image: url(/assets/icons/contact/mail.png);
+    background-image: url(../assets/icons/contact/mail.png);
     background-repeat: no-repeat;
     background-position: 95%;
     background-size: 24px;
 }
 
 .contact-field #edit-phonenumber {
-    background-image: url(/assets/icons/contact/call.png);
+    background-image: url(../assets/icons/contact/call.png);
     background-repeat: no-repeat;
     background-position: 95%;
     background-size: 24px;
@@ -628,7 +628,7 @@ button {
     width: 100%;
     height: 100vh;
     background-color: rgb(246, 247, 248);
-    
+
   }
 
 /* responsive */
@@ -719,7 +719,7 @@ button {
         display: flex;
         position: fixed;
         top: 50px;
-        left: 90%; 
+        left: 90%;
         background-color: #2A3647;
     }
     .close-popup img{
@@ -742,8 +742,8 @@ button {
     }
     .contact-info{
         display: none;
-        
-    } 
+
+    }
     .contact-list{
         position: absolute;
         left: 50%;
@@ -769,7 +769,7 @@ button {
         width: 100%;
         padding: 0px 24px;
     }
-    
+
     .back-info-wrapper{
         position: absolute;
         top: 128px;
@@ -788,7 +788,7 @@ button {
         top: 128px;
         left: 80px;
         width: 213px;
-        
+
     }
     .contact-info-wrapper{
         display: flex;
@@ -847,11 +847,11 @@ button {
     }
     .contact-text .span-2{
         font-size: 20px;
-    }   
+    }
     .cancel{
         display: none;
     }
-    
+
     #toggleButtons {
         display: flex;
     }
@@ -861,8 +861,8 @@ button {
     .close-popup{
         left: 85%;
     }
-    
-    
+
+
 }
 @media screen and (max-width: 500px) {
     #contact-text-small{
@@ -894,5 +894,5 @@ button {
     }
     .contact-text .span-2{
         font-size: 20px;
-    }   
+    }
 }

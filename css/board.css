@@ -425,7 +425,7 @@ h3 {
 .plus-button {
   width: 24px;
   height: 24px;
-  background-image: url('/assets/icons/board/plus-btn.svg');
+  background-image: url('../assets/icons/board/plus-btn.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -435,7 +435,7 @@ h3 {
 }
 
 .plus-button:hover {
-  background-image: url('/assets/icons/board/plus-btn-hover.svg');
+  background-image: url('../assets/icons/board/plus-btn-hover.svg');
 }
 
 .configuration div:hover img {
@@ -594,7 +594,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 
 .checkbox-img {
   display: inline-block;
-  background-image: url('/assets/icons/board/checkbox-unchecked.svg');
+  background-image: url('../assets/icons/board/checkbox-unchecked.svg');
   background-repeat: no-repeat;
   background-size: contain;
   min-width: 20px;
@@ -815,7 +815,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 .checkbox-image {
   width: 20px;
   height: 20px;
-  background-image: url('/assets/icons/board/checkbox_unchecked.svg');
+  background-image: url('../assets/icons/board/checkbox_unchecked.svg');
   background-size: cover;
   display: inline-block;
   transition: background-image 150ms ease;
@@ -826,7 +826,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 input[type='checkbox']:checked + .checkbox-image {
-  background-image: url('/assets/icons/board/checkbox_checked.svg');
+  background-image: url('../assets/icons/board/checkbox_checked.svg');
 }
 
 input:focus {
@@ -911,11 +911,11 @@ input:focus {
 }
 
 .urgent-img {
-  background-image: url('/assets/icons/add_tasks/inactive_icon_urgent.svg');
+  background-image: url('../assets/icons/add_tasks/inactive_icon_urgent.svg');
 }
 
 .priority-urgent.active .urgent-img {
-  background-image: url('/assets/icons/add_tasks/active_icon_urgent.svg');
+  background-image: url('../assets/icons/add_tasks/active_icon_urgent.svg');
 }
 
 .priority-medium.active {
@@ -925,11 +925,11 @@ input:focus {
 }
 
 .medium-img {
-  background-image: url('/assets/icons/add_tasks/inactive_icon_medium.svg');
+  background-image: url('../assets/icons/add_tasks/inactive_icon_medium.svg');
 }
 
 .priority-medium.active .medium-img {
-  background-image: url('/assets/icons/add_tasks/active_icon_medium.svg');
+  background-image: url('../assets/icons/add_tasks/active_icon_medium.svg');
 }
 
 .priority-low.active {
@@ -939,11 +939,11 @@ input:focus {
 }
 
 .low-img {
-  background-image: url('/assets/icons/add_tasks/inactive_icon_low.svg');
+  background-image: url('../assets/icons/add_tasks/inactive_icon_low.svg');
 }
 
 .priority-low.active .low-img {
-  background-image: url('/assets/icons/add_tasks/active_icon_low.svg');
+  background-image: url('../assets/icons/add_tasks/active_icon_low.svg');
 }
 
 .error-msg-edit-template {

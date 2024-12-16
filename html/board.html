@@ -4,34 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Board</title>
-    <link rel="icon" type="image/png" href="/assets/icons/favicons/favicon_light.png" id="favicon" />
-    <link rel="icon" type="image/png" href="/assets/icons/favicons/favicon_light.png" id="favicon" />
-    <script src="/script.js"></script>
-    <script src="/js/board.js" defer></script>
-    <link rel="stylesheet" href="/style.css" />
-    <link rel="stylesheet" href="/css/board.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    <script src="/js/remote_storage.js" defer></script>
-    <script src="/assets/template/board_template.js"></script>
+    <link rel="icon" type="image/png" href="../assets/icons/favicons/favicon_light.png" id="favicon" />
+    <link rel="icon" type="image/png" href="../assets/icons/favicons/favicon_light.png" id="favicon" />
+    <script src="../script.js"></script>
+    <script src="../js/board.js" defer></script>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../css/board.css" />
+    <link rel="stylesheet" href="../css/fonts.css" />
+    <script src="../js/remote_storage.js" defer></script>
+    <script src="../assets/template/board_template.js"></script>
     <script src="/js/add_tasks.js" defer></script>
-    <link rel="stylesheet" href="/css/add_tasks.css" defer>
+    <link rel="stylesheet" href="../css/add_tasks.css" defer>
   </head>
   <body class="max-width-1920" onload="onload();">
     <header>
-      <img class="header-join-logo" src="/assets/icons/header/joinHeaderMobile.svg" alt="logo" />
+      <img class="header-join-logo" src="../assets/icons/header/joinHeaderMobile.svg" alt="logo" />
       <p class="d-none">Kanban Project Management Tool</p>
       <div class="header-rightside-container">
         <a href="help.html">
-          <img class="header-help-icon d-none" src="/assets/icons/header/help.svg" alt="help" />
+          <img class="header-help-icon d-none" src="../assets/icons/header/help.svg" alt="help" />
         </a>
 
         <div class="dropdown-container">
           <span id="headerInitials" class="header-initials d-flex-c-c" tabindex="0"></span>
           <div class="dropdown-menu">
             <ul>
-              <li><a href="/html/legal_notice.html">Legal Notice</a></li>
-              <li><a href="/html/privacy_policy.html">Privacy Policy</a></li>
-              <li><a onclick="removeUserToken()" href="/html/login.html">Log out</a></li>
+              <li><a href="../html/legal_notice.html">Legal Notice</a></li>
+              <li><a href="../html/privacy_policy.html">Privacy Policy</a></li>
+              <li><a onclick="removeUserToken()" href="../html/login.html">Log out</a></li>
             </ul>
           </div>
         </div>
@@ -40,30 +40,30 @@
 
     <nav>
       <div class="navbar-join-icon-container d-none">
-        <img src="/assets/icons/navbar/navbar_join_icon.svg" alt="" />
+        <img src="../assets/icons/navbar/navbar_join_icon.svg" alt="" />
       </div>
       <div class="navbar-container-bottom">
         <div class="navbar-item-container">
           <a href="summary.html" class="navbar-item" data-page="summary">
-            <img src="/assets/icons/navbar/summary_Icon.svg" alt="Summary Icon" />
+            <img src="../assets/icons/navbar/summary_Icon.svg" alt="Summary Icon" />
             <p>Summary</p>
           </a>
           <a href="add_tasks.html" class="navbar-item" data-page="add_tasks">
-            <img src="/assets/icons/navbar/add_tasks.svg" alt="Add Tasks Icon" />
+            <img src="../assets/icons/navbar/add_tasks.svg" alt="Add Tasks Icon" />
             <p>Add Tasks</p>
           </a>
           <a href="board.html" class="navbar-item" data-page="board">
-            <img src="/assets/icons/navbar/board_icon.svg" alt="Board Icon" />
+            <img src="../assets/icons/navbar/board_icon.svg" alt="Board Icon" />
             <p>Board</p>
           </a>
           <a href="contact.html" class="navbar-item" data-page="contacts">
-            <img src="/assets/icons/navbar/contacts_icon.svg" alt="Contacts Icon" />
+            <img src="../assets/icons/navbar/contacts_icon.svg" alt="Contacts Icon" />
             <p>Contacts</p>
           </a>
         </div>
         <div class="navbar-disclaimer-links-container d-none">
-          <a href="/html/privacy_policy.html" data-page="privacy_policy">Privacy Policy</a>
-          <a href="/html/legal_notice.html" data-page="legal_notice">Legal Notice</a>
+          <a href="../html/privacy_policy.html" data-page="privacy_policy">Privacy Policy</a>
+          <a href="../html/legal_notice.html" data-page="legal_notice">Legal Notice</a>
         </div>
       </div>
     </nav>
@@ -77,14 +77,14 @@
           <div class="searchbar-container">
             <div id="searchbar" class="searchbar d-flex-c-c">
               <input oninput="searchTitleOrDescription('search')" maxlength="50" type="search" id="search" class="search" placeholder="Find Task" />
-              <img src="/assets/icons/board/search_lupe.svg" alt="search-btn" />
+              <img src="../assets/icons/board/search_lupe.svg" alt="search-btn" />
             </div>
             <span id="searchResultMsg" class="search-result-msg">No results found</span>
           </div>
 
           <button class="add-task d-flex-c-c btn-hover mg-b-16px" onclick="loadPopUpAddTask();">
             Add Task
-            <img src="/assets/icons/board/add_task_plus.svg" alt="plus-general" />
+            <img src="../assets/icons/board/add_task_plus.svg" alt="plus-general" />
           </button>
         </div>
       </div>
@@ -92,7 +92,7 @@
       <div class="searchbar-container-mobile">
         <div id="searchbarMobile" class="searchbar-mobile d-flex-c-c">
           <input oninput="searchTitleOrDescription('searchMobile')" maxlength="50" type="search" id="searchMobile" class="search" placeholder="Find Task" />
-          <img src="/assets/icons/board/search_lupe.svg" alt="search-btn" />
+          <img src="../assets/icons/board/search_lupe.svg" alt="search-btn" />
         </div>
         <span id="searchResultMsgMobile" class="search-result-msg">No results found</span>
       </div>

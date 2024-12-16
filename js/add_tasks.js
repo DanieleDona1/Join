@@ -176,7 +176,7 @@ function updateButtonIcons(btns) {
     let b=btns[i], c=b.getAttribute('data-color');
     let img=b.querySelector('img');
     let t=b.classList.contains('active')?'active':'inactive';
-    img.src=`/assets/icons/add_tasks/${t}_icon_${c}.svg`;
+    img.src=`../assets/icons/add_tasks/${t}_icon_${c}.svg`;
   }
 }
 
@@ -248,7 +248,7 @@ function resetPriorityButtons() {
     btns[i].classList.remove('active');
     const img=btns[i].querySelector('img');
     const c=btns[i].getAttribute('data-color');
-    img.src=`/assets/icons/add_tasks/inactive_icon_${c}.svg`;
+    img.src=`../assets/icons/add_tasks/inactive_icon_${c}.svg`;
   }
 }
 
@@ -257,7 +257,7 @@ function setDefaultPriority() {
   if(mb){
     mb.classList.add('active');
     const img=mb.querySelector('img');
-    img.src=`/assets/icons/add_tasks/active_icon_medium.svg`;
+    img.src=`../assets/icons/add_tasks/active_icon_medium.svg`;
   }
 }
 

@@ -527,7 +527,7 @@ function animationSlideOut() {
   const dialog = document.getElementById('dialog');
   const content = dialog.querySelector('.dialog-content');
 
-  content.classList.add('slide-out'); 
+  content.classList.add('slide-out');
   content.addEventListener(
     'animationend',
     function () {
@@ -575,9 +575,9 @@ function loadSubtaskList(i) {
 
     for (let j = 0; j < subtaskTexts.length; j++) {
       if (subtaskStatus[j]) {
-        checkboxImgUrl = '/assets/icons/board/checkbox-checked.svg';
+        checkboxImgUrl = '../assets/icons/board/checkbox-checked.svg';
       } else {
-        checkboxImgUrl = '/assets/icons/board/checkbox-unchecked.svg';
+        checkboxImgUrl = '../assets/icons/board/checkbox-unchecked.svg';
       }
       subtasksList.innerHTML += generateSubtaskList(i, j, checkboxImgUrl, subtaskTexts);
     }
@@ -604,9 +604,9 @@ function toggleCheckboxImage(j) {
   const isUnchecked = checkboxImg.style.backgroundImage.includes('checkbox-unchecked.svg');
 
   if (isUnchecked) {
-    checkboxImg.style.backgroundImage = "url('/assets/icons/board/checkbox-checked.svg')";
+    checkboxImg.style.backgroundImage = "url('../assets/icons/board/checkbox-checked.svg')";
   } else {
-    checkboxImg.style.backgroundImage = "url('/assets/icons/board/checkbox-unchecked.svg')";
+    checkboxImg.style.backgroundImage = "url('../assets/icons/board/checkbox-unchecked.svg')";
   }
 }
 
@@ -653,9 +653,9 @@ function onInputSubtask(id) {
   if (subtaskInput.value !== '') {
     document.getElementById('subtaskIcons').innerHTML = /*html*/ `
     <div class="d-flex-c-c">
-      <img onclick="focusInput(); resetInputField(${id});" class="add-subtask" src="/assets/icons/board/property-close.svg" alt="close">
-      <img class="mg-left" onclick="addCurrentSubtask()" class="add-subtask" src="/assets/icons/board/property-check.svg" alt="check">
-      <img class="mg-left" onclick="addCurrentSubtask()" class="add-subtask" src="/assets/icons/board/property-check.svg" alt="check">
+      <img onclick="focusInput(); resetInputField(${id});" class="add-subtask" src="../assets/icons/board/property-close.svg" alt="close">
+      <img class="mg-left" onclick="addCurrentSubtask()" class="add-subtask" src="../assets/icons/board/property-check.svg" alt="check">
+      <img class="mg-left" onclick="addCurrentSubtask()" class="add-subtask" src="../assets/icons/board/property-check.svg" alt="check">
     </div>
   `;
   } else {
@@ -670,7 +670,7 @@ function onInputSubtask(id) {
 function resetInputField() {
   document.getElementById('subtaskInput').value = '';
   document.getElementById('subtaskIcons').innerHTML = /*html*/ `
-    <img onclick="focusInput()" class="add-subtask" src="/assets/icons/board/property-add.svg" alt="add">`;
+    <img onclick="focusInput()" class="add-subtask" src="../assets/icons/board/property-add.svg" alt="add">`;
 }
 
 /**
@@ -763,8 +763,8 @@ function focusInputField(inputField) {
 function updateIconsOnFocus(index) {
   const subtaskAddedListIcons = document.getElementById('subtaskAddedListIcons' + index);
   subtaskAddedListIcons.innerHTML = /*html*/ `
-      <img id="removeIconOnFocus${index}" onclick="removeAddedSubtask(${index});" class="add-subtask" src="/assets/icons/board/property-delete.svg" alt="delete">
-      <img class="mg-left" onclick="currentEditSubtask(${index})" class="add-subtask" src="/assets/icons/board/property-check.svg" alt="check">
+      <img id="removeIconOnFocus${index}" onclick="removeAddedSubtask(${index});" class="add-subtask" src="../assets/icons/board/property-delete.svg" alt="delete">
+      <img class="mg-left" onclick="currentEditSubtask(${index})" class="add-subtask" src="../assets/icons/board/property-check.svg" alt="check">
     `;
 }
 
@@ -837,8 +837,8 @@ function updateIconsOffFocus(index) {
   const subtaskAddedListIcons = document.getElementById('subtaskAddedListIcons' + index);
   if (subtaskAddedListIcons) {
     subtaskAddedListIcons.innerHTML = /*html*/ `
-      <img onclick="readonlyToggle(${index});" class="add-subtask" src="/assets/icons/board/edit.svg" alt="edit">
-      <img class="mg-left" onclick="removeAddedSubtask(${index})" class="add-subtask" src="/assets/icons/board/delete.svg" alt="delete">
+      <img onclick="readonlyToggle(${index});" class="add-subtask" src="../assets/icons/board/edit.svg" alt="edit">
+      <img class="mg-left" onclick="removeAddedSubtask(${index})" class="add-subtask" src="../assets/icons/board/delete.svg" alt="delete">
       `;
   }
 }

@@ -105,11 +105,11 @@ function getContactInfo(groupInitial, contactIndex) {
           <div class="info-name">${contact.user.name}</div>
           <div class="info-buttons" id="editDeleteButtons">
             <button class="info-edit" onclick="openEditContact('${groupInitial}', ${contactIndex})">
-              <img src="/assets/icons/contact/contact_info_edit.png" alt="">
+              <img src="../assets/icons/contact/contact_info_edit.png" alt="">
               Edit
             </button>
             <button class="info-delete" onclick="deleteContact('${contact.id}')">
-              <img src="/assets/icons/contact/contact_info_delete.png" alt="">
+              <img src="../assets/icons/contact/contact_info_delete.png" alt="">
               Delete
             </button>
           </div>
@@ -136,13 +136,13 @@ function getContactInfo(groupInitial, contactIndex) {
       <span class="span-2">Better with a team</span>
     </div>
     <button onclick="closeContactInfoWindow()" class="back-info-wrapper">
-    <img src="/assets/icons/arrow_left_line.svg" alt="button-back">
+    <img src="../assets/icons/arrow_left_line.svg" alt="button-back">
     </button>
     <div class="contact-info-wrapper">
       ${contactHTML}
     </div>
     <button id="toggleButtons" onclick="toggleEditDelete()">
-    <img src="/assets/icons/contact/more_vert.png" alt="">
+    <img src="../assets/icons/contact/more_vert.png" alt="">
     </button>
     `;
 
@@ -243,8 +243,8 @@ function openAddContact() {
   document.getElementById("background-pop-up").classList.remove("d-none");
   document.getElementById("pop-up-add-contact").classList.remove("d-none", "slide-out");
   document.querySelector("body").classList.add("overflow-hidden");
-  
-} 
+
+}
 
 function closeAddContact() {
   document.getElementById("background-pop-up").classList.add("d-none");
@@ -256,7 +256,7 @@ function openEditContact(groupedcontact, index) {
   document.getElementById("pop-up-edit-contact").classList.remove("d-none");
   document.getElementById("background-pop-up").classList.remove("d-none");
   document.querySelector("body").classList.add("overflow-hidden");
-  
+
   renderEditConatct(groupedcontact, index);
 }
 

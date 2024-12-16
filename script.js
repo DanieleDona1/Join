@@ -198,7 +198,7 @@ function updateFavicon() {
   const favicon = document.getElementById('favicon');
   const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-  favicon.href = darkModeMediaQuery.matches ? '/assets/icons/favicons/favicon_dark.png' : '/assets/icons/favicons/favicon_light.png';
+  favicon.href = darkModeMediaQuery.matches ? '../assets/icons/favicons/favicon_dark.png' : '../assets/icons/favicons/favicon_light.png';
 }
 
 /**
@@ -213,10 +213,10 @@ function togglePasswordVisibility(passwordFieldId, visibilityImgId) {
 
   if (passwordField.type === 'password') {
     passwordField.type = 'text';
-    visibilityBtn.src = '/assets/icons/auth/visibility.svg';
+    visibilityBtn.src = '../assets/icons/auth/visibility.svg';
   } else {
     passwordField.type = 'password';
-    visibilityBtn.src = '/assets/icons/auth/visibility_off.svg';
+    visibilityBtn.src = '../assets/icons/auth/visibility_off.svg';
   }
 }
 

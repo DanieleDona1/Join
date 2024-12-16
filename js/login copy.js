@@ -90,24 +90,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // double
 function togglePasswordVisibility(passwordFieldId, visibilityImgId) {
-  let passwordField = document.getElementById(passwordFieldId);  
+  let passwordField = document.getElementById(passwordFieldId);
   let visibilityBtn = document.getElementById(visibilityImgId);
 
   if (passwordField.type === "password") {
       passwordField.type = "text";
-      visibilityBtn.src = "/assets/img/visibility.svg";
-      
+      visibilityBtn.src = "../assets/img/visibility.svg";
+
   } else {
       passwordField.type = "password";
-      visibilityBtn.src = "/assets/img/visibility_off.svg";
+      visibilityBtn.src = "../assets/img/visibility_off.svg";
   }
 }
-// double 
+// double
 function toggleVisibility(passwordFieldId, passwordLockId, visibilityBtnId) {
   const passwordField = document.getElementById(passwordFieldId);
   const passwordLock = document.getElementById(passwordLockId);
   const visibilityBtn = document.getElementById(visibilityBtnId);
-  
+
   managePasswordVisibilityIcons(passwordField, passwordLock, visibilityBtn);
 }
 
