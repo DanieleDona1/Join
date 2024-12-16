@@ -379,11 +379,10 @@ function formateDueDate() {
 }
 
 function formatDateToYMD(ds) {
-  const d=new Date(ds);
-  const y=d.getFullYear();
-  const m=(d.getMonth()+1).toString().padStart(2,'0');
-  const day=d.getDate().toString().padStart(2,'0');
-  return `${y}-${m}-${day}`;
+  const [day, month, year] = ds.split('/');
+  if (!year || !month || !day) return 'NaN-NaN-NaN';
+  const d = new Date(`${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`);
+  return isNaN(d) ? 'NaN-NaN-NaN' : `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate().toString().padStart(2, '0')}`;
 }
 
 // Custom Dropdowns ohne DOMContentLoaded
