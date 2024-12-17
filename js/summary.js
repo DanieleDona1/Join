@@ -197,7 +197,7 @@ function getNextDueDate(urgentDueDates) {
   const dueDatesObjects = urgentDueDates.map((date) => {
     return new Date(date);
   });
-  const nextDueDate = dueDatesObjects[0];
+  let nextDueDate = dueDatesObjects[0]; // 'let' statt 'const'
   for (let i = 1; i < dueDatesObjects.length; i++) {
     if (dueDatesObjects[i] < nextDueDate) {
       nextDueDate = dueDatesObjects[i];
