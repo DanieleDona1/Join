@@ -18,6 +18,7 @@ async function onload() {
 
   renderTasks();
   await generateHeaderInitials();
+  setupOutsideClickForCustomSelects();
 
   // openTaskDetails(0);
   // openEditTask(0);
@@ -445,12 +446,14 @@ function openDialog() {
 /**
  * Closes the task details dialog and resets the search field if necessary.
  */
-function closeDialog() {
+function closeDialog(e) {
+  const popup = document.querySelector('.pop-up-add-Task');
+  if (popup && e && popup.contains(e.target)) return;
   animationSlideOut();
   let filled = document.getElementById('search');
-  if (filled.value != '') {
+  if (filled && filled.value != '') {
     filled.value = '';
-    currentTodos = JSON.parse(JSON.stringify(todos));
+    currentTodos = JSON.parse(JSON.stringify(todos)); 
     renderTasks();
   }
   currentTodos = JSON.parse(JSON.stringify(todos));

@@ -177,7 +177,7 @@ function generatePopUpAddTask(category, contentId) {
     window.location.href = "/html/add_tasks.html";
   } else {
     document.getElementById('dialog').innerHTML = /*html*/ `
-    <div class="pop-up-add-Task slide-in dialog-content" onclick="event.stopPropagation();">
+    <div class="pop-up-add-Task slide-in dialog-content">
         <div class="d-flex-sb-c">
           <h2>Add Task</h2>
           <img class="x-mark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">

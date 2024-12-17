@@ -10,6 +10,7 @@ async function onloadAddtasks() {
   setClearButtonHandler();
   initCustomDropdowns();
   initFieldNavigation();
+  setupOutsideClickForCustomSelects();
 }
 
 // Namen splitten
@@ -387,9 +388,8 @@ function formatDateToYMD(ds) {
 
 // Custom Dropdowns ohne DOMContentLoaded
 function initCustomDropdowns() {
-  const cS=document.querySelectorAll('.add-task-custom-select');
-  for(let i=0;i<cS.length;i++) setupCustomSelect(cS[i]);
-  setupOutsideClickForCustomSelects(cS);
+  const cS = document.querySelectorAll('.add-task-custom-select');
+  for(let i = 0; i < cS.length; i++) setupCustomSelect(cS[i]);
 }
 
 function setupCustomSelect(c) {
@@ -416,14 +416,16 @@ function addOptionListeners(oC,sId,s,c) {
   }
 }
 
-function setupOutsideClickForCustomSelects(cS) {
-  document.addEventListener('click',(e)=>{
-    for(let i=0;i<cS.length;i++){
-      const s=cS[i].querySelector('.select-selected');
-      const oC=cS[i].querySelector('.select-items');
-      if(!s.contains(e.target)&&!oC.contains(e.target)){
+function setupOutsideClickForCustomSelects() {
+  document.addEventListener('click', (e) => {
+    // Bei jedem Klick die aktuellen Dropdowns neu abfragen
+    const allDropdowns = document.querySelectorAll('.add-task-custom-select');
+    for (let i = 0; i < allDropdowns.length; i++) {
+      const s = allDropdowns[i].querySelector('.select-selected');
+      const oC = allDropdowns[i].querySelector('.select-items');
+      if(!s.contains(e.target) && !oC.contains(e.target)) {
         oC.classList.add('select-hide');
-        cS[i].classList.remove('open');
+        allDropdowns[i].classList.remove('open');
       }
     }
   });
