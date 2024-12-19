@@ -183,7 +183,7 @@ function generatePopUpAddTask(category, contentId) {
           <img class="x-mark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
         </div>
         <form id="form-add-task">
-          <section>
+          <section class="add-task-container">
             <div class="mg-b-28">
               <p>Title<span>*</span></p>
               <input

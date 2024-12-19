@@ -385,7 +385,7 @@ h3 {
 .configuration {
   position: sticky;
   left: 290px;
-  bottom: 0px;
+  bottom: -1px;
   margin-top: auto;
   background-color: white;
   display: flex;
