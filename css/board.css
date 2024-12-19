@@ -149,7 +149,7 @@ h3 {
   margin-top: 12px;
   gap: 16px;
   height: 68vh;
-  min-width: 252px;
+  min-width: 190px;
 }
 
 .content::-webkit-scrollbar-thumb {
@@ -303,11 +303,12 @@ h3 {
   padding-bottom: 40px;
   width: 100%;
   max-width: 440px;
-  /* min-height: 650px; */
+  max-height: 736px;
+  height: 100%;
 }
 
 .scrollbar {
-  overflow-y: auto;
+  overflow-y: scroll;
   scrollbar-width: thin;
 }
 
@@ -324,7 +325,7 @@ h3 {
   height: 100%;
   max-height: 650px;
   /* gap: 20px; */
-  min-height: 650px;
+  /* min-height: 650px; */
 }
 
 .detail-task .title {
@@ -364,8 +365,9 @@ h3 {
 .x-task-category-container {
   position: sticky;
   background-color: white;
-  top: 0px;
+  top: -1px;
   padding-bottom: 16px;
+  z-index: 1;
 }
 
 .x-mark {
@@ -390,6 +392,7 @@ h3 {
   justify-content: flex-end;
   align-items: flex-end;
   padding: 10px 0 0px 0;
+  z-index: 2;
 }
 
 .configuration div {
@@ -603,74 +606,6 @@ input[type='date']::-webkit-calendar-picker-indicator {
   margin-left: 14px;
 }
 
-@media screen and (min-width: 1921px) {
-}
-
-@media screen and (min-width: 1441px) and (max-width: 1920px) {
-}
-@media screen and (min-width: 1281px) and (max-width: 1440px) {
-  main {
-    padding-left: 32px;
-  }
-}
-
-@media screen and (max-width: 1225px) {
-  .section-container {
-    /* display: flex; */
-    flex-direction: column;
-    height: auto;
-  }
-  .content {
-    flex-direction: row;
-    height: auto;
-    padding-bottom: 10px;
-    min-height: 200px;
-  }
-  .dialog-bg {
-    padding-left: 0px;
-  }
-}
-
-@media screen and (min-width: 721px) and (max-width: 1024px) {
-  main {
-    padding-right: 24px;
-    padding-left: 24px;
-  }
-}
-
-@media screen and (max-width: 720px) {
-  main {
-    padding-right: 16px;
-    padding-left: 16px;
-  }
-  .board-header {
-    align-items: flex-start;
-  }
-  .section-container {
-    margin-top: 20px;
-  }
-  .searchbar-container {
-    display: none;
-  }
-  .searchbar-container-mobile {
-    display: flex;
-  }
-  .plus-button {
-    width: 32px;
-    height: 32px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  main {
-    padding-right: 16px;
-    padding-left: 16px;
-  }
-  .content {
-    scrollbar-color: rgb(41, 171, 226) transparent;
-  }
-}
-
 .subtask-group {
   position: relative;
   margin-top: 6px;
@@ -867,7 +802,6 @@ input:focus {
   /* margin-bottom: 16px; */
   /* width: 400px; */
   /* overflow-x: auto; */
-
 }
 
 .initial-board-wrapper .margin {
@@ -952,4 +886,67 @@ input:focus {
   color: red;
   font-size: 0.8rem;
 
+}
+
+@media screen and (max-width: 1224px) {
+  .section-container {
+    /* display: flex; */
+    flex-direction: column;
+    height: auto;
+  }
+  .content {
+    flex-direction: row;
+    height: auto;
+    padding-bottom: 10px;
+    min-height: 200px;
+  }
+  .dialog-bg {
+    padding-left: 0px;
+  }
+  main {
+    padding-left: 32px;
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) {
+  main {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  main {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+  .board-header {
+    align-items: flex-start;
+  }
+  .section-container {
+    margin-top: 20px;
+  }
+  .searchbar-container {
+    display: none;
+  }
+  .searchbar-container-mobile {
+    display: flex;
+  }
+  .plus-button {
+    width: 32px;
+    height: 32px;
+  }
+  /* .wrapper {
+    max-height: 630px;
+  } */
+}
+
+@media screen and (max-width: 480px) {
+  main {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+  .content {
+    scrollbar-color: rgb(41, 171, 226) transparent;
+  }
 }
