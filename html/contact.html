@@ -35,9 +35,9 @@
 
         <form>
           <address class="contact-field">
-            <input type="text" name="name" id="name" placeholder="Name" minlength="2" required />
-            <input type="email" name="email" id="email" placeholder="Email" minlength="6" required />
-            <input type="number" name="phonenumber" id="phonenumber" placeholder="Phone" min="0" minlength="6" required />
+            <input type="text" name="name" id="name" placeholder="Name" minlength="2" pattern="[a-zA-Z\s]+" required>
+            <input type="email" name="email" id="email" placeholder="Email" minlength="6" required>
+            <input type="number" name="phonenumber" id="phonenumber" placeholder="Phone" min="111111" required>
           </address>
           <div class="input-button">
             <button type="reset" class="cancel">
