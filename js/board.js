@@ -106,13 +106,13 @@ function loadProgressText(task, progressText, progressBar) {
 function loadMembersInitials(i, initialsContainerId) {
   if (currentTodos[i].assignedTo) {
     selectedContactsKeys = getSelectedContactsKey(i);
-    console.log('keeeys:', selectedContactsKeys);
+    // console.log('keeeys:', selectedContactsKeys);
 
     const membersContainer = document.getElementById(initialsContainerId + i);
     membersContainer.innerHTML = '';
     for (let j = 0; j < selectedContactsKeys.length; j++) {
       selectedContacts = contactList.filter((f) => f.id === selectedContactsKeys[j]);
-      console.log('selectedContacts[0]', selectedContacts[0]);
+      // console.log('selectedContacts[0]', selectedContacts[0]);
 
 
       const name = getName(selectedContacts[0]);
@@ -453,7 +453,7 @@ function closeDialog(e) {
   let filled = document.getElementById('search');
   if (filled && filled.value != '') {
     filled.value = '';
-    currentTodos = JSON.parse(JSON.stringify(todos)); 
+    currentTodos = JSON.parse(JSON.stringify(todos));
     renderTasks();
   }
   currentTodos = JSON.parse(JSON.stringify(todos));
