@@ -1,3 +1,4 @@
+let contactWrapperHTML = ''; // Globale Variable
 
 
 // array für kontaktliste wo alle daten + spezifische id gespeichert wird und das laden und bearbeiten einfacher macht
@@ -99,36 +100,35 @@ function getContactInfo(groupInitial, contactIndex) {
 
   // Kontaktdaten HTML
   const contactHTML = /*html*/ `
-      <div class="info-initial-name">
-        <div class="info-initial" style="background-color: ${contactColor};">${contact.user.initials}</div>
-        <div class="info-name-button">
-          <div class="info-name">${contact.user.name}</div>
-          <div class="info-buttons" id="editDeleteButtons">
-            <button class="info-edit" onclick="openEditContact('${groupInitial}', ${contactIndex})">
-              <img src="/assets/icons/contact/contact_info_edit.png" alt="">
-              Edit
-            </button>
-            <button class="info-delete" onclick="deleteContact('${contact.id}')">
-              <img src="/assets/icons/contact/contact_info_delete.png" alt="">
-              Delete
-            </button>
-          </div>
+    <div class="info-initial-name">
+      <div class="info-initial" style="background-color: ${contactColor};">${contact.user.initials}</div>
+      <div class="info-name-button">
+        <div class="info-name">${contact.user.name}</div>
+        <div class="info-buttons" id="editDeleteButtons">
+          <button class="info-edit" onclick="openEditContact('${groupInitial}', ${contactIndex})">
+            <img src="/assets/icons/contact/contact_info_edit.png" alt="">
+            Edit
+          </button>
+          <button class="info-delete" onclick="deleteContact('${contact.id}')">
+            <img src="/assets/icons/contact/contact_info_delete.png" alt="">
+            Delete
+          </button>
         </div>
       </div>
-      <div class="info-text">Contact Information</div>
-      <div class="info-email-phone">
-        <div class="info-email">
-          <span>Email</span>
-          <a href="mailto:${contact.user.mail}">${contact.user.mail}</a>
-        </div>
-        <div class="info-phone">
-          <span>Phone</span>
-          <span>${contact.user.number}</span>
-        </div>
+    </div>
+    <div class="info-text">Contact Information</div>
+    <div class="info-email-phone">
+      <div class="info-email">
+        <span>Email</span>
+        <a href="mailto:${contact.user.mail}">${contact.user.mail}</a>
       </div>
+      <div class="info-phone">
+        <span>Phone</span>
+        <span>${contact.user.number}</span>
+      </div>
+    </div>
   `;
 
-  // Übergeordneten Container für "Contacts" und Kontaktdaten
   const contactWrapperHTML = /*html*/ `
     <div id="contact-text-small" class="contact-text">
       <span class="span-1">Contacts</span>
@@ -136,37 +136,63 @@ function getContactInfo(groupInitial, contactIndex) {
       <span class="span-2">Better with a team</span>
     </div>
     <button onclick="closeContactInfoWindow()" class="back-info-wrapper">
-    <img src="/assets/icons/arrow_left_line.svg" alt="button-back">
+      <img src="/assets/icons/arrow_left_line.svg" alt="button-back">
     </button>
     <div class="contact-info-wrapper">
       ${contactHTML}
     </div>
     <button id="toggleButtons" onclick="toggleEditDelete()">
-    <img src="/assets/icons/contact/more_vert.png" alt="">
+      <img src="/assets/icons/contact/more_vert.png" alt="">
     </button>
-    `;
+  `;
 
-  if (window.innerWidth <= 850) {
-    // Für kleine Bildschirme: Popup
-    const popup = document.getElementById("contact-info-window");
-    popup.innerHTML = contactWrapperHTML;
-    popup.classList.remove("d-none");
-    document.getElementById("contact-list-field").classList.add("d-none");
-  } else {
-    // Für große Bildschirme: Standardbereich
-    const contactInfo = document.getElementById("contact-info");
-    contactInfo.innerHTML = contactHTML;
-    document.getElementById("contact-info-window").classList.add("d-none"); // Popup ausblenden
+  function renderContactInfo() {
+    if (window.innerWidth <= 850) {
+      // Zeige im Popup-Fenster
+      const popup = document.getElementById("contact-info-window");
+      popup.innerHTML = contactWrapperHTML;
+      popup.classList.remove("d-none");
+      document.getElementById("contact-list-field").classList.add("d-none");
+      document.getElementById("contact-info").innerHTML = ""; // Sicherstellen, dass der Hauptbereich geleert wird
+    } else {
+      // Zeige im Hauptbereich
+      const contactInfo = document.getElementById("contact-info");
+      contactInfo.innerHTML = contactHTML;
+      document.getElementById("contact-info-window").classList.add("d-none"); // Popup verstecken
+      document.getElementById("contact-list-field").classList.remove("d-none");
+    }
   }
+
+
+  // HTML in den Container einfügen
+  const contactInfoWindow = document.getElementById('contact-info-window');
+  if (contactInfoWindow) {
+    contactInfoWindow.innerHTML = contactWrapperHTML;
+
+    // Optional: Buttons sofort korrekt verschieben
+    moveButtons();
+  }
+
+
+  // Initial render
+  renderContactInfo();
+
+  // Event-Listener für Resize hinzufügen
+  window.addEventListener("resize", renderContactInfo);
 }
-
-
 
 // Schließen des Popups
 function closeContactInfoWindow() {
   document.getElementById("contact-list-field").classList.remove("d-none");
   document.getElementById("contact-info-window").classList.add("d-none");
 }
+
+
+
+
+
+
+
 
 async function addContact(button) {
   // Referenz auf das Formular
@@ -340,4 +366,61 @@ function toggleEditDelete() {
   } else {
     editDeleteButtons.style.display = 'none'; // Buttons ausblenden
   }
+  moveButtons();
+
 }
+
+function moveButtons() {
+  const buttons = document.getElementById('editDeleteButtons');
+  const newParent = document.querySelector('.contact-info-window');
+
+  // Prüfen, ob die Buttons im DOM existieren
+  if (!buttons) {
+    console.error("Das Element 'editDeleteButtons' wurde nicht gefunden.");
+    return;
+  }
+
+  // Buttons sichtbar machen, bevor sie verschoben werden
+  if (buttons.style.display === 'none' || buttons.style.display === '') {
+    console.warn("Die Buttons sind aktuell ausgeblendet und können nicht verschoben werden.");
+    return; // Beenden, da die Buttons nicht sichtbar sind
+  }
+
+  if (window.innerWidth <= 850) {
+    if (!document.getElementById('movedButtons')) {
+      const buttonContainer = document.createElement('div');
+      buttonContainer.id = 'movedButtons';
+      buttonContainer.style.position = 'absolute';
+      buttonContainer.style.top = '10px'; // Anpassung der Position
+      buttonContainer.style.right = '10px'; // Anpassung der Position
+      buttonContainer.appendChild(buttons);
+      newParent.appendChild(buttonContainer);
+    }
+  } else {
+    const originalParent = document.querySelector('.info-name-button');
+    if (document.getElementById('movedButtons')) {
+      originalParent.appendChild(buttons);
+      document.getElementById('movedButtons').remove();
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // HTML-Code dynamisch einfügen
+  const contactInfoWindow = document.getElementById('contact-info-window');
+  if (contactInfoWindow) {
+    contactInfoWindow.innerHTML = contactWrapperHTML; // Füge den HTML-Code ein
+  }
+
+  // Event Listener für Fenstergröße
+  window.addEventListener('resize', moveButtons);
+
+  // Toggle-Button-Klick
+  document.getElementById('toggleButtons').addEventListener('click', () => {
+    toggleEditDelete(); // Buttons ein-/ausblenden
+    moveButtons(); // Nach dem Umschalten verschieben
+  });
+
+  // Initiales Verschieben
+  moveButtons();
+});
