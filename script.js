@@ -84,6 +84,8 @@ function getFromLocalStorage(key) {
  * @param {string} link - The URL or path of the page to redirect to.
  */
 function redirectToPage(link) {
+  console.log('Der Link', link);
+
   window.location.href = link;
 }
 
@@ -213,10 +215,10 @@ function togglePasswordVisibility(passwordFieldId, visibilityImgId) {
 
   if (passwordField.type === 'password') {
     passwordField.type = 'text';
-    visibilityBtn.src = '../assets/icons/auth/visibility.svg';
+    visibilityBtn.src = 'assets/icons/auth/visibility.svg';
   } else {
     passwordField.type = 'password';
-    visibilityBtn.src = '../assets/icons/auth/visibility_off.svg';
+    visibilityBtn.src = 'assets/icons/auth/visibility_off.svg';
   }
 }
 

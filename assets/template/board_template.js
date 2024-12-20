@@ -21,7 +21,7 @@ function generateHtmlTemplate(task) {
           <div class="d-flex-sb-c">
             <div id="membersContainer${task['id']}" class="members-container d-flex-fs-c"></div>
           </div>
-          <img draggable="false" src="/assets/icons/board/${task.prio}.svg" alt="prio">
+          <img draggable="false" src="../assets/icons/board/${task.prio}.svg" alt="prio">
       </div>`;
 }
 
@@ -38,7 +38,7 @@ function generateDetailTaskTemplate(id) {
         <div class="detail-task scrollbar">
             <div class="x-task-category-container d-flex-sb-c">
               <div class="task-category bg-${todos[id].task_category}">${todos[id].task_category}</div>
-              <img class="x-mark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
+              <img class="x-mark" onclick="closeDialog()" src="../assets/icons/board/xmark.svg" alt="xmark">
             </div>
             <div class="title">${todos[id].title}</div>
             <div class="description">${todos[id].description}</div>
@@ -49,7 +49,7 @@ function generateDetailTaskTemplate(id) {
             <div class="detail-group">
               <strong>Priority:</strong>
               <span class="padding-left-16px">${priority}</span>
-              <img class="prio-img" src="/assets/icons/board/${todos[id].prio}.svg" alt="prio">
+              <img class="prio-img" src="../assets/icons/board/${todos[id].prio}.svg" alt="prio">
             </div>
             <div class="detail-group">
               <strong>Assigned To:</strong>
@@ -60,11 +60,11 @@ function generateDetailTaskTemplate(id) {
               <div id="subtasksList" class="subtasks"></div>
             </div>
             <div class="configuration">
-              <div onclick="deleteTask(${id})"><img src="/assets/icons/board/delete.svg" alt="delete">
+              <div onclick="deleteTask(${id})"><img src="../assets/icons/board/delete.svg" alt="delete">
                 <span>Delete</span>
               </div>
               <div onclick="openEditTask(${id})" class="separator ">
-              <img src="/assets/icons/board/edit.svg" alt="edit">
+              <img src="../assets/icons/board/edit.svg" alt="edit">
               <span>Edit</span>
             </div>
         </div>
@@ -83,7 +83,7 @@ function generateEditTemplate(id, dueDate) {
         <div class="edit-template detail-task scrollbar" >
             <div class="x-task-category-container d-flex-sb-c">
               <div></div>
-              <img class="x-mark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
+              <img class="x-mark" onclick="closeDialog()" src="../assets/icons/board/xmark.svg" alt="xmark">
             </div>
           <strong>Title</strong>
             <input id="titleEdit" class="title-edit" type="text" value="${todos[id].title}" placeholder="Enter a title">
@@ -133,9 +133,9 @@ function generateEditTemplate(id, dueDate) {
             <strong>Subtasks</strong>
             <div>
               <div class="subtask-group">
-                <input id="subtaskInput" class="subtask-input" oninput="onInputSubtask(${id})" type="text" placeholder="Add new subtask">
+                <input id="subtaskInput" class="subtask-input" oninput="onInputSubtask('subtaskInput')" type="text" placeholder="Add new subtask">
                 <div id="subtaskIcons" class="subtask-icons">
-                  <img onclick="focusInput()" class="add-subtask" src="/assets/icons/board/property-add.svg" alt="add">
+                  <img onclick="focusInput()" class="add-subtask" src="../assets/icons/board/property-add.svg" alt="add">
                 </div>
               </div>
             </div>
@@ -144,8 +144,8 @@ function generateEditTemplate(id, dueDate) {
 
           <div class="configuration">
             <button onclick="editTask(${id})" class="save-edit-btn btn-hover d-flex-c-c">
-              <img src="/assets/icons/board/create_task_ok.svg" alt="create-btn">
-              <img src="/assets/icons/board/check.svg" alt="check">
+              <img src="../assets/icons/board/create_task_ok.svg" alt="create-btn">
+              <img src="../assets/icons/board/check.svg" alt="check">
             </button>
           </div>
         </div>
@@ -180,7 +180,7 @@ function generatePopUpAddTask(category, contentId) {
     <div class="pop-up-add-Task slide-in dialog-content">
         <div class="d-flex-sb-c">
           <h2>Add Task</h2>
-          <img class="x-mark" onclick="closeDialog()" src="/assets/icons/board/xmark.svg" alt="xmark">
+          <img class="x-mark" onclick="closeDialog()" src="../assets/icons/board/xmark.svg" alt="xmark">
         </div>
         <form id="form-add-task">
           <section class="add-task-container">
@@ -239,7 +239,7 @@ function generatePopUpAddTask(category, contentId) {
               >
                 Urgent
                 <img
-                  src="/assets/icons/add_tasks/inactive_icon_urgent.svg"
+                  src="../assets/icons/add_tasks/inactive_icon_urgent.svg"
                   alt=""
                 />
               </button>
@@ -251,7 +251,7 @@ function generatePopUpAddTask(category, contentId) {
               >
                 Medium
                 <img
-                  src="/assets/icons/add_tasks/active_icon_medium.svg"
+                  src="../assets/icons/add_tasks/active_icon_medium.svg"
                   alt=""
                 />
               </button>
@@ -262,7 +262,7 @@ function generatePopUpAddTask(category, contentId) {
                 type="button"
               >
                 Low
-                <img src="/assets/icons/add_tasks/inactive_icon_low.svg" alt="" />
+                <img src="../assets/icons/add_tasks/inactive_icon_low.svg" alt="" />
               </button>
             </div>
             <p>Category<span>*</span></p>
@@ -293,17 +293,17 @@ function generatePopUpAddTask(category, contentId) {
               <div>
                 <div class="subtask-group">
                   <input
-                    id="subtaskInput"
+                    id="subtaskInputBoardAddTask"
                     class="subtask-input"
-                    oninput="onInputSubtask()"
-                    type="text"
+                    oninput="onInputSubtask('subtaskInputBoardAddTask');"
+
                     placeholder="Add new subtask"
                   />
                   <div id="subtaskIcons" class="subtask-icons">
                     <img
                       onclick="focusInput()"
                       class="add-subtask"
-                      src="/assets/icons/board/property-add.svg"
+                      src="../assets/icons/board/property-add.svg"
                       alt="add"
                     />
                   </div>
@@ -360,8 +360,8 @@ function generateSubtaskAddedListTemplate(i) {
     <input onclick="readonlyToggle(${i});" id="subtaskListInput${i}" readonly class="subtask-input" type="text" value="${subtaskValueWithBullet}">
     <div id="subtaskListIcons" class="subtask-list-icons">
       <div id="subtaskAddedListIcons${i}" class="d-flex-c-c">
-        <img onclick="readonlyToggle(${i});" class="add-subtask" src="/assets/icons/board/edit.svg" alt="edit">
-        <img onclick="removeAddedSubtask(${i})" class="mg-left add-subtask" src="/assets/icons/board/delete.svg" alt="delete">
+        <img onclick="readonlyToggle(${i});" class="add-subtask" src="../assets/icons/board/edit.svg" alt="edit">
+        <img onclick="removeAddedSubtask(${i})" class="mg-left add-subtask" src="../assets/icons/board/delete.svg" alt="delete">
       </div>
     </div>
   </div>

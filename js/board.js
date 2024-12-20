@@ -650,17 +650,20 @@ function focusInput() {
  *
  * @param {number} id - The unique identifier for the subtask being added or cleared.
  */
-function onInputSubtask(id) {
-  let subtaskInput = document.getElementById('subtaskInput');
+function onInputSubtask(inputId) {
+  let subtaskInput = document.getElementById(inputId);
+  // console.log('Beide Variablen', inputId, subtaskInput);
+  // console.log(typeof(inputId));
+
   if (subtaskInput.value !== '') {
     document.getElementById('subtaskIcons').innerHTML = /*html*/ `
     <div class="d-flex-c-c">
-      <img onclick="focusInput(); resetInputField(${id});" class="add-subtask" src="../assets/icons/board/property-close.svg" alt="close">
-      <img class="mg-left" onclick="addCurrentSubtask()" class="add-subtask" src="../assets/icons/board/property-check.svg" alt="check">
+      <img onclick="focusInput(); resetInputField('${inputId}');" class="add-subtask" src="../assets/icons/board/property-close.svg" alt="close">
+      <img class="mg-left" onclick="addCurrentSubtask('${inputId}'); event.stopPropagation();" class="add-subtask" src="../assets/icons/board/property-check.svg" alt="check">
     </div>
   `;
   } else {
-    resetInputField();
+    resetInputField(inputId);
   }
 }
 
@@ -668,8 +671,9 @@ function onInputSubtask(id) {
  * Clears the 'subtaskInput' field and resets the 'subtaskIcons' area to show the default add icon.
  * Removes any additional icons previously added to 'subtaskIcons' when input is non-empty.
  */
-function resetInputField() {
-  document.getElementById('subtaskInput').value = '';
+function resetInputField(inputId) {
+  // console.log('inputId', inputId);
+  document.getElementById(inputId).value = '';
   document.getElementById('subtaskIcons').innerHTML = /*html*/ `
     <img onclick="focusInput()" class="add-subtask" src="../assets/icons/board/property-add.svg" alt="add">`;
 }
@@ -678,12 +682,15 @@ function resetInputField() {
  * Adds the current subtask input value to the `currentSubtasks` array with a bullet point.
  * Sets the subtask as unchecked by default, then renders the updated subtask list and resets the input field.
  */
-function addCurrentSubtask() {
-  let subtaskInput = document.getElementById('subtaskInput');
+function addCurrentSubtask(inputId) {
+  console.log('inputId:', inputId);
+
+  let subtaskInput = document.getElementById(inputId);
+  console.log('subtaskInput:', subtaskInput);
   currentSubtasks.push({ checked: false, text: subtaskInput.value });
 
   renderSubtaskAddedList();
-  resetInputField();
+  resetInputField(inputId);
 }
 
 /**

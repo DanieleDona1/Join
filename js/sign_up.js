@@ -67,7 +67,7 @@ function validateCheckbox() {
  */
 function addUser(name, email, password) {
   postData('/users', { name: name, email: email, password: password });
-  window.location.href = './login.html?msg=You Signed Up successfully';
+  redirectToPage('../index.html?msg=You Signed Up successfully');
 }
 
 /**

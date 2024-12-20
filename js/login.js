@@ -28,7 +28,7 @@ function checkMsgUrl() {
   } else {
     document.getElementById('animatedText').style.display = '';
   }
-  history.replaceState(null, '', './login.html');
+  // history.replaceState(null, '', './login.html');
 }
 
 /**
@@ -45,8 +45,9 @@ function login(event) {
   let userKey = checkUser(email, password);
 
   if (userKey) {
+    console.log('Der userKey', userKey);
     saveToLocalStorage('user', userKey);
-    window.location.href = '/html/summary.html';
+    redirectToPage('./html/summary.html');
   } else {
     document.getElementById('errorMsg').style.opacity = '1';
     document.getElementById('email').style.border = '1px solid red';
