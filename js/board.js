@@ -12,16 +12,9 @@ async function onload() {
   await loadTodosArray();
   currentTodos = JSON.parse(JSON.stringify(todos));
   await createContactlistAddTask();
-  console.log('onload todos:', todos);
-  console.log('onload currentTodos:', currentTodos);
-  console.log('contactList:', contactList);
-
   renderTasks();
   await generateHeaderInitials();
   setupOutsideClickForCustomSelects();
-
-  // openTaskDetails(0);
-  // openEditTask(0);
 }
 
 /**
@@ -94,7 +87,7 @@ function loadProgressText(task, progressText, progressBar) {
   if (totalSubtasks > 0) {
     progressValue = (completedTasks / totalSubtasks) * 100;
   } else {
-    progressValue = 0; // Setze den Fortschritt auf 0, wenn es keine Subtasks gibt
+    progressValue = 0;
   }
   progressBar.style.width = progressValue + '%';
 }
@@ -106,14 +99,10 @@ function loadProgressText(task, progressText, progressBar) {
 function loadMembersInitials(i, initialsContainerId) {
   if (currentTodos[i].assignedTo) {
     selectedContactsKeys = getSelectedContactsKey(i);
-    // console.log('keeeys:', selectedContactsKeys);
-
     const membersContainer = document.getElementById(initialsContainerId + i);
     membersContainer.innerHTML = '';
     for (let j = 0; j < selectedContactsKeys.length; j++) {
       selectedContacts = contactList.filter((f) => f.id === selectedContactsKeys[j]);
-      // console.log('selectedContacts[0]', selectedContacts[0]);
-
 
       const name = getName(selectedContacts[0]);
       const initialsName = generateInitials(name);
@@ -652,9 +641,6 @@ function focusInput() {
  */
 function onInputSubtask(inputId) {
   let subtaskInput = document.getElementById(inputId);
-  // console.log('Beide Variablen', inputId, subtaskInput);
-  // console.log(typeof(inputId));
-
   if (subtaskInput.value !== '') {
     document.getElementById('subtaskIcons').innerHTML = /*html*/ `
     <div class="d-flex-c-c">
@@ -672,7 +658,6 @@ function onInputSubtask(inputId) {
  * Removes any additional icons previously added to 'subtaskIcons' when input is non-empty.
  */
 function resetInputField(inputId) {
-  // console.log('inputId', inputId);
   document.getElementById(inputId).value = '';
   document.getElementById('subtaskIcons').innerHTML = /*html*/ `
     <img onclick="focusInput()" class="add-subtask" src="../assets/icons/board/property-add.svg" alt="add">`;
@@ -683,10 +668,7 @@ function resetInputField(inputId) {
  * Sets the subtask as unchecked by default, then renders the updated subtask list and resets the input field.
  */
 function addCurrentSubtask(inputId) {
-  console.log('inputId:', inputId);
-
   let subtaskInput = document.getElementById(inputId);
-  console.log('subtaskInput:', subtaskInput);
   currentSubtasks.push({ checked: false, text: subtaskInput.value });
 
   renderSubtaskAddedList();
@@ -908,7 +890,6 @@ function getUserChangedData(i) {
   currentTodos[i]['description'] = textareaEdit;
   currentTodos[i]['dueDate'] = dueDate;
 
-  // function editTaskRemote(key, { title, description, category, dueDate, assignedTo, subtask, prio }) {
   editTaskRemote(todoKeysArray[i], { title: currentTodos[i].title, description: currentTodos[i].description, dueDate: currentTodos[i].dueDate });
 }
 
@@ -1044,7 +1025,6 @@ function toggleContactSelection(checkbox, contactKey) {
   if (checkbox.checked) {
     if (index === -1) {
       selectedContactsKeys.push(contactKey);
-      console.log(selectedContactsKeys);
     }
   } else {
     if (index !== -1) {

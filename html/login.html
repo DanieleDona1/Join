@@ -12,14 +12,8 @@
     <link rel="stylesheet" href="../style.css" />
   </head>
   <body class="body" onload="onloadFunc();">
-    <div class="wrapper max-width-1920">
-      <a href="./login.html"
-        ><img
-          class="logo-animation"
-          id="logoAnimation"
-          src="../assets/icons/auth/logo.svg"
-          alt="logo"
-      /></a>
+    <div class="wrapper max-width-1440">
+      <a href="./login.html"><img class="logo-animation" id="logoAnimation" src="../assets/icons/auth/logo.svg" alt="logo" /></a>
 
       <div class="header-btn-container">
         <button>Not a Join user?</button>
@@ -53,12 +47,7 @@
 
             <div class="entry-btn-container" id="btnentryContainer">
               <button type="submit" class="entry-btn">Log in</button>
-                <button onclick="guestLoginRedirect('./summary.html')"
-                  type="button"
-                  id="btnGuestentry"
-                  class="btn-guest-entry">
-                  Guest Log in
-                </button>
+              <button onclick="guestLoginRedirect('./summary.html')" type="button" id="btnGuestentry" class="btn-guest-entry">Guest Log in</button>
             </div>
           </form>
         </div>

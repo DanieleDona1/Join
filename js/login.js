@@ -45,14 +45,12 @@ function login(event) {
   let userKey = checkUser(email, password);
 
   if (userKey) {
-    console.log('Der userKey', userKey);
     saveToLocalStorage('user', userKey);
     redirectToPage('./html/summary.html');
   } else {
     document.getElementById('errorMsg').style.opacity = '1';
     document.getElementById('email').style.border = '1px solid red';
     document.getElementById('password').style.border = '1px solid red';
-    console.log('Kein Benutzer gefunden');
   }
 };
 

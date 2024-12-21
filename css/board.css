@@ -49,13 +49,11 @@ h3 {
 
 .searchbar-container-mobile {
   display: none;
-  /* display: flex; */
   flex-direction: column;
 }
 
 .searchbar-container-mobile {
   display: none;
-  /* display: flex; */
   flex-direction: column;
 }
 
@@ -63,7 +61,6 @@ h3 {
   border: 1px solid rgb(204, 204, 204);
   padding: 4px 16px;
   border-radius: 10px;
-
   margin-top: 40px;
   max-width: 370px;
 }
@@ -100,10 +97,6 @@ h3 {
 .add-task img {
   width: 16px;
 }
-
-/* section {
-  max-width: 252px;
-} */
 
 .section-container {
   margin-top: 40px;
@@ -328,8 +321,6 @@ h3 {
   padding: 0px 14px 0px 24px;
   height: 100%;
   max-height: 650px;
-  /* gap: 20px; */
-  /* min-height: 650px; */
 }
 
 .detail-task .title {
@@ -685,7 +676,6 @@ input[type='date']::-webkit-calendar-picker-indicator {
 
 .contact-select-container {
   position: relative;
-  /* width: 250px; */
   width: 100%;
 }
 
