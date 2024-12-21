@@ -139,7 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const emailInput = document.getElementById('email');
   const passwordInput = document.getElementById('password');
   const errorMessage = document.getElementById('errorMsg');
-
   const changeBorderToBlack = (inputElement) => {
     emailInput.style.border = '1px solid rgba(0, 0, 0, 0.2)';
     inputElement.style.border = '1px solid rgba(0, 0, 0, 0.2)';

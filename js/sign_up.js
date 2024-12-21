@@ -4,7 +4,6 @@
  */
 function validatePasswordsAndCheckbox(event) {
   event.preventDefault();
-
   let formValues = getFormValues();
   let isValid = true;
 

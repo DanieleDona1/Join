@@ -84,8 +84,6 @@ function getFromLocalStorage(key) {
  * @param {string} link - The URL or path of the page to redirect to.
  */
 function redirectToPage(link) {
-  console.log('Der Link', link);
-
   window.location.href = link;
 }
 
@@ -119,7 +117,6 @@ async function loadUsersArray() {
       });
     }
   }
-  console.log('users', users);
 }
 
 /**
@@ -287,7 +284,6 @@ async function generateHeaderInitials() {
  * @returns {string} The user's initials.
  */
 function generateInitials(userName) {
-  // Suche nach Wörtern mit Buchstaben (Ignorieren von Zahlen)
   const nameParts = userName.match(/([A-ZÄÖÜ]?[a-zäöüß]+)|([A-ZÄÖÜ])/g);
 
   if (!nameParts) {

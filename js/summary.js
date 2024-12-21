@@ -52,7 +52,6 @@ function hideElementAfterTimeout(elementId, delay) {
 async function desktopGreetUser() {
   const userName = await getUserName();
   const greeting = getGreetingText();
-
   const userGreetingElement = document.getElementById('greeting');
   const userNameElement = document.getElementById('userName');
 
