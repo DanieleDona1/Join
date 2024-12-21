@@ -172,9 +172,9 @@ function generateAssignedTo(id) {
  * @param {string} category - The category of the new task.
  * @param {string} contentId - The ID of the content area where the task will be added.
  */
-function generatePopUpAddTask(category, contentId) {
+function generatePopUpAddTask(category) {
   if (window.innerWidth < 900) {
-    window.location.href = "/html/add_tasks.html";
+    window.location.href = "../html/add_tasks.html";
   } else {
     document.getElementById('dialog').innerHTML = /*html*/ `
     <div class="pop-up-add-Task slide-in dialog-content">
@@ -315,7 +315,7 @@ function generatePopUpAddTask(category, contentId) {
               <button id="clear-button" type="button" class="clear-button">
                 Clear &nbsp;&#10006;
               </button>
-              <button class="create-button" onclick="createAddTask('toDo'); return false;">
+              <button class="create-button" onclick="createAddTask('${category}'); return false;">
                 Create Task &nbsp;&nbsp;&#10003;
               </button>
             </div>
