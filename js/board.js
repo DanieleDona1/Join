@@ -959,8 +959,6 @@ function saveCurrentAssignedTo(i) {
  */
 function editTask(i) {
   if (checkRequiredTitleEditFields()) {
-
-  // TODO Die Task im Board werden mit dem Inhalt let currentTodos = []; gerendert, deswegen greift getUserChangedData() und saveCurrentSubtask() auf currentTodos
   getUserChangedData(i);
   saveCurrentPriority(i);
   saveCurrentAssignedTo(i);
@@ -1039,7 +1037,6 @@ function toggleSelectionOnChange(dropdownId) {
  * @param {string} contactKey - The unique key or ID associated with the contact.
  */
 function toggleContactSelection(checkbox, contactKey) {
-  // selectedContactsKeys = [];
   const contactDiv = document.querySelector(`[for="${contactKey}"]`);
   contactDiv.classList.toggle('selected-contact', checkbox.checked);
   const index = selectedContactsKeys.indexOf(contactKey);
@@ -1090,7 +1087,6 @@ function loadCurrentPriority(i) {
  */
 function setFocusBasedOnPriority() {
   const priorities = ['urgent', 'medium', 'low'];
-
   priorities.forEach((prio) => {
     const element = document.getElementById(`${prio}DetailTask`);
     element.classList.toggle('active', activePriority === prio);
@@ -1122,10 +1118,14 @@ function changePriority(priority) {
   setFocusBasedOnPriority();
 }
 
+/**
+ * Checks if the required "Title Edit" fields are valid.
+ * Calls `checkField` to validate a specific field and updates the validity status.
+ *
+ * @returns {boolean} - Returns `true` if the required fields are valid, otherwise `false`.
+ */
 function checkRequiredTitleEditFields() {
   let valid = true;
-
   valid &= checkField('titleEdit', 'titleErrorEdit');
-
   return valid;
 }

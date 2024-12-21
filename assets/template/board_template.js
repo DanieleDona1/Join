@@ -78,7 +78,7 @@ function generateDetailTaskTemplate(id) {
  * @param {number} dueDate - The due Date of the task to edit.
  */
 function generateEditTemplate(id, dueDate) {
-   return /*html */ `
+  return /*html */ `
       <div class="wrapper dialog-content" onclick="event.stopPropagation();">
         <div class="edit-template detail-task scrollbar" >
             <div class="x-task-category-container d-flex-sb-c">
@@ -116,15 +116,13 @@ function generateEditTemplate(id, dueDate) {
             </div>
           </div>
 
-
-
           <strong id="assignedTo">Assigned to</strong>
           <div class="contact-select-container">
             <div id="customSelectGroup" class="custom-select-group">
               <input id="selectContactsDiv" class="custom-select" readonly onclick="toggleDropdown('dropdown', 'customSelectGroup')" placeholder="Select contacts to assign"/>
             </div>
             <div class="dropdown-wrapper">
-              <div id="dropdown" class="dropdown-content"><!-- Hier werden die Kontaktinformationen durch JavaScript eingefügt --></div>
+              <div id="dropdown" class="dropdown-content"></div>
             </div>
           </div>
           <div id="memberEditInitialsContainer" class="initials-container"></div>
@@ -174,7 +172,7 @@ function generateAssignedTo(id) {
  */
 function generatePopUpAddTask(category) {
   if (window.innerWidth < 900) {
-    window.location.href = "../html/add_tasks.html";
+    window.location.href = '../html/add_tasks.html';
   } else {
     document.getElementById('dialog').innerHTML = /*html*/ `
     <div class="pop-up-add-Task slide-in dialog-content">
