@@ -204,21 +204,48 @@ function updateFavicon() {
 }
 
 /**
- * Toggles the visibility of a password field.
+ * Checks if an image exists at the given path.
+ * @param {string} src - The source URL of the image to check.
+ * @param {function(boolean): void} callback - A callback function that receives `true` if the image exists, otherwise `false`.
+ */
+function imageExists(src, callback) {
+  let img = new Image();
+  img.onload = () => callback(true);
+  img.onerror = () => callback(false);
+  img.src = src;
+}
+
+/**
+ * Sets the image source with a fallback option if the primary source does not exist.
+ * @param {HTMLElement} imgElement - The <img> element whose source needs to be set.
+ * @param {string} primarySrc - The primary image source URL.
+ * @param {string} fallbackSrc - The fallback image source URL.
+ */
+function setImageSource(imgElement, primarySrc, fallbackSrc) {
+  imageExists(primarySrc, (exists) => {
+    imgElement.src = exists ? primarySrc : fallbackSrc;
+  });
+}
+
+/**
+ * Toggles the visibility of a password field and updates the visibility icon.
  * @param {string} passwordFieldId - The ID of the password input field.
- * @param {string} visibilityImgId - The ID of the visibility icon.
- * @function togglePasswordVisibility
+ * @param {string} visibilityImgId - The ID of the image element for the visibility icon.
  */
 function togglePasswordVisibility(passwordFieldId, visibilityImgId) {
   let passwordField = document.getElementById(passwordFieldId);
   let visibilityBtn = document.getElementById(visibilityImgId);
 
+  if (!passwordField || !visibilityBtn) {
+    console.error("Invalid element IDs provided.");
+    return;
+  }
   if (passwordField.type === 'password') {
     passwordField.type = 'text';
-    visibilityBtn.src = 'assets/icons/auth/visibility.svg';
+    setImageSource(visibilityBtn, 'assets/icons/auth/visibility.svg', '../assets/icons/auth/visibility.svg');
   } else {
     passwordField.type = 'password';
-    visibilityBtn.src = 'assets/icons/auth/visibility_off.svg';
+    setImageSource(visibilityBtn, 'assets/icons/auth/visibility_off.svg','../assets/icons/auth/visibility_off.svg');
   }
 }
 
