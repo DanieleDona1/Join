@@ -72,6 +72,8 @@ function loadAssignedToList(i) {
  * @returns {string} The user's initials.
  */
 function generateInitials(userName) {
+  console.log('hhhheello');
+  
   const nameParts = userName.match(/([A-ZÄÖÜ]?[a-zäöüß]+)|([A-ZÄÖÜ])/g);
 
   if (!nameParts) {
