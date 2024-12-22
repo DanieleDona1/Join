@@ -378,6 +378,7 @@ input:focus,
 }
 
 .clear-create-button-container {
+  pointer-events: none;
   display: flex;
   margin-top: auto;
   padding-top: 40px;
@@ -386,6 +387,7 @@ input:focus,
 }
 
 .clear-button {
+  pointer-events: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -404,12 +406,12 @@ input:focus,
 }
 
 .create-button {
+  pointer-events: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
   background-color: rgb(42, 54, 71);
-  font-size: 21px;
   font-weight: 700;
   border: none;
   margin-left: 16px;
@@ -455,7 +457,7 @@ input:focus,
   .required-note {
     padding-bottom: 30px;
     position: fixed;
-    bottom: 70px;
+    bottom: 60px;
     left: 20px;
     z-index: 15;
     background-color: rgb(246, 247, 248);
@@ -474,7 +476,7 @@ input:focus,
     z-index: 15;
   }
   .add-task-container .subtask-container {
-    padding-bottom: 200px;
+    margin-bottom: 265px;
   }
 
   .subtask-list-group .subtask-list-icons {
@@ -485,5 +487,32 @@ input:focus,
 @media (max-width: 720px) {
   .task-button {
     padding: 10px 12px;
+  }
+}
+
+@media (max-width: 400px) {
+  .clear-create-button-container {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .clear-button {
+    margin-bottom: 8px;
+  }
+
+  .button-container {
+    flex-direction: column;
+  }
+
+  .task-button {
+    width: 100%;
+  }
+
+  section button {
+    margin-bottom: 16px;
+  }
+
+  main h1 {
+    padding: 0;
   }
 }
