@@ -24,7 +24,7 @@ button:hover {
   box-shadow: 0 4px 6px rgba(38, 40, 40, 0.15);
 }
 
-form input[type="checkbox"] {
+form input[type='checkbox'] {
   height: 20px;
   width: 20px;
   margin: 0;
@@ -87,7 +87,7 @@ form input[type="checkbox"] {
 
 /* Dropdown Pfeil */
 .add-task-custom-select::after {
-  content: "▼"; /* Dropdown-Pfeil */
+  content: '▼'; /* Dropdown-Pfeil */
   position: absolute;
   right: 20px;
   top: 50%;
@@ -113,7 +113,7 @@ section button {
   border: 1px solid rgb(238, 238, 238);
   border-radius: 6px;
   background-color: white;
-  font-size: 20px;
+  font-size: clamp(1rem, 1.04vw, 20px);
   font-weight: 400;
 }
 
@@ -219,7 +219,7 @@ input:focus,
 
 /* Füge das Häkchen hinzu */
 .custom-checkbox.checked:after {
-  content: "";
+  content: '';
   position: absolute;
   left: 8px;
   top: -6px;
@@ -365,15 +365,15 @@ input:focus,
   box-shadow: none;
 }
 
-.task-button[data-color="urgent"].active {
+.task-button[data-color='urgent'].active {
   background-color: rgb(255, 61, 0);
 }
 
-.task-button[data-color="medium"].active {
+.task-button[data-color='medium'].active {
   background-color: rgb(255, 168, 0);
 }
 
-.task-button[data-color="low"].active {
+.task-button[data-color='low'].active {
   background-color: rgb(122, 226, 41);
 }
 
@@ -439,20 +439,17 @@ input:focus,
   display: none;
 }
 
-
 @media (max-width: 1225px) {
-
   .clear-create-button-container,
   .required-note {
     padding-bottom: 60px;
   }
 }
 
-
 @media (max-width: 900px) {
   form {
     display: block;
-    height: 100vh
+    height: 100vh;
   }
 
   .required-note {
@@ -461,7 +458,7 @@ input:focus,
     bottom: 70px;
     left: 20px;
     z-index: 15;
-    background-color: rgb(246,247,248);
+    background-color: rgb(246, 247, 248);
     padding: 5px;
   }
 
@@ -482,5 +479,11 @@ input:focus,
 
   .subtask-list-group .subtask-list-icons {
     opacity: 1;
+  }
+}
+
+@media (max-width: 720px) {
+  .task-button {
+    padding: 10px 12px;
   }
 }

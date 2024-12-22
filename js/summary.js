@@ -25,7 +25,7 @@ function mobileGreeting() {
   let greetingDialog = document.getElementById('greetingDialog');
   greetingDialog.innerHTML = getGreetingText() + '!';
   greetingDialog.classList.add('opacity-animation');
-  hideElementAfterTimeout('greetingDialog', 2200);
+  hideElementAfterTimeout('greetingDialog', 1500);
 }
 
 /**

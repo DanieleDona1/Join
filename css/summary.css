@@ -39,7 +39,7 @@ main h2 {
 .summary-container {
   display: flex;
   gap: 20px;
-  font-size: 3rem;
+  font-size: clamp(2.7rem, 1.25vw, 3rem);
 }
 .summary-container span {
   display: flex;
@@ -136,7 +136,7 @@ main h2 {
 }
 
 .upcoming-deadline {
-  font-size: clamp(1rem, 4.5vw, 1.3rem);
+  font-size: clamp(1rem, 4.2vw, 1.3rem);
   font-weight: bold;
 }
 
