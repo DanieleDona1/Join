@@ -1,0 +1,92 @@
+.edit-template {
+  font-size: 1.125rem;
+}
+
+.edit-template strong {
+  margin-top: 16px;
+  margin-bottom: 6px;
+}
+
+.edit-template input {
+  display: flex;
+  width: 100%;
+  padding: 10px 64px 10px 16px;
+  gap: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  font-size: 18px;
+}
+
+.edit-template input:focus,
+.edit-template textarea:focus,
+.edit-template due-date:focus {
+  outline: none;
+  border: 1.8px solid rgba(41, 171, 226, 1);
+}
+
+.title-edit.title-edit {
+  padding: 10px 32px 10px 16px;
+}
+
+.textarea-edit {
+  min-height: 88px;
+}
+
+.edit-template textarea {
+  display: flex;
+  resize: none;
+  width: 100%;
+  padding: 10px 16px;
+  gap: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  font-size: 18px;
+}
+
+.save-edit-btn {
+  cursor: pointer;
+  border: unset;
+  background-color: rgb(42, 54, 71);
+  gap: 2px;
+  border-radius: 8px;
+  padding: 12px 16px;
+  width: 88px;
+  min-height: 56px;
+  padding: 10px 25px;
+  transition: background-color 200ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.save-edit-btn img {
+  width: 40px;
+}
+
+.due-edit.due-edit {
+  position: relative;
+}
+
+.due-edit {
+  position: relative;
+}
+
+input[type='date'] {
+  padding-right: 35px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.text-wrap {
+  max-width: 90%;
+  white-space: normal;
+  overflow-wrap: break-word;
+  flex-grow: 1;
+}

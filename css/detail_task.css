@@ -1,0 +1,173 @@
+.task {
+  position: relative;
+  min-width: 243px;
+  min-height: 225px;
+  cursor: pointer;
+  background-color: white;
+  padding: 16px 20px 16px 16px;
+  border-radius: 24px;
+  font-size: 1rem;
+  font-weight: 400;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+}
+
+.task-category {
+  color: rgb(255, 255, 255);
+  border-radius: 8px;
+  padding: 4px 16px;
+  width: fit-content;
+}
+
+.task .title {
+  margin-top: 16px;
+  font-weight: 700;
+}
+
+.task .description {
+  color: rgb(168, 168, 168);
+  padding: 4px 0;
+}
+
+.task .subtasks {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+}
+
+.progress-container {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 8px;
+}
+
+.progress-bar {
+  width: 50%;
+  height: 100%;
+  background-color: rgb(69, 137, 255);
+  border-radius: 25px 0 0 25px;
+}
+
+.progress-text {
+  margin-left: 10px;
+  font-size: 0.75rem;
+  color: rgb(51, 51, 51);
+  line-height: 30px;
+  white-space: nowrap;
+}
+
+.members-container {
+  position: relative;
+  width: 180px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  padding-left: 10px;
+}
+
+.initial-board-wrapper {
+  position: relative;
+}
+
+.initial-board-wrapper .initial-board {
+  margin-left: -10px;
+}
+
+.initial-board-wrapper:nth-child(1) {
+  margin-right: 0px;
+}
+
+.initial-board {
+  width: 40px;
+  height: 40px;
+  border: 2px solid white;
+  border-radius: 50%;
+  color: white;
+  font-size: 12px;
+}
+
+.members-detail-task {
+  padding-left: 20px;
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.member-name {
+  padding-left: 16px;
+  font-size: 18px;
+}
+
+.bg-Technical-Task {
+  background-color: rgba(31, 215, 193, 1);
+}
+
+.bg-User-Story {
+  background-color: rgb(0, 56, 255);
+}
+
+.wrapper {
+  background-color: white;
+  border-radius: 16px;
+  padding-right: 10px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  width: 100%;
+  max-width: 440px;
+  max-height: 736px;
+  height: 100%;
+}
+
+.scrollbar {
+  overflow-y: scroll;
+  scrollbar-width: thin;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 15px;
+}
+
+.detail-task {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 14px 0px 24px;
+  height: 100%;
+  max-height: 650px;
+}
+
+.detail-task .title {
+  font-size: clamp(1.75rem, 4vw + 1rem, 2.5rem);
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.detail-task strong {
+  color: rgb(66, 82, 110);
+  font-weight: 700;
+  margin-right: 16px;
+}
+
+.detail-task .prio-img {
+  width: 16px;
+  margin-left: 4px;
+}
+
+.detail-task .detail-group {
+  margin-top: 20px;
+}
+
+.detail-task .padding-left-16px {
+  padding-left: 16px;
+}
+
+.detail-due-edit {
+  background-color: white;
+}
+
+.detail-due-edit:disabled {
+  color: black;
+  border: unset;
+}
