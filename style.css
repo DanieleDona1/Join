@@ -184,13 +184,13 @@ header img {
   list-style-type: none;
 }
 
-.dropdown-menu ul li {
-  padding: 8px 12px;
-}
-
 .dropdown-menu ul li a {
   text-decoration: none;
   color: rgb(205, 205, 205);
+  text-decoration: none;
+  display: inline-block;
+  line-height: 40px;
+  vertical-align: middle;
 }
 
 .dropdown-menu ul li:hover {

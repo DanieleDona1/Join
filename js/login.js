@@ -13,7 +13,7 @@ async function onloadFunc() {
 
 /**
  * Checks the URL for a 'msg' parameter and displays it by starting an animation.
- * Updates the URL to './login.html'.
+ * Updates the URL to './index.html'.
  *
  * @function
  * @returns {void}
