@@ -38,7 +38,7 @@ h3 {
 
 .section-container {
   margin-top: 40px;
-  gap: 20px;
+  gap: calc(20px + (40 - 20) * ((100vw - 1400px) / (1920 - 1400)));
   max-width: 1350px;
   display: flex;
   height: 72vh;
