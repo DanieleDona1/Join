@@ -1,3 +1,4 @@
+@import url('../css/login_animation.css');
 html {
   height: 100%;
 }
@@ -24,33 +25,6 @@ a {
   justify-content: center;
   padding: 0 15px;
   overflow: hidden;
-}
-
-.logo-animation {
-  position: absolute;
-  z-index: 1;
-  background-color: rgb(246, 247, 248);
-  animation: moveToCorner 700ms linear forwards;
-  width: 40px;
-  height: 50px;
-  top: 30px;
-  left: 30px;
-}
-
-@keyframes moveToCorner {
-  from {
-    width: 100vw;
-    height: 100vh;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  to {
-    width: 100px;
-    height: 120px;
-    top: 50px;
-    left: 50px;
-  }
 }
 
 .header-btn-container {
@@ -149,7 +123,7 @@ a {
   padding: 10px 21px 10px 21px;
   gap: 10px;
   border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(209, 209, 209, 1);
   font-size: 1.125rem;
 }
 
@@ -258,22 +232,6 @@ footer a:hover {
   transform: scale(1.04);
 }
 
-@keyframes moveToCornerMobile {
-  from {
-    width: 100vw;
-    height: 100vh;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  to {
-    width: 40px;
-    height: 50px;
-    top: 30px;
-    left: 30px;
-  }
-}
-
 .dialog-bg {
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
@@ -283,47 +241,6 @@ footer a:hover {
   height: 100%;
   z-index: 1;
   display: none;
-}
-
-.animated-text {
-  font-size: 1.3rem;
-  font-weight: bold;
-  padding: 10px 15px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(42, 54, 71, 1);
-  border-radius: 10px;
-  animation: moveAndFade 3s linear 200ms both;
-  color: white;
-}
-
-@keyframes moveAndFade {
-  0% {
-    bottom: -100px;
-    opacity: 0;
-  }
-  30% {
-    bottom: 50%;
-    opacity: 1;
-  }
-  70% {
-    bottom: 50%;
-    opacity: 1;
-  }
-  100% {
-    bottom: 50%;
-    opacity: 0;
-  }
-}
-
-.logo {
-  position: absolute;
-  z-index: 1;
-  width: 100px;
-  height: 120px;
-  top: 50px;
-  left: 50px;
 }
 
 label span {
@@ -347,7 +264,7 @@ label span {
 }
 
 .form-checkbox:not(:checked) {
-  border: 1px solid black;
+  border: 2px solid rgba(0, 0, 0, 0.7);
 }
 
 .form-checkbox:checked::after {
@@ -456,15 +373,6 @@ label span {
   }
   #navbar-div {
     display: flex;
-  }
-  .logo-animation {
-    animation: moveToCornerMobile 1000ms linear forwards;
-  }
-  .logo {
-    width: 40px;
-    height: 50px;
-    top: 30px;
-    left: 30px;
   }
 }
 
