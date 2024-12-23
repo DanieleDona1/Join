@@ -1,0 +1,101 @@
+form span,
+.required-note span {
+  color: rgb(255, 129, 144);
+  vertical-align: top;
+}
+
+section p {
+  margin-bottom: 8px;
+  font-size: 20px;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+::placeholder {
+  font-size: 20px;
+  color: rgb(209, 209, 209);
+}
+
+section button {
+  height: 56px;
+  width: 40%;
+  margin-bottom: 28px;
+  border: 1px solid rgb(238, 238, 238);
+  border-radius: 6px;
+  background-color: white;
+  font-size: clamp(1rem, 1.04vw, 20px);
+  font-weight: 400;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.error-msg-addtask {
+  margin-top: 4px;
+  margin-bottom: 28px;
+  color: red;
+  font-size: 0.8rem;
+}
+
+.divider {
+  height: 424px;
+  width: 1.5px;
+  background-color: rgb(214, 214, 214);
+  margin: 0 48px;
+}
+
+.contact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.initial {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border: 2px solid white;
+  border-radius: 50%;
+  color: white;
+  font-size: 12px;
+}
+
+.name {
+  padding-left: 12px;
+}
+
+.mg-b-28 {
+  margin-bottom: 28px;
+}
+
+.mg-t-28 {
+  margin-top: 28px;
+}
+
+.d-none {
+  display: none;
+}
+
+.required-note {
+  margin-top: auto;
+  padding-top: 110px;
+  margin-bottom: 10%;
+  font-size: 16px;
+}
+
+form input:hover,
+form textarea:hover,
+.select-selected:hover,
+button:hover {
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(38, 40, 40, 0.15);
+}

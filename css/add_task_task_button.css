@@ -1,0 +1,82 @@
+.task-button {
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    cursor: pointer;
+    position: relative;
+    width: 30%;
+  }
+  
+  .task-button img {
+    position: relative;
+    top: 2px;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+  }
+  
+  .task-button.active {
+    color: white;
+    font-weight: 700;
+    cursor: unset;
+    box-shadow: none;
+  }
+  
+  .task-button[data-color='urgent'].active {
+    background-color: rgb(255, 61, 0);
+  }
+  
+  .task-button[data-color='medium'].active {
+    background-color: rgb(255, 168, 0);
+  }
+  
+  .task-button[data-color='low'].active {
+    background-color: rgb(122, 226, 41);
+  }
+  
+  .clear-create-button-container {
+    pointer-events: none;
+    display: flex;
+    margin-top: auto;
+    padding-top: 40px;
+    justify-content: flex-end;
+    margin-bottom: 5%;
+  }
+  
+  .clear-button {
+    pointer-events: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 110px;
+    border-color: rgb(42, 54, 71);
+  }
+  
+  .clear-button:hover {
+    color: rgb(41, 171, 226);
+    border: 2px solid rgb(41, 171, 226);
+  }
+  
+  .clear-button img,
+  .create-button img {
+    margin-left: 5px;
+  }
+  
+  .create-button {
+    pointer-events: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: rgb(42, 54, 71);
+    font-weight: 700;
+    border: none;
+    margin-left: 16px;
+    width: 183px;
+  }
+  
+  .create-button:hover {
+    background-color: rgb(41, 171, 226);
+  }
+  
