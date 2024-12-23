@@ -4,6 +4,7 @@
 @import url('../css/edit_subtask_board.css');
 @import url('../css/edit_priority_board_task.css');
 @import url('../css/edit_task_board.css');
+@import url('../css/animation_dialog.css');
 
 main {
   padding-top: 48px;

@@ -296,3 +296,21 @@ async function loadData(path = '') {
   let response = await fetch(BASE_URL + path + '.json');
   return (responseToJson = await response.json());
 }
+
+/**
+ * Generates initials from a user's name (e.g., 'John Doe' → 'JD').
+ *
+ * @param {string} userName - The user's full name.
+ * @returns {string} The user's initials.
+ */
+function generateInitials(userName) {
+  const nameParts = userName.match(/([A-ZÄÖÜ]?[a-zäöüß]+)|([A-ZÄÖÜ])/g);
+
+  if (!nameParts) {
+    return false;
+  }
+  return nameParts
+    .slice(0, 2)
+    .map((part) => part.charAt(0).toUpperCase())
+    .join('');
+}
