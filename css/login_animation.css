@@ -1,0 +1,95 @@
+.logo {
+  position: absolute;
+  z-index: 1;
+  width: 100px;
+  height: 120px;
+  top: 50px;
+  left: 50px;
+}
+
+.logo-animation {
+  position: absolute;
+  z-index: 1;
+  background-color: rgb(246, 247, 248);
+  animation: moveToCorner 700ms linear forwards;
+  width: 40px;
+  height: 50px;
+  top: 30px;
+  left: 30px;
+}
+
+@keyframes moveToCorner {
+  from {
+    width: 100vw;
+    height: 100vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  to {
+    width: 100px;
+    height: 120px;
+    top: 50px;
+    left: 50px;
+  }
+}
+
+@keyframes moveToCornerMobile {
+  from {
+    width: 100vw;
+    height: 100vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  to {
+    width: 40px;
+    height: 50px;
+    top: 30px;
+    left: 30px;
+  }
+}
+
+.animated-text {
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding: 10px 15px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(42, 54, 71, 1);
+  border-radius: 10px;
+  animation: moveAndFade 3s linear 200ms both;
+  color: white;
+}
+
+@keyframes moveAndFade {
+  0% {
+    bottom: -100px;
+    opacity: 0;
+  }
+  30% {
+    bottom: 50%;
+    opacity: 1;
+  }
+  70% {
+    bottom: 50%;
+    opacity: 1;
+  }
+  100% {
+    bottom: 50%;
+    opacity: 0;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 720px) {
+  .logo-animation {
+    animation: moveToCornerMobile 1000ms linear forwards;
+  }
+  .logo {
+    width: 40px;
+    height: 50px;
+    top: 30px;
+    left: 30px;
+  }
+}
