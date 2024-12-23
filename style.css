@@ -1,8 +1,7 @@
 @import url('/css/header.css');
 @import url('/css/navbar.css');
 @import url('/css/main.css');
-@import url('/css/media_min_width_1225px.css');
-@import url('/css/media_min_width_1921px.css');
+@import url('/css/media_queries.css');
 
 * {
   margin: 0;
