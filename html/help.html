@@ -17,14 +17,23 @@
   </head>
   <body class="max-width-1440">
     <header>
-      <img
-        class="header-join-logo"
-        src="../assets/icons/header/joinHeaderMobile.svg"
-        alt="logo"
-      />
+      <img class="header-join-logo" src="../assets/icons/header/joinHeaderMobile.svg" alt="logo" />
       <p class="d-none">Kanban Project Management Tool</p>
       <div class="header-rightside-container">
-        <span class="header-initials">JV</span>
+        <a href="./help.html">
+          <img class="header-help-icon d-none" src="../assets/icons/header/help.svg" alt="help" />
+        </a>
+
+        <div class="dropdown-container">
+          <span id="headerInitials" class="header-initials d-flex-c-c" tabindex="0"></span>
+          <div class="dropdown-menu">
+            <ul>
+              <li><a href="../html/legal_notice.html">Legal Notice</a></li>
+              <li><a href="../html/privacy_policy.html">Privacy Policy</a></li>
+              <li><a onclick="removeUserToken()" href="../index.html">Log out</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </header>
 
