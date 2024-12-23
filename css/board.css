@@ -1,3 +1,10 @@
+@import url('../css/assigned_dropdown_edit_task.css');
+@import url('../css/searchbar.css');
+@import url('../css/detail_task.css');
+@import url('../css/edit_subtask_board.css');
+@import url('../css/edit_priority_board_task.css');
+@import url('../css/edit_task_board.css');
+
 main {
   padding-top: 48px;
   padding-right: 56px;
@@ -211,55 +218,6 @@ h3 {
   cursor: pointer;
 }
 
-.contact-select-container {
-  position: relative;
-  width: 100%;
-}
-
-.custom-select-group {
-  position: relative;
-}
-
-.custom-select-group::after {
-  content: '▼';
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  pointer-events: none;
-  font-size: 12px;
-  z-index: 2;
-  transform: translateY(-50%);
-}
-
-.custom-select-group.open::after {
-  transform: translateY(-50%) rotate(180deg);
-}
-
-.custom-select {
-  padding: 10px 32px 10px 16px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.custom-select::placeholder {
-  color: black;
-  font-size: 1rem;
-}
-
-.dropdown-content {
-  position: absolute;
-  z-index: 1;
-  width: 99%;
-  background-color: white;
-  max-height: 200px;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 0px 0px 4px 4px;
-}
-
 .contact-select-wrapper {
   display: flex;
   justify-content: space-between;
@@ -340,28 +298,33 @@ input:focus {
   margin-right: 5px;
 }
 
+.addtask-btn-board::before {
+  content: attr(value);
+}
+
 .error-msg-edit-template {
   margin-top: 4px;
-  /* margin-bottom: 28px; */
   color: red;
   font-size: 0.8rem;
 }
 
 @media screen and (max-width: 1224px) {
   .section-container {
-    /* display: flex; */
     flex-direction: column;
     height: auto;
   }
+
   .content {
     flex-direction: row;
     height: auto;
     padding-bottom: 10px;
     min-height: 200px;
   }
+
   .dialog-bg {
     padding-left: 0px;
   }
+
   main {
     padding-left: 32px;
     padding-bottom: 96px;
@@ -380,12 +343,15 @@ input:focus {
     padding-right: 16px;
     padding-left: 16px;
   }
+
   .board-header {
     align-items: flex-start;
   }
+
   .section-container {
     margin-top: 20px;
   }
+
   .plus-button {
     width: 32px;
     height: 32px;
@@ -397,7 +363,20 @@ input:focus {
     padding-right: 16px;
     padding-left: 16px;
   }
+
   .content {
     scrollbar-color: rgb(41, 171, 226) transparent;
+  }
+
+  .addtask-btn-board::before {
+    content: '';
+  }
+
+  .add-task {
+    padding: 9px 10px 10px 2px;
+  }
+
+  .addtask-btn-board {
+    visibility: visible;
   }
 }
