@@ -147,6 +147,13 @@
   order: 2;
 }
 
+.contact-edit-vector {
+  height: 3px;
+  width: 80px;
+  background-color: #29abe2;
+  /* order: 2; */
+}
+
 .contact-text .span-2 {
   max-width: 235px;
   height: 32px;
@@ -368,13 +375,13 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
-  width: 371px;
 }
 
 .add-contact {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  padding: 0 16px;
 }
 
 .add-contact-headline {
@@ -422,14 +429,16 @@
 }
 
 .contact-field {
+  padding: 0 16px;
   display: flex;
   flex-direction: column;
   gap: 32px;
   position: absolute;
   top: 137px;
   left: 742px;
-  width: 422px;
   height: 215px;
+  width: 100%;
+  max-width: 422px;
 }
 
 .contact-field #name::placeholder {
@@ -468,7 +477,6 @@ input::-webkit-inner-spin-button {
 } */
 
 input {
-  width: 422px;
   height: 51px;
   line-height: 30px;
   font-size: 20px;
@@ -573,7 +581,13 @@ button {
   font-weight: 400;
 }
 
+.edit-delete:hover {
+  color: rgba(41, 171, 226, 1);
+  border: 1px solid rgba(41, 171, 226, 1);
+}
+
 .edit-save {
+  border: unset;
   width: 111px;
   height: 57px;
   display: flex;
@@ -586,6 +600,10 @@ button {
   font-weight: 700;
   background: #2a3647;
   color: white;
+}
+
+.edit-save:hover {
+  background: rgba(41, 171, 226, 1);
 }
 
 .contact-field #edit-name {
@@ -628,8 +646,8 @@ button {
     top: 0;
     width: 100%;
     height: 100vh;
-    background-color: rgb(246, 247, 248); 
-    
+    background-color: rgb(246, 247, 248);
+
   }*/
 
   #movedButtons {
@@ -641,14 +659,14 @@ button {
     border-radius: 8px; /* Abgerundete Ecken */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Schatteneffekt */
   }
-  
+
   #movedButtons .info-edit,
   #movedButtons .info-delete {
     width: auto;
     height: auto;
     font-size: 14px;
   }
-  
+
 
 /* responsive */
 @media screen and (min-width: 1430px) {

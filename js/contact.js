@@ -433,7 +433,6 @@ function moveButtons() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // HTML-Code dynamisch einfügen
   const contactInfoWindow = document.getElementById('contact-info-window');
   if (contactInfoWindow) {
     contactInfoWindow.innerHTML = contactWrapperHTML; // Füge den HTML-Code ein
