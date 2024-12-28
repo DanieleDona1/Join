@@ -127,33 +127,6 @@ function getContactInfo(groupInitial, contactIndex) {
         <span>${contact.user.number}</span>
       </div>
     </div>
-      <div class="info-initial-name">
-        <div class="info-initial" style="background-color: ${contactColor};">${contact.user.initials}</div>
-        <div class="info-name-button">
-          <div class="info-name">${contact.user.name}</div>
-          <div class="info-buttons" id="editDeleteButtons">
-            <button class="info-edit" onclick="openEditContact('${groupInitial}', ${contactIndex})">
-              <img src="../assets/icons/contact/contact_info_edit.png" alt="">
-              Edit
-            </button>
-            <button class="info-delete" onclick="deleteContact('${contact.id}')">
-              <img src="../assets/icons/contact/contact_info_delete.png" alt="">
-              Delete
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="info-text">Contact Information</div>
-      <div class="info-email-phone">
-        <div class="info-email">
-          <span>Email</span>
-          <a href="mailto:${contact.user.mail}">${contact.user.mail}</a>
-        </div>
-        <div class="info-phone">
-          <span>Phone</span>
-          <span>${contact.user.number}</span>
-        </div>
-      </div>
   `;
 
   const contactWrapperHTML = /*html*/ `
@@ -163,51 +136,61 @@ function getContactInfo(groupInitial, contactIndex) {
       <span class="span-2">Better with a team</span>
     </div>
     <button onclick="closeContactInfoWindow()" class="back-info-wrapper">
-    <img src="../assets/icons/arrow_left_line.svg" alt="button-back">
+      <img src="../assets/icons/arrow_left_line.svg" alt="button-back">
     </button>
     <div class="contact-info-wrapper">
       ${contactHTML}
     </div>
-    <button id="toggleButtons" onclick="toggleEditDelete()">
-    <img src="../assets/icons/contact/more_vert.png" alt="">
+    <button id="toggleButtons">
+      <img src="../assets/icons/contact/more_vert.png" alt="">
     </button>
   `;
 
-  function renderContactInfo() {
-    if (window.innerWidth <= 850) {
-      // Zeige im Popup-Fenster
-      const popup = document.getElementById("contact-info-window");
-      popup.innerHTML = contactWrapperHTML;
-      popup.classList.remove("d-none");
-      document.getElementById("contact-list-field").classList.add("d-none");
-      document.getElementById("contact-info").innerHTML = ""; // Sicherstellen, dass der Hauptbereich geleert wird
-    } else {
-      // Zeige im Hauptbereich
-      const contactInfo = document.getElementById("contact-info");
-      contactInfo.innerHTML = contactHTML;
-      document.getElementById("contact-info-window").classList.add("d-none"); // Popup verstecken
-      document.getElementById("contact-list-field").classList.remove("d-none");
-    }
+function renderContactInfo() {
+  const popup = document.getElementById("contact-info-window");
+  const contactInfo = document.getElementById("contact-info");
+  const contactListField = document.getElementById("contact-list-field");
+
+  if (!popup || !contactInfo || !contactListField) {
+    console.error("Wichtige DOM-Elemente fehlen!");
+    return;
   }
 
+  if (window.innerWidth <= 850) {
+    // Zeige im Popup-Fenster
+    popup.innerHTML = contactWrapperHTML;
+    popup.classList.remove("d-none");
+    contactListField.classList.add("d-none");
+    contactInfo.innerHTML = ""; // Hauptbereich leeren
 
-  // HTML in den Container einfügen
-  const contactInfoWindow = document.getElementById('contact-info-window');
-  if (contactInfoWindow) {
-    contactInfoWindow.innerHTML = contactWrapperHTML;
+    // Buttons verschieben nach dem Einfügen des HTML
+    moveButtons();
+  } else {
+    // Zeige im Hauptbereich
+    contactInfo.innerHTML = contactHTML;
+    popup.classList.add("d-none"); // Popup verstecken
+    contactListField.classList.remove("d-none");
 
-    // Optional: Buttons sofort korrekt verschieben
+    // Buttons verschieben nach dem Einfügen des HTML
     moveButtons();
   }
 
-
-  // Initial render
-  renderContactInfo();
-
-  // Event-Listener für Resize hinzufügen
-  window.addEventListener("resize", renderContactInfo);
+  // Event-Listener für den Toggle-Button hinzufügen
+  const toggleButton = document.getElementById("toggleButtons");
+  if (toggleButton) {
+    // Vorherige Event-Listener entfernen, um doppelte Hinzufügungen zu vermeiden
+    toggleButton.removeEventListener("click", toggleEditDelete);
+    toggleButton.addEventListener("click", toggleEditDelete);
+  } else {
+    console.warn("toggleButton existiert nicht.");
+  }
 }
+// Initial render
+renderContactInfo();
 
+// Event-Listener für Resize hinzufügen
+window.addEventListener("resize", renderContactInfo);
+}
 // Schließen des Popups
 function closeContactInfoWindow() {
   document.getElementById("contact-list-field").classList.remove("d-none");
@@ -310,7 +293,7 @@ function openEditContact(groupedcontact, index) {
   document.getElementById("background-pop-up").classList.remove("d-none");
   document.querySelector("body").classList.add("overflow-hidden");
 
-  renderEditConatct(groupedcontact, index);
+  renderEditContact(groupedcontact, index);
 }
 
 function closeEditContact() {
@@ -329,7 +312,7 @@ function getRandomColor() {
   return color;
 }
 
-function renderEditConatct(groupedcontact, index) {
+function renderEditContact(groupedcontact, index) {
   const contact = groupedContacts[groupedcontact][index];
   const contactColor = contact.color;
   console.log(contact.user.name);
@@ -387,66 +370,72 @@ async function editContact(id) {
 
 
 function toggleEditDelete() {
-  const editDeleteButtons = document.getElementById('editDeleteButtons');
-  if (editDeleteButtons.style.display === 'none' || editDeleteButtons.style.display === '') {
-    editDeleteButtons.style.display = 'flex'; // Buttons anzeigen
-  } else {
-    editDeleteButtons.style.display = 'none'; // Buttons ausblenden
-  }
-  moveButtons();
-
-}
-
-function moveButtons() {
-  const buttons = document.getElementById('editDeleteButtons');
-  const newParent = document.querySelector('.contact-info-window');
-
-  // Prüfen, ob die Buttons im DOM existieren
-  if (!buttons) {
-    console.error("Das Element 'editDeleteButtons' wurde nicht gefunden.");
+  const movedButtonsContainer = document.getElementById('movedButtons');
+  if (!movedButtonsContainer) {
+    console.warn("toggleEditDelete: 'movedButtons' existiert nicht.");
     return;
   }
 
-  // Buttons sichtbar machen, bevor sie verschoben werden
-  if (buttons.style.display === 'none' || buttons.style.display === '') {
-    console.warn("Die Buttons sind aktuell ausgeblendet und können nicht verschoben werden.");
-    return; // Beenden, da die Buttons nicht sichtbar sind
-  }
-
-  if (window.innerWidth <= 850) {
-    if (!document.getElementById('movedButtons')) {
-      const buttonContainer = document.createElement('div');
-      buttonContainer.id = 'movedButtons';
-      buttonContainer.style.position = 'absolute';
-      buttonContainer.style.top = '10px'; // Anpassung der Position
-      buttonContainer.style.right = '10px'; // Anpassung der Position
-      buttonContainer.appendChild(buttons);
-      newParent.appendChild(buttonContainer);
-    }
+  // Toggle Sichtbarkeit
+  if (movedButtonsContainer.style.display === 'none' || movedButtonsContainer.style.display === '') {
+    movedButtonsContainer.style.display = 'flex'; // Buttons anzeigen
   } else {
-    const originalParent = document.querySelector('.info-name-button');
-    if (document.getElementById('movedButtons')) {
-      originalParent.appendChild(buttons);
-      document.getElementById('movedButtons').remove();
-    }
+    movedButtonsContainer.style.display = 'none'; // Buttons ausblenden
   }
 }
+
+
+
+function moveButtons() {
+  const contactInfoWindow = document.getElementById('contact-info-window');
+  if (!contactInfoWindow) {
+    console.warn("moveButtons: 'contact-info-window' existiert nicht.");
+    return;
+  }
+
+  let movedButtonsContainer = document.getElementById('movedButtons');
+  if (!movedButtonsContainer) {
+    movedButtonsContainer = document.createElement('div');
+    movedButtonsContainer.id = 'movedButtons';
+    movedButtonsContainer.style.display = 'none'; // Standardmäßig versteckt
+    contactInfoWindow.appendChild(movedButtonsContainer);
+  }
+
+  const editDeleteButtons = document.getElementById('editDeleteButtons');
+  if (!editDeleteButtons) {
+    console.warn("moveButtons: 'editDeleteButtons' existiert nicht.");
+    return;
+  }
+
+  // Verschieben
+  while (editDeleteButtons.firstChild) {
+    movedButtonsContainer.appendChild(editDeleteButtons.firstChild);
+  }
+
+  // Ursprüngliches Element ausblenden
+  editDeleteButtons.style.display = 'none';
+}
+
+
+
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
   const contactInfoWindow = document.getElementById('contact-info-window');
   if (contactInfoWindow) {
     contactInfoWindow.innerHTML = contactWrapperHTML; // Füge den HTML-Code ein
   }
-
-  // Event Listener für Fenstergröße
-  window.addEventListener('resize', moveButtons);
-
+  
+  // Initiales Verschieben
+  moveButtons();
+  
   // Toggle-Button-Klick
   document.getElementById('toggleButtons').addEventListener('click', () => {
     toggleEditDelete(); // Buttons ein-/ausblenden
     moveButtons(); // Nach dem Umschalten verschieben
   });
-
-  // Initiales Verschieben
-  moveButtons();
+  
+  // Event Listener für Fenstergröße
+  window.addEventListener('resize', moveButtons);
 });
