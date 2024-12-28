@@ -93,6 +93,7 @@ function displayGroupedContacts(groupedContacts) {
 
   content.innerHTML = fullContent;
 }
+
 function getContactInfo(groupInitial, contactIndex) {
   const contact = groupedContacts[groupInitial][contactIndex];
   const contactColor = contact.color;
@@ -140,7 +141,7 @@ function getContactInfo(groupInitial, contactIndex) {
     <div class="contact-info-wrapper">
       ${contactHTML}
     </div>
-    <button id="toggleButtons" onclick="toggleEditDelete()">
+    <button id="toggleButtons">
       <img src="../assets/icons/contact/more_vert.png" alt="">
     </button>
   `;
@@ -173,23 +174,23 @@ function renderContactInfo() {
     // Buttons verschieben nach dem Einfügen des HTML
     moveButtons();
   }
-}
 
-  // Initial render
-  renderContactInfo();
-
-  // Event-Listener für Resize hinzufügen
-  window.addEventListener("resize", renderContactInfo);
-
-  // Event-Listener für Toggle
+  // Event-Listener für den Toggle-Button hinzufügen
   const toggleButton = document.getElementById("toggleButtons");
   if (toggleButton) {
+    // Vorherige Event-Listener entfernen, um doppelte Hinzufügungen zu vermeiden
+    toggleButton.removeEventListener("click", toggleEditDelete);
     toggleButton.addEventListener("click", toggleEditDelete);
   } else {
     console.warn("toggleButton existiert nicht.");
   }
 }
+// Initial render
+renderContactInfo();
 
+// Event-Listener für Resize hinzufügen
+window.addEventListener("resize", renderContactInfo);
+}
 // Schließen des Popups
 function closeContactInfoWindow() {
   document.getElementById("contact-list-field").classList.remove("d-none");
@@ -369,53 +370,52 @@ async function editContact(id) {
 
 
 function toggleEditDelete() {
-  const editDeleteButtons = document.getElementById('editDeleteButtons');
-  if (!editDeleteButtons) {
-    console.warn('toggleEditDelete: editDeleteButtons existiert nicht.');
+  const movedButtonsContainer = document.getElementById('movedButtons');
+  if (!movedButtonsContainer) {
+    console.warn("toggleEditDelete: 'movedButtons' existiert nicht.");
     return;
   }
 
-  if (editDeleteButtons.style.display === 'none' || editDeleteButtons.style.display === '') {
-    editDeleteButtons.style.display = 'flex'; // Buttons anzeigen
+  // Toggle Sichtbarkeit
+  if (movedButtonsContainer.style.display === 'none' || movedButtonsContainer.style.display === '') {
+    movedButtonsContainer.style.display = 'flex'; // Buttons anzeigen
   } else {
-    editDeleteButtons.style.display = 'none'; // Buttons ausblenden
+    movedButtonsContainer.style.display = 'none'; // Buttons ausblenden
   }
 }
 
 
+
 function moveButtons() {
-  const contactInfoWindow = document.getElementById("contact-info-window");
-  
-  // Überprüfen, ob der `contact-info-window`-Container existiert
+  const contactInfoWindow = document.getElementById('contact-info-window');
   if (!contactInfoWindow) {
-    console.warn("moveButtons: Der 'contact-info-window'-Container existiert nicht.");
+    console.warn("moveButtons: 'contact-info-window' existiert nicht.");
     return;
   }
 
-  // Überprüfen, ob der `movedButtons`-Container bereits existiert
-  let movedButtonsContainer = document.getElementById("movedButtons");
+  let movedButtonsContainer = document.getElementById('movedButtons');
   if (!movedButtonsContainer) {
-    // Container erstellen
-    movedButtonsContainer = document.createElement("div");
-    movedButtonsContainer.id = "movedButtons";
-    contactInfoWindow.appendChild(movedButtonsContainer); // In den `contact-info-window`-Container einfügen
+    movedButtonsContainer = document.createElement('div');
+    movedButtonsContainer.id = 'movedButtons';
+    movedButtonsContainer.style.display = 'none'; // Standardmäßig versteckt
+    contactInfoWindow.appendChild(movedButtonsContainer);
   }
 
-  // Buttons verschieben
-  const editDeleteButtons = document.getElementById("editDeleteButtons");
+  const editDeleteButtons = document.getElementById('editDeleteButtons');
   if (!editDeleteButtons) {
-    console.warn("moveButtons: Die 'editDeleteButtons' existieren nicht.");
+    console.warn("moveButtons: 'editDeleteButtons' existiert nicht.");
     return;
   }
 
-  // Alle Kinder von `editDeleteButtons` in `movedButtons` verschieben
+  // Verschieben
   while (editDeleteButtons.firstChild) {
     movedButtonsContainer.appendChild(editDeleteButtons.firstChild);
   }
 
   // Ursprüngliches Element ausblenden
-  editDeleteButtons.style.display = "none";
+  editDeleteButtons.style.display = 'none';
 }
+
 
 
 
@@ -427,16 +427,16 @@ document.addEventListener('DOMContentLoaded', () => {
   if (contactInfoWindow) {
     contactInfoWindow.innerHTML = contactWrapperHTML; // Füge den HTML-Code ein
   }
-
-  // Event Listener für Fenstergröße
-  window.addEventListener('resize', moveButtons);
-
+  
+  // Initiales Verschieben
+  moveButtons();
+  
   // Toggle-Button-Klick
   document.getElementById('toggleButtons').addEventListener('click', () => {
     toggleEditDelete(); // Buttons ein-/ausblenden
     moveButtons(); // Nach dem Umschalten verschieben
   });
-
-  // Initiales Verschieben
-  moveButtons();
+  
+  // Event Listener für Fenstergröße
+  window.addEventListener('resize', moveButtons);
 });
