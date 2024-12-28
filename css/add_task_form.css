@@ -186,3 +186,8 @@ input:focus,
 .dialog-bg .subtask-list-group:hover input {
   background-color: rgb(238, 238, 238);
 }
+
+.dialog-bg h2 {
+  font-size: clamp(32px, 5vw, 56px);
+  margin-bottom: 16px;
+}
