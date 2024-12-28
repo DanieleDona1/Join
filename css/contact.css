@@ -2,7 +2,6 @@
 .main-contact {
   padding: 0;
   width: 100%;
-  height: calc(100vh - 96px);
 }
 
 .main-contact-side {
@@ -669,11 +668,6 @@ button {
 
 
 /* responsive */
-@media screen and (min-width: 1430px) {
-  .main-contact {
-    max-width: calc(1440px - 232px);
-  }
-}
 
 @media (max-width: 1430px) {
   .contact-text {
