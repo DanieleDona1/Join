@@ -19,18 +19,25 @@ function renderPhoneList() {
 }
 
 async function createContactlist() {
-    let data = await loadData("contacts"); // holt mittels dieser Funktion das JSON von der Datenbank unter diesem Pfad
-    contactKeys = Object.keys(data); // nimmt die keys der jeweiligen Objekte zum Weiterverarbeiten
+  let data = await loadData("contacts"); // holt mittels dieser Funktion das JSON von der Datenbank unter diesem Pfad
 
-    for (let i = 0; i < contactKeys.length; i++) {
-      contactList.push({
-        id: contactKeys[i], // Speichert den jeweiligen Key als ID
-        user: data[contactKeys[i]], // Speichert die User-Daten
-        color: data[contactKeys[i]].color, // Speichert die Farbe
-      });
-    }
-    console.log(contactList);
+  if (!data || Object.keys(data).length === 0) { // Überprüft, ob die Daten leer oder undefined sind
+      console.log("Keine Kontakte vorhanden.");
+      contactList = []; // Kontaktliste bleibt leer
+  } else {
+      contactKeys = Object.keys(data); // nimmt die keys der jeweiligen Objekte zum Weiterverarbeiten
+
+      for (let i = 0; i < contactKeys.length; i++) {
+          contactList.push({
+              id: contactKeys[i], // Speichert den jeweiligen Key als ID
+              user: data[contactKeys[i]], // Speichert die User-Daten
+              color: data[contactKeys[i]].color, // Speichert die Farbe
+          });
+      }
+      console.log(contactList);
+  }
 }
+
 
 // Sortiert die Kontakte alphabetisch nach dem Namen
 function sortContacts(contacts) {
