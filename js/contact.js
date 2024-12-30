@@ -170,9 +170,6 @@ function renderContactInfo() {
     contactInfo.innerHTML = contactHTML;
     popup.classList.add("d-none"); // Popup verstecken
     contactListField.classList.remove("d-none");
-
-    // Buttons verschieben nach dem Einfügen des HTML
-    moveButtons();
   }
 
   // Event-Listener für den Toggle-Button hinzufügen
@@ -339,6 +336,8 @@ async function deleteContact(id) {
   renderPhoneList(); // Render die aktualisierte Liste
 
   document.getElementById("contact-info").innerHTML = "";
+
+  closeContactInfoWindow();
 }
 
 async function editContact(id) {
@@ -366,6 +365,10 @@ async function editContact(id) {
   await createContactlist(); // Lade die Kontakte erneut
   renderPhoneList(); // Render die aktualisierte Liste
   document.getElementById("contact-info").innerHTML = "";
+
+  getContactInfo();
+
+
 }
 
 

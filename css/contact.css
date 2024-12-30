@@ -807,11 +807,11 @@ button {
     display: none;
   }
 
-  .contact-list {
+  /* .contact-list {
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
-  }
+  } */
 
   .main-contact-side {
     width: 100%;
@@ -834,6 +834,8 @@ button {
   .contact-list-field {
     width: 100%;
     padding: 0px 24px;
+    display: flex;
+    align-items: center;
   }
 
   .back-info-wrapper {
