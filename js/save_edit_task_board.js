@@ -58,7 +58,7 @@ function getUserChangedData(i) {
  */
 async function loadPopUpAddTask(category) {
   generatePopUpAddTask(category);
-  await createContactlistAddTask();
+/*   await createContactlistAddTask(); */
    loadDropDown();
   subtaskKeyDownAddSubtask();
 }

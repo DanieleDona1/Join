@@ -115,6 +115,7 @@ function formatDate(input) {
    * @returns {void} This function does not return a value but modifies the `items` DOM element.
    */
   function createContactOptions(items) {
+    items.innerHTML = ''; 
     for (let i = 0; i < contactList.length; i++) {
       let c = contactList[i],
         inits = getInitials(c);

@@ -46,7 +46,9 @@ function splitName(fullName) {
  * @returns {Promise<void>} A promise that resolves once the contact list is populated.
  */
 async function createContactlistAddTask() {
-  let data = await loadData('contacts');
+  let data = await loadData('contacts');  
+  contactList.length = 0; 
+  
   let keys = Object.keys(data);
   for (let i = 0; i < keys.length; i++) {
     let full = data[keys[i]].name;

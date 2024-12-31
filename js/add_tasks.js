@@ -55,7 +55,9 @@ function splitName(fullName) {
  * @returns {Promise<void>} A promise that resolves once the contact list is populated.
  */
 async function createContactlistAddTask() {
-  let data = await loadData('contacts');
+  let data = await loadData('contacts');  
+  contactList.length = 0; 
+  
   let keys = Object.keys(data);
   for (let i = 0; i < keys.length; i++) {
     let full = data[keys[i]].name;
@@ -168,6 +170,7 @@ function loadDropDown() {
  * @returns {void} This function does not return a value but modifies the `items` DOM element.
  */
 function createContactOptions(items) {
+  items.innerHTML = ''; 
   for (let i = 0; i < contactList.length; i++) {
     let c = contactList[i],
       inits = getInitials(c);
