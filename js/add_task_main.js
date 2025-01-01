@@ -101,12 +101,21 @@ function updateButtonIcons(btns) {
   }
 }
 
+/**
+ * Prevents form submission when the Enter key is pressed within the specified form.
+ * 
+ * @param {string} formId - The ID of the form element to monitor for Enter key presses.
+ * 
+ * @example
+ * // Prevent form submission on Enter key press for a form with ID "myForm"
+ * blockEnterSubmit('myForm');
+ */
 function blockEnterSubmit(formId) {
   const form = document.getElementById(formId);
   if (form) {
     form.addEventListener('keypress', function (event) {
       if (event.key === 'Enter') {
-        event.preventDefault(); // Verhindert das Abschicken des Formulars
+        event.preventDefault();
       }
     });
   }
