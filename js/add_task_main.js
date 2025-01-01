@@ -17,6 +17,7 @@ async function onloadAddtasks() {
   initCustomDropdowns();
   initFieldNavigation();
   setupOutsideClickForCustomSelects();
+  blockEnterSubmit('form-add-task');
 }
 
 /**
@@ -97,5 +98,16 @@ function updateButtonIcons(btns) {
     let img = b.querySelector('img');
     let t = b.classList.contains('active') ? 'active' : 'inactive';
     img.src = `../assets/icons/add_tasks/${t}_icon_${c}.svg`;
+  }
+}
+
+function blockEnterSubmit(formId) {
+  const form = document.getElementById(formId);
+  if (form) {
+    form.addEventListener('keypress', function (event) {
+      if (event.key === 'Enter') {
+        event.preventDefault(); // Verhindert das Abschicken des Formulars
+      }
+    });
   }
 }
