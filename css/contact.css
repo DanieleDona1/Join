@@ -350,8 +350,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
-  width: 1212px;
-  height: 594px;
+  width: 84%;
+  height: 84%;
   border-radius: 30px;
   background-color: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
