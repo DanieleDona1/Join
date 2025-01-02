@@ -11,7 +11,7 @@ function formatDate(input) {
     ({ day, month } = validateDate(day, month));
     input.value = formatOutput(day, month, year);
   }
-  
+
   /**
    * Cleans the input by removing non-digit characters.
    *
@@ -21,7 +21,7 @@ function formatDate(input) {
   function cleanInput(value) {
     return value.replace(/\D/g, '');
   }
-  
+
   /**
    * Extracts the day, month, and year from a date string (DDMMYYYY).
    *
@@ -35,7 +35,7 @@ function formatDate(input) {
       year: value.substring(4, 8),
     };
   }
-  
+
   /**
    * Validates and adjusts the day and month values.
    *
@@ -51,7 +51,7 @@ function formatDate(input) {
     if (month > 12) month = '12';
     return { day, month };
   }
-  
+
   /**
    * Formats the date output as a string.
    *
@@ -69,7 +69,7 @@ function formatDate(input) {
     if (y) out += '/' + y;
     return out;
   }
-  
+
   /**
    * Converts a date string in the format 'DD/MM/YYYY' to 'YYYY-MM-DD'.
    *
@@ -91,7 +91,7 @@ function formatDate(input) {
           .toString()
           .padStart(2, '0')}`;
   }
-  
+
   /**
    * Loads and initializes the dropdown menu and its options.
    *
@@ -104,7 +104,7 @@ function formatDate(input) {
     createContactOptions(items);
     handleDropdownOptions(disp);
   }
-  
+
   /**
    * Creates and adds contact options to the dropdown list.
    *
@@ -115,14 +115,16 @@ function formatDate(input) {
    * @returns {void} This function does not return a value but modifies the `items` DOM element.
    */
   function createContactOptions(items) {
-    items.innerHTML = ''; 
+    items.innerHTML = '';
     for (let i = 0; i < contactList.length; i++) {
       let c = contactList[i],
-        inits = getInitials(c);
+
+      inits = getInitials(c);
+      console.log('contactList', c);
       items.innerHTML += getOptionTemplate(c, inits);
     }
   }
-  
+
   /**
    * Generates the initials from a contact's first and last name.
    *
@@ -132,7 +134,7 @@ function formatDate(input) {
   function getInitials(c) {
     return c.firstName.charAt(0).toUpperCase() + c.lastName.charAt(0).toUpperCase();
   }
-  
+
   /**
    * Generates the option template for one contact entry.
    *
@@ -152,7 +154,7 @@ function formatDate(input) {
       </div>
     `;
   }
-  
+
   /**
    * Handles the interaction with dropdown options.
    *
@@ -171,7 +173,7 @@ function formatDate(input) {
       });
     }
   }
-  
+
   /**
    * Checks if the given option belongs to the dropdown with ID 'drop-down-2'.
    *
@@ -182,7 +184,7 @@ function formatDate(input) {
     const p = option.closest('.add-task-custom-select');
     return p && p.id === 'drop-down-2';
   }
-  
+
   /**
    * Toggles the selection state of a dropdown option.
    *
@@ -198,7 +200,7 @@ function formatDate(input) {
     const { initials, checked } = toggleCheckboxAndClasses(option);
     updateSelectedInitials(initials, checked);
   }
-  
+
   /**
    * Toggles the checkbox state and updates related classes for a dropdown option.
    *
@@ -219,7 +221,7 @@ function formatDate(input) {
     c.classList.toggle('checked');
     return { initials: inits, checked: box.checked };
   }
-  
+
   /**
    * Updates the list of selected initials based on the checkbox state.
    *
@@ -238,7 +240,7 @@ function formatDate(input) {
       if (idx > -1) selectedInitials.splice(idx, 1);
     }
   }
-  
+
   /**
    * Updates the display of selected initials.
    *
@@ -256,7 +258,7 @@ function formatDate(input) {
       if (contactForInit) disp.innerHTML += createInitialElement(contactForInit);
     }
   }
-  
+
   /**
    * Finds a contact by its initials.
    *
@@ -272,7 +274,7 @@ function formatDate(input) {
     }
     return null;
   }
-  
+
   /**
    * Creates a DOM element representing the initials of a contact.
    *
@@ -286,7 +288,7 @@ function formatDate(input) {
   function createInitialElement(c) {
     return `<div class="initial" style="background-color:${c.color};margin-right:10px;">${getInitials(c)}</div>`;
   }
-  
+
   /**
    * Initializes all custom dropdowns on the page.
    *
@@ -299,7 +301,7 @@ function formatDate(input) {
     const cS = document.querySelectorAll('.add-task-custom-select');
     for (let i = 0; i < cS.length; i++) setupCustomSelect(cS[i]);
   }
-  
+
   /**
    * Sets up the behavior for a custom select dropdown.
    *
@@ -320,7 +322,7 @@ function formatDate(input) {
     });
     addOptionListeners(oC, sId, s, c);
   }
-  
+
   /**
    * Adds click listeners to dropdown options to update the selected text.
    *
@@ -344,7 +346,7 @@ function formatDate(input) {
       });
     }
   }
-  
+
   /**
    * Sets up a listener to close custom selects when clicking outside of them.
    *
@@ -367,4 +369,3 @@ function formatDate(input) {
       }
     });
   }
-  

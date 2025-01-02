@@ -83,5 +83,5 @@ function saveCurrentAssignedTo(i) {
   if (selectedContactsKeys.length > 0) {
     currentTodos[i]['assignedTo'] = selectedContactsKeys;
     editTaskRemote(todoKeysArray[i], { assignedTo: currentTodos[i]['assignedTo'] });
-}
+  }
 }

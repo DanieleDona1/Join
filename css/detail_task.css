@@ -1,7 +1,7 @@
 .task {
   position: relative;
   min-width: 219px;
-  min-height: 225px;
+  min-height: 250px;
   max-width: 300px;
   cursor: pointer;
   background-color: white;

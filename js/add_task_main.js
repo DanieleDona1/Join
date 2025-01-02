@@ -38,8 +38,8 @@ function splitName(fullName) {
 /**
  * Asynchronously creates a contact list and adds structured tasks for each contact.
  *
- * This function loads contact data from the database, validates the data, 
- * and populates the global `contactList` array with structured objects containing 
+ * This function loads contact data from the database, validates the data,
+ * and populates the global `contactList` array with structured objects containing
  * contact details such as ID, color, first name, and last name.
  *
  * @async
@@ -76,8 +76,8 @@ function isValidData(data) {
 /**
  * Populates the global contact list with structured contact objects.
  *
- * This function iterates over the contact data, splits each contact's full name 
- * into first and last name, and appends the structured contact objects to 
+ * This function iterates over the contact data, splits each contact's full name
+ * into first and last name, and appends the structured contact objects to
  * the global `contactList` array.
  *
  * @function populateContactList
@@ -139,9 +139,9 @@ function updateButtonIcons(btns) {
 
 /**
  * Prevents form submission when the Enter key is pressed within the specified form.
- * 
+ *
  * @param {string} formId - The ID of the form element to monitor for Enter key presses.
- * 
+ *
  * @example
  * // Prevent form submission on Enter key press for a form with ID "myForm"
  * blockEnterSubmit('myForm');
