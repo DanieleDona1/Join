@@ -1,6 +1,5 @@
 let contactWrapperHTML = ''; // Globale Variable
 
-
 // array für kontaktliste wo alle daten + spezifische id gespeichert wird und das laden und bearbeiten einfacher macht
 
 async function onloadFunc() {
@@ -8,6 +7,9 @@ async function onloadFunc() {
   await createContactlist();
   renderPhoneList();
   await generateHeaderInitials();
+
+  await loadTodosArray();
+  currentTodos = JSON.parse(JSON.stringify(todos));
 }
 
 // Hauptfunktion: Steuert den Sortier- und Renderprozess
@@ -19,25 +21,25 @@ function renderPhoneList() {
 }
 
 async function createContactlist() {
-  let data = await loadData("contacts"); // holt mittels dieser Funktion das JSON von der Datenbank unter diesem Pfad
+  let data = await loadData('contacts'); // holt mittels dieser Funktion das JSON von der Datenbank unter diesem Pfad
 
-  if (!data || Object.keys(data).length === 0) { // Überprüft, ob die Daten leer oder undefined sind
-      console.log("Keine Kontakte vorhanden.");
-      contactList = []; // Kontaktliste bleibt leer
+  if (!data || Object.keys(data).length === 0) {
+    // Überprüft, ob die Daten leer oder undefined sind
+    console.log('Keine Kontakte vorhanden.');
+    contactList = []; // Kontaktliste bleibt leer
   } else {
-      contactKeys = Object.keys(data); // nimmt die keys der jeweiligen Objekte zum Weiterverarbeiten
+    contactKeys = Object.keys(data); // nimmt die keys der jeweiligen Objekte zum Weiterverarbeiten
 
-      for (let i = 0; i < contactKeys.length; i++) {
-          contactList.push({
-              id: contactKeys[i], // Speichert den jeweiligen Key als ID
-              user: data[contactKeys[i]], // Speichert die User-Daten
-              color: data[contactKeys[i]].color, // Speichert die Farbe
-          });
-      }
-      console.log(contactList);
+    for (let i = 0; i < contactKeys.length; i++) {
+      contactList.push({
+        id: contactKeys[i], // Speichert den jeweiligen Key als ID
+        user: data[contactKeys[i]], // Speichert die User-Daten
+        color: data[contactKeys[i]].color, // Speichert die Farbe
+      });
+    }
+    console.log(contactList);
   }
 }
-
 
 // Sortiert die Kontakte alphabetisch nach dem Namen
 function sortContacts(contacts) {
@@ -48,7 +50,7 @@ function sortContacts(contacts) {
 function groupContactsByInitial(contacts) {
   const grouped = {};
 
-  contacts.forEach(contact => {
+  contacts.forEach((contact) => {
     const initial = contact.user.name.charAt(0).toUpperCase();
     if (!grouped[initial]) {
       grouped[initial] = [];
@@ -61,8 +63,8 @@ function groupContactsByInitial(contacts) {
 // Zeigt die gruppierten Kontakte an
 // Zeigt die gruppierten Kontakte sortiert nach ihren Initialen an
 function displayGroupedContacts(groupedContacts) {
-  const content = document.getElementById("content-contactlist");
-  content.innerHTML = "";
+  const content = document.getElementById('content-contactlist');
+  content.innerHTML = '';
 
   // Erstelle einen übergeordneten Container
   let fullContent = '<div class="contacts-wrapper">';
@@ -71,7 +73,7 @@ function displayGroupedContacts(groupedContacts) {
   const sortedInitials = Object.keys(groupedContacts).sort();
 
   // Schleife durch die sortierten Initialen und gruppierten Kontakte
-  sortedInitials.forEach(initial => {
+  sortedInitials.forEach((initial) => {
     fullContent += /*html*/ `
       <div class="contact-group">
         <h2>${initial}</h2>
@@ -96,7 +98,7 @@ function displayGroupedContacts(groupedContacts) {
     fullContent += `</div>`;
   });
 
-  fullContent += "</div>";
+  fullContent += '</div>';
 
   content.innerHTML = fullContent;
 }
@@ -153,64 +155,57 @@ function getContactInfo(groupInitial, contactIndex) {
     </button>
   `;
 
-function renderContactInfo() {
-  const popup = document.getElementById("contact-info-window");
-  const contactInfo = document.getElementById("contact-info");
-  const contactListField = document.getElementById("contact-list-field");
+  function renderContactInfo() {
+    const popup = document.getElementById('contact-info-window');
+    const contactInfo = document.getElementById('contact-info');
+    const contactListField = document.getElementById('contact-list-field');
 
-  if (!popup || !contactInfo || !contactListField) {
-    console.error("Wichtige DOM-Elemente fehlen!");
-    return;
+    if (!popup || !contactInfo || !contactListField) {
+      console.error('Wichtige DOM-Elemente fehlen!');
+      return;
+    }
+
+    if (window.innerWidth <= 850) {
+      // Zeige im Popup-Fenster
+      popup.innerHTML = contactWrapperHTML;
+      popup.classList.remove('d-none');
+      contactListField.classList.add('d-none');
+      contactInfo.innerHTML = ''; // Hauptbereich leeren
+
+      // Buttons verschieben nach dem Einfügen des HTML
+      moveButtons();
+    } else {
+      // Zeige im Hauptbereich
+      contactInfo.innerHTML = contactHTML;
+      popup.classList.add('d-none'); // Popup verstecken
+      contactListField.classList.remove('d-none');
+    }
+
+    // Event-Listener für den Toggle-Button hinzufügen
+    const toggleButton = document.getElementById('toggleButtons');
+    if (toggleButton) {
+      // Vorherige Event-Listener entfernen, um doppelte Hinzufügungen zu vermeiden
+      toggleButton.removeEventListener('click', toggleEditDelete);
+      toggleButton.addEventListener('click', toggleEditDelete);
+    } else {
+      console.warn('toggleButton existiert nicht.');
+    }
   }
+  // Initial render
+  renderContactInfo();
 
-  if (window.innerWidth <= 850) {
-    // Zeige im Popup-Fenster
-    popup.innerHTML = contactWrapperHTML;
-    popup.classList.remove("d-none");
-    contactListField.classList.add("d-none");
-    contactInfo.innerHTML = ""; // Hauptbereich leeren
-
-    // Buttons verschieben nach dem Einfügen des HTML
-    moveButtons();
-  } else {
-    // Zeige im Hauptbereich
-    contactInfo.innerHTML = contactHTML;
-    popup.classList.add("d-none"); // Popup verstecken
-    contactListField.classList.remove("d-none");
-  }
-
-  // Event-Listener für den Toggle-Button hinzufügen
-  const toggleButton = document.getElementById("toggleButtons");
-  if (toggleButton) {
-    // Vorherige Event-Listener entfernen, um doppelte Hinzufügungen zu vermeiden
-    toggleButton.removeEventListener("click", toggleEditDelete);
-    toggleButton.addEventListener("click", toggleEditDelete);
-  } else {
-    console.warn("toggleButton existiert nicht.");
-  }
-}
-// Initial render
-renderContactInfo();
-
-// Event-Listener für Resize hinzufügen
-window.addEventListener("resize", renderContactInfo);
+  // Event-Listener für Resize hinzufügen
+  window.addEventListener('resize', renderContactInfo);
 }
 // Schließen des Popups
 function closeContactInfoWindow() {
-  document.getElementById("contact-list-field").classList.remove("d-none");
-  document.getElementById("contact-info-window").classList.add("d-none");
+  document.getElementById('contact-list-field').classList.remove('d-none');
+  document.getElementById('contact-info-window').classList.add('d-none');
 }
-
-
-
-
-
-
-
 
 async function addContact(button) {
   // Referenz auf das Formular
-  let form = document.querySelector("form");
+  let form = document.querySelector('form');
 
   // Überprüfe, ob das Formular gültig ist
   if (!form.checkValidity()) {
@@ -220,21 +215,21 @@ async function addContact(button) {
   }
   button.disabled = true;
 
-  let name = document.getElementById("name").value;
-  let mail = document.getElementById("email").value;
-  let phone = document.getElementById("phonenumber").value;
+  let name = document.getElementById('name').value;
+  let mail = document.getElementById('email').value;
+  let phone = document.getElementById('phonenumber').value;
 
   try {
     // Füge den Kontakt hinzu (warte auf Abschluss, aber prüfe den Rückgabewert nicht)
     await addNewContact(name, mail, phone);
 
     // Erfolgsmeldung anzeigen und Liste neu rendern
-    document.getElementById("success-message").classList.remove("d-none");
+    document.getElementById('success-message').classList.remove('d-none');
 
     // Inputfelder leeren
-    document.getElementById("name").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("phonenumber").value = "";
+    document.getElementById('name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('phonenumber').value = '';
 
     // Aktualisiere die Kontaktliste
     contactList = []; // Leere die vorhandene Liste
@@ -244,10 +239,10 @@ async function addContact(button) {
     closeAddContact();
 
     setTimeout(() => {
-      document.getElementById("success-message").classList.add("d-none");
+      document.getElementById('success-message').classList.add('d-none');
     }, 3000);
   } catch (error) {
-    console.error("Fehler beim Hinzufügen des Kontakts:", error);
+    console.error('Fehler beim Hinzufügen des Kontakts:', error);
   } finally {
     button.disabled = false;
   }
@@ -255,9 +250,9 @@ async function addContact(button) {
 
 // Hilfsfunktion, um die Initialen zu extrahieren
 function getInitials(fullName) {
-  const nameParts = fullName.split(" "); // Teilt den Namen in Vor- und Nachname
+  const nameParts = fullName.split(' '); // Teilt den Namen in Vor- und Nachname
   const firstInitial = nameParts[0]?.charAt(0).toUpperCase(); // Erste Initiale
-  const lastInitial = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : ""; // Zweite Initiale, falls vorhanden
+  const lastInitial = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : ''; // Zweite Initiale, falls vorhanden
   return `${firstInitial}${lastInitial}`; // Kombiniere Initialen
 }
 
@@ -269,7 +264,7 @@ async function addNewContact(name, mail, number) {
   const color = getRandomColor();
 
   // Speichere die Daten, einschließlich der Initialen und der Farbe, in der Datenbank
-  await postData("/contacts", {
+  await postData('/contacts', {
     name: name,
     mail: mail,
     number: number,
@@ -279,37 +274,36 @@ async function addNewContact(name, mail, number) {
 }
 
 function openAddContact() {
-  console.log("animationend fired");
-  document.getElementById("background-pop-up").classList.remove("d-none");
-  document.getElementById("pop-up-add-contact").classList.remove("d-none", "slide-out");
-  document.querySelector("body").classList.add("overflow-hidden");
-
+  console.log('animationend fired');
+  document.getElementById('background-pop-up').classList.remove('d-none');
+  document.getElementById('pop-up-add-contact').classList.remove('d-none', 'slide-out');
+  document.querySelector('body').classList.add('overflow-hidden');
 }
 
 function closeAddContact() {
-  document.getElementById("background-pop-up").classList.add("d-none");
-  document.getElementById("pop-up-add-contact").classList.add("d-none");
-  document.querySelector("body").classList.remove("overflow-hidden");
+  document.getElementById('background-pop-up').classList.add('d-none');
+  document.getElementById('pop-up-add-contact').classList.add('d-none');
+  document.querySelector('body').classList.remove('overflow-hidden');
 }
 
 function openEditContact(groupedcontact, index) {
-  document.getElementById("pop-up-edit-contact").classList.remove("d-none");
-  document.getElementById("background-pop-up").classList.remove("d-none");
-  document.querySelector("body").classList.add("overflow-hidden");
+  document.getElementById('pop-up-edit-contact').classList.remove('d-none');
+  document.getElementById('background-pop-up').classList.remove('d-none');
+  document.querySelector('body').classList.add('overflow-hidden');
 
   renderEditContact(groupedcontact, index);
 }
 
 function closeEditContact() {
-  document.getElementById("pop-up-edit-contact").classList.add("d-none");
-  document.getElementById("background-pop-up").classList.add("d-none");
-  document.querySelector("body").classList.remove("overflow-hidden");
+  document.getElementById('pop-up-edit-contact').classList.add('d-none');
+  document.getElementById('background-pop-up').classList.add('d-none');
+  document.querySelector('body').classList.remove('overflow-hidden');
 }
 
 // Funktion zur Generierung einer zufälligen Hex-Farbe
 function getRandomColor() {
-  let letters = "0123456789ABCDEF";
-  let color = "#";
+  let letters = '0123456789ABCDEF';
+  let color = '#';
   for (let i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)];
   }
@@ -321,28 +315,29 @@ function renderEditContact(groupedcontact, index) {
   const contactColor = contact.color;
   console.log(contact.user.name);
 
-  document.getElementById("edit-contact-picture").innerHTML = /*html*/ `
+  document.getElementById('edit-contact-picture').innerHTML = /*html*/ `
     <div class="edit-contact-pic"  style="background-color: ${contactColor};">${contact.user.initials}</div>
   `;
 
-  document.getElementById("edit-name").value = contact.user.name;
-  document.getElementById("edit-email").value = contact.user.mail;
-  document.getElementById("edit-phonenumber").value = contact.user.number;
-  document.getElementById("edit-delete").value = contact.id;
-  document.getElementById("edit-save").value = contact.id;
+  document.getElementById('edit-name').value = contact.user.name;
+  document.getElementById('edit-email').value = contact.user.mail;
+  document.getElementById('edit-phonenumber').value = contact.user.number;
+  document.getElementById('edit-delete').value = contact.id;
+  document.getElementById('edit-save').value = contact.id;
 
   //gibt dem 2. button keine id
 }
 
 async function deleteContact(id) {
-  await deleteData("/contacts/" + id);
+  await deleteData('/contacts/' + id);
+ deleteContactRemote(id);
 
   // Aktualisiere die Kontaktliste
   contactList = []; // Leere die vorhandene Liste
   await createContactlist(); // Lade die Kontakte erneut
   renderPhoneList(); // Render die aktualisierte Liste
 
-  document.getElementById("contact-info").innerHTML = "";
+  document.getElementById('contact-info').innerHTML = '';
 
   closeContactInfoWindow();
 }
@@ -350,11 +345,11 @@ async function deleteContact(id) {
 async function editContact(id) {
   console.log(id);
 
-  let name = document.getElementById("edit-name").value;
-  let mail = document.getElementById("edit-email").value;
-  let number = document.getElementById("edit-phonenumber").value;
+  let name = document.getElementById('edit-name').value;
+  let mail = document.getElementById('edit-email').value;
+  let number = document.getElementById('edit-phonenumber').value;
   // Aktuelle Daten abrufen
-  let existingData = await loadData("/contacts/" + id);
+  let existingData = await loadData('/contacts/' + id);
 
   // Nur die Felder aktualisieren, die geändert wurden
   let updatedData = {
@@ -365,19 +360,16 @@ async function editContact(id) {
   };
 
   // Dann PUT-Request mit dem aktualisierten Datensatz senden
-  await putData("/contacts/" + id, updatedData);
+  await putData('/contacts/' + id, updatedData);
 
   closeEditContact();
   contactList = []; // Leere die vorhandene Liste
   await createContactlist(); // Lade die Kontakte erneut
   renderPhoneList(); // Render die aktualisierte Liste
-  document.getElementById("contact-info").innerHTML = "";
+  document.getElementById('contact-info').innerHTML = '';
 
   getContactInfo();
-
-
 }
-
 
 function toggleEditDelete() {
   const movedButtonsContainer = document.getElementById('movedButtons');
@@ -393,8 +385,6 @@ function toggleEditDelete() {
     movedButtonsContainer.style.display = 'none'; // Buttons ausblenden
   }
 }
-
-
 
 function moveButtons() {
   const contactInfoWindow = document.getElementById('contact-info-window');
@@ -426,26 +416,33 @@ function moveButtons() {
   editDeleteButtons.style.display = 'none';
 }
 
-
-
-
-
-
 document.addEventListener('DOMContentLoaded', () => {
   const contactInfoWindow = document.getElementById('contact-info-window');
   if (contactInfoWindow) {
     contactInfoWindow.innerHTML = contactWrapperHTML; // Füge den HTML-Code ein
   }
-  
+
   // Initiales Verschieben
   moveButtons();
-  
+
   // Toggle-Button-Klick
   document.getElementById('toggleButtons').addEventListener('click', () => {
     toggleEditDelete(); // Buttons ein-/ausblenden
     moveButtons(); // Nach dem Umschalten verschieben
   });
-  
+
   // Event Listener für Fenstergröße
   window.addEventListener('resize', moveButtons);
 });
+
+function deleteContactRemote(id) {
+  currentTodos.forEach((t, j) => {
+    if (t.assignedTo.includes(id)) {
+      const index = t.assignedTo.indexOf(id);
+      if (index !== -1) {
+        t.assignedTo.splice(index, 1);
+        putData(`todos/${todoKeysArray[j]}/assignedTo`, currentTodos[j]['assignedTo']);
+      }
+    }
+  });
+}

@@ -17,6 +17,7 @@ async function onloadAddtasks() {
   initCustomDropdowns();
   initFieldNavigation();
   setupOutsideClickForCustomSelects();
+  blockEnterSubmit('form-add-task');
 }
 
 /**
@@ -35,24 +36,62 @@ function splitName(fullName) {
 }
 
 /**
- * Asynchronously creates a contact list and adds tasks for each contact.
+ * Asynchronously creates a contact list and adds structured tasks for each contact.
  *
- * This function loads contact data, splits each contact's full name into
- * first name and last name, and populates the `contactList` array with
- * structured objects containing contact details.
+ * This function loads contact data from the database, validates the data,
+ * and populates the global `contactList` array with structured objects containing
+ * contact details such as ID, color, first name, and last name.
  *
  * @async
  * @function createContactlistAddTask
- * @returns {Promise<void>} A promise that resolves once the contact list is populated.
+ * @returns {Promise<void>} A promise that resolves once the contact list is created.
  */
 async function createContactlistAddTask() {
-  let data = await loadData('contacts');
-  let keys = Object.keys(data);
-  for (let i = 0; i < keys.length; i++) {
-    let full = data[keys[i]].name;
-    let { firstName, lastName } = splitName(full);
-    contactList.push({ id: keys[i], color: data[keys[i]].color, firstName, lastName });
+  try {
+    let data = await loadData('contacts');
+    if (!isValidData(data)) return; // Daten validieren
+    populateContactList(data); // Kontaktliste erstellen
+  } catch (error) {
+    console.error('Fehler beim Erstellen der Kontaktliste:', error);
   }
+}
+
+/**
+ * Validates the contact data.
+ *
+ * This function checks if the provided data is valid (not null, undefined, or empty).
+ *
+ * @function isValidData
+ * @param {Object|null} data - The data to validate, typically loaded from a database.
+ * @returns {boolean} Returns `true` if the data is valid, otherwise `false`.
+ */
+function isValidData(data) {
+  if (!data || Object.keys(data).length === 0) {
+    console.log('Keine Kontakte vorhanden oder Datenabruf fehlgeschlagen.');
+    return false;
+  }
+  return true;
+}
+
+/**
+ * Populates the global contact list with structured contact objects.
+ *
+ * This function iterates over the contact data, splits each contact's full name
+ * into first and last name, and appends the structured contact objects to
+ * the global `contactList` array.
+ *
+ * @function populateContactList
+ * @param {Object} data - The contact data object, where each key represents a contact ID,
+ *                        and the value contains the contact details.
+ * @returns {void}
+ */
+function populateContactList(data) {
+  contactList.length = 0; // Liste leeren
+  Object.keys(data).forEach((key) => {
+    let full = data[key].name;
+    let { firstName, lastName } = splitName(full);
+    contactList.push({ id: key, color: data[key].color, firstName, lastName });
+  });
 }
 
 /**
@@ -95,5 +134,25 @@ function updateButtonIcons(btns) {
     let img = b.querySelector('img');
     let t = b.classList.contains('active') ? 'active' : 'inactive';
     img.src = `../assets/icons/add_tasks/${t}_icon_${c}.svg`;
+  }
+}
+
+/**
+ * Prevents form submission when the Enter key is pressed within the specified form.
+ *
+ * @param {string} formId - The ID of the form element to monitor for Enter key presses.
+ *
+ * @example
+ * // Prevent form submission on Enter key press for a form with ID "myForm"
+ * blockEnterSubmit('myForm');
+ */
+function blockEnterSubmit(formId) {
+  const form = document.getElementById(formId);
+  if (form) {
+    form.addEventListener('keypress', function (event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+      }
+    });
   }
 }

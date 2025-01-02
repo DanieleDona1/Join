@@ -139,4 +139,12 @@
   body {
     background-color: rgb(53, 49, 49);
   }
+
+  .dialog-bg,
+  .background-pop-up {
+    max-width: 1920px;
+    max-height: 1080px;
+  }
+
+
 }
