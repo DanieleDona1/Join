@@ -437,10 +437,10 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
-  /* position: absolute;
+  position: absolute;
   top: 137px;
   left: 742px;
-  height: 215px; */
+  height: 215px;
   width: 100%;
   max-width: 422px;
 }
@@ -495,26 +495,16 @@ button {
   cursor: pointer;
 }
 
-.form-add-contact{
-  position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    display: flex
-;
-    flex-direction: column;
-    align-items: center;
-    gap: 50Px;
-}
+
 
 .input-button {
   display: flex;
   gap: 24px;
   max-width: 364px;
   height: 56px;
-  /* position: absolute;
+  position: absolute;
   top: 400px;
-  left: 742px; */
+  left: 742px;
 }
 
 .cancel {
@@ -759,11 +749,21 @@ button {
     border-radius: 30px 30px 0 0;
   }
 
-  /* .contact-field {
-    top: 55vh;
+  .form-add-contact{
+    position: absolute;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, 0);
-  } */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50Px;
+    width: 364px;
+  }
+
+  .contact-field {
+    position: static;
+  }
 
   .contact-logo {
     display: none;
@@ -781,11 +781,9 @@ button {
     transform: translate(-50%, 0);
   }
 
-  /* .input-button {
-    top: 80vh;
-    left: 50%;
-    transform: translate(-50%, 0);
-  } */
+  .input-button {
+    position: static;
+  }
 
   .close-popup {
     display: flex;
@@ -811,6 +809,8 @@ button {
 }
 
 @media screen and (max-width: 850px) {
+ 
+
   #contact-text-large {
     display: none;
   }
@@ -934,6 +934,7 @@ button {
   #toggleButtons {
     display: flex;
   }
+  
 }
 
 @media screen and (max-width: 700px) {
