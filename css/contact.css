@@ -1,29 +1,28 @@
 /* overflow hidden bei open popup */
-.main-contact {
-  padding: 0;
-  width: 100%;
-  /* height: calc(100vh - 96px); */
-}
+
 
 .main-contact-side {
   width: 456px;
+  height: 100%;
   background-color: white;
   box-shadow: 3px 0px 6px 0px rgba(0, 0, 0, 0.2);
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
-  overflow: scroll;
-  /* position: fixed;
-  top: 96px; */
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+
 }
 
 .contact-list-field {
-  width: 400px;
-  height: calc(100vh - 90px);
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding: 32px 24px;
+  overflow-y: auto;
 }
 
 .contact-list-field-button {
