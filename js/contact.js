@@ -62,6 +62,23 @@ function groupContactsByInitial(contacts) {
 
 // Zeigt die gruppierten Kontakte an
 // Zeigt die gruppierten Kontakte sortiert nach ihren Initialen an
+function generateFullContentHTML(initial, contact, index) {
+  const initials = getInitials(contact.user.name);
+  const contactColor = contact.color; // Verwende die gespeicherte Farbe oder generiere eine neue
+
+  return /*html*/ `
+    <div class="contact-profil">
+      <div class="contact-item" onclick="getContactInfo('${initial}', ${index})" tabindex="0">
+        <div class="contact-initials" style="background-color: ${contactColor};">${initials}</div>
+        <div class="contact-name-mail">
+          <div class="contactlist-name">${contact.user.name}</div>
+          <div class="contactlist-mail">${contact.user.mail}</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function displayGroupedContacts(groupedContacts) {
   const content = document.getElementById('content-contactlist');
   content.innerHTML = '';
@@ -78,125 +95,127 @@ function displayGroupedContacts(groupedContacts) {
       <div class="contact-group">
         <h2>${initial}</h2>
         <div class="contactlist-vector"></div>
-        `;
+    `;
 
     groupedContacts[initial].forEach((contact, index) => {
-      const initials = getInitials(contact.user.name);
-      const contactColor = contact.color; // Verwende die gespeicherte Farbe oder generiere eine neue
-      fullContent += /*html*/ `
-      <div class="contact-profil">
-        <div class="contact-item" onclick="getContactInfo('${initial}', ${index})" tabindex="0">
-          <div class="contact-initials" style="background-color: ${contactColor};">${initials}</div>
-          <div class="contact-name-mail">
-            <div class="contactlist-name">${contact.user.name}</div>
-            <div class="contactlist-mail">${contact.user.mail}</div>
-          </div>
-        </div>
-      </div>
-      `;
+      fullContent += generateFullContentHTML(initial, contact, index);
     });
+
     fullContent += `</div>`;
   });
 
   fullContent += '</div>';
-
   content.innerHTML = fullContent;
 }
 
+
+function generateContactHtml(groupInitial, contactIndex, contact, contactColor) {
+  return  /*html*/ `
+  <div class="info-initial-name">
+    <div class="info-initial" style="background-color: ${contactColor};">${contact.user.initials}</div>
+    <div class="info-name-button">
+      <div class="info-name">${contact.user.name}</div>
+      <div class="info-buttons" id="editDeleteButtons">
+        <button class="info-edit" onclick="openEditContact('${groupInitial}', ${contactIndex})">
+          <img src="/assets/icons/contact/contact_info_edit.png" alt="">
+          Edit
+        </button>
+        <button class="info-delete" onclick="deleteContact('${contact.id}')">
+          <img src="/assets/icons/contact/contact_info_delete.png" alt="">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="info-text">Contact Information</div>
+  <div class="info-email-phone">
+    <div class="info-email">
+      <span>Email</span>
+      <a href="mailto:${contact.user.mail}">${contact.user.mail}</a>
+    </div>
+    <div class="info-phone">
+      <span>Phone</span>
+      <span>${contact.user.number}</span>
+    </div>
+  </div>
+`
+}
+
+
+function generateContactWrapperHtml(contactHTML){
+  return /*html*/ `
+  <div id="contact-text-small" class="contact-text">
+    <span class="span-1">Contacts</span>
+    <div class="contact-vector"></div>
+    <span class="span-2">Better with a team</span>
+  </div>
+  <button onclick="closeContactInfoWindow()" class="back-info-wrapper">
+    <img src="../assets/icons/arrow_left_line.svg" alt="button-back">
+  </button>
+  <div class="contact-info-wrapper">
+    ${contactHTML}
+  </div>
+  <button id="toggleButtons">
+    <img src="../assets/icons/contact/more_vert.png" alt="">
+  </button>
+`
+}
+
+
+// Ausgelagerte renderContactInfo-Funktion
+function renderContactInfo(contactHTML, contactWrapperHTML) {
+  const popup = document.getElementById('contact-info-window');
+  const contactInfo = document.getElementById('contact-info');
+  const contactListField = document.getElementById('contact-list-field');
+
+  if (!popup || !contactInfo || !contactListField) {
+    console.error('Wichtige DOM-Elemente fehlen!');
+    return;
+  }
+
+  if (window.innerWidth <= 850) {
+    // Zeige im Popup-Fenster
+    popup.innerHTML = contactWrapperHTML;
+    popup.classList.remove('d-none');
+    contactListField.classList.add('d-none');
+    contactInfo.innerHTML = ''; // Hauptbereich leeren
+
+    // Buttons verschieben nach dem Einfügen des HTML
+    moveButtons();
+  } else {
+    // Zeige im Hauptbereich
+    contactInfo.innerHTML = contactHTML;
+    popup.classList.add('d-none'); // Popup verstecken
+    contactListField.classList.remove('d-none');
+  }
+
+  // Event-Listener für den Toggle-Button hinzufügen
+  const toggleButton = document.getElementById('toggleButtons');
+  if (toggleButton) {
+    // Vorherige Event-Listener entfernen, um doppelte Hinzufügungen zu vermeiden
+    toggleButton.removeEventListener('click', toggleEditDelete);
+    toggleButton.addEventListener('click', toggleEditDelete);
+  } else {
+    console.warn('toggleButton existiert nicht.');
+  }
+}
+
+// Hauptfunktion mit Aufruf der ausgelagerten Funktion
 function getContactInfo(groupInitial, contactIndex) {
   const contact = groupedContacts[groupInitial][contactIndex];
   const contactColor = contact.color;
 
   // Kontaktdaten HTML
-  const contactHTML = /*html*/ `
-    <div class="info-initial-name">
-      <div class="info-initial" style="background-color: ${contactColor};">${contact.user.initials}</div>
-      <div class="info-name-button">
-        <div class="info-name">${contact.user.name}</div>
-        <div class="info-buttons" id="editDeleteButtons">
-          <button class="info-edit" onclick="openEditContact('${groupInitial}', ${contactIndex})">
-            <img src="/assets/icons/contact/contact_info_edit.png" alt="">
-            Edit
-          </button>
-          <button class="info-delete" onclick="deleteContact('${contact.id}')">
-            <img src="/assets/icons/contact/contact_info_delete.png" alt="">
-            Delete
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="info-text">Contact Information</div>
-    <div class="info-email-phone">
-      <div class="info-email">
-        <span>Email</span>
-        <a href="mailto:${contact.user.mail}">${contact.user.mail}</a>
-      </div>
-      <div class="info-phone">
-        <span>Phone</span>
-        <span>${contact.user.number}</span>
-      </div>
-    </div>
-  `;
+  const contactHTML = generateContactHtml(groupInitial, contactIndex, contact, contactColor);
+  const contactWrapperHTML = generateContactWrapperHtml(contactHTML);
 
-  const contactWrapperHTML = /*html*/ `
-    <div id="contact-text-small" class="contact-text">
-      <span class="span-1">Contacts</span>
-      <div class="contact-vector"></div>
-      <span class="span-2">Better with a team</span>
-    </div>
-    <button onclick="closeContactInfoWindow()" class="back-info-wrapper">
-      <img src="../assets/icons/arrow_left_line.svg" alt="button-back">
-    </button>
-    <div class="contact-info-wrapper">
-      ${contactHTML}
-    </div>
-    <button id="toggleButtons">
-      <img src="../assets/icons/contact/more_vert.png" alt="">
-    </button>
-  `;
-
-  function renderContactInfo() {
-    const popup = document.getElementById('contact-info-window');
-    const contactInfo = document.getElementById('contact-info');
-    const contactListField = document.getElementById('contact-list-field');
-
-    if (!popup || !contactInfo || !contactListField) {
-      console.error('Wichtige DOM-Elemente fehlen!');
-      return;
-    }
-
-    if (window.innerWidth <= 850) {
-      // Zeige im Popup-Fenster
-      popup.innerHTML = contactWrapperHTML;
-      popup.classList.remove('d-none');
-      contactListField.classList.add('d-none');
-      contactInfo.innerHTML = ''; // Hauptbereich leeren
-
-      // Buttons verschieben nach dem Einfügen des HTML
-      moveButtons();
-    } else {
-      // Zeige im Hauptbereich
-      contactInfo.innerHTML = contactHTML;
-      popup.classList.add('d-none'); // Popup verstecken
-      contactListField.classList.remove('d-none');
-    }
-
-    // Event-Listener für den Toggle-Button hinzufügen
-    const toggleButton = document.getElementById('toggleButtons');
-    if (toggleButton) {
-      // Vorherige Event-Listener entfernen, um doppelte Hinzufügungen zu vermeiden
-      toggleButton.removeEventListener('click', toggleEditDelete);
-      toggleButton.addEventListener('click', toggleEditDelete);
-    } else {
-      console.warn('toggleButton existiert nicht.');
-    }
-  }
   // Initial render
-  renderContactInfo();
+  renderContactInfo(contactHTML, contactWrapperHTML);
 
   // Event-Listener für Resize hinzufügen
-  window.addEventListener('resize', renderContactInfo);
+  window.addEventListener('resize', () => renderContactInfo(contactHTML, contactWrapperHTML));
 }
+
 // Schließen des Popups
 function closeContactInfoWindow() {
   document.getElementById('contact-list-field').classList.remove('d-none');
@@ -367,7 +386,13 @@ async function editContact(id) {
   await createContactlist(); // Lade die Kontakte erneut
   renderPhoneList(); // Render die aktualisierte Liste
   document.getElementById('contact-info').innerHTML = '';
+  
 
+  console.log(existingData);
+  
+
+  //params für folgende funktion raussuchen und mitgeben
+  //nachverfolgen ob ich den wert für groupedcontact und index weitergeben kann über edit funktion
   getContactInfo();
 }
 
@@ -416,25 +441,6 @@ function moveButtons() {
   editDeleteButtons.style.display = 'none';
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const contactInfoWindow = document.getElementById('contact-info-window');
-  if (contactInfoWindow) {
-    contactInfoWindow.innerHTML = contactWrapperHTML; // Füge den HTML-Code ein
-  }
-
-  // Initiales Verschieben
-  moveButtons();
-
-  // Toggle-Button-Klick
-  document.getElementById('toggleButtons').addEventListener('click', () => {
-    toggleEditDelete(); // Buttons ein-/ausblenden
-    moveButtons(); // Nach dem Umschalten verschieben
-  });
-
-  // Event Listener für Fenstergröße
-  window.addEventListener('resize', moveButtons);
-});
-
 function deleteContactRemote(id) {
   currentTodos.forEach((t, j) => {
     if (t.assignedTo.includes(id)) {
@@ -446,3 +452,7 @@ function deleteContactRemote(id) {
     }
   });
 }
+
+
+
+//js anpassen, editcontact fehler beim speichern fixen, slideshow
