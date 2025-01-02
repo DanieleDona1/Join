@@ -9,15 +9,24 @@ function onInputSubtask(inputId) {
   let subtaskInput = document.getElementById(inputId);
   if (subtaskInput.value !== '') {
     document.getElementById('subtaskIcons').innerHTML = /*html*/ `
-    <div class="d-flex-c-c">
-      <img onclick="focusInput(); resetInputField('${inputId}');" class="add-subtask" src="../assets/icons/board/property-close.svg" alt="close">
-      <img class="mg-left" onclick="addCurrentSubtask('${inputId}');" class="add-subtask" src="../assets/icons/board/property-check.svg" alt="check">
-    </div>
-  `;
+      <div class="d-flex-c-c">
+        <img 
+          onclick="event.stopPropagation(); focusInput(); resetInputField('${inputId}');" 
+          class="add-subtask" 
+          src="../assets/icons/board/property-close.svg" 
+          alt="close">
+        <img 
+          onclick="event.stopPropagation(); addCurrentSubtask('${inputId}');" 
+          class="mg-left add-subtask" 
+          src="../assets/icons/board/property-check.svg" 
+          alt="check">
+      </div>
+    `;
   } else {
     resetInputField(inputId);
   }
 }
+
 
 /**
  * Clears the 'subtaskInput' field and resets the 'subtaskIcons' area to show the default add icon.

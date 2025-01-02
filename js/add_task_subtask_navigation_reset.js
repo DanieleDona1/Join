@@ -46,14 +46,14 @@ function moveToNextField(e) {
    * @returns {void}
    */
   function subtaskKeyDownAddSubtask() {
-    const inp = document.getElementById('subtaskInput');
+    const inp = document.getElementById('subtaskInput') || document.getElementById('subtaskInputBoardAddTask');
     if (inp) {
       inp.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           if (e.target.value.trim() === '') {
             e.preventDefault();
           } else {
-            addCurrentSubtask();
+            addCurrentSubtask(inp.id);
             e.preventDefault();
           }
         }
