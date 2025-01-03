@@ -348,18 +348,25 @@ function renderEditContact(groupedcontact, index) {
 }
 
 async function deleteContact(id) {
-  await deleteData('/contacts/' + id);
- deleteContactRemote(id);
+  try {
+    // Kontakt aus der Datenbank löschen
+    await deleteData('/contacts/' + id);
 
-  // Aktualisiere die Kontaktliste
-  contactList = []; // Leere die vorhandene Liste
-  await createContactlist(); // Lade die Kontakte erneut
-  renderPhoneList(); // Render die aktualisierte Liste
+    // Kontakt aus allen Todos entfernen
+    await deleteContactRemote(id);
 
-  document.getElementById('contact-info').innerHTML = '';
+    // Aktualisiere die Kontaktliste
+    contactList = []; // Leere die vorhandene Liste
+    await createContactlist(); // Kontakte neu laden
+    renderPhoneList(); // Kontaktliste neu rendern
 
-  closeContactInfoWindow();
+    document.getElementById('contact-info').innerHTML = '';
+    closeContactInfoWindow();
+  } catch (error) {
+    console.error('Fehler beim Löschen des Kontakts:', error);
+  }
 }
+
 
 async function editContact(id) {
   console.log(id);
@@ -441,17 +448,36 @@ function moveButtons() {
   editDeleteButtons.style.display = 'none';
 }
 
-function deleteContactRemote(id) {
-  currentTodos.forEach((t, j) => {
-    if (t.assignedTo.includes(id)) {
-      const index = t.assignedTo.indexOf(id);
-      if (index !== -1) {
-        t.assignedTo.splice(index, 1);
-        putData(`todos/${todoKeysArray[j]}/assignedTo`, currentTodos[j]['assignedTo']);
-      }
+async function deleteContactRemote(id) {
+  const updates = {}; // Sammle alle Änderungen in einem Objekt
+
+  currentTodos.forEach((todo, index) => {
+    // Überprüfen, ob `assignedTo` existiert, sonst als leeres Array initialisieren
+    const assignedTo = todo.assignedTo || [];
+
+    // Prüfen, ob die Kontakt-ID im `assignedTo`-Array enthalten ist
+    if (assignedTo.includes(id)) {
+      // Entferne die ID aus der `assignedTo`-Liste
+      todo.assignedTo = assignedTo.filter((contactId) => contactId !== id);
+
+      // Speichere die aktualisierte Liste im Updates-Objekt
+      updates[`todos/${todoKeysArray[index]}/assignedTo`] = todo.assignedTo;
     }
   });
+
+  // Sende alle Änderungen in einem einzigen PATCH-Request an die Datenbank
+  if (Object.keys(updates).length > 0) {
+    try {
+      await patchData('', updates); // Patch die Änderungen in Firebase
+      console.log('AssignedTo-Liste erfolgreich aktualisiert:', updates);
+    } catch (error) {
+      console.error('Fehler beim Aktualisieren der Todos:', error);
+    }
+  } else {
+    console.log('Keine Todos betroffen.');
+  }
 }
+
 
 
 
