@@ -984,3 +984,81 @@ button {
     font-size: 20px;
   }
 }
+
+@media (min-width: 1225px) {
+  
+  .pop-up-add-contact {
+    position: relative;
+    height: 54%;
+    width: 89%;
+  }
+
+  .contact-side-info {
+    flex-direction: column;
+    align-items: unset;
+    padding: 0 40px;
+    height: 100%;
+    width: 38%;
+  }
+
+  .contact-logo {
+    position: unset;
+    margin-bottom: 16px;
+  }
+
+  .add-contact {
+    padding: 0;
+  }
+
+  .contact-pic {
+    position: unset;
+    width: 175px;
+    height: 175px;
+
+  }
+
+  .contact-side-popup-middle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24%;
+  }
+
+  .contact-side-popup-right {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    padding-right:40px;
+    width: 38%;
+    overflow-y: auto;
+  }
+
+  .form-add-contact {
+    width: 100%;
+  }
+
+  .close-popup {
+    position: sticky;
+    z-index: 600;
+    top: 7%;
+    left: 0;
+  }
+
+  .slide-out {
+    animation: none;
+  }
+
+  .contact-field {
+    position: relative;
+    top: 35%;
+    left: 0;
+    padding: 0;
+    max-width: unset;
+  }
+
+  .input-button {
+    position: relative;
+    top: 55%;
+    left: 0;
+  }
+}
