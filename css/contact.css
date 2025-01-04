@@ -1010,7 +1010,8 @@ button {
     padding: 0;
   }
 
-  .contact-pic {
+  .contact-pic,
+  .edit-contact-pic {
     position: unset;
     width: 175px;
     height: 175px;
@@ -1077,5 +1078,9 @@ button {
   .create:hover {
     background-color: rgb(41, 171, 226);
     border: 2px solid rgb(41, 171, 226);
+  }
+
+  .edit-contact-pic {
+    border-radius: 90px;
   }
 }

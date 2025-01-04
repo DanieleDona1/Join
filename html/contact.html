@@ -98,10 +98,6 @@
       </section>
       <!-- edit contact section  -->
       <section class="d-none pop-up-add-contact" id="pop-up-edit-contact">
-        <button class="close-popup" onclick="closeEditContact()">
-          <img src="../assets/icons/contact/close-cross.svg" alt="close" />
-        </button>
-
         <div class="contact-side-info">
           <img
             src="../assets/icons/contact/contact_join_logo.png"
@@ -119,57 +115,62 @@
             </div>
           </div>
         </div>
-
-        <div id="edit-contact-picture"></div>
-
-        <form class="form-add-contact">
-          <address class="contact-field">
-            <input
-              type="text"
-              name="name"
-              id="edit-name"
-              placeholder="Name"
-              minlength="2"
-              required
-            />
-            <input
-              type="email"
-              name="email"
-              id="edit-email"
-              placeholder="Email"
-              minlength="6"
-              required
-            />
-            <input
-              type="number"
-              name="phonenumber"
-              id="edit-phonenumber"
-              placeholder="Phone"
-              min="0"
-              minlength="6"
-              required
-            />
-          </address>
-          <div class="input-button">
-            <button
-              type="button"
-              class="edit-delete"
-              id="edit-delete"
-              onclick="deleteContact(value), closeEditContact()"
-            >
-              Delete
-            </button>
-            <button
-              type="button"
-              id="edit-save"
-              onclick="editContact(value)"
-              class="edit-save"
-            >
-              Save
-              <img src="../assets/icons/contact/check.svg" alt="check" />
-            </button>
-          </div>
-        </form>
+        <div class="contact-side-popup-middle">
+          <div id="edit-contact-picture"></div>
+        </div>
+        <div class="contact-side-popup-right">
+          <button class="close-popup" onclick="closeEditContact()">
+            <img src="../assets/icons/contact/close-cross.svg" alt="close" />
+          </button>
+          <form class="form-add-contact">
+            <address class="contact-field">
+              <input
+                type="text"
+                name="name"
+                id="edit-name"
+                placeholder="Name"
+                minlength="2"
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                id="edit-email"
+                placeholder="Email"
+                minlength="6"
+                required
+              />
+              <input
+                type="number"
+                name="phonenumber"
+                id="edit-phonenumber"
+                placeholder="Phone"
+                min="0"
+                minlength="6"
+                required
+              />
+            </address>
+            <div class="input-button">
+              <button
+                type="button"
+                class="edit-delete"
+                id="edit-delete"
+                onclick="deleteContact(value), closeEditContact()"
+              >
+                Delete
+              </button>
+              <button
+                type="button"
+                id="edit-save"
+                onclick="editContact(value)"
+                class="edit-save"
+              >
+                Save
+                <img src="../assets/icons/contact/check.svg" alt="check" />
+              </button>
+            </div>
+          </form>
+        </div>
       </section>
     </div>
     <div id="success-message" class="d-none success-message d-flex-c-c">
