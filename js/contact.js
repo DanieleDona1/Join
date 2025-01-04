@@ -1,4 +1,5 @@
 let contactWrapperHTML = ''; // Globale Variable
+let contactInfo;
 
 // array für kontaktliste wo alle daten + spezifische id gespeichert wird und das laden und bearbeiten einfacher macht
 
@@ -165,7 +166,7 @@ function generateContactWrapperHtml(contactHTML){
 // Ausgelagerte renderContactInfo-Funktion
 function renderContactInfo(contactHTML, contactWrapperHTML) {
   const popup = document.getElementById('contact-info-window');
-  const contactInfo = document.getElementById('contact-info');
+  contactInfo = document.getElementById('contact-info');
   const contactListField = document.getElementById('contact-list-field');
 
   if (!popup || !contactInfo || !contactListField) {
@@ -234,7 +235,7 @@ async function addContact(button) {
   if (!form.checkValidity()) {
     // HTML5-Validierung schlägt fehl, der Browser zeigt eine Fehlermeldung an
     form.reportValidity(); // Zeigt die entsprechenden Fehlermeldungen für die ungültigen Felder an
-    return; // Verhindert das Fortfahren der Funktion
+    return; // Verhindert das Fortfahr<<en der Funktion
   }
   button.disabled = true;
 
@@ -250,14 +251,12 @@ async function addContact(button) {
     document.getElementById('success-message').classList.remove('d-none');
 
     // Inputfelder leeren
-    document.getElementById('name').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('phonenumber').value = '';
+    name = '';
+    mail = '';
+    phone = '';
 
     // Aktualisiere die Kontaktliste
-    contactList = []; // Leere die vorhandene Liste
-    await createContactlist(); // Lade die Kontakte erneut
-    renderPhoneList(); // Render die aktualisierte Liste
+    updateContactlist();
 
     closeAddContact();
 
@@ -269,6 +268,12 @@ async function addContact(button) {
   } finally {
     button.disabled = false;
   }
+}
+
+async function updateContactlist() {
+  contactList = []; // Leere die vorhandene Liste
+  await createContactlist(); // Lade die Kontakte erneut
+  renderPhoneList(); // Render die aktualisierte Liste
 }
 
 // Hilfsfunktion, um die Initialen zu extrahieren
@@ -358,9 +363,8 @@ async function deleteContact(id) {
     await deleteContactRemote(id);
 
     // Aktualisiere die Kontaktliste
-    contactList = []; // Leere die vorhandene Liste
-    await createContactlist(); // Kontakte neu laden
-    renderPhoneList(); // Kontaktliste neu rendern
+    updateContactlist();
+
 
     document.getElementById('contact-info').innerHTML = '';
     closeContactInfoWindow();
@@ -391,9 +395,8 @@ async function editContact(id) {
   await putData('/contacts/' + id, updatedData);
 
   closeEditContact();
-  contactList = []; // Leere die vorhandene Liste
-  await createContactlist(); // Lade die Kontakte erneut
-  renderPhoneList(); // Render die aktualisierte Liste
+  updateContactlist();
+
   document.getElementById('contact-info').innerHTML = '';
   
 
@@ -484,3 +487,4 @@ async function deleteContactRemote(id) {
 
 
 //js anpassen, editcontact fehler beim speichern fixen, slideshow
+//js funktion update contactInfo erstellen für abschluss bei editcontact?
