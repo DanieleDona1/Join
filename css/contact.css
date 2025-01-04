@@ -1061,4 +1061,21 @@ button {
     top: 55%;
     left: 0;
   }
+
+  .cancel {
+    padding: 0;
+  }
+  .cancel:hover {
+    color: rgb(41, 171, 226);
+    border: 2px solid rgb(41, 171, 226);
+  }
+
+  .create {
+    padding: 0;
+  }
+
+  .create:hover {
+    background-color: rgb(41, 171, 226);
+    border: 2px solid rgb(41, 171, 226);
+  }
 }
