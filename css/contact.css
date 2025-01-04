@@ -227,9 +227,12 @@
   cursor: pointer;
 }
 
-.info-edit:hover {
+.blue-btn-hover:hover .selected-contact-img {
   filter: brightness(0) saturate(100%) invert(57%) sepia(66%) saturate(2785%) hue-rotate(167deg) brightness(103%) contrast(77%);
+}
 
+.blue-btn-hover:hover  {
+  color: #29abe2;
 }
 
 .info-delete {
@@ -243,10 +246,6 @@
   font-size: 16px;
   font-weight: 400;
   cursor: pointer;
-}
-
-.info-delete:hover {
-  filter: brightness(0) saturate(100%) invert(57%) sepia(66%) saturate(2785%) hue-rotate(167deg) brightness(103%) contrast(77%);
 }
 
 .info-text {
@@ -493,6 +492,12 @@ input {
   cursor: pointer;
 }
 
+input:focus {
+  border-width: 1.8px;
+  border-color: rgb(41, 171, 226);
+  outline: none;
+}
+
 button {
   cursor: pointer;
 }
@@ -648,6 +653,10 @@ button {
   align-items: center;
 }
 
+#toggleButtons:hover {
+  background-color: #29abe2;
+}
+
 /* Ende Edit Contact */
 
 /* #contact-info-window {
@@ -760,7 +769,7 @@ button {
     flex-direction: column;
     align-items: center;
     gap: 50Px;
-    width: 364px;
+    width: 100%;
   }
 
   .contact-field {
@@ -811,7 +820,7 @@ button {
 }
 
 @media screen and (max-width: 850px) {
- 
+
 
   #contact-text-large {
     display: none;
@@ -936,7 +945,7 @@ button {
   #toggleButtons {
     display: flex;
   }
-  
+
 }
 
 @media screen and (max-width: 700px) {
@@ -986,7 +995,7 @@ button {
 }
 
 @media (min-width: 1225px) {
-  
+
   .pop-up-add-contact {
     position: relative;
     height: 54%;

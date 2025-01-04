@@ -116,12 +116,12 @@ function generateContactHtml(groupInitial, contactIndex, contact, contactColor) 
     <div class="info-name-button">
       <div class="info-name">${contact.user.name}</div>
       <div class="info-buttons" id="editDeleteButtons">
-        <button class="info-edit" onclick="openEditContact('${groupInitial}', ${contactIndex})">
-          <img src="/assets/icons/contact/contact_info_edit.png" alt="">
+        <button class="info-edit blue-btn-hover" onclick="openEditContact('${groupInitial}', ${contactIndex})">
+          <img class="selected-contact-img" src="/assets/icons/contact/contact_info_edit.png" alt="">
           Edit
         </button>
-        <button class="info-delete" onclick="deleteContact('${contact.id}')">
-          <img src="/assets/icons/contact/contact_info_delete.png" alt="">
+        <button class="info-delete blue-btn-hover" onclick="deleteContact('${contact.id}')">
+          <img class="selected-contact-img" src="/assets/icons/contact/contact_info_delete.png" alt="">
           Delete
         </button>
       </div>
@@ -395,10 +395,10 @@ async function editContact(id) {
   await createContactlist(); // Lade die Kontakte erneut
   renderPhoneList(); // Render die aktualisierte Liste
   document.getElementById('contact-info').innerHTML = '';
-  
+
 
   console.log(existingData);
-  
+
 
   //params für folgende funktion raussuchen und mitgeben
   //nachverfolgen ob ich den wert für groupedcontact und index weitergeben kann über edit funktion
