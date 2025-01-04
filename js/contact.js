@@ -189,6 +189,10 @@ function renderContactInfo(contactHTML, contactWrapperHTML) {
     contactListField.classList.remove('d-none');
   }
 
+  generateEventListenerToggleButtons();
+}
+
+function generateEventListenerToggleButtons() {
   // Event-Listener für den Toggle-Button hinzufügen
   const toggleButton = document.getElementById('toggleButtons');
   if (toggleButton) {
@@ -343,8 +347,6 @@ function renderEditContact(groupedcontact, index) {
   document.getElementById('edit-phonenumber').value = contact.user.number;
   document.getElementById('edit-delete').value = contact.id;
   document.getElementById('edit-save').value = contact.id;
-
-  //gibt dem 2. button keine id
 }
 
 async function deleteContact(id) {
