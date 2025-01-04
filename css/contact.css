@@ -228,7 +228,8 @@
 }
 
 .info-edit:hover {
-  filter: brightness(0) saturate(100%) invert(30%) sepia(93%) saturate(2162%) hue-rotate(214deg) brightness(99%) contrast(108%);
+  filter: brightness(0) saturate(100%) invert(57%) sepia(66%) saturate(2785%) hue-rotate(167deg) brightness(103%) contrast(77%);
+
 }
 
 .info-delete {
@@ -245,7 +246,7 @@
 }
 
 .info-delete:hover {
-  filter: brightness(0) saturate(100%) invert(30%) sepia(93%) saturate(2162%) hue-rotate(214deg) brightness(99%) contrast(108%);
+  filter: brightness(0) saturate(100%) invert(57%) sepia(66%) saturate(2785%) hue-rotate(167deg) brightness(103%) contrast(77%);
 }
 
 .info-text {
