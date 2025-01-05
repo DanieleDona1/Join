@@ -20,7 +20,6 @@ async function onloadFunc() {
 function renderPhoneList() {
   const sortedContacts = sortContacts(contactList);
   groupedContacts = groupContactsByInitial(sortedContacts);
-  console.log('groupedContacts', groupedContacts);
   displayGroupedContacts(groupedContacts);
 }
 
@@ -41,7 +40,6 @@ async function createContactlist() {
         color: data[contactKeys[i]].color, // Speichert die Farbe
       });
     }
-    console.log(contactList);
   }
 }
 
@@ -239,42 +237,6 @@ function transformContact(contact) {
 }
 
 
-// Hauptfunktion mit Aufruf der ausgelagerten Funktion
-function getContactInfo(groupInitial, contactIndex) {
-  currentGroupInitial = groupInitial;
-  currentContactIndex = contactIndex;
-
-  const group = groupedContacts[groupInitial];
-  if (!group || group.length === 0) {
-    console.error(`Gruppe ${groupInitial} existiert nicht oder ist leer.`);
-    return;
-  }
-
-  if (contactIndex < 0 || contactIndex >= group.length) {
-    console.error(`Kontakt mit Index ${contactIndex} in Gruppe ${groupInitial} existiert nicht.`);
-    console.log('Aktuelle Gruppe:', group);
-    return;
-  }
-
-  const contact = group[contactIndex];
-  if (!contact) {
-    console.error(`Kontakt mit Index ${contactIndex} in Gruppe ${groupInitial} ist undefined.`);
-    return;
-  }
-
-  const contactColor = contact.color || '#CCCCCC';
-  const contactHTML = generateContactHtml(groupInitial, contactIndex, contact, contactColor);
-  const contactWrapperHTML = generateContactWrapperHtml(contactHTML);
-
-  renderContactInfo(contactHTML, contactWrapperHTML);
-  window.addEventListener('resize', () => renderContactInfo(contactHTML, contactWrapperHTML));
-}
-
-
-
-
-
-
 // Schließen des Popups
 function closeContactInfoWindow() {
   document.getElementById('contact-list-field').classList.remove('d-none');
@@ -356,7 +318,6 @@ async function addNewContact(name, mail, number) {
 }
 
 function openAddContact() {
-  console.log('animationend fired');
   document.getElementById('background-pop-up').classList.remove('d-none');
   document.getElementById('pop-up-add-contact').classList.remove('d-none', 'slide-out');
   document.querySelector('body').classList.add('overflow-hidden');
@@ -398,7 +359,6 @@ function getRandomColor() {
 function renderEditContact(groupedcontact, index) {
   const contact = groupedContacts[groupedcontact][index];
   const contactColor = contact.color;
-  console.log(contact.user.name);
 
   document.getElementById('edit-contact-picture').innerHTML = /*html*/ `
     <div class="edit-contact-pic"  style="background-color: ${contactColor};">${contact.user.initials}</div>
@@ -432,7 +392,6 @@ async function deleteContact(id) {
 
 
 async function editContact(id) {
-  console.log(id);
 
   const { name, mail, number } = getUpdatedContactData();
   const existingData = await loadData('/contacts/' + id);
@@ -444,8 +403,8 @@ async function editContact(id) {
   await putData('/contacts/' + id, updatedData);
 
   finalizeEdit(id, updatedData);
-  console.log(updatedData);
 }
+
 
 function getUpdatedContactData() {
   return {
@@ -475,109 +434,12 @@ function createUpdatedContact(existingData, name, mail, number) {
   };
 }
 
-async function updateGroupedContacts(existingData, updatedData, id) {
-  const oldInitial = existingData.initials[0];
-  const newInitial = updatedData.initials[0];
-
-  if (existingData.initials !== updatedData.initials) {
-    if (groupedContacts[oldInitial]) {
-      groupedContacts[oldInitial] = groupedContacts[oldInitial].filter(contact => contact.id !== id);
-    } else {
-      console.warn(`Gruppe ${oldInitial} existiert nicht. Kein Entfernen notwendig.`);
-    }
-
-    if (!groupedContacts[newInitial]) groupedContacts[newInitial] = [];
-    groupedContacts[newInitial].push(updatedData);
-  } else {
-    updateContactInSameGroup(existingData, updatedData, id, oldInitial);
-  }
-}
-
-function updateContactInSameGroup(existingData, updatedData, id, groupInitial) {
-  const group = groupedContacts[groupInitial];
-  if (group) {
-    const contactIndex = group.findIndex(contact => contact.id === id);
-    if (contactIndex !== -1) {
-      group[contactIndex] = updatedData;
-    } else {
-      console.error(`Kontakt mit ID ${id} nicht in Gruppe ${groupInitial} gefunden.`);
-    }
-  } else {
-    console.error(`Gruppe ${groupInitial} existiert nicht.`);
-  }
-}
 
 function removeDuplicates(group) {
   return group.filter((contact, index, self) =>
     index === self.findIndex(c => c.id === contact.id)
   );
 }
-
-function finalizeEdit(id, updatedData) {
-  updateLocalContactList(id, updatedData);
-  updateContactlist();
-  closeEditContact();
-
-  document.getElementById('contact-info').innerHTML = '';
-
-  const newInitial = updatedData.initials[0];
-  const newGroup = groupedContacts[newInitial];
-
-  if (!newGroup || newGroup.length === 0) {
-    console.error(`Gruppe ${newInitial} ist leer oder existiert nicht.`);
-    return;
-  }
-
-  // Suche den Index des Kontakts
-  const newIndex = newGroup.findIndex(contact => contact.id === id);
-  if (newIndex === -1) {
-    console.error(`Kontakt mit ID ${id} konnte in Gruppe ${newInitial} nicht gefunden werden.`);
-    console.log('Aktuelle Gruppe:', newGroup);
-    return;
-  }
-
-  currentGroupInitial = newInitial;
-  currentContactIndex = newIndex;
-
-  console.log(`Kontakt erfolgreich in Gruppe ${newInitial} gefunden.`);
-  getContactInfo(currentGroupInitial, currentContactIndex);
-}
-
-
-
-
-
-
-
-function updateLocalContactList(id, updatedData) {
-  console.log('Vorherige groupedContacts:', JSON.stringify(groupedContacts, null, 2));
-
-  // Entferne den Kontakt aus allen Gruppen
-  Object.keys(groupedContacts).forEach(groupKey => {
-    groupedContacts[groupKey] = groupedContacts[groupKey].filter(contact => contact.id !== id);
-  });
-
-  // Füge den Kontakt in die neue Gruppe ein
-  const newInitial = updatedData.initials[0];
-  if (!groupedContacts[newInitial]) {
-    groupedContacts[newInitial] = [];
-  }
-
-  const exists = groupedContacts[newInitial].some(contact => contact.id === id);
-  if (!exists) {
-    groupedContacts[newInitial].push({
-      id,
-      ...updatedData,
-    });
-  }
-
-  // Debugging: Aktueller Zustand
-  console.log('Nachher groupedContacts:', JSON.stringify(groupedContacts, null, 2));
-}
-
-
-
-
 
 
 function toggleEditDelete() {
@@ -629,32 +491,139 @@ async function deleteContactRemote(id) {
   const updates = {}; // Sammle alle Änderungen in einem Objekt
 
   currentTodos.forEach((todo, index) => {
-    // Überprüfen, ob `assignedTo` existiert, sonst als leeres Array initialisieren
     const assignedTo = todo.assignedTo || [];
 
-    // Prüfen, ob die Kontakt-ID im `assignedTo`-Array enthalten ist
     if (assignedTo.includes(id)) {
-      // Entferne die ID aus der `assignedTo`-Liste
       todo.assignedTo = assignedTo.filter((contactId) => contactId !== id);
-
-      // Speichere die aktualisierte Liste im Updates-Objekt
       updates[`todos/${todoKeysArray[index]}/assignedTo`] = todo.assignedTo;
     }
   });
 
-  // Sende alle Änderungen in einem einzigen PATCH-Request an die Datenbank
   if (Object.keys(updates).length > 0) {
     try {
-      await patchData('', updates); // Patch die Änderungen in Firebase
-      console.log('AssignedTo-Liste erfolgreich aktualisiert:', updates);
+      await patchData('', updates);
     } catch (error) {
       console.error('Fehler beim Aktualisieren der Todos:', error);
     }
-  } else {
-    console.log('Keine Todos betroffen.');
   }
 }
 
+function removeDuplicatesFromGroupedContacts() {
+  Object.keys(groupedContacts).forEach(groupKey => {
+    groupedContacts[groupKey] = groupedContacts[groupKey].filter((contact, index, self) => {
+      const isValid = contact.id !== undefined && contact.id !== null;
+      return (
+        isValid &&
+        index === self.findIndex(c => c.id === contact.id)
+      );
+    });
+  });
+}
+
+function updateLocalContactList(id, updatedData) {
+  Object.keys(groupedContacts).forEach(groupKey => {
+    groupedContacts[groupKey] = groupedContacts[groupKey].filter(contact => contact.id !== id);
+  });
+
+  const newInitial = updatedData.initials[0];
+  if (!groupedContacts[newInitial]) {
+    groupedContacts[newInitial] = [];
+  }
+  groupedContacts[newInitial].push({
+    id,
+    ...updatedData,
+  });
+
+  removeDuplicatesFromGroupedContacts();
+  sortGroupedContacts();
+}
+
+async function updateGroupedContacts(existingData, updatedData, id) {
+  const oldInitial = existingData.initials[0];
+  const newInitial = updatedData.initials[0];
+
+  if (oldInitial !== newInitial) {
+    if (groupedContacts[oldInitial]) {
+      groupedContacts[oldInitial] = groupedContacts[oldInitial].filter(contact => contact.id !== id);
+    }
+
+    if (!groupedContacts[newInitial]) groupedContacts[newInitial] = [];
+    groupedContacts[newInitial].push(updatedData);
+  } else {
+    updateContactInSameGroup(existingData, updatedData, id, oldInitial);
+  }
+
+  removeDuplicatesFromGroupedContacts();
+}
+
+function updateContactInSameGroup(existingData, updatedData, id, groupInitial) {
+  const group = groupedContacts[groupInitial];
+  if (group) {
+    const contactIndex = group.findIndex(contact => contact.id === id);
+    if (contactIndex !== -1) {
+      group[contactIndex] = {
+        ...group[contactIndex],
+        ...updatedData,
+      };
+    }
+  }
+}
+
+function finalizeEdit(id, updatedData) {
+  updateLocalContactList(id, updatedData);
+  updateContactlist();
+  closeEditContact();
+
+  document.getElementById('contact-info').innerHTML = '';
+
+  const newInitial = updatedData.initials[0];
+  const newGroup = groupedContacts[newInitial];
+
+  if (!newGroup || newGroup.length === 0) {
+    return;
+  }
+
+  const newIndex = newGroup.findIndex(contact => {
+    return contact.id === id;
+  });
+
+  if (newIndex === -1) {
+    return;
+  }
+
+  currentGroupInitial = newInitial;
+  currentContactIndex = newIndex;
+
+  getContactInfo(currentGroupInitial, currentContactIndex);
+}
+
+function sortGroupedContacts() {
+  Object.keys(groupedContacts).forEach(groupKey => {
+    groupedContacts[groupKey].sort((a, b) => {
+      const nameA = a.user?.name || a.name || '';
+      const nameB = b.user?.name || b.name || '';
+      return nameA.localeCompare(nameB);
+    });
+  });
+}
+
+function getContactInfo(groupInitial, contactIndex) {
+  const group = groupedContacts[groupInitial];
+  if (!group || group.length === 0) {
+    return;
+  }
+
+  const contact = group[contactIndex];
+  if (!contact) {
+    return;
+  }
+
+  const contactColor = contact.color || '#CCCCCC';
+  const contactHTML = generateContactHtml(groupInitial, contactIndex, contact, contactColor);
+  const contactWrapperHTML = generateContactWrapperHtml(contactHTML);
+
+  renderContactInfo(contactHTML, contactWrapperHTML);
+}
 
 
 
