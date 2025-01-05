@@ -324,26 +324,44 @@ function openAddContact() {
 }
 
 function closeAddContact() {
-  document.getElementById('background-pop-up').classList.add('d-none');
-  document.getElementById('pop-up-add-contact').classList.add('d-none');
-  document.querySelector('body').classList.remove('overflow-hidden');
+  let popupAddContact = document.getElementById('pop-up-add-contact');
+  popupAddContact.classList.add('slide-out');
+  popupAddContact.addEventListener(
+    'animationend',
+    function () {
+      document.getElementById('background-pop-up').classList.add('d-none');
+      popupAddContact.classList.add('slide-out');
+      popupAddContact.classList.add('d-none');
+      document.querySelector('body').classList.remove('overflow-hidden');
+    },
+    { once: true }
+  );
 }
+
 
 function openEditContact(groupedcontact, index) {
   currentGroupInitial = groupedcontact;
   currentContactIndex = index;
 
-  document.getElementById('pop-up-edit-contact').classList.remove('d-none');
   document.getElementById('background-pop-up').classList.remove('d-none');
+  document.getElementById('pop-up-edit-contact').classList.remove('d-none', 'slide-out');
   document.querySelector('body').classList.add('overflow-hidden');
 
   renderEditContact(groupedcontact, index);
 }
 
 function closeEditContact() {
-  document.getElementById('pop-up-edit-contact').classList.add('d-none');
-  document.getElementById('background-pop-up').classList.add('d-none');
-  document.querySelector('body').classList.remove('overflow-hidden');
+  let popupEditContact = document.getElementById('pop-up-edit-contact');
+  popupEditContact.classList.add('slide-out');
+  popupEditContact.addEventListener(
+    'animationend',
+    function () {
+        document.getElementById('pop-up-edit-contact').classList.add('d-none');
+        document.getElementById('background-pop-up').classList.add('d-none');
+        document.querySelector('body').classList.remove('overflow-hidden');
+    },
+    { once: true }
+  );
 }
 
 // Funktion zur Generierung einer zufälligen Hex-Farbe
