@@ -67,21 +67,22 @@ function groupContactsByInitial(contacts) {
 // Zeigt die gruppierten Kontakte an
 // Zeigt die gruppierten Kontakte sortiert nach ihren Initialen an
 function generateFullContentHTML(initial, contact, index) {
-  const initials = getInitials(contact.user.name);
-  const contactColor = contact.color; // Verwende die gespeicherte Farbe oder generiere eine neue
+  const initials = contact?.user?.initials || '??'; // Initialen aus dem `user`-Objekt
+  const contactColor = contact?.color || '#CCCCCC'; // Standardfarbe verwenden
 
   return /*html*/ `
     <div class="contact-profil">
       <div class="contact-item" onclick="getContactInfo('${initial}', ${index})" tabindex="0">
         <div class="contact-initials" style="background-color: ${contactColor};">${initials}</div>
         <div class="contact-name-mail">
-          <div class="contactlist-name">${contact.user.name}</div>
-          <div class="contactlist-mail">${contact.user.mail}</div>
+          <div class="contactlist-name">${contact?.user?.name || 'Unbekannt'}</div>
+          <div class="contactlist-mail">${contact?.user?.mail || 'Keine E-Mail'}</div>
         </div>
       </div>
     </div>
   `;
 }
+
 
 function displayGroupedContacts(groupedContacts) {
   const content = document.getElementById('content-contactlist');
@@ -114,11 +115,22 @@ function displayGroupedContacts(groupedContacts) {
 
 
 function generateContactHtml(groupInitial, contactIndex, contact, contactColor) {
-  return  /*html*/ `
+  // Prüfen, ob die flache Struktur vorhanden ist
+  const initials = contact.user?.initials || contact.initials;
+  const name = contact.user?.name || contact.name;
+  const mail = contact.user?.mail || contact.mail;
+  const number = contact.user?.number || contact.number;
+
+  if (!initials || !name || !mail || !number) {
+    console.error('Fehler: Kontakt oder Kontaktinformationen fehlen.', contact);
+    return '<div class="error">Kontaktinformationen fehlen</div>';
+  }
+
+  return /*html*/ `
   <div class="info-initial-name">
-    <div class="info-initial" style="background-color: ${contactColor};">${contact.user.initials}</div>
+    <div class="info-initial" style="background-color: ${contactColor};">${initials}</div>
     <div class="info-name-button">
-      <div class="info-name">${contact.user.name}</div>
+      <div class="info-name">${name}</div>
       <div class="info-buttons" id="editDeleteButtons">
         <button class="info-edit blue-btn-hover" onclick="openEditContact('${groupInitial}', ${contactIndex})">
           <img class="selected-contact-img" src="/assets/icons/contact/contact_info_edit.png" alt="">
@@ -135,15 +147,17 @@ function generateContactHtml(groupInitial, contactIndex, contact, contactColor) 
   <div class="info-email-phone">
     <div class="info-email">
       <span>Email</span>
-      <a href="mailto:${contact.user.mail}">${contact.user.mail}</a>
+      <a href="mailto:${mail}">${mail}</a>
     </div>
     <div class="info-phone">
       <span>Phone</span>
-      <span>${contact.user.number}</span>
+      <span>${number}</span>
     </div>
   </div>
-`
+  `;
 }
+
+
 
 
 function generateContactWrapperHtml(contactHTML){
@@ -208,23 +222,58 @@ function generateEventListenerToggleButtons() {
   }
 }
 
+
+function transformContact(contact) {
+  if (!contact) return null;
+
+  return {
+    id: contact.id,
+    color: contact.color,
+    user: {
+      initials: contact.initials,
+      name: contact.name,
+      mail: contact.mail,
+      number: contact.number,
+    },
+  };
+}
+
+
 // Hauptfunktion mit Aufruf der ausgelagerten Funktion
 function getContactInfo(groupInitial, contactIndex) {
   currentGroupInitial = groupInitial;
   currentContactIndex = contactIndex;
-  const contact = groupedContacts[groupInitial][contactIndex];
-  const contactColor = contact.color;
 
-  // Kontaktdaten HTML
+  const group = groupedContacts[groupInitial];
+  if (!group || group.length === 0) {
+    console.error(`Gruppe ${groupInitial} existiert nicht oder ist leer.`);
+    return;
+  }
+
+  if (contactIndex < 0 || contactIndex >= group.length) {
+    console.error(`Kontakt mit Index ${contactIndex} in Gruppe ${groupInitial} existiert nicht.`);
+    console.log('Aktuelle Gruppe:', group);
+    return;
+  }
+
+  const contact = group[contactIndex];
+  if (!contact) {
+    console.error(`Kontakt mit Index ${contactIndex} in Gruppe ${groupInitial} ist undefined.`);
+    return;
+  }
+
+  const contactColor = contact.color || '#CCCCCC';
   const contactHTML = generateContactHtml(groupInitial, contactIndex, contact, contactColor);
   const contactWrapperHTML = generateContactWrapperHtml(contactHTML);
 
-  // Initial render
   renderContactInfo(contactHTML, contactWrapperHTML);
-
-  // Event-Listener für Resize hinzufügen
   window.addEventListener('resize', () => renderContactInfo(contactHTML, contactWrapperHTML));
 }
+
+
+
+
+
 
 // Schließen des Popups
 function closeContactInfoWindow() {
@@ -385,52 +434,150 @@ async function deleteContact(id) {
 async function editContact(id) {
   console.log(id);
 
-  let name = document.getElementById('edit-name').value;
-  let mail = document.getElementById('edit-email').value;
-  let number = document.getElementById('edit-phonenumber').value;
-  // Aktuelle Daten abrufen
-  let existingData = await loadData('/contacts/' + id);
+  const { name, mail, number } = getUpdatedContactData();
+  const existingData = await loadData('/contacts/' + id);
 
-  // Nur die Felder aktualisieren, die geändert wurden
-  let updatedData = {
-    ...existingData, // Spread-Operator: Kopiert alle Eigenschaften von existingData in das neue Objekt
-    name: name, // Überschreibt oder fügt die `name`-Eigenschaft hinzu
-    mail: mail, // Überschreibt oder fügt die `mail`-Eigenschaft hinzu
-    number: number, // Überschreibt oder fügt die `number`-Eigenschaft hinzu
-  };
+  if (!validateInitials(existingData)) return;
 
-  // Dann PUT-Request mit dem aktualisierten Datensatz senden
+  const updatedData = createUpdatedContact(existingData, name, mail, number);
+  await updateGroupedContacts(existingData, updatedData, id);
   await putData('/contacts/' + id, updatedData);
 
+  finalizeEdit(id, updatedData);
+  console.log(updatedData);
+}
+
+function getUpdatedContactData() {
+  return {
+    name: document.getElementById('edit-name').value,
+    mail: document.getElementById('edit-email').value,
+    number: document.getElementById('edit-phonenumber').value,
+  };
+}
+
+function validateInitials(existingData) {
+  if (!existingData.initials || existingData.initials.length < 1) {
+    console.error('Fehler: Initialen des bestehenden Kontakts sind nicht definiert.');
+    return false;
+  }
+  return true;
+}
+
+function createUpdatedContact(existingData, name, mail, number) {
+  const [firstName, lastName] = name.split(' ');
+  const initials = (firstName[0] + lastName[0]).toUpperCase();
+  return {
+    ...existingData,
+    name,
+    mail,
+    number,
+    initials,
+  };
+}
+
+async function updateGroupedContacts(existingData, updatedData, id) {
+  const oldInitial = existingData.initials[0];
+  const newInitial = updatedData.initials[0];
+
+  if (existingData.initials !== updatedData.initials) {
+    if (groupedContacts[oldInitial]) {
+      groupedContacts[oldInitial] = groupedContacts[oldInitial].filter(contact => contact.id !== id);
+    } else {
+      console.warn(`Gruppe ${oldInitial} existiert nicht. Kein Entfernen notwendig.`);
+    }
+
+    if (!groupedContacts[newInitial]) groupedContacts[newInitial] = [];
+    groupedContacts[newInitial].push(updatedData);
+  } else {
+    updateContactInSameGroup(existingData, updatedData, id, oldInitial);
+  }
+}
+
+function updateContactInSameGroup(existingData, updatedData, id, groupInitial) {
+  const group = groupedContacts[groupInitial];
+  if (group) {
+    const contactIndex = group.findIndex(contact => contact.id === id);
+    if (contactIndex !== -1) {
+      group[contactIndex] = updatedData;
+    } else {
+      console.error(`Kontakt mit ID ${id} nicht in Gruppe ${groupInitial} gefunden.`);
+    }
+  } else {
+    console.error(`Gruppe ${groupInitial} existiert nicht.`);
+  }
+}
+
+function removeDuplicates(group) {
+  return group.filter((contact, index, self) =>
+    index === self.findIndex(c => c.id === contact.id)
+  );
+}
+
+function finalizeEdit(id, updatedData) {
   updateLocalContactList(id, updatedData);
   updateContactlist();
   closeEditContact();
 
   document.getElementById('contact-info').innerHTML = '';
 
+  const newInitial = updatedData.initials[0];
+  const newGroup = groupedContacts[newInitial];
 
-  console.log(updatedData);
-  
-
-  //params für folgende funktion raussuchen und mitgeben
-  //nachverfolgen ob ich den wert für groupedcontact und index weitergeben kann über edit funktion
-// Rufe `getContactInfo` mit den gespeicherten Parametern auf
-if (currentGroupInitial !== null && currentContactIndex !== null) {
-  getContactInfo(currentGroupInitial, currentContactIndex);
-} else {
-  console.error('Fehler: Keine gültigen Parameter für getContactInfo vorhanden.');
-}}
-
-function updateLocalContactList(contactId, updatedData) {
-  // Durchlaufe die Gruppierung und aktualisiere den Kontakt
-  for (const group in groupedContacts) {
-    groupedContacts[group] = groupedContacts[group].map(contact =>
-      contact.id === contactId
-        ? { ...contact, user: updatedData } // Aktualisiere den Kontakt
-        : contact
-    );
+  if (!newGroup || newGroup.length === 0) {
+    console.error(`Gruppe ${newInitial} ist leer oder existiert nicht.`);
+    return;
   }
+
+  // Suche den Index des Kontakts
+  const newIndex = newGroup.findIndex(contact => contact.id === id);
+  if (newIndex === -1) {
+    console.error(`Kontakt mit ID ${id} konnte in Gruppe ${newInitial} nicht gefunden werden.`);
+    console.log('Aktuelle Gruppe:', newGroup);
+    return;
+  }
+
+  currentGroupInitial = newInitial;
+  currentContactIndex = newIndex;
+
+  console.log(`Kontakt erfolgreich in Gruppe ${newInitial} gefunden.`);
+  getContactInfo(currentGroupInitial, currentContactIndex);
 }
+
+
+
+
+
+
+
+function updateLocalContactList(id, updatedData) {
+  console.log('Vorherige groupedContacts:', JSON.stringify(groupedContacts, null, 2));
+
+  // Entferne den Kontakt aus allen Gruppen
+  Object.keys(groupedContacts).forEach(groupKey => {
+    groupedContacts[groupKey] = groupedContacts[groupKey].filter(contact => contact.id !== id);
+  });
+
+  // Füge den Kontakt in die neue Gruppe ein
+  const newInitial = updatedData.initials[0];
+  if (!groupedContacts[newInitial]) {
+    groupedContacts[newInitial] = [];
+  }
+
+  const exists = groupedContacts[newInitial].some(contact => contact.id === id);
+  if (!exists) {
+    groupedContacts[newInitial].push({
+      id,
+      ...updatedData,
+    });
+  }
+
+  // Debugging: Aktueller Zustand
+  console.log('Nachher groupedContacts:', JSON.stringify(groupedContacts, null, 2));
+}
+
+
+
+
 
 
 function toggleEditDelete() {
