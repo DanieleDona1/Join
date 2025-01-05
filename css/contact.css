@@ -1054,10 +1054,6 @@ button {
     left: 0;
   }
 
-  .slide-out {
-    animation: none;
-  }
-
   .contact-field {
     position: relative;
     top: 35%;
