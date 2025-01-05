@@ -131,11 +131,11 @@ function generateContactHtml(groupInitial, contactIndex, contact, contactColor) 
       <div class="info-name">${name}</div>
       <div class="info-buttons" id="editDeleteButtons">
         <button class="info-edit blue-btn-hover" onclick="openEditContact('${groupInitial}', ${contactIndex})">
-          <img class="selected-contact-img" src="/assets/icons/contact/contact_info_edit.png" alt="">
+          <img class="selected-contact-img" src="../assets/icons/contact/contact_info_edit.png" alt="">
           Edit
         </button>
         <button class="info-delete blue-btn-hover" onclick="deleteContact('${contact.id}')">
-          <img class="selected-contact-img" src="/assets/icons/contact/contact_info_delete.png" alt="">
+          <img class="selected-contact-img" src="../assets/icons/contact/contact_info_delete.png" alt="">
           Delete
         </button>
       </div>
