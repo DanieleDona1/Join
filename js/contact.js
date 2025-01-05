@@ -1,5 +1,8 @@
 let contactWrapperHTML = ''; // Globale Variable
 let contactInfo;
+let currentGroupInitial;
+let currentContactIndex;
+
 
 // array für kontaktliste wo alle daten + spezifische id gespeichert wird und das laden und bearbeiten einfacher macht
 
@@ -207,6 +210,8 @@ function generateEventListenerToggleButtons() {
 
 // Hauptfunktion mit Aufruf der ausgelagerten Funktion
 function getContactInfo(groupInitial, contactIndex) {
+  currentGroupInitial = groupInitial;
+  currentContactIndex = contactIndex;
   const contact = groupedContacts[groupInitial][contactIndex];
   const contactColor = contact.color;
 
@@ -256,7 +261,7 @@ async function addContact(button) {
     phone = '';
 
     // Aktualisiere die Kontaktliste
-    updateContactlist();
+    await updateContactlist();
 
     closeAddContact();
 
@@ -315,6 +320,9 @@ function closeAddContact() {
 }
 
 function openEditContact(groupedcontact, index) {
+  currentGroupInitial = groupedcontact;
+  currentContactIndex = index;
+
   document.getElementById('pop-up-edit-contact').classList.remove('d-none');
   document.getElementById('background-pop-up').classList.remove('d-none');
   document.querySelector('body').classList.add('overflow-hidden');
@@ -363,7 +371,7 @@ async function deleteContact(id) {
     await deleteContactRemote(id);
 
     // Aktualisiere die Kontaktliste
-    updateContactlist();
+    await updateContactlist();
 
 
     document.getElementById('contact-info').innerHTML = '';
@@ -394,19 +402,36 @@ async function editContact(id) {
   // Dann PUT-Request mit dem aktualisierten Datensatz senden
   await putData('/contacts/' + id, updatedData);
 
-  closeEditContact();
+  updateLocalContactList(id, updatedData);
   updateContactlist();
+  closeEditContact();
 
   document.getElementById('contact-info').innerHTML = '';
 
 
-  console.log(existingData);
-
+  console.log(updatedData);
+  
 
   //params für folgende funktion raussuchen und mitgeben
   //nachverfolgen ob ich den wert für groupedcontact und index weitergeben kann über edit funktion
-  getContactInfo();
+// Rufe `getContactInfo` mit den gespeicherten Parametern auf
+if (currentGroupInitial !== null && currentContactIndex !== null) {
+  getContactInfo(currentGroupInitial, currentContactIndex);
+} else {
+  console.error('Fehler: Keine gültigen Parameter für getContactInfo vorhanden.');
+}}
+
+function updateLocalContactList(contactId, updatedData) {
+  // Durchlaufe die Gruppierung und aktualisiere den Kontakt
+  for (const group in groupedContacts) {
+    groupedContacts[group] = groupedContacts[group].map(contact =>
+      contact.id === contactId
+        ? { ...contact, user: updatedData } // Aktualisiere den Kontakt
+        : contact
+    );
+  }
 }
+
 
 function toggleEditDelete() {
   const movedButtonsContainer = document.getElementById('movedButtons');
