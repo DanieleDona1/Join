@@ -1,54 +1,47 @@
-let contactWrapperHTML = ''; // Globale Variable
+let contactWrapperHTML = ''; 
 let contactInfo;
 let currentGroupInitial;
 let currentContactIndex;
 
 
-// array für kontaktliste wo alle daten + spezifische id gespeichert wird und das laden und bearbeiten einfacher macht
-
 async function onloadFunc() {
-  // await isUserLoggedIn();  // wenn user nicht eingeloggt ist, wird er auf login Seite weitergeleitet
   await createContactlist();
   renderPhoneList();
   await generateHeaderInitials();
-
   await loadTodosArray();
   currentTodos = JSON.parse(JSON.stringify(todos));
 }
 
-// Hauptfunktion: Steuert den Sortier- und Renderprozess
+
 function renderPhoneList() {
   const sortedContacts = sortContacts(contactList);
   groupedContacts = groupContactsByInitial(sortedContacts);
   displayGroupedContacts(groupedContacts);
 }
 
+
 async function createContactlist() {
-  let data = await loadData('contacts'); // holt mittels dieser Funktion das JSON von der Datenbank unter diesem Pfad
-
+  let data = await loadData('contacts'); 
   if (!data || Object.keys(data).length === 0) {
-    // Überprüft, ob die Daten leer oder undefined sind
-    console.log('Keine Kontakte vorhanden.');
-    contactList = []; // Kontaktliste bleibt leer
+    contactList = []; 
   } else {
-    contactKeys = Object.keys(data); // nimmt die keys der jeweiligen Objekte zum Weiterverarbeiten
-
+    contactKeys = Object.keys(data); 
     for (let i = 0; i < contactKeys.length; i++) {
       contactList.push({
-        id: contactKeys[i], // Speichert den jeweiligen Key als ID
-        user: data[contactKeys[i]], // Speichert die User-Daten
-        color: data[contactKeys[i]].color, // Speichert die Farbe
+        id: contactKeys[i], 
+        user: data[contactKeys[i]], 
+        color: data[contactKeys[i]].color, 
       });
     }
   }
 }
 
-// Sortiert die Kontakte alphabetisch nach dem Namen
+
 function sortContacts(contacts) {
   return contacts.sort((a, b) => a.user.name.localeCompare(b.user.name));
 }
 
-// Gruppiert die Kontakte basierend auf ihrem Anfangsbuchstaben
+
 function groupContactsByInitial(contacts) {
   const grouped = {};
 
@@ -62,11 +55,11 @@ function groupContactsByInitial(contacts) {
   return grouped;
 }
 
-// Zeigt die gruppierten Kontakte an
-// Zeigt die gruppierten Kontakte sortiert nach ihren Initialen an
+
+
 function generateFullContentHTML(initial, contact, index) {
-  const initials = contact?.user?.initials || '??'; // Initialen aus dem `user`-Objekt
-  const contactColor = contact?.color || '#CCCCCC'; // Standardfarbe verwenden
+  const initials = contact?.user?.initials || '??'; 
+  const contactColor = contact?.color || '#CCCCCC'; 
 
   return /*html*/ `
     <div class="contact-profil">
@@ -86,13 +79,10 @@ function displayGroupedContacts(groupedContacts) {
   const content = document.getElementById('content-contactlist');
   content.innerHTML = '';
 
-  // Erstelle einen übergeordneten Container
   let fullContent = '<div class="contacts-wrapper">';
 
-  // Sortiere die Initialen
   const sortedInitials = Object.keys(groupedContacts).sort();
 
-  // Schleife durch die sortierten Initialen und gruppierten Kontakte
   sortedInitials.forEach((initial) => {
     fullContent += /*html*/ `
       <div class="contact-group">
@@ -113,7 +103,6 @@ function displayGroupedContacts(groupedContacts) {
 
 
 function generateContactHtml(groupInitial, contactIndex, contact, contactColor) {
-  // Prüfen, ob die flache Struktur vorhanden ist
   const initials = contact.user?.initials || contact.initials;
   const name = contact.user?.name || contact.name;
   const mail = contact.user?.mail || contact.mail;
@@ -156,8 +145,6 @@ function generateContactHtml(groupInitial, contactIndex, contact, contactColor) 
 }
 
 
-
-
 function generateContactWrapperHtml(contactHTML){
   return /*html*/ `
   <div id="contact-text-small" class="contact-text">
@@ -178,7 +165,6 @@ function generateContactWrapperHtml(contactHTML){
 }
 
 
-// Ausgelagerte renderContactInfo-Funktion
 function renderContactInfo(contactHTML, contactWrapperHTML) {
   const popup = document.getElementById('contact-info-window');
   contactInfo = document.getElementById('contact-info');
@@ -190,18 +176,15 @@ function renderContactInfo(contactHTML, contactWrapperHTML) {
   }
 
   if (window.innerWidth <= 850) {
-    // Zeige im Popup-Fenster
     popup.innerHTML = contactWrapperHTML;
     popup.classList.remove('d-none');
     contactListField.classList.add('d-none');
-    contactInfo.innerHTML = ''; // Hauptbereich leeren
+    contactInfo.innerHTML = ''; 
 
-    // Buttons verschieben nach dem Einfügen des HTML
     moveButtons();
   } else {
-    // Zeige im Hauptbereich
     contactInfo.innerHTML = contactHTML;
-    popup.classList.add('d-none'); // Popup verstecken
+    popup.classList.add('d-none'); 
     contactListField.classList.remove('d-none');
   }
 
@@ -209,10 +192,8 @@ function renderContactInfo(contactHTML, contactWrapperHTML) {
 }
 
 function generateEventListenerToggleButtons() {
-  // Event-Listener für den Toggle-Button hinzufügen
   const toggleButton = document.getElementById('toggleButtons');
   if (toggleButton) {
-    // Vorherige Event-Listener entfernen, um doppelte Hinzufügungen zu vermeiden
     toggleButton.removeEventListener('click', toggleEditDelete);
     toggleButton.addEventListener('click', toggleEditDelete);
   } else {
@@ -237,21 +218,17 @@ function transformContact(contact) {
 }
 
 
-// Schließen des Popups
 function closeContactInfoWindow() {
   document.getElementById('contact-list-field').classList.remove('d-none');
   document.getElementById('contact-info-window').classList.add('d-none');
 }
 
 async function addContact(button) {
-  // Referenz auf das Formular
   let form = document.querySelector('form');
 
-  // Überprüfe, ob das Formular gültig ist
   if (!form.checkValidity()) {
-    // HTML5-Validierung schlägt fehl, der Browser zeigt eine Fehlermeldung an
-    form.reportValidity(); // Zeigt die entsprechenden Fehlermeldungen für die ungültigen Felder an
-    return; // Verhindert das Fortfahr<<en der Funktion
+    form.reportValidity(); 
+    return; 
   }
   button.disabled = true;
 
@@ -260,18 +237,15 @@ async function addContact(button) {
   let phone = document.getElementById('phonenumber').value;
 
   try {
-    // Füge den Kontakt hinzu (warte auf Abschluss, aber prüfe den Rückgabewert nicht)
+
     await addNewContact(name, mail, phone);
 
-    // Erfolgsmeldung anzeigen und Liste neu rendern
     document.getElementById('success-message').classList.remove('d-none');
 
-    // Inputfelder leeren
     name = '';
     mail = '';
     phone = '';
 
-    // Aktualisiere die Kontaktliste
     await updateContactlist();
 
     closeAddContact();
@@ -286,42 +260,42 @@ async function addContact(button) {
   }
 }
 
+
 async function updateContactlist() {
-  contactList = []; // Leere die vorhandene Liste
-  await createContactlist(); // Lade die Kontakte erneut
-  renderPhoneList(); // Render die aktualisierte Liste
+  contactList = []; 
+  await createContactlist(); 
+  renderPhoneList(); 
 }
 
-// Hilfsfunktion, um die Initialen zu extrahieren
+
 function getInitials(fullName) {
-  const nameParts = fullName.split(' '); // Teilt den Namen in Vor- und Nachname
-  const firstInitial = nameParts[0]?.charAt(0).toUpperCase(); // Erste Initiale
-  const lastInitial = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : ''; // Zweite Initiale, falls vorhanden
-  return `${firstInitial}${lastInitial}`; // Kombiniere Initialen
+  const nameParts = fullName.split(' '); 
+  const firstInitial = nameParts[0]?.charAt(0).toUpperCase(); 
+  const lastInitial = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : ''; 
+  return `${firstInitial}${lastInitial}`; 
 }
+
 
 async function addNewContact(name, mail, number) {
-  // Berechne die Initialen basierend auf dem Namen
   const initials = getInitials(name);
-
-  // Generiere eine zufällige Hintergrundfarbe
   const color = getRandomColor();
 
-  // Speichere die Daten, einschließlich der Initialen und der Farbe, in der Datenbank
   await postData('/contacts', {
     name: name,
     mail: mail,
     number: number,
-    initials: initials, // Initialen hinzufügen
-    color: color, // Hintergrundfarbe hinzufügen
+    initials: initials, 
+    color: color, 
   });
 }
+
 
 function openAddContact() {
   document.getElementById('background-pop-up').classList.remove('d-none');
   document.getElementById('pop-up-add-contact').classList.remove('d-none', 'slide-out');
   document.querySelector('body').classList.add('overflow-hidden');
 }
+
 
 function closeAddContact() {
   let popupAddContact = document.getElementById('pop-up-add-contact');
@@ -350,6 +324,7 @@ function openEditContact(groupedcontact, index) {
   renderEditContact(groupedcontact, index);
 }
 
+
 function closeEditContact() {
   let popupEditContact = document.getElementById('pop-up-edit-contact');
   popupEditContact.classList.add('slide-out');
@@ -364,7 +339,7 @@ function closeEditContact() {
   );
 }
 
-// Funktion zur Generierung einer zufälligen Hex-Farbe
+
 function getRandomColor() {
   let letters = '0123456789ABCDEF';
   let color = '#';
@@ -373,6 +348,7 @@ function getRandomColor() {
   }
   return color;
 }
+
 
 function renderEditContact(groupedcontact, index) {
   const contact = groupedContacts[groupedcontact][index];
@@ -389,17 +365,12 @@ function renderEditContact(groupedcontact, index) {
   document.getElementById('edit-save').value = contact.id;
 }
 
+
 async function deleteContact(id) {
   try {
-    // Kontakt aus der Datenbank löschen
     await deleteData('/contacts/' + id);
-
-    // Kontakt aus allen Todos entfernen
     await deleteContactRemote(id);
-
-    // Aktualisiere die Kontaktliste
     await updateContactlist();
-
 
     document.getElementById('contact-info').innerHTML = '';
     closeContactInfoWindow();
@@ -410,7 +381,6 @@ async function deleteContact(id) {
 
 
 async function editContact(id) {
-
   const { name, mail, number } = getUpdatedContactData();
   const existingData = await loadData('/contacts/' + id);
 
@@ -432,6 +402,7 @@ function getUpdatedContactData() {
   };
 }
 
+
 function validateInitials(existingData) {
   if (!existingData.initials || existingData.initials.length < 1) {
     console.error('Fehler: Initialen des bestehenden Kontakts sind nicht definiert.');
@@ -439,6 +410,7 @@ function validateInitials(existingData) {
   }
   return true;
 }
+
 
 function createUpdatedContact(existingData, name, mail, number) {
   const [firstName, lastName] = name.split(' ');
@@ -467,13 +439,13 @@ function toggleEditDelete() {
     return;
   }
 
-  // Toggle Sichtbarkeit
   if (movedButtonsContainer.style.display === 'none' || movedButtonsContainer.style.display === '') {
-    movedButtonsContainer.style.display = 'flex'; // Buttons anzeigen
+    movedButtonsContainer.style.display = 'flex'; 
   } else {
-    movedButtonsContainer.style.display = 'none'; // Buttons ausblenden
+    movedButtonsContainer.style.display = 'none'; 
   }
 }
+
 
 function moveButtons() {
   const contactInfoWindow = document.getElementById('contact-info-window');
@@ -486,7 +458,7 @@ function moveButtons() {
   if (!movedButtonsContainer) {
     movedButtonsContainer = document.createElement('div');
     movedButtonsContainer.id = 'movedButtons';
-    movedButtonsContainer.style.display = 'none'; // Standardmäßig versteckt
+    movedButtonsContainer.style.display = 'none'; 
     contactInfoWindow.appendChild(movedButtonsContainer);
   }
 
@@ -496,17 +468,18 @@ function moveButtons() {
     return;
   }
 
-  // Verschieben
+ 
   while (editDeleteButtons.firstChild) {
     movedButtonsContainer.appendChild(editDeleteButtons.firstChild);
   }
 
-  // Ursprüngliches Element ausblenden
+ 
   editDeleteButtons.style.display = 'none';
 }
 
+
 async function deleteContactRemote(id) {
-  const updates = {}; // Sammle alle Änderungen in einem Objekt
+  const updates = {}; 
 
   currentTodos.forEach((todo, index) => {
     const assignedTo = todo.assignedTo || [];
@@ -526,6 +499,7 @@ async function deleteContactRemote(id) {
   }
 }
 
+
 function removeDuplicatesFromGroupedContacts() {
   Object.keys(groupedContacts).forEach(groupKey => {
     groupedContacts[groupKey] = groupedContacts[groupKey].filter((contact, index, self) => {
@@ -537,6 +511,7 @@ function removeDuplicatesFromGroupedContacts() {
     });
   });
 }
+
 
 function updateLocalContactList(id, updatedData) {
   Object.keys(groupedContacts).forEach(groupKey => {
@@ -556,6 +531,7 @@ function updateLocalContactList(id, updatedData) {
   sortGroupedContacts();
 }
 
+
 async function updateGroupedContacts(existingData, updatedData, id) {
   const oldInitial = existingData.initials[0];
   const newInitial = updatedData.initials[0];
@@ -574,6 +550,7 @@ async function updateGroupedContacts(existingData, updatedData, id) {
   removeDuplicatesFromGroupedContacts();
 }
 
+
 function updateContactInSameGroup(existingData, updatedData, id, groupInitial) {
   const group = groupedContacts[groupInitial];
   if (group) {
@@ -586,6 +563,7 @@ function updateContactInSameGroup(existingData, updatedData, id, groupInitial) {
     }
   }
 }
+
 
 function finalizeEdit(id, updatedData) {
   updateLocalContactList(id, updatedData);
@@ -615,6 +593,7 @@ function finalizeEdit(id, updatedData) {
   getContactInfo(currentGroupInitial, currentContactIndex);
 }
 
+
 function sortGroupedContacts() {
   Object.keys(groupedContacts).forEach(groupKey => {
     groupedContacts[groupKey].sort((a, b) => {
@@ -624,6 +603,7 @@ function sortGroupedContacts() {
     });
   });
 }
+
 
 function getContactInfo(groupInitial, contactIndex) {
   const group = groupedContacts[groupInitial];
