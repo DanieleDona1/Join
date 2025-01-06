@@ -120,7 +120,6 @@ function formatDate(input) {
       let c = contactList[i],
 
       inits = getInitials(c);
-      console.log('contactList', c);
       items.innerHTML += getOptionTemplate(c, inits);
     }
   }
