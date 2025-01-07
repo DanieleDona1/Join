@@ -1,0 +1,389 @@
+@media screen and (min-width: 1430px) {
+  .main-contact {
+    max-width: calc(1920px - 232px);
+  }
+}
+
+@media (max-width: 1430px) {
+  .contact-text {
+    flex-direction: column;
+    max-width: 300px;
+    height: auto;
+    align-items: flex-start;
+    gap: 16px;
+    top: 50px;
+  }
+
+  .contact-vector {
+    width: 100px;
+    height: 3px;
+    order: 4;
+  }
+
+  .info-initial {
+    width: 90px;
+    height: 90px;
+    font-size: 40px;
+  }
+
+  .info-name {
+    font-size: 40px;
+  }
+
+  .info-initial-name {
+    gap: 30px;
+  }
+
+  .info-text {
+    height: 50px;
+  }
+
+  .contact-info {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 1224px) {
+  #contact-text-large {
+    position: absolute;
+    left: 500px;
+  }
+
+  .contact-info {
+    left: 500px;
+  }
+
+  .contact-list-field {
+    height: calc(100vh - 175px);
+  }
+
+  .pop-up-add-contact {
+    height: 100vh;
+    width: 100%;
+  }
+
+  .contact-side-info {
+    width: 100%;
+    height: 45vh;
+    border-radius: 30px 30px 0 0;
+  }
+
+  .form-add-contact {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    width: 100%;
+  }
+
+  .contact-field {
+    position: static;
+  }
+
+  .contact-logo {
+    display: none;
+  }
+
+  .contact-pic {
+    top: calc(45vh - 60px);
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  .edit-contact-pic {
+    top: calc(45vh - 60px);
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  .input-button {
+    position: static;
+  }
+
+  .close-popup {
+    display: flex;
+    position: fixed;
+    top: 50px;
+    left: 90%;
+    background-color: #2a3647;
+  }
+
+  .close-popup img {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(2%)
+      hue-rotate(61deg) brightness(110%) contrast(101%);
+  }
+}
+
+@media screen and (min-width: 850px) {
+  #contact-info-window {
+    display: none;
+  }
+
+  #toggleButtons {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  #contact-text-large {
+    display: none;
+  }
+
+  .contact-info {
+    display: none;
+  }
+
+  .main-contact-side {
+    width: 100%;
+  }
+
+  .contact-list-field-button span {
+    display: none;
+  }
+
+  .contact-list-field-button {
+    position: fixed;
+    bottom: 128px;
+    right: 50px;
+    width: 56px;
+    height: 56px;
+    border-radius: 46px;
+    z-index: 100;
+  }
+
+  .contact-list-field {
+    width: 100%;
+    padding: 0px 24px;
+    display: flex;
+    align-items: center;
+  }
+
+  .back-info-wrapper {
+    position: absolute;
+    top: 32px;
+    right: 50px;
+    background-color: transparent;
+    border: 0;
+    display: flex;
+  }
+
+  .back-info-wrapper img {
+    width: 32px;
+    height: 32px;
+  }
+
+  #contact-text-small {
+    top: 32px;
+    left: 80px;
+    width: 213px;
+  }
+
+  .contact-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 184px;
+    left: 80px;
+    gap: 16px;
+  }
+
+  .info-initial-name {
+    display: flex;
+    min-width: 330px;
+    min-height: 80px;
+    gap: 20px;
+  }
+
+  .info-initial {
+    min-width: 80px;
+    max-width: 80px;
+    height: 80px;
+  }
+
+  .info-name-button {
+    display: flex;
+    align-items: center;
+  }
+
+  .info-name {
+    font-size: 36px;
+    height: auto;
+  }
+
+  .info-buttons {
+    display: none;
+  }
+
+  .info-delete,
+  .info-edit {
+    width: 96px;
+    height: 40px;
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .info-text {
+    height: 24px;
+    font-size: 20px;
+  }
+
+  .contact-text .span-1 {
+    font-size: 47px;
+  }
+
+  .contact-text .span-2 {
+    font-size: 20px;
+  }
+
+  .cancel {
+    display: none;
+  }
+
+  #toggleButtons {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .close-popup {
+    left: 85%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #contact-text-small {
+    top: 32px;
+    left: 16px;
+    width: 213px;
+  }
+
+  .contact-info-wrapper {
+    left: 16px;
+  }
+
+  .info-initial-name {
+    min-width: 330px;
+    gap: 20px;
+  }
+
+  .info-initial {
+    width: 80px;
+    height: 80px;
+  }
+
+  .info-name-button {
+    display: flex;
+    align-items: center;
+  }
+
+  .info-text {
+    height: 24px;
+    font-size: 20px;
+  }
+
+  .contact-text .span-1 {
+    font-size: 47px;
+  }
+
+  .contact-text .span-2 {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1225px) {
+  .pop-up-add-contact {
+    position: relative;
+    height: 54%;
+    width: 89%;
+  }
+
+  .contact-side-info {
+    flex-direction: column;
+    align-items: unset;
+    padding: 0 40px;
+    height: 100%;
+    width: 38%;
+  }
+
+  .contact-logo {
+    position: unset;
+    margin-bottom: 16px;
+  }
+
+  .add-contact {
+    padding: 0;
+  }
+
+  .contact-pic,
+  .edit-contact-pic {
+    position: unset;
+    width: 175px;
+    height: 175px;
+  }
+
+  .contact-side-popup-middle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24%;
+  }
+
+  .contact-side-popup-right {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    padding-right: 40px;
+    width: 38%;
+    overflow-y: auto;
+  }
+
+  .form-add-contact {
+    width: 100%;
+  }
+
+  .close-popup {
+    position: sticky;
+    z-index: 600;
+    top: 7%;
+    left: 0;
+  }
+
+  .contact-field {
+    position: relative;
+    top: 35%;
+    left: 0;
+    padding: 0;
+    max-width: unset;
+  }
+
+  .input-button {
+    position: relative;
+    top: 55%;
+    left: 0;
+  }
+
+  .cancel {
+    padding: 0;
+  }
+  .cancel:hover {
+    color: rgb(41, 171, 226);
+    border: 2px solid rgb(41, 171, 226);
+  }
+
+  .create {
+    padding: 0;
+  }
+
+  .create:hover {
+    background-color: rgb(41, 171, 226);
+    border: 2px solid rgb(41, 171, 226);
+  }
+
+  .edit-contact-pic {
+    border-radius: 90px;
+  }
+}

@@ -1,0 +1,159 @@
+.main-contact-side {
+    width: 456px;
+    height: 100%;
+    background-color: white;
+    box-shadow: 3px 0px 6px 0px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+  
+  
+  }
+  
+  .contact-list-field {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 32px 24px;
+    overflow-y: auto;
+  }
+  
+  .contact-list-field-button {
+    width: 352px;
+    height: 56px;
+    border: 1px;
+    border-radius: 10px;
+    padding: 12px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    font-size: 21px;
+    font-weight: 700;
+    color: white;
+    background-color: #2a3647;
+  }
+  
+  .contact-list-field-button:hover {
+    background-color: rgb(41, 171, 226);
+  }
+  
+  .contact-group h2 {
+    width: 352px;
+    height: 58px;
+    padding: 17px 36px;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0;
+  }
+  
+  .contactlist-vector {
+    width: 352px;
+    height: 1px;
+    background-color: #d1d1d1;
+  }
+  
+  .contact-profil {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .contact-item {
+    width: 352px;
+    min-height: 78px;
+    padding: 15px 24px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 35px;
+    cursor: pointer;
+  }
+  
+  .contact-item:hover {
+    background-color: rgb(245,245,245);
+    border-radius: 10px;
+  }
+  
+  .contact-item:focus {
+    background-color: #2a3647;
+    color: white;
+    border-radius: 10px;
+  }
+  
+  .contact-initials {
+    width: 42px;
+    height: 42px;
+    border-radius: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    box-sizing: border-box;
+    border: 2px solid white;
+    font-size: 12px;
+    font-weight: 400;
+  }
+  
+  .contact-name-mail {
+    width: 200px;
+    min-height: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .contactlist-name {
+    font-size: 20px;
+    font-weight: 400;
+  }
+  
+  .contactlist-mail {
+    font-size: 20px;
+    font-weight: 400;
+    color: rgb(38, 107, 255);
+  }
+  
+  .contact-text {
+    position: absolute;
+    top: 110px;
+    left: 511px;
+    width: 569px;
+    height: 73px;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .contact-text .span-1 {
+    font-size: 61px;
+    font-weight: 700;
+    order: 1;
+  }
+  
+  .contact-vector {
+    height: 59px;
+    width: 3px;
+    background-color: #29abe2;
+    order: 2;
+  }
+  
+  .contact-edit-vector {
+    height: 3px;
+    width: 80px;
+    background-color: #29abe2;
+    /* order: 2; */
+  }
+  
+  .contact-text .span-2 {
+    max-width: 235px;
+    height: 32px;
+    font-size: 27px;
+    font-weight: 400;
+    color: #2a3647;
+    order: 3;
+  }

@@ -1,0 +1,93 @@
+.edit-contact-pic {
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  top: 204px;
+  left: 550px;
+  border-radius: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  box-sizing: border-box;
+  border: 2px solid white;
+  font-size: 47px;
+  font-weight: 500;
+}
+
+.edit-delete {
+  width: 113px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid black;
+  padding: 15px 24px;
+  font-size: 21px;
+  font-weight: 400;
+}
+
+.edit-delete:hover {
+  color: rgba(41, 171, 226, 1);
+  border: 1px solid rgba(41, 171, 226, 1);
+}
+
+.edit-save {
+  border: unset;
+  width: 111px;
+  height: 57px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 16px;
+  gap: 4px;
+  font-size: 21px;
+  font-weight: 700;
+  background: #2a3647;
+  color: white;
+}
+
+.edit-save:hover {
+  background: rgba(41, 171, 226, 1);
+}
+
+.contact-field #edit-name {
+  background-image: url(../assets/icons/contact/person.png);
+  background-repeat: no-repeat;
+  background-position: 95%;
+  background-size: 24px;
+}
+
+.contact-field #edit-email {
+  background-image: url(../assets/icons/contact/mail.png);
+  background-repeat: no-repeat;
+  background-position: 95%;
+  background-size: 24px;
+}
+
+.contact-field #edit-phonenumber {
+  background-image: url(../assets/icons/contact/call.png);
+  background-repeat: no-repeat;
+  background-position: 95%;
+  background-size: 24px;
+}
+
+#toggleButtons {
+  background-color: #2a3647;
+  width: 56px;
+  height: 56px;
+  position: absolute;
+  bottom: 128px;
+  right: 50px;
+  border-radius: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#toggleButtons:hover {
+  background-color: #29abe2;
+}

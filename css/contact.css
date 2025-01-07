@@ -820,8 +820,6 @@ button {
 }
 
 @media screen and (max-width: 850px) {
-
-
   #contact-text-large {
     display: none;
   }
@@ -829,12 +827,6 @@ button {
   .contact-info {
     display: none;
   }
-
-  /* .contact-list {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
-  } */
 
   .main-contact-side {
     width: 100%;
@@ -945,7 +937,6 @@ button {
   #toggleButtons {
     display: flex;
   }
-
 }
 
 @media screen and (max-width: 700px) {
