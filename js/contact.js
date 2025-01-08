@@ -2,7 +2,7 @@
  * HTML content wrapper for the contact section.
  * @type {string}
  */
-let contactWrapperHTML = "";
+let contactWrapperHTML = '';
 
 /**
  * Current contact information element.
@@ -49,7 +49,7 @@ function renderPhoneList() {
  * @async
  */
 async function createContactlist() {
-  let data = await loadData("contacts");
+  let data = await loadData('contacts');
   if (!data || Object.keys(data).length === 0) {
     contactList = [];
   } else {
@@ -69,7 +69,7 @@ async function createContactlist() {
  * @param {Object} groupedContacts - Contacts grouped by initials.
  */
 function displayGroupedContacts(groupedContacts) {
-  const content = document.getElementById("content-contactlist");
+  const content = document.getElementById('content-contactlist');
   content.innerHTML = '<div class="contacts-wrapper">';
   const sortedInitials = Object.keys(groupedContacts).sort();
   for (let i = 0; i < sortedInitials.length; i++) {
@@ -81,7 +81,7 @@ function displayGroupedContacts(groupedContacts) {
     }
     content.innerHTML += groupHTML + `</div>`;
   }
-  content.innerHTML += "</div>";
+  content.innerHTML += '</div>';
 }
 
 /**
@@ -92,7 +92,7 @@ function displayGroupedContacts(groupedContacts) {
 function renderContactInfo(contactHTML, contactWrapperHTML) {
   const { popup, contactInfo, contactListField } = getContactInfoElements();
   if (!popup || !contactInfo || !contactListField) {
-    console.error("Error: Essential DOM elements are missing!");
+    console.error('Error: Essential DOM elements are missing!');
     return;
   }
   if (window.innerWidth <= 850) {
@@ -109,9 +109,9 @@ function renderContactInfo(contactHTML, contactWrapperHTML) {
  */
 function getContactInfoElements() {
   return {
-    popup: document.getElementById("contact-info-window"),
-    contactInfo: document.getElementById("contact-info"),
-    contactListField: document.getElementById("contact-list-field"),
+    popup: document.getElementById('contact-info-window'),
+    contactInfo: document.getElementById('contact-info'),
+    contactListField: document.getElementById('contact-list-field'),
   };
 }
 
@@ -124,9 +124,9 @@ function getContactInfoElements() {
  */
 function renderForSmallScreens(popup, contactWrapperHTML, contactListField, contactInfo) {
   popup.innerHTML = contactWrapperHTML;
-  popup.classList.remove("d-none");
-  contactListField.classList.add("d-none");
-  contactInfo.innerHTML = "";
+  popup.classList.remove('d-none');
+  contactListField.classList.add('d-none');
+  contactInfo.innerHTML = '';
   moveButtons();
 }
 
@@ -139,8 +139,8 @@ function renderForSmallScreens(popup, contactWrapperHTML, contactListField, cont
  */
 function renderForLargeScreens(contactInfo, contactHTML, popup, contactListField) {
   contactInfo.innerHTML = contactHTML;
-  popup.classList.add("d-none");
-  contactListField.classList.remove("d-none");
+  popup.classList.add('d-none');
+  contactListField.classList.remove('d-none');
 }
 
 /**
@@ -149,9 +149,9 @@ function renderForLargeScreens(contactInfo, contactHTML, popup, contactListField
  */
 function getContactFormData() {
   return {
-    name: document.getElementById("name").value,
-    mail: document.getElementById("email").value,
-    phone: document.getElementById("phonenumber").value,
+    name: document.getElementById('name').value,
+    mail: document.getElementById('email').value,
+    phone: document.getElementById('phonenumber').value,
   };
 }
 
@@ -159,9 +159,9 @@ function getContactFormData() {
  * Resets the contact form inputs to their default values.
  */
 function resetContactForm() {
-  document.getElementById("name").value = "";
-  document.getElementById("email").value = "";
-  document.getElementById("phonenumber").value = "";
+  document.getElementById('name').value = '';
+  document.getElementById('email').value = '';
+  document.getElementById('phonenumber').value = '';
 }
 
 /**
@@ -183,15 +183,15 @@ function renderEditContact(groupedcontact, index) {
   const contact = groupedContacts[groupedcontact][index];
   const contactColor = contact.color;
 
-  document.getElementById("edit-contact-picture").innerHTML = /*html*/ `
+  document.getElementById('edit-contact-picture').innerHTML = /*html*/ `
     <div class="edit-contact-pic"  style="background-color: ${contactColor};">${contact.user.initials}</div>
   `;
 
-  document.getElementById("edit-name").value = contact.user.name;
-  document.getElementById("edit-email").value = contact.user.mail;
-  document.getElementById("edit-phonenumber").value = contact.user.number;
-  document.getElementById("edit-delete").value = contact.id;
-  document.getElementById("edit-save").value = contact.id;
+  document.getElementById('edit-name').value = contact.user.name;
+  document.getElementById('edit-email').value = contact.user.mail;
+  document.getElementById('edit-phonenumber').value = contact.user.number;
+  document.getElementById('edit-delete').value = contact.id;
+  document.getElementById('edit-save').value = contact.id;
 }
 
 /**
@@ -203,7 +203,7 @@ function renderEditContact(groupedcontact, index) {
  * @returns {Object} Updated contact object.
  */
 function createUpdatedContact(existingData, name, mail, number) {
-  const [firstName, lastName] = name.split(" ");
+  const [firstName, lastName] = name.split(' ');
   const initials = (firstName[0] + lastName[0]).toUpperCase();
   return {
     ...existingData,
@@ -219,7 +219,7 @@ function createUpdatedContact(existingData, name, mail, number) {
  * @returns {HTMLElement | null} The contact info window element or null if not found.
  */
 function getContactInfoWindow() {
-  const contactInfoWindow = document.getElementById("contact-info-window");
+  const contactInfoWindow = document.getElementById('contact-info-window');
   if (!contactInfoWindow) {
     console.warn("moveButtons: 'contact-info-window' does not exist.");
   }
@@ -240,7 +240,6 @@ function getTodoUpdatesForDeletedContact(id) {
       updates[`todos/${todoKeysArray[index]}/assignedTo`] = updatedAssignedTo;
     }
   });
-
   return updates;
 }
 
@@ -251,9 +250,9 @@ function getTodoUpdatesForDeletedContact(id) {
  */
 async function applyTodoUpdates(updates) {
   try {
-    await patchData("", updates);
+    await patchData('', updates);
   } catch (error) {
-    console.error("Error updating todos:", error);
+    console.error('Error updating todos:', error);
   }
 }
 
@@ -297,7 +296,7 @@ async function updateGroupedContacts(existingData, updatedData, id) {
  */
 function moveContactToNewGroup(oldInitial, newInitial, updatedData, id) {
   if (groupedContacts[oldInitial]) {
-    groupedContacts[oldInitial] = groupedContacts[oldInitial].filter(contact => contact.id !== id);
+    groupedContacts[oldInitial] = groupedContacts[oldInitial].filter((contact) => contact.id !== id);
   }
 
   if (!groupedContacts[newInitial]) {
@@ -316,7 +315,7 @@ function moveContactToNewGroup(oldInitial, newInitial, updatedData, id) {
 function updateContactInSameGroup(existingData, updatedData, id, groupInitial) {
   const group = groupedContacts[groupInitial];
   if (group) {
-    const contactIndex = group.findIndex(contact => contact.id === id);
+    const contactIndex = group.findIndex((contact) => contact.id === id);
     if (contactIndex !== -1) {
       group[contactIndex] = {
         ...group[contactIndex],
@@ -337,7 +336,7 @@ function findContactInUpdatedGroup(id, updatedData) {
   const newGroup = groupedContacts[newInitial];
   if (!newGroup || newGroup.length === 0) return { newInitial, newIndex: -1 };
 
-  const newIndex = newGroup.findIndex(contact => contact.id === id);
+  const newIndex = newGroup.findIndex((contact) => contact.id === id);
   return { newInitial, newIndex };
 }
 

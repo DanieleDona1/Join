@@ -14,7 +14,7 @@ function sortContacts(contacts) {
  */
 function groupContactsByInitial(contacts) {
   const grouped = {};
-  contacts.forEach(contact => {
+  contacts.forEach((contact) => {
     const initial = contact.user.name.charAt(0).toUpperCase();
     if (!grouped[initial]) {
       grouped[initial] = [];
@@ -32,8 +32,8 @@ function groupContactsByInitial(contacts) {
  * @returns {string} HTML content for the contact item.
  */
 function generateFullContentHTML(initial, contact, index) {
-  const initials = contact?.user?.initials || "??";
-  const contactColor = contact?.color || "#CCCCCC";
+  const initials = contact?.user?.initials || '??';
+  const contactColor = contact?.color || '#CCCCCC';
 
   return getContactHTMLTemplate(initial, initials, contact, index, contactColor);
 }
@@ -53,7 +53,7 @@ function generateContactHtml(groupInitial, contactIndex, contact, contactColor) 
   const number = contact.user?.number || contact.number;
 
   if (!initials || !name || !mail || !number) {
-    console.error("Error: Missing contact information.", contact);
+    console.error('Error: Missing contact information.', contact);
     return '<div class="error">Contact information missing</div>';
   }
 
@@ -64,12 +64,12 @@ function generateContactHtml(groupInitial, contactIndex, contact, contactColor) 
  * Attaches or re-attaches event listeners to the toggle buttons.
  */
 function generateEventListenerToggleButtons() {
-  const toggleButton = document.getElementById("toggleButtons");
+  const toggleButton = document.getElementById('toggleButtons');
   if (toggleButton) {
-    toggleButton.removeEventListener("click", toggleEditDelete);
-    toggleButton.addEventListener("click", toggleEditDelete);
+    toggleButton.removeEventListener('click', toggleEditDelete);
+    toggleButton.addEventListener('click', toggleEditDelete);
   } else {
-    console.warn("toggleButton does not exist.");
+    // console.warn('toggleButton does not exist.');
   }
 }
 
@@ -98,7 +98,7 @@ function transformContact(contact) {
  * @returns {boolean} True if the form is valid, false otherwise.
  */
 function validateForm() {
-  const form = document.querySelector("form");
+  const form = document.querySelector('form');
   if (!form.checkValidity()) {
     form.reportValidity();
     return false;
@@ -110,7 +110,7 @@ function validateForm() {
  * Displays a success message after adding a contact.
  */
 function showSuccessMessage() {
-  document.getElementById("success-message").classList.remove("d-none");
+  document.getElementById('success-message').classList.remove('d-none');
 }
 
 /**
@@ -118,7 +118,7 @@ function showSuccessMessage() {
  */
 function hideSuccessMessageAfterDelay() {
   setTimeout(() => {
-    document.getElementById("success-message").classList.add("d-none");
+    document.getElementById('success-message').classList.add('d-none');
   }, 3000);
 }
 
@@ -128,9 +128,9 @@ function hideSuccessMessageAfterDelay() {
  * @returns {string} Initials derived from the full name.
  */
 function getInitials(fullName) {
-  const nameParts = fullName.split(" ");
+  const nameParts = fullName.split(' ');
   const firstInitial = nameParts[0]?.charAt(0).toUpperCase();
-  const lastInitial = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : "";
+  const lastInitial = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : '';
   return `${firstInitial}${lastInitial}`;
 }
 
@@ -139,8 +139,8 @@ function getInitials(fullName) {
  * @returns {string} A random hex color code.
  */
 function getRandomColor() {
-  let letters = "0123456789ABCDEF";
-  let color = "#";
+  let letters = '0123456789ABCDEF';
+  let color = '#';
   for (let i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)];
   }
@@ -153,9 +153,9 @@ function getRandomColor() {
  */
 function getUpdatedContactData() {
   return {
-    name: document.getElementById("edit-name").value,
-    mail: document.getElementById("edit-email").value,
-    number: document.getElementById("edit-phonenumber").value,
+    name: document.getElementById('edit-name').value,
+    mail: document.getElementById('edit-email').value,
+    number: document.getElementById('edit-phonenumber').value,
   };
 }
 
@@ -163,16 +163,16 @@ function getUpdatedContactData() {
  * Toggles the visibility of the edit/delete buttons in the contact info popup.
  */
 function toggleEditDelete() {
-  const movedButtonsContainer = document.getElementById("movedButtons");
+  const movedButtonsContainer = document.getElementById('movedButtons');
   if (!movedButtonsContainer) {
     console.warn("toggleEditDelete: 'movedButtons' does not exist.");
     return;
   }
 
-  if (movedButtonsContainer.style.display === "none" || movedButtonsContainer.style.display === "") {
-    movedButtonsContainer.style.display = "flex";
+  if (movedButtonsContainer.style.display === 'none' || movedButtonsContainer.style.display === '') {
+    movedButtonsContainer.style.display = 'flex';
   } else {
-    movedButtonsContainer.style.display = "none";
+    movedButtonsContainer.style.display = 'none';
   }
 }
 
@@ -197,11 +197,11 @@ function moveButtons() {
  * @returns {HTMLElement} The container for moved buttons.
  */
 function getOrCreateMovedButtonsContainer(contactInfoWindow) {
-  let movedButtonsContainer = document.getElementById("movedButtons");
+  let movedButtonsContainer = document.getElementById('movedButtons');
   if (!movedButtonsContainer) {
-    movedButtonsContainer = document.createElement("div");
-    movedButtonsContainer.id = "movedButtons";
-    movedButtonsContainer.style.display = "none";
+    movedButtonsContainer = document.createElement('div');
+    movedButtonsContainer.id = 'movedButtons';
+    movedButtonsContainer.style.display = 'none';
     contactInfoWindow.appendChild(movedButtonsContainer);
   }
   return movedButtonsContainer;
@@ -212,7 +212,7 @@ function getOrCreateMovedButtonsContainer(contactInfoWindow) {
  * @returns {HTMLElement | null} The edit/delete buttons element or null if not found.
  */
 function getEditDeleteButtons() {
-  const editDeleteButtons = document.getElementById("editDeleteButtons");
+  const editDeleteButtons = document.getElementById('editDeleteButtons');
   if (!editDeleteButtons) {
     console.warn("moveButtons: 'editDeleteButtons' does not exist.");
   }
@@ -235,7 +235,7 @@ function moveEditDeleteButtons(editDeleteButtons, movedButtonsContainer) {
  * @param {HTMLElement} editDeleteButtons - The edit/delete buttons element.
  */
 function hideEditDeleteButtons(editDeleteButtons) {
-  editDeleteButtons.style.display = "none";
+  editDeleteButtons.style.display = 'none';
 }
 
 /**
@@ -246,17 +246,17 @@ function hideEditDeleteButtons(editDeleteButtons) {
  */
 function filterAssignedContacts(assignedTo, id) {
   if (!assignedTo || !assignedTo.includes(id)) return null;
-  return assignedTo.filter(contactId => contactId !== id);
+  return assignedTo.filter((contactId) => contactId !== id);
 }
 
 /**
  * Removes duplicate contacts from each group in the grouped contacts.
  */
 function removeDuplicatesFromGroupedContacts() {
-  Object.keys(groupedContacts).forEach(groupKey => {
+  Object.keys(groupedContacts).forEach((groupKey) => {
     groupedContacts[groupKey] = groupedContacts[groupKey].filter((contact, index, self) => {
       const isValid = contact.id !== undefined && contact.id !== null;
-      return isValid && index === self.findIndex(c => c.id === contact.id);
+      return isValid && index === self.findIndex((c) => c.id === contact.id);
     });
   });
 }
@@ -269,7 +269,7 @@ function removeContactFromGroups(id) {
   const groupKeys = Object.keys(groupedContacts);
   for (let i = 0; i < groupKeys.length; i++) {
     const groupKey = groupKeys[i];
-    groupedContacts[groupKey] = groupedContacts[groupKey].filter(contact => contact.id !== id);
+    groupedContacts[groupKey] = groupedContacts[groupKey].filter((contact) => contact.id !== id);
   }
 }
 
@@ -292,10 +292,10 @@ function cleanGroupedContacts() {
  * Sorts all groups in the grouped contacts by contact names.
  */
 function sortGroupedContacts() {
-  Object.keys(groupedContacts).forEach(groupKey => {
+  Object.keys(groupedContacts).forEach((groupKey) => {
     groupedContacts[groupKey].sort((a, b) => {
-      const nameA = a.user?.name || a.name || "";
-      const nameB = b.user?.name || b.name || "";
+      const nameA = a.user?.name || a.name || '';
+      const nameB = b.user?.name || b.name || '';
       return nameA.localeCompare(nameB);
     });
   });
@@ -307,7 +307,7 @@ function sortGroupedContacts() {
  * @returns {string} The color of the contact or a default color.
  */
 function getContactColor(contact) {
-  return contact.color || "#CCCCCC";
+  return contact.color || '#CCCCCC';
 }
 
 /**
@@ -316,12 +316,12 @@ function getContactColor(contact) {
  * @returns {Array<Object>} Filtered group without duplicates.
  */
 function removeDuplicates(group) {
-  return group.filter((contact, index, self) => index === self.findIndex(c => c.id === contact.id));
+  return group.filter((contact, index, self) => index === self.findIndex((c) => c.id === contact.id));
 }
 
 /**
  * Clears the contact information displayed in the UI.
  */
 function clearContactInfo() {
-  document.getElementById("contact-info").innerHTML = "";
+  document.getElementById('contact-info').innerHTML = '';
 }

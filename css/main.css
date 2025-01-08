@@ -3,27 +3,27 @@ main {
     top: 96px;
     bottom: 80px;
     height: calc(100vh - 96px);
-    padding: 48px 16px 0;
+    padding: 48px 16px 0 16px;
     background-color: rgb(246, 247, 248);
     overflow: auto;
   }
-  
+
   main a {
     color: rgb(41, 171, 226);
     text-decoration: none;
   }
-  
+
   main ol {
     font-size: 27px;
     font-weight: bold;
     list-style-type: none;
   }
-  
+
   main ol li {
     position: relative;
     padding-left: 58px;
   }
-  
+
   main ol li::before {
     content: counter(list-item) '. ';
     position: absolute;
@@ -31,29 +31,29 @@ main {
     top: 0;
     font-size: 27px;
   }
-  
+
   main ul {
     padding-left: 20px;
     margin-bottom: 16px;
   }
-  
+
   main h1 {
     font-size: 47px;
     font-weight: 700;
     margin-bottom: 35px;
     padding-right: 60px;
   }
-  
+
   main h2 {
     margin-bottom: 25px;
     font-size: 27px;
     font-weight: 700;
   }
-  
+
   main h3 {
     font-size: 19px;
   }
-  
+
   main p {
     margin-bottom: 35px;
     font-size: 16px;

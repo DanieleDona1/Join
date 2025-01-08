@@ -2,32 +2,32 @@
  * Closes the contact info window and shows the contact list field.
  */
 function closeContactInfoWindow() {
-  document.getElementById("contact-list-field").classList.remove("d-none");
-  document.getElementById("contact-info-window").classList.add("d-none");
+  document.getElementById('contact-list-field').classList.remove('d-none');
+  document.getElementById('contact-info-window').classList.add('d-none');
 }
 
 /**
  * Opens the add contact popup by modifying the DOM elements.
  */
 function openAddContact() {
-  document.getElementById("background-pop-up").classList.remove("d-none");
-  document.getElementById("pop-up-add-contact").classList.remove("d-none", "slide-out");
-  document.querySelector("body").classList.add("overflow-hidden");
+  document.getElementById('background-pop-up').classList.remove('d-none');
+  document.getElementById('pop-up-add-contact').classList.remove('d-none', 'slide-out');
+  document.querySelector('body').classList.add('overflow-hidden');
 }
 
 /**
  * Closes the add contact popup and resets its state after the animation.
  */
 function closeAddContact() {
-  let popupAddContact = document.getElementById("pop-up-add-contact");
-  popupAddContact.classList.add("slide-out");
+  let popupAddContact = document.getElementById('pop-up-add-contact');
+  popupAddContact.classList.add('slide-out');
   popupAddContact.addEventListener(
-    "animationend",
+    'animationend',
     function () {
-      document.getElementById("background-pop-up").classList.add("d-none");
-      popupAddContact.classList.add("slide-out");
-      popupAddContact.classList.add("d-none");
-      document.querySelector("body").classList.remove("overflow-hidden");
+      document.getElementById('background-pop-up').classList.add('d-none');
+      popupAddContact.classList.add('slide-out');
+      popupAddContact.classList.add('d-none');
+      document.querySelector('body').classList.remove('overflow-hidden');
     },
     { once: true }
   );
@@ -42,9 +42,9 @@ function openEditContact(groupedcontact, index) {
   currentGroupInitial = groupedcontact;
   currentContactIndex = index;
 
-  document.getElementById("background-pop-up").classList.remove("d-none");
-  document.getElementById("pop-up-edit-contact").classList.remove("d-none", "slide-out");
-  document.querySelector("body").classList.add("overflow-hidden");
+  document.getElementById('background-pop-up').classList.remove('d-none');
+  document.getElementById('pop-up-edit-contact').classList.remove('d-none', 'slide-out');
+  document.querySelector('body').classList.add('overflow-hidden');
 
   renderEditContact(groupedcontact, index);
 }
@@ -53,14 +53,14 @@ function openEditContact(groupedcontact, index) {
  * Closes the edit contact popup and resets its state after the animation.
  */
 function closeEditContact() {
-  let popupEditContact = document.getElementById("pop-up-edit-contact");
-  popupEditContact.classList.add("slide-out");
+  let popupEditContact = document.getElementById('pop-up-edit-contact');
+  popupEditContact.classList.add('slide-out');
   popupEditContact.addEventListener(
-    "animationend",
+    'animationend',
     function () {
-      document.getElementById("pop-up-edit-contact").classList.add("d-none");
-      document.getElementById("background-pop-up").classList.add("d-none");
-      document.querySelector("body").classList.remove("overflow-hidden");
+      document.getElementById('pop-up-edit-contact').classList.add('d-none');
+      document.getElementById('background-pop-up').classList.add('d-none');
+      document.querySelector('body').classList.remove('overflow-hidden');
     },
     { once: true }
   );
@@ -78,7 +78,7 @@ async function addContact(button) {
   try {
     await handleAddContact(name, mail, phone);
   } catch (error) {
-    console.error("Error adding contact:", error);
+    console.error('Error adding contact:', error);
   } finally {
     button.disabled = false;
   }
@@ -111,7 +111,7 @@ async function addNewContact(name, mail, number) {
   const initials = getInitials(name);
   const color = getRandomColor();
 
-  await postData("/contacts", {
+  await postData('/contacts', {
     name: name,
     mail: mail,
     number: number,
@@ -127,14 +127,14 @@ async function addNewContact(name, mail, number) {
  */
 async function deleteContact(id) {
   try {
-    await deleteData("/contacts/" + id);
+    await deleteData('/contacts/' + id);
     await deleteContactRemote(id);
     await updateContactlist();
 
-    document.getElementById("contact-info").innerHTML = "";
+    document.getElementById('contact-info').innerHTML = '';
     closeContactInfoWindow();
   } catch (error) {
-    console.error("Error deleting contact:", error);
+    console.error('Error deleting contact:', error);
   }
 }
 
@@ -145,13 +145,13 @@ async function deleteContact(id) {
  */
 async function editContact(id) {
   const { name, mail, number } = getUpdatedContactData();
-  const existingData = await loadData("/contacts/" + id);
+  const existingData = await loadData('/contacts/' + id);
 
   if (!validateInitials(existingData)) return;
 
   const updatedData = createUpdatedContact(existingData, name, mail, number);
   await updateGroupedContacts(existingData, updatedData, id);
-  await putData("/contacts/" + id, updatedData);
+  await putData('/contacts/' + id, updatedData);
 
   finalizeEdit(id, updatedData);
 }
@@ -163,7 +163,7 @@ async function editContact(id) {
  */
 function validateInitials(existingData) {
   if (!existingData.initials || existingData.initials.length < 1) {
-    console.error("Error: Initials of the existing contact are not defined.");
+    console.error('Error: Initials of the existing contact are not defined.');
     return false;
   }
   return true;
