@@ -198,8 +198,6 @@ function getUserAddTaskData(swimlane) {
   return {
     title: document.getElementById('input-field-title')?.value || 'No title',
     dueDate: dueDate, //yy-mm-dd Format
-    title: document.getElementById('input-field-title')?.value || 'No title',
-    dueDate: dueDate, //yy-mm-dd Format
     category: swimlane,
     description: document.getElementById('input-field-description')?.value || 'No description provided.',
     task_category: currentTaskCategory, // User-Story Technical-Task wichtig großgeschrieben User-Story

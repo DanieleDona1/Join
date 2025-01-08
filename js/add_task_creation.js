@@ -10,6 +10,7 @@
  * @returns {Promise<void>} This function returns a promise that resolves when the task is added and the page is redirected.
  */
 async function createAddTask(cat) {
+  selectedContacts= [];
     if (checkRequiredFields()) {
       activeCheckboxesRemote();
       formateDueDate();
