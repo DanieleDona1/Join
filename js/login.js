@@ -9,6 +9,8 @@ async function onloadFunc() {
   await loadTodosArray();
   checkMsgUrl();
   await loadUsersArray();
+  resetInputBorderOnKeydown('loginForm');
+  initializeForm('loginForm', 'loginBtn');
 }
 
 /**
@@ -51,8 +53,9 @@ function login(event) {
     document.getElementById('errorMsg').style.opacity = '1';
     document.getElementById('email').style.border = '1px solid red';
     document.getElementById('password').style.border = '1px solid red';
+    document.getElementById('loginBtn').classList.add('disabled');
   }
-};
+}
 
 /**
  * Checks the URL for a 'msg' parameter and displays it with an animation.
@@ -67,7 +70,7 @@ function checkUser(email, password) {
     }
   }
   return null;
-};
+}
 
 /**
  * Saves a key-value pair to local storage.
@@ -92,15 +95,6 @@ function guestLoginRedirect(url) {
   redirectToPage(url);
 }
 
-/**
- * Hides the error message on the login form.
- *
- * @function removeErrorMsg
- * @returns {void}
- */
-function removeErrorMsg() {
-  document.getElementById('errorMsg').style.opacity = '0';
-}
 
 /**
  * Sets up event listeners for DOM content loaded events.
@@ -130,24 +124,67 @@ function showDialog() {
 }
 
 /**
- * Manages input border styles and error message visibility.
+ * Resets the border color of input fields to a default color when a key is pressed.
+ * The border color will be reset to 'rgb(209, 209, 209)' if it is currently red.
+ * This function is triggered on the 'keydown' event of input fields inside the specified form(s).
  *
- * @function
- * @returns {void}
+ * @param {string} formTagId - The CSS selector or ID of the form(s) whose input fields should be monitored.
  */
-document.addEventListener('DOMContentLoaded', () => {
-  const emailInput = document.getElementById('email');
-  const passwordInput = document.getElementById('password');
-  const errorMessage = document.getElementById('errorMsg');
-  const changeBorderToBlack = (inputElement) => {
-    emailInput.style.border = '1px solid rgba(0, 0, 0, 0.2)';
-    inputElement.style.border = '1px solid rgba(0, 0, 0, 0.2)';
-    errorMessage.innerHTML = '';
-  };
-  passwordInput.addEventListener('input', () => {
-    changeBorderToBlack(passwordInput);
+function resetInputBorderOnKeydown(formTagId) {
+  const forms = document.querySelectorAll(formTagId);
+  forms.forEach((form) => {
+    form.addEventListener('keydown', (event) => {
+      if (event.target && event.target.tagName.toLowerCase() === 'input') {
+        const input = event.target;
+
+        if (input.style.borderColor === 'red') {
+          input.style.borderColor = 'rgb(209, 209, 209';
+        }
+      }
+    });
   });
-});
+}
+
+/**
+ * Checks whether all input fields in the specified form are filled.
+ * If all fields are filled, it enables the submit button by removing the 'disabled' class.
+ * If any field is empty, it disables the submit button by adding the 'disabled' class.
+ *
+ * @param {string} formId - The ID of the form to check.
+ * @param {string} btnId - The ID of the submit button to enable/disable.
+ */
+function checkInputs(formId, btnId) {
+  const form = document.getElementById(formId);
+  const inputs = form.querySelectorAll('input');
+  let allFilled = true;
+  inputs.forEach((input) => {
+    if (input.value.trim() === '') allFilled = false;
+  });
+  const submitBtn = document.getElementById(btnId);
+  if (allFilled) {
+    submitBtn.classList.remove('disabled');
+  } else {
+    submitBtn.classList.add('disabled');
+  }
+}
+
+/**
+ * Initializes the form by adding event listeners to its input fields.
+ * It listens for the `keyup` event on each input and calls `checkInputs`
+ * to check whether the form fields are filled. Also performs an initial
+ * check when the form is initialized.
+ *
+ * @param {string} formId - The ID of the form element to initialize.
+ * @param {string} btnId - The ID of the submit button that should be enabled/disabled.
+ */
+function initializeForm(formId, btnId) {
+  const form = document.getElementById(formId);
+
+  form.querySelectorAll('input').forEach((input) => {
+    input.addEventListener('keyup', () => checkInputs(formId, btnId)); // Funktion bei Keyup aufrufen
+  });
+  checkInputs(formId, btnId);
+}
 
 /**
  * Manages the visibility of password icons based on input.

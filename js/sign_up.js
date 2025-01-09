@@ -70,29 +70,6 @@ function addUser(name, email, password) {
 }
 
 /**
- * Initializes password and checkbox input listeners on DOM content loaded.
- */
-document.addEventListener('DOMContentLoaded', () => {
-  const passwordInput = document.getElementById('password');
-  const confirmPasswordInput = document.getElementById('confirmPassword');
-  const checkbox = document.getElementById('formCheckbox');
-  initializePasswordListeners(passwordInput, confirmPasswordInput);
-  initializeCheckboxListener(checkbox);
-});
-
-/**
- * Sets up input listeners for password fields.
- * @param {HTMLInputElement} passwordInput - The password input element.
- * @param {HTMLInputElement} confirmPasswordInput - The confirm password input element.
- */
-function initializePasswordListeners(passwordInput, confirmPasswordInput) {
-  addInputListener(passwordInput, confirmPasswordInput);
-  if (confirmPasswordInput) {
-    addInputListener(confirmPasswordInput, passwordInput);
-  }
-}
-
-/**
  * Sets up a listener for the checkbox input.
  * @param {HTMLInputElement} checkbox - The checkbox element.
  */
@@ -106,26 +83,20 @@ function initializeCheckboxListener(checkbox) {
   }
 }
 
-/**
- * Adds an input listener to the specified input element.
- * @param {HTMLInputElement} input1 - The first input element.
- * @param {HTMLInputElement} input2 - The second input element.
- */
-function addInputListener(input1, input2) {
-  input1.addEventListener('input', () => changeBorderToBlack(input1, input2));
-}
 
-/**
- * Changes the border color of input elements to black and clears error messages.
- * @param {...HTMLInputElement} inputElements - The input elements to style.
- */
-function changeBorderToBlack(...inputElements) {
-  const errorMessage = document.getElementById('errorSignupMsg');
-  inputElements.forEach((inputElement) => {
-    inputElement.style.border = '1px solid rgba(0, 0, 0, 0.2)';
-  });
-  errorMessage.innerHTML = '';
-}
+// TODO
+// function addInputListener(input1, input2) {
+//   input1.addEventListener('input', () => changeBorderToBlack(input1, input2));
+// }
+
+// TODO
+// function changeBorderToBlack(...inputElements) {
+//   const errorMessage = document.getElementById('errorSignupMsg');
+//   inputElements.forEach((inputElement) => {
+//     inputElement.style.border = '1px solid rgba(0, 0, 0, 0.2)';
+//   });
+//   errorMessage.innerHTML = '';
+// }
 
 /**
  * Resets the styles of the checkbox, legal text, and legal link elements.

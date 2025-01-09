@@ -32,14 +32,14 @@
             <div class="underline-headline"></div>
           </div>
 
-          <form class="input-container" onsubmit="login(event); return false;">
+          <form id="loginForm" class="input-container" onsubmit="login(event); return false;">
             <div class="input-group">
-              <input type="email" id="email" placeholder="Email" minlength="3" maxlength="32" required />
+              <input type="email" id="email" placeholder="Email" minlength="3" maxlength="32" required/>
               <img src="assets/icons/auth/mail.svg" alt="mail" />
             </div>
 
             <div class="input-group">
-              <input onkeydown="removeErrorMsg();" type="password" id="password" placeholder="Password" minlength="3" maxlength="25" required />
+              <input type="password" id="password" placeholder="Password" minlength="3" maxlength="25" required/>
               <img id="passwordLock" src="assets/icons/auth/lock.svg" alt="lock" />
               <img id="visibilityImg" class="visibilty-btn d-none" onclick="togglePasswordVisibility('password', 'visibilityImg')" src="assets/icons/auth/visibility_off.svg" alt="visibility_off" />
               <div id="errorMsg" class="error-msg">Check your email and password. Please try again.</div>
@@ -51,11 +51,11 @@
             </label>
 
             <div class="entry-btn-container" id="btnentryContainer">
-              <button type="submit" class="entry-btn">Log in</button>
+              <button id="loginBtn" type="submit" class="entry-btn disabled">Log in</button>
                 <button onclick="guestLoginRedirect('./html/summary.html')"
                   type="button"
                   id="btnGuestentry"
-                  class="btn-guest-entry">
+                  class="btn-guest-entry disabled">
                   Guest Log in
                 </button>
             </div>

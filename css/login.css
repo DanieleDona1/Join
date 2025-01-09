@@ -123,7 +123,7 @@ a {
   padding: 10px 21px 10px 21px;
   gap: 10px;
   border-radius: 10px;
-  border: 1px solid rgba(209, 209, 209, 1);
+  border: 1px solid rgb(209, 209, 209);
   font-size: 1.125rem;
 }
 
@@ -195,6 +195,11 @@ label {
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
+.entry-btn.disabled:hover {
+  background-color: rgb(42, 54, 71);
+  box-shadow: none;
+}
+
 .btn-guest-entry {
   border: unset;
   font-weight: bold;
@@ -205,6 +210,7 @@ label {
   transition: color 125ms;
   transition: border 125ms;
   background-color: white;
+  color: black;
 }
 
 .btn-guest-entry:hover {
@@ -308,6 +314,8 @@ label span {
   font-size: 13px;
   position: absolute;
 }
+
+
 
 .navbar {
   position: fixed;
