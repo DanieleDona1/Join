@@ -1,3 +1,8 @@
+function onloadSignUp() {
+  resetInputBorderOnKeydown('signupForm');
+  initializeForm('signupForm', 'signupBtn');
+}
+
 /**
  * Validates password and checkbox inputs and adds the user if valid.
  * @param {Event} event - The event triggered by form submission.
@@ -9,9 +14,31 @@ function validatePasswordsAndCheckbox(event) {
 
   isValid = validatePasswords(formValues) && isValid;
   isValid = validateCheckbox() && isValid;
+  isValid = isValidEmail(formValues.email) && isValid;
 
   if (isValid) {
     addUser(formValues.name, formValues.email, formValues.password);
+  }
+}
+
+/**
+ * Validates an email address using a regular expression.
+ * If the email is valid, it returns true. If not, it changes the border style of the email input to red.
+ *
+ * @function isValidEmail
+ * @param {string} email - The email address to be validated.
+ * @returns {boolean} Returns `true` if the email is valid, otherwise `false` and sets the border of the email input to red.
+ */
+function isValidEmail(email) {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  const emailInput = document.getElementById('email');
+
+  if (emailRegex.test(email)) {
+    return true;
+  } else {
+    emailInput.style.border = '1px solid red';
+    return false;
   }
 }
 
@@ -42,7 +69,7 @@ function validatePasswords(formValues) {
  */
 function validateCheckbox() {
   const checkbox = document.getElementById('formCheckbox');
-  const legalLink =  document.getElementById('legalLink');
+  const legalLink = document.getElementById('legalLink');
   const legalText = document.getElementById('legalText');
   if (!checkbox.checked) {
     checkbox.style.border = '2px solid red';
@@ -64,8 +91,8 @@ function validateCheckbox() {
  * @param {string} email - The email of the user.
  * @param {string} password - The password of the user.
  */
-function addUser(name, email, password) {
-  postData('/users', { name: name, email: email, password: password });
+async function addUser(name, email, password) {
+  await postData('/users', { name: name, email: email, password: password });
   redirectToPage('../index.html?msg=You Signed Up successfully');
 }
 
@@ -83,21 +110,6 @@ function initializeCheckboxListener(checkbox) {
   }
 }
 
-
-// TODO
-// function addInputListener(input1, input2) {
-//   input1.addEventListener('input', () => changeBorderToBlack(input1, input2));
-// }
-
-// TODO
-// function changeBorderToBlack(...inputElements) {
-//   const errorMessage = document.getElementById('errorSignupMsg');
-//   inputElements.forEach((inputElement) => {
-//     inputElement.style.border = '1px solid rgba(0, 0, 0, 0.2)';
-//   });
-//   errorMessage.innerHTML = '';
-// }
-
 /**
  * Resets the styles of the checkbox, legal text, and legal link elements.
  *
@@ -108,7 +120,7 @@ function initializeCheckboxListener(checkbox) {
  * @param {HTMLInputElement} checkboxElement - The checkbox input element whose style will be reset.
  */
 function updateCheckboxStyle(checkboxElement) {
-  const legalLink =  document.getElementById('legalLink');
+  const legalLink = document.getElementById('legalLink');
   const legalText = document.getElementById('legalText');
   checkboxElement.style.border = '';
   legalText.style.color = '';
@@ -160,3 +172,61 @@ document.addEventListener('DOMContentLoaded', () => {
   toggleVisibility('password', 'passwordLock', 'visibilityImg');
   toggleVisibility('confirmPassword', 'passwordLockConfirm', 'visibilityImgConfirm');
 });
+
+/**
+ * Checks whether all input fields in the specified form are filled.
+ * If all fields are filled, it enables the submit button by removing the 'disabled' class.
+ * If any field is empty, it disables the submit button by adding the 'disabled' class.
+ *
+ * @param {string} formId - The ID of the form to check.
+ * @param {string} btnId - The ID of the submit button to enable/disable.
+ */
+function checkInputs(formId, btnId) {
+  const form = document.getElementById(formId);
+  const inputs = form.querySelectorAll('input');
+  let allFilled = true;
+  inputs.forEach((input) => {
+    if (input.value.trim() === '') allFilled = false;
+  });
+  const submitBtn = document.getElementById(btnId);
+  let isCheckboxChecked = checkCheckbox();
+
+  if (allFilled && isCheckboxChecked) {
+    submitBtn.classList.remove('disabled');
+  } else {
+    submitBtn.classList.add('disabled');
+  }
+}
+
+/**
+ * Initializes the form by adding event listeners to its input fields.
+ * It listens for the `keyup` event on each input and calls `checkInputs`
+ * to check whether the form fields are filled. Also performs an initial
+ * check when the form is initialized.
+ *
+ * @param {string} formId - The ID of the form element to initialize.
+ * @param {string} btnId - The ID of the submit button that should be enabled/disabled.
+ */
+function initializeForm(formId, btnId) {
+  const form = document.getElementById(formId);
+
+  form.querySelectorAll('input').forEach((input) => {
+    input.addEventListener('keyup', () => checkInputs(formId, btnId));
+  });
+  checkInputs(formId, btnId);
+}
+
+/**
+ * Checks if the checkbox with the ID 'formCheckbox' is checked.
+ *
+ * @function checkCheckbox
+ * @returns {boolean} Returns `true` if the checkbox is checked, otherwise `false`.
+ */
+function checkCheckbox() {
+  const checkbox = document.getElementById('formCheckbox');
+  if (checkbox.checked) {
+    return true;
+  } else {
+    return false;
+  }
+}

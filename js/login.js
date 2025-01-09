@@ -124,28 +124,6 @@ function showDialog() {
 }
 
 /**
- * Resets the border color of input fields to a default color when a key is pressed.
- * The border color will be reset to 'rgb(209, 209, 209)' if it is currently red.
- * This function is triggered on the 'keydown' event of input fields inside the specified form(s).
- *
- * @param {string} formTagId - The CSS selector or ID of the form(s) whose input fields should be monitored.
- */
-function resetInputBorderOnKeydown(formTagId) {
-  const forms = document.querySelectorAll(formTagId);
-  forms.forEach((form) => {
-    form.addEventListener('keydown', (event) => {
-      if (event.target && event.target.tagName.toLowerCase() === 'input') {
-        const input = event.target;
-
-        if (input.style.borderColor === 'red') {
-          input.style.borderColor = 'rgb(209, 209, 209';
-        }
-      }
-    });
-  });
-}
-
-/**
  * Checks whether all input fields in the specified form are filled.
  * If all fields are filled, it enables the submit button by removing the 'disabled' class.
  * If any field is empty, it disables the submit button by adding the 'disabled' class.
@@ -181,7 +159,7 @@ function initializeForm(formId, btnId) {
   const form = document.getElementById(formId);
 
   form.querySelectorAll('input').forEach((input) => {
-    input.addEventListener('keyup', () => checkInputs(formId, btnId)); // Funktion bei Keyup aufrufen
+    input.addEventListener('keyup', () => checkInputs(formId, btnId));
   });
   checkInputs(formId, btnId);
 }

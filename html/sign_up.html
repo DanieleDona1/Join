@@ -16,7 +16,7 @@
     <script src="../script.js" defer></script>
     <script src="../js/remote_storage.js" defer></script>
   </head>
-  <body class="body">
+  <body class="body" onload="onloadSignUp()">
     <div class="wrapper max-width-1440">
       <a href="../index.html "><img class="logo" src="../assets/icons/auth/logo.svg" alt="logo" /></a>
 
@@ -27,7 +27,7 @@
             <div class="underline-headline"></div>
           </div>
 
-          <form class="input-container" onsubmit="validatePasswordsAndCheckbox(event);">
+          <form id="signupForm" class="input-container" onsubmit="validatePasswordsAndCheckbox(event);">
             <div class="input-group">
               <input type="name" id="name" placeholder="Name" minlength="3" maxlength="25" required />
               <img src="../assets/icons/auth/person.svg" alt="mail" />
@@ -56,7 +56,7 @@
             </div>
 
             <label class="d-flex-c-c padding-left-0">
-              <input id="formCheckbox" class="form-checkbox" type="checkbox" minlength="3" maxlength="25" />
+              <input onclick="checkInputs('signupForm', 'signupBtn')" id="formCheckbox" class="form-checkbox" type="checkbox" minlength="3" maxlength="25" />
               <span id="legalText" class="legal-text"
                 >I accept the
                 <a id="legalLink" class="legal-link" href="privacy_policy.html">Privacy Policy</a>
@@ -64,7 +64,7 @@
             </label>
 
             <div class="entry-btn-container" id="btnentryContainer">
-              <button type="submit" class="entry-btn">Sign up</button>
+              <button id="signupBtn" type="submit" class="entry-btn disabled">Sign up</button>
             </div>
           </form>
         </div>

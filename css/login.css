@@ -198,6 +198,7 @@ label {
 .entry-btn.disabled:hover {
   background-color: rgb(42, 54, 71);
   box-shadow: none;
+  cursor: auto;
 }
 
 .btn-guest-entry {
@@ -255,8 +256,8 @@ label span {
 
 .form-checkbox {
   appearance: none;
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
   background-color: white;
   cursor: pointer;
   position: relative;

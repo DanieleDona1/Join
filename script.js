@@ -314,3 +314,21 @@ function generateInitials(userName) {
     .map((part) => part.charAt(0).toUpperCase())
     .join('');
 }
+
+/**
+ * Resets the border color of input fields to a default color when a key is pressed.
+ * The border color will be reset to 'rgb(209, 209, 209)' if it is currently red.
+ * This function is triggered on the 'keydown' event of input fields inside the specified form(s).
+ *
+ * @param {string} formTagId - The CSS selector or ID of the form(s) whose input fields should be monitored.
+ */
+function resetInputBorderOnKeydown(formTagId) {
+  const form = document.getElementById(formTagId);
+  const inputs = form.querySelectorAll('input');
+
+  inputs.forEach(input => {
+    input.addEventListener('keydown', function() {
+      input.style.border = '1px solid rgb(209, 209, 209)';
+    });
+  });
+}
