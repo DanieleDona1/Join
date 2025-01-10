@@ -252,6 +252,7 @@ function moveToNextField(e) {
     resetCategoryDropdown();
     resetCategoryOptions();
     resetContactsDropdown();
+    disableAddTaskButton();
   }
   
   /**
@@ -265,5 +266,13 @@ function moveToNextField(e) {
   function setClearButtonHandler() {
     const c = document.getElementById('clear-button');
     if (c) c.addEventListener('click', clearAll);
+  }
+
+  
+  function disableAddTaskButton() {
+    const addTaskButton = document.getElementById("create-task-button");
+    if (addTaskButton) {
+      addTaskButton.disabled = true; // Deaktiviert den Button
+    }
   }
   

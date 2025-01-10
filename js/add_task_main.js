@@ -18,6 +18,7 @@ async function onloadAddtasks() {
   initFieldNavigation();
   setupOutsideClickForCustomSelects();
   blockEnterSubmit('form-add-task');
+  initializeValidation();
 }
 
 /**

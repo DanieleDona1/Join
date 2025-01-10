@@ -164,3 +164,124 @@ async function createAddTask(cat) {
     }
   }
   
+
+  function getTodayDate() {
+    const today = new Date();
+    return today.toISOString().split("T")[0];
+  }
+  
+  function validateTitle(titleInput) {
+    return titleInput.value.trim().length >= 3;
+  }
+
+
+  function validateTitleOnBlur(titleInput) {
+    const titleError = document.getElementById("titleError");
+    const titleValue = titleInput.value.trim();
+  
+    if (titleValue.length < 3) {
+      titleError.textContent = "Title must be at least 3 characters long.";
+      titleError.classList.remove("d-none");
+      return false;
+    }
+  
+    titleError.classList.add("d-none");
+    return true;
+  }
+  
+  
+  function validateDueDate(dueDateInput) {
+    const dateValue = dueDateInput.value.trim();
+    const dueDateError = document.getElementById("dueDateError");
+  
+    if (dateValue.length < 10) {
+      dueDateError.classList.add("d-none");
+      return false;
+    }
+  
+    const errorMessage = isValidDateFormat(dateValue);
+    if (errorMessage) {
+      dueDateError.textContent = errorMessage;
+      dueDateError.classList.remove("d-none");
+      return false;
+    }
+  
+    dueDateError.classList.add("d-none");
+    return true;
+  }
+  
+  function validateCategory(categorySelect) {
+    const selectedCategory = categorySelect.querySelector(".select-selected").innerText;
+    return selectedCategory === "Technical Task" || selectedCategory === "User Story";
+  }
+
+
+  function validateCategoryOnBlur(categorySelect) {
+    const selectedCategory = categorySelect.querySelector(".select-selected").innerText;
+    const categoryError = document.getElementById("categoryError");
+  
+    if (selectedCategory !== "Technical Task" && selectedCategory !== "User Story") {
+      categoryError.textContent = "Please select a valid category.";
+      categoryError.classList.remove("d-none");
+      return false;
+    }
+  
+    categoryError.classList.add("d-none");
+    return true;
+  }
+  
+  
+  function validateForm() {
+    const titleInput = document.getElementById("input-field-title");
+    const dueDateInput = document.getElementById("input-field-date");
+    const categorySelect = document.getElementById("drop-down-2");
+    const createTaskButton = document.getElementById("create-task-button");
+  
+    const isTitleValid = validateTitle(titleInput);
+    const isDueDateValid = validateDueDate(dueDateInput);
+    const isCategoryValid = validateCategory(categorySelect);
+  
+    createTaskButton.disabled = !(isTitleValid && isDueDateValid && isCategoryValid);
+  }
+  
+  function initializeValidation() {
+    const titleInput = document.getElementById("input-field-title");
+    const dueDateInput = document.getElementById("input-field-date");
+    const categorySelect = document.getElementById("drop-down-2");
+  
+    titleInput.addEventListener("input", validateForm);
+    titleInput.addEventListener("blur", () => validateTitleOnBlur(titleInput));
+    dueDateInput.addEventListener("input", validateForm);
+    dueDateInput.addEventListener("blur", () => validateDueDateOnBlur(dueDateInput));
+    categorySelect.addEventListener("click", validateForm);
+    categorySelect.addEventListener("focusout", () => validateCategoryOnBlur(categorySelect));
+  
+    validateForm();
+  }
+  
+  function isValidDateFormat(dateValue) {
+    const [day, month, year] = dateValue.split("/").map(Number);
+    const date = new Date(year, month - 1, day);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (date < today) {
+      return "Date must be today or in the future.";
+    }
+  
+    return null;
+  }
+
+  function validateDueDateOnBlur(dueDateInput) {
+    const dateValue = dueDateInput.value.trim();
+    const dueDateError = document.getElementById("dueDateError");
+  
+    if (!dateValue) {
+      dueDateError.textContent = "Due Date is required.";
+      dueDateError.classList.remove("d-none");
+      return false;
+    }
+  
+    validateDueDate(dueDateInput); // Nutze die bestehende Validierungslogik
+    return true;
+  }
+  
