@@ -220,16 +220,17 @@ async function createAddTask(cat) {
     const selectedCategory = categorySelect.querySelector(".select-selected").innerText;
     const categoryError = document.getElementById("categoryError");
   
-    if (selectedCategory !== "Technical Task" && selectedCategory !== "User Story") {
-      categoryError.textContent = "Please select a valid category.";
-      categoryError.classList.remove("d-none");
-      return false;
+    if (selectedCategory === "Technical Task" || selectedCategory === "User Story") {
+      categoryError.classList.add("d-none");
+      categoryError.textContent = ""; // Fehlernachricht entfernen
+      return true;
     }
   
-    categoryError.classList.add("d-none");
-    return true;
+    categoryError.textContent = "Please select a valid category.";
+    categoryError.classList.remove("d-none");
+    return false;
   }
-  
+ 
   
   function validateForm() {
     const titleInput = document.getElementById("input-field-title");
@@ -253,11 +254,15 @@ async function createAddTask(cat) {
     titleInput.addEventListener("blur", () => validateTitleOnBlur(titleInput));
     dueDateInput.addEventListener("input", validateForm);
     dueDateInput.addEventListener("blur", () => validateDueDateOnBlur(dueDateInput));
-    categorySelect.addEventListener("click", validateForm);
+    
+    // Events für Dropdown
+    categorySelect.addEventListener("click", () => validateCategoryOnBlur(categorySelect));
+    categorySelect.addEventListener("change", () => validateCategoryOnBlur(categorySelect));
     categorySelect.addEventListener("focusout", () => validateCategoryOnBlur(categorySelect));
   
     validateForm();
   }
+  
   
   function isValidDateFormat(dateValue) {
     const [day, month, year] = dateValue.split("/").map(Number);
