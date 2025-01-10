@@ -53,3 +53,28 @@
 .overflow.hidden {
   overflow: hidden;
 }
+
+/* Gesamter Scrollbalken */
+::-webkit-scrollbar {
+  width: 12px; /* Breite des Scrollbalkens */
+  background-color: #f4f4f4; /* Hintergrundfarbe */
+}
+
+/* Scroll-Leiste (Thumb) */
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* Farbe der Scroll-Leiste */
+  border-radius: 6px; /* Abgerundete Ecken */
+  border: 2px solid #f4f4f4; /* Abstand zur Scroll-Leiste */
+}
+
+/* Hover-Effekt für die Scroll-Leiste */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Farbe beim Hover */
+}
+
+/* Scrollbalken für horizontale Leisten */
+::-webkit-scrollbar-track {
+  background-color: #f0f0f0; /* Hintergrund der Track-Leiste */
+  border-radius: 6px;
+}
+
