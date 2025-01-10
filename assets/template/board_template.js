@@ -313,7 +313,7 @@ function generatePopUpAddTask(category) {
               <button id="clear-button" type="button" class="clear-button">
                 Clear &nbsp;&#10006;
               </button>
-              <button class="create-button" onclick="createAddTask('${category}'); return false;">
+              <button id="create-task-button" class="create-button" onclick="createAddTask('${category}'); return false;" disabled>
                 Create Task &nbsp;&nbsp;&#10003;
               </button>
             </div>
