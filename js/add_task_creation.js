@@ -310,7 +310,7 @@ function validateDueDateOnBlur(dueDateInput) {
 
 function showAddTaskMessage() {
   const overlay = document.getElementById('add-task-message');
-  overlay.style.display = 'block'; // Div anzeigen
+  overlay.style.display = 'flex'; // Div anzeigen
   
   setTimeout(() => {
     overlay.style.display = 'none'; // Div ausblenden

@@ -113,4 +113,9 @@ button:hover {
   display: flex;
   gap: 12px;
   display: none;
+  font-size: 24px;
+}
+
+.add-task-message img {
+  height: 32px;
 }
