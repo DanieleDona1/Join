@@ -29,7 +29,6 @@ function onInputSubtask(inputId) {
   }
 }
 
-
 /**
  * Clears the 'subtaskInput' field and resets the 'subtaskIcons' area to show the default add icon.
  * Removes any additional icons previously added to 'subtaskIcons' when input is non-empty.
@@ -61,7 +60,6 @@ function addCurrentSubtask(inputId) {
  * @returns {string} - The input value prefixed with a bullet point.
  */
 function getSubtaskWithBullet(subtaskInput) {
-  console.log('subtaskInput', subtaskInput);
   if (subtaskInput && !subtaskInput.startsWith('• ')) {
     subtaskInput = '• ' + subtaskInput;
   }
@@ -86,9 +84,9 @@ function getSubtaskWithBullet(subtaskInput) {
 function renderSubtaskAddedList() {
   let subtaskAddedList = document.getElementById('subtaskAddedList');
   subtaskAddedList.innerHTML = '';
-  let subtaskELements = currentTodos[currentTaskId].subtask
+  let subtaskELements = currentTodos[currentTaskId].subtask;
   for (let i = 0; i < subtaskELements.length; i++) {
-      subtaskAddedList.innerHTML += generateSubtaskAddedListTemplate(i, subtaskELements);
+    subtaskAddedList.innerHTML += generateSubtaskAddedListTemplate(i, subtaskELements);
   }
 }
 
@@ -141,7 +139,7 @@ function focusInputField(inputField) {
 function updateIconsOnFocus(index) {
   const subtaskAddedListIcons = document.getElementById('subtaskAddedListIcons' + index);
   subtaskAddedListIcons.innerHTML = /*html*/ `
-      <img id="removeIconOnFocus${index}" onclick="removeAddedSubtask(${index});" class="add-subtask" src="../assets/icons/board/property-delete.svg" alt="delete">
+      <img id="removeIconOnFocus${index}" onclick="removeAddedSubtask(${index}); event.stopPropagation();" class="add-subtask" src="../assets/icons/board/property-delete.svg" alt="delete">
       <img class="mg-left" onclick="currentEditSubtask(${index})" class="add-subtask" src="../assets/icons/board/property-check.svg" alt="check">
     `;
 }
@@ -200,8 +198,18 @@ function shouldHandleFocusOut(event, subtaskItem) {
  * @param {number} index - The index of the subtask to be edited.
  */
 function handleSubtaskEdit(index) {
-  if (currentSubtasks[index]) {
-    currentEditSubtask(index);
+  const inputField = document.getElementById(`subtaskListInput${index}`);
+  if (inputField.value.trim() !== '' && inputField.value.trim() !== ('•')) {
+    console.log('if');
+    currentTodos[currentTaskId].subtask[index].text = inputField.value;
+
+  } else {
+    // inputField.style.borderColor = 'red';
+    inputField.style.border = '1px solid red';
+    inputField.value = currentTodos[currentTaskId].subtask[index].text;
+
+    console.log('else');
+
   }
 }
 
@@ -231,7 +239,7 @@ function currentEditSubtask(index) {
   const inputField = document.getElementById(`subtaskListInput${index}`);
 
   // if (inputField.value.startsWith('• ') && inputField.value.trim() === '') {
-    // inputField.style.borderColor = 'red';
+  // inputField.style.borderColor = 'red';
   // }
 
   // Speichern des bearbeiteten Textes
@@ -245,12 +253,8 @@ function currentEditSubtask(index) {
  * @param {number} id - The index of the task in the todoKeysArray to which the subtasks are being saved.
  */
 function saveCurrentSubtask(i) {
-  if (currentSubtasks.length > 0) {
-    if (!currentTodos[i]['subtask']) {
-      currentTodos[i]['subtask'] = [...currentSubtasks];
-    } else {
-      currentTodos[i]['subtask'] = [...currentTodos[i]['subtask'], ...currentSubtasks];
-    }
+  if (currentTodos[i]['subtask']) {
+    console.log('test');
     editTaskRemote(todoKeysArray[i], { subtask: currentTodos[i]['subtask'] });
   }
 }
@@ -262,10 +266,6 @@ function saveCurrentSubtask(i) {
  * @param {number} index - The index of the subtask to be removed.
  */
 function removeAddedSubtask(index) {
-  if (index === 'all') {
-    currentSubtasks = [];
-  } else {
-    currentSubtasks.splice(index, 1);
-  }
+  currentTodos[currentTaskId].subtask.splice(index, 1);
   renderSubtaskAddedList();
 }
