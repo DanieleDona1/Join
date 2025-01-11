@@ -233,7 +233,7 @@ function validateCategoryOnBlur(categorySelect) {
     return true;
   }
 
-  categoryError.textContent = "Please select a valid category.";
+  categoryError.textContent = "A category is required. Please select one.";
   categoryError.classList.remove("d-none");
   return false;
 }
@@ -264,7 +264,7 @@ function initializeValidation() {
   titleInput.addEventListener("blur", () => {validateTitleOnBlur(titleInput); validateForm();});
   dueDateInput.addEventListener("input", validateForm);
   dueDateInput.addEventListener("blur", () =>
-    {validateDueDateOnBlur(dueDateInput); validateForm();}
+    validateDueDateOnBlur(dueDateInput)
   );
 
   // Events für Dropdown
