@@ -351,11 +351,12 @@ function generateSubtaskList(i, j, checkboxImgUrl, subtaskTexts) {
  * @param {number} i - The index of the subtask within the todo item.
  * @returns {string} The HTML string representing the subtask item, including an input field and action icons.
  */
-function generateSubtaskAddedListTemplate(i) {
-  let subtaskValueWithBullet = getSubtaskWithBullet(currentSubtasks[i].text);
+function generateSubtaskAddedListTemplate(i, subtaskELements) {
+  let subtaskElement = subtaskELements[i].text;
+  let subtaskBulletText = getSubtaskWithBullet(subtaskElement);
   return /*html*/ `
   <div id="subtask-item${i}" class="subtask-group subtask-list-group" onclick="event.stopPropagation()">
-    <input onclick="readonlyToggle(${i});" id="subtaskListInput${i}" readonly class="subtask-input" type="text" value="${subtaskValueWithBullet}">
+    <input onclick="readonlyToggle(${i});" id="subtaskListInput${i}" readonly class="subtask-input" type="text" value="${subtaskBulletText}">
     <div id="subtaskListIcons" class="subtask-list-icons">
       <div id="subtaskAddedListIcons${i}" class="d-flex-c-c">
         <img onclick="readonlyToggle(${i});" class="add-subtask" src="../assets/icons/board/edit.svg" alt="edit">

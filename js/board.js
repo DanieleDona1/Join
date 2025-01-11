@@ -246,6 +246,7 @@ function openEditTask(id) {
   const dueDate = todos[id].dueDate;
   document.getElementById('dialog').innerHTML = generateEditTemplate(id, dueDate);
   setFocusBasedOnPriority();
+  renderSubtaskAddedList();
 }
 
 /**

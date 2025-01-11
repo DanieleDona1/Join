@@ -9,7 +9,7 @@ let users = [];
 
 // Alle current Arrays wird auf addTask und board benötigt
 // Alle current Arrays wird auf addTask und board benötigt
-let currentSubtasks = [];
+let currentSubtasks = []; //TODO
 let activePriority = 'medium'; //Standardmäßig ist medium zugewiesen.
 let currentTaskCategory = ''; //Zuweisen "User-Story" oder "Technical-Task" mit Bindestrich
 let selectedContacts = [];

@@ -61,7 +61,7 @@ h3 {
 
 .section-container section img {
   position: absolute;
-  right: 24px;
+  right: 18px;
   bottom: 32px;
   width: 24px;
   cursor: pointer;
@@ -289,9 +289,7 @@ input:focus {
   width: 100%;
   margin-top: 8px;
   display: flex;
-  /* margin-bottom: 16px; */
-  /* width: 400px; */
-  /* overflow-x: auto; */
+  flex-wrap: wrap;
 }
 
 .initial-board-wrapper .margin {

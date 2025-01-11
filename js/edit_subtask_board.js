@@ -1,3 +1,5 @@
+let currentTaskId = ''; //TODO
+
 /**
  * Handles input events on the 'subtaskInput' field. Updates the subtask icons based on input content.
  * If the input field has content, displays icons for adding or clearing the subtask.
@@ -10,15 +12,15 @@ function onInputSubtask(inputId) {
   if (subtaskInput.value !== '') {
     document.getElementById('subtaskIcons').innerHTML = /*html*/ `
       <div class="d-flex-c-c">
-        <img 
-          onclick="event.stopPropagation(); focusInput(); resetInputField('${inputId}');" 
-          class="add-subtask" 
-          src="../assets/icons/board/property-close.svg" 
+        <img
+          onclick="event.stopPropagation(); focusInput(); resetInputField('${inputId}');"
+          class="add-subtask"
+          src="../assets/icons/board/property-close.svg"
           alt="close">
-        <img 
-          onclick="event.stopPropagation(); addCurrentSubtask('${inputId}');" 
-          class="mg-left add-subtask" 
-          src="../assets/icons/board/property-check.svg" 
+        <img
+          onclick="event.stopPropagation(); addCurrentSubtask('${inputId}');"
+          class="mg-left add-subtask"
+          src="../assets/icons/board/property-check.svg"
           alt="check">
       </div>
     `;
@@ -42,9 +44,12 @@ function resetInputField(inputId) {
  * Adds the current subtask input value to the `currentSubtasks` array with a bullet point.
  * Sets the subtask as unchecked by default, then renders the updated subtask list and resets the input field.
  */
+//TODO hole function wieder zurück
 function addCurrentSubtask(inputId) {
   let subtaskInput = document.getElementById(inputId);
-  currentSubtasks.push({ checked: false, text: subtaskInput.value });
+  currentTodos[currentTaskId].subtask.push({ checked: false, text: subtaskInput.value });
+  // let subtaskBulletPointText = getSubtaskWithBullet(subtaskInput.value);
+  // console.log('subtaskBulletPointText', subtaskBulletPointText);
 
   renderSubtaskAddedList();
   resetInputField(inputId);
@@ -56,26 +61,34 @@ function addCurrentSubtask(inputId) {
  * @returns {string} - The input value prefixed with a bullet point.
  */
 function getSubtaskWithBullet(subtaskInput) {
-  let bulletPoint = '• ';
-  if (subtaskInput.startsWith(bulletPoint)) {
-    return subtaskInput;
+  console.log('subtaskInput', subtaskInput);
+  if (subtaskInput && !subtaskInput.startsWith('• ')) {
+    subtaskInput = '• ' + subtaskInput;
   }
-  if (subtaskInput.startsWith(bulletPoint)) {
-    return subtaskInput;
-  }
-  return bulletPoint + subtaskInput;
+  return subtaskInput;
 }
 
 /**
  * Renders the list of added subtasks by updating the 'subtaskAddedList' element.
  * Clears any existing content and populates it with the current subtasks from `currentSubtasks`.
  */
+// function renderSubtaskAddedList() {
+//   let subtaskAddedList = document.getElementById('subtaskAddedList');
+//   subtaskAddedList.innerHTML = '';
+
+//   for (let i = 0; i < currentSubtasks.length; i++) {
+//     if (currentSubtasks[i].text.trim() !== '') {
+//       subtaskAddedList.innerHTML += generateSubtaskAddedListTemplate(i);
+//     }
+//   }
+// }
+
 function renderSubtaskAddedList() {
   let subtaskAddedList = document.getElementById('subtaskAddedList');
   subtaskAddedList.innerHTML = '';
-
-  for (let i = 0; i < currentSubtasks.length; i++) {
-    subtaskAddedList.innerHTML += generateSubtaskAddedListTemplate(i);
+  let subtaskELements = currentTodos[currentTaskId].subtask
+  for (let i = 0; i < subtaskELements.length; i++) {
+      subtaskAddedList.innerHTML += generateSubtaskAddedListTemplate(i, subtaskELements);
   }
 }
 
@@ -216,7 +229,13 @@ function updateIconsOffFocus(index) {
  */
 function currentEditSubtask(index) {
   const inputField = document.getElementById(`subtaskListInput${index}`);
-  currentSubtasks[index].text = inputField.value;
+
+  // if (inputField.value.startsWith('• ') && inputField.value.trim() === '') {
+    // inputField.style.borderColor = 'red';
+  // }
+
+  // Speichern des bearbeiteten Textes
+  // currentSubtasks[index].text = inputField.value;
 }
 
 /**

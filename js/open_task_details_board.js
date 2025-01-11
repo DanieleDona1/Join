@@ -4,6 +4,7 @@
  */
 function openTaskDetails(id) {
   loadCurrentPriority(id);
+  currentTaskId = id;
   document.getElementById('dialog').innerHTML = generateDetailTaskTemplate(id);
   loadSubtaskList(id);
   loadAssignedToList(id);
