@@ -261,21 +261,21 @@ function initializeValidation() {
   const categorySelect = document.getElementById("drop-down-2");
 
   titleInput.addEventListener("input", validateForm);
-  titleInput.addEventListener("blur", () => validateTitleOnBlur(titleInput));
+  titleInput.addEventListener("blur", () => {validateTitleOnBlur(titleInput); validateForm();});
   dueDateInput.addEventListener("input", validateForm);
   dueDateInput.addEventListener("blur", () =>
-    validateDueDateOnBlur(dueDateInput)
+    {validateDueDateOnBlur(dueDateInput); validateForm();}
   );
 
   // Events für Dropdown
   categorySelect.addEventListener("click", () =>
-    validateCategoryOnBlur(categorySelect)
+    {validateCategoryOnBlur(categorySelect); validateForm();}
   );
   categorySelect.addEventListener("change", () =>
-    validateCategoryOnBlur(categorySelect)
+    {validateCategoryOnBlur(categorySelect); validateForm();}
   );
   categorySelect.addEventListener("focusout", () =>
-    validateCategoryOnBlur(categorySelect)
+    {validateCategoryOnBlur(categorySelect); validateForm();}
   );
 
   validateForm();
