@@ -98,3 +98,19 @@ button:hover {
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(38, 40, 40, 0.15);
 }
+
+.add-task-message {
+  position: fixed; /* Fixiert den Container relativ zum Viewport */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Zentriert den Container */
+  z-index: 9999; /* Stellt sicher, dass er über allen anderen Inhalten liegt */
+  padding: 20px; /* Innenabstand */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Leichter Schatten */
+  border-radius: 8px; /* Abgerundete Ecken */
+  background-color: rgb(9,25,49);
+  color: white;
+  display: flex;
+  gap: 12px;
+  display: none;
+}

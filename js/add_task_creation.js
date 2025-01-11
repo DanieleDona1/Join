@@ -15,6 +15,7 @@ async function createAddTask(cat) {
     formateDueDate();
     const d = getUserAddTaskData(cat);
     await addTask(d);
+    showAddTaskMessage();
     redirectToPage("./board.html");
   }
 }
@@ -304,4 +305,14 @@ function validateDueDateOnBlur(dueDateInput) {
 
   validateDueDate(dueDateInput); // Nutze die bestehende Validierungslogik
   return true;
+}
+
+
+function showAddTaskMessage() {
+  const overlay = document.getElementById('add-task-message');
+  overlay.style.display = 'block'; // Div anzeigen
+  
+  setTimeout(() => {
+    overlay.style.display = 'none'; // Div ausblenden
+  }, 2000); // Nach 2 Sekunden
 }

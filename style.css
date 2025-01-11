@@ -57,14 +57,14 @@
 /* Gesamter Scrollbalken */
 ::-webkit-scrollbar {
   width: 12px; /* Breite des Scrollbalkens */
-  background-color: #f4f4f4; /* Hintergrundfarbe */
+  background-color: rgb(255,255,255); /* Hintergrundfarbe */
 }
 
 /* Scroll-Leiste (Thumb) */
 ::-webkit-scrollbar-thumb {
   background-color: #888; /* Farbe der Scroll-Leiste */
   border-radius: 6px; /* Abgerundete Ecken */
-  border: 2px solid #f4f4f4; /* Abstand zur Scroll-Leiste */
+  border: 2px solid rgb(240,240,240); /* Abstand zur Scroll-Leiste */
 }
 
 /* Hover-Effekt für die Scroll-Leiste */
@@ -74,7 +74,7 @@
 
 /* Scrollbalken für horizontale Leisten */
 ::-webkit-scrollbar-track {
-  background-color: #f0f0f0; /* Hintergrund der Track-Leiste */
+  background-color: rgb(255,255,255); /* Hintergrund der Track-Leiste */
   border-radius: 6px;
 }
 
