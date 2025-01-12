@@ -50,6 +50,7 @@
           ></span>
           <div class="dropdown-menu">
             <ul>
+              <li class="dropdown-help"><a href="../html/help.html">Help</a></li>
               <li><a href="../html/legal_notice.html">Legal Notice</a></li>
               <li><a href="../html/privacy_policy.html">Privacy Policy</a></li>
               <li>
@@ -242,14 +243,19 @@
               Clear &nbsp;&#10006;
             </button>
             <button
+            id="create-task-button"
               class="create-button"
               onclick="createAddTask('toDo'); return false;"
+              disabled
             >
               Create Task &nbsp;&nbsp;&#10003;
             </button>
           </div>
         </section>
       </form>
+      <div id="add-task-message" class="add-task-message">
+        Task added to board <img src="../assets/icons/navbar/board_icon.svg" alt="">
+      </div>
     </main>
   </body>
 </html>

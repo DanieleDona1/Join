@@ -75,8 +75,15 @@
     margin-left: 16px;
     width: 183px;
   }
+
+  .create-button:disabled {
+    background-color: #ccc; /* Grauer Hintergrund */
+    color: #666; /* Abgeschwächte Schriftfarbe */
+    cursor: not-allowed; /* Zeigt an, dass der Button nicht klickbar ist */
+    opacity: 0.6; /* Reduzierte Deckkraft */
+  }
   
-  .create-button:hover {
+  .create-button:not(:disabled):hover {
     background-color: rgb(41, 171, 226);
   }
   
