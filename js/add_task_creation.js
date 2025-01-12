@@ -173,30 +173,43 @@ function getTodayDate() {
   return today.toISOString().split("T")[0];
 }
 
-function validateTitle(titleInput) {
-  return titleInput.value.trim().length >= 3;
-}
+let titleFieldTouched = false;
 
-function validateTitleOnBlur(titleInput) {
+function validateTitle(titleInput) {
   const titleError = document.getElementById("titleError");
   const titleValue = titleInput.value.trim();
 
-  if (titleValue.length < 3) {
+  // Fehlermeldung nur anzeigen, wenn das Feld bereits berührt wurde
+  if (titleFieldTouched && titleValue.length < 3) {
     titleError.textContent = "Title must be at least 3 characters long.";
     titleError.classList.remove("d-none");
     return false;
   }
 
+  // Fehlermeldung ausblenden, wenn die Eingabe gültig ist
   titleError.classList.add("d-none");
   return true;
 }
+
+function validateTitleOnBlur(titleInput) {
+  titleFieldTouched = true; // Markiere das Feld als berührt
+  return validateTitle(titleInput); // Führe die Validierung aus
+}
+
+let dateFieldTouched = false;
 
 function validateDueDate(dueDateInput) {
   const dateValue = dueDateInput.value.trim();
   const dueDateError = document.getElementById("dueDateError");
 
-  if (dateValue.length < 10) {
+  if (!dateFieldTouched) {
     dueDateError.classList.add("d-none");
+    return true; // Keine Fehlermeldung anzeigen, solange das Feld nicht berührt wurde
+  }
+
+  if (!dateValue || dateValue.length < 10) {
+    dueDateError.textContent = "Due Date is required.";
+    dueDateError.classList.remove("d-none");
     return false;
   }
 
@@ -210,6 +223,7 @@ function validateDueDate(dueDateInput) {
   dueDateError.classList.add("d-none");
   return true;
 }
+
 
 function validateCategory(categorySelect) {
   const selectedCategory =
@@ -244,42 +258,57 @@ function validateForm() {
   const categorySelect = document.getElementById("drop-down-2");
   const createTaskButton = document.getElementById("create-task-button");
 
-  const isTitleValid = validateTitle(titleInput);
-  const isDueDateValid = validateDueDate(dueDateInput);
-  const isCategoryValid = validateCategory(categorySelect);
+  // Individuelle Validierungen ausführen
+  const isTitleValid = validateTitle(titleInput); // Keine Meldung überschreiben
+  const isDueDateValid = validateDueDate(dueDateInput); // Nur Zustand prüfen
+  const isCategoryValid = validateCategory(categorySelect); // Keine Meldung überschreiben
 
-  createTaskButton.disabled = !(
-    isTitleValid &&
-    isDueDateValid &&
-    isCategoryValid
-  );
+  // Button-Status aktualisieren
+  createTaskButton.disabled = !(isTitleValid && isDueDateValid && isCategoryValid);
 }
+
 
 function initializeValidation() {
   const titleInput = document.getElementById("input-field-title");
   const dueDateInput = document.getElementById("input-field-date");
   const categorySelect = document.getElementById("drop-down-2");
 
-  titleInput.addEventListener("input", validateForm);
-  titleInput.addEventListener("blur", () => {validateTitleOnBlur(titleInput); validateForm();});
+  // Title-Eingabe validieren
+  titleInput.addEventListener("input", () => {
+    validateTitle(titleInput); // Entferne Fehlermeldung, wenn Eingabe korrekt
+    validateForm(); // Prüfe den Button-Status
+  });
+  titleInput.addEventListener("blur", () => {
+    validateTitleOnBlur(titleInput); // Zeige Fehlermeldung bei Bedarf
+    validateForm();
+  });
+
+  // Datumseingabe validieren
   dueDateInput.addEventListener("input", validateForm);
-  dueDateInput.addEventListener("blur", () =>
-    validateDueDateOnBlur(dueDateInput)
-  );
+  dueDateInput.addEventListener("blur", () => {
+    validateDueDateOnBlur(dueDateInput);
+    validateForm();
+  });
 
-  // Events für Dropdown
-  categorySelect.addEventListener("click", () =>
-    {validateCategoryOnBlur(categorySelect); validateForm();}
-  );
-  categorySelect.addEventListener("change", () =>
-    {validateCategoryOnBlur(categorySelect); validateForm();}
-  );
-  categorySelect.addEventListener("focusout", () =>
-    {validateCategoryOnBlur(categorySelect); validateForm();}
-  );
+  // Kategorieauswahl validieren
+  categorySelect.addEventListener("click", () => {
+    validateCategoryOnBlur(categorySelect);
+    validateForm();
+  });
+  categorySelect.addEventListener("change", () => {
+    validateCategoryOnBlur(categorySelect);
+    validateForm();
+  });
+  categorySelect.addEventListener("focusout", () => {
+    validateCategoryOnBlur(categorySelect);
+    validateForm();
+  });
 
-  validateForm();
+  validateForm(); // Initialer Button-Status
 }
+
+
+
 
 function isValidDateFormat(dateValue) {
   const [day, month, year] = dateValue.split("/").map(Number);
@@ -294,18 +323,10 @@ function isValidDateFormat(dateValue) {
 }
 
 function validateDueDateOnBlur(dueDateInput) {
-  const dateValue = dueDateInput.value.trim();
-  const dueDateError = document.getElementById("dueDateError");
-
-  if (!dateValue) {
-    dueDateError.textContent = "Due Date is required.";
-    dueDateError.classList.remove("d-none");
-    return false;
-  }
-
-  validateDueDate(dueDateInput); // Nutze die bestehende Validierungslogik
-  return true;
+  dateFieldTouched = true; // Markiere das Feld als berührt
+  validateDueDate(dueDateInput); // Führe die Validierung aus
 }
+
 
 
 function showAddTaskMessage() {

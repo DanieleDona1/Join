@@ -247,12 +247,12 @@ function moveToNextField(e) {
     resetForm();
     resetPriorityButtons();
     setDefaultPriority();
-    clearSubtasks();
     hideAllErrorMessages();
     resetCategoryDropdown();
     resetCategoryOptions();
     resetContactsDropdown();
     disableAddTaskButton();
+    clearSubtasks();
   }
   
   /**
