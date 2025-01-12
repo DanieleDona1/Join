@@ -214,6 +214,10 @@ h3 {
   overflow: auto;
 }
 
+.bg-hover {
+  transition: background-color 125ms;
+}
+
 .bg-hover:hover {
   background-color: rgba(204, 204, 204, 0.3);
   cursor: pointer;

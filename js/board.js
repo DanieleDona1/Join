@@ -16,6 +16,10 @@ async function onload() {
   await generateHeaderInitials();
   setupOutsideClickForCustomSelects();
   initObserver();
+
+  //TODO
+  // openTaskDetails(4);
+  // openEditTask(4);
 }
 
 /**

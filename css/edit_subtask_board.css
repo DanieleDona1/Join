@@ -39,22 +39,19 @@
   padding: 10px 10px 0px 10px;
 }
 
-.subtask-list-group input {
-  border: none;
-  padding: 4px 64px 4px 16px;
-  font-size: 1rem;
-}
-
 .subtask-list-group:hover input {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.subtask-list-icons img:hover {
-  transform: scale(1.08);
+.subtask-list-group input {
+  border: none;
+  padding: 4px 64px 4px 16px;
+  font-size: 1rem;
+  transition: background-color 125ms;
 }
 
-.subtask-list-group input {
-  transition: background-color 125ms;
+.subtask-list-icons img:hover {
+  transform: scale(1.08);
 }
 
 .subtask-list-group input:focus {
@@ -84,6 +81,7 @@
   vertical-align: middle;
 }
 
+
 .subtask-container {
   margin-top: 16px;
 }
@@ -92,4 +90,23 @@
   display: flex;
   align-items: flex-start;
   margin-top: 12px;
+}
+
+.bullet-point-edit {
+  font-size: 18px;
+  line-height: 30px;
+  height: 30px;
+}
+
+.subtask-added-list .edit-subtask-input {
+  padding: 10px 64px 10px 8px;
+}
+
+.bullet-point-input {
+  padding: 0 0 0px 12px;
+  border-radius: 10px;
+}
+
+.dialog-bg .subtask-list-group input:focus {
+  border:none;
 }

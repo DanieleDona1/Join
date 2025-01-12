@@ -1,4 +1,4 @@
-let currentTaskId = ''; //TODO
+let currentTaskId = '';
 
 /**
  * Handles input events on the 'subtaskInput' field. Updates the subtask icons based on input content.
@@ -40,47 +40,25 @@ function resetInputField(inputId) {
 }
 
 /**
- * Adds the current subtask input value to the `currentSubtasks` array with a bullet point.
- * Sets the subtask as unchecked by default, then renders the updated subtask list and resets the input field.
+ * Adds a subtask to the current task and updates the list.
+ *
+ * @param {string} inputId - The ID of the input field for the subtask.
+ * @returns {void}
  */
-//TODO hole function wieder zurück
 function addCurrentSubtask(inputId) {
   let subtaskInput = document.getElementById(inputId);
   currentTodos[currentTaskId].subtask.push({ checked: false, text: subtaskInput.value });
-  // let subtaskBulletPointText = getSubtaskWithBullet(subtaskInput.value);
-  // console.log('subtaskBulletPointText', subtaskBulletPointText);
 
   renderSubtaskAddedList();
   resetInputField(inputId);
 }
 
 /**
- * Retrieves the current value of the 'subtaskInput' field and prepends a bullet point.
+ * Renders the list of added subtasks for the current task.
+ * Clears the existing list and generates a new list based on the subtasks.
  *
- * @returns {string} - The input value prefixed with a bullet point.
+ * @returns {void}
  */
-function getSubtaskWithBullet(subtaskInput) {
-  if (subtaskInput && !subtaskInput.startsWith('• ')) {
-    subtaskInput = '• ' + subtaskInput;
-  }
-  return subtaskInput;
-}
-
-/**
- * Renders the list of added subtasks by updating the 'subtaskAddedList' element.
- * Clears any existing content and populates it with the current subtasks from `currentSubtasks`.
- */
-// function renderSubtaskAddedList() {
-//   let subtaskAddedList = document.getElementById('subtaskAddedList');
-//   subtaskAddedList.innerHTML = '';
-
-//   for (let i = 0; i < currentSubtasks.length; i++) {
-//     if (currentSubtasks[i].text.trim() !== '') {
-//       subtaskAddedList.innerHTML += generateSubtaskAddedListTemplate(i);
-//     }
-//   }
-// }
-
 function renderSubtaskAddedList() {
   let subtaskAddedList = document.getElementById('subtaskAddedList');
   subtaskAddedList.innerHTML = '';
@@ -191,25 +169,33 @@ function shouldHandleFocusOut(event, subtaskItem) {
 }
 
 /**
- * Handles the editing of a subtask at the specified index.
- * If a subtask exists at the given index in the currentSubtasks array,
- * it invokes the currentEditSubtask function for that subtask.
+ * Handles the editing of a subtask. Updates the subtask text if the input is not empty,
+ * otherwise highlights the input field with a red border and restores the previous value.
  *
  * @param {number} index - The index of the subtask to be edited.
+ * @returns {void}
  */
 function handleSubtaskEdit(index) {
   const inputField = document.getElementById(`subtaskListInput${index}`);
-  if (inputField.value.trim() !== '' && inputField.value.trim() !== ('•')) {
-    console.log('if');
+  const bulletInputContainer = document.getElementById(`bulletInputContainer${index}`);
+  if (inputField.value.trim()) {
     currentTodos[currentTaskId].subtask[index].text = inputField.value;
-
   } else {
-    // inputField.style.borderColor = 'red';
-    inputField.style.border = '1px solid red';
-    inputField.value = currentTodos[currentTaskId].subtask[index].text;
+    bulletInputContainer.style.border = '1px solid red';
+    // inputField.value = currentTodos[currentTaskId].subtask[index].text;
+  }
+}
 
-    console.log('else');
-
+/**
+ * Resets the border of the element with the given ID if its border is currently '1px solid red'.
+ *
+ * @param {string} elementId - The ID of the element to reset the border for.
+ * @returns {void}
+ */
+function resetBorder(elementId) {
+  const bulletInputContainer = document.getElementById(`bulletInputContainer${elementId}`);
+  if (bulletInputContainer.style.border === '1px solid red') {
+    bulletInputContainer.style.border = 'none';
   }
 }
 
@@ -227,23 +213,6 @@ function updateIconsOffFocus(index) {
       <img class="mg-left" onclick="removeAddedSubtask(${index})" class="add-subtask" src="../assets/icons/board/delete.svg" alt="delete">
       `;
   }
-}
-
-/**
- * Updates the text of the currently edited subtask at the specified index
- * with the value from the corresponding input field.
- *
- * @param {number} index - The index of the subtask being edited.
- */
-function currentEditSubtask(index) {
-  const inputField = document.getElementById(`subtaskListInput${index}`);
-
-  // if (inputField.value.startsWith('• ') && inputField.value.trim() === '') {
-  // inputField.style.borderColor = 'red';
-  // }
-
-  // Speichern des bearbeiteten Textes
-  // currentSubtasks[index].text = inputField.value;
 }
 
 /**

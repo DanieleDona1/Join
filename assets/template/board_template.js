@@ -353,10 +353,14 @@ function generateSubtaskList(i, j, checkboxImgUrl, subtaskTexts) {
  */
 function generateSubtaskAddedListTemplate(i, subtaskELements) {
   let subtaskElement = subtaskELements[i].text;
-  let subtaskBulletText = getSubtaskWithBullet(subtaskElement);
   return /*html*/ `
   <div id="subtask-item${i}" class="subtask-group subtask-list-group" onclick="event.stopPropagation()">
-    <input onclick="readonlyToggle(${i});" id="subtaskListInput${i}" readonly class="subtask-input" type="text" value="${subtaskBulletText}">
+
+  <div id="bulletInputContainer${i}" class="bullet-point-input d-flex-c-c bg-hover">
+      <div class="bullet-point-edit">•</div>
+      <input onclick="readonlyToggle(${i});" oninput="resetBorder(${i})" id="subtaskListInput${i}" readonly class="subtask-input edit-subtask-input" type="text" value="${subtaskElement}">
+  </div>
+
     <div id="subtaskListIcons" class="subtask-list-icons">
       <div id="subtaskAddedListIcons${i}" class="d-flex-c-c">
         <img onclick="readonlyToggle(${i});" class="add-subtask" src="../assets/icons/board/edit.svg" alt="edit">
