@@ -57,6 +57,7 @@ function getUserChangedData(i) {
  * @returns {Promise<void>} - Resolves when the popup and contact list are loaded.
  */
 async function loadPopUpAddTask(category) {
+  currentTodos[currentTaskId].subtask = [];
   generatePopUpAddTask(category);
   await createContactlistAddTask();
   loadDropDown();
