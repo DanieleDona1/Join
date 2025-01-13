@@ -27,235 +27,240 @@
     <script src="../js/remote_storage.js" defer></script>
   </head>
   <body onload="onloadAddtasks();" class="max-width-1440">
-    <header>
-      <img
-        class="header-join-logo"
-        src="../assets/icons/header/joinHeaderMobile.svg"
-        alt="logo"
-      />
-      <p class="d-none">Kanban Project Management Tool</p>
-      <div class="header-rightside-container">
-        <a href="./help.html">
-          <img
-            class="header-help-icon d-none"
-            src="../assets/icons/header/help.svg"
-            alt="help"
-          />
-        </a>
-        <div class="dropdown-container">
-          <span
-            id="headerInitials"
-            class="header-initials d-flex-c-c"
-            tabindex="0"
-          ></span>
-          <div class="dropdown-menu">
-            <ul>
-              <li class="dropdown-help"><a href="../html/help.html">Help</a></li>
-              <li><a href="../html/legal_notice.html">Legal Notice</a></li>
-              <li><a href="../html/privacy_policy.html">Privacy Policy</a></li>
-              <li>
-                <a onclick="removeUserToken()" href="../index.html">Log out</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <nav>
-      <div class="navbar-join-icon-container d-none">
-        <img src="../assets/icons/navbar/navbar_join_icon.svg" alt="" />
-      </div>
-      <div class="navbar-container-bottom">
-        <div class="navbar-item-container">
-          <a href="./summary.html" class="navbar-item" data-page="summary">
+    <div class="header-container">
+      <header>
+        <img
+          class="header-join-logo"
+          src="../assets/icons/header/joinHeaderMobile.svg"
+          alt="logo"
+        />
+        <p class="d-none">Kanban Project Management Tool</p>
+        <div class="header-rightside-container">
+          <a href="./help.html">
             <img
-              src="../assets/icons/navbar/summary_Icon.svg"
-              alt="Summary Icon"
+              class="header-help-icon d-none"
+              src="../assets/icons/header/help.svg"
+              alt="help"
             />
-            <p>Summary</p>
           </a>
-          <a href="./add_tasks.html" class="navbar-item" data-page="add_tasks">
-            <img
-              src="../assets/icons/navbar/add_tasks.svg"
-              alt="Add Tasks Icon"
-            />
-            <p>Add Tasks</p>
-          </a>
-          <a href="./board.html" class="navbar-item" data-page="board">
-            <img src="../assets/icons/navbar/board_icon.svg" alt="Board Icon" />
-            <p>Board</p>
-          </a>
-          <a href="./contact.html" class="navbar-item" data-page="contacts">
-            <img
-              src="../assets/icons/navbar/contacts_icon.svg"
-              alt="Contacts Icon"
-            />
-            <p>Contacts</p>
-          </a>
-        </div>
-        <div class="navbar-disclaimer-links-container d-none">
-          <a href="../html/privacy_policy.html" data-page="privacy_policy"
-            >Privacy Policy</a
-          >
-          <a href="../html/legal_notice.html" data-page="legal_notice"
-            >Legal Notice</a
-          >
-        </div>
-      </div>
-    </nav>
-    <main>
-      <h1>Add Task</h1>
-      <form id="form-add-task">
-        <section>
-          <div class="mg-b-28">
-            <p>Title<span>*</span></p>
-            <input
-              id="input-field-title"
-              placeholder="Enter a title"
-              type="text"
-              required
-            />
-            <div id="titleError" class="error-msg-addtask d-none">
-              This field is required
+          <div class="dropdown-container">
+            <span
+              id="headerInitials"
+              class="header-initials d-flex-c-c"
+              tabindex="0"
+            ></span>
+            <div class="dropdown-menu">
+              <ul>
+                <li class="dropdown-help"><a href="../html/help.html">Help</a></li>
+                <li><a href="../html/legal_notice.html">Legal Notice</a></li>
+                <li><a href="../html/privacy_policy.html">Privacy Policy</a></li>
+                <li>
+                  <a onclick="removeUserToken()" href="../index.html">Log out</a>
+                </li>
+              </ul>
             </div>
           </div>
-          <p>Description</p>
-          <textarea
-            id="input-field-description"
-            class="resizable-textarea"
-            placeholder="Enter a Description"
-            type="text"
-          ></textarea>
-          <p>Assigned to</p>
-          <div class="add-task-custom-select" id="drop-down-1">
-            <div class="select-selected" tabindex="0">
-              Select contacts to assign
-            </div>
-            <div class="select-items"></div>
-          </div>
-          <div id="selected-initials">
-            <div id="initials-display"></div>
-          </div>
-          <p class="required-note"><span>*</span>This field is required</p>
-        </section>
-        <div class="divider"></div>
-        <section class="add-task-container">
-          <div class="mg-b-28">
-            <p>Due date<span>*</span></p>
-            <input
-              id="input-field-date"
-              type="text"
-              placeholder="dd/mm/yyyy"
-              oninput="formatDate(this)"
-            />
-            <div id="dueDateError" class="error-msg-addtask d-none">
-              This field is required
-            </div>
-          </div>
-          <p>Prio</p>
-          <div class="button-container">
-            <button
-              onclick="setPriority()"
-              class="task-button"
-              data-color="urgent"
-              type="button"
-            >
-              Urgent
+        </div>
+      </header>
+    </div>
+    <div class="nav-container">
+      <nav>
+        <div class="navbar-join-icon-container d-none">
+          <img src="../assets/icons/navbar/navbar_join_icon.svg" alt="" />
+        </div>
+        <div class="navbar-container-bottom">
+          <div class="navbar-item-container">
+            <a href="./summary.html" class="navbar-item" data-page="summary">
               <img
-                src="../assets/icons/add_tasks/inactive_icon_urgent.svg"
-                alt=""
+                src="../assets/icons/navbar/summary_Icon.svg"
+                alt="Summary Icon"
               />
-            </button>
-            <button
-              onclick="setPriority()"
-              class="task-button active"
-              data-color="medium"
-              type="button"
-            >
-              Medium
+              <p>Summary</p>
+            </a>
+            <a href="./add_tasks.html" class="navbar-item" data-page="add_tasks">
               <img
-                src="../assets/icons/add_tasks/active_icon_medium.svg"
-                alt=""
+                src="../assets/icons/navbar/add_tasks.svg"
+                alt="Add Tasks Icon"
               />
-            </button>
-            <button
-              onclick="setPriority()"
-              class="task-button"
-              data-color="low"
-              type="button"
-            >
-              Low
+              <p>Add Tasks</p>
+            </a>
+            <a href="./board.html" class="navbar-item" data-page="board">
+              <img src="../assets/icons/navbar/board_icon.svg" alt="Board Icon" />
+              <p>Board</p>
+            </a>
+            <a href="./contact.html" class="navbar-item" data-page="contacts">
               <img
-                src="../assets/icons/add_tasks/inactive_icon_low.svg"
-                alt=""
+                src="../assets/icons/navbar/contacts_icon.svg"
+                alt="Contacts Icon"
               />
-            </button>
+              <p>Contacts</p>
+            </a>
           </div>
-          <p>Category<span>*</span></p>
-          <div class="add-task-custom-select" id="drop-down-2">
-            <div class="select-selected" tabindex="1">Select task category</div>
-            <div class="select-items select-hide">
-              <div
-                onclick="setCategory('Technical-Task')"
-                class="select-option"
-                data-value="category1"
-              >
-                Technical Task
-              </div>
-              <div
-                onclick="setCategory('User-Story')"
-                class="select-option"
-                data-value="category2"
-              >
-                User Story
+          <div class="navbar-disclaimer-links-container d-none">
+            <a href="../html/privacy_policy.html" data-page="privacy_policy"
+              >Privacy Policy</a
+            >
+            <a href="../html/legal_notice.html" data-page="legal_notice"
+              >Legal Notice</a
+            >
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="main-container">
+      <main>
+        <h1>Add Task</h1>
+        <form id="form-add-task">
+          <section>
+            <div class="mg-b-28">
+              <p>Title<span>*</span></p>
+              <input
+                id="input-field-title"
+                placeholder="Enter a title"
+                type="text"
+                required
+              />
+              <div id="titleError" class="error-msg-addtask d-none">
+                This field is required
               </div>
             </div>
-            <div id="categoryError" class="error-msg-addtask d-none">
-              This field is required
+            <p>Description</p>
+            <textarea
+              id="input-field-description"
+              class="resizable-textarea"
+              placeholder="Enter a Description"
+              type="text"
+            ></textarea>
+            <p>Assigned to</p>
+            <div class="add-task-custom-select" id="drop-down-1">
+              <div class="select-selected" tabindex="0">
+                Select contacts to assign
+              </div>
+              <div class="select-items"></div>
             </div>
-          </div>
-          <div class="subtask-container mg-t-28">
-            <p>Subtasks</p>
-            <div>
-              <div class="subtask-group">
-                <input
-                  id="subtaskInput"
-                  class="subtask-input"
-                  oninput="onInputSubtask('subtaskInput')"
-                  type="text"
-                  placeholder="Add new subtask"
+            <div id="selected-initials">
+              <div id="initials-display"></div>
+            </div>
+            <p class="required-note"><span>*</span>This field is required</p>
+          </section>
+          <div class="divider"></div>
+          <section class="add-task-container">
+            <div class="mg-b-28">
+              <p>Due date<span>*</span></p>
+              <input
+                id="input-field-date"
+                type="text"
+                placeholder="dd/mm/yyyy"
+                oninput="formatDate(this)"
+              />
+              <div id="dueDateError" class="error-msg-addtask d-none">
+                This field is required
+              </div>
+            </div>
+            <p>Prio</p>
+            <div class="button-container">
+              <button
+                onclick="setPriority()"
+                class="task-button"
+                data-color="urgent"
+                type="button"
+              >
+                Urgent
+                <img
+                  src="../assets/icons/add_tasks/inactive_icon_urgent.svg"
+                  alt=""
                 />
-                <div id="subtaskIcons" class="subtask-icons">
-                  <img
-                    onclick="focusInput()"
-                    class="add-subtask"
-                    src="../assets/icons/board/property-add.svg"
-                    alt="add"
-                  />
+              </button>
+              <button
+                onclick="setPriority()"
+                class="task-button active"
+                data-color="medium"
+                type="button"
+              >
+                Medium
+                <img
+                  src="../assets/icons/add_tasks/active_icon_medium.svg"
+                  alt=""
+                />
+              </button>
+              <button
+                onclick="setPriority()"
+                class="task-button"
+                data-color="low"
+                type="button"
+              >
+                Low
+                <img
+                  src="../assets/icons/add_tasks/inactive_icon_low.svg"
+                  alt=""
+                />
+              </button>
+            </div>
+            <p>Category<span>*</span></p>
+            <div class="add-task-custom-select" id="drop-down-2">
+              <div class="select-selected" tabindex="1">Select task category</div>
+              <div class="select-items select-hide">
+                <div
+                  onclick="setCategory('Technical-Task')"
+                  class="select-option"
+                  data-value="category1"
+                >
+                  Technical Task
+                </div>
+                <div
+                  onclick="setCategory('User-Story')"
+                  class="select-option"
+                  data-value="category2"
+                >
+                  User Story
                 </div>
               </div>
+              <div id="categoryError" class="error-msg-addtask d-none">
+                This field is required
+              </div>
             </div>
-            <div id="subtaskAddedList" class="subtask-added-list"></div>
-          </div>
-          <div class="clear-create-button-container">
-            <button id="clear-button" type="button" class="clear-button">
-              Clear &nbsp;&#10006;
-            </button>
-            <button
-            id="create-task-button"
-              class="create-button"
-              onclick="createAddTask('toDo'); return false;"
-              disabled
-            >
-              Create Task &nbsp;&nbsp;&#10003;
-            </button>
-          </div>
-        </section>
-      </form>
-      <div id="add-task-message" class="add-task-message">
-        Task added to board <img src="../assets/icons/navbar/board_icon.svg" alt="">
-      </div>
-    </main>
-  </body>
+            <div class="subtask-container mg-t-28">
+              <p>Subtasks</p>
+              <div>
+                <div class="subtask-group">
+                  <input
+                    id="subtaskInput"
+                    class="subtask-input"
+                    oninput="onInputSubtask('subtaskInput')"
+                    type="text"
+                    placeholder="Add new subtask"
+                  />
+                  <div id="subtaskIcons" class="subtask-icons">
+                    <img
+                      onclick="focusInput()"
+                      class="add-subtask"
+                      src="../assets/icons/board/property-add.svg"
+                      alt="add"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div id="subtaskAddedList" class="subtask-added-list"></div>
+            </div>
+            <div class="clear-create-button-container">
+              <button id="clear-button" type="button" class="clear-button">
+                Clear &nbsp;&#10006;
+              </button>
+              <button
+              id="create-task-button"
+                class="create-button"
+                onclick="createAddTask('toDo'); return false;"
+                disabled
+              >
+                Create Task &nbsp;&nbsp;&#10003;
+              </button>
+            </div>
+          </section>
+        </form>
+        <div id="add-task-message" class="add-task-message">
+          Task added to board <img src="../assets/icons/navbar/board_icon.svg" alt="">
+        </div>
+      </main>
+    </div>
+   </body>
 </html>
