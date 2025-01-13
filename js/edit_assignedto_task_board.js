@@ -38,8 +38,31 @@ function populateDropdown(dropdownId) {
   contactList.forEach((contact) => {
     const contactItemHTML = createContactItemTemplate(contact);
     dropdown.innerHTML += contactItemHTML;
+    checkUserCheckbox(contact);
   });
   toggleSelectionOnChange(dropdownId);
+}
+
+function checkUserCheckbox(contact) {
+  let contactAllSelectedKeys = getSelectedContactsKey(currentTaskId);
+  console.log('contactAllSelectedKeys', contactAllSelectedKeys);
+  if (contactAllSelectedKeys.includes(contact.id)) {
+    let inputCheckboxId = document.getElementById(`${contact.id}`);
+    console.log(inputCheckboxId);
+
+    inputCheckboxId.click();
+
+    // const label = document.querySelector(`label[for="${contact.id}"]`);
+    // label.click();
+
+    // const event = new Event('change');
+    // inputCheckboxId.dispatchEvent(event);
+
+    // inputCheckboxId.checked = true;
+
+    // const label = document.querySelector(`label[for="${contact.id}"]`);
+    // label.classList.add('selected-contact');
+  }
 }
 
 /**
