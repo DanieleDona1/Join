@@ -3,7 +3,8 @@ const BASE_URL = 'https://joinremotestorage-c8226-default-rtdb.europe-west1.fire
 // login und board Arrays
 // login und board Arrays
 let todos = [];
-let currentTodos = [];
+let currentTodos = [{subtask: [],},];
+let currentTaskId = 0;
 let todoKeysArray = [];
 let users = [];
 

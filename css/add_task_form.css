@@ -125,6 +125,7 @@ input:focus,
   border: none;
   height: 30px;
   width: 100%;
+  background-color: rgb(246,247,248);
 }
 
 .subtask-list-group input:focus {

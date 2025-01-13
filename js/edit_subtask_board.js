@@ -1,5 +1,3 @@
-let currentTaskId = '';
-
 /**
  * Handles input events on the 'subtaskInput' field. Updates the subtask icons based on input content.
  * If the input field has content, displays icons for adding or clearing the subtask.
@@ -235,6 +233,16 @@ function saveCurrentSubtask(i) {
  * @param {number} index - The index of the subtask to be removed.
  */
 function removeAddedSubtask(index) {
-  currentTodos[currentTaskId].subtask.splice(index, 1);
+  if (index === 'all') {
+    // Entferne alle Subtasks
+    currentTodos[currentTaskId].subtask = [];
+  } else if (typeof index === 'number') {
+    // Entferne ein spezifisches Subtask anhand des Indexes
+    currentTodos[currentTaskId].subtask.splice(index, 1);
+  } else {
+    console.error("Invalid index passed to removeAddedSubtask:", index);
+  }
+
+  // Aktualisiere die Anzeige
   renderSubtaskAddedList();
 }
