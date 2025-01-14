@@ -113,7 +113,7 @@ function loadMembersInitials(taskId, initialsContainerId) {
         membersContainer.innerHTML += memberHtmlTemplate(initialsName);
         addedCount++;
       } else if (addedCount < 4) {
-        let collectedMembers = selectedContactsKeys.length - addedCount - 1;
+        let collectedMembers = selectedContactsKeys.length - addedCount;
         membersContainer.innerHTML += memberCollected(collectedMembers, taskId);
         addedCount++;
       }

@@ -97,6 +97,18 @@
   gap: 14px;
 }
 
+.member-collected {
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  background-color:  #afafaf;
+  transition: background-color 200ms;
+}
+
+.members-container .member-collected:hover {
+  background-color:  #d1d0d0;
+}
+
 .member-name {
   padding-left: 16px;
   font-size: 18px;

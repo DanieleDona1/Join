@@ -301,18 +301,6 @@ input:focus {
   margin-right: 5px;
 }
 
-.member-collected {
-  color: black;
-  font-weight: bold;
-  font-size: 18px;
-  background-color:  #afafaf;
-  transition: background-color 200ms;
-}
-
-.member-collected:hover {
-  background-color:  #d1d0d0;
-}
-
 .addtask-btn-board::before {
   content: attr(value);
 }
