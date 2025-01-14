@@ -184,104 +184,108 @@
     <div id="success-message" class="d-none success-message d-flex-c-c">
       Contact succesfully created
     </div>
-
-    <header>
-      <img
-        class="header-join-logo"
-        src="../assets/icons/header/joinHeaderMobile.svg"
-        alt="logo"
-      />
-      <p class="d-none">Kanban Project Management Tool</p>
-      <div class="header-rightside-container">
-        <a href="./help.html">
-          <img
-            class="header-help-icon d-none"
-            src="../assets/icons/header/help.svg"
-            alt="help"
-          />
-        </a>
-        <div class="dropdown-container">
-          <span
-            id="headerInitials"
-            class="header-initials d-flex-c-c"
-            tabindex="0"
-          ></span>
-          <div class="dropdown-menu">
-            <ul>
-              <li class="dropdown-help"><a href="../html/help.html">Help</a></li>
-              <li><a href="../html/legal_notice.html">Legal Notice</a></li>
-              <li><a href="../html/privacy_policy.html">Privacy Policy</a></li>
-              <li>
-                <a onclick="removeUserToken()" href="../index.html">Log out</a>
-              </li>
-            </ul>
+    <div class="header-container">
+      <header>
+        <img
+          class="header-join-logo"
+          src="../assets/icons/header/joinHeaderMobile.svg"
+          alt="logo"
+        />
+        <p class="d-none">Kanban Project Management Tool</p>
+        <div class="header-rightside-container">
+          <a href="./help.html">
+            <img
+              class="header-help-icon d-none"
+              src="../assets/icons/header/help.svg"
+              alt="help"
+            />
+          </a>
+          <div class="dropdown-container">
+            <span
+              id="headerInitials"
+              class="header-initials d-flex-c-c"
+              tabindex="0"
+            ></span>
+            <div class="dropdown-menu">
+              <ul>
+                <li class="dropdown-help"><a href="../html/help.html">Help</a></li>
+                <li><a href="../html/legal_notice.html">Legal Notice</a></li>
+                <li><a href="../html/privacy_policy.html">Privacy Policy</a></li>
+                <li>
+                  <a onclick="removeUserToken()" href="../index.html">Log out</a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
-    <nav>
-      <div class="navbar-join-icon-container d-none">
-        <img src="../assets/icons/navbar/navbar_join_icon.svg" alt="" />
-      </div>
-      <div class="navbar-container-bottom">
-        <div class="navbar-item-container">
-          <a href="./summary.html" class="navbar-item" data-page="summary">
-            <img
-              src="../assets/icons/navbar/summary_Icon.svg"
-              alt="Summary Icon"
-            />
-            <p>Summary</p>
-          </a>
-          <a href="./add_tasks.html" class="navbar-item" data-page="add_tasks">
-            <img
-              src="../assets/icons/navbar/add_tasks.svg"
-              alt="Add Tasks Icon"
-            />
-            <p>Add Tasks</p>
-          </a>
-          <a href="./board.html" class="navbar-item" data-page="board">
-            <img src="../assets/icons/navbar/board_icon.svg" alt="Board Icon" />
-            <p>Board</p>
-          </a>
-          <a href="./contact.html" class="navbar-item" data-page="contacts">
-            <img
-              src="../assets/icons/navbar/contacts_icon.svg"
-              alt="Contacts Icon"
-            />
-            <p>Contacts</p>
-          </a>
+      </header>
+    </div>
+    <div class="nav-container">
+      <nav>
+        <div class="navbar-join-icon-container d-none">
+          <img src="../assets/icons/navbar/navbar_join_icon.svg" alt="" />
         </div>
-        <div class="navbar-disclaimer-links-container d-none">
-          <a href="../html/privacy_policy.html" data-page="privacy_policy"
-            >Privacy Policy</a
-          >
-          <a href="../html/legal_notice.html" data-page="legal_notice"
-            >Legal Notice</a
-          >
+        <div class="navbar-container-bottom">
+          <div class="navbar-item-container">
+            <a href="./summary.html" class="navbar-item" data-page="summary">
+              <img
+                src="../assets/icons/navbar/summary_Icon.svg"
+                alt="Summary Icon"
+              />
+              <p>Summary</p>
+            </a>
+            <a href="./add_tasks.html" class="navbar-item" data-page="add_tasks">
+              <img
+                src="../assets/icons/navbar/add_tasks.svg"
+                alt="Add Tasks Icon"
+              />
+              <p>Add Tasks</p>
+            </a>
+            <a href="./board.html" class="navbar-item" data-page="board">
+              <img src="../assets/icons/navbar/board_icon.svg" alt="Board Icon" />
+              <p>Board</p>
+            </a>
+            <a href="./contact.html" class="navbar-item" data-page="contacts">
+              <img
+                src="../assets/icons/navbar/contacts_icon.svg"
+                alt="Contacts Icon"
+              />
+              <p>Contacts</p>
+            </a>
+          </div>
+          <div class="navbar-disclaimer-links-container d-none">
+            <a href="../html/privacy_policy.html" data-page="privacy_policy"
+              >Privacy Policy</a
+            >
+            <a href="../html/legal_notice.html" data-page="legal_notice"
+              >Legal Notice</a
+            >
+          </div>
         </div>
-      </div>
-    </nav>
-
-    <main class="main-contact">
-      <div class="main-contact-side">
-        <div id="contact-list-field" class="contact-list-field">
-          <button onclick="openAddContact()" class="contact-list-field-button">
-            <span>Add new contact</span>
-            <img
-              src="../assets/icons/contact/contact_add.png"
-              alt="contact add"
-            />
-          </button>
-          <div class="contact-list" id="content-contactlist"></div>
+      </nav>
+    </div>
+    <div class="main-container">
+      <main class="main-contact">
+        <div class="main-contact-side">
+          <div id="contact-list-field" class="contact-list-field">
+            <button onclick="openAddContact()" class="contact-list-field-button">
+              <span>Add new contact</span>
+              <img
+                src="../assets/icons/contact/contact_add.png"
+                alt="contact add"
+              />
+            </button>
+            <div class="contact-list" id="content-contactlist"></div>
+          </div>
         </div>
-      </div>
-      <div id="contact-info-window" class="d-none"></div>
-      <div id="contact-text-large" class="contact-text">
-        <span class="span-1">Contacts</span>
-        <div class="contact-vector"></div>
-        <span class="span-2">Better with a team</span>
-      </div>
-      <div id="contact-info" class="contact-info"></div>
-    </main>
+        <div id="contact-info-window" class="d-none"></div>
+        <div id="contact-text-large" class="contact-text">
+          <span class="span-1">Contacts</span>
+          <div class="contact-vector"></div>
+          <span class="span-2">Better with a team</span>
+        </div>
+        <div id="contact-info" class="contact-info"></div>
+      </main>
+    </div>
   </body>
 </html>

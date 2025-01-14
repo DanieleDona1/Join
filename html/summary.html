@@ -16,125 +16,128 @@
     <script src="../js/summary.js"></script>
   </head>
   <body onload="onload()" class="max-width-1440">
-    <header>
-      <img class="header-join-logo" src="../assets/icons/header/joinHeaderMobile.svg" alt="logo" />
-      <p class="d-none">Kanban Project Management Tool</p>
-      <div class="header-rightside-container">
-        <a href="help.html">
-          <img class="header-help-icon d-none" src="../assets/icons/header/help.svg" alt="help" />
-        </a>
-        <div class="dropdown-container">
-          <span id="headerInitials" class="header-initials d-flex-c-c" tabindex="0"></span>
-          <div class="dropdown-menu">
-            <ul>
-              <li class="dropdown-help"><a href="../html/help.html">Help</a></li>
-              <li><a href="../html/legal_notice.html">Legal Notice</a></li>
-              <li><a href="../html/privacy_policy.html">Privacy Policy</a></li>
-              <li><a onclick="removeUserToken()" href="../index.html">Log out</a></li>
-            </ul>
+    <div class="header-container">
+      <header>
+        <img class="header-join-logo" src="../assets/icons/header/joinHeaderMobile.svg" alt="logo" />
+        <p class="d-none">Kanban Project Management Tool</p>
+        <div class="header-rightside-container">
+          <a href="help.html">
+            <img class="header-help-icon d-none" src="../assets/icons/header/help.svg" alt="help" />
+          </a>
+          <div class="dropdown-container">
+            <span id="headerInitials" class="header-initials d-flex-c-c" tabindex="0"></span>
+            <div class="dropdown-menu">
+              <ul>
+                <li class="dropdown-help"><a href="../html/help.html">Help</a></li>
+                <li><a href="../html/legal_notice.html">Legal Notice</a></li>
+                <li><a href="../html/privacy_policy.html">Privacy Policy</a></li>
+                <li><a onclick="removeUserToken()" href="../index.html">Log out</a></li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
-
-    <nav>
-      <div class="navbar-join-icon-container d-none">
-        <img src="../assets/icons/navbar/navbar_join_icon.svg" alt="" />
-      </div>
-      <div class="navbar-container-bottom">
-        <div class="navbar-item-container">
-          <a href="./summary.html" class="navbar-item" data-page="summary">
-            <img src="../assets/icons/navbar/summary_Icon.svg" alt="Summary Icon" />
-            <p>Summary</p>
-          </a>
-          <a href="./add_tasks.html" class="navbar-item" data-page="add_tasks">
-            <img src="../assets/icons/navbar/add_tasks.svg" alt="Add Tasks Icon" />
-            <p>Add Tasks</p>
-          </a>
-          <a href="./board.html" class="navbar-item" data-page="board">
-            <img src="../assets/icons/navbar/board_icon.svg" alt="Board Icon" />
-            <p>Board</p>
-          </a>
-          <a href="./contact.html" class="navbar-item" data-page="contacts">
-            <img src="../assets/icons/navbar/contacts_icon.svg" alt="Contacts Icon" />
-            <p>Contacts</p>
-          </a>
+      </header>
+    </div>
+    <div class="nav-container">
+      <nav>
+        <div class="navbar-join-icon-container d-none">
+          <img src="../assets/icons/navbar/navbar_join_icon.svg" alt="" />
         </div>
-        <div class="navbar-disclaimer-links-container d-none">
-          <a href="../html/privacy_policy.html" data-page="privacy_policy">Privacy Policy</a>
-          <a href="../html/legal_notice.html" data-page="legal_notice">Legal Notice</a>
+        <div class="navbar-container-bottom">
+          <div class="navbar-item-container">
+            <a href="./summary.html" class="navbar-item" data-page="summary">
+              <img src="../assets/icons/navbar/summary_Icon.svg" alt="Summary Icon" />
+              <p>Summary</p>
+            </a>
+            <a href="./add_tasks.html" class="navbar-item" data-page="add_tasks">
+              <img src="../assets/icons/navbar/add_tasks.svg" alt="Add Tasks Icon" />
+              <p>Add Tasks</p>
+            </a>
+            <a href="./board.html" class="navbar-item" data-page="board">
+              <img src="../assets/icons/navbar/board_icon.svg" alt="Board Icon" />
+              <p>Board</p>
+            </a>
+            <a href="./contact.html" class="navbar-item" data-page="contacts">
+              <img src="../assets/icons/navbar/contacts_icon.svg" alt="Contacts Icon" />
+              <p>Contacts</p>
+            </a>
+          </div>
+          <div class="navbar-disclaimer-links-container d-none">
+            <a href="../html/privacy_policy.html" data-page="privacy_policy">Privacy Policy</a>
+            <a href="../html/legal_notice.html" data-page="legal_notice">Legal Notice</a>
+          </div>
         </div>
-      </div>
-    </nav>
-
+      </nav>
+    </div>
     <div class="greeting-dialog d-flex-c-c" id="greetingDialog"></div>
     <div class="loading-bar-dialog" id="loadingBarDialog">
       <div class="loading-bar" id="loadingBar">
         <div class="loading-fill" id="loadingFill"></div>
       </div>
     </div>
-
-    <main>
-      <div class="d-flex-fs-c headline">
-        <h2>Join 360</h2>
-        <div class="separator"></div>
-        <span class="underline-seperator">Key Metrics at a Glance</span>
-      </div>
-
-      <div class="summary-container">
-        <div onclick="redirectToPage('./board.html')" class="grid-container">
-          <div class="to-do gap-16">
-            <div class="to-do-img"></div>
-            <div>
-              <div id="todoAmount" class="todo-amount">0</div>
-              <span>To-do</span>
-            </div>
-          </div>
-          <div class="done gap-16">
-            <div class="done-img"></div>
-            <div>
-              <div id="doneAmount" class="done-amount">0</div>
-              <span>Done</span>
-            </div>
-          </div>
-
-          <div class="priority">
-            <div class="d-flex-c-c width-50 gap-16">
-              <div class="priority-img"></div>
+    <div class="main-container">
+      <main>
+        <div class="d-flex-fs-c headline">
+          <h2>Join 360</h2>
+          <div class="separator"></div>
+          <span class="underline-seperator">Key Metrics at a Glance</span>
+        </div>
+  
+        <div class="summary-container">
+          <div onclick="redirectToPage('./board.html')" class="grid-container">
+            <div class="to-do gap-16">
+              <div class="to-do-img"></div>
               <div>
-                <div id="urgentAmount" class="urgent-amount">0</div>
-                <span>Urgent</span>
+                <div id="todoAmount" class="todo-amount">0</div>
+                <span>To-do</span>
               </div>
             </div>
-            <div class="upcoming-separator"></div>
-            <div class="d-flex-c-c width-50">
-              <div class="d-flex-col-c-c">
-                <div id="upcomingDeadline" class="upcoming-deadline">-</div>
-                <span id="upcomingText">Upcoming Deadline</span>
+            <div class="done gap-16">
+              <div class="done-img"></div>
+              <div>
+                <div id="doneAmount" class="done-amount">0</div>
+                <span>Done</span>
               </div>
             </div>
+  
+            <div class="priority">
+              <div class="d-flex-c-c width-50 gap-16">
+                <div class="priority-img"></div>
+                <div>
+                  <div id="urgentAmount" class="urgent-amount">0</div>
+                  <span>Urgent</span>
+                </div>
+              </div>
+              <div class="upcoming-separator"></div>
+              <div class="d-flex-c-c width-50">
+                <div class="d-flex-col-c-c">
+                  <div id="upcomingDeadline" class="upcoming-deadline">-</div>
+                  <span id="upcomingText">Upcoming Deadline</span>
+                </div>
+              </div>
+            </div>
+            <div class="task-in-board d-flex-col-c-c">
+              <div id="taskInBoard">0</div>
+              <span class="task-in-board-text">Task in Board</span>
+            </div>
+            <div class="task-in-progress d-flex-col-c-c">
+              <div id="taskInProgress">0</div>
+              <span class="task-in-progress-text">Task in Progress</span>
+            </div>
+            <div class="awaiting-feedback d-flex-col-c-c">
+              <div id="taskInFeedback">0</div>
+              <span class="awaiting-feedback-text">Awaiting Feedback</span>
+            </div>
           </div>
-          <div class="task-in-board d-flex-col-c-c">
-            <div id="taskInBoard">0</div>
-            <span class="task-in-board-text">Task in Board</span>
-          </div>
-          <div class="task-in-progress d-flex-col-c-c">
-            <div id="taskInProgress">0</div>
-            <span class="task-in-progress-text">Task in Progress</span>
-          </div>
-          <div class="awaiting-feedback d-flex-col-c-c">
-            <div id="taskInFeedback">0</div>
-            <span class="awaiting-feedback-text">Awaiting Feedback</span>
+  
+          <div id="userGreeting" class="user-greeting-container d-flex-c-c">
+            <div class="user-greeting-group">
+              <div class="greeting" id="greeting"></div>
+              <div class="user-name" id="userName"></div>
+            </div>
           </div>
         </div>
-
-        <div id="userGreeting" class="user-greeting-container d-flex-c-c">
-          <div class="user-greeting-group">
-            <div class="greeting" id="greeting"></div>
-            <div class="user-name" id="userName"></div>
-          </div>
-        </div>
-      </div>
-    </main>
+      </main>
+    </div>
   </body>
 </html>
