@@ -16,10 +16,6 @@ async function onload() {
   await generateHeaderInitials();
   setupOutsideClickForCustomSelects();
   initObserver();
-
-  //TODO
-  // openTaskDetails(4);
-  // openEditTask(4);
 }
 
 /**
@@ -101,10 +97,54 @@ function loadProgressText(task, progressText, progressBar) {
  * Loads the assigned members for a task and displays their initials in the respective container.
  * Array are used contactList - createContactlistAddTask() and keys-currentTodos[i].assignedTo and selectedContacts.
  */
-function loadMembersInitials(i, initialsContainerId) {
-  if (currentTodos[i].assignedTo) {
-    selectedContactsKeys = getSelectedContactsKey(i);
-    const membersContainer = document.getElementById(initialsContainerId + i);
+function loadMembersInitials(taskId, initialsContainerId) {
+  if (currentTodos[taskId].assignedTo) {
+    selectedContactsKeys = getSelectedContactsKey(taskId);
+    const membersContainer = document.getElementById(initialsContainerId + taskId);
+    membersContainer.innerHTML = '';
+    let addedCount = 0;
+    for (let j = 0; j < selectedContactsKeys.length; j++) {
+      selectedContacts = contactList.filter((f) => f.id === selectedContactsKeys[j]);
+
+      const name = getName(selectedContacts[0]);
+      const initialsName = generateInitials(name);
+
+      if (initialsName && addedCount < 3) {
+        membersContainer.innerHTML += memberHtmlTemplate(initialsName);
+        addedCount++;
+      } else if (addedCount < 4) {
+        let collectedMembers = selectedContactsKeys.length - addedCount - 1;
+        membersContainer.innerHTML += memberCollected(collectedMembers, taskId);
+        addedCount++;
+      }
+    }
+  }
+}
+
+/**
+ * Generates an HTML snippet for displaying the count of collected members in a task.
+ * The snippet includes a clickable element that triggers the expansion of all member initials.
+ *
+ * @param {number} counter - The number of collected members to display.
+ * @param {string} taskId - The ID of the task to associate with the member collection.
+ * @returns {string} The HTML markup string for the member collection element.
+ */
+function memberCollected(counter, taskId) {
+  return /*html*/ `
+    <div class="initial-board-wrapper" onclick="event.stopPropagation(); expandAllMemberInitials('${taskId}', '${'membersContainer'}')">
+      <div class="initial-board d-flex-c-c member-collected">+${counter}</div>
+    </div>
+    `;
+}
+
+/**
+ * Loads the assigned members for a task and displays their initials in the respective container.
+ * Array are used contactList - createContactlistAddTask() and keys-currentTodos[i].assignedTo and selectedContacts.
+ */
+function expandAllMemberInitials(taskId, initialsContainerId) {
+  if (currentTodos[taskId].assignedTo) {
+    selectedContactsKeys = getSelectedContactsKey(taskId);
+    let membersContainer = document.getElementById(initialsContainerId + taskId);
     membersContainer.innerHTML = '';
     for (let j = 0; j < selectedContactsKeys.length; j++) {
       selectedContacts = contactList.filter((f) => f.id === selectedContactsKeys[j]);
@@ -116,7 +156,23 @@ function loadMembersInitials(i, initialsContainerId) {
         membersContainer.innerHTML += memberHtmlTemplate(initialsName);
       }
     }
+    membersContainer.innerHTML += closeMemberBtn(taskId);
   }
+}
+
+/**
+ * Generates an HTML snippet for a button that closes or resets the member initials view.
+ * The snippet includes a clickable element that triggers the reloading of the member initials for the specified task.
+ *
+ * @param {string} taskId - The ID of the task to reload the member initials for.
+ * @returns {string} The HTML markup string for the close button element.
+ */
+function closeMemberBtn(taskId) {
+  return /*html*/ `
+    <div class="initial-board-wrapper" onclick="event.stopPropagation(); loadMembersInitials('${taskId}', 'membersContainer')">
+      <div class="initial-board d-flex-c-c member-collected">X</div>
+    </div>
+    `;
 }
 
 /**
