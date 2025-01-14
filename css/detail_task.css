@@ -63,7 +63,7 @@
 .members-container {
   position: relative;
   width: 170px;
-  padding-left: 10px;
+  padding-left: 7px;
   flex-wrap: wrap;
   min-height: 41px;
 }
