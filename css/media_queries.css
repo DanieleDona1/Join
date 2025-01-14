@@ -168,9 +168,8 @@
     min-height: 0;
   }
 
-  .dialog-bg,
-  .background-pop-up {
-    max-width: 1920px;
+  .pop-up-add-Task {
+    max-width: 1921px;
     max-height: 1080px;
   }
 }

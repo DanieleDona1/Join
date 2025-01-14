@@ -204,10 +204,10 @@ h3 {
 
 .pop-up-add-Task {
   position: fixed;
-  top: 8%;
-  left: 8%;
   width: 84%;
+  max-width: 1200px;
   height: 84%;
+  max-height: 850px;
   background-color: white;
   border-radius: 30px;
   padding: 30px;
