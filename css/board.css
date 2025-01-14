@@ -254,9 +254,9 @@ h3 {
   display: none;
 }
 
-input[type='checkbox']:checked + .checkbox-image {
+/* input[type='checkbox']:checked + .checkbox-image {
   background-image: url('../assets/icons/board/checkbox_checked.svg');
-}
+} */
 
 input:focus {
   outline: none;

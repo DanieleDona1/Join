@@ -25,12 +25,14 @@ function toggleDropdown(dropdownId, openContactsId) {
 }
 
 /**
- * Populates the dropdown with contact list items.
+ * Populates a dropdown menu with contact items and sets up selection handling.
  *
- * This function clears the existing content of the dropdown and adds new contact items
- * from the `contactList`. It also attaches a selection change handler to the dropdown.
+ * This function takes a dropdown ID, clears its current contents, and populates it with contact items
+ * created using the `createContactItemTemplate` function. After the dropdown is populated, it sets up
+ * event listeners to handle selection changes and verifies the checkbox status of the contacts.
  *
- * @param {string} dropdownId - The ID of the dropdown element to populate.
+ * @param {string} dropdownId - The ID of the dropdown element to populate with contact items.
+ * @returns {void} This function does not return any value.
  */
 function populateDropdown(dropdownId) {
   const dropdown = document.getElementById(dropdownId);
@@ -38,30 +40,71 @@ function populateDropdown(dropdownId) {
   contactList.forEach((contact) => {
     const contactItemHTML = createContactItemTemplate(contact);
     dropdown.innerHTML += contactItemHTML;
-    checkUserCheckbox(contact);
   });
   toggleSelectionOnChange(dropdownId);
+  checkUserCheckbox('dropdown');
 }
 
-function checkUserCheckbox(contact) {
+/**
+ * Checks and clicks the checkboxes in the specified container based on the selected contact keys.
+ *
+ * This function checks all checkboxes within the specified container and simulates a click event on
+ * each checkbox whose associated contact ID is included in the selected contact keys for the current task.
+ *
+ * @param {string} containerId - The ID of the container element that holds the checkboxes.
+ * @returns {void} This function does not return any value.
+ */
+function checkUserCheckbox(containerId) {
   let contactAllSelectedKeys = getSelectedContactsKey(currentTaskId);
-  console.log('contactAllSelectedKeys', contactAllSelectedKeys);
-  if (contactAllSelectedKeys.includes(contact.id)) {
-    let inputCheckboxId = document.getElementById(`${contact.id}`);
-    console.log(inputCheckboxId);
+  let container = document.getElementById(containerId);
+  let checkboxes = container.querySelectorAll('.contact-checkbox');
 
-    inputCheckboxId.click();
+  checkboxes.forEach((input) => {
+    let contactId = input.id;
+    if (contactAllSelectedKeys.includes(contactId)) {
+      input.click();
+    }
+  });
+}
 
-    // const label = document.querySelector(`label[for="${contact.id}"]`);
-    // label.click();
+/**
+ * Updates the background image of the checkbox's associated image element based on its checked state.
+ *
+ * This function checks if the provided element is a checkbox with the class `.contact-checkbox`.
+ * If it is, it updates the `backgroundImage` of the next sibling element (typically an image) to reflect
+ * whether the checkbox is checked or unchecked.
+ *
+ * @param {HTMLElement} inputCheckboxId - The checkbox element whose checked state determines the background image.
+ * @returns {void} This function does not return any value.
+ */
+function urlLoadSubtaskImg(inputCheckboxId) {
+  if (inputCheckboxId.matches('.contact-checkbox')) {
+    const checkboxImage = inputCheckboxId.nextElementSibling;
 
-    // const event = new Event('change');
-    // inputCheckboxId.dispatchEvent(event);
+    if (inputCheckboxId.checked) {
+      checkboxImage.style.backgroundImage = "url('../assets/icons/board/checkbox_checked.svg')";
+    } else {
+      checkboxImage.style.backgroundImage = "url('../assets/icons/board/checkbox_unchecked.svg')";
+    }
+  }
+}
 
-    // inputCheckboxId.checked = true;
+/**
+ * Toggles the background image of the checkbox's sibling element based on its checked state.
+ *
+ * @param {Event} event - The event triggered by the checkbox click.
+ * @returns {void}
+ */
+function urlToggleSubtaskImg(event) {
+  if (event.target && event.target.matches('.contact-checkbox')) {
+    const checkbox = event.target;
+    const checkboxImage = checkbox.nextElementSibling;
 
-    // const label = document.querySelector(`label[for="${contact.id}"]`);
-    // label.classList.add('selected-contact');
+    if (checkbox.checked) {
+      checkboxImage.style.backgroundImage = "url('../assets/icons/board/checkbox_checked.svg')";
+    } else {
+      checkboxImage.style.backgroundImage = "url('../assets/icons/board/checkbox_unchecked.svg')";
+    }
   }
 }
 
