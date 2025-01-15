@@ -253,6 +253,8 @@ function moveToNextField(e) {
     resetContactsDropdown();
     disableAddTaskButton();
     clearSubtasks();
+    titleFieldTouched = false;
+    dateFieldTouched = false;
   }
   
   /**

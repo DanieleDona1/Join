@@ -393,3 +393,11 @@
     border-radius: 90px;
   }
 }
+
+@media (max-width: 400px) {
+  .contact-list-field {
+    width: auto;
+  }
+}
+
+

@@ -178,23 +178,27 @@ let titleFieldTouched = false;
 function validateTitle(titleInput) {
   const titleError = document.getElementById("titleError");
   const titleValue = titleInput.value.trim();
-
-  // Fehlermeldung nur anzeigen, wenn das Feld bereits berührt wurde
-  if (titleFieldTouched && titleValue.length < 3) {
+  
+  // --- 1) Hat der Titel >= 3 Zeichen? ---
+  const isTitleLongEnough = titleValue.length >= 3;
+  
+  // --- 2) Fehlermeldung nur anzeigen, wenn Feld schon berührt ---
+  if (titleFieldTouched && !isTitleLongEnough) {
     titleError.textContent = "Title must be at least 3 characters long.";
     titleError.classList.remove("d-none");
-    return false;
+  } else {
+    titleError.classList.add("d-none");
   }
-
-  // Fehlermeldung ausblenden, wenn die Eingabe gültig ist
-  titleError.classList.add("d-none");
-  return true;
+  
+  // --- 3) Für die Formular-Gültigkeit: Feld ist nur valid, wenn >= 3 Zeichen ---
+  return isTitleLongEnough;
 }
 
 function validateTitleOnBlur(titleInput) {
   titleFieldTouched = true; // Markiere das Feld als berührt
-  return validateTitle(titleInput); // Führe die Validierung aus
+  return validateTitle(titleInput);
 }
+
 
 let dateFieldTouched = false;
 
@@ -202,27 +206,46 @@ function validateDueDate(dueDateInput) {
   const dateValue = dueDateInput.value.trim();
   const dueDateError = document.getElementById("dueDateError");
 
-  if (!dateFieldTouched) {
+  // --- 1) Ist die Eingabe überhaupt gefüllt und formal korrekt? ---
+  const isFilled = dateValue.length === 10;  // (dd/mm/yyyy) => length = 10
+  let isFutureDate = false;
+  let errorMessage = null;
+
+  // Prüfe das Datum aber nur, wenn etwas drin steht.
+  if (isFilled) {
+    errorMessage = isValidDateFormat(dateValue); // gibt 'null' zurück, wenn okay
+    isFutureDate = (errorMessage === null);
+  }
+
+  // --- 2) Fehlermeldung logik ---
+  // Zeige Fehlermeldung nur, wenn Feld berührt und wir etwas Falsches feststellen
+  if (dateFieldTouched) {
+    if (!isFilled) {
+      dueDateError.textContent = "Due Date is required (dd/mm/yyyy).";
+      dueDateError.classList.remove("d-none");
+    } else if (!isFutureDate) {
+      // Dann ist 'errorMessage' != null
+      dueDateError.textContent = errorMessage;
+      dueDateError.classList.remove("d-none");
+    } else {
+      // Korrektes Datum
+      dueDateError.classList.add("d-none");
+    }
+  } else {
+    // Noch nicht berührt -> keine Fehlermeldung
     dueDateError.classList.add("d-none");
-    return true; // Keine Fehlermeldung anzeigen, solange das Feld nicht berührt wurde
   }
 
-  if (!dateValue || dateValue.length < 10) {
-    dueDateError.textContent = "Due Date is required.";
-    dueDateError.classList.remove("d-none");
-    return false;
-  }
-
-  const errorMessage = isValidDateFormat(dateValue);
-  if (errorMessage) {
-    dueDateError.textContent = errorMessage;
-    dueDateError.classList.remove("d-none");
-    return false;
-  }
-
-  dueDateError.classList.add("d-none");
-  return true;
+  // --- 3) Formular-Validity ---
+  // Ist nur valid, wenn etwas drin steht UND es ein Datum in der Zukunft ist
+  return isFilled && isFutureDate;
 }
+
+function validateDueDateOnBlur(dueDateInput) {
+  dateFieldTouched = true;
+  return validateDueDate(dueDateInput);
+}
+
 
 
 function validateCategory(categorySelect) {
@@ -321,12 +344,6 @@ function isValidDateFormat(dateValue) {
 
   return null;
 }
-
-function validateDueDateOnBlur(dueDateInput) {
-  dateFieldTouched = true; // Markiere das Feld als berührt
-  validateDueDate(dueDateInput); // Führe die Validierung aus
-}
-
 
 
 function showAddTaskMessage() {
