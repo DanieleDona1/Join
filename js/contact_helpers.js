@@ -392,3 +392,21 @@ function removeDuplicates(group) {
 function clearContactInfo() {
   document.getElementById('contact-info').innerHTML = '';
 }
+
+
+function toggleContactInfo() {
+  const container = document.getElementById('contact-info');
+  if (!container) {
+    console.error('Element mit der ID "contact-info" wurde nicht gefunden!');
+    return;
+  }
+
+  container.classList.add('info-hide');
+  void container.offsetWidth;
+  
+  setTimeout(() => {
+    container.classList.remove('info-hide');
+  }, 10);
+}
+
+

@@ -1,13 +1,26 @@
+main {
+  overflow-x: hidden;
+}
+
 .contact-info {
-    min-width: 461px;
-    height: auto;
-    position: absolute;
-    top: 215px;
-    left: 518px;
-    display: flex;
-    flex-direction: column;
-    gap: 21px;
-  }
+  min-width: 461px;
+  height: auto;
+  position: absolute;
+  top: 215px;
+  left: 518px;
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  opacity: 1;
+  transform: translateX(0);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.contact-info.info-hide {
+  transition: none;
+  opacity: 0;
+  transform: translateX(100vw);
+}
 
 .contact-item {
   width: 352px;
