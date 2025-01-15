@@ -1,7 +1,7 @@
 .main-contact-side {
     width: 456px;
     height: 100%;
-    background-color: white;
+    background-color: rgb(246,247,248);
     box-shadow: 3px 0px 6px 0px rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
@@ -157,4 +157,21 @@
     font-weight: 400;
     color: #2a3647;
     order: 3;
+  }
+
+  #movedButtons {
+    position: fixed;
+    flex-direction: column;
+    bottom: 128px;
+    right: -300px;
+    z-index: 300;
+    padding: 8px;
+    border-radius: 10px 10px 0 10px;
+    background-color: rgb(255,255,255);
+    box-shadow: 3px 0px 6px 0px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  #movedButtons.show {
+    transform: translateX(-315px); 
   }

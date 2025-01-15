@@ -159,20 +159,88 @@ function getUpdatedContactData() {
   };
 }
 
+
 /**
- * Toggles the visibility of the edit/delete buttons in the contact info popup.
+ * Toggles the visibility of the EditDelete container.
  */
 function toggleEditDelete() {
-  const movedButtonsContainer = document.getElementById('movedButtons');
-  if (!movedButtonsContainer) {
+  const editDeleteContainer = document.getElementById('movedButtons');
+  const toggleButton = document.getElementById('toggleButtons');
+
+  if (!editDeleteContainer) {
     console.warn("toggleEditDelete: 'movedButtons' does not exist.");
     return;
   }
 
-  if (movedButtonsContainer.style.display === 'none' || movedButtonsContainer.style.display === '') {
-    movedButtonsContainer.style.display = 'flex';
+  if (!editDeleteContainer.classList.contains('show')) {
+    activateEditDeleteContainer(editDeleteContainer, toggleButton);
   } else {
-    movedButtonsContainer.style.display = 'none';
+    deactivateEditDeleteContainer(editDeleteContainer);
+  }
+}
+
+/**
+ * Activates (shows) the EditDelete container and sets up the event listener for outside clicks.
+ * @param {HTMLElement} container - The EditDelete container to be activated.
+ * @param {HTMLElement} toggleButton - The toggle button associated with the container.
+ */
+function activateEditDeleteContainer(container, toggleButton) {
+  showEditDeleteContainer(container);
+  addOutsideClickListener(container, toggleButton);
+}
+
+/**
+ * Deactivates (hides) the EditDelete container and removes the event listener for outside clicks.
+ * @param {HTMLElement} container - The EditDelete container to be deactivated.
+ */
+function deactivateEditDeleteContainer(container) {
+  hideEditDeleteContainer(container);
+  removeOutsideClickListener();
+}
+
+/**
+ * Shows the EditDelete container by adding the 'show' class.
+ * @param {HTMLElement} container - The EditDelete container to be shown.
+ */
+function showEditDeleteContainer(container) {
+  container.classList.add('show');
+}
+
+/**
+ * Hides the EditDelete container by removing the 'show' class.
+ * @param {HTMLElement} container - The EditDelete container to be hidden.
+ */
+function hideEditDeleteContainer(container) {
+  container.classList.remove('show');
+}
+
+/**
+ * Adds a click event listener to handle clicks outside the EditDelete container.
+ * @param {HTMLElement} container - The EditDelete container to check for outside clicks.
+ * @param {HTMLElement} toggleButton - The toggle button associated with the container.
+ */
+function addOutsideClickListener(container, toggleButton) {
+  document.addEventListener('click', (event) =>
+    handleOutsideClick(event, container, toggleButton)
+  );
+}
+
+/**
+ * Removes the click event listener for outside clicks on the EditDelete container.
+ */
+function removeOutsideClickListener() {
+  document.removeEventListener('click', handleOutsideClick);
+}
+
+/**
+ * Handles clicks outside the EditDelete container and closes it if necessary.
+ * @param {Event} event - The click event.
+ * @param {HTMLElement} container - The EditDelete container to be closed if clicked outside.
+ * @param {HTMLElement} toggleButton - The toggle button associated with the container.
+ */
+function handleOutsideClick(event, container, toggleButton) {
+  if (!container.contains(event.target) && !toggleButton.contains(event.target)) {
+    deactivateEditDeleteContainer(container);
   }
 }
 
@@ -201,7 +269,6 @@ function getOrCreateMovedButtonsContainer(contactInfoWindow) {
   if (!movedButtonsContainer) {
     movedButtonsContainer = document.createElement('div');
     movedButtonsContainer.id = 'movedButtons';
-    movedButtonsContainer.style.display = 'none';
     contactInfoWindow.appendChild(movedButtonsContainer);
   }
   return movedButtonsContainer;
