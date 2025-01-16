@@ -65,6 +65,7 @@
   background-color: #888; /* Farbe der Scroll-Leiste */
   border-radius: 6px; /* Abgerundete Ecken */
   border: 2px solid rgb(240,240,240); /* Abstand zur Scroll-Leiste */
+  height: 20px;
 }
 
 /* Hover-Effekt für die Scroll-Leiste */

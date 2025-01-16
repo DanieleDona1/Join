@@ -88,16 +88,11 @@ h3 {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  scrollbar-width: thin;
   margin-top: 12px;
   gap: 16px;
   height: 68vh;
   min-width: 190px;
-}
-
-.content::-webkit-scrollbar-thumb {
-  background-color: rgb(41, 171, 226);
-  border-radius: 10px;
+  padding-right: 2px;
 }
 
 .drag-area-highlight {
