@@ -57,7 +57,7 @@
 /* Gesamter Scrollbalken */
 ::-webkit-scrollbar {
   width: 12px; /* Breite des Scrollbalkens */
-  background-color: rgb(255,255,255); /* Hintergrundfarbe */
+  background-color: transparent; /* Hintergrundfarbe */
 }
 
 /* Scroll-Leiste (Thumb) */
@@ -74,7 +74,7 @@
 
 /* Scrollbalken für horizontale Leisten */
 ::-webkit-scrollbar-track {
-  background-color: rgb(255,255,255); /* Hintergrund der Track-Leiste */
+  background-color: transparent; /* Hintergrund der Track-Leiste */
   border-radius: 6px;
 }
 

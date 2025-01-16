@@ -101,7 +101,7 @@
   color: black;
   font-weight: bold;
   font-size: 18px;
-  background-color:  #afafaf;
+  background-image: linear-gradient(to right, rgb(0, 255, 0, -0.5), rgba(255, 0, 0, 0.5), rgba(0, 0, 255, 0.5));
   transition: background-color 200ms;
 }
 

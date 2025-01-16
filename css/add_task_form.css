@@ -75,6 +75,7 @@ input:focus,
 
 #initials-display {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .subtask-group {
