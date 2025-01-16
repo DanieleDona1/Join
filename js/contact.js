@@ -144,14 +144,24 @@ function renderForLargeScreens(contactInfo, contactHTML, popup, contactListField
 }
 
 /**
+/**
  * Retrieves contact data from the form inputs.
- * @returns {Object} Contact data object containing name, mail, and phone.
+ * @returns {Object|null} Contact data object containing name, mail, and phone or null if fields are missing.
  */
 function getContactFormData() {
+  const nameInput = document.getElementById("name");
+  const emailInput = document.getElementById("email");
+  const phoneInput = document.getElementById("phonenumber");
+
+  if (!nameInput || !emailInput || !phoneInput) {
+    console.error("Ein oder mehrere Eingabefelder wurden nicht gefunden.");
+    return null;
+  }
+
   return {
-    name: document.getElementById('name').value,
-    mail: document.getElementById('email').value,
-    phone: document.getElementById('phonenumber').value,
+    name: nameInput.value.trim(),
+    mail: emailInput.value.trim(),
+    phone: phoneInput.value.trim(),
   };
 }
 
@@ -364,6 +374,9 @@ function getContactInfo(groupInitial, contactIndex) {
   const contactWrapperHTML = generateContactWrapperHtml(contactHTML);
 
   renderContactInfo(contactHTML, contactWrapperHTML);
+
+  window.addEventListener('resize', () => renderContactInfo(contactHTML, contactWrapperHTML));
+
 }
 
 /**

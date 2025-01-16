@@ -95,16 +95,36 @@ function transformContact(contact) {
 
 /**
  * Validates the contact form inputs.
- * @returns {boolean} True if the form is valid, false otherwise.
+ * @param {string} name - The name to validate.
+ * @param {string} email - The email to validate.
+ * @param {string} phone - The phone number to validate.
+ * @returns {boolean} True if the inputs are valid, false otherwise.
  */
-function validateForm() {
-  const form = document.querySelector('form');
-  if (!form.checkValidity()) {
-    form.reportValidity();
-    return false;
-  }
-  return true;
+function validateForm(name, email, phone) {
+  return (
+    validateName(name.trim()) &&
+    validateEmail(email.trim()) &&
+    validatePhone(phone.trim())
+  );
 }
+
+// Validierungsfunktionen
+function validateName(value) {
+  const regex = /^[a-zA-Z\s]{2,}$/;
+  return regex.test(value);
+}
+
+function validateEmail(value) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(value);
+}
+
+function validatePhone(value) {
+  return value.length >= 6;
+}
+
+
+
 
 /**
  * Displays a success message after adding a contact.
