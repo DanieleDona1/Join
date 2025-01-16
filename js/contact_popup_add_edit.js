@@ -13,6 +13,47 @@ function openAddContact() {
   document.getElementById('background-pop-up').classList.remove('d-none');
   document.getElementById('pop-up-add-contact').classList.remove('d-none', 'slide-out');
   document.querySelector('body').classList.add('overflow-hidden');
+
+  // Eingabefelder und Fehler-Elemente abrufen
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const phoneInput = document.getElementById('phonenumber');
+  const nameError = document.getElementById('nameError');
+  const emailError = document.getElementById('emailError');
+  const phoneError = document.getElementById('phoneError');
+
+  // Sicherstellen, dass die Felder existieren
+  if (!nameInput || !emailInput || !phoneInput) {
+    console.error("Eingabefelder für das Pop-up wurden nicht gefunden.");
+    return;
+  }
+
+// Event-Listener für jedes Feld
+nameInput.addEventListener('input', () => {
+  
+  if (validateName(nameInput.value)) {
+    nameError.style.display = 'none';
+  } else {
+    nameError.style.display = 'block';
+  }
+});
+
+emailInput.addEventListener('input', () => {
+  if (validateEmail(emailInput.value)) {
+    emailError.style.display = 'none';
+  } else {
+    emailError.style.display = 'block';
+  }
+});
+
+phoneInput.addEventListener('input', () => {
+  if (validatePhone(phoneInput.value)) {
+    phoneError.style.display = 'none';
+  } else {
+    phoneError.style.display = 'block';
+  }
+});
+
 }
 
 /**
@@ -47,6 +88,47 @@ function openEditContact(groupedcontact, index) {
   document.querySelector('body').classList.add('overflow-hidden');
 
   renderEditContact(groupedcontact, index);
+
+
+  // Eingabefelder und Fehler-Elemente abrufen
+  const nameEditInput = document.getElementById('edit-name');
+  const emailEditInput = document.getElementById('edit-email');
+  const phoneEditInput = document.getElementById('edit-phonenumber');
+  const nameEditError = document.getElementById('nameEditError');
+  const emailEditError = document.getElementById('emailEditError');
+  const phoneEditError = document.getElementById('phoneEditError');
+
+  // Sicherstellen, dass die Felder existieren
+  if (!nameEditInput || !emailEditInput || !phoneEditInput) {
+    console.error("Eingabefelder für das Pop-up wurden nicht gefunden.");
+    return;
+  }
+
+// Event-Listener für jedes Feld
+nameEditInput.addEventListener('input', () => {
+  
+  if (validateName(nameEditInput.value)) {
+    nameEditError.style.display = 'none';
+  } else {
+    nameEditError.style.display = 'block';
+  }
+});
+
+emailEditInput.addEventListener('input', () => {
+  if (validateEmail(emailEditInput.value)) {
+    emailEditError.style.display = 'none';
+  } else {
+    emailEditError.style.display = 'block';
+  }
+});
+
+phoneEditInput.addEventListener('input', () => {
+  if (validatePhone(phoneEditInput.value)) {
+    phoneEditError.style.display = 'none';
+  } else {
+    phoneEditError.style.display = 'block';
+  }
+});
 }
 
 /**
@@ -72,17 +154,16 @@ function closeEditContact() {
  * @param {HTMLButtonElement} button - Button element triggering the function.
  */
 async function addContact(button) {
-  if (!validateForm()) return;
-  button.disabled = true;
   const { name, mail, phone } = getContactFormData();
+  if (!validateForm(name, mail, phone)) return;
+  button.disabled = true;
   try {
     await handleAddContact(name, mail, phone);
   } catch (error) {
     console.error('Error adding contact:', error);
   } finally {
     button.disabled = false;
-  }
-}
+  }};
 
 /**
  * Handles the addition of a new contact by updating the data and UI.
@@ -145,6 +226,9 @@ async function deleteContact(id) {
  */
 async function editContact(id) {
   const { name, mail, number } = getUpdatedContactData();
+
+  if (!validateForm(name, mail, number)) return;
+
   const existingData = await loadData('/contacts/' + id);
 
   if (!validateInitials(existingData)) return;
