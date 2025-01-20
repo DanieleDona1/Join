@@ -97,11 +97,20 @@ function validateForm(name, email, phone) {
   );
 }
 
-// Validierungsfunktionen
+/**
+ * Validates if the name contains at least two words (e.g., first and last name)
+ * and each word is at least two characters long.
+ * @param {string} value - The input name to validate.
+ * @returns {boolean} True if the name is valid, false otherwise.
+ */
 function validateName(value) {
-  const regex = /^[a-zA-Z\s]{2,}$/;
-  return regex.test(value);
+  const regex = /^[a-zA-Z\s]{2,}$/; // Sicherstellen, dass nur Buchstaben und Leerzeichen erlaubt sind
+  if (!regex.test(value)) return false;
+
+  const words = value.trim().split(/\s+/); // Trimmen und durch Leerzeichen splitten
+  return words.length >= 2 && words.every(word => word.length >= 2);
 }
+
 
 function validateEmail(value) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
