@@ -198,7 +198,7 @@ label {
 .entry-btn.disabled:hover {
   background-color: rgb(42, 54, 71);
   box-shadow: none;
-  cursor: auto;
+  cursor: not-allowed;
 }
 
 .btn-guest-entry {

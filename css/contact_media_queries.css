@@ -305,6 +305,7 @@
     position: relative;
     height: 54%;
     width: 89%;
+    max-width: 1300px;
   }
 
   .contact-side-info {
@@ -399,5 +400,3 @@
     width: auto;
   }
 }
-
-
