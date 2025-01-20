@@ -144,3 +144,23 @@
   font-size: 16px;
   font-weight: 700;
 }
+
+#movedButtons {
+  position: absolute;
+  bottom: 190px;
+  right: 120px;
+  flex-direction: column;
+  width: 116px;
+  height: 100px;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 20px 20px 0 20px;
+  background-color: white;
+}
+
+#movedButtons .info-edit,
+#movedButtons .info-delete {
+  width: auto;
+  height: auto;
+  font-size: 14px;
+}

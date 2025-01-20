@@ -30,27 +30,33 @@ function openAddContact() {
 
 // Event-Listener für jedes Feld
 nameInput.addEventListener('input', () => {
-  
   if (validateName(nameInput.value)) {
-    nameError.style.display = 'none';
+    nameError.classList.add('d-none');
+    nameInput.classList.remove('border-red');
   } else {
-    nameError.style.display = 'block';
+    nameError.classList.remove('d-none');
+    nameInput.classList.add('border-red');
   }
 });
 
 emailInput.addEventListener('input', () => {
   if (validateEmail(emailInput.value)) {
-    emailError.style.display = 'none';
+    emailError.classList.add('d-none');
+    emailInput.classList.remove('border-red');
   } else {
-    emailError.style.display = 'block';
+    emailError.classList.remove('d-none');
+    emailInput.classList.add('border-red');
+
   }
 });
 
 phoneInput.addEventListener('input', () => {
   if (validatePhone(phoneInput.value)) {
-    phoneError.style.display = 'none';
+    phoneError.classList.add('d-none');
+    phoneInput.classList.remove('border-red');
   } else {
-    phoneError.style.display = 'block';
+    phoneError.classList.remove('d-none');
+    phoneInput.classList.add('border-red');
   }
 });
 
@@ -106,27 +112,32 @@ function openEditContact(groupedcontact, index) {
 
 // Event-Listener für jedes Feld
 nameEditInput.addEventListener('input', () => {
-  
   if (validateName(nameEditInput.value)) {
-    nameEditError.style.display = 'none';
+    nameEditError.classList.add('d-none');
+    nameEditInput.classList.remove('border-red');
   } else {
-    nameEditError.style.display = 'block';
+    nameEditError.classList.remove('d-none');
+    nameEditInput.classList.add('border-red');
   }
 });
 
 emailEditInput.addEventListener('input', () => {
   if (validateEmail(emailEditInput.value)) {
-    emailEditError.style.display = 'none';
+    emailEditError.classList.add('d-none');
+    emailEditInput.classList.remove('border-red');
   } else {
-    emailEditError.style.display = 'block';
+    emailEditError.classList.remove('d-none');
+    emailEditInput.classList.add('border-red');
   }
 });
 
 phoneEditInput.addEventListener('input', () => {
   if (validatePhone(phoneEditInput.value)) {
-    phoneEditError.style.display = 'none';
+    phoneEditError.classList.add('d-none');
+    phoneEditInput.classList.remove('border-red');
   } else {
-    phoneEditError.style.display = 'block';
+    phoneEditError.classList.remove('d-none');
+    phoneEditInput.classList.add('border-red');
   }
 });
 }

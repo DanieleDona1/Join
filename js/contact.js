@@ -100,7 +100,6 @@ function renderContactInfo(contactHTML, contactWrapperHTML) {
   } else {
     renderForLargeScreens(contactInfo, contactHTML, popup, contactListField);
   }
-  generateEventListenerToggleButtons();
 }
 
 /**
@@ -128,6 +127,7 @@ function renderForSmallScreens(popup, contactWrapperHTML, contactListField, cont
   contactListField.classList.add('d-none');
   contactInfo.innerHTML = '';
   moveButtons();
+  generateEventListenerToggleButtons();
 }
 
 /**

@@ -60,18 +60,7 @@ function generateContactHtml(groupInitial, contactIndex, contact, contactColor) 
   return getContactHtmlTemplate(groupInitial, contactIndex, contact, contactColor, initials, name, mail, number);
 }
 
-/**
- * Attaches or re-attaches event listeners to the toggle buttons.
- */
-function generateEventListenerToggleButtons() {
-  const toggleButton = document.getElementById('toggleButtons');
-  if (toggleButton) {
-    toggleButton.removeEventListener('click', toggleEditDelete);
-    toggleButton.addEventListener('click', toggleEditDelete);
-  } else {
-    // console.warn('toggleButton does not exist.');
-  }
-}
+
 
 /**
  * Transforms a contact object into a consistent format.
@@ -120,7 +109,7 @@ function validateEmail(value) {
 }
 
 function validatePhone(value) {
-  return value.length >= 6;
+  return value.length >= 6 && value.length <= 15;
 }
 
 
@@ -177,6 +166,19 @@ function getUpdatedContactData() {
     mail: document.getElementById('edit-email').value,
     number: document.getElementById('edit-phonenumber').value,
   };
+}
+
+/**
+ * Attaches or re-attaches event listeners to the toggle buttons.
+ */
+function generateEventListenerToggleButtons() {
+  const toggleButton = document.getElementById("toggleButtons");
+  if (toggleButton) {
+    toggleButton.removeEventListener("click", toggleEditDelete);
+    toggleButton.addEventListener("click", toggleEditDelete);
+  } else {
+    console.warn("toggleButton does not exist.");
+  }
 }
 
 /**
