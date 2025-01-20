@@ -1,30 +1,4 @@
 /**
- * Sorts the contact list alphabetically by name.
- * @param {Array<Object>} contacts - List of contact objects.
- * @returns {Array<Object>} Sorted list of contacts.
- */
-function sortContacts(contacts) {
-  return contacts.sort((a, b) => a.user.name.localeCompare(b.user.name));
-}
-
-/**
- * Groups contacts by their initials.
- * @param {Array<Object>} contacts - List of contact objects.
- * @returns {Object} Grouped contacts by initials.
- */
-function groupContactsByInitial(contacts) {
-  const grouped = {};
-  contacts.forEach((contact) => {
-    const initial = contact.user.name.charAt(0).toUpperCase();
-    if (!grouped[initial]) {
-      grouped[initial] = [];
-    }
-    grouped[initial].push(contact);
-  });
-  return grouped;
-}
-
-/**
  * Generates the HTML for a contact item.
  * @param {string} initial - Initial of the contact group.
  * @param {Object} contact - Contact object.
@@ -60,28 +34,6 @@ function generateContactHtml(groupInitial, contactIndex, contact, contactColor) 
   return getContactHtmlTemplate(groupInitial, contactIndex, contact, contactColor, initials, name, mail, number);
 }
 
-
-
-/**
- * Transforms a contact object into a consistent format.
- * @param {Object} contact - Contact object to transform.
- * @returns {Object | null} Transformed contact object or null if invalid.
- */
-function transformContact(contact) {
-  if (!contact) return null;
-
-  return {
-    id: contact.id,
-    color: contact.color,
-    user: {
-      initials: contact.initials,
-      name: contact.name,
-      mail: contact.mail,
-      number: contact.number,
-    },
-  };
-}
-
 /**
  * Validates the contact form inputs.
  * @param {string} name - The name to validate.
@@ -104,25 +56,34 @@ function validateForm(name, email, phone) {
  * @returns {boolean} True if the name is valid, false otherwise.
  */
 function validateName(value) {
-  const regex = /^[a-zA-Z\s]{2,}$/; // Sicherstellen, dass nur Buchstaben und Leerzeichen erlaubt sind
+  const regex = /^[a-zA-Z\s.-]{2,}$/;
   if (!regex.test(value)) return false;
 
-  const words = value.trim().split(/\s+/); // Trimmen und durch Leerzeichen splitten
+  const words = value.trim().split(/\s+/);
   return words.length >= 2 && words.every(word => word.length >= 2);
 }
-
-
+/**
+ * Validates an email address format.
+ * Ensures the email contains an '@' symbol, a domain name, and a top-level domain.
+ * 
+ * @param {string} value - The email address to validate.
+ * @returns {boolean} True if the email format is valid, false otherwise.
+ */
 function validateEmail(value) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(value);
 }
 
+/**
+ * Validates a phone number.
+ * Ensures the phone number length is between 6 and 15 characters.
+ * 
+ * @param {string} value - The phone number to validate.
+ * @returns {boolean} True if the phone number length is valid, false otherwise.
+ */
 function validatePhone(value) {
   return value.length >= 6 && value.length <= 15;
 }
-
-
-
 
 /**
  * Displays a success message after adding a contact.
@@ -139,44 +100,6 @@ function hideSuccessMessageAfterDelay() {
     document.getElementById('success-message').classList.add('d-none');
   }, 3000);
 }
-
-/**
- * Extracts initials from a full name.
- * @param {string} fullName - Full name of the contact.
- * @returns {string} Initials derived from the full name.
- */
-function getInitials(fullName) {
-  const nameParts = fullName.split(' ');
-  const firstInitial = nameParts[0]?.charAt(0).toUpperCase();
-  const lastInitial = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() : '';
-  return `${firstInitial}${lastInitial}`;
-}
-
-/**
- * Generates a random hexadecimal color string.
- * @returns {string} A random hex color code.
- */
-function getRandomColor() {
-  let letters = '0123456789ABCDEF';
-  let color = '#';
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
-
-/**
- * Retrieves updated contact data from the edit form inputs.
- * @returns {Object} Updated contact data object containing name, mail, and number.
- */
-function getUpdatedContactData() {
-  return {
-    name: document.getElementById('edit-name').value,
-    mail: document.getElementById('edit-email').value,
-    number: document.getElementById('edit-phonenumber').value,
-  };
-}
-
 
 /**
  * Attaches or re-attaches event listeners to the toggle buttons.
@@ -387,19 +310,6 @@ function cleanGroupedContacts() {
 }
 
 /**
- * Sorts all groups in the grouped contacts by contact names.
- */
-function sortGroupedContacts() {
-  Object.keys(groupedContacts).forEach((groupKey) => {
-    groupedContacts[groupKey].sort((a, b) => {
-      const nameA = a.user?.name || a.name || '';
-      const nameB = b.user?.name || b.name || '';
-      return nameA.localeCompare(nameB);
-    });
-  });
-}
-
-/**
  * Retrieves the color of a contact.
  * @param {Object} contact - The contact object.
  * @returns {string} The color of the contact or a default color.
@@ -424,7 +334,10 @@ function clearContactInfo() {
   document.getElementById('contact-info').innerHTML = '';
 }
 
-
+/**
+ * Toggles the visibility of the contact information element by temporarily adding
+ * and removing a CSS class to trigger reflow and CSS animations.
+ */
 function toggleContactInfo() {
   const container = document.getElementById('contact-info');
   if (!container) {

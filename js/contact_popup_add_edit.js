@@ -8,58 +8,85 @@ function closeContactInfoWindow() {
 
 /**
  * Opens the add contact popup by modifying the DOM elements.
+ * Displays the popup for adding a new contact and attaches validation logic to input fields.
  */
 function openAddContact() {
   document.getElementById('background-pop-up').classList.remove('d-none');
   document.getElementById('pop-up-add-contact').classList.remove('d-none', 'slide-out');
   document.querySelector('body').classList.add('overflow-hidden');
+  checkAddInputValidation();
+}
 
-  // Eingabefelder und Fehler-Elemente abrufen
+/**
+ * Attaches validation logic to the input fields in the add contact popup.
+ * Ensures that the required input fields exist before setting up event listeners for validation.
+ */
+function checkAddInputValidation() {
   const nameInput = document.getElementById('name');
   const emailInput = document.getElementById('email');
   const phoneInput = document.getElementById('phonenumber');
-  const nameError = document.getElementById('nameError');
-  const emailError = document.getElementById('emailError');
-  const phoneError = document.getElementById('phoneError');
-
-  // Sicherstellen, dass die Felder existieren
   if (!nameInput || !emailInput || !phoneInput) {
     console.error("Eingabefelder für das Pop-up wurden nicht gefunden.");
     return;
   }
+  checkNameInput(nameInput);
+  checkEmailInput(emailInput);
+  checkPhoneInput(phoneInput);
+}
 
-// Event-Listener für jedes Feld
-nameInput.addEventListener('input', () => {
-  if (validateName(nameInput.value)) {
-    nameError.classList.add('d-none');
-    nameInput.classList.remove('border-red');
-  } else {
-    nameError.classList.remove('d-none');
-    nameInput.classList.add('border-red');
-  }
-});
 
-emailInput.addEventListener('input', () => {
-  if (validateEmail(emailInput.value)) {
-    emailError.classList.add('d-none');
-    emailInput.classList.remove('border-red');
-  } else {
-    emailError.classList.remove('d-none');
-    emailInput.classList.add('border-red');
+/**
+ * Attaches validation logic to the name input field.
+ * Highlights the field and displays an error if the input is invalid.
+ * @param {HTMLElement} nameInput - The name input field element.
+ */
+function checkNameInput(nameInput) {
+  const nameError = document.getElementById('nameError');
+  nameInput.addEventListener('input', () => {
+    if (validateName(nameInput.value)) {
+      nameError.classList.add('d-none');
+      nameInput.classList.remove('border-red');
+    } else {
+      nameError.classList.remove('d-none');
+      nameInput.classList.add('border-red');
+    }
+  });
+}
 
-  }
-});
+/**
+ * Attaches validation logic to the email input field.
+ * Highlights the field and displays an error if the input is invalid.
+ * @param {HTMLElement} emailInput - The email input field element.
+ */
+function checkEmailInput(emailInput) {
+  const emailError = document.getElementById('emailError');
+  emailInput.addEventListener('input', () => {
+    if (validateEmail(emailInput.value)) {
+      emailError.classList.add('d-none');
+      emailInput.classList.remove('border-red');
+    } else {
+      emailError.classList.remove('d-none');
+      emailInput.classList.add('border-red');
+    }
+  });
+}
 
-phoneInput.addEventListener('input', () => {
-  if (validatePhone(phoneInput.value)) {
-    phoneError.classList.add('d-none');
-    phoneInput.classList.remove('border-red');
-  } else {
-    phoneError.classList.remove('d-none');
-    phoneInput.classList.add('border-red');
-  }
-});
-
+/**
+ * Attaches validation logic to the phone number input field.
+ * Highlights the field and displays an error if the input is invalid.
+ * @param {HTMLElement} phoneInput - The phone number input field element.
+ */
+function checkPhoneInput(phoneInput) {
+  const phoneError = document.getElementById('phoneError');
+  phoneInput.addEventListener('input', () => {
+    if (validatePhone(phoneInput.value)) {
+      phoneError.classList.add('d-none');
+      phoneInput.classList.remove('border-red');
+    } else {
+      phoneError.classList.remove('d-none');
+      phoneInput.classList.add('border-red');
+    }
+  });
 }
 
 /**
@@ -81,65 +108,89 @@ function closeAddContact() {
 }
 
 /**
- * Opens the edit contact popup and renders the contact information.
+ * Opens the edit contact popup and displays the current contact information for editing.
  * @param {string} groupedcontact - Group identifier of the contact.
  * @param {number} index - Index of the contact within the group.
  */
 function openEditContact(groupedcontact, index) {
   currentGroupInitial = groupedcontact;
   currentContactIndex = index;
-
   document.getElementById('background-pop-up').classList.remove('d-none');
   document.getElementById('pop-up-edit-contact').classList.remove('d-none', 'slide-out');
   document.querySelector('body').classList.add('overflow-hidden');
-
   renderEditContact(groupedcontact, index);
+  checkEditInputValidation();
+}
 
-
-  // Eingabefelder und Fehler-Elemente abrufen
+/**
+ * Validates the input fields in the edit contact popup.
+ * Ensures the required fields exist and applies input validation logic.
+ */
+function checkEditInputValidation() {
   const nameEditInput = document.getElementById('edit-name');
   const emailEditInput = document.getElementById('edit-email');
   const phoneEditInput = document.getElementById('edit-phonenumber');
-  const nameEditError = document.getElementById('nameEditError');
-  const emailEditError = document.getElementById('emailEditError');
-  const phoneEditError = document.getElementById('phoneEditError');
-
-  // Sicherstellen, dass die Felder existieren
   if (!nameEditInput || !emailEditInput || !phoneEditInput) {
     console.error("Eingabefelder für das Pop-up wurden nicht gefunden.");
     return;
   }
+  checkNameEditInput(nameEditInput);
+  checkEmailEditInput(emailEditInput);
+  checkPhoneEditInput(phoneEditInput);
+}
 
-// Event-Listener für jedes Feld
-nameEditInput.addEventListener('input', () => {
-  if (validateName(nameEditInput.value)) {
-    nameEditError.classList.add('d-none');
-    nameEditInput.classList.remove('border-red');
-  } else {
-    nameEditError.classList.remove('d-none');
-    nameEditInput.classList.add('border-red');
-  }
-});
+/**
+ * Adds validation logic to the name input field in the edit contact popup.
+ * Highlights the field and displays an error if the input is invalid.
+ * @param {HTMLElement} nameEditInput - The name input field element.
+ */
+function checkNameEditInput(nameEditInput) {
+  const nameEditError = document.getElementById('nameEditError');
+  nameEditInput.addEventListener('input', () => {
+    if (validateName(nameEditInput.value)) {
+      nameEditError.classList.add('d-none');
+      nameEditInput.classList.remove('border-red');
+    } else {
+      nameEditError.classList.remove('d-none');
+      nameEditInput.classList.add('border-red');
+    }
+  });
+}
 
-emailEditInput.addEventListener('input', () => {
-  if (validateEmail(emailEditInput.value)) {
-    emailEditError.classList.add('d-none');
-    emailEditInput.classList.remove('border-red');
-  } else {
-    emailEditError.classList.remove('d-none');
-    emailEditInput.classList.add('border-red');
-  }
-});
+/**
+ * Adds validation logic to the email input field in the edit contact popup.
+ * Highlights the field and displays an error if the input is invalid.
+ * @param {HTMLElement} emailEditInput - The email input field element.
+ */
+function checkEmailEditInput(emailEditInput) {
+  const emailEditError = document.getElementById('emailEditError');
+  emailEditInput.addEventListener('input', () => {
+    if (validateEmail(emailEditInput.value)) {
+      emailEditError.classList.add('d-none');
+      emailEditInput.classList.remove('border-red');
+    } else {
+      emailEditError.classList.remove('d-none');
+      emailEditInput.classList.add('border-red');
+    }
+  });
+}
 
-phoneEditInput.addEventListener('input', () => {
-  if (validatePhone(phoneEditInput.value)) {
-    phoneEditError.classList.add('d-none');
-    phoneEditInput.classList.remove('border-red');
-  } else {
-    phoneEditError.classList.remove('d-none');
-    phoneEditInput.classList.add('border-red');
-  }
-});
+/**
+ * Adds validation logic to the phone number input field in the edit contact popup.
+ * Highlights the field and displays an error if the input is invalid.
+ * @param {HTMLElement} phoneEditInput - The phone number input field element.
+ */
+function checkPhoneEditInput(phoneEditInput) {
+  const phoneEditError = document.getElementById('phoneEditError');
+  phoneEditInput.addEventListener('input', () => {
+    if (validatePhone(phoneEditInput.value)) {
+      phoneEditError.classList.add('d-none');
+      phoneEditInput.classList.remove('border-red');
+    } else {
+      phoneEditError.classList.remove('d-none');
+      phoneEditInput.classList.add('border-red');
+    }
+  });
 }
 
 /**
