@@ -70,13 +70,12 @@
 
   .form-add-contact {
     position: absolute;
-    top: 55%;
+    top: 52%;
     left: 50%;
     transform: translate(-50%, 0);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 50px;
     width: 100%;
   }
 
@@ -92,12 +91,16 @@
     top: calc(45vh - 60px);
     left: 50%;
     transform: translate(-50%, 0);
+    width: 100px;
+    height: 100px;
   }
 
   .edit-contact-pic {
     top: calc(45vh - 60px);
     left: 50%;
     transform: translate(-50%, 0);
+    width: 100px;
+    height: 100px;
   }
 
   .input-button {
