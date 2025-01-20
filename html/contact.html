@@ -79,7 +79,10 @@
                 pattern="[a-zA-Z\s]+"
                 required
               />
-              <span id="nameError" style="color: red; display: none;">Name muss mindestens 2 Buchstaben enthalten und darf nur Buchstaben oder Leerzeichen haben.</span>
+              <p class="errorP">
+
+                <span id="nameError" class="error-me d-none" >Keine Zahlen und mind. 2 Buchstaben</span>
+              </p>
 
               <input
                 type="email"
@@ -89,7 +92,9 @@
                 minlength="6"
                 required
               />
-              <span id="emailError" style="color: red; display: none;">Bitte geben Sie eine gültige E-Mail-Adresse ein.</span>
+              <p class="errorP">
+                <span id="emailError" class="error-me d-none">Bitte geben Sie eine gültige E-Mail-Adresse ein.</span>
+              </p>
 
               <input
                 type="number"
@@ -98,7 +103,10 @@
                 placeholder="Phone"
                 required
               />
-              <span id="phoneError" style="color: red; display: none;">Die Telefonnummer muss mindestens 6 Ziffern enthalten.</span>
+              <p class="errorP">
+
+                <span id="phoneError" class="error-me d-none">Mindestens 6 und maximal 15 Ziffern.</span>
+              </p>
 
             </address>
             <div class="input-button">
@@ -146,8 +154,11 @@
                 minlength="2"
                 required
               />
-              <span id="nameEditError" style="color: red; display: none;">Name muss mindestens 2 Buchstaben enthalten und darf nur Buchstaben oder Leerzeichen haben.</span>
+              <p class="errorP">
 
+                <span id="nameEditError" class="error-me d-none">Keine Zahlen und mind. 2 Buchstaben.</span>
+              </p>
+                
               <input
                 type="email"
                 name="email"
@@ -156,8 +167,11 @@
                 minlength="6"
                 required
               />
-              <span id="emailEditError" style="color: red; display: none;">Bitte geben Sie eine gültige E-Mail-Adresse ein.</span>
+              <p class="errorP">
 
+                <span id="emailEditError" class="error-me d-none">Bitte geben Sie eine gültige E-Mail-Adresse ein.</span>
+              </p>
+                
               <input
                 type="number"
                 name="phonenumber"
@@ -166,7 +180,10 @@
                 min="0"
                 required
               />
-              <span id="phoneEditError" style="color: red; display: none;">Die Telefonnummer muss mindestens 6 Ziffern enthalten.</span>
+              <p class="errorP">
+
+                <span id="phoneEditError" class="error-me d-none">Mindestens 6 und maximal 15 Ziffern.</span>
+              </p>
               
             </address>
             <div class="input-button">
