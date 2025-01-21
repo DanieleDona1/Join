@@ -85,7 +85,9 @@ function getFromLocalStorage(key) {
  * @param {string} link - The URL or path of the page to redirect to.
  */
 function redirectToPage(link) {
-  window.location.href = link;
+  setTimeout(function() {
+    window.location.href = link;
+  }, 1000); // 2000 Millisekunden entsprechen 2 Sekunden
 }
 
 /**
