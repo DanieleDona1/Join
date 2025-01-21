@@ -44,7 +44,7 @@ function resetInputField(inputId) {
  * @returns {void}
  */
 function addCurrentSubtask(inputId) {
-  
+
   let subtaskInput = document.getElementById(inputId);
   currentTodos[currentTaskId].subtask.push({ checked: false, text: subtaskInput.value });
 
@@ -62,8 +62,10 @@ function renderSubtaskAddedList() {
   let subtaskAddedList = document.getElementById('subtaskAddedList');
   subtaskAddedList.innerHTML = '';
   let subtaskELements = currentTodos[currentTaskId].subtask;
-  for (let i = 0; i < subtaskELements.length; i++) {
-    subtaskAddedList.innerHTML += generateSubtaskAddedListTemplate(i, subtaskELements);
+  if (subtaskELements) {
+    for (let i = 0; i < subtaskELements.length; i++) {
+      subtaskAddedList.innerHTML += generateSubtaskAddedListTemplate(i, subtaskELements);
+    }
   }
 }
 

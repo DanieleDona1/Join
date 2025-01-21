@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../css/add_task_dropdown.css" />
     <link rel="stylesheet" href="../css/add_task_task_button.css" />
     <link rel="stylesheet" href="../css/add_task_media_queries.css" />
+    <script src="../js/copy_add_task_subtask_board.js"></script>
     <script src="../script.js" defer></script>
     <script src="../js/add_task_main.js" defer></script>
     <script src="../js/add_task_date_dropdown.js" defer></script>
@@ -48,7 +49,7 @@
           <a href="./help.html">
             <img class="header-help-icon d-none" src="../assets/icons/header/help.svg" alt="help" />
           </a>
-  
+
           <div class="dropdown-container">
             <span id="headerInitials" class="header-initials d-flex-c-c" tabindex="0"></span>
             <div class="dropdown-menu">
@@ -98,9 +99,9 @@
       <main>
         <div class="board-header d-flex-sb-c">
           <h2>Board</h2>
-  
+
           <div class="search-add-container d-flex-se-c gap-32px">
-  
+
             <div class="searchbar-container">
               <div id="searchbar" class="searchbar d-flex-c-c">
                 <input oninput="searchTitleOrDescription('search')" maxlength="50" type="search" id="search" class="search" placeholder="Find Task" />
@@ -108,13 +109,13 @@
               </div>
               <span id="searchResultMsg" class="search-result-msg">No results found</span>
             </div>
-  
+
             <button class="add-task d-flex-c-c btn-hover mg-b-16px addtask-btn-board" onclick="loadPopUpAddTask('toDo');" value="Add Task">
               <img src="../assets/icons/board/add_task_plus.svg" alt="plus-general" />
             </button>
           </div>
         </div>
-  
+
         <div class="searchbar-container-mobile">
           <div id="searchbarMobile" class="searchbar-mobile d-flex-c-c">
             <input oninput="searchTitleOrDescription('searchMobile')" maxlength="50" type="search" id="searchMobile" class="search" placeholder="Find Task" />
@@ -122,7 +123,7 @@
           </div>
           <span id="searchResultMsgMobile" class="search-result-msg">No results found</span>
         </div>
-  
+
         <div class="section-container">
           <section id="toDo" class="to-do">
             <div class="column-title">
@@ -131,7 +132,7 @@
             </div>
             <div id="toDoContent" class="content" ondragleave="removeHighlight('toDoContent')" ondragover="allowDrop(event); highlight('toDoContent');" ondrop="moveTo('toDo')"></div>
           </section>
-  
+
           <section id="inProgress" class="in-progress">
             <div class="column-title">
               <span>in-progress</span>
@@ -145,7 +146,7 @@
               ondrop="moveTo('inProgress')"
             ></div>
           </section>
-  
+
           <section id="awaitFeedback" class="await-feedback">
             <div class="column-title">
               <span>await-feedback</span>
@@ -159,7 +160,7 @@
               ondrop="moveTo('awaitFeedback')"
             ></div>
           </section>
-  
+
           <section id="done" class="done">
             <div class="column-title">
               <span>done</span>

@@ -262,7 +262,8 @@ function getUserAddTaskData(swimlane) {
     description: document.getElementById('input-field-description')?.value || 'No description provided.',
     task_category: currentTaskCategory, // User-Story Technical-Task wichtig großgeschrieben User-Story
     assignedTo: selectedContacts,
-    subtask: currentSubtasks,
+    // subtask: currentSubtasks,
+    subtask: currentSubtasks.length > 0 ? currentSubtasks : [{}],
     prio: activePriority,
   };
 }
