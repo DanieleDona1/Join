@@ -168,6 +168,10 @@ function activeCheckboxesRemote() {
   }
 }
 
+/**
+ * Gets today's date in YYYY-MM-DD format.
+ * @returns {string} The current date in YYYY-MM-DD format.
+ */
 function getTodayDate() {
   const today = new Date();
   return today.toISOString().split("T")[0];
@@ -175,14 +179,17 @@ function getTodayDate() {
 
 let titleFieldTouched = false;
 
+/**
+ * Validates the title input field.
+ * @param {HTMLInputElement} titleInput The title input element.
+ * @returns {boolean} True if the title is valid, otherwise false.
+ */
 function validateTitle(titleInput) {
   const titleError = document.getElementById("titleError");
   const titleValue = titleInput.value.trim();
   
-  // --- 1) Hat der Titel >= 3 Zeichen? ---
   const isTitleLongEnough = titleValue.length >= 3;
   
-  // --- 2) Fehlermeldung nur anzeigen, wenn Feld schon berührt ---
   if (titleFieldTouched && !isTitleLongEnough) {
     titleError.textContent = "Title must be at least 3 characters long.";
     titleError.classList.remove("d-none");
@@ -190,64 +197,108 @@ function validateTitle(titleInput) {
     titleError.classList.add("d-none");
   }
   
-  // --- 3) Für die Formular-Gültigkeit: Feld ist nur valid, wenn >= 3 Zeichen ---
   return isTitleLongEnough;
 }
 
+/**
+ * Handles the blur event for the title input and validates it.
+ * @param {HTMLInputElement} titleInput The title input element.
+ * @returns {boolean} The validation result.
+ */
 function validateTitleOnBlur(titleInput) {
-  titleFieldTouched = true; // Markiere das Feld als berührt
+  titleFieldTouched = true;
   return validateTitle(titleInput);
 }
 
-
 let dateFieldTouched = false;
 
+/**
+ * Checks if the due date input is filled.
+ * @param {string} dateValue The value of the due date input.
+ * @returns {boolean} True if the input is filled, otherwise false.
+ */
+function isDueDateFilled(dateValue) {
+  return dateValue.length === 10;  
+}
+
+/**
+ * Checks if the due date is a valid future date.
+ * @param {string} dateValue The value of the due date input.
+ * @returns {boolean} True if the date is in the future, otherwise false.
+ */
+function isDueDateFuture(dateValue) {
+  const errorMessage = isValidDateFormat(dateValue);
+  return errorMessage === null;
+}
+
+/**
+ * Displays the error message for the due date field.
+ * @param {string} message The error message to display.
+ */
+function showDueDateError(message) {
+  const dueDateError = document.getElementById("dueDateError");
+  dueDateError.textContent = message;
+  dueDateError.classList.remove("d-none");
+}
+
+/**
+ * Hides the error message for the due date field.
+ */
+function hideDueDateError() {
+  const dueDateError = document.getElementById("dueDateError");
+  dueDateError.classList.add("d-none");
+}
+
+/**
+ * Validates the due date input field.
+ * @param {HTMLInputElement} dueDateInput The due date input element.
+ * @returns {boolean} True if the due date is valid, otherwise false.
+ */
 function validateDueDate(dueDateInput) {
   const dateValue = dueDateInput.value.trim();
-  const dueDateError = document.getElementById("dueDateError");
+  const isFilled = isDueDateFilled(dateValue);
+  const isFutureDate = isDueDateFuture(dateValue);
 
-  // --- 1) Ist die Eingabe überhaupt gefüllt und formal korrekt? ---
-  const isFilled = dateValue.length === 10;  // (dd/mm/yyyy) => length = 10
-  let isFutureDate = false;
-  let errorMessage = null;
-
-  // Prüfe das Datum aber nur, wenn etwas drin steht.
-  if (isFilled) {
-    errorMessage = isValidDateFormat(dateValue); // gibt 'null' zurück, wenn okay
-    isFutureDate = (errorMessage === null);
-  }
-
-  // --- 2) Fehlermeldung logik ---
-  // Zeige Fehlermeldung nur, wenn Feld berührt und wir etwas Falsches feststellen
-  if (dateFieldTouched) {
-    if (!isFilled) {
-      dueDateError.textContent = "Due Date is required (dd/mm/yyyy).";
-      dueDateError.classList.remove("d-none");
-    } else if (!isFutureDate) {
-      // Dann ist 'errorMessage' != null
-      dueDateError.textContent = errorMessage;
-      dueDateError.classList.remove("d-none");
-    } else {
-      // Korrektes Datum
-      dueDateError.classList.add("d-none");
-    }
-  } else {
-    // Noch nicht berührt -> keine Fehlermeldung
-    dueDateError.classList.add("d-none");
-  }
-
-  // --- 3) Formular-Validity ---
-  // Ist nur valid, wenn etwas drin steht UND es ein Datum in der Zukunft ist
+  handleDueDateError(isFilled, isFutureDate, dateValue);
+  
   return isFilled && isFutureDate;
 }
 
+/**
+ * Handles the error display for the due date field.
+ * @param {boolean} isFilled Whether the input is filled.
+ * @param {boolean} isFutureDate Whether the date is in the future.
+ * @param {string} dateValue The value of the due date input.
+ */
+function handleDueDateError(isFilled, isFutureDate, dateValue) {
+  if (dateFieldTouched) {
+    if (!isFilled) {
+      showDueDateError("Due Date is required.");
+    } else if (!isFutureDate) {
+      showDueDateError(isValidDateFormat(dateValue));
+    } else {
+      hideDueDateError();
+    }
+  } else {
+    hideDueDateError();
+  }
+}
+
+/**
+ * Handles the blur event for the due date input and validates it.
+ * @param {HTMLInputElement} dueDateInput The due date input element.
+ * @returns {boolean} The validation result.
+ */
 function validateDueDateOnBlur(dueDateInput) {
   dateFieldTouched = true;
   return validateDueDate(dueDateInput);
 }
 
-
-
+/**
+ * Validates the category selection.
+ * @param {HTMLElement} categorySelect The category select element.
+ * @returns {boolean} True if the category is valid, otherwise false.
+ */
 function validateCategory(categorySelect) {
   const selectedCategory =
     categorySelect.querySelector(".select-selected").innerText;
@@ -256,64 +307,109 @@ function validateCategory(categorySelect) {
   );
 }
 
-function validateCategoryOnBlur(categorySelect) {
-  const selectedCategory =
-    categorySelect.querySelector(".select-selected").innerText;
-  const categoryError = document.getElementById("categoryError");
+/**
+ * Gets the selected category from the category select element.
+ * @param {HTMLElement} categorySelect The category select element.
+ * @returns {string} The selected category text.
+ */
+function getSelectedCategory(categorySelect) {
+  return categorySelect.querySelector(".select-selected").innerText;
+}
 
-  if (
-    selectedCategory === "Technical Task" ||
-    selectedCategory === "User Story"
-  ) {
-    categoryError.classList.add("d-none");
-    categoryError.textContent = ""; // Fehlernachricht entfernen
+/**
+ * Displays an error message if the category is invalid.
+ * @param {string} message The error message to display.
+ */
+function showCategoryError(message) {
+  const categoryError = document.getElementById("categoryError");
+  categoryError.textContent = message;
+  categoryError.classList.remove("d-none");
+}
+
+/**
+ * Hides the error message for the category.
+ */
+function hideCategoryError() {
+  const categoryError = document.getElementById("categoryError");
+  categoryError.classList.add("d-none");
+  categoryError.textContent = ""; 
+}
+
+/**
+ * Handles the blur event for the category selection and validates it.
+ * @param {HTMLElement} categorySelect The category select element.
+ * @returns {boolean} The validation result.
+ */
+function validateCategoryOnBlur(categorySelect) {
+  const selectedCategory = getSelectedCategory(categorySelect);
+
+  if (isValidCategory(selectedCategory)) {
+    hideCategoryError();
     return true;
   }
 
-  categoryError.textContent = "A category is required. Please select one.";
-  categoryError.classList.remove("d-none");
+  showCategoryError("A category is required. Please select one.");
   return false;
 }
 
+/**
+ * Checks if the selected category is valid.
+ * @param {string} selectedCategory The selected category.
+ * @returns {boolean} True if the category is valid, otherwise false.
+ */
+function isValidCategory(selectedCategory) {
+  return selectedCategory === "Technical Task" || selectedCategory === "User Story";
+}
+
+
+/**
+ * Validates the entire form and updates the button state accordingly.
+ */
 function validateForm() {
   const titleInput = document.getElementById("input-field-title");
   const dueDateInput = document.getElementById("input-field-date");
   const categorySelect = document.getElementById("drop-down-2");
   const createTaskButton = document.getElementById("create-task-button");
 
-  // Individuelle Validierungen ausführen
-  const isTitleValid = validateTitle(titleInput); // Keine Meldung überschreiben
-  const isDueDateValid = validateDueDate(dueDateInput); // Nur Zustand prüfen
-  const isCategoryValid = validateCategory(categorySelect); // Keine Meldung überschreiben
+  const isTitleValid = validateTitle(titleInput);
+  const isDueDateValid = validateDueDate(dueDateInput);
+  const isCategoryValid = validateCategory(categorySelect);
 
-  // Button-Status aktualisieren
   createTaskButton.disabled = !(isTitleValid && isDueDateValid && isCategoryValid);
 }
 
-
-function initializeValidation() {
-  const titleInput = document.getElementById("input-field-title");
-  const dueDateInput = document.getElementById("input-field-date");
-  const categorySelect = document.getElementById("drop-down-2");
-
-  // Title-Eingabe validieren
+/**
+ * Adds input event listeners for the title input field.
+ * @param {HTMLInputElement} titleInput The title input element.
+ */
+function addTitleInputListeners(titleInput) {
   titleInput.addEventListener("input", () => {
-    validateTitle(titleInput); // Entferne Fehlermeldung, wenn Eingabe korrekt
-    validateForm(); // Prüfe den Button-Status
-  });
-  titleInput.addEventListener("blur", () => {
-    validateTitleOnBlur(titleInput); // Zeige Fehlermeldung bei Bedarf
+    validateTitle(titleInput);
     validateForm();
   });
+  titleInput.addEventListener("blur", () => {
+    validateTitleOnBlur(titleInput);
+    validateForm();
+  });
+}
 
-  // Datumseingabe validieren
+/**
+ * Adds input event listeners for the due date input field.
+ * @param {HTMLInputElement} dueDateInput The due date input element.
+ */
+function addDueDateInputListeners(dueDateInput) {
   dueDateInput.addEventListener("input", validateForm);
   dueDateInput.addEventListener("blur", () => {
     validateDueDateOnBlur(dueDateInput);
     validateForm();
   });
+}
 
-  // Kategorieauswahl validieren
+/**
+ * Adds event listeners for the category select element.
+ * @param {HTMLElement} categorySelect The category select element.
+ */
+function addCategoryInputListeners(categorySelect) {
   categorySelect.addEventListener("click", () => {
     validateCategoryOnBlur(categorySelect);
     validateForm();
@@ -326,13 +422,29 @@ function initializeValidation() {
     validateCategoryOnBlur(categorySelect);
     validateForm();
   });
+}
+
+/**
+ * Initializes form validation by adding event listeners.
+ */
+function initializeValidation() {
+  const titleInput = document.getElementById("input-field-title");
+  const dueDateInput = document.getElementById("input-field-date");
+  const categorySelect = document.getElementById("drop-down-2");
+
+  addTitleInputListeners(titleInput);
+  addDueDateInputListeners(dueDateInput);
+  addCategoryInputListeners(categorySelect);
 
   validateForm(); // Initialer Button-Status
 }
 
 
-
-
+/**
+ * Validates the date format (dd/mm/yyyy) and checks if it's in the future.
+ * @param {string} dateValue The date value to validate.
+ * @returns {string|null} An error message if the date is invalid, or null if it's valid.
+ */
 function isValidDateFormat(dateValue) {
   const [day, month, year] = dateValue.split("/").map(Number);
   const date = new Date(year, month - 1, day);
@@ -345,12 +457,14 @@ function isValidDateFormat(dateValue) {
   return null;
 }
 
-
+/**
+ * Displays a message indicating that a task has been added.
+ */
 function showAddTaskMessage() {
   const overlay = document.getElementById('add-task-message');
-  overlay.style.display = 'flex'; // Div anzeigen
+  overlay.style.display = 'flex';
   
   setTimeout(() => {
-    overlay.style.display = 'none'; // Div ausblenden
-  }, 2000); // Nach 2 Sekunden
+    overlay.style.display = 'none';
+  }, 2000); 
 }
