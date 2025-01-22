@@ -180,7 +180,11 @@ function handleSubtaskEdit(index) {
   const inputField = document.getElementById(`subtaskListInput${index}`);
   const bulletInputContainer = document.getElementById(`bulletInputContainer${index}`);
   if (inputField.value.trim()) {
-    currentTodos[currentTaskId].subtask[index].text = inputField.value;
+    if (currentSubtasks[currentTaskId]) {
+      currentSubtasks[currentTaskId].subtask[index].text = inputField.value;
+    } else {
+      currentTodos[currentTaskId].subtask[index].text = inputField.value;
+    }
   } else {
     bulletInputContainer.style.border = '1px solid red';
     // inputField.value = currentTodos[currentTaskId].subtask[index].text;
@@ -224,7 +228,6 @@ function updateIconsOffFocus(index) {
  */
 function saveCurrentSubtask(i) {
   if (currentTodos[i]['subtask']) {
-    console.log('test');
     editTaskRemote(todoKeysArray[i], { subtask: currentTodos[i]['subtask'] });
   }
 }
@@ -248,4 +251,66 @@ function removeAddedSubtask(index) {
 
   // Aktualisiere die Anzeige
   renderSubtaskAddedList();
+}
+
+/**
+ * Updates the UI with icons for adding or resetting a subtask based on the input field's value.
+ *
+ * @param {string} inputId - The ID of the input element.
+ * If the input is not empty, displays icons for confirming or resetting the subtask.
+ * If the input is empty, resets the field.
+ */
+function onInputSubtaskAddTask(inputId) {
+  let subtaskInput = document.getElementById(inputId);
+  if (subtaskInput.value !== '') {
+    document.getElementById('subtaskIcons').innerHTML = /*html*/ `
+      <div class="d-flex-c-c">
+        <img
+          onclick="event.stopPropagation(); focusInput(); resetInputField('${inputId}');"
+          class="add-subtask"
+          src="../assets/icons/board/property-close.svg"
+          alt="close">
+        <img
+          onclick="event.stopPropagation(); addCurrentSubtaskAddTask('${inputId}');"
+          class="mg-left add-subtask"
+          src="../assets/icons/board/property-check.svg"
+          alt="check">
+      </div>
+    `;
+  } else {
+    resetInputField(inputId);
+  }
+}
+
+
+/**
+ * Adds a subtask to the current task and updates the list.
+ *
+ * @param {string} inputId - The ID of the input field for the subtask.
+ * @returns {void}
+ */
+function addCurrentSubtaskAddTask(inputId) {
+  let subtaskInput = document.getElementById(inputId);
+  currentSubtasks[currentTaskId].subtask.push({ checked: false, text: subtaskInput.value });
+
+  renderSubtaskAddedListAddTask();
+  resetInputField(inputId);
+}
+
+/**
+ * Renders the list of added subtasks for the current task.
+ * Clears the existing list and generates new list items based on `currentSubtasks`.
+ *
+ * @description
+ * Iterates over the `subtask` array of the current task and appends a generated template
+ * for each subtask to the `subtaskAddedList` element.
+ */
+function renderSubtaskAddedListAddTask() {
+  let subtaskAddedList = document.getElementById('subtaskAddedList');
+  subtaskAddedList.innerHTML = '';
+  if (currentSubtasks) {
+    for (let i = 0; i < currentSubtasks[currentTaskId].subtask.length; i++) {
+      subtaskAddedList.innerHTML += generateSubtaskAddedListTemplate(i, currentSubtasks[currentTaskId].subtask);
+    }
+  }
 }

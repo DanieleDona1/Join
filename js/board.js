@@ -263,7 +263,7 @@ function getUserAddTaskData(swimlane) {
     task_category: currentTaskCategory, // User-Story Technical-Task wichtig großgeschrieben User-Story
     assignedTo: selectedContacts,
     // subtask: currentSubtasks,
-    subtask: currentSubtasks.length > 0 ? currentSubtasks : [{}],
+    subtask: currentSubtasks[currentTaskId].subtask,
     prio: activePriority,
   };
 }
@@ -314,7 +314,7 @@ function openEditTask(id) {
  * Clears all arrays used to store current subtasks, selected contact keys, and other related data.
  */
 function clearAllArrays() {
-  currentSubtasks = [];
+  currentSubtasks = [{ subtask: [] }];
   selectedContactsKeys = [];
   activePriority = 'medium';
 }

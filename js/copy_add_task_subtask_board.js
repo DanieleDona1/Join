@@ -244,7 +244,8 @@ function saveCurrentSubtask(i) {
  */
 function removeAddedSubtask(index) {
   if (index === 'all') {
-    currentSubtasks = [];
+    currentSubtasks = [{subtask: [],},];
+
   } else {
     currentSubtasks.splice(index, 1);
   }
