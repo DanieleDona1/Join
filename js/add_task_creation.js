@@ -14,6 +14,8 @@ async function createAddTask(cat) {
     activeCheckboxesRemote();
     formateDueDate();
     const d = getUserAddTaskData(cat);
+    console.log('userInputData', d);
+
     await addTask(d);
     showAddTaskMessage();
     redirectToPage("./board.html");
