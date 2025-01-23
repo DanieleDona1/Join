@@ -9,6 +9,8 @@
  * @returns {Promise<void>} This function returns a promise that resolves when the task is added and the page is redirected.
  */
 async function createAddTask(taskCategory) {
+  currentTaskId = 0;
+
   selectedContacts = [];
   if (checkRequiredFields()) {
     activeCheckboxesRemote();

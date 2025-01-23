@@ -295,11 +295,16 @@ function onInputSubtaskAddTask(inputId) {
  */
 function addCurrentSubtaskAddTask(inputId) {
   let subtaskInput = document.getElementById(inputId);
+
+  if (!currentSubtasks[currentTaskId].subtask) {
+    currentSubtasks[currentTaskId].subtask = [];  // Initialisiere das Subtask-Array, falls nicht vorhanden
+  }
   currentSubtasks[currentTaskId].subtask.push({ checked: false, text: subtaskInput.value });
 
   renderSubtaskAddedListAddTask();
   resetInputField(inputId);
 }
+
 
 /**
  * Renders the list of added subtasks for the current task.

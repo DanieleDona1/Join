@@ -293,7 +293,7 @@ function generatePopUpAddTask(category) {
                   <input
                     id="subtaskInputBoardAddTask"
                     class="subtask-input"
-                    oninput="onInputSubtask('subtaskInputBoardAddTask');"
+                    oninput="onInputSubtaskAddTask('subtaskInputBoardAddTask');"
 
                     placeholder="Add new subtask"
                   />
