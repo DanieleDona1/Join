@@ -9,8 +9,6 @@
   z-index: 500;
 }
 
-/* Pop-up Add Contact */
-
 .pop-up-add-contact {
   position: fixed;
   top: 50%;
@@ -105,11 +103,9 @@
   padding: 0 16px;
   display: flex;
   flex-direction: column;
-  /* gap: 32px; */
   position: absolute;
   top: 137px;
   left: 742px;
-  /* height: 215px; */
   width: 100%;
   max-width: 422px;
 }
@@ -138,16 +134,11 @@
   background-size: 24px;
 }
 
-/* keine pfeile für das nummer feld*/
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
-/* input[type=number] {
-  appearance: textfield;
-} */
 
 input {
   height: 51px;
