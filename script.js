@@ -11,9 +11,7 @@ let users = [];
 // Alle current Arrays wird auf addTask und board benötigt
 // Alle current Arrays wird auf addTask und board benötigt
 
-// let currentSubtasks = [{subtask: [],},];
-let currentSubtasks = [];
-
+let currentSubtasks = [{subtask: [],},];
 let activePriority = 'medium'; //Standardmäßig ist medium zugewiesen.
 let currentTaskCategory = ''; //Zuweisen "User-Story" oder "Technical-Task" mit Bindestrich
 let selectedContacts = [];

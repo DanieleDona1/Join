@@ -44,14 +44,17 @@ function resetInputField(inputId) {
  * @returns {void}
  */
 function addCurrentSubtask(inputId) {
-
   let subtaskInput = document.getElementById(inputId);
 
+  if (!currentTodos[currentTaskId].hasOwnProperty('subtask')) {
+    currentTodos[currentTaskId].subtask = [];
+  }
   currentTodos[currentTaskId].subtask.push({ checked: false, text: subtaskInput.value });
 
   renderSubtaskAddedList();
   resetInputField(inputId);
 }
+
 
 /**
  * Renders the list of added subtasks for the current task.

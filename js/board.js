@@ -255,10 +255,6 @@ async function createTask(category, contentId) {
  * @returns {Object} - The user input data for the task.
  */
 function getUserAddTaskData(swimlane) {
-  if (currentSubtasks.length === 0) {
-    console.log('true');
-    currentSubtasks.push({ subtask: [] });
-  }
   return {
     title: document.getElementById('input-field-title')?.value || 'No title',
     dueDate: dueDate, //yy-mm-dd Format
@@ -267,7 +263,7 @@ function getUserAddTaskData(swimlane) {
     task_category: currentTaskCategory, // User-Story Technical-Task wichtig großgeschrieben User-Story
     assignedTo: selectedContacts,
     // subtask: currentSubtasks,
-    subtask: currentSubtasks,
+    subtask: currentSubtasks[currentTaskId].subtask,
     prio: activePriority,
   };
 }

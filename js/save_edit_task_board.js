@@ -57,13 +57,19 @@ function getUserChangedData(i) {
  * @returns {Promise<void>} - Resolves when the popup and contact list are loaded.
  */
 async function loadPopUpAddTask(category) {
-  currentTodos[currentTaskId].subtask = [];
+  // if (!currentTodos[currentTaskId].hasOwnProperty('subtask')) {
+  //   currentTodos[currentTaskId].subtask = [];
+  // } else {
+  //   currentTodos[currentTaskId].subtask = [];
+  // }
+
   generatePopUpAddTask(category);
   await createContactlistAddTask();
   loadDropDown();
   subtaskKeyDownAddSubtask();
   setupOutsideClickForCustomSelects();
 }
+
 
 /**
  * Saves the current priority to the specified todo and updates the remote task.
