@@ -5,38 +5,40 @@
  * formats the due date, gathers user data for the task (based on the given category),
  * and calls the `addTask` function to save the task. Afterward, it redirects the user to the board page.
  *
- * @param {string} cat - The category for the new task.
+ * @param {string} taskCategory - The category for the new task.
  * @returns {Promise<void>} This function returns a promise that resolves when the task is added and the page is redirected.
  */
-async function createAddTask(cat) {
+async function createAddTask(taskCategory) {
   selectedContacts = [];
   if (checkRequiredFields()) {
     activeCheckboxesRemote();
     formateDueDate();
-    const d = getUserAddTaskData(cat);
-    console.log('userInputData', d);
+    const taskData = getUserAddTaskData(taskCategory);
+    console.log('userInputData', taskData);
 
-    await addTask(d);
+    await addTask(taskData);
     showAddTaskMessage();
     redirectToPage("./board.html");
   }
 }
 
+
 /**
- * Checks if all required fields are filled and valid.
+ * Validates the required fields for a form.
+ * This function checks if the title, due date, and category fields are correctly filled out.
+ * It returns a boolean indicating whether all required fields are valid.
  *
- * This function verifies if the fields for title, due date, and category are correctly filled.
- * It checks the title and due date fields using the `checkField` function and validates the category
- * using the `checkCategory` function. It returns `true` if all required fields are valid, otherwise `false`.
- *
- * @returns {boolean} Returns `true` if all required fields are valid, otherwise `false`.
+ * @function checkRequiredFields
+ * @returns {boolean} - Returns true if all required fields are valid, otherwise false.
  */
 function checkRequiredFields() {
-  let v = true;
-  v &= checkField("input-field-title", "titleError");
-  v &= checkField("input-field-date", "dueDateError");
-  v &= checkCategory();
-  return v;
+  let allFieldsAreValid = true;
+
+  allFieldsAreValid &= checkField("input-field-title", "titleError");
+  allFieldsAreValid &= checkField("input-field-date", "dueDateError");
+  allFieldsAreValid &= checkCategory();
+
+  return allFieldsAreValid;
 }
 
 /**
@@ -89,8 +91,8 @@ function checkCategory() {
  */
 function setPriority() {
   setTimeout(() => {
-    const b = document.querySelector(".task-button.active");
-    activePriority = b ? b.getAttribute("data-color") : "";
+    const activeButton = document.querySelector(".task-button.active");
+    activePriority = activeButton ? activeButton.getAttribute("data-color") : "";
   }, 10);
 }
 
@@ -100,11 +102,11 @@ function setPriority() {
  * This function assigns the provided category value to the `currentTaskCategory` variable,
  * which represents the selected task category.
  *
- * @param {string} c - The category to be set for the task.
+ * @param {string} setCategory - The category to be set for the task.
  * @returns {void} This function does not return a value but updates the `currentTaskCategory` variable.
  */
-function setCategory(c) {
-  currentTaskCategory = c;
+function setCategory(setCategory) {
+  currentTaskCategory = setCategory;
 }
 
 /**
@@ -128,18 +130,18 @@ function formateDueDate() {
  * and then constructs a new date in the 'YYYY-MM-DD' format. If any of the components are missing or the date is invalid,
  * it returns 'NaN-NaN-NaN'.
  *
- * @param {string} ds - The date string in 'DD/MM/YYYY' format.
+ * @param {string} dateString - The date string in 'DD/MM/YYYY' format.
  * @returns {string} Returns the date in 'YYYY-MM-DD' format, or 'NaN-NaN-NaN' if the date is invalid.
  */
-function formatDateToYMD(ds) {
-  const [day, month, year] = ds.split("/");
+function formatDateToYMD(dateString) {
+  const [day, month, year] = dateString.split("/");
   if (!year || !month || !day) return "NaN-NaN-NaN";
-  const d = new Date(
+  const formattedDate = new Date(
     `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`
   );
-  return isNaN(d)
+  return isNaN(formattedDate)
     ? "NaN-NaN-NaN"
-    : `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, "0")}-${d
+    : `${formattedDate.getFullYear()}-${(formattedDate.getMonth() + 1).toString().padStart(2, "0")}-${formattedDate
         .getDate()
         .toString()
         .padStart(2, "0")}`;
