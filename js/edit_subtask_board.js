@@ -294,6 +294,7 @@ function onInputSubtaskAddTask(inputId) {
  * @returns {void}
  */
 function addCurrentSubtaskAddTask(inputId) {
+  currentTaskId = 0;
   let subtaskInput = document.getElementById(inputId);
 
   if (!currentSubtasks[currentTaskId].subtask) {
