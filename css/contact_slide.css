@@ -5,12 +5,10 @@
   @keyframes slide-in {
     0% {
       transform: translate(50%, -50%);
-      /* Rechts außerhalb */
     }
   
     100% {
       transform: translate(-50%, -50%);
-      /* Zentriert */
     }
   }
   
@@ -21,11 +19,9 @@
   @keyframes slide-out {
     0% {
       transform: translate(-50%, -50%);
-      /* Ausgangsposition: zentriert */
     }
   
     100% {
       transform: translate(50%, -50%);
-      /* Zielposition: nach rechts außerhalb */
     }
   }
