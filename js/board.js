@@ -108,7 +108,6 @@ function loadMembersInitials(taskId, initialsContainerId) {
 
       const name = getName(selectedContacts[0]);
       const initialsName = generateInitials(name);
-
       if (initialsName && addedCount < 4) {
         membersContainer.innerHTML += memberHtmlTemplate(initialsName);
         addedCount++;
