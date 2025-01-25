@@ -417,6 +417,6 @@ label span {
 
 @media (min-width: 1921px) {
   .body {
-    background-color: white;
+    background-color: rgb(246, 247, 248);
   }
 }
