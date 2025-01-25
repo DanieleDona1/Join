@@ -180,19 +180,25 @@ function shouldHandleFocusOut(event, subtaskItem) {
  * @param {number} index - The index of the subtask to be edited.
  * @returns {void}
  */
+// TODO 
 function handleSubtaskEdit(index) {
-  const inputField = document.getElementById(`subtaskListInput${index}`);
-  const bulletInputContainer = document.getElementById(`bulletInputContainer${index}`);
-  if (inputField.value.trim()) {
-    if (currentSubtasks[currentTaskId]) {
-      currentSubtasks[currentTaskId].subtask[index].text = inputField.value;
-    } else {
-      currentTodos[currentTaskId].subtask[index].text = inputField.value;
+  setTimeout(() => {
+    const inputField = document.getElementById(`subtaskListInput${index}`);
+    const bulletInputContainer = document.getElementById(`bulletInputContainer${index}`);
+    if (inputField) {
+      if (inputField.value.trim()) {
+        if (currentSubtasks[currentTaskId]) {
+          console.log('index:', index);
+
+          currentSubtasks[currentTaskId].subtask[index].text = inputField.value;
+        } else {
+          currentTodos[currentTaskId].subtask[index].text = inputField.value;
+        }
+      } else {
+        bulletInputContainer.style.border = '1px solid red';
+      }
     }
-  } else {
-    bulletInputContainer.style.border = '1px solid red';
-    // inputField.value = currentTodos[currentTaskId].subtask[index].text;
-  }
+  }, 50);
 }
 
 /**
@@ -255,88 +261,4 @@ function removeAddedSubtask(index) {
 
   // Aktualisiere die Anzeige
   renderSubtaskAddedList();
-}
-
-/**
- * Updates the UI with icons for adding or resetting a subtask based on the input field's value.
- *
- * @param {string} inputId - The ID of the input element.
- * If the input is not empty, displays icons for confirming or resetting the subtask.
- * If the input is empty, resets the field.
- */
-function onInputSubtaskAddTask(inputId) {
-  let subtaskInput = document.getElementById(inputId);
-  if (subtaskInput.value !== '') {
-    document.getElementById('subtaskIcons').innerHTML = /*html*/ `
-      <div class="d-flex-c-c">
-        <img
-          onclick="event.stopPropagation(); focusInput(); resetInputField('${inputId}');"
-          class="add-subtask"
-          src="../assets/icons/board/property-close.svg"
-          alt="close">
-        <img
-          onclick="event.stopPropagation(); addCurrentSubtaskAddTask('${inputId}');"
-          class="mg-left add-subtask"
-          src="../assets/icons/board/property-check.svg"
-          alt="check">
-      </div>
-    `;
-  } else {
-    resetInputField(inputId);
-  }
-}
-
-
-/**
- * Adds a subtask to the current task and updates the list.
- *
- * @param {string} inputId - The ID of the input field for the subtask.
- * @returns {void}
- */
-function addCurrentSubtaskAddTask(inputId) {
-  currentTaskId = 0;
-  let subtaskInput = document.getElementById(inputId);
-
-  if (!currentSubtasks[currentTaskId].subtask) {
-    currentSubtasks[currentTaskId].subtask = [];  // Initialisiere das Subtask-Array, falls nicht vorhanden
-  }
-  currentSubtasks[currentTaskId].subtask.push({ checked: false, text: subtaskInput.value });
-
-  renderSubtaskAddedListAddTask();
-  resetInputField(inputId);
-}
-
-
-/**
- * Renders the list of added subtasks for the current task.
- * Clears the existing list and generates new list items based on `currentSubtasks`.
- *
- * @description
- * Iterates over the `subtask` array of the current task and appends a generated template
- * for each subtask to the `subtaskAddedList` element.
- */
-function renderSubtaskAddedListAddTask() {
-  let subtaskAddedList = document.getElementById('subtaskAddedList');
-  subtaskAddedList.innerHTML = '';
-  if (currentSubtasks) {
-    for (let i = 0; i < currentSubtasks[currentTaskId].subtask.length; i++) {
-      subtaskAddedList.innerHTML += generateSubtaskListTemplateAddTask(i, currentSubtasks[currentTaskId].subtask);
-    }
-  }
-}
-
-/**
- * Removes a subtask from the currentSubtasks array at the specified index
- * and re-renders the updated list of subtasks.
- *
- * @param {number} index - The index of the subtask to be removed.
- */
-function removeAddedSubtaskAddTask(index) {
-  if (index === 'all') {
-    currentSubtasks = [{subtask: [],},];
-
-  } else {
-    currentSubtasks[0].subtask.splice(index, 1);
-  }
-  renderSubtaskAddedListAddTask();
 }

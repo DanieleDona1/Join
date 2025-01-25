@@ -385,12 +385,12 @@ function generateSubtaskListTemplateAddTask(i, subtaskELements) {
 
   <div id="bulletInputContainer${i}" class="bullet-point-input d-flex-c-c bg-hover">
       <div class="bullet-point-edit">•</div>
-      <input onclick="readonlyToggle(${i});" oninput="resetBorder(${i})" id="subtaskListInput${i}" readonly class="subtask-input edit-subtask-input" type="text" value="${subtaskElement}">
+      <input onclick="readonlyToggleAddTask(${i});" oninput="resetBorder(${i})" id="subtaskListInput${i}" readonly class="subtask-input edit-subtask-input" type="text" value="${subtaskElement}">
   </div>
 
     <div id="subtaskListIcons" class="subtask-list-icons">
       <div id="subtaskAddedListIcons${i}" class="d-flex-c-c">
-        <img onclick="readonlyToggle(${i});" class="add-subtask" src="../assets/icons/board/edit.svg" alt="edit">
+        <img onclick="readonlyToggleAddTask(${i});" class="add-subtask" src="../assets/icons/board/edit.svg" alt="edit">
         <img onclick="removeAddedSubtaskAddTask(${i})" class="mg-left add-subtask" src="../assets/icons/board/delete.svg" alt="delete">
       </div>
     </div>
