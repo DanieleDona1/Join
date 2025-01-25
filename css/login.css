@@ -366,6 +366,12 @@ label span {
   display: none;
 }
 
+.back-sign-up{
+  position: absolute;
+  top: 50px;
+  right: 50px;
+}
+
 @media screen and (min-width: 1921px) {
   .section_pad {
     padding: 64px max(160px, calc(50% - 960px));

@@ -119,6 +119,9 @@
     display: none;
   }
 }
+  .privacy-policy{
+    padding-bottom: 70px;
+}
 
 @media (min-width: 1921px) {
   .nav-container {

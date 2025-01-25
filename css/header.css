@@ -5,8 +5,9 @@ header {
     left: 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100vw;
-    height: 96px;
+    height: 80px;
     padding: 20px 24px;
     background-color: white;
     box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
@@ -73,6 +74,7 @@ header {
     display: inline-block;
     line-height: 40px;
     vertical-align: middle;
+    padding-left: 10px;
   }
   
   .dropdown-menu ul li:hover {

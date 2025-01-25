@@ -1,6 +1,6 @@
 main {
     position: relative;
-    top: 96px;
+    top: 80px;
     bottom: 80px;
     height: calc(100vh - 96px);
     padding: 48px 16px 0 16px;
