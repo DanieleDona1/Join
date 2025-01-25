@@ -38,11 +38,10 @@ function addCurrentSubtaskAddTask(inputId) {
   let subtaskInput = document.getElementById(inputId);
 
   if (!currentSubtasks[currentTaskId].subtask) {
-    currentSubtasks[currentTaskId].subtask = [];  // Initialisiere das Subtask-Array, falls nicht vorhanden
+    currentSubtasks[currentTaskId].subtask = []; // Initialisiere das Subtask-Array, falls nicht vorhanden
   }
   currentSubtasks[currentTaskId].subtask.push({ checked: false, text: subtaskInput.value });
   console.log('ADDED:', currentSubtasks);
-
 
   renderSubtaskAddedListAddTask();
   resetInputField(inputId);
@@ -67,17 +66,6 @@ function renderSubtaskAddedListAddTask() {
 }
 
 /**
- * Clears the 'subtaskInput' field and resets the 'subtaskIcons' area to show the default add icon.
- * Removes any additional icons previously added to 'subtaskIcons' when input is non-empty.
- */
-// TODO
-function resetInputField(inputId) {
-  document.getElementById(inputId).value = '';
-  document.getElementById('subtaskIcons').innerHTML = /*html*/ `
-    <img onclick="focusInput()" class="add-subtask" src="../assets/icons/board/property-add.svg" alt="add">`;
-}
-
-/**
  * Toggles the readonly state of a specified subtask input field, and updates its focus and icons based on the new state.
  * When the field is editable, it focuses the input, updates the icons, prevents accidental icon focus,
  * and adds an event listener to handle focus-out actions.
@@ -99,28 +87,6 @@ function readonlyToggleAddTask(index) {
 }
 
 /**
- * Toggles the readonly property of the specified input field.
- * Sets the input field to readonly if it is currently editable, and vice versa.
- *
- * @param {HTMLInputElement} inputField - The input field element to toggle.
- */
-// TODO
-function toggleReadOnly(inputField) {
-  inputField.readOnly = !inputField.readOnly;
-}
-
-/**
- * Sets focus on the specified input field and moves the cursor to the end of the text.
- *
- * @param {HTMLInputElement} inputField - The input field element to focus and adjust the cursor position.
- */
-// TODO
-function focusInputField(inputField) {
-  inputField.focus();
-  inputField.setSelectionRange(inputField.value.length, inputField.value.length);
-}
-
-/**
  * Updates the icons for a specific subtask to show delete and confirm icons when the subtask is focused.
  *
  * @param {number} index - The index of the subtask, used to locate and update the relevant icon container.
@@ -131,21 +97,6 @@ function updateIconsOnFocusAddTask(index) {
       <img id="removeIconOnFocus${index}" onclick="removeAddedSubtaskAddTask(${index}); event.stopPropagation();" class="add-subtask" src="../assets/icons/board/property-delete.svg" alt="delete">
       <img class="mg-left" onclick="currentEditSubtask(${index})" class="add-subtask" src="../assets/icons/board/property-check.svg" alt="check">
     `;
-}
-
-/**
- * Prevents the focus on the remove icon when it is clicked, allowing for smoother interaction.
- *
- * @param {number} index - The index of the subtask, used to identify the specific remove icon element.
- */
-// TODO
-function preventRemoveIconFocus(index) {
-  const removeIconOnFocus = document.getElementById(`removeIconOnFocus${index}`);
-  if (removeIconOnFocus) {
-    removeIconOnFocus.addEventListener('mousedown', (event) => {
-      event.preventDefault();
-    });
-  }
 }
 
 /**
@@ -169,49 +120,6 @@ function addFocusOutListenerAddTask(inputField, subtaskItem, index) {
 }
 
 /**
- * Determines whether the focusout event should be handled based on the related target
- * and the specific subtask item.
- *
- * @param {FocusEvent} event - The focusout event to evaluate.
- * @param {HTMLElement} subtaskItem - The subtask item element that is being checked against.
- * @returns {boolean} - Returns true if the focusout should be handled; otherwise, false.
- */
-// TODO
-function shouldHandleFocusOut(event, subtaskItem) {
-  return !subtaskItem.contains(event.relatedTarget) && event.relatedTarget?.id !== 'removeIconOnFocus';
-}
-
-/**
- * Handles the editing of a subtask. Updates the subtask text if the input is not empty,
- * otherwise highlights the input field with a red border and restores the previous value.
- *
- * @param {number} index - The index of the subtask to be edited.
- * @returns {void}
- */
-// TODO
-function handleSubtaskEdit(index) {
-  setTimeout(() => {
-    const inputField = document.getElementById(`subtaskListInput${index}`);
-    const bulletInputContainer = document.getElementById(`bulletInputContainer${index}`);
-
-    if (inputField) {
-      if (inputField.value.trim()) {
-        if (currentSubtasks[currentTaskId]) {
-          console.log('index:', index);
-          currentSubtasks[currentTaskId].subtask[index].text = inputField.value;
-        } else {
-          currentTodos[currentTaskId].subtask[index].text = inputField.value;
-        }
-      } else {
-        bulletInputContainer.style.border = '1px solid red';
-      }
-    }
-  }, 50);
-}
-
-
-
-/**
  * Updates the icons displayed for a specific subtask when it loses focus.
  * Replaces the current icons with edit and delete icons, allowing further actions on the subtask.
  *
@@ -228,30 +136,15 @@ function updateIconsOffFocusAddTask(index) {
 }
 
 /**
- * Resets the border of the element with the given ID if its border is currently '1px solid red'.
- *
- * @param {string} elementId - The ID of the element to reset the border for.
- * @returns {void}
- */
-// TODO
-function resetBorder(elementId) {
-  const bulletInputContainer = document.getElementById(`bulletInputContainer${elementId}`);
-  if (bulletInputContainer.style.border === '1px solid red') {
-    bulletInputContainer.style.border = 'none';
-  }
-}
-
-/**
  * Removes a subtask from the currentSubtasks array at the specified index
  * and re-renders the updated list of subtasks.
  *
  * @param {number} index - The index of the subtask to be removed.
  */
 function removeAddedSubtaskAddTask(index) {
-
   if (index === 'all') {
     console.log('in');
-    currentSubtasks = [{subtask: [],},];
+    currentSubtasks = [{ subtask: [] }];
   } else {
     currentSubtasks[0].subtask.splice(index, 1);
   }
