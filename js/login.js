@@ -11,6 +11,7 @@ async function onloadFunc() {
   await loadUsersArray();
   resetInputBorderOnKeydown('loginForm');
   initializeForm('loginForm', 'loginBtn');
+  removeUserToken();
 }
 
 /**

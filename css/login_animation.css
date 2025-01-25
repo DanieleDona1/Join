@@ -10,7 +10,7 @@
 .logo-animation {
   position: absolute;
   z-index: 1;
-  background-color: white;
+  background-color: rgb(246,247,248);
   animation: moveToCorner 700ms linear forwards;
   width: 40px;
   height: 50px;

@@ -34,7 +34,7 @@ async function isUserLoggedIn() {
   const isGuest = await checkIfUserIsGuest();
 
   if (userName === false && isGuest !== 'Guest') {
-    redirectToPage('./index.html');
+    redirectToPage('../index.html');
   }
 }
 

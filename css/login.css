@@ -35,7 +35,7 @@ a {
   gap: 35px;
   max-width: 279px;
   max-height: 49px;
-  background: white;
+  background: rgb(246,247,248);
 }
 
 .header-btn-container button {
@@ -44,7 +44,7 @@ a {
 }
 
 .header-btn-container button:first-child {
-  background-color: white;
+  background-color: rgb(246,247,248);
   font-size: 1.25rem;
   font-weight: 400;
   text-align: left;
@@ -417,6 +417,6 @@ label span {
 
 @media (min-width: 1921px) {
   .body {
-    background-color: white;
+    background-color: rgb(246,247,248);
   }
 }

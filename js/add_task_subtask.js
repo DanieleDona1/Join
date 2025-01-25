@@ -41,7 +41,6 @@ function addCurrentSubtaskAddTask(inputId) {
     currentSubtasks[currentTaskId].subtask = []; // Initialisiere das Subtask-Array, falls nicht vorhanden
   }
   currentSubtasks[currentTaskId].subtask.push({ checked: false, text: subtaskInput.value });
-  console.log('ADDED:', currentSubtasks);
 
   renderSubtaskAddedListAddTask();
   resetInputField(inputId);
@@ -143,11 +142,9 @@ function updateIconsOffFocusAddTask(index) {
  */
 function removeAddedSubtaskAddTask(index) {
   if (index === 'all') {
-    console.log('in');
     currentSubtasks = [{ subtask: [] }];
   } else {
     currentSubtasks[0].subtask.splice(index, 1);
   }
-  console.log('currentSubtasks[0].subtask', currentSubtasks[0].subtask);
   renderSubtaskAddedListAddTask();
 }

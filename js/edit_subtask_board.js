@@ -187,8 +187,6 @@ function handleSubtaskEdit(index) {
     if (inputField) {
       if (inputField.value.trim()) {
         if (currentSubtasks[currentTaskId]) {
-          console.log('index:', index);
-
           currentSubtasks[currentTaskId].subtask[index].text = inputField.value;
         } else {
           currentTodos[currentTaskId].subtask[index].text = inputField.value;
