@@ -35,7 +35,7 @@ a {
   gap: 35px;
   max-width: 279px;
   max-height: 49px;
-  background: rgba(246, 247, 248, 1);
+  background: white;
 }
 
 .header-btn-container button {
@@ -44,7 +44,7 @@ a {
 }
 
 .header-btn-container button:first-child {
-  background-color: rgb(246, 247, 248);
+  background-color: white;
   font-size: 1.25rem;
   font-weight: 400;
   text-align: left;
