@@ -180,7 +180,6 @@ function shouldHandleFocusOut(event, subtaskItem) {
  * @param {number} index - The index of the subtask to be edited.
  * @returns {void}
  */
-// TODO 
 function handleSubtaskEdit(index) {
   setTimeout(() => {
     const inputField = document.getElementById(`subtaskListInput${index}`);

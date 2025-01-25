@@ -130,9 +130,8 @@ input:focus,
 }
 
 .subtask-added-list .subtask-list-group input:focus {
-  border: 2px solid rgb(246,247,248);
   border-bottom: 2px solid rgb(41, 171, 226);
-  /* border-radius: 0; */
+  border-radius: 0;
 }
 
 .subtask-list-icons {
