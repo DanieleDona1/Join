@@ -4,24 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact</title>
-    <link
-      rel="icon"
-      type="image/png"
-      href="../assets/icons/favicons/favicon_light.png"
-      id="favicon"
-    />
-
+    <link rel="icon" type="image/png" href="../assets/icons/favicons/favicon_light.png" id="favicon" />
     <link rel="stylesheet" href="../css/header.css" />
     <link rel="stylesheet" href="../css/navbar.css" />
     <link rel="stylesheet" href="../css/main.css" />
     <link rel="stylesheet" href="../css/media_queries.css" />
     <link rel="stylesheet" href="../css/fonts.css" />
-    <link rel="stylesheet" href="../css/contact_add_contact_popup.css">
-    <link rel="stylesheet" href="../css/contact_edit_contact_popup.css">
-    <link rel="stylesheet" href="../css/contact_info.css">
-    <link rel="stylesheet" href="../css/contact_list.css">
-    <link rel="stylesheet" href="../css/contact_media_queries.css">
-    <link rel="stylesheet" href="../css/contact_slide.css">
+    <link rel="stylesheet" href="../css/contact_add_contact_popup.css" />
+    <link rel="stylesheet" href="../css/contact_edit_contact_popup.css" />
+    <link rel="stylesheet" href="../css/contact_info.css" />
+    <link rel="stylesheet" href="../css/contact_list.css" />
+    <link rel="stylesheet" href="../css/contact_media_queries.css" />
+    <link rel="stylesheet" href="../css/contact_slide.css" />
     <link rel="stylesheet" href="../style.css" />
     <script src="../script.js"></script>
     <script src="../js/contact.js"></script>
@@ -33,36 +27,19 @@
   </head>
   <body onload="onloadFunc()">
     <div class="background-pop-up d-none" id="background-pop-up">
-      <section
-        class="d-none pop-up-add-contact slide-in"
-        id="pop-up-add-contact"
-      >
+      <section class="d-none pop-up-add-contact slide-in" id="pop-up-add-contact">
         <div class="contact-side-info">
-          <img
-            src="../assets/icons/contact/contact_join_logo.png"
-            alt="Join Logo"
-            class="contact-logo"
-          />
+          <img src="../assets/icons/contact/contact_join_logo.png" alt="Join Logo" class="contact-logo" />
           <div class="contact-side-info-div">
             <div class="add-contact">
               <span class="add-contact-headline">Add contact</span>
-              <span class="add-contact-info"
-                >Tasks are better with a team!</span
-              >
+              <span class="add-contact-info">Tasks are better with a team!</span>
             </div>
-            <img
-              src="../assets/icons/contact/contact_line_vector.svg"
-              alt=""
-              class="add-contact-vector"
-            />
+            <img src="../assets/icons/contact/contact_line_vector.svg" alt="" class="add-contact-vector" />
           </div>
         </div>
         <div class="contact-side-popup-middle">
-          <img
-            src="../assets/icons/contact/raw_profil_img.png"
-            alt="Konaktbild"
-            class="contact-pic"
-          />
+          <img src="../assets/icons/contact/raw_profil_img.png" alt="Konaktbild" class="contact-pic" />
         </div>
         <div class="contact-side-popup-right">
           <button class="close-popup slide-out" onclick="closeAddContact()">
@@ -70,50 +47,24 @@
           </button>
           <form class="form-add-contact">
             <address class="contact-field">
-              <input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Name"
-                minlength="2"
-                pattern="[a-zA-Z\s]+"
-                required
-              />
+              <input type="text" name="name" id="name" placeholder="Name" minlength="2" pattern="[a-zA-Z\s]+" required />
               <p class="errorP">
-
-                <span id="nameError" class="error-me d-none" >Please enter your full name. Only letters are allowed.</span>
+                <span id="nameError" class="error-me d-none">Please enter your full name. Only letters are allowed.</span>
               </p>
 
-              <input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Email"
-                minlength="6"
-                required
-              />
+              <input type="email" name="email" id="email" placeholder="Email" minlength="6" required />
               <p class="errorP">
                 <span id="emailError" class="error-me d-none">Please enter a valid email address.</span>
               </p>
 
-              <input
-                type="number"
-                name="phonenumber"
-                id="phonenumber"
-                placeholder="Phone"
-                required
-              />
+              <input type="number" name="phonenumber" id="phonenumber" placeholder="Phone" required />
               <p class="errorP">
-
                 <span id="phoneError" class="error-me d-none">Between 6 and 15 digits required.</span>
               </p>
-
             </address>
             <div class="input-button">
               <button type="reset" class="cancel">Cancel &nbsp;&#10006;</button>
-              <button type="button" onclick="addContact(this)" class="create">
-                Create contact &nbsp;&nbsp;&#10003;
-              </button>
+              <button type="button" onclick="addContact(this)" class="create">Create contact &nbsp;&nbsp;&#10003;</button>
             </div>
           </form>
         </div>
@@ -121,19 +72,11 @@
 
       <section class="d-none pop-up-add-contact slide-in" id="pop-up-edit-contact">
         <div class="contact-side-info">
-          <img
-            src="../assets/icons/contact/contact_join_logo.png"
-            alt="Join Logo"
-            class="contact-logo"
-          />
+          <img src="../assets/icons/contact/contact_join_logo.png" alt="Join Logo" class="contact-logo" />
           <div class="contact-side-info-div">
             <div class="add-contact">
               <span class="add-contact-headline">Edit contact</span>
-              <img
-                src="../assets/icons/contact/contact_line_vector.svg"
-                alt=""
-                class="contact-edit-vector"
-              />
+              <img src="../assets/icons/contact/contact_line_vector.svg" alt="" class="contact-edit-vector" />
             </div>
           </div>
         </div>
@@ -146,61 +89,24 @@
           </button>
           <form class="form-add-contact">
             <address class="contact-field">
-              <input
-                type="text"
-                name="name"
-                id="edit-name"
-                placeholder="Name"
-                minlength="2"
-                required
-              />
+              <input type="text" name="name" id="edit-name" placeholder="Name" minlength="2" required />
               <p class="errorP">
-
                 <span id="nameEditError" class="error-me d-none">Please enter your full name. Only letters are allowed.</span>
               </p>
 
-              <input
-                type="email"
-                name="email"
-                id="edit-email"
-                placeholder="Email"
-                minlength="6"
-                required
-              />
+              <input type="email" name="email" id="edit-email" placeholder="Email" minlength="6" required />
               <p class="errorP">
-
                 <span id="emailEditError" class="error-me d-none">Please enter a valid email address.</span>
               </p>
 
-              <input
-                type="number"
-                name="phonenumber"
-                id="edit-phonenumber"
-                placeholder="Phone"
-                min="0"
-                required
-              />
+              <input type="number" name="phonenumber" id="edit-phonenumber" placeholder="Phone" min="0" required />
               <p class="errorP">
-
                 <span id="phoneEditError" class="error-me d-none">Between 6 and 15 digits required.</span>
               </p>
-
             </address>
             <div class="input-button">
-              <button
-                type="button"
-                class="edit-delete"
-                id="edit-delete"
-                onclick="deleteContact(value), closeEditContact()"
-              >
-                Delete
-              </button>
-              <button
-                type="button"
-                id="edit-save"
-                onclick="editContact(value)"
-                class="edit-save"
-              >
+              <button type="button" class="edit-delete" id="edit-delete" onclick="deleteContact(value), closeEditContact()">Delete</button>
+              <button type="button" id="edit-save" onclick="editContact(value)" class="edit-save">
                 Save
                 <img src="../assets/icons/contact/check.svg" alt="check" />
               </button>
@@ -209,31 +115,17 @@
         </div>
       </section>
     </div>
-    <div id="success-message" class="d-none success-message d-flex-c-c">
-      Contact succesfully created
-    </div>
+    <div id="success-message" class="d-none success-message d-flex-c-c">Contact succesfully created</div>
     <div class="header-container">
       <header>
-        <img
-          class="header-join-logo"
-          src="../assets/icons/header/joinHeaderMobile.svg"
-          alt="logo"
-        />
+        <img class="header-join-logo" src="../assets/icons/header/joinHeaderMobile.svg" alt="logo" />
         <p class="d-none">Kanban Project Management Tool</p>
         <div class="header-rightside-container">
           <a href="./help.html">
-            <img
-              class="header-help-icon d-none"
-              src="../assets/icons/header/help.svg"
-              alt="help"
-            />
+            <img class="header-help-icon d-none" src="../assets/icons/header/help.svg" alt="help" />
           </a>
           <div class="dropdown-container">
-            <span
-              id="headerInitials"
-              class="header-initials d-flex-c-c"
-              tabindex="0"
-            ></span>
+            <span id="headerInitials" class="header-initials d-flex-c-c" tabindex="0"></span>
             <div class="dropdown-menu">
               <ul>
                 <li class="dropdown-help"><a href="../html/help.html">Help</a></li>
@@ -256,17 +148,11 @@
         <div class="navbar-container-bottom">
           <div class="navbar-item-container">
             <a href="./summary.html" class="navbar-item" data-page="summary">
-              <img
-                src="../assets/icons/navbar/summary_Icon.svg"
-                alt="Summary Icon"
-              />
+              <img src="../assets/icons/navbar/summary_Icon.svg" alt="Summary Icon" />
               <p>Summary</p>
             </a>
             <a href="./add_tasks.html" class="navbar-item" data-page="add_tasks">
-              <img
-                src="../assets/icons/navbar/add_tasks.svg"
-                alt="Add Tasks Icon"
-              />
+              <img src="../assets/icons/navbar/add_tasks.svg" alt="Add Tasks Icon" />
               <p>Add Tasks</p>
             </a>
             <a href="./board.html" class="navbar-item" data-page="board">
@@ -274,20 +160,13 @@
               <p>Board</p>
             </a>
             <a href="./contact.html" class="navbar-item" data-page="contacts">
-              <img
-                src="../assets/icons/navbar/contacts_icon.svg"
-                alt="Contacts Icon"
-              />
+              <img src="../assets/icons/navbar/contacts_icon.svg" alt="Contacts Icon" />
               <p>Contacts</p>
             </a>
           </div>
           <div class="navbar-disclaimer-links-container d-none">
-            <a href="../html/privacy_policy.html" data-page="privacy_policy"
-              >Privacy Policy</a
-            >
-            <a href="../html/legal_notice.html" data-page="legal_notice"
-              >Legal Notice</a
-            >
+            <a href="../html/privacy_policy.html" data-page="privacy_policy">Privacy Policy</a>
+            <a href="../html/legal_notice.html" data-page="legal_notice">Legal Notice</a>
           </div>
         </div>
       </nav>
@@ -298,10 +177,7 @@
           <div id="contact-list-field" class="contact-list-field">
             <button onclick="openAddContact()" class="contact-list-field-button">
               <span>Add new contact</span>
-              <img
-                src="../assets/icons/contact/contact_add.png"
-                alt="contact add"
-              />
+              <img src="../assets/icons/contact/contact_add.png" alt="contact add" />
             </button>
             <div class="contact-list" id="content-contactlist"></div>
           </div>

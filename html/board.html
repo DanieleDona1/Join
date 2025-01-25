@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Board</title>
     <link rel="icon" type="image/png" href="../assets/icons/favicons/favicon_light.png" id="favicon" />
-    <link rel="icon" type="image/png" href="../assets/icons/favicons/favicon_dark.png" id="favicon" />
     <link rel="stylesheet" href="../style.css" />
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/navbar.css">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/media_queries.css">
+    <link rel="stylesheet" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/navbar.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/media_queries.css" />
     <link rel="stylesheet" href="../css/fonts.css" />
     <link rel="stylesheet" href="../css/board.css" />
     <link rel="stylesheet" href="../css/add_task_global.css" />
@@ -18,7 +17,7 @@
     <link rel="stylesheet" href="../css/add_task_dropdown.css" />
     <link rel="stylesheet" href="../css/add_task_task_button.css" />
     <link rel="stylesheet" href="../css/add_task_media_queries.css" />
-     <script src="../js/add_task_subtask.js"></script>
+    <script src="../js/add_task_subtask.js"></script>
     <script src="../script.js" defer></script>
     <script src="../js/add_task_main.js" defer></script>
     <script src="../js/add_task_date_dropdown.js" defer></script>
@@ -38,7 +37,6 @@
     <script src="../js/remote_storage.js" defer></script>
     <script src="../js/open_close_dialog_board.js"></script>
     <script src="../assets/template/board_template.js"></script>
-
   </head>
   <body class="max-width-1440" onload="onload();">
     <div class="header-container">
@@ -101,7 +99,6 @@
           <h2>Board</h2>
 
           <div class="search-add-container d-flex-se-c gap-32px">
-
             <div class="searchbar-container">
               <div id="searchbar" class="searchbar d-flex-c-c">
                 <input oninput="searchTitleOrDescription('search')" maxlength="50" type="search" id="search" class="search" placeholder="Find Task" />
@@ -173,8 +170,6 @@
       </main>
     </div>
     <div class="dialog-bg d-none d-flex-c-c" id="dialog" onclick="closeDialog(event)"></div>
-    <div id="add-task-message" class="add-task-message">
-      Task added to board <img src="../assets/icons/navbar/board_icon.svg" alt="">
-    </div>
+    <div id="add-task-message" class="add-task-message">Task added to board <img src="../assets/icons/navbar/board_icon.svg" alt="" /></div>
   </body>
 </html>

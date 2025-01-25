@@ -201,7 +201,9 @@ function updateFavicon() {
   const favicon = document.getElementById('favicon');
   const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-  favicon.href = darkModeMediaQuery.matches ? '../assets/icons/favicons/favicon_dark.png' : '../assets/icons/favicons/favicon_light.png';
+  if (favicon) {
+    favicon.href = darkModeMediaQuery.matches ? '../assets/icons/favicons/favicon_dark.png' : '../assets/icons/favicons/favicon_light.png';
+  }
 }
 
 /**
