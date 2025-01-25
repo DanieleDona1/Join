@@ -242,7 +242,7 @@ function saveCurrentSubtask(i) {
  *
  * @param {number} index - The index of the subtask to be removed.
  */
-function removeAddedSubtask(index) {
+function removeAddedSubtaskAddTask(index) {
   if (index === 'all') {
     currentSubtasks = [{subtask: [],},];
 

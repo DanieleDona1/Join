@@ -372,6 +372,33 @@ function generateSubtaskAddedListTemplate(i, subtaskELements) {
 }
 
 /**
+ * Generates the HTML template for a subtask item.
+ *
+ * @param {number} id - The ID of the current todo item.
+ * @param {number} i - The index of the subtask within the todo item.
+ * @returns {string} The HTML string representing the subtask item, including an input field and action icons.
+ */
+function generateSubtaskListTemplateAddTask(i, subtaskELements) {
+  let subtaskElement = subtaskELements[i].text;
+  return /*html*/ `
+  <div id="subtask-item${i}" class="subtask-group subtask-list-group" onclick="event.stopPropagation()">
+
+  <div id="bulletInputContainer${i}" class="bullet-point-input d-flex-c-c bg-hover">
+      <div class="bullet-point-edit">•</div>
+      <input onclick="readonlyToggle(${i});" oninput="resetBorder(${i})" id="subtaskListInput${i}" readonly class="subtask-input edit-subtask-input" type="text" value="${subtaskElement}">
+  </div>
+
+    <div id="subtaskListIcons" class="subtask-list-icons">
+      <div id="subtaskAddedListIcons${i}" class="d-flex-c-c">
+        <img onclick="readonlyToggle(${i});" class="add-subtask" src="../assets/icons/board/edit.svg" alt="edit">
+        <img onclick="removeAddedSubtaskAddTask(${i})" class="mg-left add-subtask" src="../assets/icons/board/delete.svg" alt="delete">
+      </div>
+    </div>
+  </div>
+  `;
+}
+
+/**
  * Generates HTML template for a member's initials displayed inside a circle.
  *
  * @param {string} initialsName - The initials of the member to display inside the circle.

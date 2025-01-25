@@ -55,7 +55,7 @@
 }
 
 .subtask-list-group input:focus {
-  border: 2px solid white;
+  border: 2px solid rgb(246,247,248);
 }
 
 .subtask-list-icons {
@@ -109,4 +109,4 @@
 
 .dialog-bg .subtask-list-group input:focus {
   border:none;
-}
+  }

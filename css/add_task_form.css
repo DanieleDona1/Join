@@ -129,8 +129,10 @@ input:focus,
   background-color: rgb(246,247,248);
 }
 
-.subtask-list-group input:focus {
-  border: 2px solid white;
+.subtask-added-list .subtask-list-group input:focus {
+  border: 2px solid rgb(246,247,248);
+  border-bottom: 2px solid rgb(41, 171, 226);
+  /* border-radius: 0; */
 }
 
 .subtask-list-icons {
@@ -189,4 +191,14 @@ input:focus,
 .dialog-bg h2 {
   font-size: clamp(32px, 5vw, 56px);
   margin-bottom: 16px;
+}
+
+.bullet-point-input {
+  padding-left: 8px;
+}
+
+form .subtask-list-group input:hover {
+  /* background-color: rgb(246,247,248); */
+  /* background-color: #555; */
+  box-shadow: none;
 }

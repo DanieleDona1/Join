@@ -320,7 +320,23 @@ function renderSubtaskAddedListAddTask() {
   subtaskAddedList.innerHTML = '';
   if (currentSubtasks) {
     for (let i = 0; i < currentSubtasks[currentTaskId].subtask.length; i++) {
-      subtaskAddedList.innerHTML += generateSubtaskAddedListTemplate(i, currentSubtasks[currentTaskId].subtask);
+      subtaskAddedList.innerHTML += generateSubtaskListTemplateAddTask(i, currentSubtasks[currentTaskId].subtask);
     }
   }
+}
+
+/**
+ * Removes a subtask from the currentSubtasks array at the specified index
+ * and re-renders the updated list of subtasks.
+ *
+ * @param {number} index - The index of the subtask to be removed.
+ */
+function removeAddedSubtaskAddTask(index) {
+  if (index === 'all') {
+    currentSubtasks = [{subtask: [],},];
+
+  } else {
+    currentSubtasks[0].subtask.splice(index, 1);
+  }
+  renderSubtaskAddedListAddTask();
 }
