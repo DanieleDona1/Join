@@ -98,7 +98,7 @@ function loadProgressText(task, progressText, progressBar) {
  * Array are used contactList - createContactlistAddTask() and keys-currentTodos[i].assignedTo and selectedContacts.
  */
 function loadMembersInitials(taskId, initialsContainerId) {
-  if (currentTodos[taskId].assignedTo) {
+  if (currentTodos[taskId] && currentTodos[taskId].assignedTo) {
     selectedContactsKeys = getSelectedContactsKey(taskId);
     const membersContainer = document.getElementById(initialsContainerId + taskId);
     membersContainer.innerHTML = '';
