@@ -171,7 +171,7 @@ label {
 .entry-btn-container {
   margin-top: 15px;
   display: flex;
-  gap: 40px;
+  gap: clamp(16px, 4vw, 40px);
   justify-content: center;
 }
 
@@ -188,6 +188,7 @@ label {
   font-size: 18px;
   font-weight: bold;
   transition: background-color 125ms;
+  white-space: nowrap;
 }
 
 .entry-btn:hover {
@@ -212,6 +213,7 @@ label {
   transition: border 125ms;
   background-color: white;
   color: black;
+  white-space: nowrap;
 }
 
 .btn-guest-entry:hover {
