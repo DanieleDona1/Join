@@ -1,5 +1,5 @@
 let currentDraggedElement;
-
+isUserLoggedIn();
 /**
  * Loads all tasks from Firebase and renders them.
  *
@@ -8,7 +8,6 @@ let currentDraggedElement;
  * @returns {Promise<void>}
  */
 async function onload() {
-  await isUserLoggedIn();
   await loadTodosArray();
   currentTodos = JSON.parse(JSON.stringify(todos));
   await createContactlistAddTask();
@@ -78,6 +77,8 @@ function initializeProgressElements(taskId) {
  * @returns {void}
  */
 function loadProgressText(task, progressText, progressBar) {
+  console.log(task.subtask);
+
   const subtasks = task.subtask || [];
   const completedTasks = subtasks.filter((sub) => sub.checked).length;
   const totalSubtasks = subtasks.length;
@@ -91,6 +92,11 @@ function loadProgressText(task, progressText, progressBar) {
     progressValue = 0;
   }
   progressBar.style.width = progressValue + '%';
+  if (totalSubtasks === 0) {
+    console.log('taskid: ', task.id);
+
+  document.getElementById('progressSubtaskContainer' + task.id).style.display = 'none';
+  }
 }
 
 /**

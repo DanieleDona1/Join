@@ -11,14 +11,14 @@ function generateHtmlTemplate(task) {
           <div class="title">${task.title}</div>
           <div class="description">${task.description}</div>
 
-          <div class="subtasks">
+          <div id="progressSubtaskContainer${task['id']}" class="subtasks">
             <div class="progress-container">
                 <div id="progressBar${task['id']}" class="progress-bar"></div>
             </div>
                 <div id="progressText${task['id']}" class="progress-text">Subtasks</div>
           </div>
 
-          <div class="d-flex-sb-c">
+          <div class="d-flex-sb-c members-wrapper">
             <div id="membersContainer${task['id']}" class="members-container d-flex-fs-c"></div>
           </div>
           <img draggable="false" src="../assets/icons/board/${task.prio}.svg" alt="prio">

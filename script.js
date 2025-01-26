@@ -1,27 +1,19 @@
 const BASE_URL = 'https://joinremotestorage-c8226-default-rtdb.europe-west1.firebasedatabase.app/';
 
-// login und board Arrays
-// login und board Arrays
 let todos = [];
 let currentTodos = [{subtask: [],},];
 let currentTaskId = 0;
 let todoKeysArray = [];
 let users = [];
-
-// Alle current Arrays wird auf addTask und board benötigt
-// Alle current Arrays wird auf addTask und board benötigt
-
 let currentSubtasks = [{subtask: [],},];
-let activePriority = 'medium'; //Standardmäßig ist medium zugewiesen.
-let currentTaskCategory = ''; //Zuweisen "User-Story" oder "Technical-Task" mit Bindestrich
+let activePriority = 'medium';
+let currentTaskCategory = ''; //"User-Story" Format
 let selectedContacts = [];
 let selectedContactsKeys = [];
-let dueDate = ''; //'2024-12-31', //yy-mm-dd Format
-
-// contactList.js und addtask Arrays
+let dueDate = '';//yy-mm-dd Format
 let contactList = [];
 let contactKeys = [];
-let groupedContacts = {}; // Definiere groupedContacts als globale Variable
+let groupedContacts = {};
 
 /**
  * Checks if the user is logged in. If neither a valid username nor a guest login is found,

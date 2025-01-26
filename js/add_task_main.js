@@ -1,3 +1,4 @@
+isUserLoggedIn();
 let selectedInitials = [];
 
 /**
@@ -7,7 +8,6 @@ let selectedInitials = [];
  * @returns {Promise<void>} - Resolves when the initialization is complete.
  */
 async function onloadAddtasks() {
-  await isUserLoggedIn();
   await generateHeaderInitials();
   await createContactlistAddTask();
   loadDropDown();

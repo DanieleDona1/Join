@@ -2,7 +2,7 @@
   position: relative;
   min-width: 219px;
   min-height: 250px;
-  min-height: auto;
+  /* min-height: auto; */
   max-width: 300px;
   cursor: pointer;
   background-color: white;

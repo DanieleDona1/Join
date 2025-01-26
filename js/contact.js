@@ -1,3 +1,4 @@
+isUserLoggedIn();
 /**
  * HTML content wrapper for the contact section.
  * @type {string}

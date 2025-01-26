@@ -306,6 +306,11 @@ input:focus {
   font-size: 0.8rem;
 }
 
+.members-wrapper {
+  position: absolute;
+  bottom: 30px; 
+}
+
 @media screen and (max-width: 1224px) {
   .section-container {
     flex-direction: column;

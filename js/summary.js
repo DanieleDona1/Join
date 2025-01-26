@@ -1,10 +1,10 @@
+isUserLoggedIn();
 /**
  * Initializes the application by greeting the user, loading the todos array, updating counts and display getUpcomingDeadline.
  * @async
  * @function onload
  */
 async function onload() {
-  await isUserLoggedIn();
   mobileGreeting();
   await loadTodosArray();
   getCounts(todos);
