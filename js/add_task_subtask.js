@@ -28,25 +28,6 @@ function onInputSubtaskAddTask(inputId) {
 }
 
 /**
- * Adds a subtask to the current task and updates the list.
- *
- * @param {string} inputId - The ID of the input field for the subtask.
- * @returns {void}
- */
-function addCurrentSubtaskAddTask(inputId) {
-  currentTaskId = 0;
-  let subtaskInput = document.getElementById(inputId);
-
-  if (!currentSubtasks[currentTaskId].subtask) {
-    currentSubtasks[currentTaskId].subtask = []; // Initialisiere das Subtask-Array, falls nicht vorhanden
-  }
-  currentSubtasks[currentTaskId].subtask.push({ checked: false, text: subtaskInput.value });
-
-  renderSubtaskAddedListAddTask();
-  resetInputField(inputId);
-}
-
-/**
  * Renders the list of added subtasks for the current task.
  * Clears the existing list and generates new list items based on `currentSubtasks`.
  *
