@@ -38,7 +38,6 @@
   .clear-create-button-container {
     pointer-events: none;
     display: flex;
-    margin-top: auto;
     padding-top: 40px;
     justify-content: flex-end;
     margin-bottom: 5%;

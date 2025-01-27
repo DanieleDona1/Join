@@ -1,85 +1,101 @@
-@media (max-width: 1225px) {
-    .clear-create-button-container,
-    .required-note {
-      padding-bottom: 60px;
-    }
+@media (max-width: 900px) {
+  form {
+    display: block;
   }
-  
-  @media (max-width: 900px) {
-    form {
-      display: block;
-      height: 100vh;
-    }
-  
-    .required-note {
-      padding-bottom: 30px;
-      position: fixed;
-      bottom: 60px;
-      left: 20px;
-      z-index: 15;
-      background-color: rgb(246, 247, 248);
-      padding: 5px;
-    }
-  
-    .divider {
-      display: none;
-    }
-  
-    .clear-create-button-container {
-      padding-bottom: 30px;
-      position: fixed;
-      bottom: 60px;
-      right: 60px;
-      z-index: 15;
-    }
-  
-    .add-task-container .subtask-container {
-      margin-bottom: 265px;
-    }
-  
-    .subtask-list-group .subtask-list-icons {
-      opacity: 1;
-    }
-  }
-  
-  @media (max-width: 720px) {
-    .task-button {
-      padding: 10px 12px;
-    }
 
-    .add-task-message {
-      font-size: 12px;
-    }
-    
-    .add-task-message img {
-      height: 18px;
-    }
+  .required-note {
+    padding-bottom: 30px;
+    position: absolute;
+    top: 875px;
+    z-index: 15;
+    background-color: rgb(246, 247, 248);
+    padding: 5px;
   }
-  
-  @media (max-width: 400px) {
-    .clear-create-button-container {
-      flex-direction: column;
-      align-items: flex-end;
-    }
-  
-    .clear-button {
-      margin-bottom: 8px;
-    }
-  
-    .button-container {
-      flex-direction: column;
-    }
-  
-    .task-button {
-      width: 100%;
-    }
-  
-    section button {
-      margin-bottom: 16px;
-    }
-  
-    main h1 {
-      padding: 0;
-    }
+
+  .divider {
+    display: none;
   }
-  
+
+  .clear-create-button-container {
+    position: fixed;
+    bottom: 60px;
+    right: 10px;
+    margin-right: 10px;
+    padding-right: 20px;
+    padding-top: 10px;
+    z-index: 15;
+    background-color: rgb(246, 247, 248);
+    width: 100%;
+    margin-bottom: 0;
+    padding-bottom: 5%;
+  }
+
+  .subtask-list-group .subtask-list-icons {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 720px) {
+  .task-button {
+    padding: 10px 12px;
+  }
+
+  .add-task-message {
+    font-size: 12px;
+  }
+
+  .add-task-message img {
+    height: 18px;
+  }
+}
+
+@media (max-width: 400px) {
+  .required-note {
+    top: 1000px;
+  }
+
+  .clear-button {
+    margin-bottom: 8px;
+  }
+
+  .button-container {
+    flex-direction: column;
+  }
+
+  .task-button {
+    width: 100%;
+  }
+
+  section button {
+    margin-bottom: 16px;
+  }
+
+  main h1 {
+    padding: 0;
+  }
+}
+
+@media (max-width: 350px) {
+  .clear-create-button-container {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
+
+@media (max-width: 900px) and (max-height: 1400px) {
+  .subtask-container {
+    margin-bottom: 265px;
+  }
+}
+
+@media (min-width: 900) {
+  .subtask-container {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 900px) and (min-height: 1300px) {
+  .clear-create-button-container {
+    top: 1100px;
+  }
+}
