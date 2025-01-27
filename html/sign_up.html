@@ -36,8 +36,9 @@
               <img src="../assets/icons/auth/person.svg" alt="mail" />
             </div>
             <div class="input-group">
-              <input type="email" id="email" placeholder="Email" minlength="3" maxlength="32" required />
+              <input oninput="removeErrorMsg()" type="email" id="email" placeholder="Email" minlength="3" maxlength="32" required />
               <img src="../assets/icons/auth/mail.svg" alt="mail" />
+              <div id="emailError" class="error-signup-msg" style=" display: none;">Bitte geben Sie eine gültige E-Mail-Adresse ein.</div>
             </div>
 
             <div class="input-group">
