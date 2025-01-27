@@ -16,7 +16,7 @@ function onInputSubtaskAddTask(inputId) {
           src="../assets/icons/board/property-close.svg"
           alt="close">
         <img
-          onclick="event.stopPropagation(); addCurrentSubtaskAddTask('${inputId}');"
+          onclick="event.stopPropagation(); addCurrentSubtask('${inputId}');"
           class="mg-left add-subtask"
           src="../assets/icons/board/property-check.svg"
           alt="check">

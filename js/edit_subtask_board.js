@@ -44,7 +44,9 @@ function resetInputField(inputId) {
  * @returns {void}
  */
 function addCurrentSubtask(inputId) {
-  let subtaskInput = document.getElementById(inputId);
+    let subtaskInput = document.getElementById(inputId);
+  if (!subtaskInput.value.trim()) {
+    return; }
 
   if (!currentTodos[currentTaskId].hasOwnProperty('subtask')) {
     currentTodos[currentTaskId].subtask = [];
