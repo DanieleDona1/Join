@@ -57,12 +57,9 @@ function getUserChangedData(i) {
  * @returns {Promise<void>} - Resolves when the popup and contact list are loaded.
  */
 async function loadPopUpAddTask(category) {
-  // if (!currentTodos[currentTaskId].hasOwnProperty('subtask')) {
-  //   currentTodos[currentTaskId].subtask = [];
-  // } else {
-  //   currentTodos[currentTaskId].subtask = [];
-  // }
-  currentTodos[currentTaskId].subtask = [];
+  if (currentTodos[currentTaskId] && currentTodos[currentTaskId].hasOwnProperty('subtask')) {
+    currentTodos[currentTaskId].subtask = [];
+  }
   generatePopUpAddTask(category);
   await createContactlistAddTask();
   loadDropDown();
