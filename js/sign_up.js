@@ -38,6 +38,7 @@ function isValidEmail(email) {
     return true;
   } else {
     emailInput.style.border = '1px solid red';
+    document.getElementById('emailError').style.display = 'block';
     return false;
   }
 }
@@ -229,4 +230,16 @@ function checkCheckbox() {
   } else {
     return false;
   }
+}
+
+/**
+ * Entfernt die Fehlermeldung, indem das entsprechende HTML-Element ausgeblendet wird.
+ * Das Element mit der ID 'emailError' wird auf `display: none` gesetzt,
+ * um die Anzeige der Fehlermeldung zu verhindern.
+ *
+ * @function
+ * @returns {void} Diese Funktion gibt keinen Wert zurück.
+ */
+function removeErrorMsg() {
+  document.getElementById('emailError').style.display = 'none';
 }
