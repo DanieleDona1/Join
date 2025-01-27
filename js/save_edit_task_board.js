@@ -84,7 +84,7 @@ function saveCurrentPriority(i) {
  * @param {number} i - The index of the todo item in the `currentTodos` array to update.
  */
 function saveCurrentAssignedTo(i) {
-  if (selectedContactsKeys.length > 0) {
+  if (selectedContactsKeys.length >= 0) {
     currentTodos[i]['assignedTo'] = selectedContactsKeys;
     editTaskRemote(todoKeysArray[i], { assignedTo: currentTodos[i]['assignedTo'] });
   }
