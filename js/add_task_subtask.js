@@ -16,7 +16,7 @@ function onInputSubtaskAddTask(inputId) {
           src="../assets/icons/board/property-close.svg"
           alt="close">
         <img
-          onclick="event.stopPropagation(); addCurrentSubtaskAddTask('${inputId}');"
+          onclick="event.stopPropagation(); addCurrentSubtask('${inputId}');"
           class="mg-left add-subtask"
           src="../assets/icons/board/property-check.svg"
           alt="check">
@@ -25,25 +25,6 @@ function onInputSubtaskAddTask(inputId) {
   } else {
     resetInputField(inputId);
   }
-}
-
-/**
- * Adds a subtask to the current task and updates the list.
- *
- * @param {string} inputId - The ID of the input field for the subtask.
- * @returns {void}
- */
-function addCurrentSubtaskAddTask(inputId) {
-  currentTaskId = 0;
-  let subtaskInput = document.getElementById(inputId);
-
-  if (!currentSubtasks[currentTaskId].subtask) {
-    currentSubtasks[currentTaskId].subtask = []; // Initialisiere das Subtask-Array, falls nicht vorhanden
-  }
-  currentSubtasks[currentTaskId].subtask.push({ checked: false, text: subtaskInput.value });
-
-  renderSubtaskAddedListAddTask();
-  resetInputField(inputId);
 }
 
 /**

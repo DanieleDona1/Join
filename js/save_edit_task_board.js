@@ -62,7 +62,7 @@ async function loadPopUpAddTask(category) {
   // } else {
   //   currentTodos[currentTaskId].subtask = [];
   // }
-
+  currentTodos[currentTaskId].subtask = [];
   generatePopUpAddTask(category);
   await createContactlistAddTask();
   loadDropDown();
