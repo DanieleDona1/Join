@@ -195,7 +195,11 @@ function getName(arr) {
  * @returns {Array} An array of contacts assigned to the todo item at index `i`.
  */
 function getSelectedContactsKey(i) {
-  return currentTodos[i].assignedTo.map((t) => t);
+  if (currentTodos[i] && Array.isArray(currentTodos[i].assignedTo) && currentTodos[i].assignedTo.length > 0) {
+    return currentTodos[i].assignedTo.map((t) => t);
+  } else {
+    return [];
+  }
 }
 
 /**
