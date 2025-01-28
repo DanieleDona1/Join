@@ -210,8 +210,7 @@
   }
 
   .info-initial {
-    min-width: 80px;
-    max-width: 80px;
+    width: 80px;
     height: 80px;
   }
 
@@ -282,8 +281,9 @@
   }
 
   .info-initial {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
   }
 
   .info-name-button {
@@ -304,6 +304,14 @@
     font-size: 20px;
   }
 }
+
+@media screen and (max-width: 360px) {
+  .info-name {
+    font-size: 32px;
+    max-width: 200px;
+  }
+}
+
 
 @media (min-width: 1225px) {
   .pop-up-add-contact {
