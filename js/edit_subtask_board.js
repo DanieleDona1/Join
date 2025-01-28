@@ -44,18 +44,22 @@ function resetInputField(inputId) {
  * @returns {void}
  */
 function addCurrentSubtask(inputId) {
-    let subtaskInput = document.getElementById(inputId);
+  let subtaskInput = document.getElementById(inputId);
   if (!subtaskInput.value.trim()) {
-    return; }
-
+      return;
+  }
+  if (!currentTodos[currentTaskId]) {
+      currentTodos[currentTaskId] = {}; // Initialize the task object if it's undefined
+  }
   if (!currentTodos[currentTaskId].hasOwnProperty('subtask')) {
-    currentTodos[currentTaskId].subtask = [];
+      currentTodos[currentTaskId].subtask = [];
   }
   currentTodos[currentTaskId].subtask.push({ checked: false, text: subtaskInput.value });
 
   renderSubtaskAddedList();
   resetInputField(inputId);
 }
+
 
 
 /**
