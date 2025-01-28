@@ -93,4 +93,19 @@ function sortGroupedContacts() {
       });
     });
   }
-  
+ 
+  /**
+ * Highlights a selected contact by updating the CSS class and displays the contact's details.
+ * 
+ * @param {HTMLElement} element - The DOM element representing the selected contact.
+ * @param {string} initial - The group initial or identifier for the contact.
+ * @param {number} index - The index of the contact within the group.
+ */
+function highlightContact(element, initial, index) {
+  const allContacts = document.querySelectorAll('.contact-item');
+
+  allContacts.forEach(contact => contact.classList.remove('active'));
+  element.classList.add('active');
+
+  getContactInfo(initial, index);
+}

@@ -80,7 +80,7 @@ function getContactHtmlTemplate(groupInitial, contactIndex, contact, contactColo
 function getContactHTMLTemplate(initial, initials, contact, index, contactColor) {
     return /*html*/ `
       <div class="contact-profil" onclick="toggleContactInfo()">
-        <div class="contact-item" onclick="getContactInfo('${initial}', ${index})" tabindex="0">
+        <div class="contact-item" onclick="highlightContact(this, '${initial}', ${index})" tabindex="0">
           <div class="contact-initials" style="background-color: ${contactColor};">${initials}</div>
           <div class="contact-name-mail">
             <div class="contactlist-name">${contact?.user?.name || 'Unbekannt'}</div>

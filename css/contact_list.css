@@ -79,7 +79,7 @@
     border-radius: 10px;
   }
   
-  .contact-item:focus {
+  .contact-item.active {
     background-color: #2a3647;
     color: white;
     border-radius: 10px;
