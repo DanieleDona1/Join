@@ -77,8 +77,6 @@ function initializeProgressElements(taskId) {
  * @returns {void}
  */
 function loadProgressText(task, progressText, progressBar) {
-  console.log(task.subtask);
-
   const subtasks = task.subtask || [];
   const completedTasks = subtasks.filter((sub) => sub.checked).length;
   const totalSubtasks = subtasks.length;
@@ -93,8 +91,6 @@ function loadProgressText(task, progressText, progressBar) {
   }
   progressBar.style.width = progressValue + '%';
   if (totalSubtasks === 0) {
-    console.log('taskid: ', task.id);
-
   document.getElementById('progressSubtaskContainer' + task.id).style.display = 'none';
   }
 }
