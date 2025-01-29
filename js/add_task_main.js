@@ -159,6 +159,14 @@ function blockEnterSubmit(formId) {
   }
 }
 
+/**
+ * Moves the element with the class 'required-note' to a different container 
+ * based on the window's width. If the window width is less than or equal to 900px, 
+ * the element is moved to 'section-right', otherwise it is moved to 'section-left'.
+ *
+ * @function moveRequiredNote
+ * @returns {void}
+ */
 function moveRequiredNote() {
   const pTag = document.querySelector('.required-note');
   const container1 = document.getElementById('section-left');
@@ -171,7 +179,14 @@ function moveRequiredNote() {
   }
 }
 
-
+/**
+ * Initializes event listeners for the window resize and load events. 
+ * The listeners call the `moveRequiredNote` function when the window is resized 
+ * or the page is loaded, ensuring the correct placement of the 'required-note' element.
+ *
+ * @function initializeResizeAndLoadListeners
+ * @returns {void}
+ */
 function initializeResizeAndLoadListeners() {
   window.addEventListener('resize', moveRequiredNote);
   window.addEventListener('load', moveRequiredNote);
