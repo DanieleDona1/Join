@@ -8,6 +8,7 @@
     height: 96px;
     left: 232px;
     width: calc(100vw - 232px);
+    max-width: calc(1920px - 232px);
   }
 
   .header-rightside-container {
@@ -145,11 +146,8 @@
 
   header {
     position: relative;
-    left: 0;
     left: calc((100vw - 1920px) / 2 + 232px);
     box-shadow: none;
-    left: 232px;
-    z-index: 1;
   }
 
   .main-container {
