@@ -198,7 +198,6 @@ function validateTitle(titleInput) {
   } else {
     titleError.classList.add("d-none");
   }
-
   return isTitleLongEnough;
 }
 
@@ -438,7 +437,7 @@ function initializeValidation() {
   addDueDateInputListeners(dueDateInput);
   addCategoryInputListeners(categorySelect);
 
-  validateForm(); 
+  validateForm();
 }
 
 
@@ -464,9 +463,9 @@ function isValidDateFormat(dateValue) {
  */
 function showAddTaskMessage() {
   const overlay = document.getElementById('add-task-message');
-  overlay.style.display = 'flex'; 
+  overlay.style.display = 'flex';
 
   setTimeout(() => {
-    overlay.style.display = 'none'; 
-  }, 2000); 
+    overlay.style.display = 'none';
+  }, 2000);
 }
