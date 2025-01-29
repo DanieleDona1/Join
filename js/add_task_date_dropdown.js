@@ -356,7 +356,6 @@ function formatDate(input) {
    */
   function setupOutsideClickForCustomSelects() {
     document.addEventListener('click', (e) => {
-      // Bei jedem Klick die aktuellen Dropdowns neu abfragen
       const allDropdowns = document.querySelectorAll('.add-task-custom-select');
       for (let i = 0; i < allDropdowns.length; i++) {
         const s = allDropdowns[i].querySelector('.select-selected');
