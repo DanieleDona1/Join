@@ -33,7 +33,7 @@ a {
   right: 100px;
   display: flex;
   gap: 35px;
-  max-width: 279px;
+  max-width: 280px;
   max-height: 49px;
   background: rgb(246,247,248);
 }
@@ -370,6 +370,20 @@ label span {
   .header-btn-container a {
     padding: 12px 13px;
     font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .entry-btn-container{
+    gap: 30px;
+  }
+
+  .btn-guest-entry{
+    padding: 5px;
+  }
+
+  .entry-btn{
+    padding: 10px;
   }
 }
 
