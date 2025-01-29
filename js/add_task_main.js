@@ -19,6 +19,7 @@ async function onloadAddtasks() {
   setupOutsideClickForCustomSelects();
   blockEnterSubmit('form-add-task');
   initializeValidation();
+  initializeResizeAndLoadListeners();
 }
 
 /**
@@ -156,4 +157,22 @@ function blockEnterSubmit(formId) {
       }
     });
   }
+}
+
+function moveRequiredNote() {
+  const pTag = document.querySelector('.required-note');
+  const container1 = document.getElementById('section-left');
+  const container2 = document.getElementById('section-right');
+  
+  if (window.innerWidth <= 900) {
+    container2.appendChild(pTag);
+  } else {
+    container1.appendChild(pTag);
+  }
+}
+
+
+function initializeResizeAndLoadListeners() {
+  window.addEventListener('resize', moveRequiredNote);
+  window.addEventListener('load', moveRequiredNote);
 }

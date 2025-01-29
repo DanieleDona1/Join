@@ -5,11 +5,12 @@
 
   .required-note {
     padding-bottom: 30px;
-    position: fixed;
-    bottom: 60px;
-    z-index: 16;
+    position: relative;
+    z-index: 15;
     background-color: rgb(246, 247, 248);
     padding: 5px;
+    margin-top: 50px;
+    margin-bottom: 200px;
   }
 
   .divider {
@@ -18,17 +19,14 @@
 
   .clear-create-button-container {
     position: fixed;
-    bottom: 70px;
+    bottom: 60px;
     right: 10px;
     margin-right: 10px;
     padding-right: 20px;
     padding-top: 10px;
-    min-height: 140px;
-    z-index: 15;
+    z-index: 16;
     background-color: rgb(246, 247, 248);
     width: 100%;
-    margin-bottom: 0;
-    padding-bottom: 5%;
   }
 
   .subtask-list-group .subtask-list-icons {
@@ -80,12 +78,6 @@
   }
 }
 
-@media (max-width: 900px) and (max-height: 1400px) {
-  .subtask-container {
-    margin-bottom: 265px;
-  }
-}
-
 @media (min-width: 900) {
   .subtask-container {
     margin-bottom: 0;
@@ -95,5 +87,6 @@
 @media (min-width: 900px) and (min-height: 1300px) {
   .clear-create-button-container {
     top: 1100px;
+    bottom: 0;
   }
 }

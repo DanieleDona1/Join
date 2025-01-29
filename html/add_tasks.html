@@ -87,7 +87,7 @@
       <main>
         <h1>Add Task</h1>
         <form id="form-add-task">
-          <section>
+          <section id="section-left">
             <div class="mg-b-28">
               <p>Title<span>*</span></p>
               <input id="input-field-title" placeholder="Enter a title" type="text" required />
@@ -106,7 +106,7 @@
             <p class="required-note"><span>*</span>This field is required</p>
           </section>
           <div class="divider"></div>
-          <section class="add-task-container">
+          <section id="section-right" class="add-task-container">
             <div class="mg-b-28">
               <p>Due date<span>*</span></p>
               <input id="input-field-date" type="text" placeholder="dd/mm/yyyy" oninput="formatDate(this)" />
