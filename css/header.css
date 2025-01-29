@@ -21,12 +21,7 @@ header {
     width: 20px;
     margin-right: 16px;
   }
-  
-  .dropdown-container {
-    position: relative;
-    display: inline-block;
-  }
-  
+    
   .dropdown-container {
     position: relative;
     display: inline-block;

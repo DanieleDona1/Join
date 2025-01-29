@@ -140,7 +140,6 @@
   .header-container {
     position: relative;
     height: 96px;
-
     width: 100vw;
     box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
   }
@@ -149,7 +148,6 @@
     position: relative;
     left: 0;
     left: calc((100vw - 1920px) / 2 + 232px);
-    z-index: 1;
     box-shadow: none;
   }
 
