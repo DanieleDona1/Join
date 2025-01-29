@@ -76,10 +76,10 @@
   }
 
   .create-button:disabled {
-    background-color: #ccc; /* Grauer Hintergrund */
-    color: #666; /* Abgeschwächte Schriftfarbe */
-    cursor: not-allowed; /* Zeigt an, dass der Button nicht klickbar ist */
-    opacity: 0.6; /* Reduzierte Deckkraft */
+    background-color: #ccc; 
+    color: #666; 
+    cursor: not-allowed; 
+    opacity: 0.6; 
   }
   
   .create-button:not(:disabled):hover {

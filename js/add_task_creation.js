@@ -9,7 +9,6 @@
  * @returns {Promise<void>} This function returns a promise that resolves when the task is added and the page is redirected.
  */
 async function createAddTask(taskCategory) {
-/*   currentTaskId = 0; */
 
   selectedContacts = [];
   if (checkRequiredFields()) {
@@ -191,11 +190,8 @@ let titleFieldTouched = false;
 function validateTitle(titleInput) {
   const titleError = document.getElementById("titleError");
   const titleValue = titleInput.value.trim();
-
-  // --- 1) Hat der Titel >= 3 Zeichen? ---
   const isTitleLongEnough = titleValue.length >= 3;
 
-  // --- 2) Fehlermeldung nur anzeigen, wenn Feld schon berührt ---
   if (titleFieldTouched && !isTitleLongEnough) {
     titleError.textContent = "Title must be at least 3 characters long.";
     titleError.classList.remove("d-none");
@@ -203,7 +199,6 @@ function validateTitle(titleInput) {
     titleError.classList.add("d-none");
   }
 
-  // --- 3) Für die Formular-Gültigkeit: Feld ist nur valid, wenn >= 3 Zeichen ---
   return isTitleLongEnough;
 }
 
@@ -443,7 +438,7 @@ function initializeValidation() {
   addDueDateInputListeners(dueDateInput);
   addCategoryInputListeners(categorySelect);
 
-  validateForm(); // Initialer Button-Status
+  validateForm(); 
 }
 
 
@@ -469,9 +464,9 @@ function isValidDateFormat(dateValue) {
  */
 function showAddTaskMessage() {
   const overlay = document.getElementById('add-task-message');
-  overlay.style.display = 'flex'; // Div anzeigen
+  overlay.style.display = 'flex'; 
 
   setTimeout(() => {
-    overlay.style.display = 'none'; // Div ausblenden
-  }, 2000); // Nach 2 Sekunden
+    overlay.style.display = 'none'; 
+  }, 2000); 
 }
