@@ -5,9 +5,9 @@
 
   .required-note {
     padding-bottom: 30px;
-    position: absolute;
-    top: 875px;
-    z-index: 15;
+    position: fixed;
+    bottom: 60px;
+    z-index: 16;
     background-color: rgb(246, 247, 248);
     padding: 5px;
   }
@@ -18,11 +18,12 @@
 
   .clear-create-button-container {
     position: fixed;
-    bottom: 60px;
+    bottom: 70px;
     right: 10px;
     margin-right: 10px;
     padding-right: 20px;
     padding-top: 10px;
+    min-height: 140px;
     z-index: 15;
     background-color: rgb(246, 247, 248);
     width: 100%;
@@ -50,10 +51,6 @@
 }
 
 @media (max-width: 400px) {
-  .required-note {
-    top: 1000px;
-  }
-
   .clear-button {
     margin-bottom: 8px;
   }
@@ -79,6 +76,7 @@
   .clear-create-button-container {
     flex-direction: column;
     align-items: flex-end;
+    bottom: 90px;
   }
 }
 
