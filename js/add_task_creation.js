@@ -9,7 +9,6 @@
  * @returns {Promise<void>} This function returns a promise that resolves when the task is added and the page is redirected.
  */
 async function createAddTask(taskCategory) {
-/*   currentTaskId = 0; */
 
   selectedContacts = [];
   if (checkRequiredFields()) {
@@ -438,7 +437,7 @@ function initializeValidation() {
   addDueDateInputListeners(dueDateInput);
   addCategoryInputListeners(categorySelect);
 
-  validateForm(); // Initialer Button-Status
+  validateForm();
 }
 
 
@@ -464,9 +463,9 @@ function isValidDateFormat(dateValue) {
  */
 function showAddTaskMessage() {
   const overlay = document.getElementById('add-task-message');
-  overlay.style.display = 'flex'; // Div anzeigen
+  overlay.style.display = 'flex';
 
   setTimeout(() => {
-    overlay.style.display = 'none'; // Div ausblenden
-  }, 2000); // Nach 2 Sekunden
+    overlay.style.display = 'none';
+  }, 2000);
 }

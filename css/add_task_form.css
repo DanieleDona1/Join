@@ -197,7 +197,5 @@ input:focus,
 }
 
 form .subtask-list-group input:hover {
-  /* background-color: rgb(246,247,248); */
-  /* background-color: #555; */
   box-shadow: none;
 }
