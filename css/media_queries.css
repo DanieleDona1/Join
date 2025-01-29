@@ -138,6 +138,7 @@
   }
 
   .header-container {
+    z-index: 2;
     position: relative;
     height: 96px;
     width: 100vw;
@@ -145,6 +146,7 @@
   }
 
   header {
+    z-index: 3;
     position: relative;
     left: calc((100vw - 1920px) / 2 + 232px);
     box-shadow: none;
@@ -155,9 +157,8 @@
     position: relative;
     width: 100vw;
     height: calc(100vh - 96px);
-    z-index: 3;
   }
-  
+
   main {
     top: 0;
     left: calc((100vw - 1920px) / 2 + 232px);
@@ -168,4 +169,9 @@
     max-width: 1921px;
     max-height: 1080px;
   }
+
+  .main-contact {
+    width: 100%;
+  }
+
 }
