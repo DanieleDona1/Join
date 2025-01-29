@@ -191,19 +191,14 @@ let titleFieldTouched = false;
 function validateTitle(titleInput) {
   const titleError = document.getElementById("titleError");
   const titleValue = titleInput.value.trim();
-
-  // --- 1) Hat der Titel >= 3 Zeichen? ---
   const isTitleLongEnough = titleValue.length >= 3;
 
-  // --- 2) Fehlermeldung nur anzeigen, wenn Feld schon berührt ---
   if (titleFieldTouched && !isTitleLongEnough) {
     titleError.textContent = "Title must be at least 3 characters long.";
     titleError.classList.remove("d-none");
   } else {
     titleError.classList.add("d-none");
   }
-
-  // --- 3) Für die Formular-Gültigkeit: Feld ist nur valid, wenn >= 3 Zeichen ---
   return isTitleLongEnough;
 }
 
