@@ -188,7 +188,7 @@ main h2 {
   background-color: white;
   z-index: 1;
   font-size: 2.5rem;
-  transform: translateY(-5%);
+  transform: translateY(-8%);
 }
 
 .opacity-animation {
@@ -246,6 +246,7 @@ main h2 {
   main {
     padding-right: 32px;
     padding-left: 32px;
+    padding-top: 50px;
   }
   .grid-container {
     grid-template-rows: 130px 130px 130px;
@@ -256,6 +257,7 @@ main h2 {
   main {
     padding-right: 16px;
     padding-left: 16px;
+    padding-top: 20px;
   }
 
   .headline {

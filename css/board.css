@@ -7,7 +7,7 @@
 @import url('../css/animation_dialog.css');
 
 main {
-  padding-top: 48px;
+  /* padding-top: 48px; */
   padding-right: 56px;
   padding-left: 56px;
   background-color: rgb(246, 247, 248);
