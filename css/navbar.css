@@ -24,7 +24,7 @@ nav a:hover {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 2px 10px; 
+  padding: 2px 10px;
 }
 
 .navbar-item {
@@ -32,9 +32,8 @@ nav a:hover {
   flex-direction: column;
   align-items: center;
   background-color: rgb(42, 54, 71);
-  padding: 15px 0;
   gap: 4px;
-  width: 80px;
+  width: 70px;
   height: 76px;
   border-radius: 16px;
 }
@@ -63,12 +62,35 @@ nav a:hover {
 }
 
 .navbar-back-arrow {
-    position: absolute;
-    top: 48px;
-    right: 16px;
-    width: 32px;
-  }
+  position: absolute;
+  top: 48px;
+  right: 16px;
+  width: 32px;
+}
 
-  .navbar-back-arrow:hover {
-    cursor: pointer;
+.navbar-back-arrow:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1225px) {
+  .navbar-item {
+    justify-content: center;
+    height: 56px;
   }
+  nav {
+    display: flex;
+    align-items: center;
+  }
+  .navbar-container-bottom {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .navbar-item img {
+    height: 22px;
+    width: 22px;
+  }
+  nav {
+    height: 63px;
+}
+}

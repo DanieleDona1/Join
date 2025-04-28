@@ -33,7 +33,7 @@ a {
   right: 100px;
   display: flex;
   gap: 35px;
-  max-width: 280px;
+  max-width: 300px;
   max-height: 49px;
   background: rgb(246,247,248);
 }
@@ -41,6 +41,8 @@ a {
 .header-btn-container button {
   border: unset;
   font-weight: bold;
+  width: 100%;
+  max-width: 100px;
 }
 
 .header-btn-container button:first-child {
@@ -48,6 +50,7 @@ a {
   font-size: 1.25rem;
   font-weight: 400;
   text-align: left;
+  min-width: 156px;
 }
 
 .header-btn-container a {
@@ -73,7 +76,7 @@ a {
   max-width: 550px;
   max-height: 518px;
   width: 100%;
-  padding: 40px 10px;
+  padding: 35px 10px;
   gap: 32px;
   border-radius: 30px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -360,7 +363,7 @@ label span {
   .header-btn-container {
     position: absolute;
     top: auto;
-    bottom: 75px;
+    bottom: 70px;
     right: auto;
     left: auto;
   }
@@ -384,6 +387,9 @@ label span {
 
   .entry-btn{
     padding: 10px;
+  }
+  .header-btn-container {
+    bottom: 65px;
   }
 }
 

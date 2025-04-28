@@ -45,7 +45,6 @@ h3 {
 }
 
 .section-container {
-  margin-top: 40px;
   gap: calc(20px + (40 - 20) * ((100vw - 1400px) / (1920 - 1400)));
   max-width: 1350px;
   display: flex;
@@ -308,7 +307,7 @@ input:focus {
 
 .members-wrapper {
   position: absolute;
-  bottom: 30px; 
+  bottom: 30px;
 }
 
 @media screen and (max-width: 1224px) {
@@ -347,17 +346,24 @@ input:focus {
     padding-left: 16px;
   }
 
+  .column-title {
+    margin-bottom: 0px;
+}
+
   .board-header {
     align-items: flex-start;
   }
 
-  .section-container {
-    margin-top: 20px;
+  .section-container section{
+    margin-top: 24px;
   }
 
   .plus-button {
     width: 32px;
     height: 32px;
+  }
+  .section-container section img {
+    bottom: 20px;
   }
 }
 

@@ -14,7 +14,7 @@ form input {
   font-size: 20px;
 }
 
-form input[type="checkbox"] {
+form input[type='checkbox'] {
   height: 20px;
   width: 20px;
   margin: 0;
@@ -57,7 +57,7 @@ input:focus,
 }
 
 .custom-checkbox.checked:after {
-  content: "";
+  content: '';
   position: absolute;
   left: 8px;
   top: -6px;
@@ -126,7 +126,7 @@ input:focus,
   border: none;
   height: 30px;
   width: 100%;
-  background-color: rgb(246,247,248);
+  background-color: rgb(246, 247, 248);
 }
 
 .subtask-added-list .subtask-list-group input:focus {

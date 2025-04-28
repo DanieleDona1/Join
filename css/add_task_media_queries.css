@@ -17,6 +17,10 @@
     display: none;
   }
 
+  .mg-b-80 {
+    margin-bottom: 250px;
+  }
+
   .clear-create-button-container {
     position: fixed;
     bottom: 60px;
@@ -74,7 +78,8 @@
   .clear-create-button-container {
     flex-direction: column;
     align-items: flex-end;
-    bottom: 90px;
+    bottom: 30px;
+    padding-bottom: 10px;
   }
 }
 
