@@ -35,7 +35,7 @@ a {
   gap: 35px;
   max-width: 300px;
   max-height: 49px;
-  background: rgb(246,247,248);
+  background: rgb(246, 247, 248);
 }
 
 .header-btn-container button {
@@ -46,7 +46,7 @@ a {
 }
 
 .header-btn-container button:first-child {
-  background-color: rgb(246,247,248);
+  background-color: rgb(246, 247, 248);
   font-size: 1.25rem;
   font-weight: 400;
   text-align: left;
@@ -322,7 +322,7 @@ label span {
   position: absolute;
 }
 
-.back-sign-up{
+.back-sign-up {
   position: absolute;
   left: 25px;
   top: 50px;
@@ -360,6 +360,9 @@ label span {
     top: 16px;
     left: 30px;
   }
+  .input-group {
+    margin-bottom: 20px;
+  }
   .header-btn-container {
     position: absolute;
     top: auto;
@@ -377,15 +380,18 @@ label span {
 }
 
 @media screen and (max-width: 360px) {
-  .entry-btn-container{
+  .entry-modal {
+    padding: 20px 10px;
+  }
+  .entry-btn-container {
     gap: 30px;
   }
 
-  .btn-guest-entry{
+  .btn-guest-entry {
     padding: 5px;
   }
 
-  .entry-btn{
+  .entry-btn {
     padding: 10px;
   }
   .header-btn-container {
@@ -395,6 +401,6 @@ label span {
 
 @media (min-width: 1921px) {
   .body {
-    background-color: rgb(246,247,248);
+    background-color: rgb(246, 247, 248);
   }
 }
